@@ -83,8 +83,7 @@ const Membership = () => {
     <section id="membership" className="section-padding bg-signal-light-gray" ref={sectionRef}>
       <div className="container mx-auto container-padding">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 font-lora">{t('membership.title')}</h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">{t('membership.subtitle')}</p>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 font-lora">What's Included in Your Membership</h2>
         </div>
         
         <div className="grid md:grid-cols-3 gap-8">
