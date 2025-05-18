@@ -18,8 +18,6 @@ const Navbar = () => {
 
   const navItems = [
     { label: t('nav.membership'), href: '#membership' },
-    { label: t('nav.about'), href: '#about' },
-    { label: t('nav.founder'), href: '#founder' },
     { label: t('nav.contact'), href: '#waitlist' },
   ];
 
