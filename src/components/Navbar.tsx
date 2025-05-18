@@ -17,7 +17,6 @@ const Navbar = () => {
   }, []);
 
   const navItems = [
-    { label: t('nav.home'), href: '#home' },
     { label: t('nav.membership'), href: '#membership' },
     { label: t('nav.about'), href: '#about' },
     { label: t('nav.founder'), href: '#founder' },
@@ -31,17 +30,17 @@ const Navbar = () => {
   return (
     <nav 
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white/95 shadow-md py-2' : 'bg-transparent py-4'
+        scrolled ? 'bg-white shadow-md py-2' : 'bg-white py-4'
       }`}
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
-        <a href="#home" className="text-signal-charcoal text-xl font-playfair font-bold">
-          Signal Performance
+        <a href="#home" className="flex items-center gap-2">
+          <span className="text-signal-charcoal text-xl font-playfair font-bold">Signal Performance</span>
         </a>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center space-x-8">
-          <div className="flex space-x-6">
+        <div className="hidden md:flex items-center">
+          <div className="flex space-x-8">
             {navItems.map((item) => (
               <a
                 key={item.href}
@@ -53,14 +52,17 @@ const Navbar = () => {
             ))}
           </div>
 
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center ml-8 space-x-4">
             <button
               onClick={toggleLanguage}
               className="text-signal-charcoal hover:text-signal-gold transition-colors text-sm font-medium"
             >
-              {language === 'en' ? '中文' : 'EN'}
+              {language === 'en' ? 'EN / 中文' : '中文 / EN'}
             </button>
-            <Button variant="outline" className="border-signal-gold text-signal-gold hover:bg-signal-gold hover:text-white">
+            <Button 
+              variant="outline" 
+              className="bg-signal-charcoal text-white hover:bg-signal-charcoal/90 border-none"
+            >
               {t('nav.login')}
             </Button>
           </div>
@@ -72,7 +74,7 @@ const Navbar = () => {
             onClick={toggleLanguage}
             className="text-signal-charcoal hover:text-signal-gold transition-colors text-sm font-medium"
           >
-            {language === 'en' ? '中文' : 'EN'}
+            {language === 'en' ? 'EN / 中文' : '中文 / EN'}
           </button>
           <button 
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -105,7 +107,10 @@ const Navbar = () => {
                 {item.label}
               </a>
             ))}
-            <Button variant="outline" className="border-signal-gold text-signal-gold hover:bg-signal-gold hover:text-white">
+            <Button 
+              variant="outline" 
+              className="bg-signal-charcoal text-white hover:bg-signal-charcoal/90 border-none"
+            >
               {t('nav.login')}
             </Button>
           </div>

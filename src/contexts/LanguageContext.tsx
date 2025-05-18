@@ -1,4 +1,3 @@
-
 import { createContext, useContext, useState, ReactNode } from 'react';
 
 type Language = 'en' | 'zh';
@@ -16,13 +15,14 @@ const translations = {
     'nav.membership': 'Membership',
     'nav.about': 'About',
     'nav.founder': 'Founder',
-    'nav.contact': 'Contact',
+    'nav.contact': 'Join Waitlist',
     'nav.login': 'Member Login',
     
     // Hero
-    'hero.headline': 'Elevate Your Golf Game',
-    'hero.subheadline': 'Taiwan\'s premier private club for elite golfers',
-    'hero.cta': 'Join Waitlist',
+    'hero.headline': 'Holistic Training Facility for Professional Golfers',
+    'hero.subheadline': 'Where elite golfers prepare to perform at their highest level.',
+    'hero.cta.waitlist': 'Join the Waitlist',
+    'hero.cta.membership': 'Explore Membership',
     
     // Membership
     'membership.title': 'Exclusive Membership',
@@ -66,13 +66,14 @@ const translations = {
     'nav.membership': '會員資格',
     'nav.about': '關於我們',
     'nav.founder': '創辦人',
-    'nav.contact': '聯絡我們',
+    'nav.contact': '加入候補名單',
     'nav.login': '會員登入',
     
     // Hero
-    'hero.headline': '提升您的高爾夫表現',
-    'hero.subheadline': '台灣頂尖高爾夫球員的私人俱樂部',
-    'hero.cta': '加入候補名單',
+    'hero.headline': '專業高爾夫球手的全方位訓練設施',
+    'hero.subheadline': '頂尖高爾夫球手在此為最佳表現做準備',
+    'hero.cta.waitlist': '加入候補名單',
+    'hero.cta.membership': '探索會員資格',
     
     // Membership
     'membership.title': '尊榮會員資格',
