@@ -9,28 +9,25 @@ import {
   TableCell 
 } from '@/components/ui/table';
 import { Check } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
 
 const Membership = () => {
   const { t } = useLanguage();
   
   const features = [
     {
-      icon: '💪',
       title: t('membership.fitness.title'),
       description: t('membership.fitness.description'),
     },
     {
-      icon: '🧠',
       title: t('membership.mental.title'),
       description: t('membership.mental.description'),
     },
     {
-      icon: '🏌️',
       title: t('membership.simulator.title'),
       description: t('membership.simulator.description'),
     },
     {
-      icon: '🔄',
       title: t('membership.training.title'),
       description: t('membership.training.description'),
     },
@@ -57,7 +54,9 @@ const Membership = () => {
                 <TableRow key={index} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
                   <TableCell className="p-6 align-top border-b">
                     <div className="flex items-center gap-3">
-                      <div className="text-signal-gold text-2xl">{feature.icon}</div>
+                      <Badge variant="outline" className="bg-signal-gold bg-opacity-10 text-signal-charcoal border-signal-gold px-3 py-1.5">
+                        {index + 1}
+                      </Badge>
                       <span className="font-medium text-lg font-playfair">{feature.title}</span>
                     </div>
                   </TableCell>
