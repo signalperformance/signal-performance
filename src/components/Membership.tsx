@@ -1,24 +1,14 @@
 
-import { Card, CardContent } from '@/components/ui/card';
 import { useLanguage } from '@/contexts/LanguageContext';
-
-const MembershipFeature = ({ 
-  icon, 
-  title, 
-  description 
-}: { 
-  icon: string; 
-  title: string; 
-  description: string; 
-}) => (
-  <Card className="border-none shadow-lg hover:shadow-xl transition-shadow duration-300 h-full">
-    <CardContent className="p-6 flex flex-col items-center text-center h-full">
-      <div className="text-signal-gold mb-4 text-4xl">{icon}</div>
-      <h3 className="text-xl font-semibold mb-2 font-playfair">{title}</h3>
-      <p className="text-muted-foreground">{description}</p>
-    </CardContent>
-  </Card>
-);
+import { 
+  Table, 
+  TableHeader, 
+  TableBody, 
+  TableRow, 
+  TableHead, 
+  TableCell 
+} from '@/components/ui/table';
+import { Check } from 'lucide-react';
 
 const Membership = () => {
   const { t } = useLanguage();
@@ -54,15 +44,33 @@ const Membership = () => {
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">{t('membership.subtitle')}</p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {features.map((feature, index) => (
-            <MembershipFeature 
-              key={index}
-              icon={feature.icon}
-              title={feature.title}
-              description={feature.description}
-            />
-          ))}
+        <div className="overflow-hidden rounded-lg shadow-lg bg-white">
+          <Table>
+            <TableHeader>
+              <TableRow className="bg-signal-charcoal hover:bg-signal-charcoal">
+                <TableHead className="text-white font-playfair text-xl p-6 w-1/3">Feature</TableHead>
+                <TableHead className="text-white font-playfair text-xl p-6 w-2/3">Details</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {features.map((feature, index) => (
+                <TableRow key={index} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                  <TableCell className="p-6 align-top border-b">
+                    <div className="flex items-center gap-3">
+                      <div className="text-signal-gold text-2xl">{feature.icon}</div>
+                      <span className="font-medium text-lg font-playfair">{feature.title}</span>
+                    </div>
+                  </TableCell>
+                  <TableCell className="p-6 border-b">
+                    <div className="flex items-center gap-2">
+                      <Check className="text-signal-gold h-5 w-5 flex-shrink-0" />
+                      <span className="text-muted-foreground">{feature.description}</span>
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
         </div>
       </div>
     </section>
