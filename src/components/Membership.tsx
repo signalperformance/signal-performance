@@ -37,7 +37,7 @@ const Membership = () => {
     <section id="membership" className="section-padding bg-signal-light-gray">
       <div className="container mx-auto container-padding">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 font-playfair">{t('membership.title')}</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 font-lora">{t('membership.title')}</h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">{t('membership.subtitle')}</p>
         </div>
         
@@ -45,8 +45,8 @@ const Membership = () => {
           <Table>
             <TableHeader>
               <TableRow className="bg-signal-charcoal hover:bg-signal-charcoal">
-                <TableHead className="text-white font-playfair text-xl p-6 w-1/3">Feature</TableHead>
-                <TableHead className="text-white font-playfair text-xl p-6 w-2/3">Details</TableHead>
+                <TableHead className="text-white font-lora text-xl p-6 w-1/3">Feature</TableHead>
+                <TableHead className="text-white font-lora text-xl p-6 w-2/3">Details</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -57,7 +57,7 @@ const Membership = () => {
                       <Badge variant="outline" className="bg-signal-gold bg-opacity-10 text-signal-charcoal border-signal-gold px-3 py-1.5">
                         {index + 1}
                       </Badge>
-                      <span className="font-medium text-lg font-playfair">{feature.title}</span>
+                      <span className="font-medium text-lg font-lora">{feature.title}</span>
                     </div>
                   </TableCell>
                   <TableCell className="p-6 border-b">

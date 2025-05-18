@@ -20,8 +20,8 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				'playfair': ['Playfair Display', 'serif'],
-				'inter': ['Inter', 'sans-serif'],
+				'lora': ['Lora', 'serif'],
+				'montserrat': ['Montserrat', 'sans-serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
@@ -68,11 +68,11 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				signal: {
-					charcoal: '#333333',
-					black: '#000000',
+					charcoal: '#425563',
+					black: '#18232c',
 					white: '#FFFFFF',
-					gold: '#D4AF37',
-					'light-gray': '#F5F5F5',
+					gold: '#c9aa71',
+					'light-gray': '#F7F8F9',
 				}
 			},
 			borderRadius: {
