@@ -3,40 +3,43 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 import { Move, Activity, User, Dumbbell, Club } from "lucide-react";
+
 const AssessmentProcess = () => {
   const [activeAssessment, setActiveAssessment] = useState("mobility");
+  
   const assessments = {
     mobility: {
-      title: "Mobility and Joint Function",
+      title: "Joint Function",
       icon: Move,
-      description: "A comprehensive evaluation of your range of motion, joint stability, and functional movement patterns. Our assessment identifies mobility restrictions that may limit your golf performance or increase injury risk. We examine key areas including hip rotation, thoracic spine mobility, shoulder function, and ankle stability.",
+      description: "We assess the passive and active range of motion of every major joint to identify limitations and their root causes. These insights guide your mobility training and help reduce injury risk, support longevity, and improve movement efficiency.",
       number: 1
     },
     strength: {
       title: "Maximal Strength",
       icon: Dumbbell,
-      description: "Measurement of your foundational strength capabilities in key movement patterns relevant to golf. Tests include lower body power, core strength and stability, rotational force production, and grip strength. Results establish baseline power metrics and identify any strength imbalances that could affect your swing mechanics.",
+      description: "We test maximal strength using the bench press and deadlift to evaluate how effectively your nervous system recruits muscle fibers. These metrics help us understand your potential to generate force and increase swing speed.",
       number: 2
     },
     metabolic: {
-      title: "Metabolic Testing",
+      title: "Endurance",
       icon: Activity,
-      description: "Scientific assessment of your cardiovascular fitness and energy systems. We evaluate aerobic capacity, heart rate zones, and recovery rates to develop personalized conditioning protocols. This data helps optimize your on-course endurance and between-round recovery strategies.",
+      description: "A lactate threshold test helps us determine your personalized heart rate zones. This allows us to tailor your conditioning work to improve endurance, accelerate recovery, and avoid overtraining.",
       number: 3
     },
     body: {
       title: "Body Composition",
       icon: User,
-      description: "Analysis of your body composition including muscle mass, fat percentage, and distribution. Beyond simple weight measurements, we evaluate how your body composition affects your golf mechanics and athletic potential. This provides a foundation for nutrition planning and physical development goals.",
+      description: "We track muscle mass and body fat percentage to guide body composition goals. Whether building strength or reducing weight, this ensures your progress supports — not hinders — your performance.",
       number: 4
     },
     golf: {
-      title: "Golf Skill",
+      title: "Golf Skill + Speed",
       icon: Club,
-      description: "Detailed evaluation of your current golf performance metrics including ball speed, clubhead speed, smash factor, launch conditions, and shot dispersion patterns. We collect baseline data on your full swing, short game, and putting performance to establish clear benchmarks for improvement.",
+      description: "We measure average and max club speed, ball speed, and your ability to control distance and dispersion with wedges and irons. This helps us identify whether performance challenges are technical, physical, or mental.",
       number: 5
     }
   };
+  
   return <section id="assessment" className="section-padding bg-gradient-to-b from-white to-signal-light-gray">
       <div className="container mx-auto container-padding">
         <div className="text-center mb-12">
