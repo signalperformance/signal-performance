@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
-import { Move, Activity, Body, BicepsFlexed, Golf } from "lucide-react";
+import { Move, Activity, User, Dumbbell, GolfClub } from "lucide-react";
 
 const AssessmentProcess = () => {
   const [activeAssessment, setActiveAssessment] = useState("mobility");
@@ -16,7 +16,7 @@ const AssessmentProcess = () => {
     },
     strength: {
       title: "Maximal Strength",
-      icon: BicepsFlexed,
+      icon: Dumbbell,
       description: "Measurement of your foundational strength capabilities in key movement patterns relevant to golf. Tests include lower body power, core strength and stability, rotational force production, and grip strength. Results establish baseline power metrics and identify any strength imbalances that could affect your swing mechanics.",
     },
     metabolic: {
@@ -26,12 +26,12 @@ const AssessmentProcess = () => {
     },
     body: {
       title: "Body Composition",
-      icon: Body,
+      icon: User,
       description: "Analysis of your body composition including muscle mass, fat percentage, and distribution. Beyond simple weight measurements, we evaluate how your body composition affects your golf mechanics and athletic potential. This provides a foundation for nutrition planning and physical development goals.",
     },
     golf: {
       title: "Golf Skill",
-      icon: Golf,
+      icon: GolfClub,
       description: "Detailed evaluation of your current golf performance metrics including ball speed, clubhead speed, smash factor, launch conditions, and shot dispersion patterns. We collect baseline data on your full swing, short game, and putting performance to establish clear benchmarks for improvement.",
     }
   };
