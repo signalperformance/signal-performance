@@ -3,10 +3,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 import { Move, Activity, User, Dumbbell, Club } from "lucide-react";
-
 const AssessmentProcess = () => {
   const [activeAssessment, setActiveAssessment] = useState("mobility");
-  
   const assessments = {
     mobility: {
       title: "Joint Function",
@@ -39,12 +37,11 @@ const AssessmentProcess = () => {
       number: 5
     }
   };
-  
   return <section id="assessment" className="section-padding bg-gradient-to-b from-white to-signal-light-gray">
       <div className="container mx-auto container-padding">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 font-lora">Our Assessment Process</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">Upon joining and every 12 weeks, members complete a comprehensive evaluation across six key areas to establish a precise snapshot of their current physical and performance profile.</p>
+          <p className="text-muted-foreground max-w-2xl mx-auto">Every quarter, members complete a full assessment across five essential areas to ensure their training is aligned, effective, and progressing toward their performance goals.</p>
         </div>
 
         {/* Desktop View: Side-by-side Layout */}
