@@ -1,10 +1,13 @@
+
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ArrowRight } from 'lucide-react';
+import { useWaitlistDialog } from '@/hooks/useWaitlistDialog';
+
 const Hero = () => {
-  const {
-    t
-  } = useLanguage();
+  const { t } = useLanguage();
+  const { openWaitlist } = useWaitlistDialog();
+  
   return <section id="home" className="relative h-screen flex flex-col items-center justify-center overflow-hidden">
       {/* Background - using a clean white background */}
       <div className="absolute inset-0 z-0 bg-white"></div>
@@ -17,9 +20,7 @@ for Professional Golfers</h1>
           Where elite golfers prepare to perform at their highest level.
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
-          <Button className="bg-signal-charcoal hover:bg-signal-charcoal/90 text-white font-medium px-8 py-6 text-lg flex items-center gap-2" size="lg" onClick={() => document.getElementById('waitlist')?.scrollIntoView({
-          behavior: 'smooth'
-        })}>
+          <Button className="bg-signal-charcoal hover:bg-signal-charcoal/90 text-white font-medium px-8 py-6 text-lg flex items-center gap-2" size="lg" onClick={openWaitlist}>
             Join the Waitlist <ArrowRight size={18} />
           </Button>
           <Button className="bg-white hover:bg-gray-100 text-signal-charcoal font-medium border border-gray-200 px-8 py-6 text-lg" variant="outline" size="lg" onClick={() => document.getElementById('membership')?.scrollIntoView({
