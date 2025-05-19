@@ -1,16 +1,14 @@
-
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
-
 const About = () => {
-  const { t } = useLanguage();
-  
-  return (
-    <section id="about" className="section-padding bg-white">
+  const {
+    t
+  } = useLanguage();
+  return <section id="about" className="section-padding bg-white">
       <div className="container mx-auto container-padding">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
@@ -25,18 +23,14 @@ const About = () => {
                 <div className="w-full max-w-xs">
                   <div className="rounded-lg overflow-hidden bg-[#67A3F0] relative">
                     <div className="aspect-ratio-1/1">
-                      <img 
-                        src="/lovable-uploads/9cd6f4c9-9cfc-435a-8ebb-2bbe20537915.png" 
-                        alt="Dr. Noah Sachs" 
-                        className="object-cover w-full h-full"
-                      />
+                      <img src="/lovable-uploads/9cd6f4c9-9cfc-435a-8ebb-2bbe20537915.png" alt="Dr. Noah Sachs" className="object-cover w-full h-full" />
                     </div>
                   </div>
                 </div>
               </div>
               <div className="text-center">
                 <h3 className="text-2xl font-bold font-lora text-signal-charcoal">Dr. Noah Sachs</h3>
-                <p className="text-signal-gold mt-1 font-medium">Golf Performance Specialist</p>
+                <p className="text-signal-gold mt-1 font-medium">Performance Coach</p>
               </div>
             </div>
             
@@ -88,8 +82,6 @@ const About = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default About;
