@@ -2,18 +2,22 @@
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ArrowRight } from 'lucide-react';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const Hero = () => {
   const { t } = useLanguage();
   const signalLineRef = useRef<SVGSVGElement>(null);
+  const [animating, setAnimating] = useState(true);
 
   // Animation for the signal line
   useEffect(() => {
     // Check for reduced motion preference
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     
-    if (prefersReducedMotion || !signalLineRef.current) return;
+    if (prefersReducedMotion || !signalLineRef.current || !animating) return;
+    
+    let animationFrameId: number;
+    let peakTimer: NodeJS.Timeout;
     
     const animate = () => {
       if (!signalLineRef.current) return;
@@ -21,22 +25,18 @@ const Hero = () => {
       const path = signalLineRef.current.querySelector('path');
       if (!path) return;
       
-      // Create a new path string with subtle variations
-      const generatePath = () => {
-        const width = signalLineRef.current?.width.baseVal.value || 300;
-        const height = 20; // Height of SVG
+      // Create baseline path (mostly flat with small variations)
+      const generateBasePath = (width: number, height: number) => {
         const midPoint = height / 2;
+        const points = 20;
+        const stepSize = width / points;
         
         let pathData = `M 0 ${midPoint}`;
         
-        // Generate points for the path
-        const points = 10;
-        const stepSize = width / points;
-        
         for (let i = 1; i <= points; i++) {
           const x = i * stepSize;
-          // Create a gentle wave pattern with occasional peaks
-          const variance = Math.random() < 0.2 ? Math.random() * 6 - 3 : Math.random() * 2 - 1;
+          // Very small noise variations
+          const variance = Math.random() * 2 - 1;
           const y = midPoint + variance;
           pathData += ` L ${x} ${y}`;
         }
@@ -44,30 +44,93 @@ const Hero = () => {
         return pathData;
       };
       
-      // Animation timing
-      const duration = 5000; // 5 seconds per animation cycle
-      const startTime = Date.now();
-      const initialPath = path.getAttribute('d') || '';
-      const targetPath = generatePath();
-      
-      const updatePath = () => {
-        const elapsed = Date.now() - startTime;
-        const progress = Math.min(elapsed / duration, 1);
+      // Create path with sharp peak
+      const generatePeakPath = (width: number, height: number, peakPosition: number) => {
+        const midPoint = height / 2;
+        const points = 20;
+        const stepSize = width / points;
         
-        if (progress < 1) {
-          requestAnimationFrame(updatePath);
-        } else {
-          // Start a new animation cycle
-          setTimeout(() => animate(), 2000); // Wait 2 seconds before the next animation
+        let pathData = `M 0 ${midPoint}`;
+        
+        // Peak height (more dramatic)
+        const peakHeight = height * 0.7;
+        
+        for (let i = 1; i <= points; i++) {
+          const x = i * stepSize;
+          let y = midPoint;
+          
+          // Calculate distance from peak (as a ratio from 0 to 1)
+          const distFromPeak = Math.abs(i - peakPosition) / 2;
+          
+          if (distFromPeak < 1) {
+            // Create sharp peak using triangular function
+            if (i < peakPosition) {
+              // Rising edge - sharp incline
+              y = midPoint - peakHeight * (1 - distFromPeak);
+            } else if (i > peakPosition) {
+              // Falling edge - sharp decline
+              y = midPoint - peakHeight * (1 - distFromPeak);
+            } else {
+              // Exact peak point
+              y = midPoint - peakHeight;
+            }
+          } else {
+            // Add small noise outside peak area
+            const variance = Math.random() * 1.5 - 0.75;
+            y = midPoint + variance;
+          }
+          
+          pathData += ` L ${x} ${y}`;
         }
+        
+        return pathData;
       };
       
-      // Start the animation
-      updatePath();
+      // Animation timing
+      const width = signalLineRef.current.width.baseVal.value || 300;
+      const height = 20; // Height of SVG
+      
+      // Initial path (flat with small variations)
+      let currentPath = generateBasePath(width, height);
+      path.setAttribute('d', currentPath);
+      
+      // Function to create a peak at random intervals
+      const createRandomPeak = () => {
+        // Choose a random position for the peak (but not too close to edges)
+        const peakPosition = 5 + Math.floor(Math.random() * 10); // Between positions 5 and 15
+        
+        // Generate and set the path with a peak
+        const peakPath = generatePeakPath(width, height, peakPosition);
+        path.setAttribute('d', peakPath);
+        
+        // Reset to baseline after peak duration
+        setTimeout(() => {
+          if (path && animating) {
+            const basePath = generateBasePath(width, height);
+            path.setAttribute('d', basePath);
+          }
+        }, 800); // Duration of peak visibility
+        
+        // Schedule next peak after random interval
+        peakTimer = setTimeout(createRandomPeak, 3000 + Math.random() * 5000); // 3-8 second interval
+      };
+      
+      // Start the peak animation cycle
+      peakTimer = setTimeout(createRandomPeak, 2000);
+      
+      return () => {
+        cancelAnimationFrame(animationFrameId);
+        clearTimeout(peakTimer);
+      };
     };
     
-    // Initial animation
-    animate();
+    // Initialize animation
+    const cleanup = animate();
+    
+    return () => {
+      setAnimating(false);
+      if (cleanup) cleanup();
+    };
     
   }, []);
 
@@ -101,7 +164,9 @@ const Hero = () => {
               fill="none"
               stroke="currentColor"
               strokeWidth="1.5"
-              className="text-signal-charcoal/40"
+              className="text-signal-charcoal/60"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
           </svg>
         </div>
