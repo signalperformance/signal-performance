@@ -4,8 +4,8 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Membership from "@/components/Membership";
 import AssessmentProcess from "@/components/AssessmentProcess";
-import WaitlistForm from "@/components/WaitlistForm";
 import Footer from "@/components/Footer";
+import WaitlistDialog from "@/components/WaitlistDialog";
 
 const Index = () => {
   useEffect(() => {
@@ -18,7 +18,7 @@ const Index = () => {
       <Hero />
       <Membership />
       <AssessmentProcess />
-      <WaitlistForm />
+      <WaitlistDialog />
       <Footer />
     </div>
   );
