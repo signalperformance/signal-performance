@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
-import { Move, Activity, User, Dumbbell, Golf } from "lucide-react";
+import { Move, Activity, User, Dumbbell, Club } from "lucide-react";
 
 const AssessmentProcess = () => {
   const [activeAssessment, setActiveAssessment] = useState("mobility");
@@ -31,7 +31,7 @@ const AssessmentProcess = () => {
     },
     golf: {
       title: "Golf Skill",
-      icon: Golf,
+      icon: Club,
       description: "Detailed evaluation of your current golf performance metrics including ball speed, clubhead speed, smash factor, launch conditions, and shot dispersion patterns. We collect baseline data on your full swing, short game, and putting performance to establish clear benchmarks for improvement.",
     }
   };
