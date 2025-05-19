@@ -1,6 +1,6 @@
+
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useState, useEffect, useRef } from 'react';
-import { Check, Dumbbell, Brain, Goal, Gift } from 'lucide-react';
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
@@ -34,7 +34,6 @@ const Membership = () => {
   const categories = {
     physical: {
       title: "Physical Training",
-      icon: Dumbbell,
       items: [
         {
           title: "Quarterly Performance Assessments",
@@ -55,8 +54,7 @@ const Membership = () => {
       ]
     },
     mental: {
-      title: "🧠 Mental Training",
-      icon: Brain,
+      title: "Mental Training",
       items: [
         {
           title: "Monthly 1-on-1 Coaching (60 min)",
@@ -73,8 +71,7 @@ const Membership = () => {
       ]
     },
     golf: {
-      title: "⛳ Golf Training",
-      icon: Goal,
+      title: "Golf Training",
       items: [
         {
           title: "GCQuad Simulator Access (5 hrs/month)",
@@ -87,8 +84,7 @@ const Membership = () => {
       ]
     },
     other: {
-      title: "🎁 Other Benefits",
-      icon: Gift,
+      title: "Other Benefits",
       items: [
         {
           title: "High-Comfort Amenities",
@@ -124,9 +120,6 @@ const Membership = () => {
                   )}
                   onClick={() => setActiveCategory(key)}
                 >
-                  {category.icon && (
-                    <category.icon className="h-5 w-5 mr-3 text-signal-gold hidden md:block" />
-                  )}
                   <div>
                     <h3 className="font-medium text-base md:text-lg font-lora">{category.title}</h3>
                     <p className="text-xs md:text-sm text-muted-foreground mt-1">
@@ -148,12 +141,9 @@ const Membership = () => {
                   {categories[activeCategory as keyof typeof categories].items.map((item, index) => (
                     <div key={index} className="space-y-1 md:space-y-2">
                       <div className="flex items-start gap-3">
-                        <div className="bg-signal-gold/10 rounded-full p-1.5 mt-0.5 flex-shrink-0">
-                          <Check className="text-signal-gold h-4 w-4" />
-                        </div>
                         <h4 className="font-lora font-medium text-lg md:text-xl">{item.title}</h4>
                       </div>
-                      <p className="text-muted-foreground ml-10 text-sm md:text-base">
+                      <p className="text-muted-foreground text-sm md:text-base">
                         {item.description}
                       </p>
                     </div>
