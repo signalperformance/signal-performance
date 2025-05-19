@@ -1,11 +1,9 @@
-
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
-
 const About = () => {
   const {
     t
@@ -86,7 +84,7 @@ const About = () => {
                 </div>
                 
                 {/* Second row - 2 larger certifications */}
-                <div className="flex flex-col items-center col-span-2">
+                <div className="flex flex-col items-center col-span-2 my-0 py-0 mx-0">
                   <div className="w-40 h-40 mb-2">
                     <img src="/lovable-uploads/beb7975b-c02a-42bc-be92-0c3da1a9f81c.png" alt="FRA Certification" className="w-full h-full object-contain" />
                   </div>
@@ -105,5 +103,4 @@ const About = () => {
       </div>
     </section>;
 };
-
 export default About;
