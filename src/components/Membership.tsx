@@ -1,7 +1,6 @@
-
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useState, useEffect, useRef } from 'react';
-import { Check, Dumbbell, Brain, GolfIcon, Gift } from 'lucide-react';
+import { Check, Dumbbell, Brain, Goal, Gift } from 'lucide-react';
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
@@ -75,7 +74,7 @@ const Membership = () => {
     },
     golf: {
       title: "⛳ Golf Training",
-      icon: GolfIcon,
+      icon: Goal,
       items: [
         {
           title: "GCQuad Simulator Access (5 hrs/month)",
