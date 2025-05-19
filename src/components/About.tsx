@@ -88,13 +88,13 @@ const About = () => {
                   <div className="w-40 h-40 mb-2">
                     <img src="/lovable-uploads/beb7975b-c02a-42bc-be92-0c3da1a9f81c.png" alt="FRA Certification" className="w-full h-full object-contain" />
                   </div>
-                  <span className="text-xs text-center text-signal-charcoal/80">FRA</span>
+                  
                 </div>
                 <div className="flex flex-col items-center col-span-2">
                   <div className="w-40 h-40 mb-2">
                     <img src="/lovable-uploads/bb4a1533-7785-47f6-a0fa-6a037df47902.png" alt="FRC Certification" className="w-full h-full object-contain" />
                   </div>
-                  <span className="text-xs text-center text-signal-charcoal/80">FRC</span>
+                  
                 </div>
               </div>
             </div>
