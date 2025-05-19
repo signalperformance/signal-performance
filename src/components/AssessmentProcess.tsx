@@ -1,13 +1,10 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 import { Move, Activity, User, Dumbbell, Club } from "lucide-react";
-
 const AssessmentProcess = () => {
   const [activeAssessment, setActiveAssessment] = useState("mobility");
-
   const assessments = {
     mobility: {
       title: "Mobility and Joint Function",
@@ -40,16 +37,11 @@ const AssessmentProcess = () => {
       number: 5
     }
   };
-
-  return (
-    <section id="assessment" className="section-padding bg-gradient-to-b from-white to-signal-light-gray">
+  return <section id="assessment" className="section-padding bg-gradient-to-b from-white to-signal-light-gray">
       <div className="container mx-auto container-padding">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 font-lora">Our Assessment Process</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Each member begins with a comprehensive assessment across five key performance areas. 
-            These assessments guide your individualized training plan and provide benchmarks to track your progress.
-          </p>
+          <p className="text-muted-foreground max-w-2xl mx-auto">Upon joining and every 12 weeks, members complete a comprehensive evaluation across six key areas to establish a precise snapshot of their current physical and performance profile.</p>
         </div>
 
         {/* Desktop View: Side-by-side Layout */}
@@ -59,14 +51,7 @@ const AssessmentProcess = () => {
             <div className="relative w-[500px] h-[500px] mx-auto">
               {/* Connecting pentagon line for icons */}
               <svg className="absolute inset-0 w-full h-full" viewBox="0 0 500 500" fill="none">
-                <path
-                  d="M250,50 L430,200 L350,400 L150,400 L70,200 Z"
-                  stroke="#D4AF37"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  fill="none"
-                  opacity="0.8"
-                />
+                <path d="M250,50 L430,200 L350,400 L150,400 L70,200 Z" stroke="#D4AF37" strokeWidth="2" strokeLinecap="round" fill="none" opacity="0.8" />
               </svg>
               
               {/* Center circle */}
@@ -84,60 +69,49 @@ const AssessmentProcess = () => {
 
               {/* Positioned numbered icons */}
               {Object.entries(assessments).map(([key, assessment], index) => {
-                // Calculate position on the pentagon
-                let angle, x, y;
-                
-                // Positions for each numbered node on the pentagon
-                switch(index) {
-                  case 0: // Top (1)
-                    x = 250;
-                    y = 50;
-                    break;
-                  case 1: // Top right (2)
-                    x = 430;
-                    y = 200;
-                    break;
-                  case 2: // Bottom right (3)
-                    x = 350;
-                    y = 400;
-                    break;
-                  case 3: // Bottom left (4)
-                    x = 150;
-                    y = 400;
-                    break;
-                  case 4: // Top left (5)
-                    x = 70;
-                    y = 200;
-                    break;
-                  default:
-                    x = 250;
-                    y = 250;
-                }
-                
-                return (
-                  <div 
-                    key={key}
-                    className={cn(
-                      "absolute w-16 h-16 rounded-full bg-white shadow-md flex items-center justify-center transform -translate-x-1/2 -translate-y-1/2 cursor-pointer transition-all duration-300",
-                      activeAssessment === key 
-                        ? "scale-110 border-2 border-signal-gold" 
-                        : "hover:scale-105"
-                    )}
-                    style={{ 
-                      left: `${x}px`, 
-                      top: `${y}px`,
-                    }}
-                    onClick={() => setActiveAssessment(key)}
-                  >
-                    <span className={cn(
-                      "text-2xl font-bold",
-                      activeAssessment === key ? "text-signal-gold" : "text-signal-charcoal"
-                    )}>
+              // Calculate position on the pentagon
+              let angle, x, y;
+
+              // Positions for each numbered node on the pentagon
+              switch (index) {
+                case 0:
+                  // Top (1)
+                  x = 250;
+                  y = 50;
+                  break;
+                case 1:
+                  // Top right (2)
+                  x = 430;
+                  y = 200;
+                  break;
+                case 2:
+                  // Bottom right (3)
+                  x = 350;
+                  y = 400;
+                  break;
+                case 3:
+                  // Bottom left (4)
+                  x = 150;
+                  y = 400;
+                  break;
+                case 4:
+                  // Top left (5)
+                  x = 70;
+                  y = 200;
+                  break;
+                default:
+                  x = 250;
+                  y = 250;
+              }
+              return <div key={key} className={cn("absolute w-16 h-16 rounded-full bg-white shadow-md flex items-center justify-center transform -translate-x-1/2 -translate-y-1/2 cursor-pointer transition-all duration-300", activeAssessment === key ? "scale-110 border-2 border-signal-gold" : "hover:scale-105")} style={{
+                left: `${x}px`,
+                top: `${y}px`
+              }} onClick={() => setActiveAssessment(key)}>
+                    <span className={cn("text-2xl font-bold", activeAssessment === key ? "text-signal-gold" : "text-signal-charcoal")}>
                       {assessment.number}
                     </span>
-                  </div>
-                );
-              })}
+                  </div>;
+            })}
             </div>
           </div>
           
@@ -163,33 +137,19 @@ const AssessmentProcess = () => {
         
         {/* Mobile View: Tabs Layout */}
         <div className="md:hidden">
-          <Tabs 
-            value={activeAssessment} 
-            onValueChange={setActiveAssessment}
-            className="w-full"
-          >
+          <Tabs value={activeAssessment} onValueChange={setActiveAssessment} className="w-full">
             <TabsList className="grid grid-cols-5 mb-8">
-              {Object.entries(assessments).map(([key, assessment]) => (
-                <TabsTrigger 
-                  key={key} 
-                  value={key} 
-                  className="flex flex-col items-center py-3 px-1 data-[state=active]:border-b-2 data-[state=active]:border-signal-gold"
-                >
+              {Object.entries(assessments).map(([key, assessment]) => <TabsTrigger key={key} value={key} className="flex flex-col items-center py-3 px-1 data-[state=active]:border-b-2 data-[state=active]:border-signal-gold">
                   <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center mb-1">
-                    <span className={cn(
-                      "font-bold",
-                      activeAssessment === key ? "text-signal-gold" : "text-signal-charcoal"
-                    )}>
+                    <span className={cn("font-bold", activeAssessment === key ? "text-signal-gold" : "text-signal-charcoal")}>
                       {assessment.number}
                     </span>
                   </div>
                   <span className="text-xs text-center line-clamp-2">{assessment.title.split(' ')[0]}</span>
-                </TabsTrigger>
-              ))}
+                </TabsTrigger>)}
             </TabsList>
             
-            {Object.entries(assessments).map(([key, assessment]) => (
-              <TabsContent key={key} value={key} className="mt-0">
+            {Object.entries(assessments).map(([key, assessment]) => <TabsContent key={key} value={key} className="mt-0">
                 <Card>
                   <CardContent className="p-5">
                     <div className="flex items-center gap-3 mb-3">
@@ -203,13 +163,10 @@ const AssessmentProcess = () => {
                     </p>
                   </CardContent>
                 </Card>
-              </TabsContent>
-            ))}
+              </TabsContent>)}
           </Tabs>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default AssessmentProcess;
