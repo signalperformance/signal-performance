@@ -1,11 +1,7 @@
-
 import { useLanguage } from '@/contexts/LanguageContext';
-
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-  
-  return (
-    <footer className="bg-signal-black text-white py-12">
+  return <footer className="bg-signal-black text-white py-12">
       <div className="container mx-auto container-padding">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-6 md:mb-0">
@@ -27,7 +23,7 @@ const Footer = () => {
             
             <div>
               <h4 className="text-sm font-bold mb-4 uppercase tracking-wider text-signal-gold">Contact</h4>
-              <p className="text-white/70">contact@signalperformance.com</p>
+              <p className="text-white/70">noah@signalperformance.golf</p>
               <p className="text-white/70">+886 2 1234 5678</p>
             </div>
             
@@ -60,8 +56,6 @@ const Footer = () => {
           <p>© {currentYear} Signal Performance. All rights reserved.</p>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
