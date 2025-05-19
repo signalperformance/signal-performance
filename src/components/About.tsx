@@ -1,3 +1,4 @@
+
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
@@ -56,7 +57,7 @@ const About = () => {
               </Card>
               
               <h4 className="text-xl font-bold mb-4 text-signal-charcoal">Certifications</h4>
-              <div className="grid grid-cols-4 gap-6">
+              <div className="grid grid-cols-4 gap-4">
                 {/* First row - 4 certifications */}
                 <div className="flex flex-col items-center">
                   <div className="w-20 h-20 mb-2">
@@ -83,18 +84,16 @@ const About = () => {
                   
                 </div>
                 
-                {/* Second row - 2 larger certifications */}
-                <div className="flex flex-col items-center col-span-2 my-0 py-0 mx-0">
-                  <div className="w-40 h-40 mb-2">
+                {/* Second row - 2 larger certifications with reduced spacing */}
+                <div className="flex flex-col items-center col-span-2 mt-1">
+                  <div className="w-36 h-36">
                     <img src="/lovable-uploads/beb7975b-c02a-42bc-be92-0c3da1a9f81c.png" alt="FRA Certification" className="w-full h-full object-contain" />
                   </div>
-                  
                 </div>
-                <div className="flex flex-col items-center col-span-2">
-                  <div className="w-40 h-40 mb-2">
+                <div className="flex flex-col items-center col-span-2 mt-1">
+                  <div className="w-36 h-36">
                     <img src="/lovable-uploads/bb4a1533-7785-47f6-a0fa-6a037df47902.png" alt="FRC Certification" className="w-full h-full object-contain" />
                   </div>
-                  
                 </div>
               </div>
             </div>
