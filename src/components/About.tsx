@@ -21,15 +21,18 @@ const About = () => {
           <div className="flex flex-col lg:flex-row gap-10 items-center lg:items-start">
             {/* Profile Section */}
             <div className="w-full lg:w-1/3">
-              <div className="relative mb-6">
-                <div className="absolute inset-0 border-2 border-signal-gold rounded-xl transform translate-x-4 translate-y-4"></div>
-                <AspectRatio ratio={1} className="bg-white rounded-xl overflow-hidden shadow-lg relative z-10">
-                  <img 
-                    src="/lovable-uploads/1b7319b1-9b32-4dac-8687-ed02dffa6e59.png" 
-                    alt="Dr. Noah Sachs" 
-                    className="object-contain w-full h-full"
-                  />
-                </AspectRatio>
+              <div className="mb-6 flex justify-center">
+                <div className="w-full max-w-xs">
+                  <div className="rounded-lg overflow-hidden bg-[#67A3F0] relative">
+                    <div className="aspect-ratio-1/1">
+                      <img 
+                        src="/lovable-uploads/9cd6f4c9-9cfc-435a-8ebb-2bbe20537915.png" 
+                        alt="Dr. Noah Sachs" 
+                        className="object-cover w-full h-full"
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
               <div className="text-center">
                 <h3 className="text-2xl font-bold font-lora text-signal-charcoal">Dr. Noah Sachs</h3>
