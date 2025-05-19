@@ -27,7 +27,7 @@ const About = () => {
                   <img 
                     src="/lovable-uploads/1b7319b1-9b32-4dac-8687-ed02dffa6e59.png" 
                     alt="Dr. Noah Sachs" 
-                    className="object-cover w-full h-full"
+                    className="object-contain w-full h-full"
                   />
                 </AspectRatio>
               </div>
@@ -76,7 +76,7 @@ const About = () => {
                 </div>
                 <div className="flex flex-col items-center">
                   <div className="w-20 h-20 mb-2">
-                    <img src="/lovable-uploads/be3df569-6fc4-41cb-b326-8c8ec5b56066.png" alt="CMPC Certification" className="w-full h-full object-contain" />
+                    <img src="/lovable-uploads/09961efd-a840-417f-a93a-2e2990b91489.png" alt="CMPC Certification" className="w-full h-full object-contain" />
                   </div>
                   <span className="text-xs text-center text-signal-charcoal/80">CMPC</span>
                 </div>
