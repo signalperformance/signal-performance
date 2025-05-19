@@ -39,25 +39,18 @@ const About = () => {
             <div className="w-full lg:w-2/3">
               <Card className="mb-6">
                 <CardContent className="pt-6">
-                  <p className="text-lg leading-relaxed text-signal-charcoal/90 mb-6">
-                    Dr. Noah Sachs is a performance coach specializing in the integrated physical and mental development of elite golfers.
-                  </p>
-                  
                   <div className="mb-6">
                     <h4 className="text-xl font-bold mb-3 text-signal-charcoal">Academic Background</h4>
-                    <ul className="text-lg leading-relaxed text-signal-charcoal/90 space-y-2 list-disc pl-5">
-                      <li>Doctorate in Sport & Performance Psychology</li>
-                      <li>Master's in Sport & Performance Psychology</li>
-                      <li>B.S. Marketing and Professional Golf Management</li>
-                    </ul>
+                    <p className="text-lg leading-relaxed text-signal-charcoal/90">
+                      Doctorate in Sport & Performance Psychology
+                    </p>
                   </div>
                   
                   <div>
                     <h4 className="text-xl font-bold mb-3 text-signal-charcoal">Professional Experience</h4>
-                    <ul className="text-lg leading-relaxed text-signal-charcoal/90 space-y-2 list-disc pl-5">
-                      <li>Mental Performance Coach — IMG Academy</li>
-                      <li>Cognitive Enhancement Practitioner — U.S. Air Force Special Operations Command</li>
-                      <li>Mental Performance Coach — Integrity Golf Performance</li>
+                    <ul className="text-lg leading-relaxed text-signal-charcoal/90 space-y-2">
+                      <li>Mental Performance Coach at IMG Academy</li>
+                      <li>Cognitive Enhancement Practitioner for U.S. Air Force Special Operations</li>
                     </ul>
                   </div>
                 </CardContent>
@@ -93,12 +86,12 @@ const About = () => {
                 
                 {/* Second row - 2 larger certifications with reduced spacing */}
                 <div className="flex flex-col items-center col-span-2 mt-1">
-                  <div className="w-32 h-32">
+                  <div className="w-36 h-36">
                     <img src="/lovable-uploads/beb7975b-c02a-42bc-be92-0c3da1a9f81c.png" alt="FRA Certification" className="w-full h-full object-contain" />
                   </div>
                 </div>
                 <div className="flex flex-col items-center col-span-2 mt-1">
-                  <div className="w-32 h-32">
+                  <div className="w-36 h-36">
                     <img src="/lovable-uploads/bb4a1533-7785-47f6-a0fa-6a037df47902.png" alt="FRC Certification" className="w-full h-full object-contain" />
                   </div>
                 </div>
