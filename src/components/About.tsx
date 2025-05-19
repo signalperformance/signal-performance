@@ -5,11 +5,12 @@ import { Separator } from '@/components/ui/separator';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
+
 const About = () => {
-  const {
-    t
-  } = useLanguage();
-  return <section id="about" className="section-padding bg-white">
+  const { t } = useLanguage();
+  
+  return (
+    <section id="about" className="section-padding bg-white">
       <div className="container mx-auto container-padding">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
@@ -41,16 +42,17 @@ const About = () => {
                 <CardContent className="pt-6">
                   <div className="mb-6">
                     <h4 className="text-xl font-bold mb-3 text-signal-charcoal">Academic Background</h4>
-                    <p className="text-lg leading-relaxed text-signal-charcoal/90">
+                    <p className="text-sm leading-relaxed text-signal-charcoal/90">
                       Doctorate in Sport & Performance Psychology
                     </p>
                   </div>
                   
                   <div>
                     <h4 className="text-xl font-bold mb-3 text-signal-charcoal">Professional Experience</h4>
-                    <ul className="text-lg leading-relaxed text-signal-charcoal/90 space-y-2">
-                      <li>Mental Performance Coach at IMG Academy</li>
-                      <li>Cognitive Enhancement Practitioner for U.S. Air Force Special Operations</li>
+                    <ul className="text-sm leading-relaxed text-signal-charcoal/90 space-y-2">
+                      <li>• Mental Performance Coach — IMG Academy</li>
+                      <li>• Cognitive Enhancement Practitioner — U.S. Air Force Special Operations Command</li>
+                      <li>• Fitness Coach - PGA of America Golf Academy at Mission Hills</li>
                     </ul>
                   </div>
                 </CardContent>
@@ -100,6 +102,8 @@ const About = () => {
           </div>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default About;
