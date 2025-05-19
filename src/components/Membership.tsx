@@ -105,8 +105,9 @@ const Membership = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-4 font-lora">What's Included in Your Membership</h2>
         </div>
         
-        <div className="grid md:grid-cols-3 gap-8">
-          {/* Feature Categories on the Left */}
+        {/* Grid layout with different structure for mobile vs desktop */}
+        <div className="hidden md:grid md:grid-cols-3 gap-8">
+          {/* Feature Categories on the Left - Desktop Only */}
           <div className="md:col-span-1">
             <div className="space-y-3">
               {Object.entries(categories).map(([key, category]) => (
@@ -131,7 +132,7 @@ const Membership = () => {
             </div>
           </div>
           
-          {/* Feature Details on the Right */}
+          {/* Feature Details on the Right - Desktop Only */}
           <div className="md:col-span-2">
             <Card className="bg-white shadow-md h-full">
               <CardContent className="p-4 md:p-8">
@@ -152,6 +153,48 @@ const Membership = () => {
               </CardContent>
             </Card>
           </div>
+        </div>
+
+        {/* Mobile View - Accordion-like layout */}
+        <div className="md:hidden space-y-4">
+          {Object.entries(categories).map(([key, category]) => (
+            <div key={key} className="rounded-lg overflow-hidden">
+              <div
+                className={cn(
+                  "p-4 rounded-lg cursor-pointer transition-all duration-200",
+                  activeCategory === key 
+                    ? "bg-white shadow-md border-l-4 border-signal-gold" 
+                    : "bg-white/50 hover:bg-white"
+                )}
+                onClick={() => setActiveCategory(key)}
+              >
+                <h3 className="font-medium text-lg font-lora">{category.title}</h3>
+                <p className="text-xs text-muted-foreground mt-1">
+                  Click to view details
+                </p>
+              </div>
+              
+              {/* Show content immediately below the clicked category */}
+              {activeCategory === key && (
+                <Card className="bg-white shadow-md mt-2 mb-4">
+                  <CardContent className="p-4">
+                    <div className="space-y-6">
+                      {category.items.map((item, index) => (
+                        <div key={index} className="space-y-1">
+                          <div className="flex items-start gap-3">
+                            <h4 className="font-lora font-medium text-lg">{item.title}</h4>
+                          </div>
+                          <p className="text-muted-foreground text-sm">
+                            {item.description}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+            </div>
+          ))}
         </div>
       </div>
     </section>
