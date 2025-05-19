@@ -58,7 +58,7 @@ const About = () => {
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
                 <div className="flex flex-col items-center">
                   <div className="w-20 h-20 mb-2">
-                    <img src="/lovable-uploads/97207acd-2693-4e30-9526-d511ed4fa6f3.png" alt="PGA of America Member" className="w-full h-full object-contain" />
+                    <img src="/lovable-uploads/1d022755-a8e7-481a-91db-13f7db87b26a.png" alt="PGA of America Member" className="w-full h-full object-contain" />
                   </div>
                   <span className="text-xs text-center text-signal-charcoal/80">PGA Member</span>
                 </div>
