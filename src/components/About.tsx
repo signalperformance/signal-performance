@@ -1,9 +1,11 @@
+
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
+
 const About = () => {
   const {
     t
@@ -38,16 +40,20 @@ const About = () => {
             <div className="w-full lg:w-2/3">
               <Card className="mb-6">
                 <CardContent className="pt-6">
-                  <p className="text-lg leading-relaxed text-signal-charcoal/90 mb-4">
-                    Welcome to Signal Performance! As a dedicated golf performance specialist, I focus on helping professional 
-                    golfers achieve their highest potential through holistic training methods that integrate physical conditioning, 
-                    technical skill development, and mental performance strategies.
-                  </p>
-                  <p className="text-lg leading-relaxed text-signal-charcoal/90">
-                    With expertise in biomechanics, strength conditioning, and performance psychology, I provide comprehensive 
-                    training programs tailored to each golfer's unique needs. My evidence-based approach helps golfers not only improve 
-                    their game but also prevent injuries and extend their careers.
-                  </p>
+                  <div className="mb-6">
+                    <h4 className="text-xl font-bold mb-3 text-signal-charcoal">Academic Background</h4>
+                    <p className="text-lg leading-relaxed text-signal-charcoal/90">
+                      Doctorate in Sport & Performance Psychology
+                    </p>
+                  </div>
+                  
+                  <div>
+                    <h4 className="text-xl font-bold mb-3 text-signal-charcoal">Professional Experience</h4>
+                    <ul className="text-lg leading-relaxed text-signal-charcoal/90 space-y-2">
+                      <li>Mental Performance Coach at IMG Academy</li>
+                      <li>Cognitive Enhancement Practitioner for U.S. Air Force Special Operations</li>
+                    </ul>
+                  </div>
                 </CardContent>
               </Card>
               
@@ -84,4 +90,5 @@ const About = () => {
       </div>
     </section>;
 };
+
 export default About;
