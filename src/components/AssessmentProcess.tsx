@@ -47,11 +47,11 @@ const AssessmentProcess = () => {
           </p>
         </div>
 
-        {/* Desktop View: Circular Layout */}
-        <div className="hidden md:block relative">
-          <div className="flex justify-center items-center mb-8">
-            {/* Circle with icons around it */}
-            <div className="relative w-[500px] h-[500px]">
+        {/* Desktop View: Side-by-side Layout */}
+        <div className="hidden md:flex md:flex-row md:gap-8 md:items-start">
+          {/* Left side: Circular Layout */}
+          <div className="w-1/2">
+            <div className="relative w-[500px] h-[500px] mx-auto">
               {/* Center circle */}
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="w-48 h-48 rounded-full bg-white shadow-lg flex items-center justify-center p-6 border-2 border-signal-gold">
@@ -94,9 +94,9 @@ const AssessmentProcess = () => {
             </div>
           </div>
           
-          {/* Description box below */}
-          <div className="mt-8">
-            <Card className="bg-white shadow-md mx-auto max-w-3xl">
+          {/* Right side: Description box */}
+          <div className="w-1/2">
+            <Card className="bg-white shadow-md mt-8">
               <CardContent className="p-6">
                 <div className="flex items-center gap-4 mb-4">
                   {React.createElement(assessments[activeAssessment as keyof typeof assessments].icon, { 
