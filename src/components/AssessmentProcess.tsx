@@ -60,7 +60,7 @@ const AssessmentProcess = () => {
               {/* Connecting pentagon line for icons */}
               <svg className="absolute inset-0 w-full h-full" viewBox="0 0 500 500" fill="none">
                 <path
-                  d="M250,100 L430,200 L350,400 L150,400 L70,200 Z"
+                  d="M250,50 L430,200 L350,400 L150,400 L70,200 Z"
                   stroke="#D4AF37"
                   strokeWidth="2"
                   strokeLinecap="round"
@@ -91,7 +91,7 @@ const AssessmentProcess = () => {
                 switch(index) {
                   case 0: // Top (1)
                     x = 250;
-                    y = 100;
+                    y = 50;
                     break;
                   case 1: // Top right (2)
                     x = 430;
