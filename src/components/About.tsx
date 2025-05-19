@@ -1,20 +1,18 @@
-
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
-
 const About = () => {
-  const { t } = useLanguage();
-  
-  return (
-    <section id="about" className="section-padding bg-white">
+  const {
+    t
+  } = useLanguage();
+  return <section id="about" className="section-padding bg-white">
       <div className="container mx-auto container-padding">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 font-lora text-signal-charcoal">About Me</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 font-lora text-signal-charcoal">Your Coach</h2>
             <Separator className="mx-auto w-24 bg-signal-gold h-0.5" />
           </div>
           
@@ -102,8 +100,6 @@ const About = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default About;
