@@ -37,12 +37,20 @@ const Membership = () => {
       title: "Physical Training",
       items: [
         {
-          title: t('membership.fitness.title'),
-          description: t('membership.fitness.description'),
+          title: "Comprehensive Performance Assessments",
+          description: "When you join, and then every 12 weeks, you'll complete a full physical assessment to track progress and guide your individualized program. [Click here to learn more about our assessment process.]",
         },
         {
-          title: t('membership.training.title'),
-          description: t('membership.training.description'),
+          title: "1-on-2 Fitness Coaching — 3x/Week",
+          description: "Train three times per week in a focused 1-on-2 setting. While you'll share the space with another athlete, your training plan is entirely your own — designed around your assessments, goals, and current point in the golf season to directly support your performance on the course.",
+        },
+        {
+          title: "Train on Your Own Schedule",
+          description: "In addition to coached sessions, you can book time to train independently using the same equipment. Your custom program is always available in our training app, and updated regularly by your coach to match your needs.",
+        },
+        {
+          title: "Custom Training App Access",
+          description: "Your personalized program lives in an easy-to-use training app, allowing you to train anytime — whether you're at our facility, traveling, or at home. Because not every aspect of your program can be covered in the three coached sessions each week, we provide additional workouts tailored to your needs and schedule. Most members train 4–5 days per week to ensure they're progressing across all key areas of physical development.",
         }
       ]
     },
@@ -50,8 +58,12 @@ const Membership = () => {
       title: "Mental Training",
       items: [
         {
-          title: t('membership.mental.title'),
-          description: t('membership.mental.description'),
+          title: "1-on-1 Mental Performance Coaching — 1x/Month",
+          description: "Meet in person each month for a 60-minute session focused on enhancing your on-course performance and supporting long-term brain health. The first few sessions are used to establish a baseline and teach foundational concepts. After that, your training becomes fully individualized — incorporating tools like mindfulness and biofeedback training. You'll receive guided mental training exercises to complete regularly at home or in the facility between sessions, allowing you to build consistency and reinforce what you've learned.",
+        },
+        {
+          title: "Mental Training App + Biofeedback Tools",
+          description: "All members receive a heart rate monitor and access to a mobile training app, allowing for regular practice both at the facility and on your own. Your coach can monitor your progress remotely, help keep you accountable, and make timely adjustments — supporting consistent practice and measurable growth over time.",
         }
       ]
     },
@@ -59,8 +71,12 @@ const Membership = () => {
       title: "Golf Training",
       items: [
         {
-          title: t('membership.simulator.title'),
-          description: t('membership.simulator.description'),
+          title: "GCQuad Simulator Access",
+          description: "Each member receives 5 hours of simulator time per month using our industry-leading GCQuad launch monitor. Book sessions online and use the space to dial in your numbers, train shot shapes, or test equipment with precision.",
+        },
+        {
+          title: "On-Demand Putting Practice",
+          description: "Refine your feel and green reading anytime on our in-house putting surface — available for self-guided use throughout the day.",
         }
       ]
     },
@@ -68,12 +84,12 @@ const Membership = () => {
       title: "Other Benefits",
       items: [
         {
-          title: "Networking Events",
-          description: "Regular networking events with golf professionals and industry experts",
+          title: "High-Comfort Amenities",
+          description: "Enjoy access to a clean, modern shower space and a kitchenette stocked with a mix of complimentary and member-priced food and beverage options.",
         },
         {
-          title: "Equipment Analysis",
-          description: "Quarterly equipment reviews and fitting sessions with specialists",
+          title: "Private Club Environment",
+          description: "With a maximum of 20 members, the space remains quiet, focused, and available — giving you the freedom to train on your schedule without crowding or distractions.",
         }
       ]
     }
@@ -103,7 +119,7 @@ const Membership = () => {
                 >
                   <h3 className="font-medium text-lg font-lora">{category.title}</h3>
                   <p className="text-sm text-muted-foreground mt-1">
-                    {activeCategory === key ? `${category.items.length} features available` : "Click to view details"}
+                    Click to view details
                   </p>
                 </div>
               ))}
