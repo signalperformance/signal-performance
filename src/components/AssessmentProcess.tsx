@@ -57,15 +57,15 @@ const AssessmentProcess = () => {
           {/* Left side: Circular Layout */}
           <div className="w-1/2">
             <div className="relative w-[500px] h-[500px] mx-auto">
-              {/* Connecting line for icons */}
+              {/* Connecting pentagon line for icons */}
               <svg className="absolute inset-0 w-full h-full" viewBox="0 0 500 500" fill="none">
                 <path
-                  d="M250,50 L405,155 L365,345 L135,345 L95,155 Z"
+                  d="M250,100 L430,200 L350,400 L150,400 L70,200 Z"
                   stroke="#D4AF37"
                   strokeWidth="2"
                   strokeLinecap="round"
                   fill="none"
-                  opacity="0.6"
+                  opacity="0.8"
                 />
               </svg>
               
@@ -84,10 +84,35 @@ const AssessmentProcess = () => {
 
               {/* Positioned numbered icons */}
               {Object.entries(assessments).map(([key, assessment], index) => {
-                // Calculate position on the circle
-                const angle = (index * (2 * Math.PI / Object.keys(assessments).length)) - Math.PI/2;
-                const x = Math.cos(angle) * 200 + 250; 
-                const y = Math.sin(angle) * 200 + 250;
+                // Calculate position on the pentagon
+                let angle, x, y;
+                
+                // Positions for each numbered node on the pentagon
+                switch(index) {
+                  case 0: // Top (1)
+                    x = 250;
+                    y = 100;
+                    break;
+                  case 1: // Top right (2)
+                    x = 430;
+                    y = 200;
+                    break;
+                  case 2: // Bottom right (3)
+                    x = 350;
+                    y = 400;
+                    break;
+                  case 3: // Bottom left (4)
+                    x = 150;
+                    y = 400;
+                    break;
+                  case 4: // Top left (5)
+                    x = 70;
+                    y = 200;
+                    break;
+                  default:
+                    x = 250;
+                    y = 250;
+                }
                 
                 return (
                   <div 
