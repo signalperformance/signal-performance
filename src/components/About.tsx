@@ -49,9 +49,9 @@ const About = () => {
                   <div>
                     <h4 className="text-xl font-bold mb-3 text-signal-charcoal">Professional Experience</h4>
                     <ul className="text-sm leading-relaxed text-signal-charcoal/90 space-y-2">
-                      <li>Mental Performance Coach — IMG Academy</li>
-                      <li>Cognitive Enhancement Practitioner — U.S. Air Force Special Operations Command</li>
-                      <li>Fitness Coach — PGA of America Golf Academy at Mission Hills</li>
+                      <li>IMG Academy</li>
+                      <li>U.S. Air Force Special Operations Command</li>
+                      <li>PGA of America Golf Academy at Mission Hills</li>
                     </ul>
                   </div>
                 </CardContent>
