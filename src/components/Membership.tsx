@@ -75,11 +75,15 @@ const Membership = () => {
       items: [
         {
           title: "GCQuad Simulator Access (5 hrs/month)",
-          description: "Book simulator sessions to dial in numbers, shape shots, and track performance.",
+          description: "Book simulator sessions to dial in numbers, shape shots, and track performance with tour-grade data.",
         },
         {
           title: "On-Demand Putting Green",
           description: "Use the putting surface anytime for feel, alignment, and distance control work.",
+        },
+        {
+          title: "On-Course Performance Tracking",
+          description: "All members receive access to golf stat tracking software, allowing us to monitor your competitive performance and adjust your training focus accordingly.",
         }
       ]
     },
