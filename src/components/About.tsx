@@ -58,7 +58,7 @@ const About = () => {
               </Card>
               
               <h4 className="text-xl font-bold mb-4 text-signal-charcoal">Certifications</h4>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
                 <div className="flex flex-col items-center">
                   <div className="w-20 h-20 mb-2">
                     <img src="/lovable-uploads/1d022755-a8e7-481a-91db-13f7db87b26a.png" alt="PGA of America Member" className="w-full h-full object-contain" />
@@ -76,6 +76,18 @@ const About = () => {
                     <img src="/lovable-uploads/1dc02882-2327-403c-9e82-8b8207c618ff.png" alt="CSCS Certification" className="w-full h-full object-contain" />
                   </div>
                   <span className="text-xs text-center text-signal-charcoal/80">CSCS</span>
+                </div>
+                <div className="flex flex-col items-center">
+                  <div className="w-20 h-20 mb-2">
+                    <img src="/lovable-uploads/cf67c243-74b1-4d9e-b7d8-e7a81b5050bf.png" alt="FRC Certification" className="w-full h-full object-contain" />
+                  </div>
+                  <span className="text-xs text-center text-signal-charcoal/80">FRC</span>
+                </div>
+                <div className="flex flex-col items-center">
+                  <div className="w-20 h-20 mb-2">
+                    <img src="/lovable-uploads/f880d476-e9df-463d-b3da-7bcedec8b6ff.png" alt="FRA Certification" className="w-full h-full object-contain" />
+                  </div>
+                  <span className="text-xs text-center text-signal-charcoal/80">FRA</span>
                 </div>
                 <div className="flex flex-col items-center">
                   <div className="w-20 h-20 mb-2">
