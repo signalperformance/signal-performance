@@ -8,6 +8,7 @@ const Navbar = () => {
     t
   } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
@@ -33,22 +34,39 @@ const Navbar = () => {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center">
-          
+          <div className="flex space-x-8">
+            {navItems.map(item => <a key={item.href} href={item.href} className="text-signal-charcoal hover:text-signal-gold transition-colors text-sm font-medium">
+                {item.label}
+              </a>)}
+          </div>
 
           <div className="flex items-center ml-8 space-x-4">
             <button onClick={toggleLanguage} className="text-signal-charcoal hover:text-signal-gold transition-colors text-sm font-medium">
               {language === 'en' ? 'EN / 中文' : '中文 / EN'}
             </button>
+            
           </div>
         </div>
 
-        {/* Mobile Navigation - Only Language Toggle */}
-        <div className="md:hidden">
+        {/* Mobile Menu Button */}
+        <div className="md:hidden flex items-center space-x-4">
           <button onClick={toggleLanguage} className="text-signal-charcoal hover:text-signal-gold transition-colors text-sm font-medium">
             {language === 'en' ? 'EN / 中文' : '中文 / EN'}
           </button>
+          <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="text-signal-charcoal">
+            {mobileMenuOpen ? <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg> : <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>}
+          </button>
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      {mobileMenuOpen && <div className="md:hidden bg-white shadow-lg absolute w-full">
+          
+        </div>}
     </nav>;
 };
 export default Navbar;
