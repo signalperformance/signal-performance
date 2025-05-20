@@ -1,16 +1,13 @@
-
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
-
 const About = () => {
   const {
     t
   } = useLanguage();
-  
   return <section id="about" className="section-padding bg-white">
       <div className="container mx-auto container-padding">
         <div className="max-w-5xl mx-auto">
@@ -84,7 +81,7 @@ const About = () => {
                 <div className="grid grid-cols-2 gap-4">
                   <div className="flex justify-center">
                     <div className="w-24 h-24">
-                      <img src="/lovable-uploads/81b45c03-40d4-4cab-b7ad-893125dff714.png" alt="BCIA Biofeedback Certification" className="w-full h-full object-contain" />
+                      <img alt="BCIA Biofeedback Certification" className="w-full h-full object-contain" src="/lovable-uploads/b8e8e7d5-5980-475f-9534-3660f734bccf.png" />
                     </div>
                   </div>
                   <div className="flex justify-center">
@@ -100,5 +97,4 @@ const About = () => {
       </div>
     </section>;
 };
-
 export default About;
