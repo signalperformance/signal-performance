@@ -1,4 +1,3 @@
-
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useState, useEffect, useRef } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
@@ -127,7 +126,7 @@ const Membership = () => {
                     key={key} 
                     value={key} 
                     className={cn(
-                      "py-3 px-6 rounded-lg cursor-pointer transition-all min-w-[120px] mx-1 border-b-2",
+                      "py-3 px-6 rounded-lg cursor-pointer min-w-[120px] mx-1 border-b-2",
                       isActive 
                         ? "bg-white shadow-md border-b-2 font-semibold" 
                         : "hover:bg-muted/40 border-transparent"
@@ -144,17 +143,14 @@ const Membership = () => {
                       <div 
                         className={cn(
                           "w-3 h-3 rounded-full",
-                          isActive ? "ring-2 ring-offset-2" : ""
+                          isActive ? "outline outline-2 outline-offset-2" : ""
                         )}
                         style={{ 
                           backgroundColor: categoryColor,
-                          ringColor: isActive ? categoryColor : 'transparent',
-                          ringOffsetColor: isActive ? 'white' : 'transparent'
+                          outlineColor: isActive ? categoryColor : 'transparent',
                         }}
                       ></div>
-                      <span className={cn(
-                        isActive ? "text-foreground" : "text-muted-foreground"
-                      )}>
+                      <span>
                         {category.title}
                       </span>
                     </div>
@@ -165,7 +161,7 @@ const Membership = () => {
 
             {/* Content for each tab */}
             {Object.entries(categories).map(([key, category]) => (
-              <TabsContent key={key} value={key} className="mt-0 transition-all duration-300">
+              <TabsContent key={key} value={key} className="mt-0">
                 <Card className="bg-white shadow-lg rounded-xl overflow-hidden">
                   <CardContent className="p-8">
                     <h3 className="text-2xl font-lora mb-6 font-medium">{category.title}</h3>
@@ -195,7 +191,7 @@ const Membership = () => {
           </Tabs>
         </div>
 
-        {/* Mobile View - Modified to remove colored dots to save space */}
+        {/* Mobile View */}
         <div className="md:hidden">
           {/* Category Pills - Horizontal Scrolling */}
           <div className="mb-6 overflow-x-auto pb-2 no-scrollbar">
@@ -258,4 +254,3 @@ const Membership = () => {
     </section>;
 };
 export default Membership;
-
