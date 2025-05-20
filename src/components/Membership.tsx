@@ -1,8 +1,9 @@
-
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useState, useEffect, useRef } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { Check } from "lucide-react";
+
 const Membership = () => {
   const {
     t, language
@@ -84,6 +85,21 @@ const Membership = () => {
     }
   };
   
+  const getCategoryColor = (key: string) => {
+    switch (key) {
+      case 'physical':
+        return '#3b82f6'; // blue-500
+      case 'mental':
+        return '#ef4444'; // red-500
+      case 'golf':
+        return '#22c55e'; // green-500
+      case 'other':
+        return '#a855f7'; // purple-500
+      default:
+        return '#6b7280'; // gray-500
+    }
+  };
+  
   return <section id="membership" className="section-padding bg-signal-light-gray" ref={sectionRef}>
       <div className="container mx-auto container-padding">
         <div className="text-center mb-8">
@@ -129,32 +145,67 @@ const Membership = () => {
           </div>
         </div>
 
-        {/* Mobile View - Accordion-like layout */}
-        <div className="md:hidden space-y-4">
-          {Object.entries(categories).map(([key, category]) => <div key={key} className="rounded-lg overflow-hidden">
-              <div className={cn("p-4 rounded-lg cursor-pointer transition-all duration-200", activeCategory === key ? "bg-white shadow-md border-l-4 border-signal-gold" : "bg-white/50 hover:bg-white")} onClick={() => setActiveCategory(key)}>
-                <h3 className="font-medium text-lg font-lora">{category.title}</h3>
-                <p className="text-xs text-muted-foreground mt-1">
-                  {language === 'en' ? 'Click to view details' : '點擊查看詳情'}
-                </p>
-              </div>
-              
-              {/* Show content immediately below the clicked category */}
-              {activeCategory === key && <Card className="bg-white shadow-md mt-2 mb-4">
-                  <CardContent className="p-4">
-                    <div className="space-y-6">
-                      {category.items.map((item, index) => <div key={index} className="space-y-1">
-                          <div className="flex items-start gap-3">
-                            <h4 className="font-lora font-medium text-lg">{item.title}</h4>
-                          </div>
-                          <p className="text-muted-foreground text-sm">
-                            {item.description}
-                          </p>
-                        </div>)}
+        {/* Mobile View - Enhanced Design Similar to AssessmentProcess */}
+        <div className="md:hidden">
+          {/* Category Pills - Horizontal Scrolling */}
+          <div className="mb-6 overflow-x-auto no-scrollbar">
+            <div className="flex p-1.5 rounded-xl bg-muted/20 shadow-sm space-x-2">
+              {Object.entries(categories).map(([key, category]) => {
+                const isActive = activeCategory === key;
+                const categoryColor = getCategoryColor(key);
+                
+                return (
+                  <div 
+                    key={key} 
+                    className={cn(
+                      "py-3 px-4 rounded-lg cursor-pointer transition-all flex-shrink-0",
+                      isActive ? "bg-white shadow-md" : "hover:bg-muted/40"
+                    )}
+                    onClick={() => setActiveCategory(key)}
+                  >
+                    <div className="flex items-center justify-center space-x-2">
+                      <div 
+                        className="w-3 h-3 rounded-full"
+                        style={{ backgroundColor: categoryColor }}
+                      ></div>
+                      <span className={cn(
+                        "font-medium",
+                        isActive ? "text-foreground" : "text-muted-foreground"
+                      )}>
+                        {category.title}
+                      </span>
                     </div>
-                  </CardContent>
-                </Card>}
-            </div>)}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          
+          {/* Content Card */}
+          <Card className="bg-white shadow-md rounded-xl overflow-hidden">
+            <CardContent className="p-6">
+              <h3 className="text-xl font-lora mb-4 font-medium">{categories[activeCategory as keyof typeof categories].title}</h3>
+              
+              <div className="space-y-6">
+                {categories[activeCategory as keyof typeof categories].items.map((item, index) => (
+                  <div key={index} className="flex items-start gap-3 pb-4 border-b last:border-0 last:pb-0">
+                    <div 
+                      className="w-6 h-6 rounded-full flex items-center justify-center text-white mt-0.5 flex-shrink-0" 
+                      style={{ backgroundColor: getCategoryColor(activeCategory) }}
+                    >
+                      <Check className="h-3.5 w-3.5" />
+                    </div>
+                    <div>
+                      <h4 className="font-medium text-base">{item.title}</h4>
+                      <p className="text-muted-foreground text-sm mt-1">
+                        {item.description}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </section>;
