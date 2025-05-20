@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
-import Founder from "@/components/Founder";
 import Membership from "@/components/Membership";
 import AssessmentProcess from "@/components/AssessmentProcess";
 import Footer from "@/components/Footer";
