@@ -15,7 +15,7 @@ const About = () => {
       <div className="container mx-auto container-padding">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 font-lora text-signal-charcoal">Your Coach</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 font-lora text-signal-charcoal">{t('about.coach.title')}</h2>
             <Separator className="mx-auto w-24 bg-signal-gold h-0.5" />
           </div>
           
@@ -32,8 +32,8 @@ const About = () => {
                 </div>
               </div>
               <div className="text-center">
-                <h3 className="text-2xl font-bold font-lora text-signal-charcoal">Dr. Noah Sachs</h3>
-                <p className="text-signal-gold mt-1 font-medium">Performance Coach</p>
+                <h3 className="text-2xl font-bold font-lora text-signal-charcoal">{t('about.coach.name')}</h3>
+                <p className="text-signal-gold mt-1 font-medium">{t('about.coach.position')}</p>
               </div>
             </div>
             
@@ -42,24 +42,24 @@ const About = () => {
               <Card className="mb-6">
                 <CardContent className="pt-6">
                   <div className="mb-6">
-                    <h4 className="text-xl font-bold mb-3 text-signal-charcoal">Academic Background</h4>
+                    <h4 className="text-xl font-bold mb-3 text-signal-charcoal">{t('about.coach.academic')}</h4>
                     <p className="text-sm leading-relaxed text-signal-charcoal/90">
-                      Doctorate in Sport & Performance Psychology
+                      {t('about.coach.academic.degree')}
                     </p>
                   </div>
                   
                   <div>
-                    <h4 className="text-xl font-bold mb-3 text-signal-charcoal">Professional Experience</h4>
+                    <h4 className="text-xl font-bold mb-3 text-signal-charcoal">{t('about.coach.experience')}</h4>
                     <ul className="text-sm leading-relaxed text-signal-charcoal/90 space-y-2">
-                      <li>IMG Academy</li>
-                      <li>U.S. Air Force Special Operations Command</li>
-                      <li>PGA of America Golf Academy at Mission Hills</li>
+                      <li>{t('about.coach.experience.img')}</li>
+                      <li>{t('about.coach.experience.usaf')}</li>
+                      <li>{t('about.coach.experience.pga')}</li>
                     </ul>
                   </div>
                 </CardContent>
               </Card>
               
-              <h4 className="text-xl font-bold mb-4 text-signal-charcoal">Certifications</h4>
+              <h4 className="text-xl font-bold mb-4 text-signal-charcoal">{t('about.coach.certifications')}</h4>
               <div className="grid grid-cols-5 gap-4">
                 {/* First row - 5 certifications in the new order: PGA, CSCS, CMPC, Biofeedback, Neurofeedback */}
                 <div className="flex flex-col items-center">

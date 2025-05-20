@@ -57,8 +57,8 @@ const translations = {
     
     'membership.facility.title': 'Facility Features',
     'membership.facility.refresh': 'Refresh & Recharge',
-    'membership.facility.refresh.description': 'Includes modern shower, towel service, and kitchenette with complimentary and member-priced options.',
-    'membership.facility.atmosphere': 'Private Club Atmosphere',
+    'membership.facility.refresh.description': 'Includes modern shower and kitchenette with complimentary and member-priced options.',
+    'membership.facility.atmosphere': 'Private Training Environment',
     'membership.facility.atmosphere.description': 'Capped at 20 members for a quiet, focused, and highly accessible training environment.',
     
     // Assessment Process
@@ -86,6 +86,18 @@ const translations = {
     'about.paragraph1': 'Signal Performance brings together physical conditioning, mental resilience, and technical skill development in one seamless experience.',
     'about.paragraph2': 'Our integrated approach recognizes that excellence in golf requires harmony between body, mind, and technique.',
     'about.paragraph3': 'We provide a sanctuary where elite golfers can focus on all aspects of their game without distraction.',
+
+    // Coach
+    'about.coach.title': 'Your Coach',
+    'about.coach.name': 'Dr. Noah Sachs',
+    'about.coach.position': 'Performance Coach',
+    'about.coach.academic': 'Academic Background',
+    'about.coach.academic.degree': 'Doctorate in Sport & Performance Psychology',
+    'about.coach.experience': 'Professional Experience',
+    'about.coach.experience.img': 'IMG Academy',
+    'about.coach.experience.usaf': 'U.S. Air Force Special Operations Command',
+    'about.coach.experience.pga': 'PGA of America Golf Academy at Mission Hills',
+    'about.coach.certifications': 'Certifications',
     
     // Founder
     'founder.title': 'Our Founder',
@@ -117,7 +129,7 @@ const translations = {
     'hero.headline': '專業高爾夫選手的訓練基地',
     'hero.subheadline': '在單一場館中整合體能、心理與技術訓練',
     'hero.cta.waitlist': '加入候補名單',
-    'hero.cta.membership': '探索會員資格',
+    'hero.cta.membership': '了解會員方案',
     
     // Membership
     'membership.title': '會員專屬內容',
@@ -129,8 +141,8 @@ const translations = {
     'membership.physical.coaching': '每週三次 1 對 2 體能訓練課程',
     'membership.physical.coaching.description': '在半私人環境中進行完全符合您目標的訓練計畫。',
     'membership.physical.train': '自主訓練空間使用',
-    'membership.physical.train.description': '在教練課程之外使用場館完成您的個人化訓練計畫—只需預約時間，開始訓練。',
-    'membership.physical.app': '專屬訓練 App，隨時隨地跟進課表',
+    'membership.physical.train.description': '在教練課程之外使用場館完成您的個人化訓練計畫：只需預約時間，開始訓練。',
+    'membership.physical.app': '專屬訓練 APP，隨時隨地跟進課表',
     'membership.physical.app.description': '隨時隨地查看您的訓練計劃—在場館、出差或在家—讓您在任何地方都能保持一致的訓練。',
     
     'membership.mental.title': '心理訓練',
@@ -138,22 +150,22 @@ const translations = {
     'membership.mental.coaching.description': '與認證心理績效顧問會面，進行針對場上場下表現提升的個人化課程。',
     'membership.mental.plan': '系統化心理訓練計畫',
     'membership.mental.plan.description': '依循個人化計劃，透過有針對性的練習在課程間隔建立心理技能。',
-    'membership.mental.toolkit': '居家練習工具包（含心率監測器與訓練 App）',
-    'membership.mental.toolkit.description': '獲得心率監測器和移動應用程式，練習課程中學到的技能，並在課程之間追踪進度。',
+    'membership.mental.toolkit': '居家練習工具包（含心率監測器與訓練 APP）',
+    'membership.mental.toolkit.description': '獲得心率監測器與專屬訓練 APP，練習課程中學到的技能，並在課程之間追蹤進度。',
     
     'membership.golf.title': '高爾夫訓練',
     'membership.golf.simulator': '模擬器使用時數：每月 5 小時',
-    'membership.golf.simulator.description': '使用最先進的技術進行訓練—隨時適應您的時間表。',
-    'membership.golf.putting': '推桿綠使用時數：每月 2 小時',
-    'membership.golf.putting.description': '使用尖端工具改進您的技術和對準—按照自己的時間表。',
-    'membership.golf.tracking': '賽場表現追蹤與數據分析',
-    'membership.golf.tracking.description': '所有會員都可以使用高爾夫統計跟踪軟件，使我們能夠監控您的競技表現並相應調整您的訓練重點。',
+    'membership.golf.simulator.description': '使用最先進的技術進行訓練，依您的時間表彈性安排。',
+    'membership.golf.putting': '推桿果嶺使用時間：每月 2 小時',
+    'membership.golf.putting.description': '使用尖端工具提升技術與對準，自主安排練習時間。',
+    'membership.golf.tracking': '比賽數據分析',
+    'membership.golf.tracking.description': '所有會員皆可使用數據分析軟體，使我們能夠深入了解您的比賽表現，並依此調整訓練重點。',
     
     'membership.facility.title': '場館設施',
     'membership.facility.refresh': '放鬆與補給空間',
-    'membership.facility.refresh.description': '包括現代化淋浴、毛巾服務和帶免費和會員價格選項的小廚房。',
-    'membership.facility.atmosphere': '會員人數上限 20 人，打造安靜、專注的訓練環境',
-    'membership.facility.atmosphere.description': '限定20名會員，打造安靜、專注和高度可進入的訓練環境。',
+    'membership.facility.refresh.description': '包括現代化淋浴和附有免費與會員專屬價格選項的小廚房。',
+    'membership.facility.atmosphere': '私人化訓練環境',
+    'membership.facility.atmosphere.description': '會員人數上限 20 人，確保場館安靜、專注且可穩定使用。',
     
     // Assessment Process
     'assessment.title': '我們的評估流程',
@@ -172,7 +184,7 @@ const translations = {
     'assessment.body.description': '我們追踪肌肉量和體脂百分比的變化，評估您的訓練是否產生正確的適應。這比單純體重提供更可靠的反饋，並幫助確保您的進步與表現目標一致。',
     
     'assessment.golf.title': '高爾夫表現評估',
-    'assessment.golf.description': '我們測量每個球桿的距離和分散指標，在受控環境中評估您的擊球和球路控制。然後將此與您從比賽中獲得的推桿數據分析相結合，以更好地了解技術、體能和心理因素對您表現的相對貢獻。',
+    'assessment.golf.description': '我們測量每個球桿的距離和分散指標，在受控環境中評估您的擊球與球路控制。然後結合比賽中的 Strokes Gained 數據分析，更深入了解技術、體能與心理因素對您表現的相對影響。',
     
     // About
     'about.title': '關於 Signal Performance',
@@ -180,6 +192,18 @@ const translations = {
     'about.paragraph1': 'Signal Performance 將身體鍛鍊、心理韌性和技術技能發展融合為一體，提供無縫體驗。',
     'about.paragraph2': '我們的整合方法認識到，高爾夫卓越需要身體、心靈和技術之間的和諧。',
     'about.paragraph3': '我們提供一個聖所，讓精英高爾夫球手能夠專注於他們的比賽各個方面，不受干擾。',
+    
+    // Coach
+    'about.coach.title': '您的教練',
+    'about.coach.name': 'Dr. Noah Sachs',
+    'about.coach.position': '表現教練',
+    'about.coach.academic': '學術背景',
+    'about.coach.academic.degree': '運動與表現心理學博士',
+    'about.coach.experience': '專業經歷',
+    'about.coach.experience.img': 'IMG Academy',
+    'about.coach.experience.usaf': '美國空軍特種作戰司令部',
+    'about.coach.experience.pga': '美國高爾夫協會 Mission Hills 訓練中心',
+    'about.coach.certifications': '專業認證',
     
     // Founder
     'founder.title': '我們的創辦人',
