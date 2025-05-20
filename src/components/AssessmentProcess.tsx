@@ -1,44 +1,49 @@
+
 import React, { useState } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
 import { Move, Activity, User, Dumbbell, Club } from "lucide-react";
+import { useLanguage } from '@/contexts/LanguageContext';
+
 const AssessmentProcess = () => {
+  const { t, language } = useLanguage();
   const [activeAssessment, setActiveAssessment] = useState("mobility");
+  
   const assessments = {
     mobility: {
-      title: "Joint Health",
+      title: t('assessment.joint.title'),
       icon: Move,
-      description: "We assess the passive and active range of motion of every major joint to identify movement limitations and their root causes. These insights inform your fitness program to help reduce injury risk and support long-term joint health. We also track changes in range of motion over time to monitor progress and guide ongoing adjustments.",
+      description: t('assessment.joint.description'),
       number: 1,
       color: "bg-blue-500"
     },
     strength: {
-      title: "Maximal Strength",
+      title: t('assessment.strength.title'),
       icon: Dumbbell,
-      description: "We assess maximal strength using compound lifts like the bench press and deadlift to measure how effectively your neuromuscular system produces force. As maximal strength increases, you're able to move lighter loads — like a golf club — more quickly, directly supporting gains in swing speed.",
+      description: t('assessment.strength.description'),
       number: 2,
       color: "bg-red-500"
     },
     metabolic: {
-      title: "Metabolic Testing",
+      title: t('assessment.metabolic.title'),
       icon: Activity,
-      description: "We assess how efficiently your body produces and uses energy through aerobic and anaerobic testing. This allows us to define your personalized heart rate zones and design a conditioning program that improves endurance, enhances recovery, and supports sustained performance over multiple rounds of competitive golf.",
+      description: t('assessment.metabolic.description'),
       number: 3,
       color: "bg-green-500"
     },
     body: {
-      title: "Body Composition",
+      title: t('assessment.body.title'),
       icon: User,
-      description: "We track changes in muscle mass and body fat percentage to evaluate whether your training is producing the right adaptations. This gives us more reliable feedback than body weight alone and helps ensure your progress aligns with performance goals.",
+      description: t('assessment.body.description'),
       number: 4,
       color: "bg-purple-500"
     },
     golf: {
-      title: "Golf Performance Assessment",
+      title: t('assessment.golf.title'),
       icon: Club,
-      description: "We measure distance and dispersion metrics across every club in the bag to assess your ball-striking and shot control in a controlled environment. We then combine this with an analysis of your strokes gained data from tournament play to better understand the relative contribution of technical, physical, and mental factors to your performance.",
+      description: t('assessment.golf.description'),
       number: 5,
       color: "bg-signal-gold"
     }
@@ -93,11 +98,12 @@ const AssessmentProcess = () => {
       // gray-500
     }
   };
+  
   return <section id="assessment" className="section-padding bg-gradient-to-b from-white to-signal-light-gray">
       <div className="container mx-auto container-padding">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 font-lora">Our Assessment Process</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">Every quarter, members complete a full assessment across five essential areas to ensure their training is aligned, effective, and progressing toward their performance goals.</p>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 font-lora">{t('assessment.title')}</h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto">{t('assessment.description')}</p>
         </div>
 
         {/* Desktop View: Radial Progress Wheel */}

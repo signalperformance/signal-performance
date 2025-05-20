@@ -1,10 +1,11 @@
+
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useState, useEffect, useRef } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 const Membership = () => {
   const {
-    t
+    t, language
   } = useLanguage();
   const [activeCategory, setActiveCategory] = useState("physical");
   const sectionRef = useRef<HTMLElement>(null);
@@ -27,66 +28,68 @@ const Membership = () => {
       }
     };
   }, []);
+  
   const categories = {
     physical: {
-      title: "Physical Training",
+      title: t('membership.physical.title'),
       items: [{
-        title: "Quarterly Performance Assessments",
-        description: <>Quarterly assessments provide objective data to guide your individualized training plan. </>
+        title: t('membership.physical.assessment'),
+        description: t('membership.physical.assessment.description')
       }, {
-        title: "1-on-2 Fitness Coaching (3x/Week)",
-        description: "Train in a semi-private setting with a fully personalized program aligned with your goals."
+        title: t('membership.physical.coaching'),
+        description: t('membership.physical.coaching.description')
       }, {
-        title: "Train On Your Own",
-        description: "Use the facility outside of coached sessions to complete your personalized program—just book your time and get to work."
+        title: t('membership.physical.train'),
+        description: t('membership.physical.train.description')
       }, {
-        title: "Mobile Training App",
-        description: "Access your program anytime — in the facility, on the road, or at home — so you can train consistently anywhere."
+        title: t('membership.physical.app'),
+        description: t('membership.physical.app.description')
       }]
     },
     mental: {
-      title: "Mental Training",
+      title: t('membership.mental.title'),
       items: [{
-        title: "1-on-1 Mental Coaching (1x/Month)",
-        description: "Meet with a certified mental performance consultant for personalized sessions to enhance performance on and off the course."
+        title: t('membership.mental.coaching'),
+        description: t('membership.mental.coaching.description')
       }, {
-        title: "Structured Mental Training Plan",
-        description: "Follow a personalized plan with targeted exercises to build mental skills between sessions."
+        title: t('membership.mental.plan'),
+        description: t('membership.mental.plan.description')
       }, {
-        title: "Home Practice Toolkit",
-        description: "Receive a heart rate monitor and mobile app to practice skills learned in coaching sessions and track progress between sessions."
+        title: t('membership.mental.toolkit'),
+        description: t('membership.mental.toolkit.description')
       }]
     },
     golf: {
-      title: "Golf Training",
+      title: t('membership.golf.title'),
       items: [{
-        title: "Simulator Access (5 hrs/month)",
-        description: "Train with state-of-the-art technology — anytime that fits your schedule."
+        title: t('membership.golf.simulator'),
+        description: t('membership.golf.simulator.description')
       }, {
-        title: "Putting Green Access (2 hrs/month)",
-        description: "Refine your mechanics and alignment with cutting-edge tools — on your own schedule."
+        title: t('membership.golf.putting'),
+        description: t('membership.golf.putting.description')
       }, {
-        title: "On-Course Performance Tracking",
-        description: "All members receive access to golf stat tracking software, allowing us to monitor your competitive performance and adjust your training focus accordingly."
+        title: t('membership.golf.tracking'),
+        description: t('membership.golf.tracking.description')
       }]
     },
     other: {
-      title: "Facility Features",
+      title: t('membership.facility.title'),
       items: [{
-        title: "Refresh & Recharge",
-        description: "Includes modern shower, towel service, and kitchenette with complimentary and member-priced options."
+        title: t('membership.facility.refresh'),
+        description: t('membership.facility.refresh.description')
       }, {
-        title: "Private Club Atmosphere",
-        description: "Capped at 20 members for a quiet, focused, and highly accessible training environment."
+        title: t('membership.facility.atmosphere'),
+        description: t('membership.facility.atmosphere.description')
       }]
     }
   };
+  
   return <section id="membership" className="section-padding bg-signal-light-gray" ref={sectionRef}>
       <div className="container mx-auto container-padding">
         <div className="text-center mb-8">
-          <h2 className="text-3xl md:text-4xl font-bold mb-1 font-lora">What's Included in Your Membership</h2>
-          <p className="text-xl text-muted-foreground font-medium">NT$18,000/month</p>
-          <p className="text-sm text-muted-foreground italic mt-1">All-inclusive membership.</p>
+          <h2 className="text-3xl md:text-4xl font-bold mb-1 font-lora">{t('membership.title')}</h2>
+          <p className="text-xl text-muted-foreground font-medium">{t('membership.price')}</p>
+          <p className="text-sm text-muted-foreground italic mt-1">{t('membership.subtitle')}</p>
         </div>
         
         {/* Grid layout with different structure for mobile vs desktop */}
@@ -98,7 +101,7 @@ const Membership = () => {
                   <div>
                     <h3 className="font-medium text-base md:text-lg font-lora">{category.title}</h3>
                     <p className="text-xs md:text-sm text-muted-foreground mt-1">
-                      Click to view details
+                      {language === 'en' ? 'Click to view details' : '點擊查看詳情'}
                     </p>
                   </div>
                 </div>)}
@@ -132,7 +135,7 @@ const Membership = () => {
               <div className={cn("p-4 rounded-lg cursor-pointer transition-all duration-200", activeCategory === key ? "bg-white shadow-md border-l-4 border-signal-gold" : "bg-white/50 hover:bg-white")} onClick={() => setActiveCategory(key)}>
                 <h3 className="font-medium text-lg font-lora">{category.title}</h3>
                 <p className="text-xs text-muted-foreground mt-1">
-                  Click to view details
+                  {language === 'en' ? 'Click to view details' : '點擊查看詳情'}
                 </p>
               </div>
               

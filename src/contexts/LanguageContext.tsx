@@ -19,22 +19,65 @@ const translations = {
     'nav.login': 'Member Login',
     
     // Hero
-    'hero.headline': 'Holistic Training Facility for Professional Golfers',
-    'hero.subheadline': 'Where elite golfers prepare to perform at their highest level.',
+    'hero.headline': 'Where Pro Golfers Train to Perform',
+    'hero.subheadline': 'Integrated physical, mental, and skill training in one private facility.',
     'hero.cta.waitlist': 'Join the Waitlist',
     'hero.cta.membership': 'Explore Membership',
     
     // Membership
-    'membership.title': 'Exclusive Membership',
-    'membership.subtitle': 'Experience a holistic approach to golf excellence',
-    'membership.fitness.title': 'Semi-Private Fitness',
-    'membership.fitness.description': '3 sessions per week of specialized golf fitness training',
-    'membership.mental.title': 'Mental Coaching',
-    'membership.mental.description': 'Monthly one-on-one sessions with our mental performance coach',
-    'membership.simulator.title': 'Golf Simulator',
-    'membership.simulator.description': '5 hours monthly access to state-of-the-art golf simulators',
-    'membership.training.title': 'Independent Training',
-    'membership.training.description': 'Unlimited access to our facilities for self-directed practice',
+    'membership.title': 'What\'s Included in Your Membership',
+    'membership.price': 'NT$18,000/month',
+    'membership.subtitle': 'All-inclusive membership.',
+    'membership.physical.title': 'Physical Training',
+    'membership.physical.assessment': 'Quarterly Performance Assessments',
+    'membership.physical.assessment.description': 'Quarterly assessments provide objective data to guide your individualized training plan.',
+    'membership.physical.coaching': '1-on-2 Fitness Coaching (3x/Week)',
+    'membership.physical.coaching.description': 'Train in a semi-private setting with a fully personalized program aligned with your goals.',
+    'membership.physical.train': 'Train On Your Own',
+    'membership.physical.train.description': 'Use the facility outside of coached sessions to complete your personalized program—just book your time and get to work.',
+    'membership.physical.app': 'Mobile Training App',
+    'membership.physical.app.description': 'Access your program anytime — in the facility, on the road, or at home — so you can train consistently anywhere.',
+    
+    'membership.mental.title': 'Mental Training',
+    'membership.mental.coaching': '1-on-1 Mental Coaching (1x/Month)',
+    'membership.mental.coaching.description': 'Meet with a certified mental performance consultant for personalized sessions to enhance performance on and off the course.',
+    'membership.mental.plan': 'Structured Mental Training Plan',
+    'membership.mental.plan.description': 'Follow a personalized plan with targeted exercises to build mental skills between sessions.',
+    'membership.mental.toolkit': 'Home Practice Toolkit',
+    'membership.mental.toolkit.description': 'Receive a heart rate monitor and mobile app to practice skills learned in coaching sessions and track progress between sessions.',
+    
+    'membership.golf.title': 'Golf Training',
+    'membership.golf.simulator': 'Simulator Access (5 hrs/month)',
+    'membership.golf.simulator.description': 'Train with state-of-the-art technology — anytime that fits your schedule.',
+    'membership.golf.putting': 'Putting Green Access (2 hrs/month)',
+    'membership.golf.putting.description': 'Refine your mechanics and alignment with cutting-edge tools — on your own schedule.',
+    'membership.golf.tracking': 'On-Course Performance Tracking',
+    'membership.golf.tracking.description': 'All members receive access to golf stat tracking software, allowing us to monitor your competitive performance and adjust your training focus accordingly.',
+    
+    'membership.facility.title': 'Facility Features',
+    'membership.facility.refresh': 'Refresh & Recharge',
+    'membership.facility.refresh.description': 'Includes modern shower, towel service, and kitchenette with complimentary and member-priced options.',
+    'membership.facility.atmosphere': 'Private Club Atmosphere',
+    'membership.facility.atmosphere.description': 'Capped at 20 members for a quiet, focused, and highly accessible training environment.',
+    
+    // Assessment Process
+    'assessment.title': 'Our Assessment Process',
+    'assessment.description': 'Every quarter, members complete a full assessment across five essential areas to ensure their training is aligned, effective, and progressing toward their performance goals.',
+    
+    'assessment.joint.title': 'Joint Health',
+    'assessment.joint.description': 'We assess the passive and active range of motion of every major joint to identify movement limitations and their root causes. These insights inform your fitness program to help reduce injury risk and support long-term joint health. We also track changes in range of motion over time to monitor progress and guide ongoing adjustments.',
+    
+    'assessment.strength.title': 'Maximal Strength',
+    'assessment.strength.description': 'We assess maximal strength using compound lifts like the bench press and deadlift to measure how effectively your neuromuscular system produces force. As maximal strength increases, you're able to move lighter loads — like a golf club — more quickly, directly supporting gains in swing speed.',
+    
+    'assessment.metabolic.title': 'Metabolic Testing',
+    'assessment.metabolic.description': 'We assess how efficiently your body produces and uses energy through aerobic and anaerobic testing. This allows us to define your personalized heart rate zones and design a conditioning program that improves endurance, enhances recovery, and supports sustained performance over multiple rounds of competitive golf.',
+    
+    'assessment.body.title': 'Body Composition',
+    'assessment.body.description': 'We track changes in muscle mass and body fat percentage to evaluate whether your training is producing the right adaptations. This gives us more reliable feedback than body weight alone and helps ensure your progress aligns with performance goals.',
+    
+    'assessment.golf.title': 'Golf Performance Assessment',
+    'assessment.golf.description': 'We measure distance and dispersion metrics across every club in the bag to assess your ball-striking and shot control in a controlled environment. We then combine this with an analysis of your strokes gained data from tournament play to better understand the relative contribution of technical, physical, and mental factors to your performance.',
     
     // About
     'about.title': 'About Signal Performance',
@@ -70,22 +113,65 @@ const translations = {
     'nav.login': '會員登入',
     
     // Hero
-    'hero.headline': '專業高爾夫球手的全方位訓練設施',
-    'hero.subheadline': '頂尖高爾夫球手在此為最佳表現做準備',
+    'hero.headline': '專業高爾夫選手的訓練基地',
+    'hero.subheadline': '在單一場館中整合體能、心理與技術訓練',
     'hero.cta.waitlist': '加入候補名單',
     'hero.cta.membership': '探索會員資格',
     
     // Membership
-    'membership.title': '尊榮會員資格',
-    'membership.subtitle': '體驗全方位的高爾夫卓越訓練',
-    'membership.fitness.title': '半私人體能訓練',
-    'membership.fitness.description': '每週三次專業高爾夫體能訓練',
-    'membership.mental.title': '心理教練',
-    'membership.mental.description': '每月一次一對一心理表現教練課程',
-    'membership.simulator.title': '高爾夫模擬器',
-    'membership.simulator.description': '每月五小時使用最先進的高爾夫模擬器',
-    'membership.training.title': '獨立訓練',
-    'membership.training.description': '無限制使用我們的設施進行自主練習',
+    'membership.title': '會員專屬內容',
+    'membership.price': '每月 NT$18,000',
+    'membership.subtitle': '全方位訓練課程皆包含在內',
+    'membership.physical.title': '體能訓練',
+    'membership.physical.assessment': '每季表現評估',
+    'membership.physical.assessment.description': '每季評估提供客觀數據，指導您的個人化訓練計劃。',
+    'membership.physical.coaching': '每週三次 1 對 2 體能訓練課程',
+    'membership.physical.coaching.description': '在半私人環境中進行完全符合您目標的訓練計畫。',
+    'membership.physical.train': '自主訓練空間使用',
+    'membership.physical.train.description': '在教練課程之外使用場館完成您的個人化訓練計畫—只需預約時間，開始訓練。',
+    'membership.physical.app': '專屬訓練 App，隨時隨地跟進課表',
+    'membership.physical.app.description': '隨時隨地查看您的訓練計劃—在場館、出差或在家—讓您在任何地方都能保持一致的訓練。',
+    
+    'membership.mental.title': '心理訓練',
+    'membership.mental.coaching': '每月一次的 1 對 1 心理教練諮詢',
+    'membership.mental.coaching.description': '與認證心理績效顧問會面，進行針對場上場下表現提升的個人化課程。',
+    'membership.mental.plan': '系統化心理訓練計畫',
+    'membership.mental.plan.description': '依循個人化計劃，透過有針對性的練習在課程間隔建立心理技能。',
+    'membership.mental.toolkit': '居家練習工具包（含心率監測器與訓練 App）',
+    'membership.mental.toolkit.description': '獲得心率監測器和移動應用程式，練習課程中學到的技能，並在課程之間追踪進度。',
+    
+    'membership.golf.title': '高爾夫訓練',
+    'membership.golf.simulator': '模擬器使用時數：每月 5 小時',
+    'membership.golf.simulator.description': '使用最先進的技術進行訓練—隨時適應您的時間表。',
+    'membership.golf.putting': '推桿綠使用時數：每月 2 小時',
+    'membership.golf.putting.description': '使用尖端工具改進您的技術和對準—按照自己的時間表。',
+    'membership.golf.tracking': '賽場表現追蹤與數據分析',
+    'membership.golf.tracking.description': '所有會員都可以使用高爾夫統計跟踪軟件，使我們能夠監控您的競技表現並相應調整您的訓練重點。',
+    
+    'membership.facility.title': '場館設施',
+    'membership.facility.refresh': '放鬆與補給空間',
+    'membership.facility.refresh.description': '包括現代化淋浴、毛巾服務和帶免費和會員價格選項的小廚房。',
+    'membership.facility.atmosphere': '會員人數上限 20 人，打造安靜、專注的訓練環境',
+    'membership.facility.atmosphere.description': '限定20名會員，打造安靜、專注和高度可進入的訓練環境。',
+    
+    // Assessment Process
+    'assessment.title': '我們的評估流程',
+    'assessment.description': '每季進行一次完整評估，涵蓋五大核心面向，確保訓練方向正確、有效，並持續朝表現目標邁進。',
+    
+    'assessment.joint.title': '關節健康',
+    'assessment.joint.description': '評估每個主要關節的主動與被動活動範圍，找出動作受限的根本原因。這些資料將用來調整訓練計畫，降低受傷風險並維持長期關節健康。所有變化都會被紀錄與追蹤，持續優化訓練方向。',
+    
+    'assessment.strength.title': '最大肌力',
+    'assessment.strength.description': '透過臥推、硬舉等複合動作測量最大肌力，了解神經肌肉系統的出力效率。隨著最大肌力提升，你將能更快地揮動像高爾夫球桿這類較輕的器具，進而提升揮桿速度。',
+    
+    'assessment.metabolic.title': '新陳代謝測試',
+    'assessment.metabolic.description': '透過有氧與無氧測試，評估你在不同運動強度下的能量供應效率。我們據此設定個人化心率區間，並設計能提升耐力、加速恢復、讓你多回合比賽中保持穩定表現的體能訓練計畫。',
+    
+    'assessment.body.title': '身體組成',
+    'assessment.body.description': '我們追踪肌肉量和體脂百分比的變化，評估您的訓練是否產生正確的適應。這比單純體重提供更可靠的反饋，並幫助確保您的進步與表現目標一致。',
+    
+    'assessment.golf.title': '高爾夫表現評估',
+    'assessment.golf.description': '我們測量每個球桿的距離和分散指標，在受控環境中評估您的擊球和球路控制。然後將此與您從比賽中獲得的推桿數據分析相結合，以更好地了解技術、體能和心理因素對您表現的相對貢獻。',
     
     // About
     'about.title': '關於 Signal Performance',
