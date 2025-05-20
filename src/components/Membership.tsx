@@ -148,7 +148,7 @@ const Membership = () => {
                           outlineColor: isActive ? categoryColor : 'transparent',
                         }}
                       ></div>
-                      <span className={isActive ? "text-foreground" : "text-muted-foreground"}>
+                      <span className={isActive ? "text-foreground font-medium" : "text-muted-foreground"}>
                         {category.title}
                       </span>
                     </div>
@@ -189,7 +189,7 @@ const Membership = () => {
           </Tabs>
         </div>
 
-        {/* Mobile View */}
+        {/* Mobile View - Updated to match desktop styling */}
         <div className="md:hidden">
           {/* Category Pills - Horizontal Scrolling */}
           <div className="mb-6 overflow-x-auto pb-2 no-scrollbar">
@@ -202,13 +202,16 @@ const Membership = () => {
                   <div 
                     key={key} 
                     className={cn(
-                      "py-2 px-3 rounded-lg cursor-pointer transition-all flex-1 min-w-0",
+                      "py-2 px-4 rounded-lg cursor-pointer transition-all flex-1 min-w-0 border-b-2",
                       isActive 
-                        ? "bg-white shadow-md" 
-                        : "hover:bg-muted/40 bg-muted/20"
+                        ? "bg-white shadow-md font-semibold" 
+                        : "hover:bg-muted/40 bg-muted/20 border-transparent"
                     )}
                     onClick={() => setActiveCategory(key)}
-                    style={isActive ? { borderBottom: `2px solid ${categoryColor}` } : {}}
+                    style={isActive ? { 
+                      borderColor: categoryColor,
+                      boxShadow: `0 2px 4px rgba(0, 0, 0, 0.1)`
+                    } : {}}
                   >
                     <span className={cn(
                       "font-medium text-sm text-center block truncate",
