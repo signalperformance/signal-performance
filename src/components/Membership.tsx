@@ -1,3 +1,4 @@
+
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useState, useEffect, useRef } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
@@ -33,6 +34,7 @@ const Membership = () => {
   const categories = {
     physical: {
       title: t('membership.physical.title'),
+      shortTitle: 'Body',
       items: [{
         title: t('membership.physical.assessment'),
         description: t('membership.physical.assessment.description')
@@ -49,6 +51,7 @@ const Membership = () => {
     },
     mental: {
       title: t('membership.mental.title'),
+      shortTitle: 'Mind',
       items: [{
         title: t('membership.mental.coaching'),
         description: t('membership.mental.coaching.description')
@@ -62,6 +65,7 @@ const Membership = () => {
     },
     golf: {
       title: t('membership.golf.title'),
+      shortTitle: 'Golf',
       items: [{
         title: t('membership.golf.simulator'),
         description: t('membership.golf.simulator.description')
@@ -75,6 +79,7 @@ const Membership = () => {
     },
     other: {
       title: t('membership.facility.title'),
+      shortTitle: 'Other',
       items: [{
         title: t('membership.facility.refresh'),
         description: t('membership.facility.refresh.description')
@@ -148,8 +153,8 @@ const Membership = () => {
         {/* Mobile View - Enhanced Design Similar to AssessmentProcess */}
         <div className="md:hidden">
           {/* Category Pills - Horizontal Scrolling */}
-          <div className="mb-6 overflow-x-auto no-scrollbar">
-            <div className="flex p-1.5 rounded-xl bg-muted/20 shadow-sm space-x-2">
+          <div className="mb-6 overflow-x-auto pb-2 no-scrollbar">
+            <div className="flex gap-2 min-w-full">
               {Object.entries(categories).map(([key, category]) => {
                 const isActive = activeCategory === key;
                 const categoryColor = getCategoryColor(key);
@@ -158,21 +163,21 @@ const Membership = () => {
                   <div 
                     key={key} 
                     className={cn(
-                      "py-3 px-4 rounded-lg cursor-pointer transition-all flex-shrink-0",
-                      isActive ? "bg-white shadow-md" : "hover:bg-muted/40"
+                      "py-2 px-3 rounded-lg cursor-pointer transition-all flex-1 min-w-0",
+                      isActive ? "bg-white shadow-md" : "hover:bg-muted/40 bg-muted/20"
                     )}
                     onClick={() => setActiveCategory(key)}
                   >
-                    <div className="flex items-center justify-center space-x-2">
+                    <div className="flex items-center justify-center space-x-1.5">
                       <div 
-                        className="w-3 h-3 rounded-full"
+                        className="w-2.5 h-2.5 rounded-full flex-shrink-0"
                         style={{ backgroundColor: categoryColor }}
                       ></div>
                       <span className={cn(
-                        "font-medium",
+                        "font-medium text-sm truncate",
                         isActive ? "text-foreground" : "text-muted-foreground"
                       )}>
-                        {category.title}
+                        {category.shortTitle}
                       </span>
                     </div>
                   </div>
