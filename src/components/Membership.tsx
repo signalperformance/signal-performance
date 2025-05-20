@@ -1,3 +1,4 @@
+
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useState, useEffect, useRef } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
@@ -136,10 +137,7 @@ const Membership = () => {
                       boxShadow: `0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06), 0 0 0 2px rgba(${categoryColor.replace('#', '').match(/../g)?.map(hex => parseInt(hex, 16)).join(', ')}, 0.1)` 
                     } : {}}
                   >
-                    <div className={cn(
-                      "flex items-center justify-center space-x-2",
-                      isActive ? "text-foreground" : "text-muted-foreground"
-                    )}>
+                    <div className="flex items-center justify-center space-x-2">
                       <div 
                         className={cn(
                           "w-3 h-3 rounded-full",
@@ -150,7 +148,7 @@ const Membership = () => {
                           outlineColor: isActive ? categoryColor : 'transparent',
                         }}
                       ></div>
-                      <span>
+                      <span className={isActive ? "text-foreground" : "text-muted-foreground"}>
                         {category.title}
                       </span>
                     </div>
