@@ -37,7 +37,7 @@ const Membership = () => {
       items: [
         {
           title: "Quarterly Performance Assessments",
-          description: "Quarterly assessments provide objective data to guide your individualized training plan. Learn more about the assessment process here.",
+          description: <>Quarterly assessments provide objective data to guide your individualized training plan. <a href="#assessment" className="text-signal-gold hover:underline">Learn more about the assessment process here.</a></>,
         },
         {
           title: "1-on-2 Fitness Coaching (3x/Week)",
@@ -45,7 +45,7 @@ const Membership = () => {
         },
         {
           title: "Train On Your Own",
-          description: "Use the facility outside of coached sessions to complete your personalized program—just book your time and get to work",
+          description: "Use the facility outside of coached sessions to complete your personalized program—just book your time and get to work.",
         },
         {
           title: "Mobile Training App",
