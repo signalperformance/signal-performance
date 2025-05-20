@@ -3,40 +3,43 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 import { Move, Activity, User, Dumbbell, Club } from "lucide-react";
+
 const AssessmentProcess = () => {
   const [activeAssessment, setActiveAssessment] = useState("mobility");
+  
   const assessments = {
     mobility: {
-      title: "Joint Function",
+      title: "Joint Health",
       icon: Move,
-      description: "We assess the passive and active range of motion of every major joint to identify limitations and their root causes. These insights guide your mobility training and help reduce injury risk, support longevity, and improve movement efficiency.",
+      description: "We assess the passive and active range of motion of every major joint to identify movement limitations and their root causes. These insights inform your fitness program to help reduce injury risk and support long-term joint health. We also track changes in range of motion over time to monitor progress and guide ongoing adjustments.",
       number: 1
     },
     strength: {
       title: "Maximal Strength",
       icon: Dumbbell,
-      description: "We test maximal strength using the bench press and deadlift to evaluate how effectively your nervous system recruits muscle fibers. These metrics help us understand your potential to generate force and increase swing speed.",
+      description: "We assess maximal strength using compound lifts like the bench press and deadlift to measure how effectively your neuromuscular system produces force. As maximal strength increases, you're able to move lighter loads — like a golf club — more quickly, directly supporting gains in swing speed.",
       number: 2
     },
     metabolic: {
-      title: "Endurance",
+      title: "Metabolic Testing",
       icon: Activity,
-      description: "A lactate threshold test helps us determine your personalized heart rate zones. This allows us to tailor your conditioning work to improve endurance, accelerate recovery, and avoid overtraining.",
+      description: "We assess how efficiently your body produces and uses energy through aerobic and anaerobic testing. This allows us to define your personalized heart rate zones and design a conditioning program that improves endurance, enhances recovery, and supports sustained performance over multiple rounds of competitive golf.",
       number: 3
     },
     body: {
       title: "Body Composition",
       icon: User,
-      description: "We track muscle mass and body fat percentage to guide body composition goals. Whether building strength or reducing weight, this ensures your progress supports — not hinders — your performance.",
+      description: "We track changes in muscle mass and body fat percentage to evaluate whether your training is producing the right adaptations. This gives us more reliable feedback than body weight alone and helps ensure your progress aligns with performance goals.",
       number: 4
     },
     golf: {
-      title: "Golf Skill + Speed",
+      title: "Golf Performance Assessment",
       icon: Club,
-      description: "We measure average and max club speed, ball speed, and your ability to control distance and dispersion with wedges and irons. This helps us identify whether performance challenges are technical, physical, or mental.",
+      description: "We measure distance and dispersion metrics across every club in the bag to assess your ball-striking and shot control in a controlled environment. We then combine this with an analysis of your strokes gained data from tournament play to better understand the relative contribution of technical, physical, and mental factors to your performance.",
       number: 5
     }
   };
+
   return <section id="assessment" className="section-padding bg-gradient-to-b from-white to-signal-light-gray">
       <div className="container mx-auto container-padding">
         <div className="text-center mb-12">
@@ -169,4 +172,5 @@ const AssessmentProcess = () => {
       </div>
     </section>;
 };
+
 export default AssessmentProcess;
