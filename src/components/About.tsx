@@ -88,14 +88,14 @@ const About = () => {
                   </div>
                 </div>
                 
-                {/* Second row - 2 larger certifications with improved centering */}
-                <div className="flex justify-center col-span-2 mt-1 col-start-2">
-                  <div className="w-36 h-36 mx-auto">
+                {/* Second row - 2 larger certifications with improved centering, shifted to the left */}
+                <div className="flex justify-end col-span-2 mt-1 col-start-1">
+                  <div className="w-36 h-36 pr-4">
                     <img src="/lovable-uploads/beb7975b-c02a-42bc-be92-0c3da1a9f81c.png" alt="FRA Certification" className="w-full h-full object-contain" />
                   </div>
                 </div>
-                <div className="flex justify-center col-span-2 mt-1">
-                  <div className="w-36 h-36 mx-auto">
+                <div className="flex justify-start col-span-2 mt-1">
+                  <div className="w-36 h-36 pl-4">
                     <img src="/lovable-uploads/bb4a1533-7785-47f6-a0fa-6a037df47902.png" alt="FRC Certification" className="w-full h-full object-contain" />
                   </div>
                 </div>
