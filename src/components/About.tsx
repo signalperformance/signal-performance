@@ -1,3 +1,4 @@
+
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
@@ -57,19 +58,13 @@ const About = () => {
               </Card>
               
               <h4 className="text-xl font-bold mb-4 text-signal-charcoal">Certifications</h4>
-              <div className="grid grid-cols-4 gap-4">
-                {/* First row - 4 certifications */}
+              <div className="grid grid-cols-5 gap-4">
+                {/* First row - 5 certifications */}
                 <div className="flex flex-col items-center">
-                  <div className="w-20 h-20 mb-2">
-                    <img src="/lovable-uploads/1d022755-a8e7-481a-91db-13f7db87b26a.png" alt="PGA of America Member" className="w-full h-full object-contain" />
+                  {/* Placeholder for new logo */}
+                  <div className="w-20 h-20 mb-2 border border-dashed border-signal-charcoal/30 flex items-center justify-center bg-gray-50 rounded">
+                    <span className="text-xs text-signal-charcoal/50">Logo</span>
                   </div>
-                  
-                </div>
-                <div className="flex flex-col items-center">
-                  <div className="w-20 h-20 mb-2">
-                    <img alt="Golf Channel Academy" className="w-full h-full object-contain" src="/lovable-uploads/7386a216-356d-4d52-8c2f-60bfc9a85397.png" />
-                  </div>
-                  
                 </div>
                 <div className="flex flex-col items-center">
                   <div className="w-20 h-20 mb-2">
@@ -83,9 +78,21 @@ const About = () => {
                   </div>
                   
                 </div>
+                <div className="flex flex-col items-center">
+                  <div className="w-20 h-20 mb-2">
+                    <img src="/lovable-uploads/1d022755-a8e7-481a-91db-13f7db87b26a.png" alt="PGA of America Member" className="w-full h-full object-contain" />
+                  </div>
+                  
+                </div>
+                <div className="flex flex-col items-center">
+                  <div className="w-20 h-20 mb-2">
+                    <img alt="Golf Channel Academy" className="w-full h-full object-contain" src="/lovable-uploads/7386a216-356d-4d52-8c2f-60bfc9a85397.png" />
+                  </div>
+                  
+                </div>
                 
                 {/* Second row - 2 larger certifications with reduced spacing */}
-                <div className="flex flex-col items-center col-span-2 mt-1">
+                <div className="flex flex-col items-center col-span-2 mt-1 col-start-2">
                   <div className="w-36 h-36">
                     <img src="/lovable-uploads/beb7975b-c02a-42bc-be92-0c3da1a9f81c.png" alt="FRA Certification" className="w-full h-full object-contain" />
                   </div>
