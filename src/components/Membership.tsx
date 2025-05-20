@@ -37,19 +37,19 @@ const Membership = () => {
       items: [
         {
           title: "Quarterly Performance Assessments",
-          description: "Baseline and 12-week assessments guide your individualized training plan.",
+          description: "Quarterly assessments provide objective data to guide your individualized training plan. Learn more about the assessment process here.",
         },
         {
           title: "1-on-2 Fitness Coaching (3x/Week)",
-          description: "Personalized programming delivered in a focused, semi-private setting.",
+          description: "Train in a semi-private setting with a fully personalized program aligned with your goals.",
         },
         {
-          title: "Self-Guided Training Access",
-          description: "Book facility time to complete additional workouts on your own schedule.",
+          title: "Train On Your Own",
+          description: "Use the facility outside of coached sessions to complete your personalized program—just book your time and get to work",
         },
         {
-          title: "Custom Training App",
-          description: "Access your updated program anytime — at the facility, at home, or while traveling. Most members train 4–5x/week to cover all key areas.",
+          title: "Mobile Training App",
+          description: "Access your program anytime — in the facility, on the road, or at home — so you can train consistently anywhere.",
         }
       ]
     },
@@ -57,16 +57,16 @@ const Membership = () => {
       title: "Mental Training",
       items: [
         {
-          title: "Monthly 1-on-1 Coaching (60 min)",
-          description: "In-person sessions tailored to your goals using sport psychology, mindfulness, and biofeedback.",
+          title: "1-on-1 Mental Coaching (1x/Month)",
+          description: "Meet with a certified mental performance consultant for personalized sessions to enhance performance on and off the course.",
         },
         {
-          title: "Ongoing Mental Training Plan",
-          description: "Receive guided exercises to complete between sessions for consistent mental skill development.",
+          title: "Structured Mental Training Plan",
+          description: "Follow a personalized plan with targeted exercises to build mental skills between sessions.",
         },
         {
-          title: "App + Biofeedback Tools",
-          description: "Includes heart rate monitor and mobile app for regular practice and remote coach tracking.",
+          title: "Home Practice Toolkit",
+          description: "Receive a heart rate monitor and mobile app to practice skills learned in coaching sessions and track progress between sessions.",
         }
       ]
     },
@@ -74,12 +74,12 @@ const Membership = () => {
       title: "Golf Training",
       items: [
         {
-          title: "GCQuad Simulator Access (5 hrs/month)",
-          description: "Book simulator sessions to dial in numbers, shape shots, and track performance with tour-grade data.",
+          title: "Simulator Access (5 hrs/month)",
+          description: "Train with state-of-the-art technology — anytime that fits your schedule.",
         },
         {
-          title: "On-Demand Putting Green",
-          description: "Use the putting surface anytime for feel, alignment, and distance control work.",
+          title: "Putting Green Access (2 hrs/month)",
+          description: "Refine your mechanics and alignment with cutting-edge tools — on your own schedule.",
         },
         {
           title: "On-Course Performance Tracking",
