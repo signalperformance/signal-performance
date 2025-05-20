@@ -74,15 +74,13 @@ const About = () => {
                 </div>
                 <div className="flex flex-col items-center">
                   <div className="w-20 h-20 mb-2">
-                    <img src="/lovable-uploads/1dc02882-2327-403c-9e82-8b8207c618ff.png" alt="CSCS Certification" className="w-full h-full object-contain" />
+                    <img src="/lovable-uploads/f476d5d5-e5d7-488a-a903-0a1b07edd912.png" alt="BCIA Certification 1" className="w-full h-full object-contain" />
                   </div>
-                  
                 </div>
                 <div className="flex flex-col items-center">
                   <div className="w-20 h-20 mb-2">
-                    <img src="/lovable-uploads/09961efd-a840-417f-a93a-2e2990b91489.png" alt="CMPC Certification" className="w-full h-full object-contain" />
+                    <img src="/lovable-uploads/113d918f-6887-4479-9a2c-10ef1a20137f.png" alt="BCIA Certification 2" className="w-full h-full object-contain" />
                   </div>
-                  
                 </div>
                 
                 {/* Second row - 2 larger certifications with reduced spacing */}
