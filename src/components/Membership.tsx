@@ -108,6 +108,7 @@ const Membership = () => {
         <div className="text-center mb-8">
           <h2 className="text-3xl md:text-4xl font-bold mb-1 font-lora">What's Included in Your Membership</h2>
           <p className="text-xl text-muted-foreground font-medium">NT$18,000/month</p>
+          <p className="text-sm text-muted-foreground italic mt-1">All-inclusive membership.</p>
         </div>
         
         {/* Grid layout with different structure for mobile vs desktop */}
