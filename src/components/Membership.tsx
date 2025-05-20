@@ -3,7 +3,6 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { useState, useEffect, useRef } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
 
@@ -34,9 +33,10 @@ const Membership = () => {
   const categories = {
     physical: {
       title: "Physical Training",
+      color: "bg-signal-gold",
       items: [{
         title: "Quarterly Performance Assessments",
-        description: <>Quarterly assessments provide objective data to guide your individualized training plan. </>
+        description: "Quarterly assessments provide objective data to guide your individualized training plan."
       }, {
         title: "1-on-2 Fitness Coaching (3x/Week)",
         description: "Train in a semi-private setting with a fully personalized program aligned with your goals."
@@ -50,6 +50,7 @@ const Membership = () => {
     },
     mental: {
       title: "Mental Training",
+      color: "bg-sky-500",
       items: [{
         title: "1-on-1 Mental Coaching (1x/Month)",
         description: "Meet with a certified mental performance consultant for personalized sessions to enhance performance on and off the course."
@@ -63,6 +64,7 @@ const Membership = () => {
     },
     golf: {
       title: "Golf Training",
+      color: "bg-green-500",
       items: [{
         title: "Simulator Access (5 hrs/month)",
         description: "Train with state-of-the-art technology — anytime that fits your schedule."
@@ -76,6 +78,7 @@ const Membership = () => {
     },
     other: {
       title: "Facility Features",
+      color: "bg-gray-400",
       items: [{
         title: "Refresh & Recharge",
         description: "Includes modern shower, towel service, and kitchenette with complimentary and member-priced options."
@@ -85,6 +88,9 @@ const Membership = () => {
       }]
     }
   };
+
+  // Generate the current category content
+  const currentCategory = categories[activeCategory as keyof typeof categories];
 
   return (
     <section id="membership" className="section-padding bg-signal-light-gray overflow-hidden" ref={sectionRef}>
@@ -96,7 +102,7 @@ const Membership = () => {
         </div>
         
         {/* Category Selector */}
-        <div className="flex justify-center mb-8 gap-2 md:gap-4">
+        <div className="flex justify-center mb-12 gap-2 md:gap-4">
           {Object.entries(categories).map(([key, category]) => (
             <Button
               key={key}
@@ -104,7 +110,7 @@ const Membership = () => {
               onClick={() => setActiveCategory(key)}
               className={cn(
                 "rounded-full px-4 py-2 transition-all duration-300",
-                activeCategory === key ? "bg-signal-gold text-white shadow-md" : "hover:bg-signal-gold/10"
+                activeCategory === key ? category.color + " text-white shadow-md" : "hover:bg-signal-gold/10"
               )}
             >
               {category.title}
@@ -112,76 +118,115 @@ const Membership = () => {
           ))}
         </div>
 
-        {/* Desktop 3D Carousel */}
-        <div className="hidden md:block relative px-12">
-          <Carousel opts={{ loop: true, align: "center" }} className="w-full">
-            <CarouselContent className="-ml-4">
-              {categories[activeCategory as keyof typeof categories].items.map((item, index) => (
-                <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/3">
-                  <div className="membership-card-wrapper p-1">
-                    <Card className="membership-card border-2 border-signal-gold/20 hover:border-signal-gold transition-all duration-300 backdrop-blur-sm bg-white/90 h-[300px] rounded-xl overflow-hidden shadow-lg transform perspective-1000 hover:rotate-y-5 hover:scale-105">
-                      <CardContent className="p-6 flex flex-col h-full">
-                        <div className="card-header mb-4 pb-4 border-b border-signal-gold/20">
-                          <h3 className="text-xl font-bold text-signal-charcoal font-lora">{item.title}</h3>
-                        </div>
-                        <div className="flex-grow">
-                          <p className="text-muted-foreground">{item.description}</p>
-                        </div>
-                        <div className="mt-4 pt-2 flex justify-end">
-                          <Button variant="ghost" size="sm" className="text-signal-gold hover:text-signal-gold/80 p-0">
-                            Learn more <ChevronRight className="ml-1 h-4 w-4" />
-                          </Button>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious className="left-0 border-signal-gold text-signal-gold hover:bg-signal-gold hover:text-white" />
-            <CarouselNext className="right-0 border-signal-gold text-signal-gold hover:bg-signal-gold hover:text-white" />
-          </Carousel>
+        {/* Desktop Timeline Flow */}
+        <div className="hidden md:block relative">
+          {/* Timeline Line */}
+          <div className={`absolute left-0 right-0 h-1 top-1/2 transform -translate-y-1/2 ${currentCategory.color} opacity-30`}></div>
+          
+          {/* Timeline Items */}
+          <div className="relative z-10 grid grid-cols-4 gap-4">
+            {currentCategory.items.map((item, index) => (
+              <div key={index} className={`timeline-item ${index % 2 === 0 ? 'timeline-top' : 'timeline-bottom'}`}>
+                {/* Connection Line */}
+                <div className={`connection-line ${index % 2 === 0 ? 'connection-top' : 'connection-bottom'} ${currentCategory.color}`}></div>
+                
+                {/* Node Point */}
+                <div className={`node-point ${currentCategory.color}`}></div>
+                
+                {/* Content Card */}
+                <Card className={`timeline-card transition-all duration-500 hover:shadow-lg ${index % 2 === 0 ? 'mb-16' : 'mt-16'}`}>
+                  <CardContent className="p-6">
+                    <h3 className="font-bold text-lg mb-2 font-lora">{item.title}</h3>
+                    <p className="text-muted-foreground">{item.description}</p>
+                  </CardContent>
+                </Card>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Mobile Accordion View */}
         <div className="md:hidden space-y-4">
-          {categories[activeCategory as keyof typeof categories].items.map((item, index) => (
-            <Card key={index} className="border-l-4 border-signal-gold bg-white shadow-md overflow-hidden">
-              <CardContent className="p-4">
-                <div className="space-y-2">
-                  <h4 className="font-lora font-medium text-lg">{item.title}</h4>
-                  <p className="text-muted-foreground text-sm">
-                    {item.description}
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
+          {currentCategory.items.map((item, index) => (
+            <div key={index} className="relative">
+              {/* Vertical timeline line */}
+              {index < currentCategory.items.length - 1 && (
+                <div className={`absolute top-[2.5rem] bottom-0 left-[0.65rem] w-0.5 ${currentCategory.color} opacity-30`}></div>
+              )}
+              
+              <div className="flex items-start gap-4">
+                {/* Timeline node */}
+                <div className={`relative top-2 h-5 w-5 rounded-full ${currentCategory.color} shadow-lg flex-shrink-0`}></div>
+                
+                {/* Content */}
+                <Card className="flex-1 border-l-4 border-l-signal-gold shadow-md mb-4">
+                  <CardContent className="p-4">
+                    <h3 className="font-medium text-lg mb-1.5">{item.title}</h3>
+                    <p className="text-sm text-muted-foreground">
+                      {item.description}
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
           ))}
         </div>
       </div>
 
-      {/* CSS for 3D effects */}
-      <style jsx>{`
-        .membership-card {
-          transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-          transform-style: preserve-3d;
-        }
-        .membership-card:hover {
-          transform: translateY(-10px) rotateX(5deg);
-          box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-        @keyframes float {
-          0% { transform: translateY(0px); }
-          50% { transform: translateY(-10px); }
-          100% { transform: translateY(0px); }
-        }
-        .perspective-1000 {
-          perspective: 1000px;
-        }
-        .rotate-y-5:hover {
-          transform: rotateY(5deg);
-        }
-      `}</style>
+      <style>
+        {`
+          /* Timeline Styling */
+          .timeline-item {
+            position: relative;
+            padding: 20px 0;
+          }
+          
+          .timeline-top .timeline-card {
+            margin-bottom: 40px;
+          }
+          
+          .timeline-bottom .timeline-card {
+            margin-top: 40px;
+          }
+          
+          .connection-line {
+            position: absolute;
+            width: 2px;
+            left: 50%;
+            transform: translateX(-50%);
+          }
+          
+          .connection-top {
+            bottom: 30px;
+            height: 40px;
+          }
+          
+          .connection-bottom {
+            top: 30px;
+            height: 40px;
+          }
+          
+          .node-point {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 20;
+          }
+          
+          /* Animation */
+          .timeline-card {
+            transition: all 0.4s ease;
+          }
+          
+          .timeline-card:hover {
+            transform: translateY(-5px);
+          }
+        `}
+      </style>
     </section>
   );
 };
