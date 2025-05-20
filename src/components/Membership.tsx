@@ -3,6 +3,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { useState, useEffect, useRef } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { Hexagon } from "lucide-react";
 
 const Membership = () => {
   const { t } = useLanguage();
@@ -34,6 +35,10 @@ const Membership = () => {
   const categories = {
     physical: {
       title: "Physical Training",
+      icon: <Hexagon className="w-6 h-6" />,
+      color: "bg-blue-500",
+      textColor: "text-blue-500",
+      borderColor: "border-blue-500",
       items: [
         {
           title: "Quarterly Performance Assessments",
@@ -55,6 +60,10 @@ const Membership = () => {
     },
     mental: {
       title: "Mental Training",
+      icon: <Hexagon className="w-6 h-6" />,
+      color: "bg-purple-500",
+      textColor: "text-purple-500",
+      borderColor: "border-purple-500",
       items: [
         {
           title: "1-on-1 Mental Coaching (1x/Month)",
@@ -72,6 +81,10 @@ const Membership = () => {
     },
     golf: {
       title: "Golf Training",
+      icon: <Hexagon className="w-6 h-6" />,
+      color: "bg-green-500",
+      textColor: "text-green-500", 
+      borderColor: "border-green-500",
       items: [
         {
           title: "Simulator Access (5 hrs/month)",
@@ -89,6 +102,10 @@ const Membership = () => {
     },
     other: {
       title: "Facility Features",
+      icon: <Hexagon className="w-6 h-6" />,
+      color: "bg-signal-gold",
+      textColor: "text-signal-gold",
+      borderColor: "border-signal-gold",
       items: [
         {
           title: "Refresh & Recharge",
@@ -102,47 +119,97 @@ const Membership = () => {
     }
   };
 
+  // Function to get hexagon position classes
+  const getHexPosition = (index: number, total: number) => {
+    if (total <= 4) {
+      // For 4 or fewer hexagons, we arrange them in a single row
+      return "transform transition-all duration-300";
+    }
+    
+    // For more hexagons, we'd implement a more complex layout
+    return "transform transition-all duration-300";
+  };
+
   return (
     <section id="membership" className="section-padding bg-signal-light-gray" ref={sectionRef}>
       <div className="container mx-auto container-padding">
-        <div className="text-center mb-8">
+        <div className="text-center mb-10">
           <h2 className="text-3xl md:text-4xl font-bold mb-1 font-lora">What's Included in Your Membership</h2>
           <p className="text-xl text-muted-foreground font-medium">NT$18,000/month</p>
           <p className="text-sm text-muted-foreground italic mt-1">All-inclusive membership.</p>
         </div>
         
-        {/* Grid layout with different structure for mobile vs desktop */}
-        <div className="hidden md:grid md:grid-cols-3 gap-8">
-          {/* Feature Categories on the Left - Desktop Only */}
-          <div className="md:col-span-1">
-            <div className="space-y-3">
-              {Object.entries(categories).map(([key, category]) => (
-                <div
+        {/* Hexagonal Grid for Desktop */}
+        <div className="hidden md:block">
+          <div className="flex justify-center mb-12">
+            <div className="flex flex-wrap justify-center gap-4 max-w-4xl">
+              {Object.entries(categories).map(([key, category], index) => (
+                <div 
                   key={key}
                   className={cn(
-                    "p-4 md:p-6 rounded-lg cursor-pointer transition-all duration-200 flex items-center",
-                    activeCategory === key 
-                      ? "bg-white shadow-md border-l-4 border-signal-gold" 
-                      : "bg-white/50 hover:bg-white"
+                    "cursor-pointer transform transition-all duration-300 hover:scale-105",
+                    getHexPosition(index, Object.keys(categories).length)
                   )}
                   onClick={() => setActiveCategory(key)}
                 >
-                  <div>
-                    <h3 className="font-medium text-base md:text-lg font-lora">{category.title}</h3>
-                    <p className="text-xs md:text-sm text-muted-foreground mt-1">
-                      Click to view details
-                    </p>
+                  <div className={cn(
+                    "hex-container relative flex items-center justify-center h-32 w-36",
+                    activeCategory === key ? "scale-110" : ""
+                  )}>
+                    {/* Hexagon Shape Background with clip-path */}
+                    <div className={cn(
+                      "absolute inset-0 clip-path-hex",
+                      activeCategory === key ? category.color : "bg-white",
+                      "transition-colors duration-300"
+                    )}></div>
+                    
+                    {/* Hexagon Border */}
+                    <div className={cn(
+                      "absolute inset-0 clip-path-hex",
+                      activeCategory === key ? "border-2 border-white" : `border-2 ${category.borderColor}`,
+                      "bg-transparent transition-colors duration-300"
+                    )}></div>
+                    
+                    {/* Content */}
+                    <div className="z-10 text-center p-2">
+                      <div className={cn(
+                        "flex justify-center mb-1",
+                        activeCategory === key ? "text-white" : category.textColor
+                      )}>
+                        {category.icon}
+                      </div>
+                      <h3 className={cn(
+                        "font-medium text-sm font-lora transition-colors duration-300",
+                        activeCategory === key ? "text-white" : "text-signal-charcoal"
+                      )}>
+                        {category.title}
+                      </h3>
+                      <p className={cn(
+                        "text-xs mt-1 transition-colors duration-300",
+                        activeCategory === key ? "text-white/80" : "text-muted-foreground"
+                      )}>
+                        Click to view
+                      </p>
+                    </div>
                   </div>
                 </div>
               ))}
             </div>
           </div>
           
-          {/* Feature Details on the Right - Desktop Only */}
-          <div className="md:col-span-2">
-            <Card className="bg-white shadow-md h-full">
-              <CardContent className="p-4 md:p-8">
-                <h3 className="text-xl md:text-2xl font-lora mb-6">{categories[activeCategory as keyof typeof categories].title}</h3>
+          {/* Details Card for Selected Category - Desktop */}
+          <div className="max-w-4xl mx-auto">
+            <Card className={cn(
+              "bg-white shadow-md border-t-4 transition-colors duration-300",
+              categories[activeCategory as keyof typeof categories].borderColor
+            )}>
+              <CardContent className="p-6 md:p-8">
+                <h3 className={cn(
+                  "text-xl md:text-2xl font-lora mb-6",
+                  categories[activeCategory as keyof typeof categories].textColor
+                )}>
+                  {categories[activeCategory as keyof typeof categories].title}
+                </h3>
                 
                 <div className="space-y-6">
                   {categories[activeCategory as keyof typeof categories].items.map((item, index) => (
@@ -167,17 +234,29 @@ const Membership = () => {
             <div key={key} className="rounded-lg overflow-hidden">
               <div
                 className={cn(
-                  "p-4 rounded-lg cursor-pointer transition-all duration-200",
+                  "p-4 rounded-lg cursor-pointer transition-all duration-200 flex items-center space-x-3",
                   activeCategory === key 
-                    ? "bg-white shadow-md border-l-4 border-signal-gold" 
+                    ? category.color + " text-white" 
                     : "bg-white/50 hover:bg-white"
                 )}
                 onClick={() => setActiveCategory(key)}
               >
-                <h3 className="font-medium text-lg font-lora">{category.title}</h3>
-                <p className="text-xs text-muted-foreground mt-1">
-                  Click to view details
-                </p>
+                <div className={cn(
+                  activeCategory === key 
+                    ? "text-white" 
+                    : category.textColor
+                )}>
+                  {category.icon}
+                </div>
+                <div>
+                  <h3 className="font-medium text-lg font-lora">{category.title}</h3>
+                  <p className={cn(
+                    "text-xs mt-1",
+                    activeCategory === key ? "text-white/80" : "text-muted-foreground"
+                  )}>
+                    Click to view details
+                  </p>
+                </div>
               </div>
               
               {/* Show content immediately below the clicked category */}
@@ -203,6 +282,13 @@ const Membership = () => {
           ))}
         </div>
       </div>
+      
+      {/* Add the hexagon clip path as a style */}
+      <style jsx>{`
+        .clip-path-hex {
+          clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+        }
+      `}</style>
     </section>
   );
 };
