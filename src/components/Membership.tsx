@@ -1,11 +1,14 @@
+
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useState, useEffect, useRef } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { Button } from "@/components/ui/button";
+import { ChevronRight } from "lucide-react";
+
 const Membership = () => {
-  const {
-    t
-  } = useLanguage();
+  const { t } = useLanguage();
   const [activeCategory, setActiveCategory] = useState("physical");
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -27,6 +30,7 @@ const Membership = () => {
       }
     };
   }, []);
+
   const categories = {
     physical: {
       title: "Physical Training",
@@ -81,79 +85,105 @@ const Membership = () => {
       }]
     }
   };
-  return <section id="membership" className="section-padding bg-signal-light-gray" ref={sectionRef}>
+
+  return (
+    <section id="membership" className="section-padding bg-signal-light-gray overflow-hidden" ref={sectionRef}>
       <div className="container mx-auto container-padding">
-        <div className="text-center mb-8">
+        <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-1 font-lora">What's Included in Your Membership</h2>
           <p className="text-xl text-muted-foreground font-medium">NT$18,000/month</p>
           <p className="text-sm text-muted-foreground italic mt-1">All-inclusive membership.</p>
         </div>
         
-        {/* Grid layout with different structure for mobile vs desktop */}
-        <div className="hidden md:grid md:grid-cols-3 gap-8">
-          {/* Feature Categories on the Left - Desktop Only */}
-          <div className="md:col-span-1">
-            <div className="space-y-3">
-              {Object.entries(categories).map(([key, category]) => <div key={key} className={cn("p-4 md:p-6 rounded-lg cursor-pointer transition-all duration-200 flex items-center", activeCategory === key ? "bg-white shadow-md border-l-4 border-signal-gold" : "bg-white/50 hover:bg-white")} onClick={() => setActiveCategory(key)}>
-                  <div>
-                    <h3 className="font-medium text-base md:text-lg font-lora">{category.title}</h3>
-                    <p className="text-xs md:text-sm text-muted-foreground mt-1">
-                      Click to view details
-                    </p>
+        {/* Category Selector */}
+        <div className="flex justify-center mb-8 gap-2 md:gap-4">
+          {Object.entries(categories).map(([key, category]) => (
+            <Button
+              key={key}
+              variant={activeCategory === key ? "default" : "outline"}
+              onClick={() => setActiveCategory(key)}
+              className={cn(
+                "rounded-full px-4 py-2 transition-all duration-300",
+                activeCategory === key ? "bg-signal-gold text-white shadow-md" : "hover:bg-signal-gold/10"
+              )}
+            >
+              {category.title}
+            </Button>
+          ))}
+        </div>
+
+        {/* Desktop 3D Carousel */}
+        <div className="hidden md:block relative px-12">
+          <Carousel opts={{ loop: true, align: "center" }} className="w-full">
+            <CarouselContent className="-ml-4">
+              {categories[activeCategory as keyof typeof categories].items.map((item, index) => (
+                <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/3">
+                  <div className="membership-card-wrapper p-1">
+                    <Card className="membership-card border-2 border-signal-gold/20 hover:border-signal-gold transition-all duration-300 backdrop-blur-sm bg-white/90 h-[300px] rounded-xl overflow-hidden shadow-lg transform perspective-1000 hover:rotate-y-5 hover:scale-105">
+                      <CardContent className="p-6 flex flex-col h-full">
+                        <div className="card-header mb-4 pb-4 border-b border-signal-gold/20">
+                          <h3 className="text-xl font-bold text-signal-charcoal font-lora">{item.title}</h3>
+                        </div>
+                        <div className="flex-grow">
+                          <p className="text-muted-foreground">{item.description}</p>
+                        </div>
+                        <div className="mt-4 pt-2 flex justify-end">
+                          <Button variant="ghost" size="sm" className="text-signal-gold hover:text-signal-gold/80 p-0">
+                            Learn more <ChevronRight className="ml-1 h-4 w-4" />
+                          </Button>
+                        </div>
+                      </CardContent>
+                    </Card>
                   </div>
-                </div>)}
-            </div>
-          </div>
-          
-          {/* Feature Details on the Right - Desktop Only */}
-          <div className="md:col-span-2">
-            <Card className="bg-white shadow-md h-full">
-              <CardContent className="p-4 md:p-8">
-                <h3 className="text-xl md:text-2xl font-lora mb-6">{categories[activeCategory as keyof typeof categories].title}</h3>
-                
-                <div className="space-y-6">
-                  {categories[activeCategory as keyof typeof categories].items.map((item, index) => <div key={index} className="space-y-1 md:space-y-2">
-                      <div className="flex items-start gap-3">
-                        <h4 className="font-lora font-medium text-lg md:text-xl">{item.title}</h4>
-                      </div>
-                      <p className="text-muted-foreground text-sm md:text-base">
-                        {item.description}
-                      </p>
-                    </div>)}
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="left-0 border-signal-gold text-signal-gold hover:bg-signal-gold hover:text-white" />
+            <CarouselNext className="right-0 border-signal-gold text-signal-gold hover:bg-signal-gold hover:text-white" />
+          </Carousel>
+        </div>
+
+        {/* Mobile Accordion View */}
+        <div className="md:hidden space-y-4">
+          {categories[activeCategory as keyof typeof categories].items.map((item, index) => (
+            <Card key={index} className="border-l-4 border-signal-gold bg-white shadow-md overflow-hidden">
+              <CardContent className="p-4">
+                <div className="space-y-2">
+                  <h4 className="font-lora font-medium text-lg">{item.title}</h4>
+                  <p className="text-muted-foreground text-sm">
+                    {item.description}
+                  </p>
                 </div>
               </CardContent>
             </Card>
-          </div>
-        </div>
-
-        {/* Mobile View - Accordion-like layout */}
-        <div className="md:hidden space-y-4">
-          {Object.entries(categories).map(([key, category]) => <div key={key} className="rounded-lg overflow-hidden">
-              <div className={cn("p-4 rounded-lg cursor-pointer transition-all duration-200", activeCategory === key ? "bg-white shadow-md border-l-4 border-signal-gold" : "bg-white/50 hover:bg-white")} onClick={() => setActiveCategory(key)}>
-                <h3 className="font-medium text-lg font-lora">{category.title}</h3>
-                <p className="text-xs text-muted-foreground mt-1">
-                  Click to view details
-                </p>
-              </div>
-              
-              {/* Show content immediately below the clicked category */}
-              {activeCategory === key && <Card className="bg-white shadow-md mt-2 mb-4">
-                  <CardContent className="p-4">
-                    <div className="space-y-6">
-                      {category.items.map((item, index) => <div key={index} className="space-y-1">
-                          <div className="flex items-start gap-3">
-                            <h4 className="font-lora font-medium text-lg">{item.title}</h4>
-                          </div>
-                          <p className="text-muted-foreground text-sm">
-                            {item.description}
-                          </p>
-                        </div>)}
-                    </div>
-                  </CardContent>
-                </Card>}
-            </div>)}
+          ))}
         </div>
       </div>
-    </section>;
+
+      {/* CSS for 3D effects */}
+      <style jsx>{`
+        .membership-card {
+          transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+          transform-style: preserve-3d;
+        }
+        .membership-card:hover {
+          transform: translateY(-10px) rotateX(5deg);
+          box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        @keyframes float {
+          0% { transform: translateY(0px); }
+          50% { transform: translateY(-10px); }
+          100% { transform: translateY(0px); }
+        }
+        .perspective-1000 {
+          perspective: 1000px;
+        }
+        .rotate-y-5:hover {
+          transform: rotateY(5deg);
+        }
+      `}</style>
+    </section>
+  );
 };
+
 export default Membership;
