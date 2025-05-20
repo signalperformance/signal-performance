@@ -86,7 +86,7 @@ const About = () => {
                   </div>
                   <div className="flex justify-center">
                     <div className="w-24 h-24">
-                      <img alt="Golf Channel Academy" className="w-full h-full object-contain" src="/lovable-uploads/7386a216-356d-4d52-8c2f-60bfc9a85397.png" />
+                      <img alt="Golf Channel Academy" className="w-full h-full object-contain" src="/lovable-uploads/650394e1-2bf5-4354-b912-86a81648eaaa.png" />
                     </div>
                   </div>
                 </div>
