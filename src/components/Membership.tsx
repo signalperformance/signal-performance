@@ -3,7 +3,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { useState, useEffect, useRef } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { Hexagon } from "lucide-react";
+import { LayoutGrid } from "lucide-react";
 
 const Membership = () => {
   const { t } = useLanguage();
@@ -35,7 +35,7 @@ const Membership = () => {
   const categories = {
     physical: {
       title: "Physical Training",
-      icon: <Hexagon className="w-6 h-6" />,
+      icon: <LayoutGrid className="w-6 h-6" />,
       color: "bg-blue-500",
       textColor: "text-blue-500",
       borderColor: "border-blue-500",
@@ -60,7 +60,7 @@ const Membership = () => {
     },
     mental: {
       title: "Mental Training",
-      icon: <Hexagon className="w-6 h-6" />,
+      icon: <LayoutGrid className="w-6 h-6" />,
       color: "bg-purple-500",
       textColor: "text-purple-500",
       borderColor: "border-purple-500",
@@ -81,7 +81,7 @@ const Membership = () => {
     },
     golf: {
       title: "Golf Training",
-      icon: <Hexagon className="w-6 h-6" />,
+      icon: <LayoutGrid className="w-6 h-6" />,
       color: "bg-green-500",
       textColor: "text-green-500", 
       borderColor: "border-green-500",
@@ -102,7 +102,7 @@ const Membership = () => {
     },
     other: {
       title: "Facility Features",
-      icon: <Hexagon className="w-6 h-6" />,
+      icon: <LayoutGrid className="w-6 h-6" />,
       color: "bg-signal-gold",
       textColor: "text-signal-gold",
       borderColor: "border-signal-gold",
@@ -119,17 +119,6 @@ const Membership = () => {
     }
   };
 
-  // Function to get hexagon position classes
-  const getHexPosition = (index: number, total: number) => {
-    if (total <= 4) {
-      // For 4 or fewer hexagons, we arrange them in a single row
-      return "transform transition-all duration-300";
-    }
-    
-    // For more hexagons, we'd implement a more complex layout
-    return "transform transition-all duration-300";
-  };
-
   return (
     <section id="membership" className="section-padding bg-signal-light-gray" ref={sectionRef}>
       <div className="container mx-auto container-padding">
@@ -139,156 +128,133 @@ const Membership = () => {
           <p className="text-sm text-muted-foreground italic mt-1">All-inclusive membership.</p>
         </div>
         
-        {/* Hexagonal Grid for Desktop */}
+        {/* Quadrant-based Grid Layout - Desktop */}
         <div className="hidden md:block">
-          <div className="flex justify-center mb-12">
-            <div className="flex flex-wrap justify-center gap-4 max-w-4xl">
-              {Object.entries(categories).map(([key, category], index) => (
-                <div 
-                  key={key}
-                  className={cn(
-                    "cursor-pointer transform transition-all duration-300 hover:scale-105",
-                    getHexPosition(index, Object.keys(categories).length)
-                  )}
-                  onClick={() => setActiveCategory(key)}
-                >
-                  <div className={cn(
-                    "hex-container relative flex items-center justify-center h-32 w-36",
-                    activeCategory === key ? "scale-110" : ""
-                  )}>
-                    {/* Hexagon Shape Background with clip-path */}
-                    <div className={cn(
-                      "absolute inset-0 clip-path-hex",
-                      activeCategory === key ? category.color : "bg-white",
-                      "transition-colors duration-300"
-                    )}></div>
-                    
-                    {/* Hexagon Border */}
-                    <div className={cn(
-                      "absolute inset-0 clip-path-hex",
-                      activeCategory === key ? "border-2 border-white" : `border-2 ${category.borderColor}`,
-                      "bg-transparent transition-colors duration-300"
-                    )}></div>
-                    
-                    {/* Content */}
-                    <div className="z-10 text-center p-2">
-                      <div className={cn(
-                        "flex justify-center mb-1",
-                        activeCategory === key ? "text-white" : category.textColor
-                      )}>
-                        {category.icon}
-                      </div>
-                      <h3 className={cn(
-                        "font-medium text-sm font-lora transition-colors duration-300",
-                        activeCategory === key ? "text-white" : "text-signal-charcoal"
-                      )}>
-                        {category.title}
-                      </h3>
-                      <p className={cn(
-                        "text-xs mt-1 transition-colors duration-300",
-                        activeCategory === key ? "text-white/80" : "text-muted-foreground"
-                      )}>
-                        Click to view
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-          
-          {/* Details Card for Selected Category - Desktop */}
-          <div className="max-w-4xl mx-auto">
-            <Card className={cn(
-              "bg-white shadow-md border-t-4 transition-colors duration-300",
-              categories[activeCategory as keyof typeof categories].borderColor
-            )}>
-              <CardContent className="p-6 md:p-8">
-                <h3 className={cn(
-                  "text-xl md:text-2xl font-lora mb-6",
-                  categories[activeCategory as keyof typeof categories].textColor
-                )}>
-                  {categories[activeCategory as keyof typeof categories].title}
-                </h3>
-                
-                <div className="space-y-6">
-                  {categories[activeCategory as keyof typeof categories].items.map((item, index) => (
-                    <div key={index} className="space-y-1 md:space-y-2">
-                      <div className="flex items-start gap-3">
-                        <h4 className="font-lora font-medium text-lg md:text-xl">{item.title}</h4>
-                      </div>
-                      <p className="text-muted-foreground text-sm md:text-base">
-                        {item.description}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-
-        {/* Mobile View - Accordion-like layout */}
-        <div className="md:hidden space-y-4">
-          {Object.entries(categories).map(([key, category]) => (
-            <div key={key} className="rounded-lg overflow-hidden">
-              <div
+          <div className="grid grid-cols-2 gap-6 max-w-5xl mx-auto mb-0">
+            {Object.entries(categories).map(([key, category], index) => (
+              <div 
+                key={key}
                 className={cn(
-                  "p-4 rounded-lg cursor-pointer transition-all duration-200 flex items-center space-x-3",
+                  "cursor-pointer relative overflow-hidden transition-all duration-300 rounded-xl",
                   activeCategory === key 
-                    ? category.color + " text-white" 
-                    : "bg-white/50 hover:bg-white"
+                    ? "shadow-lg scale-105 z-10" 
+                    : "shadow hover:shadow-md hover:scale-102",
                 )}
                 onClick={() => setActiveCategory(key)}
               >
                 <div className={cn(
+                  "absolute inset-0 opacity-100 transition-opacity duration-300",
+                  activeCategory === key ? "opacity-100" : "opacity-0",
+                  category.color
+                )}></div>
+                
+                <Card className={cn(
+                  "border-2 h-full bg-white bg-opacity-95 transition-all duration-300 overflow-hidden",
                   activeCategory === key 
-                    ? "text-white" 
-                    : category.textColor
+                    ? `${category.borderColor} border-opacity-100` 
+                    : "border-gray-200 hover:border-opacity-75",
+                  activeCategory === key && "bg-opacity-10"
                 )}>
-                  {category.icon}
-                </div>
-                <div>
-                  <h3 className="font-medium text-lg font-lora">{category.title}</h3>
-                  <p className={cn(
-                    "text-xs mt-1",
-                    activeCategory === key ? "text-white/80" : "text-muted-foreground"
+                  <CardContent className="p-5 relative z-10 h-full">
+                    <div className="flex items-center space-x-3 mb-3">
+                      <div className={cn(
+                        "rounded-lg p-2 transition-colors",
+                        activeCategory === key 
+                          ? "bg-white text-signal-charcoal" 
+                          : `${category.color} bg-opacity-10 ${category.textColor}`
+                      )}>
+                        {category.icon}
+                      </div>
+                      <h3 className={cn(
+                        "font-lora font-medium text-xl transition-colors",
+                        activeCategory === key ? "text-white" : "text-signal-charcoal"
+                      )}>
+                        {category.title}
+                      </h3>
+                    </div>
+                    
+                    {activeCategory === key ? (
+                      <ul className="mt-4 space-y-3">
+                        {category.items.map((item, idx) => (
+                          <li key={idx} className="flex items-start">
+                            <span className="text-white font-medium me-2">•</span>
+                            <div>
+                              <h4 className="text-white font-medium">{item.title}</h4>
+                              <p className="text-white text-opacity-80 text-sm">
+                                {item.description}
+                              </p>
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p className={cn(
+                        "text-sm mt-2 transition-colors line-clamp-2",
+                        activeCategory === key ? "text-white" : "text-muted-foreground"
+                      )}>
+                        Click to see {category.items.length} features included in {category.title.toLowerCase()}.
+                      </p>
+                    )}
+                  </CardContent>
+                </Card>
+              </div>
+            ))}
+          </div>
+        </div>
+        
+        {/* Mobile View - Accordion Cards */}
+        <div className="md:hidden space-y-4">
+          {Object.entries(categories).map(([key, category]) => (
+            <div 
+              key={key} 
+              className={cn(
+                "relative overflow-hidden rounded-lg transition-all duration-300",
+                activeCategory === key 
+                  ? `shadow-md ${category.color}` 
+                  : "bg-white shadow"
+              )}
+              onClick={() => setActiveCategory(key)}
+            >
+              <div className="p-4 flex items-center justify-between">
+                <div className="flex items-center space-x-3">
+                  <div className={cn(
+                    "p-2 rounded-lg",
+                    activeCategory === key 
+                      ? "bg-white text-signal-charcoal" 
+                      : `${category.color} bg-opacity-10 ${category.textColor}`
                   )}>
-                    Click to view details
-                  </p>
+                    {category.icon}
+                  </div>
+                  <h3 className={cn(
+                    "font-lora font-medium",
+                    activeCategory === key ? "text-white" : "text-signal-charcoal"
+                  )}>
+                    {category.title}
+                  </h3>
                 </div>
               </div>
               
-              {/* Show content immediately below the clicked category */}
               {activeCategory === key && (
-                <Card className="bg-white shadow-md mt-2 mb-4">
-                  <CardContent className="p-4">
-                    <div className="space-y-6">
-                      {category.items.map((item, index) => (
-                        <div key={index} className="space-y-1">
-                          <div className="flex items-start gap-3">
-                            <h4 className="font-lora font-medium text-lg">{item.title}</h4>
-                          </div>
-                          <p className="text-muted-foreground text-sm">
+                <div className="p-4 pt-0">
+                  <ul className="space-y-3">
+                    {category.items.map((item, idx) => (
+                      <li key={idx} className="flex items-start">
+                        <span className="text-white font-medium me-2">•</span>
+                        <div>
+                          <h4 className="text-white font-medium">{item.title}</h4>
+                          <p className="text-white text-opacity-80 text-sm">
                             {item.description}
                           </p>
                         </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               )}
             </div>
           ))}
         </div>
       </div>
-      
-      {/* Add the hexagon clip path as a style */}
-      <style jsx>{`
-        .clip-path-hex {
-          clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-        }
-      `}</style>
     </section>
   );
 };
