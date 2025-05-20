@@ -1,3 +1,4 @@
+
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useState, useEffect, useRef } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
@@ -34,7 +35,7 @@ const Membership = () => {
   const categories = {
     physical: {
       title: t('membership.physical.title'),
-      shortTitle: 'Body',
+      shortTitle: language === 'zh' ? '身體' : 'Body',
       items: [{
         title: t('membership.physical.assessment'),
         description: t('membership.physical.assessment.description')
@@ -51,7 +52,7 @@ const Membership = () => {
     },
     mental: {
       title: t('membership.mental.title'),
-      shortTitle: 'Mind',
+      shortTitle: language === 'zh' ? '心理' : 'Mind',
       items: [{
         title: t('membership.mental.coaching'),
         description: t('membership.mental.coaching.description')
@@ -65,7 +66,7 @@ const Membership = () => {
     },
     golf: {
       title: t('membership.golf.title'),
-      shortTitle: 'Golf',
+      shortTitle: language === 'zh' ? '高爾夫' : 'Golf',
       items: [{
         title: t('membership.golf.simulator'),
         description: t('membership.golf.simulator.description')
@@ -79,7 +80,7 @@ const Membership = () => {
     },
     other: {
       title: t('membership.facility.title'),
-      shortTitle: 'Other',
+      shortTitle: language === 'zh' ? '其他' : 'Other',
       items: [{
         title: t('membership.facility.refresh'),
         description: t('membership.facility.refresh.description')
