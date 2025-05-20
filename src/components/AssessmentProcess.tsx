@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -204,19 +203,18 @@ const AssessmentProcess = () => {
           </div>
         </div>
         
-        {/* Mobile View: Tabs Layout */}
+        {/* Mobile View: Tabs Layout - Optimized */}
         <div className="md:hidden">
           <Tabs value={activeAssessment} onValueChange={setActiveAssessment} className="w-full">
             <TabsList className="grid grid-cols-5 mb-8">
               {Object.entries(assessments).map(([key, assessment]) => {
               const textColorClass = getTextColorClass(key);
-              return <TabsTrigger key={key} value={key} className="flex flex-col items-center py-3 px-1 data-[state=active]:border-b-2 data-[state=active]:border-signal-gold">
-                    <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center mb-1">
+              return <TabsTrigger key={key} value={key} className="flex flex-col items-center py-2 px-1 data-[state=active]:border-b-2 data-[state=active]:border-signal-gold">
+                    <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center">
                       <span className={cn("font-bold", activeAssessment === key ? textColorClass : "text-signal-charcoal")}>
                         {assessment.number}
                       </span>
                     </div>
-                    <span className="text-xs text-center line-clamp-2">{assessment.title.split(' ')[0]}</span>
                   </TabsTrigger>;
             })}
             </TabsList>
