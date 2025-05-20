@@ -60,43 +60,37 @@ const About = () => {
               </Card>
               
               <h4 className="text-xl font-bold mb-4 text-signal-charcoal">{t('about.coach.certifications')}</h4>
-              <div className="grid grid-cols-5 gap-4">
-                {/* First row - 5 certifications in the new order: PGA, CSCS, CMPC, Biofeedback, Neurofeedback */}
-                <div className="flex flex-col items-center">
-                  <div className="w-20 h-20 mb-2">
-                    <img src="/lovable-uploads/1d022755-a8e7-481a-91db-13f7db87b26a.png" alt="PGA of America Member" className="w-full h-full object-contain" />
+              <div className="flex flex-col space-y-6">
+                {/* First row - 3 certifications: PGA, CSCS, CMPC */}
+                <div className="grid grid-cols-3 gap-4">
+                  <div className="flex flex-col items-center">
+                    <div className="w-20 h-20">
+                      <img src="/lovable-uploads/1d022755-a8e7-481a-91db-13f7db87b26a.png" alt="PGA of America Member" className="w-full h-full object-contain" />
+                    </div>
                   </div>
-                </div>
-                <div className="flex flex-col items-center">
-                  <div className="w-20 h-20 mb-2">
-                    <img src="/lovable-uploads/1dc02882-2327-403c-9e82-8b8207c618ff.png" alt="CSCS Certification" className="w-full h-full object-contain" />
+                  <div className="flex flex-col items-center">
+                    <div className="w-20 h-20">
+                      <img src="/lovable-uploads/1dc02882-2327-403c-9e82-8b8207c618ff.png" alt="CSCS Certification" className="w-full h-full object-contain" />
+                    </div>
                   </div>
-                </div>
-                <div className="flex flex-col items-center">
-                  <div className="w-20 h-20 mb-2">
-                    <img src="/lovable-uploads/09961efd-a840-417f-a93a-2e2990b91489.png" alt="CMPC Certification" className="w-full h-full object-contain" />
-                  </div>
-                </div>
-                <div className="flex flex-col items-center">
-                  <div className="w-20 h-20 mb-2">
-                    <img src="/lovable-uploads/81b45c03-40d4-4cab-b7ad-893125dff714.png" alt="BCIA Biofeedback Certification" className="w-full h-full object-contain" />
-                  </div>
-                </div>
-                <div className="flex flex-col items-center">
-                  <div className="w-20 h-20 mb-2">
-                    <img alt="Golf Channel Academy" className="w-full h-full object-contain" src="/lovable-uploads/7386a216-356d-4d52-8c2f-60bfc9a85397.png" />
+                  <div className="flex flex-col items-center">
+                    <div className="w-20 h-20">
+                      <img src="/lovable-uploads/09961efd-a840-417f-a93a-2e2990b91489.png" alt="CMPC Certification" className="w-full h-full object-contain" />
+                    </div>
                   </div>
                 </div>
                 
-                {/* Second row - 2 larger certifications with better centering */}
-                <div className="flex justify-center col-span-2 mt-1 col-start-2">
-                  <div className="w-36 h-36">
-                    <img src="/lovable-uploads/beb7975b-c02a-42bc-be92-0c3da1a9f81c.png" alt="FRA Certification" className="w-full h-full object-contain" />
+                {/* Second row - 2 BCIA certifications */}
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="flex justify-center">
+                    <div className="w-24 h-24">
+                      <img src="/lovable-uploads/81b45c03-40d4-4cab-b7ad-893125dff714.png" alt="BCIA Biofeedback Certification" className="w-full h-full object-contain" />
+                    </div>
                   </div>
-                </div>
-                <div className="flex justify-center col-span-2 mt-1">
-                  <div className="w-36 h-36">
-                    <img src="/lovable-uploads/bb4a1533-7785-47f6-a0fa-6a037df47902.png" alt="FRC Certification" className="w-full h-full object-contain" />
+                  <div className="flex justify-center">
+                    <div className="w-24 h-24">
+                      <img alt="Golf Channel Academy" className="w-full h-full object-contain" src="/lovable-uploads/7386a216-356d-4d52-8c2f-60bfc9a85397.png" />
+                    </div>
                   </div>
                 </div>
               </div>
