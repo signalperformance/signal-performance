@@ -105,8 +105,9 @@ const Membership = () => {
   return (
     <section id="membership" className="section-padding bg-signal-light-gray" ref={sectionRef}>
       <div className="container mx-auto container-padding">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 font-lora">What's Included in Your Membership</h2>
+        <div className="text-center mb-8">
+          <h2 className="text-3xl md:text-4xl font-bold mb-1 font-lora">What's Included in Your Membership</h2>
+          <p className="text-xl text-muted-foreground font-medium">NT$18,000/month</p>
         </div>
         
         {/* Grid layout with different structure for mobile vs desktop */}
