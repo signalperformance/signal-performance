@@ -129,7 +129,7 @@ const Membership = () => {
                     className={cn(
                       "py-3 px-6 rounded-lg cursor-pointer min-w-[120px] mx-1 border-b-2",
                       isActive 
-                        ? "bg-white shadow-md border-b-2 font-semibold" 
+                        ? "bg-white shadow-md border-b-2 font-bold" 
                         : "hover:bg-muted/40 border-transparent"
                     )}
                     style={isActive ? { 
@@ -148,7 +148,7 @@ const Membership = () => {
                           outlineColor: isActive ? categoryColor : 'transparent',
                         }}
                       ></div>
-                      <span className={isActive ? "text-foreground" : "text-muted-foreground"}>
+                      <span className={isActive ? "text-foreground font-bold" : "text-muted-foreground"}>
                         {category.title}
                       </span>
                     </div>
@@ -204,7 +204,7 @@ const Membership = () => {
                     className={cn(
                       "py-2 px-3 rounded-lg cursor-pointer transition-all flex-1 min-w-0",
                       isActive 
-                        ? "bg-white shadow-md" 
+                        ? "bg-white shadow-md font-bold" 
                         : "hover:bg-muted/40 bg-muted/20"
                     )}
                     onClick={() => setActiveCategory(key)}
@@ -212,7 +212,7 @@ const Membership = () => {
                   >
                     <span className={cn(
                       "font-medium text-sm text-center block truncate",
-                      isActive ? "text-foreground" : "text-muted-foreground"
+                      isActive ? "text-foreground font-bold" : "text-muted-foreground"
                     )}>
                       {category.shortTitle}
                     </span>
