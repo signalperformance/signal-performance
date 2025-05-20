@@ -55,6 +55,30 @@ const AssessmentProcess = () => {
     return (current / max) * 100;
   };
 
+  // Function to get the text color class based on assessment key
+  const getTextColorClass = (key: string) => {
+    switch (key) {
+      case 'mobility': return 'text-blue-500';
+      case 'strength': return 'text-red-500';
+      case 'metabolic': return 'text-green-500';
+      case 'body': return 'text-purple-500';
+      case 'golf': return 'text-signal-gold';
+      default: return 'text-gray-500';
+    }
+  };
+
+  // Function to get circle color for the number points based on assessment key
+  const getCircleColor = (key: string) => {
+    switch (key) {
+      case 'mobility': return '#3b82f6'; // blue-500
+      case 'strength': return '#ef4444'; // red-500
+      case 'metabolic': return '#22c55e'; // green-500
+      case 'body': return '#a855f7'; // purple-500
+      case 'golf': return '#c9aa71'; // signal-gold
+      default: return '#6b7280'; // gray-500
+    }
+  };
+
   return <section id="assessment" className="section-padding bg-gradient-to-b from-white to-signal-light-gray">
       <div className="container mx-auto container-padding">
         <div className="text-center mb-12">
@@ -67,16 +91,9 @@ const AssessmentProcess = () => {
           {/* Left side: Radial Progress Wheel */}
           <div className="w-1/2">
             <div className="relative w-[500px] h-[500px] mx-auto">
-              {/* Central circle with active assessment */}
+              {/* Central circle - now remains blank */}
               <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 rounded-full bg-white shadow-lg flex items-center justify-center z-10 border-4 border-signal-gold">
-                <div className="text-center">
-                  <span className="text-4xl font-bold text-signal-gold">
-                    {assessments[activeAssessment as keyof typeof assessments].number}
-                  </span>
-                  <h3 className="font-lora text-lg mt-2">
-                    {assessments[activeAssessment as keyof typeof assessments].title}
-                  </h3>
-                </div>
+                {/* Intentionally left blank */}
               </div>
               
               {/* Circular progress track */}
@@ -113,11 +130,14 @@ const AssessmentProcess = () => {
                     const isActive = activeAssessment === key;
                     const shouldHighlight = assessments[activeAssessment as keyof typeof assessments].number >= assessment.number;
                     
+                    // Get the color matching the current segment's number
+                    const segmentColor = getCircleColor(key);
+                    
                     return (
                       <path
                         key={key}
                         d={path}
-                        fill={shouldHighlight ? assessment.color : "#f3f4f6"}
+                        fill={shouldHighlight ? segmentColor : "#f3f4f6"}
                         stroke="#fff"
                         strokeWidth="2"
                         opacity={isActive ? "1" : "0.7"}
@@ -137,6 +157,8 @@ const AssessmentProcess = () => {
                     
                     // Determine if this point should be highlighted
                     const isActive = activeAssessment === key;
+                    // Get proper color for the circle based on assessment key
+                    const circleColor = getCircleColor(key);
                     
                     return (
                       <g key={key} onClick={() => setActiveAssessment(key)} className="cursor-pointer">
@@ -145,7 +167,7 @@ const AssessmentProcess = () => {
                           cy={y} 
                           r="24" 
                           fill={isActive ? "white" : "#f9fafb"} 
-                          stroke={isActive ? "#c9aa71" : "#e5e7eb"}
+                          stroke={isActive ? circleColor : "#e5e7eb"}
                           strokeWidth="2"
                           className="transition-all duration-300"
                         />
@@ -154,7 +176,7 @@ const AssessmentProcess = () => {
                           y={y} 
                           textAnchor="middle" 
                           dominantBaseline="central"
-                          fill={isActive ? "#c9aa71" : "#6b7280"}
+                          fill={circleColor}
                           fontWeight="bold"
                           fontSize="16"
                         >
@@ -195,7 +217,7 @@ const AssessmentProcess = () => {
                       className={cn(
                         "px-3 py-1 rounded-full text-xs font-medium transition-all",
                         activeAssessment === key 
-                          ? "bg-signal-gold text-white" 
+                          ? assessment.color + " text-white" 
                           : "bg-gray-100 text-gray-600 hover:bg-gray-200"
                       )}
                       onClick={() => setActiveAssessment(key)}
@@ -213,14 +235,20 @@ const AssessmentProcess = () => {
         <div className="md:hidden">
           <Tabs value={activeAssessment} onValueChange={setActiveAssessment} className="w-full">
             <TabsList className="grid grid-cols-5 mb-8">
-              {Object.entries(assessments).map(([key, assessment]) => <TabsTrigger key={key} value={key} className="flex flex-col items-center py-3 px-1 data-[state=active]:border-b-2 data-[state=active]:border-signal-gold">
-                  <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center mb-1">
-                    <span className={cn("font-bold", activeAssessment === key ? "text-signal-gold" : "text-signal-charcoal")}>
-                      {assessment.number}
-                    </span>
-                  </div>
-                  <span className="text-xs text-center line-clamp-2">{assessment.title.split(' ')[0]}</span>
-                </TabsTrigger>)}
+              {Object.entries(assessments).map(([key, assessment]) => {
+                const textColorClass = getTextColorClass(key);
+                
+                return (
+                  <TabsTrigger key={key} value={key} className="flex flex-col items-center py-3 px-1 data-[state=active]:border-b-2 data-[state=active]:border-signal-gold">
+                    <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center mb-1">
+                      <span className={cn("font-bold", activeAssessment === key ? textColorClass : "text-signal-charcoal")}>
+                        {assessment.number}
+                      </span>
+                    </div>
+                    <span className="text-xs text-center line-clamp-2">{assessment.title.split(' ')[0]}</span>
+                  </TabsTrigger>
+                );
+              })}
             </TabsList>
             
             <div className="mb-4">
