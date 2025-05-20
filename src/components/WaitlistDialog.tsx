@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -73,7 +72,7 @@ const WaitlistDialog = () => {
           size="lg"
           onClick={openWaitlist}
         >
-          Join the Waitlist <ArrowRight className="ml-1 h-5 w-5" />
+          {t('nav.contact')} <ArrowRight className="ml-1 h-5 w-5" />
         </Button>
       </div>
 
