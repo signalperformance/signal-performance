@@ -88,10 +88,10 @@ const Membership = () => {
       ]
     },
     other: {
-      title: "Other Benefits",
+      title: "Facility Features",
       items: [
         {
-          title: "High-Comfort Amenities",
+          title: "Refresh & Recharge",
           description: "Includes modern shower, towel service, and kitchenette with complimentary and member-priced options.",
         },
         {
