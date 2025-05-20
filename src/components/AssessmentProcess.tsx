@@ -203,41 +203,73 @@ const AssessmentProcess = () => {
           </div>
         </div>
         
-        {/* Mobile View: Tabs Layout - Optimized */}
+        {/* Mobile View: Improved Tabs Layout */}
         <div className="md:hidden">
           <Tabs value={activeAssessment} onValueChange={setActiveAssessment} className="w-full">
-            <TabsList className="grid grid-cols-5 mb-8">
+            <TabsList className="grid grid-cols-5 mb-6 rounded-xl p-1 bg-muted/20 shadow-sm">
               {Object.entries(assessments).map(([key, assessment]) => {
-              const textColorClass = getTextColorClass(key);
-              return <TabsTrigger key={key} value={key} className="flex flex-col items-center py-2 px-1 data-[state=active]:border-b-2 data-[state=active]:border-signal-gold">
-                    <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center">
-                      <span className={cn("font-bold", activeAssessment === key ? textColorClass : "text-signal-charcoal")}>
+                const textColorClass = getTextColorClass(key);
+                const isActive = activeAssessment === key;
+                const circleColor = getCircleColor(key);
+                
+                return (
+                  <TabsTrigger 
+                    key={key} 
+                    value={key} 
+                    className={cn(
+                      "flex justify-center py-3 rounded-lg transition-all",
+                      isActive ? "shadow-sm" : "hover:bg-muted/40"
+                    )}
+                  >
+                    <div 
+                      className={cn(
+                        "w-10 h-10 rounded-full flex items-center justify-center",
+                        isActive ? "bg-white shadow-md" : "bg-gray-50"
+                      )}
+                      style={{ 
+                        border: isActive ? `2px solid ${circleColor}` : '1px solid #e5e7eb',
+                      }}
+                    >
+                      <span className={cn("font-bold", textColorClass)}>
                         {assessment.number}
                       </span>
                     </div>
-                  </TabsTrigger>;
-            })}
+                  </TabsTrigger>
+                );
+              })}
             </TabsList>
             
             <div className="mb-4">
-              <Progress value={getProgressValue()} className="h-2" />
+              <Progress 
+                value={getProgressValue()} 
+                className="h-2" 
+                style={{
+                  backgroundColor: '#e5e7eb',
+                  '--progress-background': getCircleColor(activeAssessment as keyof typeof assessments)
+                } as React.CSSProperties}
+              />
             </div>
             
-            {Object.entries(assessments).map(([key, assessment]) => <TabsContent key={key} value={key} className="mt-0">
-                <Card>
-                  <CardContent className="p-5">
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className={cn("w-8 h-8 rounded-full flex items-center justify-center text-white font-bold", assessment.color)}>
-                        {assessment.number}
+            {Object.entries(assessments).map(([key, assessment]) => (
+              <TabsContent key={key} value={key} className="mt-0">
+                <Card className="border-0 shadow-md rounded-xl overflow-hidden">
+                  <CardContent className="p-6">
+                    <div className="flex items-center gap-4 mb-4">
+                      <div 
+                        className={cn("w-12 h-12 rounded-full flex items-center justify-center text-white font-bold", 
+                        assessment.color)}
+                      >
+                        <assessment.icon size={20} />
                       </div>
                       <h3 className="text-xl font-lora font-medium">{assessment.title}</h3>
                     </div>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-muted-foreground">
                       {assessment.description}
                     </p>
                   </CardContent>
                 </Card>
-              </TabsContent>)}
+              </TabsContent>
+            ))}
           </Tabs>
         </div>
       </div>
