@@ -5,11 +5,12 @@ import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
 import { Move, Activity, User, Dumbbell, Club } from "lucide-react";
 import { useLanguage } from '@/contexts/LanguageContext';
-
 const AssessmentProcess = () => {
-  const { t, language } = useLanguage();
+  const {
+    t,
+    language
+  } = useLanguage();
   const [activeAssessment, setActiveAssessment] = useState("mobility");
-  
   const assessments = {
     mobility: {
       title: t('assessment.joint.title'),
@@ -97,7 +98,6 @@ const AssessmentProcess = () => {
       // gray-500
     }
   };
-  
   return <section id="assessment" className="section-padding bg-gradient-to-b from-white to-signal-light-gray">
       <div className="container mx-auto container-padding">
         <div className="text-center mb-12">
@@ -208,59 +208,33 @@ const AssessmentProcess = () => {
           <Tabs value={activeAssessment} onValueChange={setActiveAssessment} className="w-full">
             <TabsList className="grid grid-cols-5 mb-6 rounded-xl p-1 bg-muted/20 shadow-sm">
               {Object.entries(assessments).map(([key, assessment]) => {
-                const textColorClass = getTextColorClass(key);
-                const isActive = activeAssessment === key;
-                const circleColor = getCircleColor(key);
-                
-                return (
-                  <TabsTrigger 
-                    key={key} 
-                    value={key} 
-                    className={cn(
-                      "flex justify-center py-3 rounded-lg transition-all",
-                      isActive ? "shadow-sm" : "hover:bg-muted/40"
-                    )}
-                  >
-                    <div 
-                      className={cn(
-                        "w-10 h-10 rounded-full flex items-center justify-center",
-                        isActive ? "bg-white shadow-md" : "bg-gray-50"
-                      )}
-                      style={{ 
-                        border: isActive ? `2px solid ${circleColor}` : '1px solid #e5e7eb',
-                      }}
-                    >
+              const textColorClass = getTextColorClass(key);
+              const isActive = activeAssessment === key;
+              const circleColor = getCircleColor(key);
+              return <TabsTrigger key={key} value={key} className={cn("flex justify-center py-3 rounded-lg transition-all", isActive ? "shadow-sm" : "hover:bg-muted/40")}>
+                    <div className={cn("w-10 h-10 rounded-full flex items-center justify-center", isActive ? "bg-white shadow-md" : "bg-gray-50")} style={{
+                  border: isActive ? `2px solid ${circleColor}` : '1px solid #e5e7eb'
+                }}>
                       <span className={cn("font-bold", textColorClass)}>
                         {assessment.number}
                       </span>
                     </div>
-                  </TabsTrigger>
-                );
-              })}
+                  </TabsTrigger>;
+            })}
             </TabsList>
             
             <div className="mb-4">
-              <Progress 
-                value={getProgressValue()} 
-                className="h-2" 
-                style={{
-                  backgroundColor: '#e5e7eb',
-                  '--progress-background': getCircleColor(activeAssessment as keyof typeof assessments)
-                } as React.CSSProperties}
-              />
+              <Progress value={getProgressValue()} className="h-2" style={{
+              backgroundColor: '#e5e7eb',
+              '--progress-background': getCircleColor(activeAssessment as keyof typeof assessments)
+            } as React.CSSProperties} />
             </div>
             
-            {Object.entries(assessments).map(([key, assessment]) => (
-              <TabsContent key={key} value={key} className="mt-0">
+            {Object.entries(assessments).map(([key, assessment]) => <TabsContent key={key} value={key} className="mt-0">
                 <Card className="border-0 shadow-md rounded-xl overflow-hidden">
                   <CardContent className="p-6">
                     <div className="flex items-center gap-4 mb-4">
-                      <div 
-                        className={cn("w-12 h-12 rounded-full flex items-center justify-center text-white font-bold", 
-                        assessment.color)}
-                      >
-                        <assessment.icon size={20} />
-                      </div>
+                      
                       <h3 className="text-xl font-lora font-medium">{assessment.title}</h3>
                     </div>
                     <p className="text-muted-foreground">
@@ -268,8 +242,7 @@ const AssessmentProcess = () => {
                     </p>
                   </CardContent>
                 </Card>
-              </TabsContent>
-            ))}
+              </TabsContent>)}
           </Tabs>
         </div>
       </div>
