@@ -1,4 +1,3 @@
-
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
@@ -68,7 +67,7 @@ const About = () => {
                 </div>
                 <div className="flex flex-col items-center">
                   <div className="w-20 h-20 mb-2">
-                    <img src="/lovable-uploads/28f89c93-391d-4f91-bc76-be4af64ab42b.png" alt="Golf Channel Academy" className="w-full h-full object-contain" />
+                    <img alt="Golf Channel Academy" className="w-full h-full object-contain" src="/lovable-uploads/7386a216-356d-4d52-8c2f-60bfc9a85397.png" />
                   </div>
                   
                 </div>
