@@ -1,14 +1,11 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
 import { Move, Activity, User, Dumbbell, Club } from "lucide-react";
-
 const AssessmentProcess = () => {
   const [activeAssessment, setActiveAssessment] = useState("mobility");
-  
   const assessments = {
     mobility: {
       title: "Joint Health",
@@ -52,33 +49,50 @@ const AssessmentProcess = () => {
     const numbers = Object.values(assessments).map(assessment => assessment.number);
     const max = Math.max(...numbers);
     const current = assessments[activeAssessment as keyof typeof assessments].number;
-    return (current / max) * 100;
+    return current / max * 100;
   };
 
   // Function to get the text color class based on assessment key
   const getTextColorClass = (key: string) => {
     switch (key) {
-      case 'mobility': return 'text-blue-500';
-      case 'strength': return 'text-red-500';
-      case 'metabolic': return 'text-green-500';
-      case 'body': return 'text-purple-500';
-      case 'golf': return 'text-signal-gold';
-      default: return 'text-gray-500';
+      case 'mobility':
+        return 'text-blue-500';
+      case 'strength':
+        return 'text-red-500';
+      case 'metabolic':
+        return 'text-green-500';
+      case 'body':
+        return 'text-purple-500';
+      case 'golf':
+        return 'text-signal-gold';
+      default:
+        return 'text-gray-500';
     }
   };
 
   // Function to get circle color for the number points based on assessment key
   const getCircleColor = (key: string) => {
     switch (key) {
-      case 'mobility': return '#3b82f6'; // blue-500
-      case 'strength': return '#ef4444'; // red-500
-      case 'metabolic': return '#22c55e'; // green-500
-      case 'body': return '#a855f7'; // purple-500
-      case 'golf': return '#c9aa71'; // signal-gold
-      default: return '#6b7280'; // gray-500
+      case 'mobility':
+        return '#3b82f6';
+      // blue-500
+      case 'strength':
+        return '#ef4444';
+      // red-500
+      case 'metabolic':
+        return '#22c55e';
+      // green-500
+      case 'body':
+        return '#a855f7';
+      // purple-500
+      case 'golf':
+        return '#c9aa71';
+      // signal-gold
+      default:
+        return '#6b7280';
+      // gray-500
     }
   };
-
   return <section id="assessment" className="section-padding bg-gradient-to-b from-white to-signal-light-gray">
       <div className="container mx-auto container-padding">
         <div className="text-center mb-12">
@@ -104,87 +118,56 @@ const AssessmentProcess = () => {
                   
                   {/* Progress arcs - will draw in sequence based on active step */}
                   {Object.entries(assessments).map(([key, assessment], index) => {
-                    // Calculate the start and end angles for each segment
-                    const totalSegments = Object.keys(assessments).length;
-                    const segmentAngle = 360 / totalSegments;
-                    const startAngle = -90 + (index * segmentAngle); // Start from top (12 o'clock)
-                    const endAngle = startAngle + segmentAngle;
-                    
-                    // Convert to radians for calculations
-                    const startRad = (startAngle * Math.PI) / 180;
-                    const endRad = (endAngle * Math.PI) / 180;
-                    
-                    // Calculate points on circle for path
-                    const startX = 250 + 200 * Math.cos(startRad);
-                    const startY = 250 + 200 * Math.sin(startRad);
-                    const endX = 250 + 200 * Math.cos(endRad);
-                    const endY = 250 + 200 * Math.sin(endRad);
-                    
-                    // Flag for large arc (0 for arc <180 degrees, 1 for arc >=180 degrees)
-                    const largeArcFlag = segmentAngle <= 180 ? "0" : "1";
-                    
-                    // Create the SVG arc path
-                    const path = `M ${250} ${250} L ${startX} ${startY} A 200 200 0 ${largeArcFlag} 1 ${endX} ${endY} Z`;
-                    
-                    // Determine if this segment should be highlighted
-                    const isActive = activeAssessment === key;
-                    const shouldHighlight = assessments[activeAssessment as keyof typeof assessments].number >= assessment.number;
-                    
-                    // Get the color matching the current segment's number
-                    const segmentColor = getCircleColor(key);
-                    
-                    return (
-                      <path
-                        key={key}
-                        d={path}
-                        fill={shouldHighlight ? segmentColor : "#f3f4f6"}
-                        stroke="#fff"
-                        strokeWidth="2"
-                        opacity={isActive ? "1" : "0.7"}
-                        className="transition-all duration-300 cursor-pointer hover:opacity-90"
-                        onClick={() => setActiveAssessment(key)}
-                      />
-                    );
-                  })}
+                  // Calculate the start and end angles for each segment
+                  const totalSegments = Object.keys(assessments).length;
+                  const segmentAngle = 360 / totalSegments;
+                  const startAngle = -90 + index * segmentAngle; // Start from top (12 o'clock)
+                  const endAngle = startAngle + segmentAngle;
+
+                  // Convert to radians for calculations
+                  const startRad = startAngle * Math.PI / 180;
+                  const endRad = endAngle * Math.PI / 180;
+
+                  // Calculate points on circle for path
+                  const startX = 250 + 200 * Math.cos(startRad);
+                  const startY = 250 + 200 * Math.sin(startRad);
+                  const endX = 250 + 200 * Math.cos(endRad);
+                  const endY = 250 + 200 * Math.sin(endRad);
+
+                  // Flag for large arc (0 for arc <180 degrees, 1 for arc >=180 degrees)
+                  const largeArcFlag = segmentAngle <= 180 ? "0" : "1";
+
+                  // Create the SVG arc path
+                  const path = `M ${250} ${250} L ${startX} ${startY} A 200 200 0 ${largeArcFlag} 1 ${endX} ${endY} Z`;
+
+                  // Determine if this segment should be highlighted
+                  const isActive = activeAssessment === key;
+                  const shouldHighlight = assessments[activeAssessment as keyof typeof assessments].number >= assessment.number;
+
+                  // Get the color matching the current segment's number
+                  const segmentColor = getCircleColor(key);
+                  return <path key={key} d={path} fill={shouldHighlight ? segmentColor : "#f3f4f6"} stroke="#fff" strokeWidth="2" opacity={isActive ? "1" : "0.7"} className="transition-all duration-300 cursor-pointer hover:opacity-90" onClick={() => setActiveAssessment(key)} />;
+                })}
                   
                   {/* Assessment number points on the wheel */}
                   {Object.entries(assessments).map(([key, assessment]) => {
-                    // Calculate position on the circle
-                    const angle = -90 + ((assessment.number - 1) * (360 / Object.keys(assessments).length));
-                    const rad = (angle * Math.PI) / 180;
-                    const x = 250 + 200 * Math.cos(rad);
-                    const y = 250 + 200 * Math.sin(rad);
-                    
-                    // Determine if this point should be highlighted
-                    const isActive = activeAssessment === key;
-                    // Get proper color for the circle based on assessment key
-                    const circleColor = getCircleColor(key);
-                    
-                    return (
-                      <g key={key} onClick={() => setActiveAssessment(key)} className="cursor-pointer">
-                        <circle 
-                          cx={x} 
-                          cy={y} 
-                          r="24" 
-                          fill={isActive ? "white" : "#f9fafb"} 
-                          stroke={isActive ? circleColor : "#e5e7eb"}
-                          strokeWidth="2"
-                          className="transition-all duration-300"
-                        />
-                        <text 
-                          x={x} 
-                          y={y} 
-                          textAnchor="middle" 
-                          dominantBaseline="central"
-                          fill={circleColor}
-                          fontWeight="bold"
-                          fontSize="16"
-                        >
+                  // Calculate position on the circle
+                  const angle = -90 + (assessment.number - 1) * (360 / Object.keys(assessments).length);
+                  const rad = angle * Math.PI / 180;
+                  const x = 250 + 200 * Math.cos(rad);
+                  const y = 250 + 200 * Math.sin(rad);
+
+                  // Determine if this point should be highlighted
+                  const isActive = activeAssessment === key;
+                  // Get proper color for the circle based on assessment key
+                  const circleColor = getCircleColor(key);
+                  return <g key={key} onClick={() => setActiveAssessment(key)} className="cursor-pointer">
+                        <circle cx={x} cy={y} r="24" fill={isActive ? "white" : "#f9fafb"} stroke={isActive ? circleColor : "#e5e7eb"} strokeWidth="2" className="transition-all duration-300" />
+                        <text x={x} y={y} textAnchor="middle" dominantBaseline="central" fill={circleColor} fontWeight="bold" fontSize="16">
                           {assessment.number}
                         </text>
-                      </g>
-                    );
-                  })}
+                      </g>;
+                })}
                 </svg>
               </div>
             </div>
@@ -195,8 +178,7 @@ const AssessmentProcess = () => {
             <Card className="bg-white shadow-md">
               <CardContent className="p-6">
                 <div className="flex items-center gap-4 mb-4">
-                  <div className={cn("w-10 h-10 rounded-full flex items-center justify-center text-white font-bold", 
-                    assessments[activeAssessment as keyof typeof assessments].color)}>
+                  <div className={cn("w-10 h-10 rounded-full flex items-center justify-center text-white font-bold", assessments[activeAssessment as keyof typeof assessments].color)}>
                     {assessments[activeAssessment as keyof typeof assessments].number}
                   </div>
                   <h3 className="text-2xl font-lora font-medium">
@@ -210,22 +192,7 @@ const AssessmentProcess = () => {
                   {assessments[activeAssessment as keyof typeof assessments].description}
                 </p>
                 
-                <div className="flex mt-6 justify-between">
-                  {Object.entries(assessments).map(([key, assessment]) => (
-                    <button
-                      key={key}
-                      className={cn(
-                        "px-3 py-1 rounded-full text-xs font-medium transition-all",
-                        activeAssessment === key 
-                          ? assessment.color + " text-white" 
-                          : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                      )}
-                      onClick={() => setActiveAssessment(key)}
-                    >
-                      {assessment.title.split(' ')[0]}
-                    </button>
-                  ))}
-                </div>
+                
               </CardContent>
             </Card>
           </div>
@@ -236,19 +203,16 @@ const AssessmentProcess = () => {
           <Tabs value={activeAssessment} onValueChange={setActiveAssessment} className="w-full">
             <TabsList className="grid grid-cols-5 mb-8">
               {Object.entries(assessments).map(([key, assessment]) => {
-                const textColorClass = getTextColorClass(key);
-                
-                return (
-                  <TabsTrigger key={key} value={key} className="flex flex-col items-center py-3 px-1 data-[state=active]:border-b-2 data-[state=active]:border-signal-gold">
+              const textColorClass = getTextColorClass(key);
+              return <TabsTrigger key={key} value={key} className="flex flex-col items-center py-3 px-1 data-[state=active]:border-b-2 data-[state=active]:border-signal-gold">
                     <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center mb-1">
                       <span className={cn("font-bold", activeAssessment === key ? textColorClass : "text-signal-charcoal")}>
                         {assessment.number}
                       </span>
                     </div>
                     <span className="text-xs text-center line-clamp-2">{assessment.title.split(' ')[0]}</span>
-                  </TabsTrigger>
-                );
-              })}
+                  </TabsTrigger>;
+            })}
             </TabsList>
             
             <div className="mb-4">
@@ -259,8 +223,7 @@ const AssessmentProcess = () => {
                 <Card>
                   <CardContent className="p-5">
                     <div className="flex items-center gap-3 mb-3">
-                      <div className={cn("w-8 h-8 rounded-full flex items-center justify-center text-white font-bold",
-                        assessment.color)}>
+                      <div className={cn("w-8 h-8 rounded-full flex items-center justify-center text-white font-bold", assessment.color)}>
                         {assessment.number}
                       </div>
                       <h3 className="text-xl font-lora font-medium">{assessment.title}</h3>
@@ -276,5 +239,4 @@ const AssessmentProcess = () => {
       </div>
     </section>;
 };
-
 export default AssessmentProcess;
