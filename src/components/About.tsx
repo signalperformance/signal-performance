@@ -5,10 +5,12 @@ import { Separator } from '@/components/ui/separator';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
+
 const About = () => {
   const {
     t
   } = useLanguage();
+  
   return <section id="about" className="section-padding bg-white">
       <div className="container mx-auto container-padding">
         <div className="max-w-5xl mx-auto">
@@ -59,36 +61,31 @@ const About = () => {
               
               <h4 className="text-xl font-bold mb-4 text-signal-charcoal">Certifications</h4>
               <div className="grid grid-cols-5 gap-4">
-                {/* First row - 5 certifications */}
+                {/* First row - 5 certifications in the new order: PGA, CSCS, CMPC, Biofeedback, Neurofeedback */}
                 <div className="flex flex-col items-center">
-                  {/* Placeholder for new logo */}
-                  <div className="w-20 h-20 mb-2 border border-dashed border-signal-charcoal/30 flex items-center justify-center bg-gray-50 rounded">
-                    <span className="text-xs text-signal-charcoal/50">Logo</span>
+                  <div className="w-20 h-20 mb-2">
+                    <img src="/lovable-uploads/1d022755-a8e7-481a-91db-13f7db87b26a.png" alt="PGA of America Member" className="w-full h-full object-contain" />
                   </div>
                 </div>
                 <div className="flex flex-col items-center">
                   <div className="w-20 h-20 mb-2">
                     <img src="/lovable-uploads/1dc02882-2327-403c-9e82-8b8207c618ff.png" alt="CSCS Certification" className="w-full h-full object-contain" />
                   </div>
-                  
                 </div>
                 <div className="flex flex-col items-center">
                   <div className="w-20 h-20 mb-2">
                     <img src="/lovable-uploads/09961efd-a840-417f-a93a-2e2990b91489.png" alt="CMPC Certification" className="w-full h-full object-contain" />
                   </div>
-                  
                 </div>
                 <div className="flex flex-col items-center">
                   <div className="w-20 h-20 mb-2">
-                    <img src="/lovable-uploads/1d022755-a8e7-481a-91db-13f7db87b26a.png" alt="PGA of America Member" className="w-full h-full object-contain" />
+                    <img src="/lovable-uploads/81b45c03-40d4-4cab-b7ad-893125dff714.png" alt="BCIA Biofeedback Certification" className="w-full h-full object-contain" />
                   </div>
-                  
                 </div>
                 <div className="flex flex-col items-center">
                   <div className="w-20 h-20 mb-2">
                     <img alt="Golf Channel Academy" className="w-full h-full object-contain" src="/lovable-uploads/7386a216-356d-4d52-8c2f-60bfc9a85397.png" />
                   </div>
-                  
                 </div>
                 
                 {/* Second row - 2 larger certifications with reduced spacing */}
@@ -109,4 +106,5 @@ const About = () => {
       </div>
     </section>;
 };
+
 export default About;
