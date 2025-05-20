@@ -1,3 +1,4 @@
+
 import { createContext, useContext, useState, ReactNode } from 'react';
 
 type Language = 'en' | 'zh';
@@ -68,7 +69,7 @@ const translations = {
     'assessment.joint.description': 'We assess the passive and active range of motion of every major joint to identify movement limitations and their root causes. These insights inform your fitness program to help reduce injury risk and support long-term joint health. We also track changes in range of motion over time to monitor progress and guide ongoing adjustments.',
     
     'assessment.strength.title': 'Maximal Strength',
-    'assessment.strength.description': 'We assess maximal strength using compound lifts like the bench press and deadlift to measure how effectively your neuromuscular system produces force. As maximal strength increases, you're able to move lighter loads — like a golf club — more quickly, directly supporting gains in swing speed.',
+    'assessment.strength.description': 'We assess maximal strength using compound lifts like the bench press and deadlift to measure how effectively your neuromuscular system produces force. As maximal strength increases, you\'re able to move lighter loads — like a golf club — more quickly, directly supporting gains in swing speed.',
     
     'assessment.metabolic.title': 'Metabolic Testing',
     'assessment.metabolic.description': 'We assess how efficiently your body produces and uses energy through aerobic and anaerobic testing. This allows us to define your personalized heart rate zones and design a conditioning program that improves endurance, enhances recovery, and supports sustained performance over multiple rounds of competitive golf.',
