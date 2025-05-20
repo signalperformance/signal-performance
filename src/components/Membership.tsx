@@ -114,10 +114,10 @@ const Membership = () => {
           <p className="text-sm text-muted-foreground italic mt-1">{t('membership.subtitle')}</p>
         </div>
         
-        {/* Desktop View - Now using tabs like mobile */}
+        {/* Desktop View - Enhanced tabs with better visual separation */}
         <div className="hidden md:block">
           <Tabs value={activeCategory} onValueChange={setActiveCategory} className="w-full">
-            <TabsList className="flex justify-center mb-6 rounded-xl p-1.5 bg-muted/20 shadow-sm">
+            <TabsList className="flex justify-center mb-6 rounded-xl p-1.5 bg-muted/20 shadow-sm w-full max-w-3xl mx-auto">
               {Object.entries(categories).map(([key, category]) => {
                 const isActive = activeCategory === key;
                 const categoryColor = getCategoryColor(key);
@@ -127,17 +127,32 @@ const Membership = () => {
                     key={key} 
                     value={key} 
                     className={cn(
-                      "py-3 px-6 rounded-lg cursor-pointer transition-all min-w-[120px]",
-                      isActive ? "bg-white shadow-md" : "hover:bg-muted/40"
+                      "py-3 px-6 rounded-lg cursor-pointer transition-all min-w-[120px] mx-1 border-b-2",
+                      isActive 
+                        ? "bg-white shadow-md border-b-2 font-semibold" 
+                        : "hover:bg-muted/40 border-transparent"
                     )}
+                    style={isActive ? { 
+                      borderColor: categoryColor,
+                      boxShadow: `0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06), 0 0 0 2px rgba(${categoryColor.replace('#', '').match(/../g)?.map(hex => parseInt(hex, 16)).join(', ')}, 0.1)` 
+                    } : {}}
                   >
-                    <div className="flex items-center justify-center space-x-2">
+                    <div className={cn(
+                      "flex items-center justify-center space-x-2",
+                      isActive ? "text-foreground" : "text-muted-foreground"
+                    )}>
                       <div 
-                        className="w-3 h-3 rounded-full"
-                        style={{ backgroundColor: categoryColor }}
+                        className={cn(
+                          "w-3 h-3 rounded-full",
+                          isActive ? "ring-2 ring-offset-2" : ""
+                        )}
+                        style={{ 
+                          backgroundColor: categoryColor,
+                          ringColor: isActive ? categoryColor : 'transparent',
+                          ringOffsetColor: isActive ? 'white' : 'transparent'
+                        }}
                       ></div>
                       <span className={cn(
-                        "font-medium",
                         isActive ? "text-foreground" : "text-muted-foreground"
                       )}>
                         {category.title}
@@ -150,7 +165,7 @@ const Membership = () => {
 
             {/* Content for each tab */}
             {Object.entries(categories).map(([key, category]) => (
-              <TabsContent key={key} value={key} className="mt-0">
+              <TabsContent key={key} value={key} className="mt-0 transition-all duration-300">
                 <Card className="bg-white shadow-lg rounded-xl overflow-hidden">
                   <CardContent className="p-8">
                     <h3 className="text-2xl font-lora mb-6 font-medium">{category.title}</h3>
@@ -182,7 +197,7 @@ const Membership = () => {
 
         {/* Mobile View - Modified to remove colored dots to save space */}
         <div className="md:hidden">
-          {/* Category Pills - Horizontal Scrolling - Removed colored dots */}
+          {/* Category Pills - Horizontal Scrolling */}
           <div className="mb-6 overflow-x-auto pb-2 no-scrollbar">
             <div className="flex gap-2 min-w-full">
               {Object.entries(categories).map(([key, category]) => {
@@ -243,3 +258,4 @@ const Membership = () => {
     </section>;
 };
 export default Membership;
+
