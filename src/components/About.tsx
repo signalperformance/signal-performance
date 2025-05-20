@@ -88,8 +88,8 @@ const About = () => {
                   </div>
                 </div>
                 
-                {/* Second row - 2 larger certifications with reduced spacing */}
-                <div className="flex flex-col items-center col-span-2 mt-1 col-start-2">
+                {/* Second row - 2 larger certifications with improved centering */}
+                <div className="flex flex-col items-center col-span-2 mt-1 col-start-2 mx-auto">
                   <div className="w-36 h-36">
                     <img src="/lovable-uploads/beb7975b-c02a-42bc-be92-0c3da1a9f81c.png" alt="FRA Certification" className="w-full h-full object-contain" />
                   </div>
