@@ -21,7 +21,6 @@ const Index = () => {
       <Membership />
       <AssessmentProcess />
       <About />
-      <Founder />
       <WaitlistDialog />
       <Footer />
     </div>
