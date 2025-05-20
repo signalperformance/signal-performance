@@ -1,3 +1,4 @@
+
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
@@ -36,6 +37,7 @@ const About = () => {
             
             {/* Bio & Certification Section */}
             <div className="w-full lg:w-2/3">
+              {/* Academic & Experience Card */}
               <Card className="mb-6">
                 <CardContent className="pt-6">
                   <div className="mb-6">
@@ -56,41 +58,46 @@ const About = () => {
                 </CardContent>
               </Card>
               
-              <h4 className="text-xl font-bold mb-4 text-signal-charcoal">{t('about.coach.certifications')}</h4>
-              <div className="flex flex-col space-y-6">
-                {/* First row - 3 certifications: PGA, CSCS, CMPC */}
-                <div className="grid grid-cols-3 gap-4">
-                  <div className="flex flex-col items-center">
-                    <div className="w-20 h-20">
-                      <img src="/lovable-uploads/1d022755-a8e7-481a-91db-13f7db87b26a.png" alt="PGA of America Member" className="w-full h-full object-contain" />
+              {/* Certifications Card - Now wrapped in a Card component to match */}
+              <Card className="mb-6">
+                <CardContent className="pt-6">
+                  <h4 className="text-xl font-bold mb-4 text-signal-charcoal">{t('about.coach.certifications')}</h4>
+                  <div className="flex flex-col space-y-6">
+                    {/* First row - 3 certifications: PGA, CSCS, CMPC */}
+                    <div className="grid grid-cols-3 gap-4">
+                      <div className="flex flex-col items-center">
+                        <div className="w-20 h-20">
+                          <img src="/lovable-uploads/1d022755-a8e7-481a-91db-13f7db87b26a.png" alt="PGA of America Member" className="w-full h-full object-contain" />
+                        </div>
+                      </div>
+                      <div className="flex flex-col items-center">
+                        <div className="w-20 h-20">
+                          <img src="/lovable-uploads/1dc02882-2327-403c-9e82-8b8207c618ff.png" alt="CSCS Certification" className="w-full h-full object-contain" />
+                        </div>
+                      </div>
+                      <div className="flex flex-col items-center">
+                        <div className="w-20 h-20">
+                          <img src="/lovable-uploads/09961efd-a840-417f-a93a-2e2990b91489.png" alt="CMPC Certification" className="w-full h-full object-contain" />
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Second row - 2 BCIA certifications */}
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="flex justify-center">
+                        <div className="w-24 h-24">
+                          <img alt="BCIA Biofeedback Certification" className="w-full h-full object-contain" src="/lovable-uploads/b8e8e7d5-5980-475f-9534-3660f734bccf.png" />
+                        </div>
+                      </div>
+                      <div className="flex justify-center">
+                        <div className="w-24 h-24">
+                          <img alt="Golf Channel Academy" className="w-full h-full object-contain" src="/lovable-uploads/650394e1-2bf5-4354-b912-86a81648eaaa.png" />
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <div className="flex flex-col items-center">
-                    <div className="w-20 h-20">
-                      <img src="/lovable-uploads/1dc02882-2327-403c-9e82-8b8207c618ff.png" alt="CSCS Certification" className="w-full h-full object-contain" />
-                    </div>
-                  </div>
-                  <div className="flex flex-col items-center">
-                    <div className="w-20 h-20">
-                      <img src="/lovable-uploads/09961efd-a840-417f-a93a-2e2990b91489.png" alt="CMPC Certification" className="w-full h-full object-contain" />
-                    </div>
-                  </div>
-                </div>
-                
-                {/* Second row - 2 BCIA certifications */}
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="flex justify-center">
-                    <div className="w-24 h-24">
-                      <img alt="BCIA Biofeedback Certification" className="w-full h-full object-contain" src="/lovable-uploads/b8e8e7d5-5980-475f-9534-3660f734bccf.png" />
-                    </div>
-                  </div>
-                  <div className="flex justify-center">
-                    <div className="w-24 h-24">
-                      <img alt="Golf Channel Academy" className="w-full h-full object-contain" src="/lovable-uploads/650394e1-2bf5-4354-b912-86a81648eaaa.png" />
-                    </div>
-                  </div>
-                </div>
-              </div>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </div>
