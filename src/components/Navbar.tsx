@@ -1,8 +1,6 @@
-
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
-
 const Navbar = () => {
   const {
     language,
@@ -10,7 +8,6 @@ const Navbar = () => {
     t
   } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
-
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
@@ -18,7 +15,6 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
   const navItems = [{
     label: t('nav.membership'),
     href: '#membership'
@@ -26,11 +22,9 @@ const Navbar = () => {
     label: t('nav.contact'),
     href: '#waitlist'
   }];
-
   const toggleLanguage = () => {
     setLanguage(language === 'en' ? 'zh' : 'en');
   };
-
   return <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-md py-2' : 'bg-white py-4'}`}>
       <div className="container mx-auto px-4 flex justify-between items-center">
         <a href="#home" className="flex items-center gap-2">
@@ -39,17 +33,7 @@ const Navbar = () => {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center">
-          <div className="flex space-x-8">
-            {navItems.map(item => (
-              <a 
-                key={item.href} 
-                href={item.href} 
-                className="text-signal-charcoal hover:text-signal-gold transition-colors text-sm font-medium"
-              >
-                {item.label}
-              </a>
-            ))}
-          </div>
+          
 
           <div className="flex items-center ml-8 space-x-4">
             <button onClick={toggleLanguage} className="text-signal-charcoal hover:text-signal-gold transition-colors text-sm font-medium">
@@ -67,5 +51,4 @@ const Navbar = () => {
       </div>
     </nav>;
 };
-
 export default Navbar;
