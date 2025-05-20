@@ -1,3 +1,4 @@
+
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useState, useEffect, useRef } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
@@ -147,7 +148,7 @@ const Membership = () => {
                           outlineColor: isActive ? categoryColor : 'transparent',
                         }}
                       ></div>
-                      <span className={isActive ? "text-foreground font-medium" : "text-muted-foreground"}>
+                      <span className={isActive ? "text-foreground" : "text-muted-foreground"}>
                         {category.title}
                       </span>
                     </div>
@@ -188,7 +189,7 @@ const Membership = () => {
           </Tabs>
         </div>
 
-        {/* Mobile View - Updated to match desktop styling */}
+        {/* Mobile View */}
         <div className="md:hidden">
           {/* Category Pills - Horizontal Scrolling */}
           <div className="mb-6 overflow-x-auto pb-2 no-scrollbar">
@@ -201,18 +202,18 @@ const Membership = () => {
                   <div 
                     key={key} 
                     className={cn(
-                      "py-2 px-4 rounded-lg cursor-pointer min-w-0 border-b-2",
+                      "py-2 px-3 rounded-lg cursor-pointer transition-all flex-1 min-w-0",
                       isActive 
-                        ? "bg-white shadow-md font-semibold" 
-                        : "hover:bg-muted/40 bg-muted/20 border-transparent"
+                        ? "bg-white shadow-md" 
+                        : "hover:bg-muted/40 bg-muted/20"
                     )}
                     onClick={() => setActiveCategory(key)}
-                    style={isActive ? { 
-                      borderColor: categoryColor,
-                      boxShadow: `0 2px 4px rgba(0, 0, 0, 0.1)`
-                    } : {}}
+                    style={isActive ? { borderBottom: `2px solid ${categoryColor}` } : {}}
                   >
-                    <span className="font-medium text-sm text-center block truncate">
+                    <span className={cn(
+                      "font-medium text-sm text-center block truncate",
+                      isActive ? "text-foreground" : "text-muted-foreground"
+                    )}>
                       {category.shortTitle}
                     </span>
                   </div>
