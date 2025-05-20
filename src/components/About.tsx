@@ -5,6 +5,7 @@ import { Separator } from '@/components/ui/separator';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
+
 const About = () => {
   const {
     t
@@ -64,25 +65,21 @@ const About = () => {
                   <div className="w-20 h-20 mb-2">
                     <img src="/lovable-uploads/1d022755-a8e7-481a-91db-13f7db87b26a.png" alt="PGA of America Member" className="w-full h-full object-contain" />
                   </div>
-                  
                 </div>
                 <div className="flex flex-col items-center">
                   <div className="w-20 h-20 mb-2">
                     <img src="/lovable-uploads/28f89c93-391d-4f91-bc76-be4af64ab42b.png" alt="Golf Channel Academy" className="w-full h-full object-contain" />
                   </div>
-                  
                 </div>
                 <div className="flex flex-col items-center">
                   <div className="w-20 h-20 mb-2">
-                    <img src="/lovable-uploads/1dc02882-2327-403c-9e82-8b8207c618ff.png" alt="CSCS Certification" className="w-full h-full object-contain" />
+                    <img src="/lovable-uploads/77ce2ebf-a5e8-4a0e-be56-c78e611cbeda.png" alt="BCIA Certification" className="w-full h-full object-contain" />
                   </div>
-                  
                 </div>
                 <div className="flex flex-col items-center">
                   <div className="w-20 h-20 mb-2">
-                    <img src="/lovable-uploads/09961efd-a840-417f-a93a-2e2990b91489.png" alt="CMPC Certification" className="w-full h-full object-contain" />
+                    <img src="/lovable-uploads/faf35083-6b68-4335-91e5-ff983778df57.png" alt="BCIA Biofeedback" className="w-full h-full object-contain" />
                   </div>
-                  
                 </div>
                 
                 {/* Second row - 2 larger certifications with reduced spacing */}
@@ -103,4 +100,5 @@ const About = () => {
       </div>
     </section>;
 };
+
 export default About;
