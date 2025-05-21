@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -23,6 +24,7 @@ import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ArrowRight } from 'lucide-react';
 import { useWaitlistDialog } from '@/hooks/useWaitlistDialog';
+import { supabase } from '@/integrations/supabase/client';
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -47,20 +49,47 @@ const WaitlistDialog = () => {
     },
   });
 
-  const onSubmit = (data: FormValues) => {
+  const onSubmit = async (data: FormValues) => {
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
-      console.log('Form submitted:', data);
+    try {
+      // Submit data to Supabase
+      const { error } = await supabase
+        .from('waitlist_entries')
+        .insert([
+          {
+            name: data.name,
+            email: data.email,
+            phone: data.phone,
+          }
+        ]);
+      
+      if (error) {
+        console.error('Error submitting to waitlist:', error);
+        toast({
+          title: t('errors.generic'),
+          description: error.message,
+          variant: "destructive",
+          duration: 5000,
+        });
+      } else {
+        toast({
+          title: t('waitlist.success'),
+          duration: 5000,
+        });
+        form.reset();
+        closeWaitlist();
+      }
+    } catch (err) {
+      console.error('Exception when submitting to waitlist:', err);
       toast({
-        title: t('waitlist.success'),
+        title: t('errors.generic'),
+        variant: "destructive",
         duration: 5000,
       });
-      form.reset();
+    } finally {
       setIsSubmitting(false);
-      closeWaitlist();
-    }, 1500);
+    }
   };
 
   return (
