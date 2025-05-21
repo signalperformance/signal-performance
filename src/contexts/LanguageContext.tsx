@@ -126,7 +126,7 @@ const translations = {
     'nav.login': '會員登入',
     
     // Hero
-    'hero.headline': '噶爾夫選手的訓練基地',
+    'hero.headline': '高爾夫選手的訓練基地',
     'hero.subheadline': '在同一個訓練空間中整合體能、心理與技術訓練',
     'hero.cta.waitlist': '加入候補名單',
     'hero.cta.membership': '了解會員方案',
