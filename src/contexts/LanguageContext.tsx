@@ -1,4 +1,3 @@
-
 import { createContext, useContext, useState, ReactNode } from 'react';
 
 type Language = 'en' | 'zh';
@@ -21,7 +20,7 @@ const translations = {
     
     // Hero
     'hero.headline': 'An Integrated Training Space for Pro Golfers',
-    'hero.subheadline': 'Physical, mental, and skill training — all in one professional facility.',
+    'hero.subheadline': 'Physical, mental, and skill training — all in one place',
     'hero.cta.waitlist': 'Join the Waitlist',
     'hero.cta.membership': 'Explore Membership',
     
