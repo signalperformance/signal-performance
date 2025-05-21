@@ -5,22 +5,25 @@ import { Separator } from '@/components/ui/separator';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
+
 const About = () => {
   const {
     t
   } = useLanguage();
-  return <section id="about" className="section-padding bg-white">
+  
+  return (
+    <section id="about" className="py-12 md:py-16 bg-white">
       <div className="container mx-auto container-padding">
         <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-12">
+          <div className="text-center mb-8">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 font-lora text-signal-charcoal">{t('about.coach.title')}</h2>
             <Separator className="mx-auto w-24 bg-signal-gold h-0.5" />
           </div>
           
-          <div className="flex flex-col lg:flex-row gap-10 items-center lg:items-start">
+          <div className="flex flex-col lg:flex-row gap-8 items-center lg:items-start">
             {/* Profile Section */}
             <div className="w-full lg:w-1/3">
-              <div className="mb-6 flex justify-center">
+              <div className="mb-4 flex justify-center">
                 <div className="w-full max-w-xs">
                   <div className="rounded-lg overflow-hidden bg-signal-gold/20 relative">
                     <div className="aspect-ratio-1/1">
@@ -38,9 +41,9 @@ const About = () => {
             {/* Bio & Certification Section */}
             <div className="w-full lg:w-2/3">
               {/* Academic & Experience Card */}
-              <Card className="mb-6">
+              <Card className="mb-4">
                 <CardContent className="pt-6">
-                  <div className="mb-6">
+                  <div className="mb-4">
                     <h4 className="text-xl font-bold mb-3 text-signal-charcoal">{t('about.coach.academic')}</h4>
                     <p className="text-sm leading-relaxed text-signal-charcoal/90">
                       {t('about.coach.academic.degree')}
@@ -59,24 +62,24 @@ const About = () => {
               </Card>
               
               {/* Certifications Card - Now wrapped in a Card component to match */}
-              <Card className="mb-6">
+              <Card>
                 <CardContent className="pt-6">
                   <h4 className="text-xl font-bold mb-4 text-signal-charcoal">{t('about.coach.certifications')}</h4>
-                  <div className="flex flex-col space-y-6">
+                  <div className="flex flex-col space-y-4">
                     {/* First row - 3 certifications: PGA, CSCS, CMPC */}
                     <div className="grid grid-cols-3 gap-4">
                       <div className="flex flex-col items-center">
-                        <div className="w-20 h-20">
+                        <div className="w-16 h-16 md:w-20 md:h-20">
                           <img src="/lovable-uploads/1d022755-a8e7-481a-91db-13f7db87b26a.png" alt="PGA of America Member" className="w-full h-full object-contain" />
                         </div>
                       </div>
                       <div className="flex flex-col items-center">
-                        <div className="w-20 h-20">
+                        <div className="w-16 h-16 md:w-20 md:h-20">
                           <img src="/lovable-uploads/1dc02882-2327-403c-9e82-8b8207c618ff.png" alt="CSCS Certification" className="w-full h-full object-contain" />
                         </div>
                       </div>
                       <div className="flex flex-col items-center">
-                        <div className="w-20 h-20">
+                        <div className="w-16 h-16 md:w-20 md:h-20">
                           <img src="/lovable-uploads/09961efd-a840-417f-a93a-2e2990b91489.png" alt="CMPC Certification" className="w-full h-full object-contain" />
                         </div>
                       </div>
@@ -85,12 +88,12 @@ const About = () => {
                     {/* Second row - 2 BCIA certifications */}
                     <div className="grid grid-cols-2 gap-4">
                       <div className="flex justify-center">
-                        <div className="w-24 h-24">
+                        <div className="w-20 h-20 md:w-24 md:h-24">
                           <img alt="BCIA Biofeedback Certification" className="w-full h-full object-contain" src="/lovable-uploads/b8e8e7d5-5980-475f-9534-3660f734bccf.png" />
                         </div>
                       </div>
                       <div className="flex justify-center">
-                        <div className="w-24 h-24">
+                        <div className="w-20 h-20 md:w-24 md:h-24">
                           <img alt="Golf Channel Academy" className="w-full h-full object-contain" src="/lovable-uploads/650394e1-2bf5-4354-b912-86a81648eaaa.png" />
                         </div>
                       </div>
@@ -102,6 +105,8 @@ const About = () => {
           </div>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default About;
