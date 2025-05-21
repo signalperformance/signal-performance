@@ -1,4 +1,3 @@
-
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useState, useEffect, useRef } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
@@ -189,48 +188,37 @@ const Membership = () => {
           </Tabs>
         </div>
 
-        {/* Mobile View - Enhanced with better visual separation */}
+        {/* Mobile View - Subtle visual separation */}
         <div className="md:hidden">
-          {/* Category Pills - Horizontal Scrolling with Enhanced Styling */}
-          <div className="mb-6 overflow-x-auto pb-3 no-scrollbar">
-            <div className="flex gap-3 min-w-full px-1 py-1">
+          {/* Category Pills - Horizontal Scrolling with Subtle Styling */}
+          <div className="mb-6 overflow-x-auto pb-2 no-scrollbar">
+            <div className="flex gap-2 min-w-full px-1">
               {Object.entries(categories).map(([key, category]) => {
                 const isActive = activeCategory === key;
                 const categoryColor = getCategoryColor(key);
                 
-                // Calculate a lighter version of the category color for backgrounds
+                // Calculate a very subtle background color
                 const rgbColor = categoryColor.replace('#', '').match(/../g)?.map(hex => parseInt(hex, 16));
                 const lightBgColor = rgbColor ? 
-                  `rgba(${rgbColor[0]}, ${rgbColor[1]}, ${rgbColor[2]}, 0.15)` : 
-                  'rgba(0,0,0,0.05)';
+                  `rgba(${rgbColor[0]}, ${rgbColor[1]}, ${rgbColor[2]}, 0.08)` : 
+                  'rgba(0,0,0,0.02)';
                 
                 return (
                   <div 
                     key={key} 
                     className={cn(
-                      "py-3 px-4 rounded-xl cursor-pointer transition-all flex-shrink-0 min-w-[80px]",
-                      "border-2 shadow-sm flex flex-col items-center justify-center",
+                      "py-2.5 px-4 rounded-lg cursor-pointer transition-all flex-shrink-0",
+                      "border-b-2 min-w-[70px] text-center",
                       isActive 
-                        ? "font-bold transform scale-105" 
-                        : "hover:bg-white/70"
+                        ? "bg-white shadow-sm font-medium" 
+                        : "hover:bg-white/50"
                     )}
                     onClick={() => setActiveCategory(key)}
                     style={{
                       backgroundColor: isActive ? 'white' : lightBgColor,
-                      borderColor: isActive ? categoryColor : 'transparent',
-                      boxShadow: isActive ? `0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)` : ''
+                      borderColor: isActive ? categoryColor : 'transparent'
                     }}
                   >
-                    <div 
-                      className={cn(
-                        "w-4 h-4 rounded-full mb-1",
-                        isActive ? "ring-2 ring-offset-2" : ""
-                      )}
-                      style={{ 
-                        backgroundColor: categoryColor,
-                        ringColor: isActive ? categoryColor : 'transparent',
-                      }}
-                    ></div>
                     <span className={cn(
                       "font-medium text-sm text-center block",
                       isActive ? "text-foreground" : "text-muted-foreground"
