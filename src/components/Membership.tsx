@@ -189,30 +189,51 @@ const Membership = () => {
           </Tabs>
         </div>
 
-        {/* Mobile View */}
+        {/* Mobile View - Enhanced with better visual separation */}
         <div className="md:hidden">
-          {/* Category Pills - Horizontal Scrolling */}
-          <div className="mb-6 overflow-x-auto pb-2 no-scrollbar">
-            <div className="flex gap-2 min-w-full">
+          {/* Category Pills - Horizontal Scrolling with Enhanced Styling */}
+          <div className="mb-6 overflow-x-auto pb-3 no-scrollbar">
+            <div className="flex gap-3 min-w-full px-1 py-1">
               {Object.entries(categories).map(([key, category]) => {
                 const isActive = activeCategory === key;
                 const categoryColor = getCategoryColor(key);
+                
+                // Calculate a lighter version of the category color for backgrounds
+                const rgbColor = categoryColor.replace('#', '').match(/../g)?.map(hex => parseInt(hex, 16));
+                const lightBgColor = rgbColor ? 
+                  `rgba(${rgbColor[0]}, ${rgbColor[1]}, ${rgbColor[2]}, 0.15)` : 
+                  'rgba(0,0,0,0.05)';
                 
                 return (
                   <div 
                     key={key} 
                     className={cn(
-                      "py-2 px-3 rounded-lg cursor-pointer transition-all flex-1 min-w-0",
+                      "py-3 px-4 rounded-xl cursor-pointer transition-all flex-shrink-0 min-w-[80px]",
+                      "border-2 shadow-sm flex flex-col items-center justify-center",
                       isActive 
-                        ? "bg-white shadow-md font-bold" 
-                        : "hover:bg-muted/40 bg-muted/20"
+                        ? "font-bold transform scale-105" 
+                        : "hover:bg-white/70"
                     )}
                     onClick={() => setActiveCategory(key)}
-                    style={isActive ? { borderBottom: `2px solid ${categoryColor}` } : {}}
+                    style={{
+                      backgroundColor: isActive ? 'white' : lightBgColor,
+                      borderColor: isActive ? categoryColor : 'transparent',
+                      boxShadow: isActive ? `0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)` : ''
+                    }}
                   >
+                    <div 
+                      className={cn(
+                        "w-4 h-4 rounded-full mb-1",
+                        isActive ? "ring-2 ring-offset-2" : ""
+                      )}
+                      style={{ 
+                        backgroundColor: categoryColor,
+                        ringColor: isActive ? categoryColor : 'transparent',
+                      }}
+                    ></div>
                     <span className={cn(
-                      "font-medium text-sm text-center block truncate",
-                      isActive ? "text-foreground font-bold" : "text-muted-foreground"
+                      "font-medium text-sm text-center block",
+                      isActive ? "text-foreground" : "text-muted-foreground"
                     )}>
                       {category.shortTitle}
                     </span>
