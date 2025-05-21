@@ -7,7 +7,6 @@ import Membership from "@/components/Membership";
 import AssessmentProcess from "@/components/AssessmentProcess";
 import Footer from "@/components/Footer";
 import WaitlistDialog from "@/components/WaitlistDialog";
-import WaitlistForm from "@/components/WaitlistForm";
 
 const Index = () => {
   useEffect(() => {
@@ -21,7 +20,6 @@ const Index = () => {
       <Membership />
       <AssessmentProcess />
       <About />
-      <WaitlistForm />
       <WaitlistDialog />
       <Footer />
     </div>
