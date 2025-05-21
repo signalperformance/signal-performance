@@ -1,3 +1,4 @@
+
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useState, useEffect, useRef } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
@@ -188,40 +189,30 @@ const Membership = () => {
           </Tabs>
         </div>
 
-        {/* Mobile View - Subtle visual separation */}
+        {/* Mobile View */}
         <div className="md:hidden">
-          {/* Category Pills - Horizontal Scrolling with Subtle Styling */}
+          {/* Category Pills - Horizontal Scrolling */}
           <div className="mb-6 overflow-x-auto pb-2 no-scrollbar">
-            <div className="flex gap-2 min-w-full px-1">
+            <div className="flex gap-2 min-w-full">
               {Object.entries(categories).map(([key, category]) => {
                 const isActive = activeCategory === key;
                 const categoryColor = getCategoryColor(key);
-                
-                // Calculate a very subtle background color
-                const rgbColor = categoryColor.replace('#', '').match(/../g)?.map(hex => parseInt(hex, 16));
-                const lightBgColor = rgbColor ? 
-                  `rgba(${rgbColor[0]}, ${rgbColor[1]}, ${rgbColor[2]}, 0.08)` : 
-                  'rgba(0,0,0,0.02)';
                 
                 return (
                   <div 
                     key={key} 
                     className={cn(
-                      "py-2.5 px-4 rounded-lg cursor-pointer transition-all flex-shrink-0",
-                      "border-b-2 min-w-[70px] text-center",
+                      "py-2 px-3 rounded-lg cursor-pointer transition-all flex-1 min-w-0",
                       isActive 
-                        ? "bg-white shadow-sm font-medium" 
-                        : "hover:bg-white/50"
+                        ? "bg-white shadow-md font-bold" 
+                        : "hover:bg-muted/40 bg-muted/20"
                     )}
                     onClick={() => setActiveCategory(key)}
-                    style={{
-                      backgroundColor: isActive ? 'white' : lightBgColor,
-                      borderColor: isActive ? categoryColor : 'transparent'
-                    }}
+                    style={isActive ? { borderBottom: `2px solid ${categoryColor}` } : {}}
                   >
                     <span className={cn(
-                      "font-medium text-sm text-center block",
-                      isActive ? "text-foreground" : "text-muted-foreground"
+                      "font-medium text-sm text-center block truncate",
+                      isActive ? "text-foreground font-bold" : "text-muted-foreground"
                     )}>
                       {category.shortTitle}
                     </span>
