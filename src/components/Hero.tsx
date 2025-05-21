@@ -3,7 +3,6 @@ import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ArrowRight } from 'lucide-react';
 import { useWaitlistDialog } from '@/hooks/useWaitlistDialog';
-
 const Hero = () => {
   const {
     t
@@ -11,14 +10,13 @@ const Hero = () => {
   const {
     openWaitlist
   } = useWaitlistDialog();
-  
   return <section id="home" className="relative h-screen flex flex-col items-center justify-center overflow-hidden">
       {/* Background - using a clean white background */}
       <div className="absolute inset-0 z-0 bg-white"></div>
       
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 text-center">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 text-signal-charcoal max-w-5xl mx-auto leading-tight whitespace-nowrap overflow-hidden text-ellipsis">{t('hero.headline')}</h1>
+        <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 text-signal-charcoal max-w-5xl mx-auto leading-tight">{t('hero.headline')}</h1>
         <p className="text-xl md:text-2xl mb-12 max-w-3xl mx-auto text-signal-charcoal/80">{t('hero.subheadline')}</p>
         <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
           <Button className="bg-signal-charcoal hover:bg-signal-charcoal/90 text-white font-medium px-8 py-6 text-lg flex items-center gap-2" size="lg" onClick={openWaitlist}>
