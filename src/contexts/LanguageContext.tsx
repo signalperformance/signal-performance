@@ -1,4 +1,3 @@
-
 import { createContext, useContext, useState, ReactNode } from 'react';
 
 type Language = 'en' | 'zh';
@@ -86,7 +85,7 @@ const translations = {
     'about.paragraph1': 'Signal Performance brings together physical conditioning, mental resilience, and technical skill development in one seamless experience.',
     'about.paragraph2': 'Our integrated approach recognizes that excellence in golf requires harmony between body, mind, and technique.',
     'about.paragraph3': 'We provide a sanctuary where elite golfers can focus on all aspects of their game without distraction.',
-
+    
     // Coach
     'about.coach.title': 'Your Coach',
     'about.coach.name': 'Dr. Noah Sachs',
@@ -161,7 +160,7 @@ const translations = {
     'membership.golf.tracking': '比賽數據分析',
     'membership.golf.tracking.description': '所有會員皆可使用數據分析軟體，使我們能夠深入了解您的比賽表現，並依此調整訓練重點。',
     
-    'membership.facility.title': '場館設施',
+    'membership.facility.title': '空間特色',
     'membership.facility.refresh': '放鬆與補給空間',
     'membership.facility.refresh.description': '包括現代化淋浴和附有免費與會員專屬價格選項的小廚房。',
     'membership.facility.atmosphere': '私人化訓練環境',

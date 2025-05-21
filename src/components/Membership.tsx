@@ -80,7 +80,7 @@ const Membership = () => {
     },
     other: {
       title: t('membership.facility.title'),
-      shortTitle: language === 'zh' ? '其他' : 'Other',
+      shortTitle: language === 'zh' ? '空間特色' : 'Facility',
       items: [{
         title: t('membership.facility.refresh'),
         description: t('membership.facility.refresh.description')
