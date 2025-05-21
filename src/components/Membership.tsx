@@ -1,7 +1,10 @@
+
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useState, useEffect, useRef } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
+import { Check } from "lucide-react";
 
 const Membership = () => {
   const {
@@ -103,70 +106,161 @@ const Membership = () => {
     }
   };
   
-  return (
-    <section id="membership" className="section-padding bg-black text-white" ref={sectionRef}>
+  return <section id="membership" className="section-padding bg-signal-light-gray" ref={sectionRef}>
       <div className="container mx-auto container-padding">
         <div className="text-center mb-8">
-          <h2 className="text-3xl md:text-4xl font-bold mb-2 font-lora">Membership Options</h2>
-          <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
-            Explore our membership tiers designed to enhance your golf experience, from beginners to seasoned pros.
-          </p>
+          <h2 className="text-3xl md:text-4xl font-bold mb-1 font-lora">{t('membership.title')}</h2>
+          <p className="text-xl text-muted-foreground font-medium">{t('membership.price')}</p>
+          <p className="text-sm text-muted-foreground italic mt-1">{t('membership.subtitle')}</p>
         </div>
         
-        {/* Tab Navigation */}
-        <div className="overflow-x-auto mb-8">
-          <div className="flex border-b border-gray-700 min-w-max">
-            {Object.entries(categories).map(([key, category]) => {
-              const isActive = activeCategory === key;
-              return (
-                <button
-                  key={key}
-                  onClick={() => setActiveCategory(key)}
-                  className={cn(
-                    "px-6 py-3 font-medium text-lg transition-colors relative whitespace-nowrap",
-                    isActive 
-                      ? "text-white" 
-                      : "text-gray-400 hover:text-gray-300"
-                  )}
-                >
-                  {key === 'physical' ? 'Physical Training' : 
-                   key === 'mental' ? 'Mental Training' : 
-                   key === 'golf' ? 'Golf Training' : 
-                   'Facility Features'}
-                  {isActive && (
-                    <span className="absolute bottom-0 left-0 w-full h-0.5 bg-white"></span>
-                  )}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-        
-        {/* Content Area */}
-        <div>
-          {/* Section Title */}
-          <h3 className="text-2xl font-bold mb-8">
-            {activeCategory === 'physical' ? 'Physical Training' : 
-             activeCategory === 'mental' ? 'Mental Training' : 
-             activeCategory === 'golf' ? 'Golf Training' : 
-             'Facility Features'}
-          </h3>
-          
-          {/* Items Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {categories[activeCategory as keyof typeof categories].items.map((item, index) => (
-              <Card key={index} className="bg-gray-900 border-gray-800 overflow-hidden">
-                <CardContent className="p-6">
-                  <h4 className="text-xl font-bold mb-2">{item.title}</h4>
-                  <p className="text-gray-400">{item.description}</p>
-                </CardContent>
-              </Card>
+        {/* Desktop View - Enhanced tabs with better visual separation */}
+        <div className="hidden md:block">
+          <Tabs value={activeCategory} onValueChange={setActiveCategory} className="w-full">
+            <TabsList className="flex justify-center mb-6 rounded-xl p-1.5 bg-muted/20 shadow-sm w-full max-w-3xl mx-auto">
+              {Object.entries(categories).map(([key, category]) => {
+                const isActive = activeCategory === key;
+                const categoryColor = getCategoryColor(key);
+                
+                return (
+                  <TabsTrigger 
+                    key={key} 
+                    value={key} 
+                    className={cn(
+                      "py-3 px-6 rounded-lg cursor-pointer min-w-[120px] mx-1 border-b-2",
+                      isActive 
+                        ? "bg-white shadow-md border-b-2 font-bold" 
+                        : "hover:bg-muted/40 border-transparent"
+                    )}
+                    style={isActive ? { 
+                      borderColor: categoryColor,
+                      boxShadow: `0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06), 0 0 0 2px rgba(${categoryColor.replace('#', '').match(/../g)?.map(hex => parseInt(hex, 16)).join(', ')}, 0.1)` 
+                    } : {}}
+                  >
+                    <div className="flex items-center justify-center space-x-2">
+                      <div 
+                        className={cn(
+                          "w-3 h-3 rounded-full",
+                          isActive ? "outline outline-2 outline-offset-2" : ""
+                        )}
+                        style={{ 
+                          backgroundColor: categoryColor,
+                          outlineColor: isActive ? categoryColor : 'transparent',
+                        }}
+                      ></div>
+                      <span className={isActive ? "text-foreground font-bold" : "text-muted-foreground"}>
+                        {category.title}
+                      </span>
+                    </div>
+                  </TabsTrigger>
+                );
+              })}
+            </TabsList>
+
+            {/* Content for each tab */}
+            {Object.entries(categories).map(([key, category]) => (
+              <TabsContent key={key} value={key} className="mt-0">
+                <Card className="bg-white shadow-lg rounded-xl overflow-hidden">
+                  <CardContent className="p-8">
+                    <h3 className="text-2xl font-lora mb-6 font-medium">{category.title}</h3>
+                    
+                    <div className="grid gap-6">
+                      {category.items.map((item, index) => (
+                        <div key={index} className="flex items-start gap-4 pb-5 border-b last:border-0 last:pb-0">
+                          <div 
+                            className="w-8 h-8 rounded-full flex items-center justify-center text-white mt-0.5 flex-shrink-0" 
+                            style={{ backgroundColor: getCategoryColor(key) }}
+                          >
+                            <Check className="h-4 w-4" />
+                          </div>
+                          <div>
+                            <h4 className="font-medium text-lg">{item.title}</h4>
+                            <p className="text-muted-foreground mt-1">
+                              {item.description}
+                            </p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </TabsContent>
             ))}
+          </Tabs>
+        </div>
+
+        {/* Mobile View */}
+        <div className="md:hidden">
+          {/* Category Pills - Horizontal Scrolling */}
+          <div className="mb-6 overflow-x-auto pb-2 no-scrollbar">
+            <div className="flex gap-0 min-w-full bg-muted/10 rounded-lg p-0.5">
+              {Object.entries(categories).map(([key, category], index) => {
+                const isActive = activeCategory === key;
+                const categoryColor = getCategoryColor(key);
+                
+                return (
+                  <>
+                    {index > 0 && (
+                      <div className="self-stretch flex items-center px-0.5">
+                        <div className="h-8 w-px bg-border/40"></div>
+                      </div>
+                    )}
+                    <div 
+                      key={key} 
+                      className={cn(
+                        "py-2 px-3 cursor-pointer transition-all flex-1 min-w-0 relative",
+                        isActive 
+                          ? "bg-white/50 font-bold" 
+                          : "hover:bg-muted/20"
+                      )}
+                      onClick={() => setActiveCategory(key)}
+                    >
+                      {isActive && (
+                        <div 
+                          className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full" 
+                          style={{ backgroundColor: categoryColor }}
+                        ></div>
+                      )}
+                      <span className={cn(
+                        "font-medium text-sm text-center block truncate",
+                        isActive ? "text-foreground font-bold" : "text-muted-foreground"
+                      )}>
+                        {category.shortTitle}
+                      </span>
+                    </div>
+                  </>
+                );
+              })}
+            </div>
           </div>
+          
+          {/* Content Card */}
+          <Card className="bg-white shadow-md rounded-xl overflow-hidden">
+            <CardContent className="p-6">
+              <h3 className="text-xl font-lora mb-4 font-medium">{categories[activeCategory as keyof typeof categories].title}</h3>
+              
+              <div className="space-y-6">
+                {categories[activeCategory as keyof typeof categories].items.map((item, index) => (
+                  <div key={index} className="flex items-start gap-3 pb-4 border-b last:border-0 last:pb-0">
+                    <div 
+                      className="w-6 h-6 rounded-full flex items-center justify-center text-white mt-0.5 flex-shrink-0" 
+                      style={{ backgroundColor: getCategoryColor(activeCategory) }}
+                    >
+                      <Check className="h-3.5 w-3.5" />
+                    </div>
+                    <div>
+                      <h4 className="font-medium text-base">{item.title}</h4>
+                      <p className="text-muted-foreground text-sm mt-1">
+                        {item.description}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Membership;
