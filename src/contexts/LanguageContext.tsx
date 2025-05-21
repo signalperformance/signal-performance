@@ -20,8 +20,8 @@ const translations = {
     'nav.login': 'Member Login',
     
     // Hero
-    'hero.headline': 'Where Pro Golfers Train to Perform',
-    'hero.subheadline': 'Integrated physical, mental, and skill training in one private facility.',
+    'hero.headline': 'An Integrated Training Space for Pro Golfers',
+    'hero.subheadline': 'Physical, mental, and skill training — all in one professional facility.',
     'hero.cta.waitlist': 'Join the Waitlist',
     'hero.cta.membership': 'Explore Membership',
     
@@ -127,7 +127,7 @@ const translations = {
     
     // Hero
     'hero.headline': '高爾夫選手的整合式訓練空間',
-    'hero.subheadline': '整合體能、心理與技術訓練於一個專業空間',
+    'hero.subheadline': '體能、心理與技術訓練集中於一個專業空間',
     'hero.cta.waitlist': '加入候補名單',
     'hero.cta.membership': '了解會員方案',
     
