@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
-import { Check } from "lucide-react";
+import { Check, Separator } from "lucide-react";
 
 const Membership = () => {
   const {
@@ -193,30 +193,42 @@ const Membership = () => {
         <div className="md:hidden">
           {/* Category Pills - Horizontal Scrolling */}
           <div className="mb-6 overflow-x-auto pb-2 no-scrollbar">
-            <div className="flex gap-2 min-w-full">
-              {Object.entries(categories).map(([key, category]) => {
+            <div className="flex gap-0 min-w-full bg-muted/10 rounded-lg p-0.5">
+              {Object.entries(categories).map(([key, category], index) => {
                 const isActive = activeCategory === key;
                 const categoryColor = getCategoryColor(key);
                 
                 return (
-                  <div 
-                    key={key} 
-                    className={cn(
-                      "py-2 px-3 rounded-lg cursor-pointer transition-all flex-1 min-w-0",
-                      isActive 
-                        ? "bg-white shadow-md font-bold" 
-                        : "hover:bg-muted/40 bg-muted/20"
+                  <>
+                    {index > 0 && (
+                      <div className="self-stretch flex items-center px-0.5">
+                        <div className="h-8 w-px bg-border/40"></div>
+                      </div>
                     )}
-                    onClick={() => setActiveCategory(key)}
-                    style={isActive ? { borderBottom: `2px solid ${categoryColor}` } : {}}
-                  >
-                    <span className={cn(
-                      "font-medium text-sm text-center block truncate",
-                      isActive ? "text-foreground font-bold" : "text-muted-foreground"
-                    )}>
-                      {category.shortTitle}
-                    </span>
-                  </div>
+                    <div 
+                      key={key} 
+                      className={cn(
+                        "py-2 px-3 cursor-pointer transition-all flex-1 min-w-0 relative",
+                        isActive 
+                          ? "bg-white/50 font-bold" 
+                          : "hover:bg-muted/20"
+                      )}
+                      onClick={() => setActiveCategory(key)}
+                    >
+                      {isActive && (
+                        <div 
+                          className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full" 
+                          style={{ backgroundColor: categoryColor }}
+                        ></div>
+                      )}
+                      <span className={cn(
+                        "font-medium text-sm text-center block truncate",
+                        isActive ? "text-foreground font-bold" : "text-muted-foreground"
+                      )}>
+                        {category.shortTitle}
+                      </span>
+                    </div>
+                  </>
                 );
               })}
             </div>
