@@ -11,7 +11,7 @@ const Philosophy = () => {
         {/* Signal wave graphic - responsive images for different screen sizes */}
         <div className="w-full mb-12 relative h-36 md:h-32 flex items-center justify-center">
           {/* Mobile image (visible on smaller screens) */}
-          <img alt="Signal wave with red spike" className="w-full max-w-5xl h-auto object-contain md:hidden" src="/lovable-uploads/43c83554-cc61-4cc0-9dfd-783d9edd9801.png" />
+          <img alt="Signal wave with red spike" className="w-full max-w-5xl h-auto object-contain md:hidden" src="/lovable-uploads/614bffe2-0ec7-4876-9688-d9dd206fc83e.png" />
           
           {/* Desktop image (hidden on mobile, visible on md screens and up) */}
           <img alt="Signal wave with red spike" className="w-full max-w-5xl h-auto object-contain hidden md:block" src="/lovable-uploads/b4b4aa1e-4962-4b31-b419-80efa90220ff.png" />
