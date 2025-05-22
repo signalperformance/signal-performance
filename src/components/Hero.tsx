@@ -17,6 +17,23 @@ const Hero = () => {
   // For typewriter animation
   const [displayText, setDisplayText] = useState('');
   const [currentPhaseIndex, setCurrentPhaseIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  
+  // Check for mobile device
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    // Set initial value
+    checkIfMobile();
+    
+    // Add event listener for window resize
+    window.addEventListener('resize', checkIfMobile);
+    
+    // Clean up
+    return () => window.removeEventListener('resize', checkIfMobile);
+  }, []);
   
   // Text phases to display sequentially - different for each language
   const textPhases = language === 'zh' 
@@ -29,9 +46,9 @@ const Hero = () => {
     setCurrentPhaseIndex(0);
   }, [language]);
   
-  // Typewriter effect
+  // Typewriter effect - only on desktop
   useEffect(() => {
-    if (currentPhaseIndex >= textPhases.length) return;
+    if (isMobile || currentPhaseIndex >= textPhases.length) return;
     
     const nextPhrase = textPhases[currentPhaseIndex];
     let currentText = '';
@@ -58,7 +75,12 @@ const Hero = () => {
     }, language === 'zh' ? 100 : 50); // Slower typing speed for Chinese characters
     
     return () => clearInterval(typingInterval);
-  }, [currentPhaseIndex, language]);
+  }, [currentPhaseIndex, language, isMobile]);
+  
+  // Generate the complete text for mobile display
+  const getCompleteText = () => {
+    return textPhases.join(language === 'zh' ? '' : ' ');
+  };
   
   // Function to render headline with line break for Chinese
   const renderHeadline = () => {
@@ -88,7 +110,7 @@ const Hero = () => {
           {renderHeadline()}
         </h1>
         <p className="text-xl md:text-2xl mb-12 max-w-3xl mx-auto text-signal-charcoal/80 min-h-[2rem]">
-          {displayText}
+          {isMobile ? getCompleteText() : displayText}
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
           <Button className="bg-signal-charcoal hover:bg-signal-charcoal/90 text-white font-medium px-8 py-6 text-lg flex items-center gap-2" size="lg" onClick={openWaitlist}>
