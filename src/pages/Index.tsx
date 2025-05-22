@@ -10,7 +10,7 @@ import WaitlistDialog from "@/components/WaitlistDialog";
 
 const Index = () => {
   useEffect(() => {
-    document.title = "Signal Performance - Elite Golf Training";
+    document.title = "Signal Performance";
   }, []);
   
   return (
