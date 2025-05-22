@@ -26,18 +26,24 @@ const Hero = () => {
     "— all in one place"
   ];
   
+  // Reset animation when language changes
+  useEffect(() => {
+    setDisplayText('');
+    setCurrentPhaseIndex(0);
+  }, [language]);
+  
   // Typewriter effect
   useEffect(() => {
     if (currentPhaseIndex >= textPhases.length) return;
     
-    let currentText = displayText;
+    const nextPhrase = textPhases[currentPhaseIndex];
+    let currentText = '';
     
-    // Add a space before next phase if not the first one
-    if (currentPhaseIndex > 0 && !currentText.endsWith(' ')) {
-      currentText += ' ';
+    // Add content from previous phases with spaces between
+    for (let i = 0; i < currentPhaseIndex; i++) {
+      currentText += textPhases[i] + ' ';
     }
     
-    const nextPhrase = textPhases[currentPhaseIndex];
     let charIndex = 0;
     
     const typingInterval = setInterval(() => {
@@ -46,14 +52,16 @@ const Hero = () => {
         charIndex++;
       } else {
         clearInterval(typingInterval);
-        setTimeout(() => {
-          setCurrentPhaseIndex(prevIndex => prevIndex + 1);
-        }, 500); // 0.5 second delay between word groups
+        if (currentPhaseIndex < textPhases.length - 1) {
+          setTimeout(() => {
+            setCurrentPhaseIndex(prevIndex => prevIndex + 1);
+          }, 500); // 0.5 second delay between word groups
+        }
       }
     }, 50); // Speed of typing each character
     
     return () => clearInterval(typingInterval);
-  }, [currentPhaseIndex, displayText]);
+  }, [currentPhaseIndex]);
   
   // Function to render headline with line break for Chinese
   const renderHeadline = () => {
