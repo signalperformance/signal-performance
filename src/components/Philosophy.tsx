@@ -13,36 +13,41 @@ const Philosophy = () => {
         {/* Signal wave graphic */}
         <div className="w-full mb-12 relative h-40 md:h-48 overflow-hidden">
           <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1200 200" preserveAspectRatio="none">
-            {/* Gray sine wave background */}
+            {/* Gray sine wave background - more smooth and continuous */}
             <path 
               d="M0,100 
-                 C30,85 60,115 90,100 
-                 C120,85 150,115 180,100 
-                 C210,85 240,115 270,100 
-                 C300,85 330,115 360,100 
-                 C390,85 420,115 450,100 
-                 C480,85 510,115 540,100 
-                 C570,85 600,115 630,100 
-                 C660,85 690,115 720,100 
-                 C750,85 780,115 810,100 
-                 C840,85 870,115 900,100 
-                 C930,85 960,115 990,100 
-                 C1020,85 1050,115 1080,100 
-                 C1110,85 1140,115 1170,100 
-                 C1200,85 1230,115 1260,100"
+                 C20,110 40,90 60,100 
+                 C80,110 100,90 120,100 
+                 C140,110 160,90 180,100
+                 C200,110 220,90 240,100
+                 C260,110 280,90 300,100
+                 C320,110 340,90 360,100
+                 C380,110 400,90 420,100
+                 C440,110 460,90 480,100
+                 C500,110 520,90 540,100
+                 C560,110 580,90 600,100
+                 C620,110 640,90 660,100
+                 C680,110 700,90 720,100
+                 C740,110 760,90 780,100
+                 C800,110 820,90 840,100
+                 C860,110 880,90 900,100
+                 C920,110 940,90 960,100
+                 C980,110 1000,90 1020,100
+                 C1040,110 1060,90 1080,100
+                 C1100,110 1120,90 1140,100
+                 C1160,110 1180,90 1200,100"
               fill="none"
               stroke="#D1D5DB"
               strokeWidth="2"
             />
             
-            {/* Red spike in the center */}
+            {/* Red spike in the center - taller and more prominent */}
             <path 
-              d="M585,100 L600,10 L615,100"
+              d="M590,100 L600,20 L610,100"
               fill="none"
               stroke="#EF4444"
-              strokeWidth="3"
+              strokeWidth="2.5"
               strokeLinecap="round"
-              strokeLinejoin="round"
             />
           </svg>
         </div>
