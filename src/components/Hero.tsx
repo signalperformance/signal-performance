@@ -18,13 +18,10 @@ const Hero = () => {
   const [displayText, setDisplayText] = useState('');
   const [currentPhaseIndex, setCurrentPhaseIndex] = useState(0);
   
-  // Text phases to display sequentially
-  const textPhases = [
-    "Physical,",
-    "mental,",
-    "and skill training",
-    "— all in one place"
-  ];
+  // Text phases to display sequentially - different for each language
+  const textPhases = language === 'zh' 
+    ? ["體能、", "心理與", "技術訓練", "集中於一個專業空間"] 
+    : ["Physical,", "mental,", "and skill training", "— all in one place"];
   
   // Reset animation when language changes
   useEffect(() => {
@@ -41,7 +38,7 @@ const Hero = () => {
     
     // Add content from previous phases with spaces between
     for (let i = 0; i < currentPhaseIndex; i++) {
-      currentText += textPhases[i] + ' ';
+      currentText += textPhases[i] + (language === 'zh' ? '' : ' ');
     }
     
     let charIndex = 0;
@@ -61,7 +58,7 @@ const Hero = () => {
     }, 50); // Speed of typing each character
     
     return () => clearInterval(typingInterval);
-  }, [currentPhaseIndex]);
+  }, [currentPhaseIndex, language]);
   
   // Function to render headline with line break for Chinese
   const renderHeadline = () => {
