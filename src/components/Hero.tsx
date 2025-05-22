@@ -55,7 +55,7 @@ const Hero = () => {
           }, 500); // 0.5 second delay between word groups
         }
       }
-    }, 50); // Speed of typing each character
+    }, language === 'zh' ? 100 : 50); // Slower typing speed for Chinese characters
     
     return () => clearInterval(typingInterval);
   }, [currentPhaseIndex, language]);
