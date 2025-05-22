@@ -26,7 +26,7 @@ const Navbar = () => {
   return <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-md py-2' : 'bg-white py-4'}`}>
       <div className="container mx-auto px-4 flex justify-between items-center">
         <a href="#home" className="flex items-center gap-2">
-          <span className="text-signal-charcoal text-xl font-playfair font-bold">Signal Performance</span>
+          <span className="text-signal-charcoal text-xl md:text-2xl font-playfair font-bold">Signal Performance</span>
         </a>
 
         <div className="flex items-center space-x-2">

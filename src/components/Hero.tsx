@@ -14,9 +14,6 @@ const Hero = () => {
     openWaitlist
   } = useWaitlistDialog();
   
-  // For typewriter animation
-  const [displayText, setDisplayText] = useState('');
-  const [currentPhaseIndex, setCurrentPhaseIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   
   // Check for mobile device
@@ -35,49 +32,12 @@ const Hero = () => {
     return () => window.removeEventListener('resize', checkIfMobile);
   }, []);
   
-  // Text phases to display sequentially - different for each language
+  // Text phases for different languages
   const textPhases = language === 'zh' 
     ? ["體能、", "心理與", "技術訓練", "集中於一個專業空間"] 
     : ["Physical,", "mental,", "and skill training", "— all in one place"];
   
-  // Reset animation when language changes
-  useEffect(() => {
-    setDisplayText('');
-    setCurrentPhaseIndex(0);
-  }, [language]);
-  
-  // Typewriter effect - only on desktop
-  useEffect(() => {
-    if (isMobile || currentPhaseIndex >= textPhases.length) return;
-    
-    const nextPhrase = textPhases[currentPhaseIndex];
-    let currentText = '';
-    
-    // Add content from previous phases with spaces between
-    for (let i = 0; i < currentPhaseIndex; i++) {
-      currentText += textPhases[i] + (language === 'zh' ? '' : ' ');
-    }
-    
-    let charIndex = 0;
-    
-    const typingInterval = setInterval(() => {
-      if (charIndex < nextPhrase.length) {
-        setDisplayText(currentText + nextPhrase.substring(0, charIndex + 1));
-        charIndex++;
-      } else {
-        clearInterval(typingInterval);
-        if (currentPhaseIndex < textPhases.length - 1) {
-          setTimeout(() => {
-            setCurrentPhaseIndex(prevIndex => prevIndex + 1);
-          }, 500); // 0.5 second delay between word groups
-        }
-      }
-    }, language === 'zh' ? 100 : 50); // Slower typing speed for Chinese characters
-    
-    return () => clearInterval(typingInterval);
-  }, [currentPhaseIndex, language, isMobile]);
-  
-  // Generate the complete text for mobile display
+  // Function to get the complete text
   const getCompleteText = () => {
     return textPhases.join(language === 'zh' ? '' : ' ');
   };
@@ -110,8 +70,8 @@ const Hero = () => {
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 text-signal-charcoal max-w-5xl mx-auto leading-tight">
           {renderHeadline()}
         </h1>
-        <p className="text-lg sm:text-xl md:text-2xl mb-8 sm:mb-12 max-w-3xl mx-auto text-signal-charcoal/80 min-h-[2rem]">
-          {isMobile ? getCompleteText() : displayText}
+        <p className="text-lg sm:text-xl md:text-3xl mb-8 sm:mb-12 max-w-3xl mx-auto text-signal-charcoal/80 min-h-[2rem]">
+          {getCompleteText()}
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
           <Button 
