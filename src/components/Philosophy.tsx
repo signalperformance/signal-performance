@@ -26,7 +26,7 @@ const Philosophy = () => {
           
           <Card className="border rounded-lg p-6">
             <CardTitle className="text-xl md:text-2xl font-lora mb-4 text-signal-charcoal">Measure, Don't Guess</CardTitle>
-            <p className="text-muted-foreground">We take a data-informed, evidence-based approach to training—no chasing trends and no guesswork. But we don’t blindly follow the numbers. Data guides our decisions, it doesn’t dictate them. We combine meaningful metrics with the experience and judgment of qualified professionals to deliver training that’s both effective and individualized.</p>
+            <p className="text-muted-foreground">We take a data-informed, evidence-based approach to training—with no guesswork. But we don’t blindly follow the numbers. Data guides our decisions, it doesn’t dictate them. We combine meaningful metrics with the experience and judgment of qualified professionals to deliver training that’s both effective and individualized.</p>
           </Card>
           
           <Card className="border rounded-lg p-6">
