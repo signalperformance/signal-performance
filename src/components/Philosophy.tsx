@@ -14,7 +14,7 @@ const Philosophy = () => {
           <img alt="Signal wave with red spike" className="w-full max-w-5xl h-auto object-contain md:hidden" src="/lovable-uploads/43c83554-cc61-4cc0-9dfd-783d9edd9801.png" />
           
           {/* Desktop image (hidden on mobile, visible on md screens and up) */}
-          <img src="/lovable-uploads/9823eeb3-9e86-4736-b87b-ec93c5b38202.png" alt="Signal wave with red spike" className="w-full max-w-5xl h-auto object-contain hidden md:block" />
+          <img alt="Signal wave with red spike" className="w-full max-w-5xl h-auto object-contain hidden md:block" src="/lovable-uploads/b4b4aa1e-4962-4b31-b419-80efa90220ff.png" />
         </div>
         
         {/* Philosophy cards - horizontal layout on desktop */}
