@@ -31,7 +31,7 @@ const Philosophy = () => {
           
           <Card className="border rounded-lg p-6">
             <CardTitle className="text-xl md:text-2xl font-lora mb-4 text-signal-charcoal">Integrated Training</CardTitle>
-            <p className="text-muted-foreground">Performance isn’t about one thing—it’s about the system. Mind, body, and skill are deeply connected and can’t be separated. That’s why our training is fully integrated, targeting all three in unison. Because true performance gains come from the interaction of all parts, not isolated improvement.</p>
+            <p className="text-muted-foreground">There’s no single key to performance. It’s a system—complex, dynamic, and made up of many moving parts. Our mind and body interact constantly, and skill draws on both. That’s why we don’t isolate them. Our integrated approach trains the physical, mental, and skill components together—within one cohesive, performance-driven program.</p>
           </Card>
         </div>
       </div>
