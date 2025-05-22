@@ -1,61 +1,10 @@
 
-import { useState, useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { ChartContainer, ChartTooltip } from '@/components/ui/chart';
-import { 
-  Area,
-  XAxis, 
-  YAxis, 
-  AreaChart,
-  ResponsiveContainer
-} from 'recharts';
 
 const WhySignalPerformance = () => {
   const { t } = useLanguage();
-  const [animated, setAnimated] = useState(false);
-
-  // Generate data points for the signal-to-noise graphic
-  const generateData = () => {
-    // Create baseline noise
-    const data = Array(100).fill(null).map((_, i) => ({
-      index: i,
-      noise: Math.random() * 0.5 + 0.1,
-      signal: 0
-    }));
-    
-    // Add signal spike around index 30
-    for (let i = 28; i < 35; i++) {
-      if (i === 30) {
-        data[i].signal = animated ? 4 : 0; // The peak
-      } else if (i === 29 || i === 31) {
-        data[i].signal = animated ? 2 : 0; // Build up and down
-      } else if (i === 28 || i === 32) {
-        data[i].signal = animated ? 1 : 0; // Smaller shoulders
-      } else {
-        data[i].signal = animated ? 0.5 : 0; // Smallest shoulders
-      }
-    }
-    
-    return data;
-  };
-  
-  const [data, setData] = useState(generateData());
-  
-  // Run animation when component mounts
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setAnimated(true);
-    }, 500);
-    
-    return () => clearTimeout(timer);
-  }, []);
-  
-  // Update data when animation state changes
-  useEffect(() => {
-    setData(generateData());
-  }, [animated]);
   
   const cards = [
     {
@@ -95,60 +44,59 @@ const WhySignalPerformance = () => {
         </div>
         
         <div className="flex flex-col lg:flex-row gap-8 items-center">
-          {/* Signal-to-Noise Graphic */}
-          <div className="w-full lg:w-1/3 h-64 md:h-96">
-            <div className="bg-white p-4 rounded-lg shadow-sm h-full">
-              <ChartContainer 
-                config={{ 
-                  signal: { color: "#ff3333" }, 
-                  noise: { color: "#cccccc" } 
-                }} 
-                className="h-full"
-              >
-                <AreaChart data={data} margin={{ top: 20, right: 20, bottom: 20, left: 0 }}>
-                  <defs>
-                    <linearGradient id="signalGradient" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#ff3333" stopOpacity={0.8}/>
-                      <stop offset="95%" stopColor="#ff3333" stopOpacity={0.2}/>
-                    </linearGradient>
-                    <linearGradient id="noiseGradient" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#cccccc" stopOpacity={0.8}/>
-                      <stop offset="95%" stopColor="#cccccc" stopOpacity={0.2}/>
-                    </linearGradient>
-                  </defs>
-                  <XAxis hide={true} />
-                  <YAxis hide={true} />
-                  <ChartTooltip />
-                  <Area 
-                    type="monotone" 
-                    dataKey="noise" 
-                    stroke="#cccccc" 
-                    fillOpacity={1} 
-                    fill="url(#noiseGradient)" 
-                    name="Noise"
-                    animationDuration={800}
-                  />
-                  <Area 
-                    type="monotone" 
-                    dataKey="signal" 
-                    stroke="#ff3333" 
-                    fillOpacity={1} 
-                    fill="url(#signalGradient)" 
-                    name="Signal"
-                    animationDuration={1500}
-                    isAnimationActive={true}
-                  />
-                </AreaChart>
-              </ChartContainer>
+          {/* Static Signal-to-Noise Graphic */}
+          <div className="w-full lg:w-1/3">
+            <div className="bg-white p-4 rounded-lg shadow-sm h-full overflow-hidden">
+              <div className="relative h-64 md:h-80">
+                {/* Gray background noise */}
+                <div className="absolute inset-0 flex items-center">
+                  <svg viewBox="0 0 400 200" className="w-full h-full" preserveAspectRatio="none">
+                    <path 
+                      d="M0,100 Q10,110 20,95 T40,105 T60,90 T80,100 T100,85 T120,95 T140,90 T160,100 T180,95 T200,105 T220,90 T240,100 T260,95 T280,85 T300,100 T320,90 T340,105 T360,95 T380,100 T400,90" 
+                      fill="none" 
+                      stroke="#cccccc" 
+                      strokeWidth="2" 
+                    />
+                    <path 
+                      d="M0,100 Q10,90 20,105 T40,95 T60,110 T80,100 T100,115 T120,105 T140,110 T160,100 T180,105 T200,95 T220,110 T240,100 T260,105 T280,115 T300,100 T320,110 T340,95 T360,105 T380,100 T400,110" 
+                      fill="none" 
+                      stroke="#cccccc" 
+                      strokeWidth="2" 
+                    />
+                    <path 
+                      d="M0,100 Q20,105 40,95 T80,105 T120,90 T160,105 T200,95 T240,105 T280,90 T320,105 T360,95 T400,100" 
+                      fill="rgba(204,204,204,0.2)" 
+                      strokeWidth="0" 
+                    />
+                  </svg>
+                </div>
+                
+                {/* Red signal peak */}
+                <div className="absolute inset-0 flex items-center">
+                  <svg viewBox="0 0 400 200" className="w-full h-full" preserveAspectRatio="none">
+                    <path 
+                      d="M180,100 L190,100 L195,90 L200,50 L205,90 L210,100 L220,100" 
+                      fill="none" 
+                      stroke="#ff3333" 
+                      strokeWidth="2" 
+                    />
+                    <path 
+                      d="M180,100 L190,100 L195,90 L200,50 L205,90 L210,100 L220,100 L220,100 L210,100 L195,100 L180,100" 
+                      fill="rgba(255,51,51,0.2)" 
+                      strokeWidth="0" 
+                    />
+                  </svg>
+                </div>
+              </div>
               
               {/* Labels */}
               <div className="flex justify-between mt-2">
                 <div></div> {/* Empty div to push "SIGNAL" to the middle */}
-                <div className="font-bold">SIGNAL</div>
+                <div className="font-bold text-center">SIGNAL</div>
+                <div></div>
               </div>
-              <div className="flex justify-between mt-0">
-                <div></div> {/* Empty div to push "NOISE" to the right */}
-                <div className="text-gray-500">NOISE</div>
+              <div className="flex justify-end mt-0">
+                <div className="text-gray-500 mr-4">NOISE</div>
               </div>
             </div>
           </div>
