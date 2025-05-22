@@ -21,29 +21,17 @@ const Philosophy = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <Card className="border rounded-lg p-6">
             <CardTitle className="text-xl md:text-2xl font-lora mb-4 text-signal-charcoal">Signal Over Noise</CardTitle>
-            <p className="text-muted-foreground">
-              Our name comes from the concept of the signal-to-noise ratio—a principle in data science and engineering. 
-              The "signal" is meaningful, actionable information. The "noise" is everything that gets in the way. 
-              We apply this mindset to golf performance by identifying what matters most and cutting the rest.
-            </p>
+            <p className="text-muted-foreground">Our name comes from the concept of the signal-to-noise ratio—a principle in data science and engineering. The "signal" is meaningful, actionable information. The "noise" is everything that gets in the way. We apply this mindset to golf performance by identifying what matters most and cutting the rest.</p>
           </Card>
           
           <Card className="border rounded-lg p-6">
             <CardTitle className="text-xl md:text-2xl font-lora mb-4 text-signal-charcoal">Measure, Don't Guess</CardTitle>
-            <p className="text-muted-foreground">
-              We take a data-informed, evidence-based approach to golf performance. 
-              Not chasing trends. Not relying on guesswork. Just smart, effective programming 
-              that respects your time and delivers real results.
-            </p>
+            <p className="text-muted-foreground">We take a data-informed, evidence-based approach to training. That means no chasing trends, no relying on guesswork, and no wasted effort. Instead, we use smart, efficient methods guided by meaningful metrics—so every decision supports your performance and respects your time.</p>
           </Card>
           
           <Card className="border rounded-lg p-6">
             <CardTitle className="text-xl md:text-2xl font-lora mb-4 text-signal-charcoal">Integrated Training</CardTitle>
-            <p className="text-muted-foreground">
-              Performance isn't driven by one thing—it's the result of many things working together. 
-              We treat mind, body, and skill as a single, interconnected system. 
-              That's why our training is truly integrated: it reflects the way performance actually works.
-            </p>
+            <p className="text-muted-foreground">Performance isn’t about one thing—it’s about the system. Mind, body, and skill are deeply connected and can’t be separated. That’s why our training is fully integrated, targeting all three in unison. Because true performance gains come from the interaction of all parts, not isolated improvement.</p>
           </Card>
         </div>
       </div>
