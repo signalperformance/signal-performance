@@ -1,30 +1,20 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useLanguage } from '@/contexts/LanguageContext';
-
 const Philosophy = () => {
-  const { t } = useLanguage();
-  
-  return (
-    <section id="philosophy" className="section-padding bg-white">
+  const {
+    t
+  } = useLanguage();
+  return <section id="philosophy" className="section-padding bg-white">
       <div className="container mx-auto container-padding">
         <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center font-lora">Our Philosophy</h2>
         
         {/* Signal wave graphic - responsive images for different screen sizes */}
         <div className="w-full mb-12 relative h-36 md:h-32 flex items-center justify-center">
           {/* Mobile image (visible on smaller screens) */}
-          <img 
-            src="/lovable-uploads/699b06ad-ae41-4dc3-b268-7459c5536899.png" 
-            alt="Signal wave with red spike" 
-            className="w-full max-w-5xl h-auto object-contain md:hidden"
-          />
+          <img alt="Signal wave with red spike" className="w-full max-w-5xl h-auto object-contain md:hidden" src="/lovable-uploads/43c83554-cc61-4cc0-9dfd-783d9edd9801.png" />
           
           {/* Desktop image (hidden on mobile, visible on md screens and up) */}
-          <img 
-            src="/lovable-uploads/9823eeb3-9e86-4736-b87b-ec93c5b38202.png" 
-            alt="Signal wave with red spike" 
-            className="w-full max-w-5xl h-auto object-contain hidden md:block"
-          />
+          <img src="/lovable-uploads/9823eeb3-9e86-4736-b87b-ec93c5b38202.png" alt="Signal wave with red spike" className="w-full max-w-5xl h-auto object-contain hidden md:block" />
         </div>
         
         {/* Philosophy cards - horizontal layout on desktop */}
@@ -57,8 +47,6 @@ const Philosophy = () => {
           </Card>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Philosophy;
