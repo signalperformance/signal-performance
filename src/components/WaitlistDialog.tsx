@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -39,6 +39,27 @@ const WaitlistDialog = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { isOpen, closeWaitlist, openWaitlist } = useWaitlistDialog();
+  const [showFixedButton, setShowFixedButton] = useState(false);
+  
+  // Add scroll event listener to show/hide the fixed button
+  useEffect(() => {
+    const handleScroll = () => {
+      const heroSection = document.getElementById('home');
+      if (heroSection) {
+        const heroBottom = heroSection.getBoundingClientRect().bottom;
+        setShowFixedButton(heroBottom < 0);
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    
+    // Initial check
+    handleScroll();
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
   
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -94,16 +115,18 @@ const WaitlistDialog = () => {
 
   return (
     <>
-      {/* Fixed button at bottom right */}
-      <div className="fixed bottom-8 right-8 z-40">
-        <Button 
-          className="bg-signal-gold hover:bg-signal-gold/90 text-black font-semibold shadow-lg"
-          size="lg"
-          onClick={openWaitlist}
-        >
-          {t('nav.contact')} <ArrowRight className="ml-1 h-5 w-5" />
-        </Button>
-      </div>
+      {/* Fixed button at bottom right - only shown after scrolling past hero section */}
+      {showFixedButton && (
+        <div className="fixed bottom-8 right-8 z-40">
+          <Button 
+            className="bg-signal-gold hover:bg-signal-gold/90 text-black font-semibold shadow-lg"
+            size="lg"
+            onClick={openWaitlist}
+          >
+            {t('nav.contact')} <ArrowRight className="ml-1 h-5 w-5" />
+          </Button>
+        </div>
+      )}
 
       <Dialog open={isOpen} onOpenChange={closeWaitlist}>
         <DialogContent className="sm:max-w-md">

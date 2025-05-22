@@ -1,8 +1,10 @@
+
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ArrowRight } from 'lucide-react';
 import { useWaitlistDialog } from '@/hooks/useWaitlistDialog';
 import { useState, useEffect } from 'react';
+
 const Hero = () => {
   const {
     t,
@@ -65,16 +67,18 @@ const Hero = () => {
           {getCompleteText()}
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
-          <Button className="bg-signal-charcoal hover:bg-signal-charcoal/90 text-white font-medium px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg flex items-center gap-2" size="lg" onClick={openWaitlist}>
-            {t('hero.cta.waitlist')} <ArrowRight size={18} />
-          </Button>
-          <Button className="bg-white hover:bg-gray-100 text-signal-charcoal font-medium border border-gray-200 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg" variant="outline" size="lg" onClick={() => document.getElementById('membership')?.scrollIntoView({
+          {/* Swapped button positions and styles */}
+          <Button className="bg-signal-charcoal hover:bg-signal-charcoal/90 text-white font-medium px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg flex items-center gap-2" size="lg" onClick={() => document.getElementById('membership')?.scrollIntoView({
           behavior: 'smooth'
-        })}>
+          })}>
             {t('hero.cta.membership')}
+          </Button>
+          <Button className="bg-white hover:bg-gray-100 text-signal-charcoal font-medium border border-gray-200 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg" variant="outline" size="lg" onClick={openWaitlist}>
+            {t('hero.cta.waitlist')} <ArrowRight size={18} />
           </Button>
         </div>
       </div>
     </section>;
 };
+
 export default Hero;
