@@ -58,7 +58,7 @@ const Hero = () => {
       
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 text-center">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl xl:text-7xl font-bold mb-6 sm:mb-8 text-signal-charcoal max-w-5xl mx-auto leading-tight lg:text-5xl">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 sm:mb-8 text-signal-charcoal max-w-5xl mx-auto leading-tight">
           {renderHeadline()}
         </h1>
         <p className="text-lg sm:text-xl mb-10 sm:mb-14 max-w-3xl mx-auto text-signal-charcoal/90 min-h-[2rem] font-medium md:text-3xl">
