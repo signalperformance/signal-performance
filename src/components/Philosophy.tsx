@@ -11,21 +11,33 @@ const Philosophy = () => {
         <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center font-lora">Our Philosophy</h2>
         
         {/* Signal wave graphic */}
-        <div className="w-full mb-12 relative h-32 md:h-40 overflow-hidden">
-          {/* Gray sine wave background */}
-          <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1200 150" preserveAspectRatio="none">
+        <div className="w-full mb-12 relative h-40 md:h-48 overflow-hidden">
+          <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1200 200" preserveAspectRatio="none">
+            {/* Gray sine wave background */}
             <path 
-              d="M0,50 C50,30 100,70 150,50 C200,30 250,70 300,50 C350,30 400,70 450,50 C500,30 550,70 600,50 C650,30 700,70 750,50 C800,30 850,70 900,50 C950,30 1000,70 1050,50 C1100,30 1150,70 1200,50 V150 H0 Z" 
+              d="M0,100 
+                 C30,85 60,115 90,100 
+                 C120,85 150,115 180,100 
+                 C210,85 240,115 270,100 
+                 C300,85 330,115 360,100 
+                 C390,85 420,115 450,100 
+                 C480,85 510,115 540,100 
+                 C570,85 600,115 630,100 
+                 C660,85 690,115 720,100 
+                 C750,85 780,115 810,100 
+                 C840,85 870,115 900,100 
+                 C930,85 960,115 990,100 
+                 C1020,85 1050,115 1080,100 
+                 C1110,85 1140,115 1170,100 
+                 C1200,85 1230,115 1260,100"
               fill="none"
               stroke="#D1D5DB"
               strokeWidth="2"
             />
-          </svg>
-          
-          {/* Red peak spike */}
-          <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1200 150" preserveAspectRatio="none">
+            
+            {/* Red spike in the center */}
             <path 
-              d="M590,50 L600,5 L610,50"
+              d="M585,100 L600,10 L615,100"
               fill="none"
               stroke="#EF4444"
               strokeWidth="3"
