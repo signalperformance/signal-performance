@@ -1,7 +1,6 @@
 
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { ArrowRight } from 'lucide-react';
 import { useWaitlistDialog } from '@/hooks/useWaitlistDialog';
 import { useState, useEffect } from 'react';
 
@@ -74,7 +73,7 @@ const Hero = () => {
             {t('hero.cta.membership')}
           </Button>
           <Button className="bg-white hover:bg-gray-100 text-signal-charcoal font-medium border border-gray-200 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg" variant="outline" size="lg" onClick={openWaitlist}>
-            {t('hero.cta.waitlist')} <ArrowRight size={18} />
+            {t('hero.cta.waitlist')}
           </Button>
         </div>
       </div>
