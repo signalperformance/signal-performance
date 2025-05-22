@@ -5,7 +5,6 @@ import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Membership from "@/components/Membership";
 import AssessmentProcess from "@/components/AssessmentProcess";
-import WhySignalPerformance from "@/components/WhySignalPerformance";
 import Footer from "@/components/Footer";
 import WaitlistDialog from "@/components/WaitlistDialog";
 
@@ -21,7 +20,6 @@ const Index = () => {
       <Membership />
       <AssessmentProcess />
       <About />
-      <WhySignalPerformance />
       <WaitlistDialog />
       <Footer />
     </div>
