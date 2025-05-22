@@ -13,40 +13,28 @@ const Philosophy = () => {
         {/* Signal wave graphic */}
         <div className="w-full mb-12 relative h-40 md:h-48 overflow-hidden">
           <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1200 200" preserveAspectRatio="none">
-            {/* Gray sine wave background - more smooth and continuous */}
+            {/* Gray sine wave background - smooth with varying amplitude */}
             <path 
               d="M0,100 
-                 C20,110 40,90 60,100 
-                 C80,110 100,90 120,100 
-                 C140,110 160,90 180,100
-                 C200,110 220,90 240,100
-                 C260,110 280,90 300,100
-                 C320,110 340,90 360,100
-                 C380,110 400,90 420,100
-                 C440,110 460,90 480,100
-                 C500,110 520,90 540,100
-                 C560,110 580,90 600,100
-                 C620,110 640,90 660,100
-                 C680,110 700,90 720,100
-                 C740,110 760,90 780,100
-                 C800,110 820,90 840,100
-                 C860,110 880,90 900,100
-                 C920,110 940,90 960,100
-                 C980,110 1000,90 1020,100
-                 C1040,110 1060,90 1080,100
-                 C1100,110 1120,90 1140,100
-                 C1160,110 1180,90 1200,100"
+                 C50,120 100,80 150,100 
+                 C200,120 250,80 300,100 
+                 C350,120 400,80 450,100 
+                 C500,120 550,80 600,100 
+                 C650,120 700,80 750,100 
+                 C800,120 850,80 900,100 
+                 C950,120 1000,80 1050,100 
+                 C1100,120 1150,80 1200,100"
               fill="none"
               stroke="#D1D5DB"
-              strokeWidth="2"
+              strokeWidth="1.5"
             />
             
-            {/* Red spike in the center - taller and more prominent */}
+            {/* Red spike in the center - smooth curved spike */}
             <path 
-              d="M590,100 L600,20 L610,100"
+              d="M580,100 Q600,30 620,100"
               fill="none"
               stroke="#EF4444"
-              strokeWidth="2.5"
+              strokeWidth="2"
               strokeLinecap="round"
             />
           </svg>
