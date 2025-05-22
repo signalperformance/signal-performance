@@ -10,34 +10,13 @@ const Philosophy = () => {
       <div className="container mx-auto container-padding">
         <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center font-lora">Our Philosophy</h2>
         
-        {/* Signal wave graphic */}
-        <div className="w-full mb-12 relative h-40 md:h-48 overflow-hidden">
-          <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1200 200" preserveAspectRatio="none">
-            {/* Gray sine wave background - smooth with varying amplitude */}
-            <path 
-              d="M0,100 
-                 C50,120 100,80 150,100 
-                 C200,120 250,80 300,100 
-                 C350,120 400,80 450,100 
-                 C500,120 550,80 600,100 
-                 C650,120 700,80 750,100 
-                 C800,120 850,80 900,100 
-                 C950,120 1000,80 1050,100 
-                 C1100,120 1150,80 1200,100"
-              fill="none"
-              stroke="#D1D5DB"
-              strokeWidth="1.5"
-            />
-            
-            {/* Red spike in the center - smooth curved spike */}
-            <path 
-              d="M580,100 Q600,30 620,100"
-              fill="none"
-              stroke="#EF4444"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-          </svg>
+        {/* Signal wave graphic - using PNG image */}
+        <div className="w-full mb-12 relative h-24 md:h-32 flex items-center justify-center">
+          <img 
+            src="/lovable-uploads/9823eeb3-9e86-4736-b87b-ec93c5b38202.png" 
+            alt="Signal wave with red spike" 
+            className="w-full max-w-5xl h-auto object-contain"
+          />
         </div>
         
         {/* Philosophy cards - horizontal layout on desktop */}
