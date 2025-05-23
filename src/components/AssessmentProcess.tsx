@@ -335,7 +335,9 @@ const AssessmentProcess = () => {
                 <Card className="border-0 shadow-md rounded-xl overflow-hidden">
                   <CardContent className="p-6">
                     <div className="flex items-center gap-4 mb-4">
-                      
+                      <div className={cn("w-10 h-10 rounded-full flex items-center justify-center text-white font-bold", assessment.color)}>
+                        {assessment.number}
+                      </div>
                       <h3 className="text-xl font-lora font-medium">{assessment.title}</h3>
                     </div>
                     <p className="text-muted-foreground">
@@ -351,4 +353,3 @@ const AssessmentProcess = () => {
 };
 
 export default AssessmentProcess;
-
