@@ -76,8 +76,8 @@ const translations = {
     'assessment.body.title': 'Body Composition',
     'assessment.body.description': 'We track changes in muscle mass and body fat percentage to evaluate whether your training is producing the right adaptations. This gives us more reliable feedback than body weight alone and helps ensure your progress aligns with performance goals.',
     
-    'assessment.golf.title': 'Golf Performance Assessment',
-    'assessment.golf.description': 'We measure distance and dispersion metrics across every club in the bag to assess your ball-striking and shot control in a controlled environment. We then combine this with an analysis of your strokes gained data from tournament play to better understand the relative contribution of technical, physical, and mental factors to your performance.',
+    'assessment.golf.title': 'Skill Assessment',
+    'assessment.golf.description': 'We measure distance and dispersion metrics across every club in the bag to assess your ball-striking and shot control in a controlled environment. This is combined with an analysis of your strokes gained data and equipment setup to better understand the relative contribution of technical, physical, mental, and equipment factors to your performance.',
     
     // About
     'about.title': 'About Signal Performance',
