@@ -48,7 +48,7 @@ const AssessmentProcess = () => {
       color: "bg-purple-500"
     },
     golf: {
-      title: t('assessment.golf.title'),
+      title: "Skill Assessment",
       icon: Club,
       description: t('assessment.golf.description'),
       number: 5,
