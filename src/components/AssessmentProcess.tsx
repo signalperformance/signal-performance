@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -99,7 +100,7 @@ const AssessmentProcess = () => {
     if (autoProgressEnabled && isInViewport) {
       timerRef.current = setTimeout(() => {
         advanceToNextTab();
-      }, 5000); // Changed from 3000 to 5000 (5 seconds)
+      }, 8000); // Changed from 5000 to 8000 (8 seconds)
     }
     
     // Cleanup timer on unmount or when active assessment or viewport status changes
@@ -350,3 +351,4 @@ const AssessmentProcess = () => {
 };
 
 export default AssessmentProcess;
+
