@@ -61,7 +61,7 @@ const translations = {
     'membership.facility.refresh': 'Refresh & Recharge',
     'membership.facility.refresh.description': 'Includes modern shower and kitchenette with complimentary and member-priced options.',
     'membership.facility.atmosphere': 'Private Training Environment',
-    'membership.facility.atmosphere.description': 'Capped at 20 members for a quiet, focused, and highly accessible training environment.',
+    'membership.facility.atmosphere.description': 'Membership is capped to ensure a quiet, focused, and accessible environment.',
     
     // Assessment Process
     'assessment.title': 'Our Assessment Process',
@@ -179,7 +179,7 @@ const translations = {
     'membership.facility.refresh': '放鬆與補給空間',
     'membership.facility.refresh.description': '包括現代化淋浴和附有免費與會員專屬價格選項的小廚房。',
     'membership.facility.atmosphere': '私人化訓練環境',
-    'membership.facility.atmosphere.description': '會員人數上限 20 人，確保場館安靜、專注且可穩定使用。',
+    'membership.facility.atmosphere.description': '為確保訓練環境安靜、專注且便利，本中心設有人數上限。',
     
     // Assessment Process
     'assessment.title': '我們的評估流程',
