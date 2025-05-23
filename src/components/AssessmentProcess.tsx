@@ -3,9 +3,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Move, Activity, User, Dumbbell, Club, ChevronRight, Play, Pause, ArrowLeft, ArrowRight } from "lucide-react";
+import { Move, Activity, User, Dumbbell, Club } from "lucide-react";
 import { useLanguage } from '@/contexts/LanguageContext';
 
 const AssessmentProcess = () => {
@@ -16,8 +15,6 @@ const AssessmentProcess = () => {
   const [activeAssessment, setActiveAssessment] = useState("mobility");
   const [autoProgressEnabled, setAutoProgressEnabled] = useState(true);
   const [isInViewport, setIsInViewport] = useState(false);
-  const [showHints, setShowHints] = useState(true);
-  const [hasUserInteracted, setHasUserInteracted] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
   
@@ -67,14 +64,6 @@ const AssessmentProcess = () => {
     setActiveAssessment(keys[nextIndex]);
   };
 
-  // Function to go to previous tab
-  const goToPreviousTab = () => {
-    const keys = Object.keys(assessments);
-    const currentIndex = keys.indexOf(activeAssessment);
-    const previousIndex = currentIndex === 0 ? keys.length - 1 : currentIndex - 1;
-    setActiveAssessment(keys[previousIndex]);
-  };
-
   // Set up intersection observer to detect when the section is in viewport
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -122,23 +111,10 @@ const AssessmentProcess = () => {
     };
   }, [activeAssessment, autoProgressEnabled, isInViewport]);
 
-  // Handle tab click - stop auto progression and hide hints after first interaction
+  // Handle tab click - stop auto progression
   const handleTabClick = (key: string) => {
     setActiveAssessment(key);
     setAutoProgressEnabled(false);
-    if (!hasUserInteracted) {
-      setHasUserInteracted(true);
-      setTimeout(() => setShowHints(false), 2000); // Hide hints after 2 seconds
-    }
-  };
-
-  // Toggle auto progression
-  const toggleAutoProgress = () => {
-    setAutoProgressEnabled(!autoProgressEnabled);
-    if (!hasUserInteracted) {
-      setHasUserInteracted(true);
-      setTimeout(() => setShowHints(false), 2000);
-    }
   };
 
   // Calculate the progress percentage based on active assessment
@@ -201,39 +177,11 @@ const AssessmentProcess = () => {
         {/* Desktop View: Radial Progress Wheel */}
         <div className="hidden md:flex md:flex-row md:gap-8 md:items-center">
           {/* Left side: Radial Progress Wheel */}
-          <div className="w-1/2 relative">
+          <div className="w-1/2">
             <div className="relative w-[500px] h-[500px] mx-auto">
-              {/* Central circle with interaction hint */}
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 rounded-full bg-white shadow-lg flex flex-col items-center justify-center z-10 border-4 border-signal-gold">
-                {showHints && !hasUserInteracted && (
-                  <div className="text-center animate-fade-in">
-                    <p className="text-sm text-muted-foreground mb-1">Click to explore</p>
-                    <ChevronRight className="w-5 h-5 text-signal-gold mx-auto animate-pulse" />
-                  </div>
-                )}
-              </div>
-              
-              {/* Auto-progression control */}
-              <div className="absolute top-4 right-4 z-20">
-                <Button
-                  onClick={toggleAutoProgress}
-                  variant="outline"
-                  size="sm"
-                  className="bg-white/90 backdrop-blur-sm shadow-md hover:bg-white"
-                  aria-label={autoProgressEnabled ? "Pause auto-progression" : "Resume auto-progression"}
-                >
-                  {autoProgressEnabled ? (
-                    <>
-                      <Pause className="w-4 h-4 mr-2" />
-                      Auto
-                    </>
-                  ) : (
-                    <>
-                      <Play className="w-4 h-4 mr-2" />
-                      Manual
-                    </>
-                  )}
-                </Button>
+              {/* Central circle - now remains blank */}
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 rounded-full bg-white shadow-lg flex items-center justify-center z-10 border-4 border-signal-gold">
+                {/* Intentionally left blank */}
               </div>
               
               {/* Circular progress track */}
@@ -272,43 +220,16 @@ const AssessmentProcess = () => {
 
                     // Get the color matching the current segment's number
                     const segmentColor = getCircleColor(key);
-                    return <g key={key}>
-                        <path 
-                          d={path} 
-                          fill={shouldHighlight ? segmentColor : "#f3f4f6"} 
-                          stroke="#fff" 
-                          strokeWidth="2" 
-                          opacity={isActive ? "1" : "0.7"} 
-                          className={cn(
-                            "transition-all duration-300 cursor-pointer hover:opacity-90", 
-                            isActive && "animate-pulse"
-                          )} 
-                          onClick={() => handleTabClick(key)} 
-                        />
-                        {/* Hover chevron indicator */}
-                        {showHints && (
-                          <g className="opacity-0 hover:opacity-100 transition-opacity duration-200 pointer-events-none">
-                            <circle 
-                              cx={250 + 160 * Math.cos((startAngle + segmentAngle/2) * Math.PI / 180)} 
-                              cy={250 + 160 * Math.sin((startAngle + segmentAngle/2) * Math.PI / 180)} 
-                              r="12" 
-                              fill="white" 
-                              stroke={segmentColor} 
-                              strokeWidth="2"
-                            />
-                            <text 
-                              x={250 + 160 * Math.cos((startAngle + segmentAngle/2) * Math.PI / 180)} 
-                              y={250 + 160 * Math.sin((startAngle + segmentAngle/2) * Math.PI / 180)} 
-                              textAnchor="middle" 
-                              dominantBaseline="central" 
-                              fill={segmentColor} 
-                              fontSize="12"
-                            >
-                              →
-                            </text>
-                          </g>
-                        )}
-                      </g>;
+                    return <path 
+                      key={key} 
+                      d={path} 
+                      fill={shouldHighlight ? segmentColor : "#f3f4f6"} 
+                      stroke="#fff" 
+                      strokeWidth="2" 
+                      opacity={isActive ? "1" : "0.7"} 
+                      className="transition-all duration-300 cursor-pointer hover:opacity-90" 
+                      onClick={() => handleTabClick(key)} 
+                    />;
                   })}
                   
                   {/* Assessment number points on the wheel */}
@@ -334,10 +255,7 @@ const AssessmentProcess = () => {
                             fill={isActive ? "white" : "#f9fafb"} 
                             stroke={isActive ? circleColor : "#e5e7eb"} 
                             strokeWidth="2" 
-                            className={cn(
-                              "transition-all duration-300 hover:scale-110", 
-                              isActive && "animate-pulse"
-                            )} 
+                            className="transition-all duration-300" 
                           />
                           <text 
                             x={x} 
@@ -372,22 +290,11 @@ const AssessmentProcess = () => {
                 
                 <Progress value={getProgressValue()} className="h-2 mb-6" />
                 
-                <p className="text-muted-foreground mb-6">
+                <p className="text-muted-foreground">
                   {assessments[activeAssessment as keyof typeof assessments].description}
                 </p>
-
-                {/* Navigation hints for desktop */}
-                {showHints && !hasUserInteracted && (
-                  <div className="flex items-center justify-between text-sm text-muted-foreground animate-fade-in">
-                    <span className="flex items-center gap-1">
-                      <span>Click segments to explore</span>
-                      <ChevronRight className="w-4 h-4" />
-                    </span>
-                    <span className="text-xs">
-                      {assessments[activeAssessment as keyof typeof assessments].number} of {Object.keys(assessments).length}
-                    </span>
-                  </div>
-                )}
+                
+                
               </CardContent>
             </Card>
           </div>
@@ -396,35 +303,6 @@ const AssessmentProcess = () => {
         {/* Mobile View: Improved Tabs Layout */}
         <div className="md:hidden">
           <Tabs value={activeAssessment} onValueChange={(value) => handleTabClick(value)} className="w-full">
-            {/* Mobile navigation controls */}
-            <div className="flex items-center justify-between mb-4">
-              <Button
-                onClick={goToPreviousTab}
-                variant="outline"
-                size="sm"
-                className="flex items-center gap-2"
-                aria-label="Previous assessment"
-              >
-                <ArrowLeft className="w-4 h-4" />
-                Previous
-              </Button>
-              
-              <div className="text-sm text-muted-foreground">
-                {assessments[activeAssessment as keyof typeof assessments].number} of {Object.keys(assessments).length}
-              </div>
-              
-              <Button
-                onClick={advanceToNextTab}
-                variant="outline"
-                size="sm"
-                className="flex items-center gap-2"
-                aria-label="Next assessment"
-              >
-                Next
-                <ArrowRight className="w-4 h-4" />
-              </Button>
-            </div>
-
             <TabsList className="grid grid-cols-5 mb-6 rounded-xl p-1 bg-muted/20 shadow-sm">
               {Object.entries(assessments).map(([key, assessment]) => {
               const textColorClass = getTextColorClass(key);
@@ -435,7 +313,7 @@ const AssessmentProcess = () => {
                 value={key} 
                 className={cn("flex justify-center py-3 rounded-lg transition-all", isActive ? "shadow-sm" : "hover:bg-muted/40")}
               >
-                    <div className={cn("w-10 h-10 rounded-full flex items-center justify-center transition-all", isActive ? "bg-white shadow-md scale-110" : "bg-gray-50 hover:scale-105")} style={{
+                    <div className={cn("w-10 h-10 rounded-full flex items-center justify-center", isActive ? "bg-white shadow-md" : "bg-gray-50")} style={{
                   border: isActive ? `2px solid ${circleColor}` : '1px solid #e5e7eb'
                 }}>
                       <span className={cn("font-bold", textColorClass)}>
@@ -452,15 +330,6 @@ const AssessmentProcess = () => {
               '--progress-background': getCircleColor(activeAssessment as keyof typeof assessments)
             } as React.CSSProperties} />
             </div>
-
-            {/* Mobile swipe hints */}
-            {showHints && !hasUserInteracted && (
-              <div className="flex items-center justify-center gap-4 mb-4 text-sm text-muted-foreground animate-fade-in">
-                <ArrowLeft className="w-4 h-4" />
-                <span>Tap or swipe to navigate</span>
-                <ArrowRight className="w-4 h-4" />
-              </div>
-            )}
             
             {Object.entries(assessments).map(([key, assessment]) => <TabsContent key={key} value={key} className="mt-0">
                 <Card className="border-0 shadow-md rounded-xl overflow-hidden">
@@ -478,28 +347,6 @@ const AssessmentProcess = () => {
                 </Card>
               </TabsContent>)}
           </Tabs>
-
-          {/* Auto-progression control for mobile */}
-          <div className="flex justify-center mt-6">
-            <Button
-              onClick={toggleAutoProgress}
-              variant="outline"
-              size="sm"
-              className="flex items-center gap-2"
-            >
-              {autoProgressEnabled ? (
-                <>
-                  <Pause className="w-4 h-4" />
-                  Pause Auto-Play
-                </>
-              ) : (
-                <>
-                  <Play className="w-4 h-4" />
-                  Resume Auto-Play
-                </>
-              )}
-            </Button>
-          </div>
         </div>
       </div>
     </section>;
