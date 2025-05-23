@@ -1,4 +1,3 @@
-
 import { createContext, useContext, useState, ReactNode } from 'react';
 
 type Language = 'en' | 'zh';
@@ -234,7 +233,7 @@ const translations = {
     // Philosophy
     'philosophy.title': '我們的理念',
     'philosophy.card1.title': '去除雜訊，聚焦訊號',
-    'philosophy.card1.content': '我們的名稱源自「訊號與雜訊比」（Signal-to-Noise Ratio）的概念，這是資料科學與工程領域中的一項核心原則。所謂「訊號」，是具有意義且可採取行動的資訊；而「雜訊」則是那些分散注意、模糊重點的干擾。我們看待高爾夫表現的方式，就是辨識出真正重要的元素，排除無關雜訊，聚焦提升關鍵表現。',
+    'philosophy.card1.content': '我們的名稱源自「訊號與雜訊比」的概念，這是資料科學與工程領域中的一項核心原則。所謂「訊號」，是具有意義且可採取行動的資訊；而「雜訊」則是那些分散注意、模糊重點的干擾。我們看待高爾夫表現的方式，就是辨識出真正重要的元素，排除無關雜訊，聚焦提升關鍵表現。',
     'philosophy.card2.title': '依據數據，不靠猜測',
     'philosophy.card2.content': '我們採取以數據為基礎、科學實證支持的訓練方式，不靠猜測，也不盲從數據。數據能提供方向，但不是唯一的決策依據。我們重視專業教練的經驗與判斷，並結合有意義的指標，打造出既有效又具個人化的訓練計畫，協助選手精準提升表現。',
     'philosophy.card3.title': '整合式訓練系統',
