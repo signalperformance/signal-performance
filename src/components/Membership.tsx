@@ -1,3 +1,4 @@
+
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useState, useEffect, useRef } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
@@ -79,7 +80,7 @@ const Membership = () => {
     },
     other: {
       title: t('membership.facility.title'),
-      shortTitle: language === 'zh' ? '空間特色' : 'Facility',
+      shortTitle: language === 'zh' ? '其他' : 'Facility',
       items: [{
         title: t('membership.facility.refresh'),
         description: t('membership.facility.refresh.description')
