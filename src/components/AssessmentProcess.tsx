@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -280,23 +279,17 @@ const AssessmentProcess = () => {
           <div className="w-1/2">
             <Card className="bg-white shadow-md">
               <CardContent className="p-6">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className={cn("w-10 h-10 rounded-full flex items-center justify-center text-white font-bold", assessments[activeAssessment as keyof typeof assessments].color)}>
-                    {assessments[activeAssessment as keyof typeof assessments].number}
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-4">
+                    <div className={cn("w-10 h-10 rounded-full flex items-center justify-center text-white font-bold", assessments[activeAssessment as keyof typeof assessments].color)}>
+                      {assessments[activeAssessment as keyof typeof assessments].number}
+                    </div>
+                    <h3 className="text-2xl font-lora font-medium">
+                      {assessments[activeAssessment as keyof typeof assessments].title}
+                    </h3>
                   </div>
-                  <h3 className="text-2xl font-lora font-medium">
-                    {assessments[activeAssessment as keyof typeof assessments].title}
-                  </h3>
-                </div>
-                
-                <Progress value={getProgressValue()} className="h-2 mb-6" />
-                
-                <p className="text-muted-foreground">
-                  {assessments[activeAssessment as keyof typeof assessments].description}
-                </p>
-                
-                {/* Add Next Step Button */}
-                <div className="flex justify-end mt-6">
+                  
+                  {/* Next Step Button moved to be inline with title */}
                   <Button 
                     onClick={advanceToNextTab}
                     variant="outline"
@@ -307,6 +300,12 @@ const AssessmentProcess = () => {
                     <ChevronRight className="ml-1 w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                   </Button>
                 </div>
+                
+                <Progress value={getProgressValue()} className="h-2 mb-6" />
+                
+                <p className="text-muted-foreground">
+                  {assessments[activeAssessment as keyof typeof assessments].description}
+                </p>
               </CardContent>
             </Card>
           </div>
