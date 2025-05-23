@@ -1,7 +1,9 @@
+
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useWaitlistDialog } from '@/hooks/useWaitlistDialog';
 import { useState, useEffect } from 'react';
+import WaveAnimation from './WaveAnimation';
 
 const Hero = () => {
   const {
@@ -53,8 +55,10 @@ const Hero = () => {
     return t('hero.headline');
   };
   return <section id="home" className="relative min-h-[100svh] py-16 md:py-0 md:h-screen flex flex-col items-center justify-center overflow-x-hidden overflow-y-auto">
-      {/* Background - using a clean white background */}
-      <div className="absolute inset-0 z-0 bg-white"></div>
+      {/* Background with wave animation */}
+      <div className="absolute inset-0 z-0 bg-white">
+        <WaveAnimation className="opacity-70" />
+      </div>
       
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 text-center">
