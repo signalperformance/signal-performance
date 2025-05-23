@@ -48,7 +48,7 @@ const AssessmentProcess = () => {
       color: "bg-purple-500"
     },
     golf: {
-      title: "Skill Assessment",
+      title: language === 'en' ? "Skill Assessment" : t('assessment.golf.title'),
       icon: Club,
       description: t('assessment.golf.description'),
       number: 5,
