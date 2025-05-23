@@ -4,7 +4,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
-import { Move, Activity, User, Dumbbell, Club } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Move, Activity, User, Dumbbell, Club, ChevronRight } from "lucide-react";
 import { useLanguage } from '@/contexts/LanguageContext';
 
 const AssessmentProcess = () => {
@@ -294,7 +295,18 @@ const AssessmentProcess = () => {
                   {assessments[activeAssessment as keyof typeof assessments].description}
                 </p>
                 
-                
+                {/* Add Next Step Button */}
+                <div className="flex justify-end mt-6">
+                  <Button 
+                    onClick={advanceToNextTab}
+                    variant="outline"
+                    className="group border-signal-gold text-signal-gold hover:bg-signal-gold/10 hover:text-signal-gold transition-all duration-300"
+                    size="sm"
+                  >
+                    Next Step
+                    <ChevronRight className="ml-1 w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           </div>
