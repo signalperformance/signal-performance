@@ -18,7 +18,7 @@ const Philosophy = () => {
           {language === 'zh' ? (
             <img alt="Signal wave with red spike (Chinese)" className="w-full max-w-5xl h-auto object-contain md:hidden" src="/lovable-uploads/02648a92-ba42-467d-b308-7d76e55376a2.png" />
           ) : (
-            <img alt="Signal wave with red spike" className="w-full max-w-5xl h-auto object-contain md:hidden" src="/lovable-uploads/614bffe2-0ec7-4876-9688-d9dd206fc83e.png" />
+            <img alt="Signal wave with red spike" className="w-full max-w-5xl h-auto object-contain md:hidden" src="/lovable-uploads/707078a4-7f6c-4632-bc06-693f532d2cd3.png" />
           )}
           
           {/* Desktop images based on language */}
