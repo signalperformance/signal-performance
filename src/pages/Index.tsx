@@ -18,9 +18,9 @@ const Index = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <Hero />
-      <Membership />
-      <AssessmentProcess />
       <Philosophy />
+      <AssessmentProcess />
+      <Membership />
       <About />
       <WaitlistDialog />
       <Footer />
