@@ -1,13 +1,13 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useLanguage } from '@/contexts/LanguageContext';
+
 const Philosophy = () => {
-  const {
-    t
-  } = useLanguage();
+  const { t } = useLanguage();
+  
   return <section id="philosophy" className="section-padding bg-signal-light-gray">
       <div className="container mx-auto container-padding">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center font-lora">Our Philosophy</h2>
+        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center font-lora">{t('philosophy.title')}</h2>
         
         {/* Signal wave graphic - responsive images for different screen sizes */}
         <div className="w-full mb-12 relative h-36 md:h-32 flex items-center justify-center">
@@ -21,21 +21,22 @@ const Philosophy = () => {
         {/* Philosophy cards - horizontal layout on desktop */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <Card className="border rounded-lg p-6">
-            <CardTitle className="text-xl md:text-2xl font-lora mb-4 text-signal-charcoal">Signal Over Noise</CardTitle>
-            <p className="text-muted-foreground">Our name comes from the concept of the signal-to-noise ratio—a principle in data science and engineering. The "signal" is meaningful, actionable information. The "noise" is everything that gets in the way. We apply this mindset to golf performance by identifying what matters most and cutting the rest.</p>
+            <CardTitle className="text-xl md:text-2xl font-lora mb-4 text-signal-charcoal">{t('philosophy.card1.title')}</CardTitle>
+            <p className="text-muted-foreground">{t('philosophy.card1.content')}</p>
           </Card>
           
           <Card className="border rounded-lg p-6">
-            <CardTitle className="text-xl md:text-2xl font-lora mb-4 text-signal-charcoal">Measure, Don't Guess</CardTitle>
-            <p className="text-muted-foreground">We take a data-informed, evidence-based approach to training—with no guesswork. But we don’t blindly follow the numbers. Data guides our decisions, it doesn’t dictate them. We combine meaningful metrics with the experience and judgment of qualified professionals to deliver training that’s both effective and individualized.</p>
+            <CardTitle className="text-xl md:text-2xl font-lora mb-4 text-signal-charcoal">{t('philosophy.card2.title')}</CardTitle>
+            <p className="text-muted-foreground">{t('philosophy.card2.content')}</p>
           </Card>
           
           <Card className="border rounded-lg p-6">
-            <CardTitle className="text-xl md:text-2xl font-lora mb-4 text-signal-charcoal">Integrated Training</CardTitle>
-            <p className="text-muted-foreground">There’s no single key to performance. It’s a system—complex, dynamic, and made up of many moving parts. Our mind and body interact constantly, and skill draws on both. That’s why we don’t isolate them. Our integrated approach trains the physical, mental, and skill components together—within one cohesive, performance-driven program.</p>
+            <CardTitle className="text-xl md:text-2xl font-lora mb-4 text-signal-charcoal">{t('philosophy.card3.title')}</CardTitle>
+            <p className="text-muted-foreground">{t('philosophy.card3.content')}</p>
           </Card>
         </div>
       </div>
     </section>;
 };
+
 export default Philosophy;

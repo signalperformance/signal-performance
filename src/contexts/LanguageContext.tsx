@@ -114,6 +114,15 @@ const translations = {
     'waitlist.goals': 'Your Golf Goals',
     'waitlist.submit': 'Submit Application',
     'waitlist.success': 'Thank you for your interest! We will contact you soon.',
+    
+    // Philosophy
+    'philosophy.title': 'Our Philosophy',
+    'philosophy.card1.title': 'Signal Over Noise',
+    'philosophy.card1.content': 'Our name comes from the concept of the signal-to-noise ratio—a principle in data science and engineering. The "signal" is meaningful, actionable information. The "noise" is everything that gets in the way. We apply this mindset to golf performance by identifying what matters most and cutting the rest.',
+    'philosophy.card2.title': 'Measure, Don\'t Guess',
+    'philosophy.card2.content': 'We take a data-informed, evidence-based approach to training—with no guesswork. But we don\'t blindly follow the numbers. Data guides our decisions, it doesn\'t dictate them. We combine meaningful metrics with the experience and judgment of qualified professionals to deliver training that\'s both effective and individualized.',
+    'philosophy.card3.title': 'Integrated Training',
+    'philosophy.card3.content': 'There\'s no single key to performance. It\'s a system—complex, dynamic, and made up of many moving parts. Our mind and body interact constantly, and skill draws on both. That\'s why we don\'t isolate them. Our integrated approach trains the physical, mental, and skill components together—within one cohesive, performance-driven program.',
   },
   zh: {
     // Navigation
@@ -220,6 +229,15 @@ const translations = {
     'waitlist.goals': '您的高爾夫目標',
     'waitlist.submit': '提交申請',
     'waitlist.success': '感謝您的興趣！我們將盡快與您聯繫。',
+    
+    // Philosophy
+    'philosophy.title': '我們的理念',
+    'philosophy.card1.title': '去除雜訊，聚焦訊號',
+    'philosophy.card1.content': '我們的名稱源自「訊號與雜訊比」（Signal-to-Noise Ratio）的概念，這是資料科學與工程領域中的一項核心原則。所謂「訊號」，是具意義、可採取行動的資訊；而「雜訊」，則是那些干擾判斷、模糊重點的多餘資訊。這正是我們看待高爾夫表現的方式，辨識出真正重要的元素，捨棄其他無關的干擾',
+    'philosophy.card2.title': '依據數據，不靠猜測',
+    'philosophy.card2.content': '我們採取以數據為基礎、科學實證支持的訓練方式，不依賴猜測。然而，我們也不盲目追隨數字。數據能提供方向，但不是唯一的決策依據。我們結合有意義的指標與專業教練的經驗與判斷，打造出既有效又具個人化的訓練計畫。',
+    'philosophy.card3.title': '整合式訓練系統',
+    'philosophy.card3.content': '表現沒有單一關鍵，因為它是由多個元素互相作用、動態變化的系統所構成。我們的身心彼此連動，技術則建立在兩者之上。因此，我們不將這些面向分割看待。我們採取整合式的訓練方法，將體能、心理與技術納入同一個有系統、有目的的訓練計畫中。',
   }
 };
 
