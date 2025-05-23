@@ -1,4 +1,3 @@
-
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useState, useEffect, useRef } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
@@ -76,6 +75,9 @@ const Membership = () => {
       }, {
         title: t('membership.golf.tracking'),
         description: t('membership.golf.tracking.description')
+      }, {
+        title: t('membership.golf.fitting'),
+        description: t('membership.golf.fitting.description')
       }]
     },
     other: {

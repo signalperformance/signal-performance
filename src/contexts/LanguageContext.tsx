@@ -53,7 +53,10 @@ const translations = {
     'membership.golf.putting.description': 'Refine your mechanics and alignment with cutting-edge tools — on your own schedule.',
     'membership.golf.tracking': 'On-Course Performance Tracking',
     'membership.golf.tracking.description': 'All members receive access to golf stat tracking software, allowing us to monitor your competitive performance and adjust your training focus accordingly.',
+    'membership.golf.fitting': 'Club Fitting Station',
+    'membership.golf.fitting.description': 'Access in-house tools to measure loft, lie, and other club specs — make data-informed equipment adjustments for peak performance.',
     
+    // Facility
     'membership.facility.title': 'Facility Features',
     'membership.facility.refresh': 'Refresh & Recharge',
     'membership.facility.refresh.description': 'Includes modern shower and kitchenette with complimentary and member-priced options.',
@@ -168,7 +171,10 @@ const translations = {
     'membership.golf.putting.description': '使用尖端工具提升技術與對準，自主安排練習時間。',
     'membership.golf.tracking': '比賽數據分析',
     'membership.golf.tracking.description': '所有會員皆可使用數據分析軟體，使我們能夠深入了解您的比賽表現，並依此調整訓練重點。',
+    'membership.golf.fitting': '球桿調校工作站',
+    'membership.golf.fitting.description': '使用專業設備測量桿面仰角、桿身傾角及其他規格，進行依據數據的調整，優化球桿設定以提升表現。',
     
+    // Facility
     'membership.facility.title': '空間特色',
     'membership.facility.refresh': '放鬆與補給空間',
     'membership.facility.refresh.description': '包括現代化淋浴和附有免費與會員專屬價格選項的小廚房。',
