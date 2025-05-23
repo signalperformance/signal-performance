@@ -192,7 +192,7 @@ const translations = {
     'assessment.body.description': '我們追踪肌肉量和體脂百分比的變化，評估您的訓練是否產生正確的適應。這比單純體重提供更可靠的反饋，並幫助確保您的進步與表現目標一致。',
     
     'assessment.golf.title': '高爾夫表現評估',
-    'assessment.golf.description': '我們測量每個球桿的距離和分散指標，在受控環境中評估您的擊球與球路控制。然後結合比賽中的 Strokes Gained 數據分析，更深入了解技術、體能與心理因素對您表現的相對影響。',
+    'assessment.golf.description': '我們測量每支球桿的擊球距離與落點分佈，在受控環境中評估您的擊球品質與球路控制表現。再結合比賽中的 Strokes Gained 數據與球桿設定分析，更深入了解技術、體能、心理與球桿等因素對您整體表現的相對影響。',
     
     // About
     'about.title': '關於 Signal Performance',
