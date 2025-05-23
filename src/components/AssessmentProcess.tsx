@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -19,7 +20,7 @@ const AssessmentProcess = () => {
   
   const assessments = {
     mobility: {
-      title: "Skill Assessment",
+      title: t('assessment.joint.title'),
       icon: Move,
       description: t('assessment.joint.description'),
       number: 1,
