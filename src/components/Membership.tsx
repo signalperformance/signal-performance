@@ -1,4 +1,3 @@
-
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useState, useEffect, useRef } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
@@ -189,46 +188,37 @@ const Membership = () => {
           </Tabs>
         </div>
 
-        {/* Mobile View */}
+        {/* Mobile View - Updated to match desktop style more closely */}
         <div className="md:hidden">
-          {/* Category Pills - Horizontal Scrolling */}
+          {/* Category Pills - Horizontal Scrolling - Updated style */}
           <div className="mb-6 overflow-x-auto pb-2 no-scrollbar">
-            <div className="flex gap-0 min-w-full bg-muted/10 rounded-lg p-0.5">
+            <div className="flex bg-muted/20 shadow-sm rounded-xl p-1.5">
               {Object.entries(categories).map(([key, category], index) => {
                 const isActive = activeCategory === key;
                 const categoryColor = getCategoryColor(key);
                 
                 return (
-                  <>
-                    {index > 0 && (
-                      <div className="self-stretch flex items-center px-0.5">
-                        <div className="h-8 w-px bg-border/40"></div>
-                      </div>
+                  <div 
+                    key={key}
+                    className={cn(
+                      "py-2 px-3 rounded-lg cursor-pointer mx-1 flex-1 min-w-0 transition-all border-b-2",
+                      isActive 
+                        ? "bg-white shadow-sm font-bold border-b-2" 
+                        : "hover:bg-muted/40 border-transparent"
                     )}
-                    <div 
-                      key={key} 
-                      className={cn(
-                        "py-2 px-3 cursor-pointer transition-all flex-1 min-w-0 relative",
-                        isActive 
-                          ? "bg-white/50 font-bold" 
-                          : "hover:bg-muted/20"
-                      )}
-                      onClick={() => setActiveCategory(key)}
-                    >
-                      {isActive && (
-                        <div 
-                          className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full" 
-                          style={{ backgroundColor: categoryColor }}
-                        ></div>
-                      )}
-                      <span className={cn(
-                        "font-medium text-sm text-center block truncate",
-                        isActive ? "text-foreground font-bold" : "text-muted-foreground"
-                      )}>
-                        {category.shortTitle}
-                      </span>
-                    </div>
-                  </>
+                    style={isActive ? { 
+                      borderColor: categoryColor,
+                      boxShadow: `0 2px 4px -1px rgba(0, 0, 0, 0.06)` 
+                    } : {}}
+                    onClick={() => setActiveCategory(key)}
+                  >
+                    <span className={cn(
+                      "font-medium text-sm text-center block truncate",
+                      isActive ? "text-foreground font-bold" : "text-muted-foreground"
+                    )}>
+                      {category.shortTitle}
+                    </span>
+                  </div>
                 );
               })}
             </div>
