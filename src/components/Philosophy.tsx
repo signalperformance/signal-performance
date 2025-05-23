@@ -13,7 +13,7 @@ const Philosophy = () => {
         <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center font-lora">{t('philosophy.title')}</h2>
         
         {/* Signal wave graphic - responsive images for different screen sizes and languages */}
-        <div className="w-full mb-12 relative h-36 md:h-32 flex items-center justify-center">
+        <div className="w-full mb-12 md:mb-12 mb-6 relative h-36 md:h-32 flex items-center justify-center">
           {/* Mobile images based on language */}
           {language === 'zh' ? (
             <img alt="Signal wave with red spike (Chinese)" className="w-full max-w-5xl h-auto object-contain md:hidden" src="/lovable-uploads/d99e31a5-cac8-4e5a-9086-5af02e4769a6.png" />
