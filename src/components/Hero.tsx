@@ -1,4 +1,3 @@
-
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useWaitlistDialog } from '@/hooks/useWaitlistDialog';
@@ -66,13 +65,24 @@ const Hero = () => {
           {getCompleteText()}
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
-          {/* Swapped button positions and styles */}
-          <Button className="bg-signal-charcoal hover:bg-signal-charcoal/90 text-white font-medium px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg flex items-center gap-2" size="lg" onClick={() => document.getElementById('membership')?.scrollIntoView({
-          behavior: 'smooth'
-          })}>
+          {/* Philosophy button */}
+          <Button 
+            className="bg-signal-charcoal hover:bg-signal-charcoal/90 text-white font-medium px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg flex items-center gap-2" 
+            size="lg" 
+            onClick={() => document.getElementById('philosophy')?.scrollIntoView({
+              behavior: 'smooth'
+            })}
+          >
             {t('hero.cta.membership')}
           </Button>
-          <Button className="bg-white hover:bg-gray-100 text-signal-charcoal font-medium border border-gray-200 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg" variant="outline" size="lg" onClick={openWaitlist}>
+          {/* Waitlist button with ID for tracking visibility */}
+          <Button 
+            id="hero-waitlist-button"
+            className="bg-white hover:bg-gray-100 text-signal-charcoal font-medium border border-gray-200 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg" 
+            variant="outline" 
+            size="lg" 
+            onClick={openWaitlist}
+          >
             {t('hero.cta.waitlist')}
           </Button>
         </div>

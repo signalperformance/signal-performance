@@ -41,13 +41,18 @@ const WaitlistDialog = () => {
   const { isOpen, closeWaitlist, openWaitlist } = useWaitlistDialog();
   const [showFixedButton, setShowFixedButton] = useState(false);
   
-  // Add scroll event listener to show/hide the fixed button
+  // Updated scroll event listener to check if the hero waitlist button is visible
   useEffect(() => {
     const handleScroll = () => {
-      const heroSection = document.getElementById('home');
-      if (heroSection) {
-        const heroBottom = heroSection.getBoundingClientRect().bottom;
-        setShowFixedButton(heroBottom < 0);
+      const waitlistButton = document.querySelector('#hero-waitlist-button');
+      
+      if (waitlistButton) {
+        const buttonRect = waitlistButton.getBoundingClientRect();
+        // Show fixed button when hero waitlist button is no longer visible in the viewport
+        setShowFixedButton(
+          buttonRect.bottom < 0 || // button is above viewport
+          buttonRect.top > window.innerHeight // button is below viewport
+        );
       }
     };
     
@@ -115,7 +120,7 @@ const WaitlistDialog = () => {
 
   return (
     <>
-      {/* Fixed button at bottom right - only shown after scrolling past hero section */}
+      {/* Fixed button at bottom right - only shown when hero waitlist button is not visible */}
       {showFixedButton && (
         <div className="fixed bottom-8 right-8 z-40">
           <Button 
