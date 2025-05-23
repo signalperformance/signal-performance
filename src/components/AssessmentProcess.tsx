@@ -64,6 +64,12 @@ const AssessmentProcess = () => {
     setActiveAssessment(keys[nextIndex]);
   };
 
+  // Function to handle Next Step button click - stops auto progression
+  const handleNextStepClick = () => {
+    setAutoProgressEnabled(false);
+    advanceToNextTab();
+  };
+
   // Set up intersection observer to detect when the section is in viewport
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -291,12 +297,12 @@ const AssessmentProcess = () => {
                   
                   {/* Next Step Button moved to be inline with title */}
                   <Button 
-                    onClick={advanceToNextTab}
+                    onClick={handleNextStepClick}
                     variant="outline"
                     className="group border-signal-gold text-signal-gold hover:bg-signal-gold/10 hover:text-signal-gold transition-all duration-300"
                     size="sm"
                   >
-                    Next Step
+                    {language === 'zh' ? '下一步' : 'Next Step'}
                     <ChevronRight className="ml-1 w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                   </Button>
                 </div>
