@@ -1,16 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
 import { Move, Activity, User, Dumbbell, Club } from "lucide-react";
 import { useLanguage } from '@/contexts/LanguageContext';
+
 const AssessmentProcess = () => {
   const {
     t,
     language
   } = useLanguage();
   const [activeAssessment, setActiveAssessment] = useState("mobility");
+  const [autoProgressEnabled, setAutoProgressEnabled] = useState(true);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  
   const assessments = {
     mobility: {
       title: t('assessment.joint.title'),
@@ -47,6 +51,42 @@ const AssessmentProcess = () => {
       number: 5,
       color: "bg-signal-gold"
     }
+  };
+
+  // Function to advance to the next tab
+  const advanceToNextTab = () => {
+    const keys = Object.keys(assessments);
+    const currentIndex = keys.indexOf(activeAssessment);
+    const nextIndex = (currentIndex + 1) % keys.length;
+    setActiveAssessment(keys[nextIndex]);
+  };
+
+  // Set up auto-progression timer
+  useEffect(() => {
+    // Clear any existing timer
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+    }
+    
+    // Only set a new timer if auto-progress is enabled
+    if (autoProgressEnabled) {
+      timerRef.current = setTimeout(() => {
+        advanceToNextTab();
+      }, 3000);
+    }
+    
+    // Cleanup timer on unmount or when active assessment changes
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+    };
+  }, [activeAssessment, autoProgressEnabled]);
+
+  // Handle tab click - stop auto progression
+  const handleTabClick = (key: string) => {
+    setActiveAssessment(key);
+    setAutoProgressEnabled(false);
   };
 
   // Calculate the progress percentage based on active assessment
@@ -151,7 +191,16 @@ const AssessmentProcess = () => {
 
                   // Get the color matching the current segment's number
                   const segmentColor = getCircleColor(key);
-                  return <path key={key} d={path} fill={shouldHighlight ? segmentColor : "#f3f4f6"} stroke="#fff" strokeWidth="2" opacity={isActive ? "1" : "0.7"} className="transition-all duration-300 cursor-pointer hover:opacity-90" onClick={() => setActiveAssessment(key)} />;
+                  return <path 
+                    key={key} 
+                    d={path} 
+                    fill={shouldHighlight ? segmentColor : "#f3f4f6"} 
+                    stroke="#fff" 
+                    strokeWidth="2" 
+                    opacity={isActive ? "1" : "0.7"} 
+                    className="transition-all duration-300 cursor-pointer hover:opacity-90" 
+                    onClick={() => handleTabClick(key)} 
+                  />;
                 })}
                   
                   {/* Assessment number points on the wheel */}
@@ -166,9 +215,28 @@ const AssessmentProcess = () => {
                   const isActive = activeAssessment === key;
                   // Get proper color for the circle based on assessment key
                   const circleColor = getCircleColor(key);
-                  return <g key={key} onClick={() => setActiveAssessment(key)} className="cursor-pointer">
-                        <circle cx={x} cy={y} r="24" fill={isActive ? "white" : "#f9fafb"} stroke={isActive ? circleColor : "#e5e7eb"} strokeWidth="2" className="transition-all duration-300" />
-                        <text x={x} y={y} textAnchor="middle" dominantBaseline="central" fill={circleColor} fontWeight="bold" fontSize="16">
+                  return <g 
+                    key={key} 
+                    onClick={() => handleTabClick(key)} 
+                    className="cursor-pointer">
+                        <circle 
+                          cx={x} 
+                          cy={y} 
+                          r="24" 
+                          fill={isActive ? "white" : "#f9fafb"} 
+                          stroke={isActive ? circleColor : "#e5e7eb"} 
+                          strokeWidth="2" 
+                          className="transition-all duration-300" 
+                        />
+                        <text 
+                          x={x} 
+                          y={y} 
+                          textAnchor="middle" 
+                          dominantBaseline="central" 
+                          fill={circleColor} 
+                          fontWeight="bold" 
+                          fontSize="16"
+                        >
                           {assessment.number}
                         </text>
                       </g>;
@@ -205,13 +273,17 @@ const AssessmentProcess = () => {
         
         {/* Mobile View: Improved Tabs Layout */}
         <div className="md:hidden">
-          <Tabs value={activeAssessment} onValueChange={setActiveAssessment} className="w-full">
+          <Tabs value={activeAssessment} onValueChange={(value) => handleTabClick(value)} className="w-full">
             <TabsList className="grid grid-cols-5 mb-6 rounded-xl p-1 bg-muted/20 shadow-sm">
               {Object.entries(assessments).map(([key, assessment]) => {
               const textColorClass = getTextColorClass(key);
               const isActive = activeAssessment === key;
               const circleColor = getCircleColor(key);
-              return <TabsTrigger key={key} value={key} className={cn("flex justify-center py-3 rounded-lg transition-all", isActive ? "shadow-sm" : "hover:bg-muted/40")}>
+              return <TabsTrigger 
+                key={key} 
+                value={key} 
+                className={cn("flex justify-center py-3 rounded-lg transition-all", isActive ? "shadow-sm" : "hover:bg-muted/40")}
+              >
                     <div className={cn("w-10 h-10 rounded-full flex items-center justify-center", isActive ? "bg-white shadow-md" : "bg-gray-50")} style={{
                   border: isActive ? `2px solid ${circleColor}` : '1px solid #e5e7eb'
                 }}>
@@ -248,4 +320,5 @@ const AssessmentProcess = () => {
       </div>
     </section>;
 };
+
 export default AssessmentProcess;
