@@ -16,7 +16,7 @@ const Philosophy = () => {
         <div className="w-full mb-12 relative h-36 md:h-32 flex items-center justify-center">
           {/* Mobile images based on language */}
           {language === 'zh' ? (
-            <img alt="Signal wave with red spike (Chinese)" className="w-full max-w-5xl h-auto object-contain md:hidden" src="/lovable-uploads/02648a92-ba42-467d-b308-7d76e55376a2.png" />
+            <img alt="Signal wave with red spike (Chinese)" className="w-full max-w-5xl h-auto object-contain md:hidden" src="/lovable-uploads/d99e31a5-cac8-4e5a-9086-5af02e4769a6.png" />
           ) : (
             <img alt="Signal wave with red spike" className="w-full max-w-5xl h-auto object-contain md:hidden" src="/lovable-uploads/08851ee9-0b49-49f8-a037-3b2566bfd6d3.png" />
           )}
