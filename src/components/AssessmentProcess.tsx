@@ -98,7 +98,7 @@ const AssessmentProcess = () => {
       // gray-500
     }
   };
-  return <section id="assessment" className="section-padding bg-gradient-to-b from-white to-signal-light-gray">
+  return <section id="assessment" className="section-padding bg-white">
       <div className="container mx-auto container-padding">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 font-lora">{t('assessment.title')}</h2>

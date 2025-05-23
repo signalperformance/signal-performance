@@ -1,10 +1,11 @@
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useLanguage } from '@/contexts/LanguageContext';
 const Philosophy = () => {
   const {
     t
   } = useLanguage();
-  return <section id="philosophy" className="section-padding bg-white">
+  return <section id="philosophy" className="section-padding bg-signal-light-gray">
       <div className="container mx-auto container-padding">
         <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center font-lora">Our Philosophy</h2>
         
