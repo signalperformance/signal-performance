@@ -171,7 +171,7 @@ const translations = {
     'membership.golf.putting.description': '使用尖端工具提升技術與對準，自主安排練習時間。',
     'membership.golf.tracking': '比賽數據分析',
     'membership.golf.tracking.description': '所有會員皆可使用數據分析軟體，使我們能夠深入了解您的比賽表現，並依此調整訓練重點。',
-    'membership.golf.fitting': '球桿調校工作站',
+    'membership.golf.fitting': '球桿調整站',
     'membership.golf.fitting.description': '使用專業設備測量桿面仰角、桿身傾角及其他規格，進行依據數據的調整，優化球桿設定以提升表現。',
     
     // Facility
