@@ -132,17 +132,17 @@ const Hero = () => {
       const parts = headlineText.split('的');
       if (parts.length > 1) {
         return <>
-            {parts[0]}的<br className="md:hidden" />{parts[1]}
+            {parts[0]}的<br className="sm:hidden" />{parts[1]}
           </>;
       }
       return headlineText;
     }
     
-    // For English, add line break after "Space"
+    // For English, add line break after "Space" only on very small screens
     const parts = headlineText.split('Space');
     if (parts.length > 1) {
       return <>
-          {parts[0]}Space<br className="md:hidden" />{parts[1]}
+          {parts[0]}Space<br className="sm:hidden" />{parts[1]}
         </>;
     }
     return headlineText;
