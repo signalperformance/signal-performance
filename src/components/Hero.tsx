@@ -1,4 +1,3 @@
-
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useWaitlistDialog } from '@/hooks/useWaitlistDialog';
@@ -121,7 +120,7 @@ const Hero = () => {
     return textPhases.join(language === 'zh' ? '' : ' ');
   };
 
-  // Function to render headline with line break after "Space"
+  // Function to render headline with controlled line breaks
   const renderHeadline = () => {
     const headlineText = t('hero.headline');
     
@@ -131,14 +130,16 @@ const Hero = () => {
       if (parts.length > 1) {
         return (
           <>
-            <span className="whitespace-nowrap">{parts[0]}空間</span><br />{parts[1].trim()}
+            <span className="whitespace-nowrap">{parts[0]}空間</span>
+            <br className="hidden max-sm:block" />
+            <span> {parts[1].trim()}</span>
           </>
         );
       }
       return headlineText;
     }
     
-    // For English, find "Space" and add line break after it
+    // For English, find "Space" and add controlled line break after it
     const spaceWord = 'Space';
     if (headlineText.includes(spaceWord)) {
       const spaceIndex = headlineText.indexOf(spaceWord) + spaceWord.length;
@@ -147,7 +148,9 @@ const Hero = () => {
       
       return (
         <>
-          <span className="whitespace-nowrap">{beforeBreak}</span><br />{afterBreak}
+          <span className="whitespace-nowrap">{beforeBreak}</span>
+          <br className="hidden max-sm:block" />
+          <span> {afterBreak}</span>
         </>
       );
     }
