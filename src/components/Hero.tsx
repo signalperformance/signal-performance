@@ -159,7 +159,7 @@ const Hero = () => {
             {t('hero.cta.membership')}
           </Button>
           {/* Waitlist button with ID for tracking visibility */}
-          <Button id="hero-waitlist-button" variant="outline" size="lg" onClick={openWaitlist} className="font-medium border border-signal-charcoal/30 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg text-signal-white bg-signal-gold hover:bg-signal-gold active:bg-signal-gold focus:bg-signal-gold">
+          <Button id="hero-waitlist-button" variant="outline" size="lg" onClick={openWaitlist} className="font-medium border border-signal-charcoal/30 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg text-signal-white bg-signal-gold hover:bg-signal-gold hover:text-signal-white active:bg-signal-gold active:text-signal-white focus:bg-signal-gold focus:text-signal-white">
             {t('hero.cta.waitlist')}
           </Button>
         </div>
