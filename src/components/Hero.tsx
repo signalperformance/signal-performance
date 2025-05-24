@@ -137,16 +137,16 @@ const Hero = () => {
       return headlineText;
     }
     
-    // For English, find " Space " (with spaces) and add line break after it on mobile only
-    const spacePhrase = ' Space ';
-    if (headlineText.includes(spacePhrase)) {
-      const spaceIndex = headlineText.indexOf(spacePhrase) + spacePhrase.length;
-      const beforeSpace = headlineText.substring(0, spaceIndex);
-      const afterSpace = headlineText.substring(spaceIndex);
+    // For English, find "Space " (with trailing space) and add line break after it
+    const spaceWord = 'Space ';
+    if (headlineText.includes(spaceWord)) {
+      const spaceIndex = headlineText.indexOf(spaceWord) + spaceWord.length;
+      const beforeBreak = headlineText.substring(0, spaceIndex);
+      const afterBreak = headlineText.substring(spaceIndex);
       
       return (
         <>
-          {beforeSpace}<br className="hidden max-sm:block" />{afterSpace}
+          {beforeBreak}<br className="hidden max-sm:block" />{afterBreak}
         </>
       );
     }
