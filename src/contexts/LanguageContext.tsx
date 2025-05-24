@@ -19,7 +19,7 @@ const translations = {
     'nav.login': 'Member Login',
     
     // Hero
-    'hero.headline': 'An Integrated Training Space for Pro Golfers',
+    'hero.headline': 'Holistic Training Space for Pro Golfers',
     'hero.subheadline': 'Physical, mental, and skill training — all in one place',
     'hero.cta.waitlist': 'Join the Waitlist',
     'hero.cta.membership': 'Explore Membership',
