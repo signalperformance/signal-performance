@@ -13,7 +13,6 @@ const Hero = () => {
     openWaitlist
   } = useWaitlistDialog();
   const [isMobile, setIsMobile] = useState(false);
-  const vantaRef = useRef<HTMLDivElement>(null);
   const vantaEffect = useRef<any>(null);
 
   // Check for mobile device
@@ -35,11 +34,12 @@ const Hero = () => {
   // Initialize VANTA waves effect
   useEffect(() => {
     const initVanta = () => {
-      if (vantaRef.current && (window as any).VANTA && (window as any).THREE) {
+      const vantaElement = document.getElementById('vanta-hero-bg');
+      if (vantaElement && (window as any).VANTA && (window as any).THREE) {
         console.log('Initializing VANTA effect...');
         try {
           vantaEffect.current = (window as any).VANTA.WAVES({
-            el: vantaRef.current,
+            el: "#vanta-hero-bg",
             mouseControls: true,
             touchControls: true,
             gyroControls: false,
@@ -47,11 +47,11 @@ const Hero = () => {
             minWidth: 200.00,
             scale: 1.00,
             scaleMobile: 1.00,
-            color: 0x18232c,
+            color: 0x003366,
             shininess: 30.00,
             waveHeight: 15.00,
-            waveSpeed: 1.00,
-            zoom: 0.75
+            waveSpeed: 0.75,
+            zoom: 0.85
           });
           console.log('VANTA effect initialized successfully');
         } catch (error) {
@@ -100,37 +100,49 @@ const Hero = () => {
   };
 
   return (
-    <section id="home" className="relative min-h-[100svh] py-16 md:py-0 md:h-screen overflow-x-hidden overflow-y-auto">
-      <div ref={vantaRef} className="absolute inset-0 bg-gray-900">
-        <div className="relative z-10 container mx-auto px-4 text-center h-full flex flex-col justify-center">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 sm:mb-8 text-white max-w-5xl mx-auto leading-tight">
-            {renderHeadline()}
-          </h1>
-          <p className="text-lg sm:text-xl mb-10 sm:mb-14 max-w-3xl mx-auto min-h-[2rem] font-medium md:text-3xl text-white/90">
-            {getCompleteText()}
-          </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
-            {/* Philosophy button */}
-            <Button 
-              className="bg-white hover:bg-gray-100 text-signal-charcoal font-medium px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg flex items-center gap-2" 
-              size="lg" 
-              onClick={() => document.getElementById('philosophy')?.scrollIntoView({
-                behavior: 'smooth'
-              })}
-            >
-              {t('hero.cta.membership')}
-            </Button>
-            {/* Waitlist button with ID for tracking visibility */}
-            <Button 
-              id="hero-waitlist-button"
-              className="bg-transparent hover:bg-white/10 text-white font-medium border border-white/30 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg" 
-              variant="outline" 
-              size="lg" 
-              onClick={openWaitlist}
-            >
-              {t('hero.cta.waitlist')}
-            </Button>
-          </div>
+    <section id="home" className="relative min-h-[70vh] py-16 md:py-0 md:h-screen overflow-x-hidden overflow-y-auto">
+      {/* Vanta.js background div */}
+      <div 
+        id="vanta-hero-bg" 
+        className="absolute top-0 left-0 w-full h-full"
+        style={{ zIndex: -1 }}
+      ></div>
+      
+      {/* Hero content overlay */}
+      <div className="relative z-10 container mx-auto px-4 text-center h-full flex flex-col justify-center">
+        <h1 
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 sm:mb-8 text-white max-w-5xl mx-auto leading-tight"
+          style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)' }}
+        >
+          {renderHeadline()}
+        </h1>
+        <p 
+          className="text-lg sm:text-xl mb-10 sm:mb-14 max-w-3xl mx-auto min-h-[2rem] font-medium md:text-3xl text-white/90"
+          style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.5)' }}
+        >
+          {getCompleteText()}
+        </p>
+        <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
+          {/* Philosophy button */}
+          <Button 
+            className="bg-white hover:bg-gray-100 text-signal-charcoal font-medium px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg flex items-center gap-2" 
+            size="lg" 
+            onClick={() => document.getElementById('philosophy')?.scrollIntoView({
+              behavior: 'smooth'
+            })}
+          >
+            {t('hero.cta.membership')}
+          </Button>
+          {/* Waitlist button with ID for tracking visibility */}
+          <Button 
+            id="hero-waitlist-button"
+            className="bg-transparent hover:bg-white/10 text-white font-medium border border-white/30 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg" 
+            variant="outline" 
+            size="lg" 
+            onClick={openWaitlist}
+          >
+            {t('hero.cta.waitlist')}
+          </Button>
         </div>
       </div>
     </section>
