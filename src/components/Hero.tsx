@@ -138,7 +138,6 @@ const Hero = () => {
     }
     return t('hero.headline');
   };
-
   return <section id="home" className="relative min-h-[100svh] overflow-hidden flex items-center justify-center">
       {/* VANTA Waves Background with fallback */}
       <div ref={vantaRef} className="absolute inset-0 w-full h-full z-0" style={{
@@ -164,7 +163,7 @@ const Hero = () => {
             {t('hero.cta.membership')}
           </Button>
           {/* Waitlist button with ID for tracking visibility */}
-          <Button id="hero-waitlist-button" className="bg-transparent hover:bg-signal-charcoal/10 text-signal-charcoal font-medium border border-signal-charcoal/30 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg" variant="outline" size="lg" onClick={openWaitlist}>
+          <Button id="hero-waitlist-button" variant="outline" size="lg" onClick={openWaitlist} className="font-medium border border-signal-charcoal/30 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg bg-signal-white text-signal-charcoal">
             {t('hero.cta.waitlist')}
           </Button>
         </div>
