@@ -150,7 +150,7 @@ const Hero = () => {
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 sm:mb-8 text-signal-charcoal max-w-5xl mx-auto leading-tight">
           {renderHeadline()}
         </h1>
-        <div className="bg-signal-gold rounded-lg px-6 py-4 mb-10 sm:mb-14 max-w-3xl mx-auto">
+        <div className="rounded-lg px-6 py-4 mb-10 sm:mb-14 max-w-3xl mx-auto bg-transparent">
           <p className="text-lg sm:text-xl font-medium md:text-3xl text-white">
             {getCompleteText()}
           </p>
