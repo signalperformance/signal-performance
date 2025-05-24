@@ -60,8 +60,8 @@ const Hero = () => {
             color: 0xacacac,
             // Changed to medium gray color
             shininess: 0.00,
-            waveHeight: 15.00,
-            waveSpeed: 0.75,
+            waveHeight: 2.00,
+            waveSpeed: 1.1,
             zoom: 0.85
           });
           if (vantaEffect.current) {
