@@ -1,3 +1,4 @@
+
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useWaitlistDialog } from '@/hooks/useWaitlistDialog';
@@ -125,28 +126,28 @@ const Hero = () => {
     const headlineText = t('hero.headline');
     
     if (language === 'zh') {
-      // Split the Chinese title after "的"
-      const parts = headlineText.split('的');
+      // Split the Chinese title after "空間"
+      const parts = headlineText.split('空間');
       if (parts.length > 1) {
         return (
           <>
-            {parts[0]}的<br className="hidden max-sm:block" />{parts[1]}
+            <span className="whitespace-nowrap">{parts[0]}空間</span><br />{parts[1].trim()}
           </>
         );
       }
       return headlineText;
     }
     
-    // For English, find "Space " (with trailing space) and add line break after it
-    const spaceWord = 'Space ';
+    // For English, find "Space" and add line break after it
+    const spaceWord = 'Space';
     if (headlineText.includes(spaceWord)) {
       const spaceIndex = headlineText.indexOf(spaceWord) + spaceWord.length;
       const beforeBreak = headlineText.substring(0, spaceIndex);
-      const afterBreak = headlineText.substring(spaceIndex);
+      const afterBreak = headlineText.substring(spaceIndex).trim();
       
       return (
         <>
-          {beforeBreak}<br className="hidden max-sm:block" />{afterBreak}
+          <span className="whitespace-nowrap">{beforeBreak}</span><br />{afterBreak}
         </>
       );
     }
