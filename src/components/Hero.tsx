@@ -57,7 +57,7 @@ const Hero = () => {
             minWidth: 200.00,
             scale: 1.00,
             scaleMobile: 1.00,
-            color: 0xacacac,
+            color: 0x989b9b,
             // Changed to medium gray color
             shininess: 0.00,
             waveHeight: 2.00,
