@@ -2,8 +2,14 @@
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useWaitlistDialog } from '@/hooks/useWaitlistDialog';
-import { useState, useEffect } from 'react';
-import { WavyBackground } from '@/components/ui/wavy-background';
+import { useState, useEffect, useRef } from 'react';
+
+declare global {
+  interface Window {
+    VANTA: any;
+    THREE: any;
+  }
+}
 
 const Hero = () => {
   const {
@@ -14,6 +20,8 @@ const Hero = () => {
     openWaitlist
   } = useWaitlistDialog();
   const [isMobile, setIsMobile] = useState(false);
+  const vantaRef = useRef<HTMLDivElement>(null);
+  const vantaEffect = useRef<any>(null);
 
   // Check for mobile device
   useEffect(() => {
@@ -29,6 +37,46 @@ const Hero = () => {
 
     // Clean up
     return () => window.removeEventListener('resize', checkIfMobile);
+  }, []);
+
+  // Initialize VANTA effect
+  useEffect(() => {
+    const initVanta = () => {
+      if (vantaRef.current && window.VANTA && window.THREE) {
+        vantaEffect.current = window.VANTA.WAVES({
+          el: vantaRef.current,
+          mouseControls: true,
+          touchControls: true,
+          gyroControls: false,
+          minHeight: 200.00,
+          minWidth: 200.00,
+          scale: 1.00,
+          scaleMobile: 1.00,
+          color: 0x1d4f78,
+          shininess: 30.00,
+          waveHeight: 15.00,
+          waveSpeed: 0.75,
+          zoom: 0.85
+        });
+      }
+    };
+
+    // Check if VANTA is available, if not retry
+    const checkVanta = () => {
+      if (window.VANTA && window.THREE) {
+        initVanta();
+      } else {
+        setTimeout(checkVanta, 100);
+      }
+    };
+
+    checkVanta();
+
+    return () => {
+      if (vantaEffect.current) {
+        vantaEffect.current.destroy();
+      }
+    };
   }, []);
 
   // Text phases for different languages
@@ -56,45 +104,45 @@ const Hero = () => {
   };
 
   return (
-    <section id="home" className="relative min-h-[100svh] py-16 md:py-0 md:h-screen overflow-x-hidden overflow-y-auto">
-      <WavyBackground
-        backgroundFill="white"
-        colors={["#c9aa71", "#425563", "#18232c", "#F7F8F9"]}
-        waveOpacity={0.3}
-        speed="slow"
-        containerClassName="absolute inset-0"
-      >
-        <div className="relative z-10 container mx-auto px-4 text-center">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 sm:mb-8 text-signal-charcoal max-w-5xl mx-auto leading-tight">
-            {renderHeadline()}
-          </h1>
-          <p className="text-lg sm:text-xl mb-10 sm:mb-14 max-w-3xl mx-auto min-h-[2rem] font-medium md:text-3xl text-signal-gold">
-            {getCompleteText()}
-          </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
-            {/* Philosophy button */}
-            <Button 
-              className="bg-signal-charcoal hover:bg-signal-charcoal/90 text-white font-medium px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg flex items-center gap-2" 
-              size="lg" 
-              onClick={() => document.getElementById('philosophy')?.scrollIntoView({
-                behavior: 'smooth'
-              })}
-            >
-              {t('hero.cta.membership')}
-            </Button>
-            {/* Waitlist button with ID for tracking visibility */}
-            <Button 
-              id="hero-waitlist-button"
-              className="bg-white hover:bg-gray-100 text-signal-charcoal font-medium border border-gray-200 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg" 
-              variant="outline" 
-              size="lg" 
-              onClick={openWaitlist}
-            >
-              {t('hero.cta.waitlist')}
-            </Button>
-          </div>
+    <section id="home" className="relative min-h-[100svh] py-16 md:py-0 md:h-screen overflow-hidden">
+      {/* VANTA Waves Background */}
+      <div 
+        ref={vantaRef}
+        className="absolute inset-0 w-full h-full"
+        style={{ zIndex: 1 }}
+      />
+      
+      {/* Content Overlay */}
+      <div className="relative z-10 container mx-auto px-4 text-center h-full flex flex-col justify-center">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 sm:mb-8 text-white max-w-5xl mx-auto leading-tight drop-shadow-lg">
+          {renderHeadline()}
+        </h1>
+        <p className="text-lg sm:text-xl mb-10 sm:mb-14 max-w-3xl mx-auto min-h-[2rem] font-medium md:text-3xl text-white/90 drop-shadow-md">
+          {getCompleteText()}
+        </p>
+        <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
+          {/* Philosophy button */}
+          <Button 
+            className="bg-white/90 hover:bg-white text-signal-charcoal font-medium px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg flex items-center gap-2 backdrop-blur-sm" 
+            size="lg" 
+            onClick={() => document.getElementById('philosophy')?.scrollIntoView({
+              behavior: 'smooth'
+            })}
+          >
+            {t('hero.cta.membership')}
+          </Button>
+          {/* Waitlist button with ID for tracking visibility */}
+          <Button 
+            id="hero-waitlist-button"
+            className="bg-transparent hover:bg-white/10 text-white font-medium border border-white/30 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg backdrop-blur-sm" 
+            variant="outline" 
+            size="lg" 
+            onClick={openWaitlist}
+          >
+            {t('hero.cta.waitlist')}
+          </Button>
         </div>
-      </WavyBackground>
+      </div>
     </section>
   );
 };
