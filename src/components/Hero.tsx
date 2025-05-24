@@ -1,4 +1,3 @@
-
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useWaitlistDialog } from '@/hooks/useWaitlistDialog';
@@ -108,8 +107,7 @@ const Hero = () => {
       {/* VANTA Waves Background */}
       <div 
         ref={vantaRef}
-        className="absolute inset-0 w-full h-full"
-        style={{ zIndex: 1 }}
+        className="absolute inset-0 w-full h-full z-0"
       />
       
       {/* Content Overlay */}
