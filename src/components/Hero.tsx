@@ -1,21 +1,20 @@
+
 import { Button } from '@/components/ui/button';
+import { TextRotate } from '@/components/ui/text-rotate';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useWaitlistDialog } from '@/hooks/useWaitlistDialog';
 import { useState, useEffect, useRef } from 'react';
+
 declare global {
   interface Window {
     VANTA: any;
     THREE: any;
   }
 }
+
 const Hero = () => {
-  const {
-    t,
-    language
-  } = useLanguage();
-  const {
-    openWaitlist
-  } = useWaitlistDialog();
+  const { t, language } = useLanguage();
+  const { openWaitlist } = useWaitlistDialog();
   const [isMobile, setIsMobile] = useState(false);
   const [vantaLoaded, setVantaLoaded] = useState(false);
   const vantaRef = useRef<HTMLDivElement>(null);
@@ -123,47 +122,59 @@ const Hero = () => {
     return textPhases.join(language === 'zh' ? '' : ' ');
   };
 
-  // Function to render headline with line break for Chinese
-  const renderHeadline = () => {
-    if (language === 'zh') {
-      // Split the Chinese title after "的"
-      const headlineText = t('hero.headline');
-      const parts = headlineText.split('的');
-      if (parts.length > 1) {
-        return <>
-            {parts[0]}的<br className="md:hidden" />{parts[1]}
-          </>;
-      }
-      return headlineText;
-    }
-    return t('hero.headline');
-  };
-  return <section id="home" className="relative min-h-[100svh] overflow-hidden flex items-center justify-center">
+  // Define rotating text options
+  const rotatingTexts = language === 'zh' 
+    ? ["全面", "專業", "整合式"] 
+    : ["Holistic", "Elite", "Integrated"];
+
+  return (
+    <section id="home" className="relative min-h-[100svh] overflow-hidden flex items-center justify-center">
       {/* VANTA Waves Background with fallback */}
-      <div ref={vantaRef} className="absolute inset-0 w-full h-full z-0" style={{
-      backgroundColor: vantaLoaded ? 'transparent' : '#85858c',
-      transition: 'background-color 0.5s ease'
-    }} />
+      <div 
+        ref={vantaRef} 
+        className="absolute inset-0 w-full h-full z-0" 
+        style={{
+          backgroundColor: vantaLoaded ? 'transparent' : '#85858c',
+          transition: 'background-color 0.5s ease'
+        }} 
+      />
       
       {/* Content Overlay */}
       <div className="relative z-10 container mx-auto px-4 text-center py-16 md:py-0">
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 sm:mb-8 text-signal-charcoal max-w-5xl mx-auto leading-tight py-[35px]">
-          {renderHeadline()}
+          <TextRotate
+            texts={rotatingTexts}
+            rotationInterval={3000}
+            staggerDuration={0.05}
+            staggerFrom="first"
+            transition={{ type: "spring", damping: 30, stiffness: 400 }}
+          />
+          {" "}Training Space for Pro Golfers
         </h1>
         
         <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
           {/* Philosophy button */}
-          <Button size="lg" onClick={() => document.getElementById('philosophy')?.scrollIntoView({
-          behavior: 'smooth'
-        })} className="text-white font-medium px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg flex items-center gap-2 bg-signal-charcoal hover:bg-signal-charcoal active:bg-signal-charcoal focus:bg-signal-charcoal">
+          <Button 
+            size="lg" 
+            onClick={() => document.getElementById('philosophy')?.scrollIntoView({ behavior: 'smooth' })} 
+            className="text-white font-medium px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg flex items-center gap-2 bg-signal-charcoal hover:bg-signal-charcoal active:bg-signal-charcoal focus:bg-signal-charcoal"
+          >
             {t('hero.cta.membership')}
           </Button>
           {/* Waitlist button with ID for tracking visibility */}
-          <Button id="hero-waitlist-button" variant="outline" size="lg" onClick={openWaitlist} className="font-medium border border-signal-charcoal/30 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg text-signal-white bg-signal-gold hover:bg-signal-gold hover:text-signal-white active:bg-signal-gold active:text-signal-white focus:bg-signal-gold focus:text-signal-white">
+          <Button 
+            id="hero-waitlist-button" 
+            variant="outline" 
+            size="lg" 
+            onClick={openWaitlist} 
+            className="font-medium border border-signal-charcoal/30 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg text-signal-white bg-signal-gold hover:bg-signal-gold hover:text-signal-white active:bg-signal-gold active:text-signal-white focus:bg-signal-gold focus:text-signal-white"
+          >
             {t('hero.cta.waitlist')}
           </Button>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default Hero;
