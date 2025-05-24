@@ -1,4 +1,3 @@
-
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useWaitlistDialog } from '@/hooks/useWaitlistDialog';
@@ -131,22 +130,23 @@ const Hero = () => {
       if (parts.length > 1) {
         return (
           <>
-            {parts[0]}的<br className="block sm:hidden" />{parts[1]}
+            {parts[0]}的<br className="hidden max-sm:block" />{parts[1]}
           </>
         );
       }
       return headlineText;
     }
     
-    // For English, find "Space" and add line break after it on mobile only
-    if (headlineText.includes('Space')) {
-      const spaceIndex = headlineText.indexOf('Space') + 5; // +5 to include "Space"
+    // For English, find " Space " (with spaces) and add line break after it on mobile only
+    const spacePhrase = ' Space ';
+    if (headlineText.includes(spacePhrase)) {
+      const spaceIndex = headlineText.indexOf(spacePhrase) + spacePhrase.length;
       const beforeSpace = headlineText.substring(0, spaceIndex);
       const afterSpace = headlineText.substring(spaceIndex);
       
       return (
         <>
-          {beforeSpace}<br className="block sm:hidden" />{afterSpace}
+          {beforeSpace}<br className="hidden max-sm:block" />{afterSpace}
         </>
       );
     }
