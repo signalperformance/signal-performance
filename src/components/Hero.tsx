@@ -1,3 +1,4 @@
+
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useWaitlistDialog } from '@/hooks/useWaitlistDialog';
@@ -61,7 +62,7 @@ const Hero = () => {
             minWidth: 200.00,
             scale: 1.00,
             scaleMobile: 1.00,
-            color: 0x1d4f78,
+            color: 0xc9aa71, // Changed to gold color from theme
             shininess: 30.00,
             waveHeight: 15.00,
             waveSpeed: 0.75,
@@ -82,15 +83,27 @@ const Hero = () => {
       }
     };
 
-    // Improved script loading detection with timeout
+    // Improved script loading detection with timeout and retries
+    let retries = 0;
+    const maxRetries = 50;
+    
     const checkVanta = () => {
-      console.log('🔍 Checking VANTA availability...');
+      console.log('🔍 Checking VANTA availability... Attempt:', retries + 1);
+      
       if (window.VANTA && window.THREE) {
         console.log('✅ VANTA and THREE.js are available');
         initVanta();
       } else {
         console.log('⏳ VANTA or THREE.js not available, retrying...');
-        setTimeout(checkVanta, 100);
+        console.log('window.THREE available:', !!window.THREE);
+        console.log('window.VANTA available:', !!window.VANTA);
+        
+        retries++;
+        if (retries < maxRetries) {
+          setTimeout(checkVanta, 100);
+        } else {
+          console.error('❌ VANTA loading failed after', maxRetries, 'attempts');
+        }
       }
     };
 
@@ -146,19 +159,10 @@ const Hero = () => {
         ref={vantaRef}
         className="absolute inset-0 w-full h-full z-0"
         style={{
-          backgroundColor: vantaLoaded ? 'transparent' : '#1d4f78',
+          backgroundColor: vantaLoaded ? 'transparent' : '#c9aa71',
           transition: 'background-color 0.5s ease'
         }}
       />
-      
-      {/* Debug info (remove in production) */}
-      {process.env.NODE_ENV === 'development' && (
-        <div className="absolute top-4 left-4 z-50 bg-black/50 text-white p-2 text-xs rounded">
-          VANTA Loaded: {vantaLoaded ? '✅' : '❌'}<br/>
-          THREE: {typeof window !== 'undefined' && window.THREE ? '✅' : '❌'}<br/>
-          VANTA: {typeof window !== 'undefined' && window.VANTA ? '✅' : '❌'}
-        </div>
-      )}
       
       {/* Content Overlay */}
       <div className="relative z-10 container mx-auto px-4 text-center h-full flex flex-col justify-center">
