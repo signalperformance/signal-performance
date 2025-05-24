@@ -1,4 +1,5 @@
 
+
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useWaitlistDialog } from '@/hooks/useWaitlistDialog';
@@ -62,7 +63,7 @@ const Hero = () => {
             minWidth: 200.00,
             scale: 1.00,
             scaleMobile: 1.00,
-            color: 0xc9aa71, // Changed to gold color from theme
+            color: 0xE5DACE, // Changed to lighter gold color
             shininess: 30.00,
             waveHeight: 15.00,
             waveSpeed: 0.75,
@@ -152,20 +153,20 @@ const Hero = () => {
   return (
     <section 
       id="home" 
-      className="relative min-h-[100svh] py-16 md:py-0 md:h-screen overflow-hidden"
+      className="relative min-h-[100svh] overflow-hidden flex items-center justify-center"
     >
       {/* VANTA Waves Background with fallback */}
       <div 
         ref={vantaRef}
         className="absolute inset-0 w-full h-full z-0"
         style={{
-          backgroundColor: vantaLoaded ? 'transparent' : '#c9aa71',
+          backgroundColor: vantaLoaded ? 'transparent' : '#E5DACE',
           transition: 'background-color 0.5s ease'
         }}
       />
       
       {/* Content Overlay */}
-      <div className="relative z-10 container mx-auto px-4 text-center h-full flex flex-col justify-center">
+      <div className="relative z-10 container mx-auto px-4 text-center py-16 md:py-0">
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 sm:mb-8 text-white max-w-5xl mx-auto leading-tight drop-shadow-lg">
           {renderHeadline()}
         </h1>
