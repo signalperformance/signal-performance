@@ -34,25 +34,41 @@ const Hero = () => {
 
   // Initialize VANTA waves effect
   useEffect(() => {
-    if (vantaRef.current && (window as any).VANTA) {
-      vantaEffect.current = (window as any).VANTA.WAVES({
-        el: vantaRef.current,
-        mouseControls: true,
-        touchControls: true,
-        gyroControls: false,
-        minHeight: 200.00,
-        minWidth: 200.00,
-        scale: 1.00,
-        scaleMobile: 1.00,
-        color: 0x18232c,
-        shininess: 30.00,
-        waveHeight: 15.00,
-        waveSpeed: 1.00,
-        zoom: 0.75
-      });
-    }
+    const initVanta = () => {
+      if (vantaRef.current && (window as any).VANTA && (window as any).THREE) {
+        console.log('Initializing VANTA effect...');
+        try {
+          vantaEffect.current = (window as any).VANTA.WAVES({
+            el: vantaRef.current,
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0x18232c,
+            shininess: 30.00,
+            waveHeight: 15.00,
+            waveSpeed: 1.00,
+            zoom: 0.75
+          });
+          console.log('VANTA effect initialized successfully');
+        } catch (error) {
+          console.error('Error initializing VANTA effect:', error);
+        }
+      } else {
+        console.log('VANTA or THREE.js not available, retrying...');
+        // Retry after a short delay
+        setTimeout(initVanta, 100);
+      }
+    };
+
+    // Wait for scripts to load
+    const timer = setTimeout(initVanta, 100);
 
     return () => {
+      clearTimeout(timer);
       if (vantaEffect.current) {
         vantaEffect.current.destroy();
       }
@@ -85,7 +101,7 @@ const Hero = () => {
 
   return (
     <section id="home" className="relative min-h-[100svh] py-16 md:py-0 md:h-screen overflow-x-hidden overflow-y-auto">
-      <div ref={vantaRef} className="absolute inset-0">
+      <div ref={vantaRef} className="absolute inset-0 bg-gray-900">
         <div className="relative z-10 container mx-auto px-4 text-center h-full flex flex-col justify-center">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 sm:mb-8 text-white max-w-5xl mx-auto leading-tight">
             {renderHeadline()}
