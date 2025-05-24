@@ -123,11 +123,12 @@ const Hero = () => {
     return textPhases.join(language === 'zh' ? '' : ' ');
   };
 
-  // Function to render headline with line break for Chinese
+  // Function to render headline with line break after "Space"
   const renderHeadline = () => {
+    const headlineText = t('hero.headline');
+    
     if (language === 'zh') {
       // Split the Chinese title after "的"
-      const headlineText = t('hero.headline');
       const parts = headlineText.split('的');
       if (parts.length > 1) {
         return <>
@@ -136,8 +137,17 @@ const Hero = () => {
       }
       return headlineText;
     }
-    return t('hero.headline');
+    
+    // For English, add line break after "Space"
+    const parts = headlineText.split('Space');
+    if (parts.length > 1) {
+      return <>
+          {parts[0]}Space<br className="md:hidden" />{parts[1]}
+        </>;
+    }
+    return headlineText;
   };
+
   return <section id="home" className="relative min-h-[100svh] overflow-hidden flex items-center justify-center">
       {/* VANTA Waves Background with fallback */}
       <div ref={vantaRef} className="absolute inset-0 w-full h-full z-0" style={{
