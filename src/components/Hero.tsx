@@ -159,7 +159,7 @@ const Hero = () => {
           {/* Philosophy button */}
           <Button size="lg" onClick={() => document.getElementById('philosophy')?.scrollIntoView({
           behavior: 'smooth'
-        })} className="text-white font-medium px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg flex items-center gap-2 bg-signal-charcoal">
+        })} className="text-white font-medium px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg flex items-center gap-2 bg-signal-charcoal hover:bg-signal-charcoal">
             {t('hero.cta.membership')}
           </Button>
           {/* Waitlist button with ID for tracking visibility */}
