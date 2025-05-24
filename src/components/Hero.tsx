@@ -167,16 +167,16 @@ const Hero = () => {
       
       {/* Content Overlay */}
       <div className="relative z-10 container mx-auto px-4 text-center py-16 md:py-0">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 sm:mb-8 text-white max-w-5xl mx-auto leading-tight drop-shadow-lg">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 sm:mb-8 text-signal-charcoal max-w-5xl mx-auto leading-tight">
           {renderHeadline()}
         </h1>
-        <p className="text-lg sm:text-xl mb-10 sm:mb-14 max-w-3xl mx-auto min-h-[2rem] font-medium md:text-3xl text-white/90 drop-shadow-md">
+        <p className="text-lg sm:text-xl mb-10 sm:mb-14 max-w-3xl mx-auto min-h-[2rem] font-medium md:text-3xl text-signal-gold">
           {getCompleteText()}
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
           {/* Philosophy button */}
           <Button 
-            className="bg-white/90 hover:bg-white text-signal-charcoal font-medium px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg flex items-center gap-2 backdrop-blur-sm" 
+            className="bg-signal-gold hover:bg-signal-gold/90 text-white font-medium px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg flex items-center gap-2" 
             size="lg" 
             onClick={() => document.getElementById('philosophy')?.scrollIntoView({
               behavior: 'smooth'
@@ -187,7 +187,7 @@ const Hero = () => {
           {/* Waitlist button with ID for tracking visibility */}
           <Button 
             id="hero-waitlist-button"
-            className="bg-transparent hover:bg-white/10 text-white font-medium border border-white/30 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg backdrop-blur-sm" 
+            className="bg-transparent hover:bg-signal-charcoal/10 text-signal-charcoal font-medium border border-signal-charcoal/30 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg" 
             variant="outline" 
             size="lg" 
             onClick={openWaitlist}
