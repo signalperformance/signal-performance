@@ -19,6 +19,7 @@ const Hero = () => {
     openWaitlist
   } = useWaitlistDialog();
   const [isMobile, setIsMobile] = useState(false);
+  const [vantaLoaded, setVantaLoaded] = useState(false);
   const vantaRef = useRef<HTMLDivElement>(null);
   const vantaEffect = useRef<any>(null);
 
@@ -38,45 +39,78 @@ const Hero = () => {
     return () => window.removeEventListener('resize', checkIfMobile);
   }, []);
 
-  // Initialize VANTA effect
+  // Initialize VANTA effect with comprehensive debugging
   useEffect(() => {
+    console.log('🌊 VANTA Hero useEffect started');
+    
     const initVanta = () => {
+      console.log('🌊 initVanta called');
+      console.log('🌊 window.THREE:', !!window.THREE);
+      console.log('🌊 window.VANTA:', !!window.VANTA);
+      console.log('🌊 vantaRef.current:', !!vantaRef.current);
+      
       if (vantaRef.current && window.VANTA && window.THREE) {
-        vantaEffect.current = window.VANTA.WAVES({
-          el: vantaRef.current,
-          mouseControls: true,
-          touchControls: true,
-          gyroControls: false,
-          minHeight: 200.00,
-          minWidth: 200.00,
-          scale: 1.00,
-          scaleMobile: 1.00,
-          color: 0x1d4f78,
-          shininess: 30.00,
-          waveHeight: 15.00,
-          waveSpeed: 0.75,
-          zoom: 0.85
-        });
+        try {
+          console.log('🌊 Creating VANTA WAVES effect...');
+          vantaEffect.current = window.VANTA.WAVES({
+            el: vantaRef.current,
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0x1d4f78,
+            shininess: 30.00,
+            waveHeight: 15.00,
+            waveSpeed: 0.75,
+            zoom: 0.85
+          });
+          
+          if (vantaEffect.current) {
+            console.log('✅ VANTA WAVES effect created successfully!');
+            setVantaLoaded(true);
+          } else {
+            console.error('❌ VANTA effect creation returned null/undefined');
+          }
+        } catch (error) {
+          console.error('❌ Error creating VANTA effect:', error);
+        }
+      } else {
+        console.log('❌ Missing dependencies for VANTA initialization');
       }
     };
 
-    // Check if VANTA is available, if not retry
+    // Improved script loading detection with timeout
     const checkVanta = () => {
+      console.log('🔍 Checking VANTA availability...');
       if (window.VANTA && window.THREE) {
+        console.log('✅ VANTA and THREE.js are available');
         initVanta();
       } else {
+        console.log('⏳ VANTA or THREE.js not available, retrying...');
         setTimeout(checkVanta, 100);
       }
     };
 
+    // Add a timeout to prevent infinite retries
+    const timeoutId = setTimeout(() => {
+      if (!vantaLoaded) {
+        console.error('⏰ VANTA loading timed out after 10 seconds');
+      }
+    }, 10000);
+
     checkVanta();
 
     return () => {
+      clearTimeout(timeoutId);
       if (vantaEffect.current) {
+        console.log('🧹 Cleaning up VANTA effect');
         vantaEffect.current.destroy();
       }
     };
-  }, []);
+  }, [vantaLoaded]);
 
   // Text phases for different languages
   const textPhases = language === 'zh' ? ["體能、", "心理與", "技術訓練", "集中於一個專業空間"] : ["Physical,", "mental,", "and skill training", "— all in one place"];
@@ -103,12 +137,28 @@ const Hero = () => {
   };
 
   return (
-    <section id="home" className="relative min-h-[100svh] py-16 md:py-0 md:h-screen overflow-hidden">
-      {/* VANTA Waves Background */}
+    <section 
+      id="home" 
+      className="relative min-h-[100svh] py-16 md:py-0 md:h-screen overflow-hidden"
+    >
+      {/* VANTA Waves Background with fallback */}
       <div 
         ref={vantaRef}
         className="absolute inset-0 w-full h-full z-0"
+        style={{
+          backgroundColor: vantaLoaded ? 'transparent' : '#1d4f78',
+          transition: 'background-color 0.5s ease'
+        }}
       />
+      
+      {/* Debug info (remove in production) */}
+      {process.env.NODE_ENV === 'development' && (
+        <div className="absolute top-4 left-4 z-50 bg-black/50 text-white p-2 text-xs rounded">
+          VANTA Loaded: {vantaLoaded ? '✅' : '❌'}<br/>
+          THREE: {typeof window !== 'undefined' && window.THREE ? '✅' : '❌'}<br/>
+          VANTA: {typeof window !== 'undefined' && window.VANTA ? '✅' : '❌'}
+        </div>
+      )}
       
       {/* Content Overlay */}
       <div className="relative z-10 container mx-auto px-4 text-center h-full flex flex-col justify-center">
