@@ -59,7 +59,7 @@ const Hero = () => {
             scaleMobile: 1.00,
             color: 0xacacac,
             // Changed to medium gray color
-            shininess: 00.00,
+            shininess: 0.00,
             waveHeight: 15.00,
             waveSpeed: 0.75,
             zoom: 0.85
