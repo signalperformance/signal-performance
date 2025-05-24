@@ -57,8 +57,8 @@ const Hero = () => {
             minWidth: 200.00,
             scale: 1.00,
             scaleMobile: 1.00,
-            color: 0xE5DACE,
-            // Changed to lighter gold color
+            color: 0x18232c,
+            // Changed to deep charcoal color
             shininess: 30.00,
             waveHeight: 15.00,
             waveSpeed: 0.75,
@@ -141,7 +141,7 @@ const Hero = () => {
   return <section id="home" className="relative min-h-[100svh] overflow-hidden flex items-center justify-center">
       {/* VANTA Waves Background with fallback */}
       <div ref={vantaRef} className="absolute inset-0 w-full h-full z-0" style={{
-      backgroundColor: vantaLoaded ? 'transparent' : '#E5DACE',
+      backgroundColor: vantaLoaded ? 'transparent' : '#18232c',
       transition: 'background-color 0.5s ease'
     }} />
       
