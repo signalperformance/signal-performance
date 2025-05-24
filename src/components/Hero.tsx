@@ -138,6 +138,7 @@ const Hero = () => {
     }
     return t('hero.headline');
   };
+
   return <section id="home" className="relative min-h-[100svh] overflow-hidden flex items-center justify-center">
       {/* VANTA Waves Background with fallback */}
       <div ref={vantaRef} className="absolute inset-0 w-full h-full z-0" style={{
@@ -150,9 +151,11 @@ const Hero = () => {
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 sm:mb-8 text-signal-charcoal max-w-5xl mx-auto leading-tight">
           {renderHeadline()}
         </h1>
-        <p className="text-lg sm:text-xl mb-10 sm:mb-14 max-w-3xl mx-auto min-h-[2rem] font-medium md:text-3xl text-signal-gold">
-          {getCompleteText()}
-        </p>
+        <div className="bg-signal-gold rounded-lg px-6 py-4 mb-10 sm:mb-14 max-w-3xl mx-auto">
+          <p className="text-lg sm:text-xl font-medium md:text-3xl text-white">
+            {getCompleteText()}
+          </p>
+        </div>
         <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
           {/* Philosophy button */}
           <Button size="lg" onClick={() => document.getElementById('philosophy')?.scrollIntoView({
