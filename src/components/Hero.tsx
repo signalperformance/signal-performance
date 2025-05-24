@@ -1,3 +1,4 @@
+
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useWaitlistDialog } from '@/hooks/useWaitlistDialog';
@@ -124,9 +125,9 @@ const Hero = () => {
   const renderHeadline = () => {
     const headlineText = t('hero.headline');
     
-    // On desktop (sm and above), render as single unbroken text
+    // On desktop (sm and above), render as single unbroken text with proper centering
     const desktopHeadline = (
-      <span className="whitespace-nowrap hidden sm:inline">{headlineText}</span>
+      <span className="hidden sm:inline text-center w-full block">{headlineText}</span>
     );
     
     // On mobile, render with explicit breaks
