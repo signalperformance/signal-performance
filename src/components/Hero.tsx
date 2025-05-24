@@ -1,17 +1,13 @@
-
-
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useWaitlistDialog } from '@/hooks/useWaitlistDialog';
 import { useState, useEffect, useRef } from 'react';
-
 declare global {
   interface Window {
     VANTA: any;
     THREE: any;
   }
 }
-
 const Hero = () => {
   const {
     t,
@@ -44,13 +40,11 @@ const Hero = () => {
   // Initialize VANTA effect with comprehensive debugging
   useEffect(() => {
     console.log('🌊 VANTA Hero useEffect started');
-    
     const initVanta = () => {
       console.log('🌊 initVanta called');
       console.log('🌊 window.THREE:', !!window.THREE);
       console.log('🌊 window.VANTA:', !!window.VANTA);
       console.log('🌊 vantaRef.current:', !!vantaRef.current);
-      
       if (vantaRef.current && window.VANTA && window.THREE) {
         try {
           console.log('🌊 Creating VANTA WAVES effect...');
@@ -63,13 +57,13 @@ const Hero = () => {
             minWidth: 200.00,
             scale: 1.00,
             scaleMobile: 1.00,
-            color: 0xE5DACE, // Changed to lighter gold color
+            color: 0xE5DACE,
+            // Changed to lighter gold color
             shininess: 30.00,
             waveHeight: 15.00,
             waveSpeed: 0.75,
             zoom: 0.85
           });
-          
           if (vantaEffect.current) {
             console.log('✅ VANTA WAVES effect created successfully!');
             setVantaLoaded(true);
@@ -87,10 +81,8 @@ const Hero = () => {
     // Improved script loading detection with timeout and retries
     let retries = 0;
     const maxRetries = 50;
-    
     const checkVanta = () => {
       console.log('🔍 Checking VANTA availability... Attempt:', retries + 1);
-      
       if (window.VANTA && window.THREE) {
         console.log('✅ VANTA and THREE.js are available');
         initVanta();
@@ -98,7 +90,6 @@ const Hero = () => {
         console.log('⏳ VANTA or THREE.js not available, retrying...');
         console.log('window.THREE available:', !!window.THREE);
         console.log('window.VANTA available:', !!window.VANTA);
-        
         retries++;
         if (retries < maxRetries) {
           setTimeout(checkVanta, 100);
@@ -114,9 +105,7 @@ const Hero = () => {
         console.error('⏰ VANTA loading timed out after 10 seconds');
       }
     }, 10000);
-
     checkVanta();
-
     return () => {
       clearTimeout(timeoutId);
       if (vantaEffect.current) {
@@ -149,21 +138,12 @@ const Hero = () => {
     }
     return t('hero.headline');
   };
-
-  return (
-    <section 
-      id="home" 
-      className="relative min-h-[100svh] overflow-hidden flex items-center justify-center"
-    >
+  return <section id="home" className="relative min-h-[100svh] overflow-hidden flex items-center justify-center">
       {/* VANTA Waves Background with fallback */}
-      <div 
-        ref={vantaRef}
-        className="absolute inset-0 w-full h-full z-0"
-        style={{
-          backgroundColor: vantaLoaded ? 'transparent' : '#E5DACE',
-          transition: 'background-color 0.5s ease'
-        }}
-      />
+      <div ref={vantaRef} className="absolute inset-0 w-full h-full z-0" style={{
+      backgroundColor: vantaLoaded ? 'transparent' : '#E5DACE',
+      transition: 'background-color 0.5s ease'
+    }} />
       
       {/* Content Overlay */}
       <div className="relative z-10 container mx-auto px-4 text-center py-16 md:py-0">
@@ -175,29 +155,17 @@ const Hero = () => {
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
           {/* Philosophy button */}
-          <Button 
-            className="bg-signal-gold hover:bg-signal-gold/90 text-white font-medium px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg flex items-center gap-2" 
-            size="lg" 
-            onClick={() => document.getElementById('philosophy')?.scrollIntoView({
-              behavior: 'smooth'
-            })}
-          >
+          <Button size="lg" onClick={() => document.getElementById('philosophy')?.scrollIntoView({
+          behavior: 'smooth'
+        })} className="text-white font-medium px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg flex items-center gap-2 bg-signal-charcoal">
             {t('hero.cta.membership')}
           </Button>
           {/* Waitlist button with ID for tracking visibility */}
-          <Button 
-            id="hero-waitlist-button"
-            className="bg-transparent hover:bg-signal-charcoal/10 text-signal-charcoal font-medium border border-signal-charcoal/30 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg" 
-            variant="outline" 
-            size="lg" 
-            onClick={openWaitlist}
-          >
+          <Button id="hero-waitlist-button" className="bg-transparent hover:bg-signal-charcoal/10 text-signal-charcoal font-medium border border-signal-charcoal/30 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg" variant="outline" size="lg" onClick={openWaitlist}>
             {t('hero.cta.waitlist')}
           </Button>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Hero;
