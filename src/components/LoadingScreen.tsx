@@ -12,13 +12,21 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
     const preloadResources = async () => {
       const promises = [];
 
-      // Preload the new gold logo image
+      // Preload the new gold logo image for loading screen
       const logoPromise = new Promise((resolve) => {
         const img = new Image();
         img.onload = () => resolve(true);
         img.src = "/lovable-uploads/a46da5a6-283e-4115-91d7-c1373de8fb80.png";
       });
       promises.push(logoPromise);
+
+      // Preload the navbar logo to prevent flash
+      const navbarLogoPromise = new Promise((resolve) => {
+        const img = new Image();
+        img.onload = () => resolve(true);
+        img.src = "/lovable-uploads/0959e8f0-e34c-4d16-9e3e-16462b6d8961.png";
+      });
+      promises.push(navbarLogoPromise);
 
       // Wait for fonts to load
       const fontPromise = document.fonts.ready;
