@@ -1,4 +1,3 @@
-
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useWaitlistDialog } from '@/hooks/useWaitlistDialog';
@@ -137,14 +136,14 @@ const Hero = () => {
         const parts = headlineText.split('空間');
         if (parts.length > 1) {
           return (
-            <span className="sm:hidden">
+            <span className="sm:hidden px-2">
               <span className="whitespace-nowrap">{parts[0]}空間</span>
               <br />
               <span>{parts[1].trim()}</span>
             </span>
           );
         }
-        return <span className="sm:hidden">{headlineText}</span>;
+        return <span className="sm:hidden px-2">{headlineText}</span>;
       }
       
       // For English, find "Space" and add break after it
@@ -192,7 +191,7 @@ const Hero = () => {
           {renderHeadline()}
         </h1>
         
-        <p className="text-lg sm:text-xl md:text-2xl text-signal-charcoal mb-8 sm:mb-12 max-w-4xl mx-auto">
+        <p className={`text-lg sm:text-xl md:text-2xl text-signal-charcoal mb-8 sm:mb-12 max-w-4xl mx-auto ${language === 'zh' ? 'px-2 sm:px-0' : ''}`}>
           {language === 'zh' ? '體能、心理與技術訓練集中於一個專業空間' : 'Physical, mental, and skill training — all in one place'}
         </p>
         
