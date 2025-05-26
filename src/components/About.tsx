@@ -1,4 +1,3 @@
-
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
@@ -125,17 +124,15 @@ const About = () => {
                       </div>
                       
                       {/* Bottom row - 2 certifications positioned between top ones */}
-                      <div className="flex justify-center">
-                        <div className="flex justify-between w-1/2">
-                          <div className="flex flex-col items-center">
-                            <div className="w-24 h-24">
-                              <img alt="BCIA Biofeedback Certification" className="w-full h-full object-contain" src="/lovable-uploads/b8e8e7d5-5980-475f-9534-3660f734bccf.png" />
-                            </div>
+                      <div className="flex justify-between">
+                        <div className="flex flex-col items-center ml-[16.66%]">
+                          <div className="w-24 h-24">
+                            <img alt="BCIA Biofeedback Certification" className="w-full h-full object-contain" src="/lovable-uploads/b8e8e7d5-5980-475f-9534-3660f734bccf.png" />
                           </div>
-                          <div className="flex flex-col items-center">
-                            <div className="w-24 h-24">
-                              <img alt="Golf Channel Academy" className="w-full h-full object-contain" src="/lovable-uploads/650394e1-2bf5-4354-b912-86a81648eaaa.png" />
-                            </div>
+                        </div>
+                        <div className="flex flex-col items-center mr-[16.66%]">
+                          <div className="w-24 h-24">
+                            <img alt="Golf Channel Academy" className="w-full h-full object-contain" src="/lovable-uploads/650394e1-2bf5-4354-b912-86a81648eaaa.png" />
                           </div>
                         </div>
                       </div>
