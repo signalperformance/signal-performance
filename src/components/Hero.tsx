@@ -191,6 +191,10 @@ const Hero = () => {
           {renderHeadline()}
         </h1>
         
+        <p className="text-lg sm:text-xl md:text-2xl text-signal-charcoal mb-8 sm:mb-12 max-w-4xl mx-auto">
+          {language === 'zh' ? '體能、心理與技術訓練集中於一個專業空間' : 'Physical, mental, and skill training — all in one place'}
+        </p>
+        
         <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
           {/* Philosophy button */}
           <Button 
