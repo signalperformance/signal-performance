@@ -1,4 +1,5 @@
 
+
 import { useState, useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Switch } from '@/components/ui/switch';
@@ -25,7 +26,12 @@ const Navbar = () => {
 
   return <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-md py-2' : 'bg-white py-4'}`}>
       <div className="container mx-auto px-4 flex justify-between items-center">
-        <a href="#home" className="flex items-center gap-2">
+        <a href="#home" className="flex items-center gap-3">
+          <img 
+            src="/lovable-uploads/ec5cc812-612a-4c8b-ae92-c31c0db8dfe0.png" 
+            alt="Signal Performance Logo" 
+            className="h-8 w-auto md:h-10"
+          />
           <span className="text-signal-charcoal text-xl md:text-2xl font-playfair font-bold">Signal Performance</span>
         </a>
 
@@ -42,3 +48,4 @@ const Navbar = () => {
     </nav>;
 };
 export default Navbar;
+
