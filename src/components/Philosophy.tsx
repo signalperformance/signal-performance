@@ -1,13 +1,10 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useLanguage } from '@/contexts/LanguageContext';
-
 const Philosophy = () => {
   const {
     t,
     language
   } = useLanguage();
-
   return <section id="philosophy" className="section-padding bg-signal-light-gray">
       <div className="container mx-auto container-padding">
         <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center font-lora">{t('philosophy.title')}</h2>
@@ -15,18 +12,10 @@ const Philosophy = () => {
         {/* Signal wave graphic - responsive images for different screen sizes and languages */}
         <div className="w-full mb-12 md:mb-12 mb-6 relative h-36 md:h-32 flex items-center justify-center">
           {/* Mobile images based on language */}
-          {language === 'zh' ? (
-            <img alt="Signal wave with red spike (Chinese)" className="w-full max-w-5xl h-auto object-contain md:hidden" src="/lovable-uploads/d99e31a5-cac8-4e5a-9086-5af02e4769a6.png" />
-          ) : (
-            <img alt="Signal wave with red spike" className="w-full max-w-5xl h-auto object-contain md:hidden" src="/lovable-uploads/08851ee9-0b49-49f8-a037-3b2566bfd6d3.png" />
-          )}
+          {language === 'zh' ? <img alt="Signal wave with red spike (Chinese)" className="w-full max-w-5xl h-auto object-contain md:hidden" src="/lovable-uploads/d99e31a5-cac8-4e5a-9086-5af02e4769a6.png" /> : <img alt="Signal wave with red spike" className="w-full max-w-5xl h-auto object-contain md:hidden" src="/lovable-uploads/08851ee9-0b49-49f8-a037-3b2566bfd6d3.png" />}
           
           {/* Desktop images based on language */}
-          {language === 'zh' ? (
-            <img alt="Signal wave with red spike (Chinese)" className="w-full max-w-5xl h-auto object-contain hidden md:block" src="/lovable-uploads/02648a92-ba42-467d-b308-7d76e55376a2.png" />
-          ) : (
-            <img alt="Signal wave with red spike" className="w-full max-w-5xl h-auto object-contain hidden md:block" src="/lovable-uploads/06356803-be6d-4dce-b006-b5944a61d7f8.png" />
-          )}
+          {language === 'zh' ? <img alt="Signal wave with red spike (Chinese)" className="w-full max-w-5xl h-auto object-contain hidden md:block" src="/lovable-uploads/02648a92-ba42-467d-b308-7d76e55376a2.png" /> : <img alt="Signal wave with red spike" className="w-full max-w-5xl h-auto object-contain hidden md:block" src="/lovable-uploads/2277bfb2-f510-4e78-bf50-410d94a0f83b.png" />}
         </div>
         
         {/* Philosophy cards - horizontal layout on desktop */}
@@ -49,5 +38,4 @@ const Philosophy = () => {
       </div>
     </section>;
 };
-
 export default Philosophy;
