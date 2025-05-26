@@ -36,7 +36,7 @@ const Navbar = () => {
   return (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-md py-2' : 'bg-white py-4'}`}>
       <div className="container mx-auto px-4 flex justify-between items-center">
-        <a href="#home" className={`flex items-center justify-start gap-3 transition-opacity duration-200 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}>
+        <a href="#home" className={`flex items-center justify-start gap-1 transition-opacity duration-200 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}>
           <div className="w-8 md:w-10 h-8 md:h-10 flex-shrink-0">
             <img 
               src="/lovable-uploads/cfdb7d55-6112-4f0a-ab39-6a01df835f6b.png" 
