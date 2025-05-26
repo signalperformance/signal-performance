@@ -12,11 +12,11 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
     const preloadResources = async () => {
       const promises = [];
 
-      // Preload the logo image
+      // Preload the new gold logo image
       const logoPromise = new Promise((resolve) => {
         const img = new Image();
         img.onload = () => resolve(true);
-        img.src = "/lovable-uploads/cfdb7d55-6112-4f0a-ab39-6a01df835f6b.png";
+        img.src = "/lovable-uploads/a46da5a6-283e-4115-91d7-c1373de8fb80.png";
       });
       promises.push(logoPromise);
 
@@ -75,10 +75,10 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
   return (
     <div className={`fixed inset-0 z-[100] bg-white flex items-center justify-center transition-opacity duration-500 ${fadeOut ? 'opacity-0' : 'opacity-100'}`}>
       <div className="flex flex-col items-center">
-        {/* Logo with subtle pulse animation */}
+        {/* Gold logo with subtle pulse animation */}
         <div className="animate-pulse">
           <img 
-            src="/lovable-uploads/cfdb7d55-6112-4f0a-ab39-6a01df835f6b.png" 
+            src="/lovable-uploads/a46da5a6-283e-4115-91d7-c1373de8fb80.png" 
             alt="Signal Performance Logo" 
             className="h-16 w-auto md:h-20 object-contain"
           />
