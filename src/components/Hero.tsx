@@ -136,14 +136,14 @@ const Hero = () => {
         const parts = headlineText.split('空間');
         if (parts.length > 1) {
           return (
-            <span className="sm:hidden px-2">
+            <span className="sm:hidden px-4">
               <span className="whitespace-nowrap">{parts[0]}空間</span>
               <br />
               <span>{parts[1].trim()}</span>
             </span>
           );
         }
-        return <span className="sm:hidden px-2">{headlineText}</span>;
+        return <span className="sm:hidden px-4">{headlineText}</span>;
       }
       
       // For English, find "Space" and add break after it
@@ -187,11 +187,11 @@ const Hero = () => {
       
       {/* Content Overlay */}
       <div className="relative z-10 container mx-auto px-4 text-center py-16 md:py-0">
-        <h1 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-3 sm:mb-4 text-signal-charcoal max-w-5xl mx-auto leading-tight py-[35px] ${language === 'en' ? 'sm:!text-5xl md:!text-6xl lg:!text-6xl xl:!text-6xl' : ''}`}>
+        <h1 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-1 sm:mb-2 text-signal-charcoal max-w-5xl mx-auto leading-tight py-[35px] ${language === 'en' ? 'sm:!text-5xl md:!text-6xl lg:!text-6xl xl:!text-6xl' : ''}`}>
           {renderHeadline()}
         </h1>
         
-        <p className={`text-lg sm:text-xl md:text-2xl text-signal-charcoal mb-8 sm:mb-12 max-w-4xl mx-auto ${language === 'zh' ? 'px-2 sm:px-0' : ''}`}>
+        <p className={`text-lg sm:text-xl md:text-2xl text-signal-charcoal mb-8 sm:mb-12 max-w-4xl mx-auto ${language === 'zh' ? 'px-4 sm:px-0' : ''}`}>
           {language === 'zh' ? '體能、心理與技術訓練集中於一個專業空間' : 'Physical, mental, and skill training — all in one place'}
         </p>
         
