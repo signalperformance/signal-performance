@@ -1,3 +1,4 @@
+
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useWaitlistDialog } from '@/hooks/useWaitlistDialog';
@@ -187,7 +188,7 @@ const Hero = () => {
       
       {/* Content Overlay */}
       <div className="relative z-10 container mx-auto px-4 text-center py-16 md:py-0">
-        <h1 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 sm:mb-8 text-signal-charcoal max-w-5xl mx-auto leading-tight py-[35px] ${language === 'en' ? 'sm:!text-5xl md:!text-6xl lg:!text-6xl xl:!text-6xl' : ''}`}>
+        <h1 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-3 sm:mb-4 text-signal-charcoal max-w-5xl mx-auto leading-tight py-[35px] ${language === 'en' ? 'sm:!text-5xl md:!text-6xl lg:!text-6xl xl:!text-6xl' : ''}`}>
           {renderHeadline()}
         </h1>
         
