@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 type Language = 'en' | 'zh';
 
@@ -249,8 +249,30 @@ const translations = {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
+// Helper function to get saved language from localStorage
+const getSavedLanguage = (): Language => {
+  try {
+    const saved = localStorage.getItem('signal-performance-language');
+    if (saved === 'en' || saved === 'zh') {
+      return saved;
+    }
+  } catch (error) {
+    console.log('Failed to read language from localStorage:', error);
+  }
+  return 'en'; // Default to English for first-time visitors
+};
+
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  const [language, setLanguage] = useState<Language>('en');
+  const [language, setLanguage] = useState<Language>(getSavedLanguage);
+
+  // Save language preference to localStorage whenever it changes
+  useEffect(() => {
+    try {
+      localStorage.setItem('signal-performance-language', language);
+    } catch (error) {
+      console.log('Failed to save language to localStorage:', error);
+    }
+  }, [language]);
 
   const t = (key: string): string => {
     return translations[language][key as keyof typeof translations[typeof language]] || key;
