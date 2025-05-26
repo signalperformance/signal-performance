@@ -1,5 +1,7 @@
 
 import { useEffect } from "react";
+import { useLoadingState } from "@/hooks/useLoadingState";
+import LoadingScreen from "@/components/LoadingScreen";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -10,12 +12,18 @@ import Footer from "@/components/Footer";
 import WaitlistDialog from "@/components/WaitlistDialog";
 
 const Index = () => {
+  const { isLoading, completeLoading } = useLoadingState();
+
   useEffect(() => {
     document.title = "Signal Performance";
   }, []);
   
+  if (isLoading) {
+    return <LoadingScreen onLoadingComplete={completeLoading} />;
+  }
+  
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col animate-fade-in">
       <Navbar />
       <Hero />
       <Philosophy />

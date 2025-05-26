@@ -92,3 +92,19 @@ html {
 .container-padding {
   @apply px-4 md:px-8;
 }
+
+/* Enhanced loading animations */
+@keyframes gentle-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.02);
+  }
+}
+
+.animate-gentle-pulse {
+  animation: gentle-pulse 2s ease-in-out infinite;
+}
