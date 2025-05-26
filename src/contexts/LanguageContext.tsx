@@ -249,30 +249,63 @@ const translations = {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
+// Helper function to check if localStorage is available
+const isLocalStorageAvailable = (): boolean => {
+  try {
+    return typeof window !== 'undefined' && 'localStorage' in window && window.localStorage !== null;
+  } catch (error) {
+    return false;
+  }
+};
+
 // Helper function to get saved language from localStorage
 const getSavedLanguage = (): Language => {
+  if (!isLocalStorageAvailable()) {
+    console.log('localStorage is not available, defaulting to English');
+    return 'en';
+  }
+  
   try {
     const saved = localStorage.getItem('signal-performance-language');
+    console.log('Reading saved language from localStorage:', saved);
     if (saved === 'en' || saved === 'zh') {
       return saved;
     }
   } catch (error) {
     console.log('Failed to read language from localStorage:', error);
   }
+  console.log('No valid saved language found, defaulting to English');
   return 'en'; // Default to English for first-time visitors
 };
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  const [language, setLanguage] = useState<Language>(getSavedLanguage);
+  const [language, setLanguage] = useState<Language>('en');
+  const [isInitialized, setIsInitialized] = useState(false);
 
-  // Save language preference to localStorage whenever it changes
+  // Initialize language from localStorage after component mounts
   useEffect(() => {
+    const savedLanguage = getSavedLanguage();
+    console.log('Initializing language to:', savedLanguage);
+    setLanguage(savedLanguage);
+    setIsInitialized(true);
+  }, []);
+
+  // Save language preference to localStorage whenever it changes (but not on initial load)
+  useEffect(() => {
+    if (!isInitialized) return; // Don't save during initialization
+    
+    if (!isLocalStorageAvailable()) {
+      console.log('localStorage is not available, cannot save language preference');
+      return;
+    }
+
     try {
+      console.log('Saving language to localStorage:', language);
       localStorage.setItem('signal-performance-language', language);
     } catch (error) {
       console.log('Failed to save language to localStorage:', error);
     }
-  }, [language]);
+  }, [language, isInitialized]);
 
   const t = (key: string): string => {
     return translations[language][key as keyof typeof translations[typeof language]] || key;
