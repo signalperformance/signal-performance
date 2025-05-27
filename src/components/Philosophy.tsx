@@ -9,7 +9,7 @@ const Philosophy = () => {
   } = useLanguage();
   return <section id="philosophy" className="section-padding bg-signal-light-gray">
       <div className="container mx-auto container-padding">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center font-lora">{t('philosophy.title')}</h2>
+        <h2 className="text-3xl md:text-4xl font-bold mb-6 md:mb-12 text-center font-lora">{t('philosophy.title')}</h2>
         
         {/* Signal wave graphic - responsive images for different screen sizes and languages */}
         <div className="w-full mb-12 md:mb-12 mb-6 relative h-36 md:h-32 flex items-center justify-center">
