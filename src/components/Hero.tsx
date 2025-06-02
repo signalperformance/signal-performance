@@ -197,6 +197,11 @@ const Hero = () => {
     );
   };
 
+  // Custom waitlist button text
+  const getWaitlistButtonText = () => {
+    return language === 'zh' ? '加入候補名單' : 'Join Waitlist';
+  };
+
   return (
     <section id="home" className="relative min-h-[100svh] overflow-hidden flex items-center justify-center">
       {/* VANTA Waves Background with fallback */}
@@ -236,7 +241,7 @@ const Hero = () => {
             onClick={openWaitlist} 
             className="font-medium border border-signal-charcoal/30 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg text-signal-white bg-signal-gold hover:bg-signal-gold hover:text-signal-white active:bg-signal-gold active:text-signal-white focus:bg-signal-gold focus:text-signal-white"
           >
-            {t('hero.cta.waitlist')}
+            {getWaitlistButtonText()}
           </Button>
         </div>
       </div>
