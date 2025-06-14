@@ -137,6 +137,27 @@ const en = {
   'schedule.classes.cardio': 'Cardio',
   'schedule.classes.power': 'Power',
   'schedule.disclaimer': 'Schedule subject to change. Please confirm with staff.',
+
+  // Getting Started
+  'gettingStarted.title': 'How To Get Started',
+  'gettingStarted.subtitle': 'A clear path from your first assessment to full membership.',
+  'gettingStarted.step1.title': 'Schedule Baseline Assessment',
+  'gettingStarted.step1.description': 'A comprehensive evaluation of your physical, mental, and skill-based performance.',
+  'gettingStarted.step2.title': 'Review Results & Create Plan',
+  'gettingStarted.step2.description': 'We analyze your assessment data and collaboratively build your personalized training roadmap.',
+  'gettingStarted.step3.title': 'Complete 3 1-on-1 Coaching Sessions',
+  'gettingStarted.step3.description': 'Work directly with our coaches to kickstart your program and master foundational techniques.',
+  'gettingStarted.step4.title': 'Start Monthly Program',
+  'gettingStarted.step4.description': 'Begin your all-inclusive membership with ongoing coaching, facility access, and continuous support.',
+  'gettingStarted.onboarding.title': 'Onboarding Program',
+  'gettingStarted.onboarding.includes': 'Steps 1-3',
+  'gettingStarted.onboarding.price': 'NT$12,000',
+  'gettingStarted.onboarding.type': 'One-Time Fee',
+  'gettingStarted.membership.title': 'Full Membership',
+  'gettingStarted.membership.includes': 'Step 4',
+  'gettingStarted.membership.price': 'NT$18,000 / Month',
+  'gettingStarted.membership.type': 'Recurring',
 };
 
 export default en;
+

@@ -1,4 +1,3 @@
-
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { translations } from '@/i18n';
 
@@ -39,7 +38,7 @@ const getSavedLanguage = (): Language => {
 };
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  const [language, setLanguage] = useState<Language>('en'); // Initialize with 'en' directly
+  const [language, setLanguage] = useState<Language>('en');
   const [isInitialized, setIsInitialized] = useState(false);
 
   // Initialize language from localStorage after component mounts

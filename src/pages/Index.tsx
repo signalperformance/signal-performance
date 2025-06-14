@@ -8,9 +8,10 @@ import About from "@/components/About";
 import Membership from "@/components/Membership";
 import AssessmentProcess from "@/components/AssessmentProcess";
 import Philosophy from "@/components/Philosophy";
-import WeeklySchedule from "@/components/WeeklySchedule"; // Added import
+import WeeklySchedule from "@/components/WeeklySchedule";
 import Footer from "@/components/Footer";
 import WaitlistDialog from "@/components/WaitlistDialog";
+import GettingStarted from "@/components/GettingStarted";
 
 const Index = () => {
   const { isLoading, completeLoading } = useLoadingState();
@@ -27,10 +28,11 @@ const Index = () => {
     <div className="min-h-screen flex flex-col animate-fade-in">
       <Navbar />
       <Hero />
+      <GettingStarted />
       <Philosophy />
       <AssessmentProcess />
       <Membership />
-      <WeeklySchedule /> {/* Added new component */}
+      <WeeklySchedule />
       <About />
       <WaitlistDialog />
       <Footer />
@@ -39,3 +41,4 @@ const Index = () => {
 };
 
 export default Index;
+
