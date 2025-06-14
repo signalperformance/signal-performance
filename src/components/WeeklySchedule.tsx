@@ -2,19 +2,19 @@ import React from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { cn } from '@/lib/utils';
 import { scheduleData } from '@/data/scheduleData';
-import { ScheduleEntry, TimeSlotItem } from '@/data/scheduleTypes';
+import { ScheduleEntry, TimeSlotItem, DayKey } from '@/data/scheduleTypes';
 
 const WeeklySchedule = () => {
   const { t } = useLanguage();
 
   const daysOfWeek = [
-    { key: 'monday' as ScheduleEntry['dayKey'], label: t('schedule.days.monday') },
-    { key: 'tuesday' as ScheduleEntry['dayKey'], label: t('schedule.days.tuesday') },
-    { key: 'wednesday' as ScheduleEntry['dayKey'], label: t('schedule.days.wednesday') },
-    { key: 'thursday' as ScheduleEntry['dayKey'], label: t('schedule.days.thursday') },
-    { key: 'friday' as ScheduleEntry['dayKey'], label: t('schedule.days.friday') },
-    { key: 'saturday' as ScheduleEntry['dayKey'], label: t('schedule.days.saturday') },
-    { key: 'sunday' as ScheduleEntry['dayKey'], label: t('schedule.days.sunday') },
+    { key: 'monday' as DayKey, label: t('schedule.days.monday') },
+    { key: 'tuesday' as DayKey, label: t('schedule.days.tuesday') },
+    { key: 'wednesday' as DayKey, label: t('schedule.days.wednesday') },
+    { key: 'thursday' as DayKey, label: t('schedule.days.thursday') },
+    { key: 'friday' as DayKey, label: t('schedule.days.friday') },
+    { key: 'saturday' as DayKey, label: t('schedule.days.saturday') },
+    { key: 'sunday' as DayKey, label: t('schedule.days.sunday') },
   ];
 
   const timeSlots: TimeSlotItem[] = [
@@ -30,11 +30,10 @@ const WeeklySchedule = () => {
     { id: 'ts-20', type: 'time', hour24: 20, label: `8 ${t('schedule.timePeriods.pm')}` }, // Spacer / End of Amateur Block (currently empty)
   ];
 
-  const getClassForSlot = (dayKey: ScheduleEntry['dayKey'], hour24: number) => {
+  const getClassForSlot = (dayKey: DayKey, hour24: number) => {
     return scheduleData.find(entry => entry.dayKey === dayKey && entry.hour24 === hour24);
   };
 
-  // TODO: Consider moving classDisplayNames and classStyles to a theme/config file if they grow
   const classDisplayNames = {
     MOBILITY: t('schedule.classes.mobility'),
     STRENGTH: t('schedule.classes.strength'),
