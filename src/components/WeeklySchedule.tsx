@@ -1,7 +1,6 @@
-
+import React from 'react'; // Moved React import to the top for convention
 import { useLanguage } from '@/contexts/LanguageContext';
 import { cn } from '@/lib/utils';
-import React from 'react'; // Moved React import to the top for convention
 
 interface ScheduleEntry {
   id: string;
@@ -49,13 +48,13 @@ const WeeklySchedule = () => {
   const { t } = useLanguage();
 
   const daysOfWeek = [
-    { key: 'monday', label: t('schedule.days.monday') },
-    { key: 'tuesday', label: t('schedule.days.tuesday') },
-    { key: 'wednesday', label: t('schedule.days.wednesday') },
-    { key: 'thursday', label: t('schedule.days.thursday') },
-    { key: 'friday', label: t('schedule.days.friday') },
-    { key: 'saturday', label: t('schedule.days.saturday') },
-    { key: 'sunday', label: t('schedule.days.sunday') },
+    { key: 'monday' as ScheduleEntry['dayKey'], label: t('schedule.days.monday') },
+    { key: 'tuesday' as ScheduleEntry['dayKey'], label: t('schedule.days.tuesday') },
+    { key: 'wednesday' as ScheduleEntry['dayKey'], label: t('schedule.days.wednesday') },
+    { key: 'thursday' as ScheduleEntry['dayKey'], label: t('schedule.days.thursday') },
+    { key: 'friday' as ScheduleEntry['dayKey'], label: t('schedule.days.friday') },
+    { key: 'saturday' as ScheduleEntry['dayKey'], label: t('schedule.days.saturday') },
+    { key: 'sunday' as ScheduleEntry['dayKey'], label: t('schedule.days.sunday') },
   ];
 
   const timeSlots = Array.from({ length: 13 }, (_, i) => { // 8 AM to 8 PM (inclusive)
@@ -72,8 +71,7 @@ const WeeklySchedule = () => {
   const getClassForSlot = (dayKey: ScheduleEntry['dayKey'], hour24: number) => {
     return scheduleData.find(entry => entry.dayKey === dayKey && entry.hour24 === hour24);
   };
-
-  // These keys (e.g., 'schedule.classes.mobility') will be displayed if translations are not found.
+  
   const classDisplayNames = {
     MOBILITY: t('schedule.classes.mobility'),
     STRENGTH: t('schedule.classes.strength'),
@@ -111,12 +109,12 @@ const WeeklySchedule = () => {
         </div>
 
         <div className="overflow-x-auto">
-          <div className="grid grid-cols-[auto_repeat(7,minmax(100px,1fr))] gap-px bg-gray-700 border border-gray-700 rounded-lg min-w-[800px] md:min-w-full">
+          <div className="grid grid-cols-[auto_repeat(7,minmax(80px,1fr))] gap-px bg-gray-700 border border-gray-700 rounded-lg min-w-[640px] md:min-w-full">
             {/* Header: Empty Top Left Cell */}
-            <div className="bg-signal-charcoal p-2"></div>
+            <div className="bg-signal-charcoal p-1.5"></div>
             {/* Header: Day Names */}
             {daysOfWeek.map(day => (
-              <div key={day.key} className="bg-signal-charcoal text-center py-3 px-1 font-semibold text-sm sticky top-0 z-10">
+              <div key={day.key} className="bg-signal-charcoal text-center py-2 px-1 font-semibold text-sm sticky top-0 z-10">
                 {day.label.toUpperCase()}
               </div>
             ))}
@@ -125,20 +123,20 @@ const WeeklySchedule = () => {
             {timeSlots.map(timeSlot => (
               <React.Fragment key={timeSlot.hour24}>
                 {/* Time Label Cell */}
-                <div className="bg-signal-charcoal text-right py-3 pr-3 pl-1 text-xs font-medium sticky left-0 z-10">
+                <div className="bg-signal-charcoal text-right py-2 pr-2 pl-1 text-xs font-medium sticky left-0 z-10">
                   {timeSlot.label}
                 </div>
                 {/* Class Cells for this Time Slot */}
                 {daysOfWeek.map(day => {
-                  const scheduledClass = getClassForSlot(day.key as ScheduleEntry['dayKey'], timeSlot.hour24);
+                  const scheduledClass = getClassForSlot(day.key, timeSlot.hour24);
                   return (
-                    <div key={`${day.key}-${timeSlot.hour24}`} className="bg-signal-charcoal p-0.5 min-h-[60px] h-full">
+                    <div key={`${day.key}-${timeSlot.hour24}`} className="bg-signal-charcoal p-0.5 min-h-[50px] h-full">
                       {scheduledClass ? (
                         <div className={cn(
-                          "w-full h-full rounded-sm p-2 text-center text-xs leading-tight flex items-center justify-center transition-opacity duration-150",
+                          "w-full h-full rounded-sm p-1.5 text-center text-xs leading-tight flex items-center justify-center transition-opacity duration-150",
                           classStyles[scheduledClass.name.toUpperCase()] || 'bg-gray-400 text-black'
                         )}>
-                          {scheduledClass.name}
+                          {t(`schedule.classes.${scheduledClass.name.toLowerCase()}` as any, scheduledClass.name)}
                         </div>
                       ) : (
                         <div className="w-full h-full"></div> // Empty cell
@@ -159,4 +157,3 @@ const WeeklySchedule = () => {
 };
 
 export default WeeklySchedule;
-
