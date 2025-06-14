@@ -3,7 +3,6 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { cn } from '@/lib/utils';
 import { scheduleData } from '@/data/scheduleData';
 import { ScheduleEntry, TimeSlotItem, DayKey } from '@/data/scheduleTypes';
-
 const WeeklySchedule = () => {
   const {
     t
@@ -100,17 +99,14 @@ const WeeklySchedule = () => {
     [t('schedule.classes.cardio').toUpperCase()]: 'bg-signal-charcoal text-signal-light-gray border border-gray-700 hover:opacity-90',
     [t('schedule.classes.power').toUpperCase()]: 'bg-gray-500 text-white hover:opacity-90'
   };
-  const keyItems = [
-    {
-      name: t('schedule.key.pro'),
-      style: cn('bg-gray-600') 
-    },
-    {
-      name: t('schedule.key.open'),
-      style: cn('bg-gray-600')
-    }
-  ];
-  return <section id="schedule" className="section-padding bg-signal-black text-signal-light-gray">
+  const keyItems = [{
+    name: t('schedule.key.pro'),
+    style: cn('bg-gray-600')
+  }, {
+    name: t('schedule.key.open'),
+    style: cn('bg-gray-600')
+  }];
+  return <section id="schedule" className="section-padding text-signal-light-gray bg-signal-white">
       <div className="container mx-auto container-padding">
         <h2 className="text-3xl md:text-4xl font-bold mb-2 text-center font-lora">{t('schedule.title')}</h2>
         <p className="text-base md:text-lg text-center text-gray-400 mb-6 font-montserrat">
@@ -134,8 +130,7 @@ const WeeklySchedule = () => {
                 {daysOfWeek.map(day => {
               const scheduledClass = getClassForSlot(day.key, timeSlot.hour24);
               return <div key={`${day.key}-${timeSlot.hour24}`} className="bg-signal-charcoal p-0.5 min-h-[40px] h-full">
-                      {scheduledClass ? <div className={cn("w-full h-full rounded-sm p-1 text-center text-xs leading-tight flex flex-col items-center justify-center transition-opacity duration-150", classStyles[t(`schedule.classes.${scheduledClass.name.toLowerCase()}`).toUpperCase()] || 'bg-gray-400 text-black'
-                )}>
+                      {scheduledClass ? <div className={cn("w-full h-full rounded-sm p-1 text-center text-xs leading-tight flex flex-col items-center justify-center transition-opacity duration-150", classStyles[t(`schedule.classes.${scheduledClass.name.toLowerCase()}`).toUpperCase()] || 'bg-gray-400 text-black')}>
                           <span>
                             {t(`schedule.classes.${scheduledClass.name.toLowerCase()}`)}
                             {scheduledClass.sessionType === 'pro' && <sup>PR</sup>}
