@@ -50,10 +50,8 @@ const Membership = () => {
       items: [{
         title: t('membership.mental.coaching'),
         description: t('membership.mental.coaching.description')
-      }, {
-        title: t('membership.mental.plan'),
-        description: t('membership.mental.plan.description')
-      }, {
+      }, 
+      {
         title: t('membership.mental.toolkit'),
         description: t('membership.mental.toolkit.description')
       }]
