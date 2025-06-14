@@ -145,7 +145,7 @@ const WeeklySchedule = () => {
         </div>
         
         {/* Key/Legend items */}
-        <div className="mt-6 flex flex-wrap justify-center items-center gap-x-4 gap-y-2">
+        <div className="mt-6 flex flex-wrap justify-center items-center gap-x-4 gap-y-2 text-muted-foreground">
           <span className="text-sm font-semibold uppercase mr-2">{t('schedule.keyTitle')}</span>
           {keyItems.map(item => <div key={item.name} className="flex items-center">
               
