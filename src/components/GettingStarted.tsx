@@ -1,6 +1,5 @@
 
 import { useLanguage } from "@/contexts/LanguageContext";
-import { ArrowDown, ArrowRight } from "lucide-react";
 
 const GettingStarted = () => {
   const { t } = useLanguage();
@@ -32,66 +31,108 @@ const GettingStarted = () => {
           <p className="mx-auto max-w-xl text-lg text-muted-foreground">{t('gettingStarted.subtitle')}</p>
         </div>
 
-        {/* Steps Grid */}
-        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-12 relative">
-          {/* Onboarding Program Bracket - positioned above steps 1-3 */}
-          <div className="hidden md:block absolute top-0 z-10" style={{left: '6%', width: '63%'}}>
-            {/* Bracket connecting steps 1-3 */}
-            <div className="relative">
-              {/* Horizontal bracket line */}
-              <div className="absolute left-6 top-0 right-6 h-0.5 bg-primary"></div>
-              {/* Left vertical line connecting to step 1 */}
-              <div className="absolute left-6 top-0 w-0.5 h-6 bg-primary"></div>
-              {/* Right vertical line connecting to step 3 */}
-              <div className="absolute right-6 top-0 w-0.5 h-6 bg-primary"></div>
-              
-              {/* Onboarding Program pricing box above bracket */}
-              <div className="absolute left-1/2 -top-20 transform -translate-x-1/2 text-center">
-                <div className="bg-white dark:bg-gray-900 px-4 py-2 rounded-lg shadow-lg border border-primary/20">
-                  <h4 className="font-semibold text-sm text-primary">{t('gettingStarted.onboarding.title')}</h4>
-                  <p className="text-lg font-bold">{t('gettingStarted.onboarding.price')}</p>
-                  <p className="text-xs text-muted-foreground">{t('gettingStarted.onboarding.type')}</p>
-                </div>
+        {/* Desktop diagram */}
+        <div className="hidden md:block relative max-w-4xl mx-auto">
+          {/* Onboarding Program bracket and pricing */}
+          <div className="relative mb-16">
+            {/* Pricing box */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 -top-4 z-20">
+              <div className="bg-white dark:bg-gray-900 px-6 py-3 rounded-lg shadow-lg border border-primary/20 text-center">
+                <h4 className="font-semibold text-primary text-lg">{t('gettingStarted.onboarding.title')}</h4>
+                <p className="text-2xl font-bold text-primary">{t('gettingStarted.onboarding.price')}</p>
               </div>
+            </div>
+            
+            {/* Bracket - positioned to connect steps 1-3 */}
+            <div className="absolute top-12 left-0 right-0 z-10">
+              {/* Main horizontal bracket line */}
+              <div 
+                className="absolute h-0.5 bg-primary" 
+                style={{
+                  left: '12.5%',  // Start from center of step 1
+                  right: '37.5%', // End at center of step 3
+                  top: '0'
+                }}
+              ></div>
+              
+              {/* Left vertical connector to step 1 */}
+              <div 
+                className="absolute w-0.5 h-8 bg-primary" 
+                style={{
+                  left: '12.5%',
+                  top: '0'
+                }}
+              ></div>
+              
+              {/* Right vertical connector to step 3 */}
+              <div 
+                className="absolute w-0.5 h-8 bg-primary" 
+                style={{
+                  right: '37.5%',
+                  top: '0'
+                }}
+              ></div>
             </div>
           </div>
 
-          {/* Main connecting line for all steps - positioned above the circles */}
-          <div className="hidden md:block absolute left-0 right-0 top-6 z-0 h-0.5 bg-gradient-to-r from-primary/30 via-primary to-primary/30 mx-8"></div>
+          {/* Steps container */}
+          <div className="flex justify-between items-start relative pt-8">
+            {/* Horizontal connecting line under all steps */}
+            <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary/30 via-primary to-primary/30"></div>
 
-          {steps.map((step, index) => (
-            <div key={index} className="relative z-10 flex flex-col items-center text-center flex-1 group">
-              <div className="flex items-center justify-center w-12 h-12 mb-4 bg-gradient-to-br from-primary/80 to-primary rounded-full shadow-lg border-4 border-secondary dark:border-black transition-transform group-hover:scale-105">
-                <span className="text-xl font-bold text-primary-foreground">{index + 1}</span>
-              </div>
-              <h3 className="text-lg font-semibold mb-2">{step.title}</h3>
-              <p className="text-muted-foreground text-sm">{step.description}</p>
-              
-              {/* Monthly Program pricing for step 4 */}
-              {index === 3 && (
-                <div className="mt-4 bg-white dark:bg-gray-900 px-4 py-2 rounded-lg shadow-lg border border-primary/20">
-                  <h4 className="font-semibold text-sm text-primary">{t('gettingStarted.membership.title')}</h4>
-                  <p className="text-lg font-bold">{t('gettingStarted.membership.price')}</p>
-                  <p className="text-xs text-muted-foreground">{t('gettingStarted.membership.type')}</p>
+            {steps.map((step, index) => (
+              <div key={index} className="flex flex-col items-center text-center flex-1 relative z-10">
+                {/* Step circle */}
+                <div className="flex items-center justify-center w-16 h-16 mb-6 bg-gradient-to-br from-primary/80 to-primary rounded-full shadow-lg border-4 border-secondary dark:border-black transition-transform hover:scale-105">
+                  <span className="text-2xl font-bold text-primary-foreground">{index + 1}</span>
                 </div>
-              )}
-            </div>
-          ))}
+                
+                {/* Step content */}
+                <div className="max-w-48">
+                  <h3 className="text-lg font-semibold mb-3">{step.title}</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{step.description}</p>
+                </div>
+                
+                {/* Monthly Program pricing for step 4 */}
+                {index === 3 && (
+                  <div className="mt-6 bg-white dark:bg-gray-900 px-6 py-3 rounded-lg shadow-lg border border-primary/20">
+                    <h4 className="font-semibold text-primary text-lg">{t('gettingStarted.membership.title')}</h4>
+                    <p className="text-2xl font-bold text-primary">{t('gettingStarted.membership.price')}</p>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* Mobile pricing info */}
-        <div className="md:hidden mt-8 flex flex-col gap-4">
-          <div className="bg-white dark:bg-gray-900 px-4 py-3 rounded-lg shadow-lg border border-primary/20 text-center">
-            <h4 className="font-semibold text-primary">{t('gettingStarted.onboarding.title')}</h4>
-            <p className="text-sm text-muted-foreground">{t('gettingStarted.onboarding.includes')}</p>
-            <p className="text-xl font-bold">{t('gettingStarted.onboarding.price')}</p>
-            <p className="text-sm text-muted-foreground">{t('gettingStarted.onboarding.type')}</p>
-          </div>
-          <div className="bg-white dark:bg-gray-900 px-4 py-3 rounded-lg shadow-lg border border-primary/20 text-center">
-            <h4 className="font-semibold text-primary">{t('gettingStarted.membership.title')}</h4>
-            <p className="text-sm text-muted-foreground">{t('gettingStarted.membership.includes')}</p>
-            <p className="text-xl font-bold">{t('gettingStarted.membership.price')}</p>
-            <p className="text-sm text-muted-foreground">{t('gettingStarted.membership.type')}</p>
+        {/* Mobile layout */}
+        <div className="md:hidden space-y-8">
+          {steps.map((step, index) => (
+            <div key={index} className="flex items-start gap-4">
+              <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-primary/80 to-primary rounded-full shadow-lg flex-shrink-0">
+                <span className="text-xl font-bold text-primary-foreground">{index + 1}</span>
+              </div>
+              <div className="flex-1">
+                <h3 className="text-lg font-semibold mb-2">{step.title}</h3>
+                <p className="text-muted-foreground text-sm">{step.description}</p>
+              </div>
+            </div>
+          ))}
+          
+          {/* Mobile pricing info */}
+          <div className="mt-8 flex flex-col gap-4">
+            <div className="bg-white dark:bg-gray-900 px-4 py-3 rounded-lg shadow-lg border border-primary/20 text-center">
+              <h4 className="font-semibold text-primary">{t('gettingStarted.onboarding.title')}</h4>
+              <p className="text-sm text-muted-foreground">{t('gettingStarted.onboarding.includes')}</p>
+              <p className="text-xl font-bold">{t('gettingStarted.onboarding.price')}</p>
+              <p className="text-sm text-muted-foreground">{t('gettingStarted.onboarding.type')}</p>
+            </div>
+            <div className="bg-white dark:bg-gray-900 px-4 py-3 rounded-lg shadow-lg border border-primary/20 text-center">
+              <h4 className="font-semibold text-primary">{t('gettingStarted.membership.title')}</h4>
+              <p className="text-sm text-muted-foreground">{t('gettingStarted.membership.includes')}</p>
+              <p className="text-xl font-bold">{t('gettingStarted.membership.price')}</p>
+              <p className="text-sm text-muted-foreground">{t('gettingStarted.membership.type')}</p>
+            </div>
           </div>
         </div>
       </div>
