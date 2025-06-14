@@ -34,19 +34,19 @@ const GettingStarted = () => {
 
         {/* Steps Grid */}
         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-12 relative">
-          {/* Onboarding Program Bracket - positioned above steps 1-3 */}
-          <div className="hidden md:block absolute left-0 top-0 z-10" style={{width: '75%'}}>
-            {/* Bracket connecting steps 1-3 */}
+          {/* Onboarding Program Bracket - positioned to connect steps 1-3 */}
+          <div className="hidden md:block absolute left-0 top-6 z-10" style={{width: '75%'}}>
+            {/* Bracket connecting steps 1-3 at the level of the numbered circles */}
             <div className="relative">
-              {/* Horizontal bracket line */}
-              <div className="absolute left-12 top-0 right-12 h-0.5 bg-primary/60" style={{width: 'calc(100% - 6rem)'}}></div>
-              {/* Left vertical line */}
-              <div className="absolute left-12 top-0 w-0.5 h-4 bg-primary/60"></div>
-              {/* Right vertical line */}
-              <div className="absolute right-12 top-0 w-0.5 h-4 bg-primary/60"></div>
+              {/* Horizontal bracket line connecting from step 1 to step 3 */}
+              <div className="absolute left-6 top-0 right-6 h-0.5 bg-primary/60" style={{width: 'calc(100% - 3rem)'}}></div>
+              {/* Left vertical line down from step 1 circle */}
+              <div className="absolute left-6 top-0 w-0.5 h-4 bg-primary/60"></div>
+              {/* Right vertical line down from step 3 circle */}
+              <div className="absolute right-6 top-0 w-0.5 h-4 bg-primary/60"></div>
               
               {/* Onboarding Program pricing box above bracket */}
-              <div className="absolute left-1/2 -top-16 transform -translate-x-1/2 text-center">
+              <div className="absolute left-1/2 -top-20 transform -translate-x-1/2 text-center">
                 <div className="bg-white dark:bg-gray-900 px-4 py-2 rounded-lg shadow-lg border border-primary/20">
                   <h4 className="font-semibold text-sm text-primary">{t('gettingStarted.onboarding.title')}</h4>
                   <p className="text-lg font-bold">{t('gettingStarted.onboarding.price')}</p>
