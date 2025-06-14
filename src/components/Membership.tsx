@@ -64,12 +64,10 @@ const Membership = () => {
       title: t('membership.golf.title'),
       shortTitle: language === 'zh' ? '高爾夫' : 'Golf',
       items: [{
-        title: t('membership.golf.simulator'),
-        description: t('membership.golf.simulator.description')
-      }, {
-        title: t('membership.golf.putting'),
-        description: t('membership.golf.putting.description')
-      }, {
+        title: language === 'zh' ? '高爾夫技能評估（每月一次）' : 'Golf Skill Assessment (1x/month)',
+        description: language === 'zh' ? '透過模擬器進行結構化評估，追蹤進步成果。' : 'Track progress with a structured simulator-based evaluation.'
+      }, 
+      {
         title: t('membership.golf.tracking'),
         description: t('membership.golf.tracking.description')
       }, {
