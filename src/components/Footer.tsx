@@ -12,7 +12,7 @@ const Footer = () => {
   return (
     <footer className="bg-signal-black text-white py-6">
       <div className="container mx-auto container-padding">
-        <div className="text-center text-white/70 text-sm">
+        <div className="text-center text-muted-foreground text-sm">
           <p>{copyrightText}</p>
         </div>
       </div>
