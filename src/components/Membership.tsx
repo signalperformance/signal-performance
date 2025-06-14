@@ -1,3 +1,4 @@
+
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useState, useEffect, useRef } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
@@ -90,17 +91,17 @@ const Membership = () => {
   return (
     <section id="membership" className="section-padding bg-signal-light-gray">
       <div className="container mx-auto container-padding">
-        <div className="text-center mb-12"> {/* Increased bottom margin for better spacing */}
+        <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-1 font-lora">{t('membership.title')}</h2>
           <p className="text-xl text-muted-foreground font-medium">{t('membership.price')}</p>
           <p className="text-sm text-muted-foreground italic mt-1">{t('membership.subtitle')}</p>
         </div>
 
-        {/* Unified Grid Layout for all screen sizes */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        {/* Masonry/Pinterest-Style Layout using CSS columns */}
+        <div className="columns-1 md:columns-2 lg:columns-3 gap-6 md:gap-8 space-y-6 md:space-y-8">
           {Object.entries(categories).map(([key, category]) => (
-            <Card key={key} className="bg-white shadow-lg rounded-xl overflow-hidden flex flex-col">
-              <CardContent className="p-6 md:p-8 flex-grow"> {/* Use p-6 for mobile, p-8 for desktop */}
+            <Card key={key} className="bg-white shadow-lg rounded-xl overflow-hidden flex flex-col break-inside-avoid-column">
+              <CardContent className="p-6 md:p-8 flex-grow">
                 <div className="flex items-center mb-6">
                   <div
                     className="w-4 h-4 rounded-full mr-3"
@@ -111,9 +112,9 @@ const Membership = () => {
                   </h3>
                 </div>
 
-                <div className="space-y-5"> {/* Consistent spacing for items */}
+                <div className="space-y-5">
                   {category.items.map((item, index) => (
-                    <div key={index} className="flex items-start gap-3"> {/* Consistent gap */}
+                    <div key={index} className="flex items-start gap-3">
                       <div
                         className="w-6 h-6 rounded-full flex items-center justify-center text-white mt-0.5 flex-shrink-0"
                         style={{ backgroundColor: getCategoryColor(key) }}
