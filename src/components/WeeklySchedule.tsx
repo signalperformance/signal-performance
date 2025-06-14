@@ -258,7 +258,7 @@ const WeeklySchedule = () => {
       <div className="container mx-auto container-padding">
         <h2 className="text-3xl md:text-4xl font-bold mb-2 text-center font-lora">{t('schedule.title')}</h2>
         <p className="text-base md:text-lg text-center text-gray-400 mb-6 font-montserrat">
-          {t('schedule.subtitle', { defaultValue: "Choose 4 sessions per week based on your goals and training phase — guided by your coach."})}
+          {t('schedule.subtitle')}
         </p>
         
         
@@ -287,7 +287,7 @@ const WeeklySchedule = () => {
                           {scheduledClass ? <div className={cn("w-full h-full rounded-sm p-1 text-center text-xs leading-tight flex items-center justify-center transition-opacity duration-150",
                   // p-1 from p-1.5
                   classStyles[scheduledClass.name.toUpperCase()] || 'bg-gray-400 text-black')}>
-                              {t(`schedule.classes.${scheduledClass.name.toLowerCase()}` as any)}
+                              {t(`schedule.classes.${scheduledClass.name.toLowerCase()}`)}
                             </div> : <div className="w-full h-full"></div> // Empty cell
                   }
                         </div>;
