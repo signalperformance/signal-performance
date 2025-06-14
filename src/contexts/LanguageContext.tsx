@@ -1,15 +1,6 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-
-// Helper to track module evaluation instances across HMR.
-let contextInstanceCounter = 0;
-if (typeof (window as any)._appLanguageContextInstanceCounter === 'undefined') {
-  (window as any)._appLanguageContextInstanceCounter = 0;
-}
-(window as any)._appLanguageContextInstanceCounter++;
-contextInstanceCounter = (window as any)._appLanguageContextInstanceCounter;
-console.log(`LanguageContext.tsx module evaluated. Instance: ${contextInstanceCounter}`);
-
+import { translations } from '@/i18n';
 
 type Language = 'en' | 'zh';
 
@@ -19,297 +10,13 @@ type LanguageContextType = {
   t: (key: string) => string;
 };
 
-const translations = {
-  en: {
-    // Navigation
-    'nav.home': 'Home',
-    'nav.membership': 'Membership',
-    'nav.about': 'About',
-    'nav.founder': 'Founder',
-    'nav.contact': 'Join Waitlist',
-    'nav.login': 'Member Login',
-    
-    // Hero
-    'hero.headline': 'Holistic Training Space for Pro Golfers',
-    'hero.subheadline': 'Physical, mental, and skill training — all in one place',
-    'hero.cta.waitlist': 'Join the Waitlist',
-    'hero.cta.membership': 'Explore Membership',
-    
-    // Membership
-    'membership.title': 'What\'s Included in Your Membership',
-    'membership.price': 'NT$18,000/month',
-    'membership.subtitle': 'All-inclusive membership.',
-    'membership.physical.title': 'Physical Training',
-    'membership.physical.assessment': 'Quarterly Performance Assessments',
-    'membership.physical.assessment.description': 'Quarterly assessments provide objective data to guide your individualized training plan.',
-    'membership.physical.coaching': '1-on-2 Fitness Coaching (3x/Week)',
-    'membership.physical.coaching.description': 'Train in a semi-private setting with a fully personalized program aligned with your goals.',
-    'membership.physical.train': 'Train On Your Own',
-    'membership.physical.train.description': 'Use the facility outside of coached sessions to complete your personalized program—just book your time and get to work.',
-    'membership.physical.app': 'Mobile Training App',
-    'membership.physical.app.description': 'Access your program anytime — in the facility, on the road, or at home — so you can train consistently anywhere.',
-    
-    'membership.mental.title': 'Mental Training',
-    'membership.mental.coaching': '1-on-1 Mental Coaching (1x/Month)',
-    'membership.mental.coaching.description': 'Meet with a certified mental performance consultant for personalized sessions to enhance performance on and off the course.',
-    'membership.mental.plan': 'Structured Mental Training Plan',
-    'membership.mental.plan.description': 'Follow a personalized plan with targeted exercises to build mental skills between sessions.',
-    'membership.mental.toolkit': 'Home Practice Toolkit',
-    'membership.mental.toolkit.description': 'Receive a heart rate monitor and mobile app to practice skills learned in coaching sessions and track progress between sessions.',
-    
-    'membership.golf.title': 'Golf Training',
-    'membership.golf.simulator': 'Simulator Access (5 hrs/month)',
-    'membership.golf.simulator.description': 'Train with state-of-the-art technology — anytime that fits your schedule.',
-    'membership.golf.putting': 'Putting Green Access (2 hrs/month)',
-    'membership.golf.putting.description': 'Refine your mechanics and alignment with cutting-edge tools — on your own schedule.',
-    'membership.golf.tracking': 'On-Course Performance Tracking',
-    'membership.golf.tracking.description': 'All members receive access to golf stat tracking software, allowing us to monitor your competitive performance and adjust your training focus accordingly.',
-    'membership.golf.fitting': 'Club Fitting Station',
-    'membership.golf.fitting.description': 'Access in-house tools to measure loft, lie, and other club specs — make data-informed equipment adjustments for peak performance.',
-    
-    // Facility
-    'membership.facility.title': 'Facility Features',
-    'membership.facility.refresh': 'Refresh & Recharge',
-    'membership.facility.refresh.description': 'Includes modern shower and kitchenette with complimentary and member-priced options.',
-    'membership.facility.atmosphere': 'Private Training Environment',
-    'membership.facility.atmosphere.description': 'Membership is capped to ensure a quiet, focused, and accessible environment.',
-    
-    // Assessment Process
-    'assessment.title': 'Our Assessment Process',
-    'assessment.description': 'Every quarter, members complete a full assessment across five essential areas to ensure their training is aligned, effective, and progressing toward their performance goals.',
-    
-    'assessment.joint.title': 'Joint Health',
-    'assessment.joint.description': 'We assess the passive and active range of motion of every major joint to identify movement limitations and their root causes. These insights inform your fitness program to help reduce injury risk and support long-term joint health. We also track changes in range of motion over time to monitor progress and guide ongoing adjustments.',
-    
-    'assessment.strength.title': 'Maximal Strength',
-    'assessment.strength.description': 'We assess maximal strength using compound lifts like the bench press and deadlift to measure how effectively your neuromuscular system produces force. As maximal strength increases, you\'re able to move lighter loads — like a golf club — more quickly, directly supporting gains in swing speed.',
-    
-    'assessment.metabolic.title': 'Metabolic Testing',
-    'assessment.metabolic.description': 'We assess how efficiently your body produces and uses energy through aerobic and anaerobic testing. This allows us to define your personalized heart rate zones and design a conditioning program that improves endurance, enhances recovery, and supports sustained performance over multiple rounds of competitive golf.',
-    
-    'assessment.body.title': 'Body Composition',
-    'assessment.body.description': 'We track changes in muscle mass and body fat percentage to evaluate whether your training is producing the right adaptations. This gives us more reliable feedback than body weight alone and helps ensure your progress aligns with performance goals.',
-    
-    'assessment.golf.title': 'Skill Assessment',
-    'assessment.golf.description': 'We measure distance and dispersion metrics across every club in the bag to assess your ball-striking and shot control in a controlled environment. This is combined with an analysis of your strokes gained data and equipment setup to better understand the relative contribution of technical, physical, mental, and equipment factors to your performance.',
-    
-    // About
-    'about.title': 'About Signal Performance',
-    'about.subtitle': 'Redefining golf training through integration',
-    'about.paragraph1': 'Signal Performance brings together physical conditioning, mental resilience, and technical skill development in one seamless experience.',
-    'about.paragraph2': 'Our integrated approach recognizes that excellence in golf requires harmony between body, mind, and technique.',
-    'about.paragraph3': 'We provide a sanctuary where elite golfers can focus on all aspects of their game without distraction.',
-    
-    // Coach
-    'about.coach.title': 'Your Coach',
-    'about.coach.name': 'Dr. Noah Sachs',
-    'about.coach.position': 'Performance Coach',
-    'about.coach.academic': 'Academic Background',
-    'about.coach.academic.degree': 'Doctorate in Sport & Performance Psychology',
-    'about.coach.experience': 'Professional Experience',
-    'about.coach.experience.img': 'IMG Academy',
-    'about.coach.experience.usaf': 'U.S. Air Force Special Operations Command',
-    'about.coach.experience.pga': 'PGA of America Golf Academy at Mission Hills',
-    'about.coach.certifications': 'Certifications',
-    
-    // Founder
-    'founder.title': 'Our Founder',
-    'founder.name': 'Samuel Chen',
-    'founder.credentials': 'PGA Certified Professional • Performance Coach • Former Asian Tour Player',
-    'founder.bio': 'With over 15 years of experience in professional golf across Asia and North America, Samuel founded Signal Performance to bring a holistic training methodology to elite Taiwanese golfers. His approach combines Eastern discipline with Western sports science to create a uniquely effective training environment.',
-    
-    // Waitlist
-    'waitlist.title': 'Join Our Waitlist',
-    'waitlist.subtitle': 'Membership is limited and by application only',
-    'waitlist.name': 'Full Name',
-    'waitlist.email': 'Email Address',
-    'waitlist.phone': 'Phone Number',
-    'waitlist.handicap': 'Current Handicap',
-    'waitlist.goals': 'Your Golf Goals',
-    'waitlist.submit': 'Submit Application',
-    'waitlist.success': 'Thank you for your interest! We will contact you soon.',
-    
-    // Philosophy
-    'philosophy.title': 'Our Philosophy',
-    'philosophy.card1.title': 'Signal Over Noise',
-    'philosophy.card1.content': 'Our name comes from the concept of the signal-to-noise ratio—a principle in data science and engineering. The "signal" is meaningful, actionable information. The "noise" is everything that gets in the way. We apply this mindset to golf performance by identifying what matters most and cutting the rest.',
-    'philosophy.card2.title': 'Measure, Don\'t Guess',
-    'philosophy.card2.content': 'We take a data-informed, evidence-based approach to training—with no guesswork. But we don\'t blindly follow the numbers. Data guides our decisions, it doesn\'t dictate them. We combine meaningful metrics with the experience and judgment of qualified professionals to deliver training that\'s both effective and individualized.',
-    'philosophy.card3.title': 'Integrated Training',
-    'philosophy.card3.content': 'There\'s no single key to performance. It\'s a system—complex, dynamic, and made up of many moving parts. Our mind and body interact constantly, and skill draws on both. That\'s why we don\'t isolate them. Our integrated approach trains the physical, mental, and skill components together—within one cohesive, performance-driven program.',
-    
-    // Schedule
-    'schedule.title': 'Weekly Training Schedule',
-    'schedule.subtitle': 'Choose four sessions per week based on your goals and training phase — guided by your coach.',
-    'schedule.keyTitle': 'KEY:',
-    'schedule.key.pro': "PR: Pro's Only",
-    'schedule.key.open': "OP: Open to All Members",
-    'schedule.days.monday': 'Mon',
-    'schedule.days.tuesday': 'Tue',
-    'schedule.days.wednesday': 'Wed',
-    'schedule.days.thursday': 'Thu',
-    'schedule.days.friday': 'Fri',
-    'schedule.days.saturday': 'Sat',
-    'schedule.days.sunday': 'Sun',
-    'schedule.timePeriods.am': 'AM',
-    'schedule.timePeriods.pm': 'PM',
-    'schedule.classes.mobility': 'Mobility',
-    'schedule.classes.strength': 'Strength',
-    'schedule.classes.cardio': 'Cardio',
-    'schedule.classes.power': 'Power',
-    'schedule.disclaimer': 'Schedule subject to change. Please confirm with staff.',
-  },
-  zh: {
-    // Navigation
-    'nav.home': '首頁',
-    'nav.membership': '會員資格',
-    'nav.about': '關於我們',
-    'nav.founder': '創辦人',
-    'nav.contact': '加入候補名單',
-    'nav.login': '會員登入',
-    
-    // Hero
-    'hero.headline': '高爾夫選手的整合式訓練空間',
-    'hero.subheadline': '體能、心理與技術訓練集中於一個專業空間',
-    'hero.cta.waitlist': '加入候補名單',
-    'hero.cta.membership': '了解會員方案',
-    
-    // Membership
-    'membership.title': '會員專屬內容',
-    'membership.price': '每月 NT$18,000',
-    'membership.subtitle': '全方位訓練課程皆包含在內',
-    'membership.physical.title': '體能訓練',
-    'membership.physical.assessment': '每季表現評估',
-    'membership.physical.assessment.description': '每季評估提供客觀數據，指導您的個人化訓練計劃。',
-    'membership.physical.coaching': '每週三次 1 對 2 體能訓練課程',
-    'membership.physical.coaching.description': '在半私人環境中進行完全符合您目標的訓練計畫。',
-    'membership.physical.train': '自主訓練空間使用',
-    'membership.physical.train.description': '在教練課程之外使用場館完成您的個人化訓練計畫：只需預約時間，開始訓練。',
-    'membership.physical.app': '專屬訓練 APP，隨時隨地跟進課表',
-    'membership.physical.app.description': '隨時隨地查看您的訓練計劃—在場館、出差或在家—讓您在任何地方都能保持一致的訓練。',
-    
-    'membership.mental.title': '心理訓練',
-    'membership.mental.coaching': '每月一次的 1 對 1 心理教練諮詢',
-    'membership.mental.coaching.description': '與認證心理績效顧問會面，進行針對場上場下表現提升的個人化課程。',
-    'membership.mental.plan': '系統化心理訓練計畫',
-    'membership.mental.plan.description': '依循個人化計劃，透過有針對性的練習在課程間隔建立心理技能。',
-    'membership.mental.toolkit': '居家練習工具包（含心率監測器與訓練 APP）',
-    'membership.mental.toolkit.description': '獲得心率監測器與專屬訓練 APP，練習課程中學到的技能，並在課程之間追蹤進度。',
-    
-    'membership.golf.title': '高爾夫訓練',
-    'membership.golf.simulator': '模擬器使用時數：每月 5 小時',
-    'membership.golf.simulator.description': '使用最先進的技術進行訓練，依您的時間表彈性安排。',
-    'membership.golf.putting': '推桿果嶺使用時間：每月 2 小時',
-    'membership.golf.putting.description': '使用尖端工具提升技術與對準，自主安排練習時間。',
-    'membership.golf.tracking': '比賽數據分析',
-    'membership.golf.tracking.description': '所有會員皆可使用數據分析軟體，使我們能夠深入了解您的比賽表現，並依此調整訓練重點。',
-    'membership.golf.fitting': '球桿調整站',
-    'membership.golf.fitting.description': '使用專業設備測量桿面仰角、桿身傾角及其他規格，進行依據數據的調整，優化球桿設定以提升表現。',
-    
-    // Facility
-    'membership.facility.title': '空間特色',
-    'membership.facility.refresh': '放鬆與補給空間',
-    'membership.facility.refresh.description': '包括現代化淋浴和附有免費與會員專屬價格選項的小廚房。',
-    'membership.facility.atmosphere': '私人化訓練環境',
-    'membership.facility.atmosphere.description': '為確保訓練環境安靜、專注且便利，本中心設有人數上限。',
-    
-    // Assessment Process
-    'assessment.title': '我們的評估流程',
-    'assessment.description': '每季進行一次完整評估，涵蓋五大核心面向，確保訓練方向正確、有效，並持續朝表現目標邁進。',
-    
-    'assessment.joint.title': '關節健康',
-    'assessment.joint.description': '評估每個主要關節的主動與被動活動範圍，找出動作受限的根本原因。這些資料將用來調整訓練計畫，降低受傷風險並維持長期關節健康。所有變化都會被紀錄與追蹤，持續優化訓練方向。',
-    
-    'assessment.strength.title': '最大肌力',
-    'assessment.strength.description': '透過臥推、硬舉等複合動作測量最大肌力，了解神經肌肉系統的出力效率。隨著最大肌力提升，你將能更快地揮動像高爾夫球桿這類較輕的器具，進而提升揮桿速度。',
-    
-    'assessment.metabolic.title': '新陳代謝測試',
-    'assessment.metabolic.description': '透過有氧與無氧測試，評估你在不同運動強度下的能量供應效率。我們據此設定個人化心率區間，並設計能提升耐力、加速恢復、讓你多回合比賽中保持穩定表現的體能訓練計畫。',
-    
-    'assessment.body.title': '身體組成',
-    'assessment.body.description': '我們追踪肌肉量和體脂百分比的變化，評估您的訓練是否產生正確的適應。這比單純體重提供更可靠的反饋，並幫助確保您的進步與表現目標一致。',
-    
-    'assessment.golf.title': '高爾夫表現評估',
-    'assessment.golf.description': '我們測量每支球桿的擊球距離與落點分佈，在受控環境中評估您的擊球品質與球路控制表現。再結合比賽中的 Strokes Gained 數據與球桿設定分析，更深入了解技術、體能、心理與球桿等因素對您整體表現的相對影響。',
-    
-    // About
-    'about.title': '關於 Signal Performance',
-    'about.subtitle': '透過整合重新定義高爾夫訓練',
-    'about.paragraph1': 'Signal Performance 將身體鍛鍊、心理韌性和技術技能發展融合為一體，提供無縫體驗。',
-    'about.paragraph2': '我們的整合方法認識到，高爾夫卓越需要身體、心靈和技術之間的和諧。',
-    'about.paragraph3': '我們提供一個聖所，讓精英高爾夫球手能夠專注於他們的比賽各個方面，不受干擾。',
-    
-    // Coach
-    'about.coach.title': '您的教練',
-    'about.coach.name': 'Dr. Noah Sachs',
-    'about.coach.position': '表現教練',
-    'about.coach.academic': '學術背景',
-    'about.coach.academic.degree': '運動與表現心理學博士',
-    'about.coach.experience': '專業經歷',
-    'about.coach.experience.img': 'IMG Academy',
-    'about.coach.experience.usaf': '美國空軍特種作戰司令部',
-    'about.coach.experience.pga': '美國高爾夫協會 Mission Hills 訓練中心',
-    'about.coach.certifications': '專業認證',
-    
-    // Founder
-    'founder.title': '我們的創辦人',
-    'founder.name': '陳志明',
-    'founder.credentials': 'PGA認證專業人士 • 表現教練 • 前亞巡賽球員',
-    'founder.bio': '擁有超過15年橫跨亞洲和北美的專業高爾夫經驗，志明創立了Signal Performance，為台灣精英高爾夫球手帶來全面的訓練方法。他的方法將東方的紀律與西方的運動科學相結合，創造了一個獨特而有效的訓練環境。',
-    
-    // Waitlist
-    'waitlist.title': '加入我們的候補名單',
-    'waitlist.subtitle': '會員名額有限，僅接受申請',
-    'waitlist.name': '全名',
-    'waitlist.email': '電子郵件',
-    'waitlist.phone': '電話號碼',
-    'waitlist.handicap': '目前差點',
-    'waitlist.goals': '您的高爾夫目標',
-    'waitlist.submit': '提交申請',
-    'waitlist.success': '感謝您的興趣！我們將盡快與您聯繫。',
-    
-    // Philosophy
-    'philosophy.title': '我們的理念',
-    'philosophy.card1.title': '去除雜訊，聚焦訊號',
-    'philosophy.card1.content': '我們的名稱源自「訊號與雜訊比」的概念，這是資料科學與工程領域中的一項核心原則。所謂「訊號」，是具有意義且可採取行動的資訊；而「雜訊」則是那些分散注意、模糊重點的干擾。我們看待高爾夫表現的方式，就是辨識出真正重要的元素，排除無關雜訊，聚焦提升關鍵表現。',
-    'philosophy.card2.title': '依據數據，不靠猜測',
-    'philosophy.card2.content': '我們採取以數據為基礎、科學實證支持的訓練方式，不靠猜測，也不盲從數據。數據能提供方向，但不是唯一的決策依據。我們重視專業教練的經驗與判斷，並結合有意義的指標，打造出既有效又具個人化的訓練計畫，協助選手精準提升表現。',
-    'philosophy.card3.title': '整合式訓練系統',
-    'philosophy.card3.content': '表現從不是單一因素決定的，它是一個由多個面向互動構成的複雜系統。我們的身心彼此連動，技術則建立在兩者之上。因此，我們不將體能、心理與技術分割訓練，而是納入一套整合式的訓練架構中，讓每一部分協同作用，推動整體表現持續進步。',
-    
-    // Schedule
-    'schedule.title': '每週訓練課表',
-    'schedule.subtitle': '依據你的目標與訓練階段，選擇每週 4 堂課，由教練協助規劃。',
-    'schedule.keyTitle': '圖例說明：',
-    'schedule.key.pro': "PR：僅限職業選手",
-    'schedule.key.open': "OP：所有會員皆可參加",
-    'schedule.days.monday': '週一',
-    'schedule.days.tuesday': '週二',
-    'schedule.days.wednesday': '週三',
-    'schedule.days.thursday': '週四',
-    'schedule.days.friday': '週五',
-    'schedule.days.saturday': '週六',
-    'schedule.days.sunday': '週日',
-    'schedule.timePeriods.am': '上午',
-    'schedule.timePeriods.pm': '下午',
-    'schedule.classes.mobility': '活動度',
-    'schedule.classes.strength': '肌力',
-    'schedule.classes.cardio': '心肺',
-    'schedule.classes.power': '爆發力',
-    'schedule.disclaimer': '時間表可能隨時更動，請與工作人員確認。',
-  }
-};
-
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
-console.log(`LanguageContext object created. Module instance: ${contextInstanceCounter}`);
-
 
 // Helper function to check if localStorage is available
 const isLocalStorageAvailable = (): boolean => {
   try {
     return typeof window !== 'undefined' && 'localStorage' in window && window.localStorage !== null;
   } catch (error) {
-    // console.warn('localStorage check failed:', error); // Less noisy
     return false;
   }
 };
@@ -317,54 +24,45 @@ const isLocalStorageAvailable = (): boolean => {
 // Helper function to get saved language from localStorage
 const getSavedLanguage = (): Language => {
   if (!isLocalStorageAvailable()) {
-    // console.warn('localStorage is not available, defaulting to English'); // Less noisy
     return 'en';
   }
-  
+
   try {
     const saved = localStorage.getItem('signal-performance-language');
-    // console.log('Reading saved language from localStorage:', saved); // Less noisy
     if (saved === 'en' || saved === 'zh') {
       return saved;
     }
   } catch (error) {
-    // console.warn('Failed to read language from localStorage:', error); // Less noisy
+    // Silently fail
   }
-  // console.log('No valid saved language found, defaulting to English'); // Less noisy
   return 'en'; // Default to English for first-time visitors
 };
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  console.log(`LanguageProvider rendered. Using context from module instance: ${contextInstanceCounter}`);
   const [language, setLanguage] = useState<Language>('en'); // Initialize with 'en' directly
   const [isInitialized, setIsInitialized] = useState(false);
 
   // Initialize language from localStorage after component mounts
   useEffect(() => {
-    // console.log('LanguageProvider mount effect: initializing language.'); // Less noisy
     const savedLanguage = getSavedLanguage();
-    // console.log('Initializing language to:', savedLanguage); // Less noisy
     setLanguage(savedLanguage);
     setIsInitialized(true);
   }, []);
 
-  // Save language preference to localStorage whenever it changes (but not on initial load)
+  // Save language preference to localStorage whenever it changes
   useEffect(() => {
     if (!isInitialized) {
-      // console.log('LanguageProvider update effect: skipping save, not initialized yet.'); // Less noisy
-      return; 
+      return;
     }
-    
+
     if (!isLocalStorageAvailable()) {
-      // console.warn('localStorage is not available, cannot save language preference'); // Less noisy
       return;
     }
 
     try {
-      // console.log('Saving language to localStorage:', language); // Less noisy
       localStorage.setItem('signal-performance-language', language);
     } catch (error) {
-      // console.warn('Failed to save language to localStorage:', error); // Less noisy
+      // Silently fail
     }
   }, [language, isInitialized]);
 
@@ -380,13 +78,9 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
 };
 
 export const useLanguage = (): LanguageContextType => {
-  console.log(`useLanguage called. Expecting context from module instance: ${contextInstanceCounter}`);
   const context = useContext(LanguageContext);
   if (context === undefined) {
-    console.error(`useLanguage: context is undefined. Module instance: ${contextInstanceCounter}. This means useLanguage is likely called outside a LanguageProvider.`);
     throw new Error('useLanguage must be used within a LanguageProvider');
   }
-  // console.log(`useLanguage: context found. Module instance: ${contextInstanceCounter}`); // Less noisy
   return context;
 };
-
