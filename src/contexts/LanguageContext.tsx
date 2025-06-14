@@ -129,7 +129,7 @@ const translations = {
     
     // Schedule
     'schedule.title': 'Weekly Training Schedule',
-    'schedule.subtitle': 'Choose 4 sessions per week based on your goals and training phase — guided by your coach.',
+    'schedule.subtitle': 'Choose four sessions per week based on your goals and training phase — guided by your coach.',
     'schedule.keyTitle': 'KEY:',
     'schedule.days.monday': 'Mon',
     'schedule.days.tuesday': 'Tue',
