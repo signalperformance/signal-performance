@@ -1,3 +1,4 @@
+
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { translations } from '@/i18n';
 
@@ -38,22 +39,10 @@ const getSavedLanguage = (): Language => {
 };
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  const [language, setLanguage] = useState<Language>('en');
-  const [isInitialized, setIsInitialized] = useState(false);
-
-  // Initialize language from localStorage after component mounts
-  useEffect(() => {
-    const savedLanguage = getSavedLanguage();
-    setLanguage(savedLanguage);
-    setIsInitialized(true);
-  }, []);
+  const [language, setLanguage] = useState<Language>(getSavedLanguage());
 
   // Save language preference to localStorage whenever it changes
   useEffect(() => {
-    if (!isInitialized) {
-      return;
-    }
-
     if (!isLocalStorageAvailable()) {
       return;
     }
@@ -63,7 +52,7 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     } catch (error) {
       // Silently fail
     }
-  }, [language, isInitialized]);
+  }, [language]);
 
   const t = (key: string): string => {
     return translations[language][key as keyof typeof translations[typeof language]] || key;
