@@ -126,6 +126,24 @@ const translations = {
     'philosophy.card2.content': 'We take a data-informed, evidence-based approach to training—with no guesswork. But we don\'t blindly follow the numbers. Data guides our decisions, it doesn\'t dictate them. We combine meaningful metrics with the experience and judgment of qualified professionals to deliver training that\'s both effective and individualized.',
     'philosophy.card3.title': 'Integrated Training',
     'philosophy.card3.content': 'There\'s no single key to performance. It\'s a system—complex, dynamic, and made up of many moving parts. Our mind and body interact constantly, and skill draws on both. That\'s why we don\'t isolate them. Our integrated approach trains the physical, mental, and skill components together—within one cohesive, performance-driven program.',
+    
+    // Schedule
+    'schedule.title': 'Weekly Training Schedule',
+    'schedule.keyTitle': 'KEY:',
+    'schedule.days.monday': 'Mon',
+    'schedule.days.tuesday': 'Tue',
+    'schedule.days.wednesday': 'Wed',
+    'schedule.days.thursday': 'Thu',
+    'schedule.days.friday': 'Fri',
+    'schedule.days.saturday': 'Sat',
+    'schedule.days.sunday': 'Sun',
+    'schedule.timePeriods.am': 'AM',
+    'schedule.timePeriods.pm': 'PM',
+    'schedule.classes.mobility': 'Mobility',
+    'schedule.classes.strength': 'Strength',
+    'schedule.classes.cardio': 'Cardio',
+    'schedule.classes.power': 'Power',
+    'schedule.disclaimer': 'Schedule subject to change. Please confirm with staff.',
   },
   zh: {
     // Navigation
@@ -244,6 +262,24 @@ const translations = {
     'philosophy.card2.content': '我們採取以數據為基礎、科學實證支持的訓練方式，不靠猜測，也不盲從數據。數據能提供方向，但不是唯一的決策依據。我們重視專業教練的經驗與判斷，並結合有意義的指標，打造出既有效又具個人化的訓練計畫，協助選手精準提升表現。',
     'philosophy.card3.title': '整合式訓練系統',
     'philosophy.card3.content': '表現從不是單一因素決定的，它是一個由多個面向互動構成的複雜系統。我們的身心彼此連動，技術則建立在兩者之上。因此，我們不將體能、心理與技術分割訓練，而是納入一套整合式的訓練架構中，讓每一部分協同作用，推動整體表現持續進步。',
+    
+    // Schedule
+    'schedule.title': '每週訓練時間表',
+    'schedule.keyTitle': '圖例：',
+    'schedule.days.monday': '週一',
+    'schedule.days.tuesday': '週二',
+    'schedule.days.wednesday': '週三',
+    'schedule.days.thursday': '週四',
+    'schedule.days.friday': '週五',
+    'schedule.days.saturday': '週六',
+    'schedule.days.sunday': '週日',
+    'schedule.timePeriods.am': '上午',
+    'schedule.timePeriods.pm': '下午',
+    'schedule.classes.mobility': '活動度',
+    'schedule.classes.strength': '肌力',
+    'schedule.classes.cardio': '心肺',
+    'schedule.classes.power': '爆發力',
+    'schedule.disclaimer': '時間表可能隨時更動，請與工作人員確認。',
   }
 };
 
