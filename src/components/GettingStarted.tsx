@@ -27,7 +27,7 @@ const GettingStarted = () => {
   return (
     <section className="section-padding bg-secondary dark:bg-black">
       <div className="container container-padding">
-        <div className="mb-14 text-center">
+        <div className="mb-20 text-center">
           <h2 className="text-3xl md:text-4xl font-semibold mb-4 text-balance">{t('gettingStarted.title')}</h2>
           <p className="mx-auto max-w-xl text-lg text-muted-foreground">{t('gettingStarted.subtitle')}</p>
         </div>
@@ -35,18 +35,18 @@ const GettingStarted = () => {
         {/* Steps Grid */}
         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-12 relative">
           {/* Onboarding Program Bracket - positioned above steps 1-3 */}
-          <div className="hidden md:block absolute left-0 top-0 z-10" style={{width: '75%'}}>
+          <div className="hidden md:block absolute top-0 z-10" style={{left: '6%', width: '63%'}}>
             {/* Bracket connecting steps 1-3 */}
             <div className="relative">
               {/* Horizontal bracket line */}
-              <div className="absolute left-12 top-0 right-12 h-0.5 bg-primary/60" style={{width: 'calc(100% - 6rem)'}}></div>
-              {/* Left vertical line */}
-              <div className="absolute left-12 top-0 w-0.5 h-4 bg-primary/60"></div>
-              {/* Right vertical line */}
-              <div className="absolute right-12 top-0 w-0.5 h-4 bg-primary/60"></div>
+              <div className="absolute left-6 top-0 right-6 h-0.5 bg-primary"></div>
+              {/* Left vertical line connecting to step 1 */}
+              <div className="absolute left-6 top-0 w-0.5 h-6 bg-primary"></div>
+              {/* Right vertical line connecting to step 3 */}
+              <div className="absolute right-6 top-0 w-0.5 h-6 bg-primary"></div>
               
               {/* Onboarding Program pricing box above bracket */}
-              <div className="absolute left-1/2 -top-16 transform -translate-x-1/2 text-center">
+              <div className="absolute left-1/2 -top-20 transform -translate-x-1/2 text-center">
                 <div className="bg-white dark:bg-gray-900 px-4 py-2 rounded-lg shadow-lg border border-primary/20">
                   <h4 className="font-semibold text-sm text-primary">{t('gettingStarted.onboarding.title')}</h4>
                   <p className="text-lg font-bold">{t('gettingStarted.onboarding.price')}</p>
@@ -56,8 +56,8 @@ const GettingStarted = () => {
             </div>
           </div>
 
-          {/* Main connecting line for all steps */}
-          <div className="hidden md:block absolute left-0 right-0 top-6 z-0 h-0.5 bg-gradient-to-r from-primary/30 via-primary to-primary/30 mx-8"></div>
+          {/* Main connecting line for all steps - positioned higher */}
+          <div className="hidden md:block absolute left-0 right-0 top-12 z-0 h-0.5 bg-gradient-to-r from-primary/30 via-primary to-primary/30 mx-8"></div>
 
           {steps.map((step, index) => (
             <div key={index} className="relative z-10 flex flex-col items-center text-center flex-1 group">
