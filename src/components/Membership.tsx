@@ -99,10 +99,6 @@ const Membership = () => {
             <Card key={key} className="bg-white shadow-lg rounded-xl overflow-hidden flex flex-col">
               <CardContent className="p-6 md:p-8 flex-grow"> {/* Use p-6 for mobile, p-8 for desktop */}
                 <div className="flex items-center mb-6">
-                  <div
-                    className="w-4 h-4 rounded-full mr-3"
-                    style={{ backgroundColor: getCategoryColor(key) }}
-                  ></div>
                   <h3 className="text-xl md:text-2xl font-lora font-medium text-foreground">
                     {category.title}
                   </h3>
