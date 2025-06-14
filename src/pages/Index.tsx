@@ -9,7 +9,7 @@ import Membership from "@/components/Membership";
 import AssessmentProcess from "@/components/AssessmentProcess";
 import GettingStarted from "@/components/GettingStarted";
 import Philosophy from "@/components/Philosophy";
-import WeeklySchedule from "@/components/WeeklySchedule"; // Added import
+import WeeklySchedule from "@/components/WeeklySchedule";
 import Footer from "@/components/Footer";
 import WaitlistDialog from "@/components/WaitlistDialog";
 
@@ -30,9 +30,9 @@ const Index = () => {
       <Hero />
       <Philosophy />
       <AssessmentProcess />
-      <GettingStarted />
       <Membership />
-      <WeeklySchedule /> {/* Added new component */}
+      <WeeklySchedule />
+      <GettingStarted />
       <About />
       <WaitlistDialog />
       <Footer />
