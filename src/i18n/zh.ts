@@ -120,9 +120,13 @@ const zh = {
   // Getting Started
   'gettingStarted.title': '如何開始',
   'gettingStarted.step1.title': '安排評估',
+  'gettingStarted.step1.description': '我們從全面的評估開始，以了解您目前的表現基準。',
   'gettingStarted.step2.title': '評估報告',
+  'gettingStarted.step2.description': '收到一份詳細的報告，其中概述了評估結果和個人化計劃。',
   'gettingStarted.step3.title': '3次一對一指導',
+  'gettingStarted.step3.description': '與我們的專家一對一合作，啟動您的訓練計劃。',
   'gettingStarted.step4.title': '月度計畫',
+  'gettingStarted.step4.description': '過渡到我們的月度計劃，以獲得持續的支持和進度跟踪。',
 
   // Schedule
   'schedule.title': '每週訓練課表',
