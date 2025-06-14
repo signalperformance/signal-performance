@@ -1,85 +1,8 @@
 import React from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { cn } from '@/lib/utils';
-
-interface ScheduleEntry {
-  id: string;
-  dayKey: 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday';
-  hour24: number; 
-  name: string; 
-  sessionType: 'pro' | 'amateur';
-}
-
-// TODO: Move to a separate data file or fetch if it becomes complex
-// TODO: Add actual translations for class names
-const scheduleData: ScheduleEntry[] = [
-  // Monday - Pro (Afternoon) 12 PM - 4 PM (12:00, 13:00, 14:00, 15:00)
-  { id: 'mon-12-mob-pro', dayKey: 'monday', hour24: 12, name: 'Mobility', sessionType: 'pro' },
-  { id: 'mon-13-str-pro', dayKey: 'monday', hour24: 13, name: 'Strength', sessionType: 'pro' },
-  { id: 'mon-14-pow-pro', dayKey: 'monday', hour24: 14, name: 'Power', sessionType: 'pro' },
-  { id: 'mon-15-car-pro', dayKey: 'monday', hour24: 15, name: 'Cardio', sessionType: 'pro' },
-  // Monday - Amateur (Evening)
-  { id: 'mon-17-mob-am', dayKey: 'monday', hour24: 17, name: 'Mobility', sessionType: 'amateur' },
-  { id: 'mon-18-str-am', dayKey: 'monday', hour24: 18, name: 'Strength', sessionType: 'amateur' },
-  { id: 'mon-19-str-am', dayKey: 'monday', hour24: 19, name: 'Strength', sessionType: 'amateur' },
-
-  // Tuesday - Pro (Afternoon)
-  { id: 'tue-12-mob-pro', dayKey: 'tuesday', hour24: 12, name: 'Mobility', sessionType: 'pro' },
-  { id: 'tue-13-str-pro', dayKey: 'tuesday', hour24: 13, name: 'Strength', sessionType: 'pro' },
-  { id: 'tue-14-pow-pro', dayKey: 'tuesday', hour24: 14, name: 'Power', sessionType: 'pro' },
-  { id: 'tue-15-car-pro', dayKey: 'tuesday', hour24: 15, name: 'Cardio', sessionType: 'pro' },
-  // Tuesday - Amateur (Evening)
-  { id: 'tue-17-pow-am', dayKey: 'tuesday', hour24: 17, name: 'Power', sessionType: 'amateur' },
-  { id: 'tue-18-car-am', dayKey: 'tuesday', hour24: 18, name: 'Cardio', sessionType: 'amateur' },
-  { id: 'tue-19-pow-am', dayKey: 'tuesday', hour24: 19, name: 'Power', sessionType: 'amateur' },
-
-  // Wednesday - Pro (Afternoon)
-  { id: 'wed-12-mob-pro', dayKey: 'wednesday', hour24: 12, name: 'Mobility', sessionType: 'pro' },
-  { id: 'wed-13-str-pro', dayKey: 'wednesday', hour24: 13, name: 'Strength', sessionType: 'pro' },
-  { id: 'wed-14-pow-pro', dayKey: 'wednesday', hour24: 14, name: 'Power', sessionType: 'pro' },
-  { id: 'wed-15-car-pro', dayKey: 'wednesday', hour24: 15, name: 'Cardio', sessionType: 'pro' },
-  // Wednesday - Amateur (Evening)
-  { id: 'wed-17-mob-am', dayKey: 'wednesday', hour24: 17, name: 'Mobility', sessionType: 'amateur' },
-  { id: 'wed-18-str-am', dayKey: 'wednesday', hour24: 18, name: 'Strength', sessionType: 'amateur' },
-  { id: 'wed-19-str-am', dayKey: 'wednesday', hour24: 19, name: 'Strength', sessionType: 'amateur' },
-
-  // Thursday - Pro (Afternoon)
-  { id: 'thu-12-mob-pro', dayKey: 'thursday', hour24: 12, name: 'Mobility', sessionType: 'pro' },
-  { id: 'thu-13-str-pro', dayKey: 'thursday', hour24: 13, name: 'Strength', sessionType: 'pro' },
-  { id: 'thu-14-pow-pro', dayKey: 'thursday', hour24: 14, name: 'Power', sessionType: 'pro' },
-  { id: 'thu-15-car-pro', dayKey: 'thursday', hour24: 15, name: 'Cardio', sessionType: 'pro' },
-  // Thursday - Amateur (Evening)
-  { id: 'thu-17-pow-am', dayKey: 'thursday', hour24: 17, name: 'Power', sessionType: 'amateur' },
-  { id: 'thu-18-car-am', dayKey: 'thursday', hour24: 18, name: 'Cardio', sessionType: 'amateur' },
-  { id: 'thu-19-pow-am', dayKey: 'thursday', hour24: 19, name: 'Power', sessionType: 'amateur' },
-
-  // Friday - Pro (Afternoon)
-  { id: 'fri-12-mob-pro', dayKey: 'friday', hour24: 12, name: 'Mobility', sessionType: 'pro' },
-  { id: 'fri-13-str-pro', dayKey: 'friday', hour24: 13, name: 'Strength', sessionType: 'pro' },
-  { id: 'fri-14-pow-pro', dayKey: 'friday', hour24: 14, name: 'Power', sessionType: 'pro' },
-  { id: 'fri-15-car-pro', dayKey: 'friday', hour24: 15, name: 'Cardio', sessionType: 'pro' },
-  // Friday - Amateur (Evening)
-  { id: 'fri-17-mob-am', dayKey: 'friday', hour24: 17, name: 'Mobility', sessionType: 'amateur' },
-  { id: 'fri-18-str-am', dayKey: 'friday', hour24: 18, name: 'Strength', sessionType: 'amateur' },
-  { id: 'fri-19-str-am', dayKey: 'friday', hour24: 19, name: 'Strength', sessionType: 'amateur' },
-
-  // Saturday - Amateur (Evening) - Morning sessions removed
-  { id: 'sat-17-mob-am-eve', dayKey: 'saturday', hour24: 17, name: 'Mobility', sessionType: 'amateur' },
-  { id: 'sat-18-str-am-eve', dayKey: 'saturday', hour24: 18, name: 'Strength', sessionType: 'amateur' },
-  { id: 'sat-19-pow-am-eve', dayKey: 'saturday', hour24: 19, name: 'Power', sessionType: 'amateur' },
-
-  // Sunday - Amateur (Evening) - Morning sessions removed
-  { id: 'sun-17-mob-am-eve', dayKey: 'sunday', hour24: 17, name: 'Mobility', sessionType: 'amateur' },
-  { id: 'sun-18-str-am-eve', dayKey: 'sunday', hour24: 18, name: 'Strength', sessionType: 'amateur' },
-  { id: 'sun-19-pow-am-eve', dayKey: 'sunday', hour24: 19, name: 'Power', sessionType: 'amateur' },
-];
-
-interface TimeSlotItem {
-  id: string;
-  type: 'time' | 'break';
-  hour24?: number; // Only for type 'time'
-  label: string;
-}
+import { scheduleData } from '@/data/scheduleData';
+import { ScheduleEntry, TimeSlotItem } from '@/data/scheduleTypes';
 
 const WeeklySchedule = () => {
   const { t } = useLanguage();
