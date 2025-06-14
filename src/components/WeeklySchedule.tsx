@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { cn } from '@/lib/utils';
@@ -53,12 +54,12 @@ const WeeklySchedule = () => {
   
   const keyItems = [
     {
-      name: t('schedule.key.pro'),
-      style: cn('bg-gray-600', 'pattern-diagonal-stripes')
+      name: "PR: Pro's Only", // Updated text
+      style: cn('bg-gray-600') // Removed pattern-diagonal-stripes
     },
     {
-      name: t('schedule.key.open'),
-      style: cn('bg-gray-600')
+      name: "OP: Open to All Members", // Updated text
+      style: cn('bg-gray-600') // Kept solid color for consistency or if needed for future differentiation
     }
   ];
 
@@ -81,14 +82,12 @@ const WeeklySchedule = () => {
               </div>
             ))}
 
-            {/* Time Slots and Schedule Entries - Simplified logic */}
+            {/* Time Slots and Schedule Entries */}
             {timeSlots.map(timeSlot => (
               <React.Fragment key={timeSlot.id}>
-                {/* Time Label Cell for regular time slots. */}
                 <div className="bg-signal-charcoal text-right py-1 pr-2 pl-1 text-xs font-medium sticky left-0 z-10 min-h-[40px] flex items-center justify-end">
                   {timeSlot.label}
                 </div>
-                {/* Class Cells for this Time Slot */}
                 {daysOfWeek.map(day => {
                   const scheduledClass = getClassForSlot(day.key, timeSlot.hour24);
                   return (
@@ -96,8 +95,8 @@ const WeeklySchedule = () => {
                       {scheduledClass ? (
                         <div className={cn(
                           "w-full h-full rounded-sm p-1 text-center text-xs leading-tight flex flex-col items-center justify-center transition-opacity duration-150",
-                          classStyles[scheduledClass.name.toUpperCase()] || 'bg-gray-400 text-black',
-                          scheduledClass.sessionType === 'pro' ? 'pattern-diagonal-stripes' : ''
+                          classStyles[scheduledClass.name.toUpperCase()] || 'bg-gray-400 text-black'
+                          // Removed: scheduledClass.sessionType === 'pro' ? 'pattern-diagonal-stripes' : ''
                         )}>
                           <span>
                             {t(`schedule.classes.${scheduledClass.name.toLowerCase()}`)}
@@ -133,3 +132,4 @@ const WeeklySchedule = () => {
 };
 
 export default WeeklySchedule;
+
