@@ -35,19 +35,16 @@ const Membership = () => {
     physical: {
       title: t('membership.physical.title'),
       shortTitle: language === 'zh' ? '身體' : 'Body',
-      items: [{
-        title: t('membership.physical.assessment'),
-        description: t('membership.physical.assessment.description')
-      }, {
-        title: t('membership.physical.coaching'),
-        description: t('membership.physical.coaching.description')
-      }, {
-        title: t('membership.physical.train'),
-        description: t('membership.physical.train.description')
-      }, {
-        title: t('membership.physical.app'),
-        description: t('membership.physical.app.description')
-      }]
+      items: [
+        {
+          title: t('membership.physical.assessment'),
+          description: t('membership.physical.assessment.description')
+        },
+        {
+          title: language === 'zh' ? "一對三健身指導" : "One-on-Three Fitness Coaching",
+          description: `${t('membership.physical.coaching.description')} (${language === 'zh' ? '每週4次' : '4 times per week'})`
+        }
+      ]
     },
     mental: {
       title: t('membership.mental.title'),
