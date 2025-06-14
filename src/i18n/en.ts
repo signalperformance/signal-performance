@@ -117,17 +117,6 @@ const en = {
   'philosophy.card3.title': 'Integrated Training',
   'philosophy.card3.content': 'There\'s no single key to performance. It\'s a system—complex, dynamic, and made up of many moving parts. Our mind and body interact constantly, and skill draws on both. That\'s why we don\'t isolate them. Our integrated approach trains the physical, mental, and skill components together—within one cohesive, performance-driven program.',
 
-  // Getting Started
-  'gettingStarted.title': 'How to Get Started',
-  'gettingStarted.step1.title': 'Schedule Assessment',
-  'gettingStarted.step1.description': 'We begin with a comprehensive assessment to understand your current performance baseline.',
-  'gettingStarted.step2.title': 'Assessment Report',
-  'gettingStarted.step2.description': 'Receive a detailed report outlining findings and a personalized plan.',
-  'gettingStarted.step3.title': '3x 1-on-1 Coaching',
-  'gettingStarted.step3.description': 'Work one-on-one with our experts to kickstart your training program.',
-  'gettingStarted.step4.title': 'Monthly Program',
-  'gettingStarted.step4.description': 'Transition to our monthly program for continuous support and progress tracking.',
-
   // Schedule
   'schedule.title': 'Weekly Training Schedule',
   'schedule.subtitle': 'Choose four sessions per week based on your goals and training phase — guided by your coach.',
