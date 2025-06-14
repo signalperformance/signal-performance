@@ -304,9 +304,7 @@ const WeeklySchedule = () => {
               </React.Fragment>)}
           </div>
         </div>
-        <p className="text-center text-xs text-gray-400 mt-4 italic">
-          {t('schedule.disclaimer')}
-        </p>
+        
       </div>
     </section>;
 };
