@@ -177,7 +177,10 @@ const WeeklySchedule = () => {
                               classStyles[scheduledClass.name.toUpperCase()] || 'bg-gray-400 text-black',
                               scheduledClass.sessionType === 'pro' ? 'pattern-diagonal-stripes' : '' // Apply pattern for Pro sessions
                             )}>
-                              <span>{t(`schedule.classes.${scheduledClass.name.toLowerCase()}`)}</span>
+                              <span>
+                                {t(`schedule.classes.${scheduledClass.name.toLowerCase()}`)}
+                                {scheduledClass.sessionType === 'pro' && <sup>PR</sup>}
+                              </span>
                             </div>
                           ) : (
                             <div className="w-full h-full"></div> // Empty cell
