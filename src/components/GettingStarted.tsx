@@ -1,6 +1,6 @@
 
 import { useLanguage } from "@/contexts/LanguageContext";
-import { ArrowDown } from "lucide-react";
+import { ArrowDown, ArrowRight } from "lucide-react";
 
 const GettingStarted = () => {
   const { t } = useLanguage();
@@ -49,11 +49,11 @@ const GettingStarted = () => {
         </div>
 
         {/* Pricing Bracket */}
-        <div className="mt-16 pt-8 max-w-4xl mx-auto">
-            <div className="flex flex-col md:flex-row justify-center items-center md:items-start gap-4 md:gap-8">
+        <div className="mt-16 pt-8 max-w-5xl mx-auto">
+            <div className="flex flex-col md:flex-row justify-center items-stretch md:items-center gap-4 md:gap-0">
                 {/* Onboarding phase */}
-                <div className="relative text-center border-t-2 border-l-2 border-r-2 border-primary/50 pt-8 pb-4 px-12 rounded-t-lg">
-                    <div className="absolute -top-3.5 bg-secondary dark:bg-black px-2 left-1/2 -translate-x-1/2">
+                <div className="md:w-3/4 relative text-center border-t-2 border-l-2 border-b-2 border-primary/50 pt-8 pb-4 px-6 md:px-12 rounded-l-lg">
+                    <div className="absolute -top-[15px] bg-secondary dark:bg-black px-2 left-1/2 -translate-x-1/2">
                         <span className="text-primary font-semibold">{t('gettingStarted.onboarding.title')}</span>
                     </div>
                     <p className="text-sm text-muted-foreground">{t('gettingStarted.onboarding.includes')}</p>
@@ -61,13 +61,13 @@ const GettingStarted = () => {
                     <p className="text-sm text-muted-foreground">{t('gettingStarted.onboarding.type')}</p>
                 </div>
 
-                <div className="flex items-center h-full pt-12">
-                    <ArrowDown className="w-8 h-8 text-primary md:hidden" />
-                    <ArrowDown className="w-8 h-8 text-primary hidden md:block transform -rotate-90" />
+                <div className="flex items-center justify-center p-4 md:p-6 text-primary">
+                    <ArrowDown className="w-8 h-8 md:hidden" />
+                    <ArrowRight className="w-8 h-8 hidden md:block" />
                 </div>
 
                 {/* Membership phase */}
-                <div className="text-center pt-8 pb-4 px-12">
+                <div className="md:w-1/4 text-center py-8 px-6 md:px-12">
                     <span className="text-primary font-semibold">{t('gettingStarted.membership.title')}</span>
                     <p className="text-sm text-muted-foreground">{t('gettingStarted.membership.includes')}</p>
                     <p className="text-2xl font-bold mt-2">{t('gettingStarted.membership.price')}</p>
@@ -81,4 +81,3 @@ const GettingStarted = () => {
 };
 
 export default GettingStarted;
-
