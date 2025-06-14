@@ -1,3 +1,4 @@
+
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 type Language = 'en' | 'zh';
@@ -131,6 +132,8 @@ const translations = {
     'schedule.title': 'Weekly Training Schedule',
     'schedule.subtitle': 'Choose four sessions per week based on your goals and training phase — guided by your coach.',
     'schedule.keyTitle': 'KEY:',
+    'schedule.key.pro': "PR: Pro's Only",
+    'schedule.key.open': "OP: Open to All Members",
     'schedule.days.monday': 'Mon',
     'schedule.days.tuesday': 'Tue',
     'schedule.days.wednesday': 'Wed',
@@ -267,7 +270,9 @@ const translations = {
     // Schedule
     'schedule.title': '每週訓練課表',
     'schedule.subtitle': '依據你的目標與訓練階段，選擇每週 4 堂課，由教練協助規劃。',
-    'schedule.keyTitle': '圖例：',
+    'schedule.keyTitle': '圖例說明：',
+    'schedule.key.pro': "PR：僅限職業選手",
+    'schedule.key.open': "OP：所有會員皆可參加",
     'schedule.days.monday': '週一',
     'schedule.days.tuesday': '週二',
     'schedule.days.wednesday': '週三',

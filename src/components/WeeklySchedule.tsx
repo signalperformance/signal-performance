@@ -3,6 +3,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { cn } from '@/lib/utils';
 import { scheduleData } from '@/data/scheduleData';
 import { ScheduleEntry, TimeSlotItem, DayKey } from '@/data/scheduleTypes';
+
 const WeeklySchedule = () => {
   const {
     t
@@ -94,20 +95,21 @@ const WeeklySchedule = () => {
   const classStyles: {
     [key: string]: string;
   } = {
-    [classDisplayNames.MOBILITY.toUpperCase()]: 'bg-gray-600 text-signal-light-gray hover:opacity-90',
-    [classDisplayNames.STRENGTH.toUpperCase()]: 'bg-signal-gold text-signal-black font-semibold hover:opacity-90',
-    [classDisplayNames.CARDIO.toUpperCase()]: 'bg-signal-charcoal text-signal-light-gray border border-gray-700 hover:opacity-90',
-    [classDisplayNames.POWER.toUpperCase()]: 'bg-gray-500 text-white hover:opacity-90'
+    [t('schedule.classes.mobility').toUpperCase()]: 'bg-gray-600 text-signal-light-gray hover:opacity-90',
+    [t('schedule.classes.strength').toUpperCase()]: 'bg-signal-gold text-signal-black font-semibold hover:opacity-90',
+    [t('schedule.classes.cardio').toUpperCase()]: 'bg-signal-charcoal text-signal-light-gray border border-gray-700 hover:opacity-90',
+    [t('schedule.classes.power').toUpperCase()]: 'bg-gray-500 text-white hover:opacity-90'
   };
-  const keyItems = [{
-    name: "PR: Pro's Only",
-    // Updated text
-    style: cn('bg-gray-600') // Removed pattern-diagonal-stripes
-  }, {
-    name: "OP: Open to All Members",
-    // Updated text
-    style: cn('bg-gray-600') // Kept solid color for consistency or if needed for future differentiation
-  }];
+  const keyItems = [
+    {
+      name: t('schedule.key.pro'),
+      style: cn('bg-gray-600') 
+    },
+    {
+      name: t('schedule.key.open'),
+      style: cn('bg-gray-600')
+    }
+  ];
   return <section id="schedule" className="section-padding bg-signal-black text-signal-light-gray">
       <div className="container mx-auto container-padding">
         <h2 className="text-3xl md:text-4xl font-bold mb-2 text-center font-lora">{t('schedule.title')}</h2>
@@ -132,8 +134,7 @@ const WeeklySchedule = () => {
                 {daysOfWeek.map(day => {
               const scheduledClass = getClassForSlot(day.key, timeSlot.hour24);
               return <div key={`${day.key}-${timeSlot.hour24}`} className="bg-signal-charcoal p-0.5 min-h-[40px] h-full">
-                      {scheduledClass ? <div className={cn("w-full h-full rounded-sm p-1 text-center text-xs leading-tight flex flex-col items-center justify-center transition-opacity duration-150", classStyles[scheduledClass.name.toUpperCase()] || 'bg-gray-400 text-black'
-                // Removed: scheduledClass.sessionType === 'pro' ? 'pattern-diagonal-stripes' : ''
+                      {scheduledClass ? <div className={cn("w-full h-full rounded-sm p-1 text-center text-xs leading-tight flex flex-col items-center justify-center transition-opacity duration-150", classStyles[t(`schedule.classes.${scheduledClass.name.toLowerCase()}`).toUpperCase()] || 'bg-gray-400 text-black'
                 )}>
                           <span>
                             {t(`schedule.classes.${scheduledClass.name.toLowerCase()}`)}
