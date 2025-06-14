@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 interface ScheduleEntry {
   id: string;
   dayKey: 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday';
-  hour24: number; // 8 to 20
+  hour24: number; // 8 to 20 (though 8 will no longer be displayed)
   name: string; // Class name, e.g., "Mobility"
 }
 
@@ -44,6 +44,13 @@ const scheduleData: ScheduleEntry[] = [
   { id: 'sun-12-pow', dayKey: 'sunday', hour24: 12, name: 'Power' },
 ];
 
+interface TimeSlotItem {
+  id: string;
+  type: 'time' | 'break';
+  hour24?: number; // Only for type 'time'
+  label: string;
+}
+
 const WeeklySchedule = () => {
   const { t } = useLanguage();
 
@@ -57,16 +64,18 @@ const WeeklySchedule = () => {
     { key: 'sunday' as ScheduleEntry['dayKey'], label: t('schedule.days.sunday') },
   ];
 
-  const timeSlots = Array.from({ length: 13 }, (_, i) => { // 8 AM to 8 PM (inclusive)
-    const hour = i + 8;
-    let displayHour = hour % 12;
-    if (displayHour === 0) displayHour = 12;
-    const period = hour < 12 || hour === 24 ? t('schedule.timePeriods.am') : t('schedule.timePeriods.pm');
-    return {
-      hour24: hour,
-      label: `${displayHour} ${period}`
-    };
-  });
+  const timeSlots: TimeSlotItem[] = [
+    { id: 'ts-9', type: 'time', hour24: 9, label: `9 ${t('schedule.timePeriods.am')}` },
+    { id: 'ts-10', type: 'time', hour24: 10, label: `10 ${t('schedule.timePeriods.am')}` },
+    { id: 'ts-11', type: 'time', hour24: 11, label: `11 ${t('schedule.timePeriods.am')}` },
+    { id: 'ts-12', type: 'time', hour24: 12, label: `12 ${t('schedule.timePeriods.pm')}` },
+    { id: 'ts-break', type: 'break', label: '...' }, // Visual cue for time jump
+    { id: 'ts-16', type: 'time', hour24: 16, label: `4 ${t('schedule.timePeriods.pm')}` },
+    { id: 'ts-17', type: 'time', hour24: 17, label: `5 ${t('schedule.timePeriods.pm')}` },
+    { id: 'ts-18', type: 'time', hour24: 18, label: `6 ${t('schedule.timePeriods.pm')}` },
+    { id: 'ts-19', type: 'time', hour24: 19, label: `7 ${t('schedule.timePeriods.pm')}` },
+    { id: 'ts-20', type: 'time', hour24: 20, label: `8 ${t('schedule.timePeriods.pm')}` },
+  ];
 
   const getClassForSlot = (dayKey: ScheduleEntry['dayKey'], hour24: number) => {
     return scheduleData.find(entry => entry.dayKey === dayKey && entry.hour24 === hour24);
@@ -109,41 +118,57 @@ const WeeklySchedule = () => {
         </div>
 
         <div className="overflow-x-auto">
-          <div className="grid grid-cols-[auto_repeat(7,minmax(80px,1fr))] gap-px bg-gray-700 border border-gray-700 rounded-lg min-w-[640px] md:min-w-full">
+          {/* Main grid for the schedule table. Day column widths adjusted slightly. */}
+          <div className="grid grid-cols-[auto_repeat(7,minmax(55px,1fr))] gap-px bg-gray-700 border border-gray-700 rounded-lg min-w-[600px] md:min-w-full">
             {/* Header: Empty Top Left Cell */}
             <div className="bg-signal-charcoal p-1.5"></div>
-            {/* Header: Day Names */}
+            {/* Header: Day Names - text size adjusted */}
             {daysOfWeek.map(day => (
-              <div key={day.key} className="bg-signal-charcoal text-center py-2 px-1 font-semibold text-sm sticky top-0 z-10">
+              <div key={day.key} className="bg-signal-charcoal text-center py-2 px-1 font-semibold text-xs sticky top-0 z-10">
                 {day.label.toUpperCase()}
               </div>
             ))}
 
             {/* Time Slots and Schedule Entries */}
             {timeSlots.map(timeSlot => (
-              <React.Fragment key={timeSlot.hour24}>
-                {/* Time Label Cell */}
-                <div className="bg-signal-charcoal text-right py-2 pr-2 pl-1 text-xs font-medium sticky left-0 z-10">
-                  {timeSlot.label}
-                </div>
-                {/* Class Cells for this Time Slot */}
-                {daysOfWeek.map(day => {
-                  const scheduledClass = getClassForSlot(day.key, timeSlot.hour24);
-                  return (
-                    <div key={`${day.key}-${timeSlot.hour24}`} className="bg-signal-charcoal p-0.5 min-h-[50px] h-full">
-                      {scheduledClass ? (
-                        <div className={cn(
-                          "w-full h-full rounded-sm p-1.5 text-center text-xs leading-tight flex items-center justify-center transition-opacity duration-150",
-                          classStyles[scheduledClass.name.toUpperCase()] || 'bg-gray-400 text-black'
-                        )}>
-                          {t(`schedule.classes.${scheduledClass.name.toLowerCase()}` as any)}
-                        </div>
-                      ) : (
-                        <div className="w-full h-full"></div> // Empty cell
-                      )}
+              <React.Fragment key={timeSlot.id}>
+                {timeSlot.type === 'time' ? (
+                  <>
+                    {/* Time Label Cell for regular time slots. min-h-[40px] for consistent row height. */}
+                    <div className="bg-signal-charcoal text-right py-1 pr-2 pl-1 text-xs font-medium sticky left-0 z-10 min-h-[40px] flex items-center justify-end">
+                      {timeSlot.label}
                     </div>
-                  );
-                })}
+                    {/* Class Cells for this Time Slot */}
+                    {daysOfWeek.map(day => {
+                      const scheduledClass = getClassForSlot(day.key, timeSlot.hour24!); // hour24 is defined for type 'time'
+                      return (
+                        <div key={`${day.key}-${timeSlot.hour24}`} className="bg-signal-charcoal p-0.5 min-h-[40px] h-full">
+                          {scheduledClass ? (
+                            <div className={cn(
+                              "w-full h-full rounded-sm p-1 text-center text-xs leading-tight flex items-center justify-center transition-opacity duration-150", // p-1 from p-1.5
+                              classStyles[scheduledClass.name.toUpperCase()] || 'bg-gray-400 text-black'
+                            )}>
+                              {t(`schedule.classes.${scheduledClass.name.toLowerCase()}` as any)}
+                            </div>
+                          ) : (
+                            <div className="w-full h-full"></div> // Empty cell
+                          )}
+                        </div>
+                      );
+                    })}
+                  </>
+                ) : ( // type === 'break'
+                  <>
+                    {/* Time Label Cell for Break. h-[20px] for a smaller break row. */}
+                    <div className="bg-signal-charcoal text-center py-1 text-xs font-medium sticky left-0 z-10 h-[20px] flex items-center justify-center">
+                      {timeSlot.label} {/* This will display "..." */}
+                    </div>
+                    {/* Break Visual Cue Cell spanning all day columns */}
+                    <div className="bg-signal-charcoal h-[20px] flex items-center justify-center col-span-7">
+                       <div className="w-1/2 border-t border-dashed border-gray-500"></div> {/* Dashed line as visual cue */}
+                    </div>
+                  </>
+                )}
               </React.Fragment>
             ))}
           </div>
