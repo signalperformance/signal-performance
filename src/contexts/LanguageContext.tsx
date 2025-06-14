@@ -12,18 +12,10 @@ type LanguageContextType = {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-// Helper function to check if localStorage is available
-const isLocalStorageAvailable = (): boolean => {
-  try {
-    return typeof window !== 'undefined' && 'localStorage' in window && window.localStorage !== null;
-  } catch (error) {
-    return false;
-  }
-};
-
 // Helper function to get saved language from localStorage
 const getSavedLanguage = (): Language => {
-  if (!isLocalStorageAvailable()) {
+  // Guard against SSR environments where `window` is not defined
+  if (typeof window === 'undefined') {
     return 'en';
   }
 
@@ -33,38 +25,26 @@ const getSavedLanguage = (): Language => {
       return saved;
     }
   } catch (error) {
-    // Silently fail
+    // Fails silently if localStorage is not available (e.g., private browsing)
   }
-  return 'en'; // Default to English for first-time visitors
+  return 'en'; // Default to English
 };
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  const [language, setLanguage] = useState<Language>('en'); // Initialize with 'en' directly
-  const [isInitialized, setIsInitialized] = useState(false);
-
-  // Initialize language from localStorage after component mounts
-  useEffect(() => {
-    const savedLanguage = getSavedLanguage();
-    setLanguage(savedLanguage);
-    setIsInitialized(true);
-  }, []);
+  // Initialize state directly from localStorage using a lazy initializer.
+  // This function is only called on the initial render.
+  const [language, setLanguage] = useState<Language>(getSavedLanguage);
 
   // Save language preference to localStorage whenever it changes
   useEffect(() => {
-    if (!isInitialized) {
-      return;
+    if (typeof window === 'undefined') {
+      try {
+        localStorage.setItem('signal-performance-language', language);
+      } catch (error) {
+        // Fails silently if localStorage is not available
+      }
     }
-
-    if (!isLocalStorageAvailable()) {
-      return;
-    }
-
-    try {
-      localStorage.setItem('signal-performance-language', language);
-    } catch (error) {
-      // Silently fail
-    }
-  }, [language, isInitialized]);
+  }, [language]);
 
   const t = (key: string): string => {
     return translations[language][key as keyof typeof translations[typeof language]] || key;
