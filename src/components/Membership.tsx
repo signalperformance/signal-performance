@@ -70,9 +70,6 @@ const Membership = () => {
       {
         title: t('membership.golf.tracking'),
         description: t('membership.golf.tracking.description')
-      }, {
-        title: t('membership.golf.fitting'),
-        description: t('membership.golf.fitting.description')
       }]
     }
   };
