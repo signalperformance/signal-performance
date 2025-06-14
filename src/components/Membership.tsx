@@ -74,17 +74,6 @@ const Membership = () => {
         title: t('membership.golf.fitting'),
         description: t('membership.golf.fitting.description')
       }]
-    },
-    other: {
-      title: t('membership.facility.title'),
-      shortTitle: language === 'zh' ? '其他' : 'Facility',
-      items: [{
-        title: t('membership.facility.refresh'),
-        description: t('membership.facility.refresh.description')
-      }, {
-        title: t('membership.facility.atmosphere'),
-        description: t('membership.facility.atmosphere.description')
-      }]
     }
   };
   
