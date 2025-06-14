@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { cn } from '@/lib/utils';
@@ -132,15 +131,15 @@ const WeeklySchedule = () => {
     [classDisplayNames.POWER.toUpperCase()]: 'bg-gray-500 text-white hover:opacity-90',
   };
   
-  // Updated keyItems to distinguish Pro and Amateur sessions
+  // Updated keyItems to distinguish Pro (patterned) and Amateur (solid) sessions
   const keyItems = [
     {
-      name: t('schedule.sessionTypes.pro'), // Assuming 'schedule.sessionTypes.pro' key exists from previous work
-      style: cn('bg-gray-600', 'border border-signal-gold') // Example: Mobility color with Pro border
+      name: t('schedule.sessionTypes.pro'),
+      style: cn('bg-gray-600', 'pattern-diagonal-stripes') // Example: Mobility color with Pro pattern
     },
     {
-      name: t('schedule.sessionTypes.amateur'), // Assuming 'schedule.sessionTypes.amateur' key exists
-      style: cn('bg-gray-600', 'border border-transparent') // Example: Mobility color with Amateur (transparent) border
+      name: t('schedule.sessionTypes.amateur'),
+      style: cn('bg-gray-600') // Example: Mobility color (solid) for Amateur
     }
   ];
 
@@ -181,9 +180,8 @@ const WeeklySchedule = () => {
                             <div className={cn(
                               "w-full h-full rounded-sm p-1 text-center text-xs leading-tight flex flex-col items-center justify-center transition-opacity duration-150",
                               classStyles[scheduledClass.name.toUpperCase()] || 'bg-gray-400 text-black',
-                              scheduledClass.sessionType === 'pro' ? 'border border-signal-gold' : 'border border-transparent' // Apply border style
+                              scheduledClass.sessionType === 'pro' ? 'pattern-diagonal-stripes' : '' // Apply pattern for Pro sessions
                             )}>
-                              {/* Removed (PRO) text indicator */}
                               <span>{t(`schedule.classes.${scheduledClass.name.toLowerCase()}`)}</span>
                             </div>
                           ) : (
@@ -211,12 +209,12 @@ const WeeklySchedule = () => {
           </div>
         </div>
         
-        {/* Key/Legend items - Now reflects Pro/Amateur distinction */}
+        {/* Key/Legend items - Now reflects Pro (patterned) / Amateur (solid) distinction */}
         <div className="mt-6 flex flex-wrap justify-center items-center gap-x-4 gap-y-2">
           <span className="text-sm font-semibold uppercase mr-2">{t('schedule.keyTitle')}</span>
           {keyItems.map(item => (
             <div key={item.name} className="flex items-center">
-              <span className={cn("w-3 h-3 rounded-xs mr-1.5", item.style)}></span> {/* Ensure item.style includes border for Pro */}
+              <span className={cn("w-3 h-3 rounded-xs mr-1.5", item.style)}></span>
               <span className="text-xs">{item.name}</span>
             </div>
           ))}

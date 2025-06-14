@@ -108,3 +108,16 @@ html {
 .animate-gentle-pulse {
   animation: gentle-pulse 2s ease-in-out infinite;
 }
+
+/* Pattern for Pro sessions */
+.pattern-diagonal-stripes {
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(0, 0, 0, 0.15), /* Stripe color: subtle dark semi-transparent */
+    rgba(0, 0, 0, 0.15) 4px,  /* Stripe width */
+    transparent 4px,          /* Space color (shows base bg) */
+    transparent 8px           /* Space width + stripe width = pattern repeat */
+  );
+  background-size: 12px 12px; /* Controls the density of the pattern tiling */
+}
+
