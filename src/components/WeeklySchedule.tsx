@@ -18,19 +18,19 @@ const WeeklySchedule = () => {
   ];
 
   const timeSlots: TimeSlotItem[] = [
-    { id: 'ts-8', hour24: 8, label: `8 ${t('schedule.timePeriods.am', 'AM')}` },
-    { id: 'ts-9', hour24: 9, label: `9 ${t('schedule.timePeriods.am', 'AM')}` },
-    { id: 'ts-10', hour24: 10, label: `10 ${t('schedule.timePeriods.am', 'AM')}` },
-    { id: 'ts-11', hour24: 11, label: `11 ${t('schedule.timePeriods.am', 'AM')}` },
-    { id: 'ts-12', hour24: 12, label: `12 ${t('schedule.timePeriods.pm', 'PM')}` },
-    { id: 'ts-13', hour24: 13, label: `1 ${t('schedule.timePeriods.pm', 'PM')}` },
-    { id: 'ts-14', hour24: 14, label: `2 ${t('schedule.timePeriods.pm', 'PM')}` },
-    { id: 'ts-15', hour24: 15, label: `3 ${t('schedule.timePeriods.pm', 'PM')}` },
-    { id: 'ts-16', hour24: 16, label: `4 ${t('schedule.timePeriods.pm', 'PM')}` }, // Empty for weekdays, acts as break
-    { id: 'ts-17', hour24: 17, label: `5 ${t('schedule.timePeriods.pm', 'PM')}` },
-    { id: 'ts-18', hour24: 18, label: `6 ${t('schedule.timePeriods.pm', 'PM')}` },
-    { id: 'ts-19', hour24: 19, label: `7 ${t('schedule.timePeriods.pm', 'PM')}` },
-    { id: 'ts-20', hour24: 20, label: `8 ${t('schedule.timePeriods.pm', 'PM')}` }, // End of day display
+    { id: 'ts-8', hour24: 8, label: `8 ${t('schedule.timePeriods.am')}` },
+    { id: 'ts-9', hour24: 9, label: `9 ${t('schedule.timePeriods.am')}` },
+    { id: 'ts-10', hour24: 10, label: `10 ${t('schedule.timePeriods.am')}` },
+    { id: 'ts-11', hour24: 11, label: `11 ${t('schedule.timePeriods.am')}` },
+    { id: 'ts-12', hour24: 12, label: `12 ${t('schedule.timePeriods.pm')}` },
+    { id: 'ts-13', hour24: 13, label: `1 ${t('schedule.timePeriods.pm')}` },
+    { id: 'ts-14', hour24: 14, label: `2 ${t('schedule.timePeriods.pm')}` },
+    { id: 'ts-15', hour24: 15, label: `3 ${t('schedule.timePeriods.pm')}` },
+    { id: 'ts-16', hour24: 16, label: `4 ${t('schedule.timePeriods.pm')}` },
+    { id: 'ts-17', hour24: 17, label: `5 ${t('schedule.timePeriods.pm')}` },
+    { id: 'ts-18', hour24: 18, label: `6 ${t('schedule.timePeriods.pm')}` },
+    { id: 'ts-19', hour24: 19, label: `7 ${t('schedule.timePeriods.pm')}` },
+    { id: 'ts-20', hour24: 20, label: `8 ${t('schedule.timePeriods.pm')}` },
   ];
 
   const getClassForSlot = (dayKey: DayKey, hour24: number) => {
@@ -53,11 +53,11 @@ const WeeklySchedule = () => {
   
   const keyItems = [
     {
-      name: t('schedule.key.pro', "PR: Pro's only"),
+      name: t('schedule.key.pro'),
       style: cn('bg-gray-600', 'pattern-diagonal-stripes')
     },
     {
-      name: t('schedule.key.open', "OP: Open to anyone"),
+      name: t('schedule.key.open'),
       style: cn('bg-gray-600')
     }
   ];
