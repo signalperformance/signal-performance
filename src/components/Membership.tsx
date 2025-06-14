@@ -6,9 +6,7 @@ import { cn } from "@/lib/utils";
 import { Check } from "lucide-react";
 
 const Membership = () => {
-  const {
-    t, language
-  } = useLanguage();
+  const { t, language } = useLanguage();
   const [activeCategory, setActiveCategory] = useState("physical");
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -89,152 +87,54 @@ const Membership = () => {
     }
   };
   
-  return <section id="membership" className="section-padding bg-signal-light-gray" ref={sectionRef}>
+  return (
+    <section id="membership" className="section-padding bg-signal-light-gray">
       <div className="container mx-auto container-padding">
-        <div className="text-center mb-8">
+        <div className="text-center mb-12"> {/* Increased bottom margin for better spacing */}
           <h2 className="text-3xl md:text-4xl font-bold mb-1 font-lora">{t('membership.title')}</h2>
           <p className="text-xl text-muted-foreground font-medium">{t('membership.price')}</p>
           <p className="text-sm text-muted-foreground italic mt-1">{t('membership.subtitle')}</p>
         </div>
-        
-        {/* Desktop View - Enhanced tabs with better visual separation */}
-        <div className="hidden md:block">
-          <Tabs value={activeCategory} onValueChange={setActiveCategory} className="w-full">
-            <TabsList className="flex justify-center mb-6 rounded-xl p-1.5 bg-muted/20 shadow-sm w-full max-w-3xl mx-auto">
-              {Object.entries(categories).map(([key, category]) => {
-                const isActive = activeCategory === key;
-                const categoryColor = getCategoryColor(key);
-                
-                return (
-                  <TabsTrigger 
-                    key={key} 
-                    value={key} 
-                    className={cn(
-                      "py-3 px-6 rounded-lg cursor-pointer min-w-[120px] mx-1 border-b-2",
-                      isActive 
-                        ? "bg-white shadow-md border-b-2 font-bold" 
-                        : "hover:bg-muted/40 border-transparent"
-                    )}
-                    style={isActive ? { 
-                      borderColor: categoryColor,
-                      boxShadow: `0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06), 0 0 0 2px rgba(${categoryColor.replace('#', '').match(/../g)?.map(hex => parseInt(hex, 16)).join(', ')}, 0.1)` 
-                    } : {}}
-                  >
-                    <div className="flex items-center justify-center space-x-2">
-                      <div 
-                        className={cn(
-                          "w-3 h-3 rounded-full",
-                          isActive ? "outline outline-2 outline-offset-2" : ""
-                        )}
-                        style={{ 
-                          backgroundColor: categoryColor,
-                          outlineColor: isActive ? categoryColor : 'transparent',
-                        }}
-                      ></div>
-                      <span className={isActive ? "text-foreground font-bold" : "text-muted-foreground"}>
-                        {category.title}
-                      </span>
-                    </div>
-                  </TabsTrigger>
-                );
-              })}
-            </TabsList>
 
-            {/* Content for each tab */}
-            {Object.entries(categories).map(([key, category]) => (
-              <TabsContent key={key} value={key} className="mt-0">
-                <Card className="bg-white shadow-lg rounded-xl overflow-hidden">
-                  <CardContent className="p-8">
-                    <h3 className="text-2xl font-lora mb-6 font-medium">{category.title}</h3>
-                    
-                    <div className="grid gap-6">
-                      {category.items.map((item, index) => (
-                        <div key={index} className="flex items-start gap-4 pb-5 border-b last:border-0 last:pb-0">
-                          <div 
-                            className="w-8 h-8 rounded-full flex items-center justify-center text-white mt-0.5 flex-shrink-0" 
-                            style={{ backgroundColor: getCategoryColor(key) }}
-                          >
-                            <Check className="h-4 w-4" />
-                          </div>
-                          <div>
-                            <h4 className="font-medium text-lg">{item.title}</h4>
-                            <p className="text-muted-foreground mt-1">
-                              {item.description}
-                            </p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-            ))}
-          </Tabs>
-        </div>
+        {/* Unified Grid Layout for all screen sizes */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+          {Object.entries(categories).map(([key, category]) => (
+            <Card key={key} className="bg-white shadow-lg rounded-xl overflow-hidden flex flex-col">
+              <CardContent className="p-6 md:p-8 flex-grow"> {/* Use p-6 for mobile, p-8 for desktop */}
+                <div className="flex items-center mb-6">
+                  <div
+                    className="w-4 h-4 rounded-full mr-3"
+                    style={{ backgroundColor: getCategoryColor(key) }}
+                  ></div>
+                  <h3 className="text-xl md:text-2xl font-lora font-medium text-foreground">
+                    {category.title}
+                  </h3>
+                </div>
 
-        {/* Mobile View - Updated to match desktop style more closely */}
-        <div className="md:hidden">
-          {/* Category Pills - Horizontal Scrolling - Updated style */}
-          <div className="mb-6 overflow-x-auto pb-2 no-scrollbar">
-            <div className="flex bg-muted/20 shadow-sm rounded-xl p-1.5">
-              {Object.entries(categories).map(([key, category], index) => {
-                const isActive = activeCategory === key;
-                const categoryColor = getCategoryColor(key);
-                
-                return (
-                  <div 
-                    key={key}
-                    className={cn(
-                      "py-2 px-3 rounded-lg cursor-pointer mx-1 flex-1 min-w-0 transition-all border-b-2",
-                      isActive 
-                        ? "bg-white shadow-sm font-bold border-b-2" 
-                        : "hover:bg-muted/40 border-transparent"
-                    )}
-                    style={isActive ? { 
-                      borderColor: categoryColor,
-                      boxShadow: `0 2px 4px -1px rgba(0, 0, 0, 0.06)` 
-                    } : {}}
-                    onClick={() => setActiveCategory(key)}
-                  >
-                    <span className={cn(
-                      "font-medium text-sm text-center block truncate",
-                      isActive ? "text-foreground font-bold" : "text-muted-foreground"
-                    )}>
-                      {category.shortTitle}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-          
-          {/* Content Card */}
-          <Card className="bg-white shadow-md rounded-xl overflow-hidden">
-            <CardContent className="p-6">
-              <h3 className="text-xl font-lora mb-4 font-medium">{categories[activeCategory as keyof typeof categories].title}</h3>
-              
-              <div className="space-y-6">
-                {categories[activeCategory as keyof typeof categories].items.map((item, index) => (
-                  <div key={index} className="flex items-start gap-3 pb-4 border-b last:border-0 last:pb-0">
-                    <div 
-                      className="w-6 h-6 rounded-full flex items-center justify-center text-white mt-0.5 flex-shrink-0" 
-                      style={{ backgroundColor: getCategoryColor(activeCategory) }}
-                    >
-                      <Check className="h-3.5 w-3.5" />
+                <div className="space-y-5"> {/* Consistent spacing for items */}
+                  {category.items.map((item, index) => (
+                    <div key={index} className="flex items-start gap-3"> {/* Consistent gap */}
+                      <div
+                        className="w-6 h-6 rounded-full flex items-center justify-center text-white mt-0.5 flex-shrink-0"
+                        style={{ backgroundColor: getCategoryColor(key) }}
+                      >
+                        <Check className="h-3.5 w-3.5" />
+                      </div>
+                      <div>
+                        <h4 className="font-medium text-base md:text-lg">{item.title}</h4>
+                        <p className="text-muted-foreground text-sm mt-1">
+                          {item.description}
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <h4 className="font-medium text-base">{item.title}</h4>
-                      <p className="text-muted-foreground text-sm mt-1">
-                        {item.description}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          ))}
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
 export default Membership;
