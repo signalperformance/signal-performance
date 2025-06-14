@@ -129,6 +129,7 @@ const translations = {
     
     // Schedule
     'schedule.title': 'Weekly Training Schedule',
+    'schedule.subtitle': 'Choose 4 sessions per week based on your goals and training phase — guided by your coach.',
     'schedule.keyTitle': 'KEY:',
     'schedule.days.monday': 'Mon',
     'schedule.days.tuesday': 'Tue',
@@ -265,6 +266,7 @@ const translations = {
     
     // Schedule
     'schedule.title': '每週訓練時間表',
+    'schedule.subtitle': '每週根據您的目標和訓練階段選擇4節課——由您的教練指導。',
     'schedule.keyTitle': '圖例：',
     'schedule.days.monday': '週一',
     'schedule.days.tuesday': '週二',
