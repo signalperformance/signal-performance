@@ -10,8 +10,6 @@ export interface ScheduleEntry {
 
 export interface TimeSlotItem {
   id: string;
-  type: 'time' | 'break';
-  hour24?: number; // Only for 'time' type
+  hour24: number; // 24-hour format, e.g., 13 for 1 PM. Made non-optional.
   label: string;
 }
-
