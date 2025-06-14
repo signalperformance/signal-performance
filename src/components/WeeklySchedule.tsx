@@ -1,6 +1,7 @@
 
 import { useLanguage } from '@/contexts/LanguageContext';
 import { cn } from '@/lib/utils';
+import React from 'react'; // Moved React import to the top for convention
 
 interface ScheduleEntry {
   id: string;
@@ -48,20 +49,20 @@ const WeeklySchedule = () => {
   const { t } = useLanguage();
 
   const daysOfWeek = [
-    { key: 'monday', label: t('schedule.days.monday', 'Mon') },
-    { key: 'tuesday', label: t('schedule.days.tuesday', 'Tue') },
-    { key: 'wednesday', label: t('schedule.days.wednesday', 'Wed') },
-    { key: 'thursday', label: t('schedule.days.thursday', 'Thu') },
-    { key: 'friday', label: t('schedule.days.friday', 'Fri') },
-    { key: 'saturday', label: t('schedule.days.saturday', 'Sat') },
-    { key: 'sunday', label: t('schedule.days.sunday', 'Sun') },
+    { key: 'monday', label: t('schedule.days.monday') },
+    { key: 'tuesday', label: t('schedule.days.tuesday') },
+    { key: 'wednesday', label: t('schedule.days.wednesday') },
+    { key: 'thursday', label: t('schedule.days.thursday') },
+    { key: 'friday', label: t('schedule.days.friday') },
+    { key: 'saturday', label: t('schedule.days.saturday') },
+    { key: 'sunday', label: t('schedule.days.sunday') },
   ];
 
   const timeSlots = Array.from({ length: 13 }, (_, i) => { // 8 AM to 8 PM (inclusive)
     const hour = i + 8;
     let displayHour = hour % 12;
     if (displayHour === 0) displayHour = 12;
-    const period = hour < 12 || hour === 24 ? t('schedule.timePeriods.am', 'AM') : t('schedule.timePeriods.pm', 'PM');
+    const period = hour < 12 || hour === 24 ? t('schedule.timePeriods.am') : t('schedule.timePeriods.pm');
     return {
       hour24: hour,
       label: `${displayHour} ${period}`
@@ -72,12 +73,12 @@ const WeeklySchedule = () => {
     return scheduleData.find(entry => entry.dayKey === dayKey && entry.hour24 === hour24);
   };
 
-  // TODO: Add translations for these class names in your language context
+  // These keys (e.g., 'schedule.classes.mobility') will be displayed if translations are not found.
   const classDisplayNames = {
-    MOBILITY: t('schedule.classes.mobility', 'Mobility'),
-    STRENGTH: t('schedule.classes.strength', 'Strength'),
-    CARDIO: t('schedule.classes.cardio', 'Cardio'),
-    POWER: t('schedule.classes.power', 'Power'),
+    MOBILITY: t('schedule.classes.mobility'),
+    STRENGTH: t('schedule.classes.strength'),
+    CARDIO: t('schedule.classes.cardio'),
+    POWER: t('schedule.classes.power'),
   };
   
   const classStyles: { [key: string]: string } = {
@@ -97,10 +98,10 @@ const WeeklySchedule = () => {
   return (
     <section id="schedule" className="section-padding bg-signal-black text-signal-light-gray">
       <div className="container mx-auto container-padding">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center font-lora">{t('schedule.title', 'Weekly Training Schedule')}</h2>
+        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center font-lora">{t('schedule.title')}</h2>
         
         <div className="mb-8 flex flex-wrap justify-center gap-x-6 gap-y-2">
-          <span className="font-semibold mr-2">{t('schedule.keyTitle', 'KEY:')}</span>
+          <span className="font-semibold mr-2">{t('schedule.keyTitle')}</span>
           {keyItems.map(item => (
             <div key={item.name} className="flex items-center gap-2">
               <span className={cn("w-4 h-4 rounded-sm block", item.style)}></span>
@@ -150,14 +151,12 @@ const WeeklySchedule = () => {
           </div>
         </div>
         <p className="text-center text-xs text-gray-400 mt-4 italic">
-          {t('schedule.disclaimer', 'Schedule subject to change. Please confirm with staff.')}
+          {t('schedule.disclaimer')}
         </p>
       </div>
     </section>
   );
 };
 
-// Need to import React for React.Fragment
-import React from 'react';
 export default WeeklySchedule;
 
