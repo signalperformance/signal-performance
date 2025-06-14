@@ -108,7 +108,7 @@ const WeeklySchedule = () => {
   }];
   return <section id="schedule" className="section-padding text-signal-light-gray bg-signal-white">
       <div className="container mx-auto container-padding">
-        <h2 className="text-3xl md:text-4xl font-bold mb-2 text-center font-lora">{t('schedule.title')}</h2>
+        <h2 className="text-3xl md:text-4xl font-bold mb-2 text-center font-lora text-signal-black">{t('schedule.title')}</h2>
         <p className="text-base md:text-lg text-center text-gray-400 mb-6 font-montserrat">
           {t('schedule.subtitle')}
         </p>
