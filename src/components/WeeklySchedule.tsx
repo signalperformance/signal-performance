@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { cn } from '@/lib/utils';
@@ -126,15 +127,14 @@ const WeeklySchedule = () => {
     [classDisplayNames.POWER.toUpperCase()]: 'bg-gray-500 text-white hover:opacity-90',
   };
   
-  // Updated keyItems to distinguish Pro (patterned) and Amateur (solid) sessions
   const keyItems = [
     {
-      name: t('schedule.sessionTypes.pro'),
-      style: cn('bg-gray-600', 'pattern-diagonal-stripes') // Example: Mobility color with Pro pattern
+      name: "PR: Pro's only",
+      style: cn('bg-gray-600', 'pattern-diagonal-stripes') // Pattern for Pro sessions
     },
     {
-      name: t('schedule.sessionTypes.amateur'),
-      style: cn('bg-gray-600') // Example: Mobility color (solid) for Amateur
+      name: "OP: Open to anyone", // Amateur sessions are open to anyone
+      style: cn('bg-gray-600') // Solid color for Amateur/Open sessions
     }
   ];
 
@@ -180,6 +180,7 @@ const WeeklySchedule = () => {
                               <span>
                                 {t(`schedule.classes.${scheduledClass.name.toLowerCase()}`)}
                                 {scheduledClass.sessionType === 'pro' && <sup>PR</sup>}
+                                {scheduledClass.sessionType === 'amateur' && <sup>AM</sup>}
                               </span>
                             </div>
                           ) : (
@@ -207,7 +208,7 @@ const WeeklySchedule = () => {
           </div>
         </div>
         
-        {/* Key/Legend items - Now reflects Pro (patterned) / Amateur (solid) distinction */}
+        {/* Key/Legend items - Now reflects PR (Pro's only) and OP (Open to anyone) */}
         <div className="mt-6 flex flex-wrap justify-center items-center gap-x-4 gap-y-2">
           <span className="text-sm font-semibold uppercase mr-2">{t('schedule.keyTitle')}</span>
           {keyItems.map(item => (
@@ -224,3 +225,4 @@ const WeeklySchedule = () => {
 };
 
 export default WeeklySchedule;
+
