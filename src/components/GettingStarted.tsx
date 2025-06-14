@@ -37,8 +37,8 @@ const GettingStarted = () => {
 
           {steps.map((step, index) => (
             <div key={index} className="relative z-10 flex flex-col items-center text-center flex-1 group">
-              <div className="flex items-center justify-center w-16 h-16 mb-4 bg-gradient-to-br from-signal-charcoal to-signal-black rounded-full shadow-lg border-4 border-background transition-transform group-hover:scale-105">
-                <span className="text-2xl font-bold text-white">{index + 1}</span>
+              <div className="flex items-center justify-center w-16 h-16 mb-4 bg-signal-gold rounded-full shadow-lg border-4 border-background transition-transform group-hover:scale-105">
+                <span className="text-2xl font-bold text-signal-black">{index + 1}</span>
               </div>
               <h3 className="text-lg font-semibold text-signal-charcoal px-2">{step.title}</h3>
             </div>
