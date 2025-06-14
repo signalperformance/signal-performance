@@ -136,7 +136,7 @@ const WeeklySchedule = () => {
                           "w-full h-full rounded-sm p-1.5 text-center text-xs leading-tight flex items-center justify-center transition-opacity duration-150",
                           classStyles[scheduledClass.name.toUpperCase()] || 'bg-gray-400 text-black'
                         )}>
-                          {t(`schedule.classes.${scheduledClass.name.toLowerCase()}` as any, scheduledClass.name)}
+                          {t(`schedule.classes.${scheduledClass.name.toLowerCase()}` as any)}
                         </div>
                       ) : (
                         <div className="w-full h-full"></div> // Empty cell
