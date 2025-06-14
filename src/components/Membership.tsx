@@ -41,8 +41,8 @@ const Membership = () => {
           description: t('membership.physical.assessment.description')
         },
         {
-          title: language === 'zh' ? "一對三健身指導" : "One-on-Three Fitness Coaching",
-          description: `${t('membership.physical.coaching.description')} (${language === 'zh' ? '每週4次' : '4 times per week'})`
+          title: language === 'zh' ? "一對三健身指導 (每週4次)" : "1-on-3 Fitness Coaching (4x/Week)",
+          description: t('membership.physical.coaching.description')
         }
       ]
     },
