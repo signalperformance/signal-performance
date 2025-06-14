@@ -1,6 +1,16 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
+// Helper to track module evaluation instances across HMR.
+let contextInstanceCounter = 0;
+if (typeof (window as any)._appLanguageContextInstanceCounter === 'undefined') {
+  (window as any)._appLanguageContextInstanceCounter = 0;
+}
+(window as any)._appLanguageContextInstanceCounter++;
+contextInstanceCounter = (window as any)._appLanguageContextInstanceCounter;
+console.log(`LanguageContext.tsx module evaluated. Instance: ${contextInstanceCounter}`);
+
+
 type Language = 'en' | 'zh';
 
 type LanguageContextType = {
@@ -291,12 +301,15 @@ const translations = {
 };
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
+console.log(`LanguageContext object created. Module instance: ${contextInstanceCounter}`);
+
 
 // Helper function to check if localStorage is available
 const isLocalStorageAvailable = (): boolean => {
   try {
     return typeof window !== 'undefined' && 'localStorage' in window && window.localStorage !== null;
   } catch (error) {
+    // console.warn('localStorage check failed:', error); // Less noisy
     return false;
   }
 };
@@ -304,49 +317,54 @@ const isLocalStorageAvailable = (): boolean => {
 // Helper function to get saved language from localStorage
 const getSavedLanguage = (): Language => {
   if (!isLocalStorageAvailable()) {
-    console.log('localStorage is not available, defaulting to English');
+    // console.warn('localStorage is not available, defaulting to English'); // Less noisy
     return 'en';
   }
   
   try {
     const saved = localStorage.getItem('signal-performance-language');
-    console.log('Reading saved language from localStorage:', saved);
+    // console.log('Reading saved language from localStorage:', saved); // Less noisy
     if (saved === 'en' || saved === 'zh') {
       return saved;
     }
   } catch (error) {
-    console.log('Failed to read language from localStorage:', error);
+    // console.warn('Failed to read language from localStorage:', error); // Less noisy
   }
-  console.log('No valid saved language found, defaulting to English');
+  // console.log('No valid saved language found, defaulting to English'); // Less noisy
   return 'en'; // Default to English for first-time visitors
 };
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  const [language, setLanguage] = useState<Language>('en');
+  console.log(`LanguageProvider rendered. Using context from module instance: ${contextInstanceCounter}`);
+  const [language, setLanguage] = useState<Language>('en'); // Initialize with 'en' directly
   const [isInitialized, setIsInitialized] = useState(false);
 
   // Initialize language from localStorage after component mounts
   useEffect(() => {
+    // console.log('LanguageProvider mount effect: initializing language.'); // Less noisy
     const savedLanguage = getSavedLanguage();
-    console.log('Initializing language to:', savedLanguage);
+    // console.log('Initializing language to:', savedLanguage); // Less noisy
     setLanguage(savedLanguage);
     setIsInitialized(true);
   }, []);
 
   // Save language preference to localStorage whenever it changes (but not on initial load)
   useEffect(() => {
-    if (!isInitialized) return; // Don't save during initialization
+    if (!isInitialized) {
+      // console.log('LanguageProvider update effect: skipping save, not initialized yet.'); // Less noisy
+      return; 
+    }
     
     if (!isLocalStorageAvailable()) {
-      console.log('localStorage is not available, cannot save language preference');
+      // console.warn('localStorage is not available, cannot save language preference'); // Less noisy
       return;
     }
 
     try {
-      console.log('Saving language to localStorage:', language);
+      // console.log('Saving language to localStorage:', language); // Less noisy
       localStorage.setItem('signal-performance-language', language);
     } catch (error) {
-      console.log('Failed to save language to localStorage:', error);
+      // console.warn('Failed to save language to localStorage:', error); // Less noisy
     }
   }, [language, isInitialized]);
 
@@ -362,9 +380,13 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
 };
 
 export const useLanguage = (): LanguageContextType => {
+  console.log(`useLanguage called. Expecting context from module instance: ${contextInstanceCounter}`);
   const context = useContext(LanguageContext);
   if (context === undefined) {
+    console.error(`useLanguage: context is undefined. Module instance: ${contextInstanceCounter}. This means useLanguage is likely called outside a LanguageProvider.`);
     throw new Error('useLanguage must be used within a LanguageProvider');
   }
+  // console.log(`useLanguage: context found. Module instance: ${contextInstanceCounter}`); // Less noisy
   return context;
 };
+
