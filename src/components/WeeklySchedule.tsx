@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { cn } from '@/lib/utils';
@@ -180,7 +179,7 @@ const WeeklySchedule = () => {
                               <span>
                                 {t(`schedule.classes.${scheduledClass.name.toLowerCase()}`)}
                                 {scheduledClass.sessionType === 'pro' && <sup>PR</sup>}
-                                {scheduledClass.sessionType === 'amateur' && <sup>AM</sup>}
+                                {scheduledClass.sessionType === 'amateur' && <sup>OP</sup>}
                               </span>
                             </div>
                           ) : (
@@ -225,4 +224,3 @@ const WeeklySchedule = () => {
 };
 
 export default WeeklySchedule;
-
