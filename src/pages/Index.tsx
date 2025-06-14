@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Membership from "@/components/Membership";
+import GettingStarted from "@/components/GettingStarted";
 import AssessmentProcess from "@/components/AssessmentProcess";
 import Philosophy from "@/components/Philosophy";
 import WeeklySchedule from "@/components/WeeklySchedule"; // Added import
@@ -30,6 +31,7 @@ const Index = () => {
       <Philosophy />
       <AssessmentProcess />
       <Membership />
+      <GettingStarted />
       <WeeklySchedule /> {/* Added new component */}
       <About />
       <WaitlistDialog />

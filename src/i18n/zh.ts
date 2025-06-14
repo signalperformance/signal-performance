@@ -117,6 +117,13 @@ const zh = {
   'philosophy.card3.title': '整合式訓練系統',
   'philosophy.card3.content': '表現從不是單一因素決定的，它是一個由多個面向互動構成的複雜系統。我們的身心彼此連動，技術則建立在兩者之上。因此，我們不將體能、心理與技術分割訓練，而是納入一套整合式的訓練架構中，讓每一部分協同作用，推動整體表現持續進步。',
 
+  // Getting Started
+  'gettingStarted.title': '如何開始',
+  'gettingStarted.step1.title': '安排評估',
+  'gettingStarted.step2.title': '評估報告',
+  'gettingStarted.step3.title': '3次一對一指導',
+  'gettingStarted.step4.title': '月度計畫',
+
   // Schedule
   'schedule.title': '每週訓練課表',
   'schedule.subtitle': '依據你的目標與訓練階段，選擇每週 4 堂課，由教練協助規劃。',
