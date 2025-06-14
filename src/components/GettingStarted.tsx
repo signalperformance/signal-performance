@@ -56,8 +56,8 @@ const GettingStarted = () => {
             </div>
           </div>
 
-          {/* Main connecting line for all steps - positioned higher */}
-          <div className="hidden md:block absolute left-0 right-0 top-12 z-0 h-0.5 bg-gradient-to-r from-primary/30 via-primary to-primary/30 mx-8"></div>
+          {/* Main connecting line for all steps - positioned above the circles */}
+          <div className="hidden md:block absolute left-0 right-0 top-6 z-0 h-0.5 bg-gradient-to-r from-primary/30 via-primary to-primary/30 mx-8"></div>
 
           {steps.map((step, index) => (
             <div key={index} className="relative z-10 flex flex-col items-center text-center flex-1 group">
