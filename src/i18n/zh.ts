@@ -137,26 +137,5 @@ const zh = {
   'schedule.classes.cardio': '心肺',
   'schedule.classes.power': '爆發力',
   'schedule.disclaimer': '時間表可能隨時更動，請與工作人員確認。',
-
-  // Getting Started
-  'gettingStarted.title': '如何開始',
-  'gettingStarted.subtitle': '從初次評估到正式會員，我們為您規劃了清晰的路徑。',
-  'gettingStarted.step1.title': '預約基準評估',
-  'gettingStarted.step1.description': '對您的身體、心理和技術表現進行全面評估。',
-  'gettingStarted.step2.title': '審核結果與制定計畫',
-  'gettingStarted.step2.description': '我們將分析您的評估數據，共同制定個人化的訓練藍圖。',
-  'gettingStarted.step3.title': '完成三堂一對一教練課',
-  'gettingStarted.step3.description': '與我們的教練直接合作，啟動您的訓練計畫並掌握基礎技術。',
-  'gettingStarted.step4.title': '開始月度會員方案',
-  'gettingStarted.step4.description': '享受全方位的會員資格，包含持續的教練指導、場館使用權限與不間斷的支援。',
-  'gettingStarted.onboarding.title': '啟動方案',
-  'gettingStarted.onboarding.includes': '步驟 1-3',
-  'gettingStarted.onboarding.price': 'NT$12,000',
-  'gettingStarted.onboarding.type': '一次性費用',
-  'gettingStarted.membership.title': '正式會員',
-  'gettingStarted.membership.includes': '步驟 4',
-  'gettingStarted.membership.price': 'NT$18,000 / 月',
-  'gettingStarted.membership.type': '月費制',
 };
 export default zh;
-
