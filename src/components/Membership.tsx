@@ -1,7 +1,6 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useState, useEffect, useRef } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 import { Check } from "lucide-react";
 
@@ -35,12 +34,12 @@ const Membership = () => {
       shortTitle: language === 'zh' ? '身體' : 'Body',
       items: [
         {
-          title: t('membership.physical.assessment'),
-          description: t('membership.physical.assessment.description')
-        },
-        {
           title: language === 'zh' ? "每週四次 1 對 3 體能訓練課程" : "1-on-3 Fitness Coaching (4x/Week)",
           description: t('membership.physical.coaching.description')
+        },
+        {
+          title: t('membership.physical.assessment'),
+          description: t('membership.physical.assessment.description')
         }
       ]
     },
