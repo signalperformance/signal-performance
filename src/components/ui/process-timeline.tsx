@@ -9,7 +9,7 @@ import {
   motion,
   useScroll,
   useTransform,
-} from "motion/react"
+} from "framer-motion"
 
 import { cn } from "@/lib/utils"
 
@@ -114,6 +114,7 @@ export const ProcessCard: React.FC<ProcessCardProps> = ({
   size,
   itemsLength,
   index,
+  children,
   ...props
 }) => {
   const { scrollYProgress } = useContainerScrollContext()
@@ -136,7 +137,9 @@ export const ProcessCard: React.FC<ProcessCardProps> = ({
       }}
       className={cn(processCardVariants({ variant, size }), className)}
       {...props}
-    />
+    >
+      {children}
+    </motion.div>
   )
 }
 ProcessCard.displayName = "ProcessCard"
