@@ -6,7 +6,7 @@ import { Switch } from '@/components/ui/switch';
 const Navbar = () => {
   const {
     language,
-    setLanguage,
+    toggleLanguage,
     t
   } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
@@ -18,10 +18,6 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const toggleLanguage = () => {
-    setLanguage(language === 'en' ? 'zh' : 'en');
-  };
 
   return <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-md py-2' : 'bg-white py-4'}`}>
       <div className="container mx-auto px-4 flex justify-between items-center">
