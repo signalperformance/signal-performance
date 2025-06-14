@@ -1,4 +1,5 @@
-import React from 'react'; // Moved React import to the top for convention
+
+import React from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { cn } from '@/lib/utils';
 
@@ -63,18 +64,17 @@ const scheduleData: ScheduleEntry[] = [
   { id: 'sat-10-str-am', dayKey: 'saturday', hour24: 10, name: 'Strength', sessionType: 'amateur' },
   { id: 'sat-11-car-am', dayKey: 'saturday', hour24: 11, name: 'Cardio', sessionType: 'amateur' },
   { id: 'sat-12-pow-am', dayKey: 'saturday', hour24: 12, name: 'Power', sessionType: 'amateur' },
-  // Saturday - Amateur (Evening) - NEW
+  // Saturday - Amateur (Evening)
   { id: 'sat-17-mob-am-eve', dayKey: 'saturday', hour24: 17, name: 'Mobility', sessionType: 'amateur' },
   { id: 'sat-18-str-am-eve', dayKey: 'saturday', hour24: 18, name: 'Strength', sessionType: 'amateur' },
   { id: 'sat-19-pow-am-eve', dayKey: 'saturday', hour24: 19, name: 'Power', sessionType: 'amateur' },
-
 
   // Sunday - Amateur (Morning/Midday)
   { id: 'sun-9-mob-am', dayKey: 'sunday', hour24: 9, name: 'Mobility', sessionType: 'amateur' },
   { id: 'sun-10-str-am', dayKey: 'sunday', hour24: 10, name: 'Strength', sessionType: 'amateur' },
   { id: 'sun-11-car-am', dayKey: 'sunday', hour24: 11, name: 'Cardio', sessionType: 'amateur' },
   { id: 'sun-12-pow-am', dayKey: 'sunday', hour24: 12, name: 'Power', sessionType: 'amateur' },
-  // Sunday - Amateur (Evening) - NEW
+  // Sunday - Amateur (Evening)
   { id: 'sun-17-mob-am-eve', dayKey: 'sunday', hour24: 17, name: 'Mobility', sessionType: 'amateur' },
   { id: 'sun-18-str-am-eve', dayKey: 'sunday', hour24: 18, name: 'Strength', sessionType: 'amateur' },
   { id: 'sun-19-pow-am-eve', dayKey: 'sunday', hour24: 19, name: 'Power', sessionType: 'amateur' },
@@ -117,6 +117,7 @@ const WeeklySchedule = () => {
     return scheduleData.find(entry => entry.dayKey === dayKey && entry.hour24 === hour24);
   };
 
+  // TODO: Consider moving classDisplayNames and classStyles to a theme/config file if they grow
   const classDisplayNames = {
     MOBILITY: t('schedule.classes.mobility'),
     STRENGTH: t('schedule.classes.strength'),
@@ -131,19 +132,17 @@ const WeeklySchedule = () => {
     [classDisplayNames.POWER.toUpperCase()]: 'bg-gray-500 text-white hover:opacity-90',
   };
   
-  const keyItems = [{
-    name: classDisplayNames.STRENGTH,
-    style: classStyles[classDisplayNames.STRENGTH.toUpperCase()]
-  }, {
-    name: classDisplayNames.CARDIO,
-    style: classStyles[classDisplayNames.CARDIO.toUpperCase()]
-  }, {
-    name: classDisplayNames.MOBILITY,
-    style: classStyles[classDisplayNames.MOBILITY.toUpperCase()]
-  }, {
-    name: classDisplayNames.POWER,
-    style: classStyles[classDisplayNames.POWER.toUpperCase()]
-  }];
+  // Updated keyItems to distinguish Pro and Amateur sessions
+  const keyItems = [
+    {
+      name: t('schedule.sessionTypes.pro'), // Assuming 'schedule.sessionTypes.pro' key exists from previous work
+      style: cn('bg-gray-600', 'border border-signal-gold') // Example: Mobility color with Pro border
+    },
+    {
+      name: t('schedule.sessionTypes.amateur'), // Assuming 'schedule.sessionTypes.amateur' key exists
+      style: cn('bg-gray-600', 'border border-transparent') // Example: Mobility color with Amateur (transparent) border
+    }
+  ];
 
   return (
     <section id="schedule" className="section-padding bg-signal-black text-signal-light-gray">
@@ -153,11 +152,7 @@ const WeeklySchedule = () => {
           {t('schedule.subtitle')}
         </p>
         
-        {/* Key/Legend - No changes needed here for this request unless specifically asked */}
-        {/* ... keep existing code ... */}
-
         <div className="overflow-x-auto">
-          {/* Main grid for the schedule table. Day column widths adjusted slightly. */}
           <div className="grid grid-cols-[auto_repeat(7,minmax(55px,1fr))] gap-px bg-gray-700 border border-gray-700 rounded-lg min-w-[600px] md:min-w-full">
             {/* Header: Empty Top Left Cell */}
             <div className="bg-signal-charcoal p-1.5"></div>
@@ -185,13 +180,10 @@ const WeeklySchedule = () => {
                           {scheduledClass ? (
                             <div className={cn(
                               "w-full h-full rounded-sm p-1 text-center text-xs leading-tight flex flex-col items-center justify-center transition-opacity duration-150",
-                              classStyles[scheduledClass.name.toUpperCase()] || 'bg-gray-400 text-black'
+                              classStyles[scheduledClass.name.toUpperCase()] || 'bg-gray-400 text-black',
+                              scheduledClass.sessionType === 'pro' ? 'border border-signal-gold' : 'border border-transparent' // Apply border style
                             )}>
-                              {scheduledClass.sessionType === 'pro' && (
-                                <span className="block text-[10px] opacity-90 font-medium tracking-wide">
-                                  (PRO)
-                                </span>
-                              )}
+                              {/* Removed (PRO) text indicator */}
                               <span>{t(`schedule.classes.${scheduledClass.name.toLowerCase()}`)}</span>
                             </div>
                           ) : (
@@ -219,12 +211,12 @@ const WeeklySchedule = () => {
           </div>
         </div>
         
-        {/* Key/Legend items */}
+        {/* Key/Legend items - Now reflects Pro/Amateur distinction */}
         <div className="mt-6 flex flex-wrap justify-center items-center gap-x-4 gap-y-2">
           <span className="text-sm font-semibold uppercase mr-2">{t('schedule.keyTitle')}</span>
           {keyItems.map(item => (
             <div key={item.name} className="flex items-center">
-              <span className={cn("w-3 h-3 rounded-xs mr-1.5", item.style)}></span>
+              <span className={cn("w-3 h-3 rounded-xs mr-1.5", item.style)}></span> {/* Ensure item.style includes border for Pro */}
               <span className="text-xs">{item.name}</span>
             </div>
           ))}
