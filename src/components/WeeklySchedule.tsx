@@ -256,7 +256,10 @@ const WeeklySchedule = () => {
   }];
   return <section id="schedule" className="section-padding bg-signal-black text-signal-light-gray">
       <div className="container mx-auto container-padding">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center font-lora">{t('schedule.title')}</h2>
+        <h2 className="text-3xl md:text-4xl font-bold mb-2 text-center font-lora">{t('schedule.title')}</h2>
+        <p className="text-base md:text-lg text-center text-gray-400 mb-6 font-montserrat">
+          {t('schedule.subtitle', { defaultValue: "Choose 4 sessions per week based on your goals and training phase — guided by your coach."})}
+        </p>
         
         
 
