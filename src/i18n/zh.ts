@@ -1,3 +1,4 @@
+
 const zh = {
   // Navigation
   'nav.home': '首頁',
@@ -153,7 +154,7 @@ const zh = {
 
   // Who It's For
   'whoitsfor.title': '我們的服務對象',
-  'whoitsfor.subtitle': '在 Signal Performance，我們並非適合所有人——這是刻意為之的。\n我們專為準備好投入、接受挑戰並尋求成長的高爾夫球手而設。',
+  'whoitsfor.subtitle': '在 Signal Performance，我們並非適合所有人——這是刻意為之的。',
   'whoitsfor.for.title': '✅ 如果您符合以下條件，這裡適合您...',
   'whoitsfor.for.item1': '想要一個有結構、數據導向的計畫——沒有猜測，只有清晰',
   'whoitsfor.for.item2': '重視責任感並希望追踪進度',

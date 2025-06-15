@@ -1,3 +1,4 @@
+
 const en = {
   // Navigation
   'nav.home': 'Home',
@@ -153,7 +154,7 @@ const en = {
 
   // Who It's For
   'whoitsfor.title': 'Who It’s For',
-  'whoitsfor.subtitle': 'At Signal Performance, we’re not for everyone — and that’s intentional.\nWe’re built for golfers who are ready to commit, be challenged, and grow.',
+  'whoitsfor.subtitle': 'At Signal Performance, we’re not for everyone — and that’s intentional.',
   'whoitsfor.for.title': '✅ This is for you if you…',
   'whoitsfor.for.item1': 'Want a structured, data-driven plan — no guessing, just clarity',
   'whoitsfor.for.item2': 'Value accountability and want to track your progress',
