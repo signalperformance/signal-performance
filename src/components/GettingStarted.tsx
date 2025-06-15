@@ -71,6 +71,22 @@ const GettingStarted = () => {
             {/* Connector line */}
             <div className="h-8 w-px bg-gray-300 my-4" />
 
+            {/* Monthly Program Card */}
+            <div className="mb-4">
+              <Card className="bg-signal-charcoal text-white border-signal-gold/50 shadow-xl w-full max-w-[280px] sm:max-w-xs text-center">
+                  <CardHeader className="p-4">
+                      <CardTitle className="text-xl text-signal-gold">
+                          {t('gettingstarted.step4.title')}
+                      </CardTitle>
+                  </CardHeader>
+                  <CardContent className="p-4 pt-0">
+                      <p className="text-3xl font-bold text-white mb-2">
+                          {t('membership.price')}
+                      </p>
+                  </CardContent>
+              </Card>
+            </div>
+
             {/* Step 4 */}
             {steps[3] && (
               <div className="flex flex-col items-center text-center w-full max-w-xs">
@@ -110,6 +126,18 @@ const GettingStarted = () => {
               </div>
             </div>
 
+            {/* Monthly Program box */}
+            <div className="absolute z-30 top-[20px] left-[87.5%] transform -translate-x-1/2 -translate-y-1/2">
+              <div className="bg-signal-charcoal text-white border border-signal-gold/50 shadow-xl rounded-md px-4 py-2 text-center whitespace-nowrap">
+                <p className="text-base text-signal-gold font-semibold">
+                  {t('gettingstarted.step4.title')}
+                </p>
+                <p className="text-2xl font-bold text-white">
+                  {t('membership.price')}
+                </p>
+              </div>
+            </div>
+
             <div className="flex justify-between items-start relative">
               {steps.map((step, index) => (
                 <div key={step.title} className="relative z-20 flex flex-col items-center text-center flex-1 group px-2">
@@ -130,3 +158,4 @@ const GettingStarted = () => {
   );
 };
 export default GettingStarted;
+
