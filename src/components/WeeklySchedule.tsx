@@ -1,12 +1,27 @@
-import React from 'react';
+
+```
+import React, { useState, useMemo } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { cn } from '@/lib/utils';
 import { scheduleData } from '@/data/scheduleData';
 import { ScheduleEntry, TimeSlotItem, DayKey } from '@/data/scheduleTypes';
+import { Button } from '@/components/ui/button';
+
+type FilterType = 'all' | 'pro' | 'amateur';
+
 const WeeklySchedule = () => {
   const {
     t
   } = useLanguage();
+  const [filter, setFilter] = useState<FilterType>('all');
+
+  const filteredSchedule = useMemo(() => {
+    if (filter === 'all') {
+      return scheduleData;
+    }
+    return scheduleData.filter(entry => entry.sessionType === filter);
+  }, [filter]);
+
   const daysOfWeek = [{
     key: 'monday' as DayKey,
     label: t('schedule.days.monday')
@@ -83,7 +98,7 @@ const WeeklySchedule = () => {
     label: `8 ${t('schedule.timePeriods.pm')}`
   }];
   const getClassForSlot = (dayKey: DayKey, hour24: number) => {
-    return scheduleData.find(entry => entry.dayKey === dayKey && entry.hour24 === hour24);
+    return filteredSchedule.find(entry => entry.dayKey === dayKey && entry.hour24 === hour24);
   };
   const classDisplayNames = {
     MOBILITY: t('schedule.classes.mobility'),
@@ -112,6 +127,33 @@ const WeeklySchedule = () => {
         <p className="text-base md:text-lg text-center text-muted-foreground mb-6 font-montserrat">
           {t('schedule.subtitle')}
         </p>
+
+        <div className="flex justify-center items-center gap-2 mb-6 flex-wrap">
+          <Button
+            size="sm"
+            variant={filter === 'all' ? 'default' : 'outline'}
+            onClick={() => setFilter('all')}
+            className="rounded-full"
+          >
+            {t('schedule.filter.all')}
+          </Button>
+          <Button
+            size="sm"
+            variant={filter === 'pro' ? 'default' : 'outline'}
+            onClick={() => setFilter('pro')}
+            className="rounded-full"
+          >
+            {t('schedule.filter.pro')}
+          </Button>
+          <Button
+            size="sm"
+            variant={filter === 'amateur' ? 'default' : 'outline'}
+            onClick={() => setFilter('amateur')}
+            className="rounded-full"
+          >
+            {t('schedule.filter.open')}
+          </Button>
+        </div>
         
         <div className="overflow-x-auto">
           <div className="grid grid-cols-[auto_repeat(7,minmax(55px,1fr))] gap-px bg-gray-700 border border-gray-700 rounded-lg min-w-[600px] md:min-w-full">
@@ -157,3 +199,4 @@ const WeeklySchedule = () => {
     </section>;
 };
 export default WeeklySchedule;
+```

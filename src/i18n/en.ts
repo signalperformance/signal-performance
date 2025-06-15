@@ -1,4 +1,5 @@
 
+```
 const en = {
   // Navigation
   'nav.home': 'Home',
@@ -142,6 +143,9 @@ const en = {
   'schedule.keyTitle': 'KEY:',
   'schedule.key.pro': "PR: Pro's Only",
   'schedule.key.open': "OP: Open to All Members",
+  'schedule.filter.all': 'All Classes',
+  'schedule.filter.pro': 'Pro Only',
+  'schedule.filter.open': 'Open to All',
   'schedule.days.monday': 'Mon',
   'schedule.days.tuesday': 'Tue',
   'schedule.days.wednesday': 'Wed',
@@ -173,3 +177,4 @@ const en = {
 };
 
 export default en;
+```

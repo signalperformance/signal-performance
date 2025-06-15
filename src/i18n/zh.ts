@@ -1,4 +1,5 @@
 
+```
 const zh = {
   // Navigation
   'nav.home': '首頁',
@@ -141,6 +142,9 @@ const zh = {
   'schedule.keyTitle': '圖例說明：',
   'schedule.key.pro': "PR：僅限職業選手",
   'schedule.key.open': "OP：所有會員皆可參加",
+  'schedule.filter.all': '所有課程',
+  'schedule.filter.pro': '僅限職業',
+  'schedule.filter.open': '所有會員',
   'schedule.days.monday': '週一',
   'schedule.days.tuesday': '週二',
   'schedule.days.wednesday': '週三',
@@ -172,3 +176,4 @@ const zh = {
 };
 
 export default zh;
+```
