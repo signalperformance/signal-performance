@@ -1,3 +1,4 @@
+
 const zh = {
   // Navigation
   'nav.home': '首頁',
@@ -18,9 +19,10 @@ const zh = {
   'membership.price': '每月 NT$18,000',
   'membership.subtitle': '全方位訓練課程皆包含在內',
   'membership.physical.title': '體能訓練',
+  'membership.physical.frequency': '(每週4次)',
   'membership.physical.assessment': '每季表現評估',
   'membership.physical.assessment.description': '每季評估提供客觀數據，指導您的個人化訓練計劃。',
-  'membership.physical.coaching': '每週四次 1 對 3 體能訓練課程',
+  'membership.physical.coaching': '1 對 3 體能訓練課程',
   'membership.physical.coaching.description': '在半私人環境中進行完全符合您目標的訓練計畫。',
   'membership.physical.train': '自主訓練空間使用',
   'membership.physical.train.description': '在教練課程之外使用場館完成您的個人化訓練計畫：只需預約時間，開始訓練。',
@@ -28,14 +30,16 @@ const zh = {
   'membership.physical.app.description': '隨時隨地查看您的訓練計劃—在場館、出差或在家—讓您在任何地方都能保持一致的訓練。',
 
   'membership.mental.title': '心理訓練',
-  'membership.mental.coaching': '每月一次的 1 對 1 心理教練諮詢',
-  'membership.mental.coaching.description': '每月會面，透過專注於場上及場下表現的個人化指導，強化您的心理素質。',
+  'membership.mental.frequency': '(每月1次)',
+  'membership.mental.coaching': '1 對 1 心理教練諮詢',
+  'membership.mental.coaching.description': '個人化心理指導，專注於場上及場下的表現。',
   'membership.mental.plan': '系統化心理訓練計畫',
   'membership.mental.plan.description': '依循個人化計劃，透過有針對性的練習在課程間隔建立心理技能。',
   'membership.mental.toolkit': '居家練習工具包（含心率監測器與訓練 APP）',
   'membership.mental.toolkit.description': '獲得心率監測器與專屬訓練 APP，練習課程中學到的技能，並在課程之間追蹤進度。',
 
   'membership.golf.title': '高爾夫訓練',
+  'membership.golf.frequency': '(每月1次)',
   'membership.golf.skillassessment': '技術評估',
   'membership.golf.skillassessment.description': '全面評估，測試您比賽的各個環節並長期追蹤進度。',
   'membership.golf.simulator': '模擬器使用時數：每月 5 小時',

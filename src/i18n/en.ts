@@ -1,3 +1,4 @@
+
 const en = {
   // Navigation
   'nav.home': 'Home',
@@ -18,9 +19,10 @@ const en = {
   'membership.price': 'NT$18,000/month',
   'membership.subtitle': 'All-inclusive membership.',
   'membership.physical.title': 'Physical Training',
+  'membership.physical.frequency': '(4x/week)',
   'membership.physical.assessment': 'Quarterly Performance Assessments',
   'membership.physical.assessment.description': 'Quarterly assessments provide objective data to guide your individualized training plan.',
-  'membership.physical.coaching': '1-on-3 Fitness Coaching (4x/week)',
+  'membership.physical.coaching': '1-on-3 Fitness Coaching',
   'membership.physical.coaching.description': 'Train in a semi-private setting with a fully personalized program aligned with your goals.',
   'membership.physical.train': 'Train On Your Own',
   'membership.physical.train.description': 'Use the facility outside of coached sessions to complete your personalized program—just book your time and get to work.',
@@ -28,14 +30,16 @@ const en = {
   'membership.physical.app.description': 'Access your program anytime — in the facility, on the road, or at home — so you can train consistently anywhere.',
 
   'membership.mental.title': 'Mental Training',
-  'membership.mental.coaching': '1-on-1 Mental Coaching (1x/Month)',
-  'membership.mental.coaching.description': 'Meet monthly to strengthen your mental game with personalized guidance focused on performance — both on and off the course.',
+  'membership.mental.frequency': '(1x/month)',
+  'membership.mental.coaching': '1-on-1 Mental Coaching',
+  'membership.mental.coaching.description': 'Personalized mental coaching focused on performance — on and off the course.',
   'membership.mental.plan': 'Structured Mental Training Plan',
   'membership.mental.plan.description': 'Follow a personalized plan with targeted exercises to build mental skills between sessions.',
   'membership.mental.toolkit': 'Home Practice Toolkit',
   'membership.mental.toolkit.description': 'Receive a heart rate monitor and mobile app to practice skills learned in coaching sessions and track progress between sessions.',
 
   'membership.golf.title': 'Golf Training',
+  'membership.golf.frequency': '(1x/month)',
   'membership.golf.skillassessment': 'Skill Assessment',
   'membership.golf.skillassessment.description': 'Comprehensive evaluation that tests all parts of your game and tracks progress over time.',
   'membership.golf.simulator': 'Simulator Access (5 hrs/month)',

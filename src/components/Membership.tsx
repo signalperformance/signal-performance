@@ -8,6 +8,7 @@ const Membership = () => {
   const categories = {
     physical: {
       title: t('membership.physical.title'),
+      frequency: t('membership.physical.frequency'),
       items: [
         {
           title: t('membership.physical.coaching'),
@@ -17,6 +18,7 @@ const Membership = () => {
     },
     mental: {
       title: t('membership.mental.title'),
+      frequency: t('membership.mental.frequency'),
       items: [{
         title: t('membership.mental.coaching'),
         description: t('membership.mental.coaching.description')
@@ -24,6 +26,7 @@ const Membership = () => {
     },
     golf: {
       title: t('membership.golf.title'),
+      frequency: t('membership.golf.frequency'),
       items: [{
         title: t('membership.golf.skillassessment'),
         description: t('membership.golf.skillassessment.description')
@@ -67,9 +70,12 @@ const Membership = () => {
                       className="w-3 h-3 rounded-full mr-3 flex-shrink-0"
                       style={{ backgroundColor: getCategoryColor(key) }}
                     ></div>
-                    <h3 className="text-xl md:text-2xl font-lora font-medium text-foreground">
-                      {category.title}
-                    </h3>
+                    <div className="flex-grow">
+                      <h3 className="text-xl md:text-2xl font-lora font-medium text-foreground">
+                        {category.title}
+                      </h3>
+                      <p className="text-sm text-muted-foreground">{category.frequency}</p>
+                    </div>
                   </div>
 
                   <div>
