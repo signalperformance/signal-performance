@@ -1,18 +1,20 @@
 
-import { useEffect } from "react";
+import { useEffect, Suspense, lazy } from "react";
 import { useLoadingState } from "@/hooks/useLoadingState";
 import LoadingScreen from "@/components/LoadingScreen";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import About from "@/components/About";
-import Membership from "@/components/Membership";
-import AssessmentProcess from "@/components/AssessmentProcess";
-import GettingStarted from "@/components/GettingStarted";
-import Philosophy from "@/components/Philosophy";
-import WhoItsFor from "@/components/WhoItsFor";
-import WeeklySchedule from "@/components/WeeklySchedule";
-import Footer from "@/components/Footer";
-import WaitlistDialog from "@/components/WaitlistDialog";
+
+// Lazy-loaded components
+const About = lazy(() => import("@/components/About"));
+const Membership = lazy(() => import("@/components/Membership"));
+const AssessmentProcess = lazy(() => import("@/components/AssessmentProcess"));
+const GettingStarted = lazy(() => import("@/components/GettingStarted"));
+const Philosophy = lazy(() => import("@/components/Philosophy"));
+const WhoItsFor = lazy(() => import("@/components/WhoItsFor"));
+const WeeklySchedule = lazy(() => import("@/components/WeeklySchedule"));
+const Footer = lazy(() => import("@/components/Footer"));
+const WaitlistDialog = lazy(() => import("@/components/WaitlistDialog"));
 
 const Index = () => {
   const { isLoading, completeLoading } = useLoadingState();
@@ -29,15 +31,17 @@ const Index = () => {
     <div className="min-h-screen flex flex-col animate-fade-in">
       <Navbar />
       <Hero />
-      <Philosophy />
-      <WhoItsFor />
-      <AssessmentProcess />
-      <Membership />
-      <WeeklySchedule />
-      <GettingStarted />
-      <About />
-      <WaitlistDialog />
-      <Footer />
+      <Suspense fallback={null}>
+        <Philosophy />
+        <WhoItsFor />
+        <AssessmentProcess />
+        <Membership />
+        <WeeklySchedule />
+        <GettingStarted />
+        <About />
+        <WaitlistDialog />
+        <Footer />
+      </Suspense>
     </div>
   );
 };
