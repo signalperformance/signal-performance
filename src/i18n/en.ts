@@ -37,6 +37,8 @@ const en = {
   'membership.mental.toolkit.description': 'Receive a heart rate monitor and mobile app to practice skills learned in coaching sessions and track progress between sessions.',
 
   'membership.golf.title': 'Golf Training',
+  'membership.golf.skillassessment': 'Golf Skill Assessment (1x/month)',
+  'membership.golf.skillassessment.description': 'Track progress with a structured simulator-based evaluation.',
   'membership.golf.simulator': 'Simulator Access (5 hrs/month)',
   'membership.golf.simulator.description': 'Train with state-of-the-art technology — anytime that fits your schedule.',
   'membership.golf.putting': 'Putting Green Access (2 hrs/month)',

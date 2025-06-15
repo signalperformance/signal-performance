@@ -37,6 +37,8 @@ const zh = {
   'membership.mental.toolkit.description': '獲得心率監測器與專屬訓練 APP，練習課程中學到的技能，並在課程之間追蹤進度。',
 
   'membership.golf.title': '高爾夫訓練',
+  'membership.golf.skillassessment': '高爾夫技能評估（每月一次）',
+  'membership.golf.skillassessment.description': '透過模擬器進行結構化評估，追蹤進步成果。',
   'membership.golf.simulator': '模擬器使用時數：每月 5 小時',
   'membership.golf.simulator.description': '使用最先進的技術進行訓練，依您的時間表彈性安排。',
   'membership.golf.putting': '推桿果嶺使用時間：每月 2 小時',
