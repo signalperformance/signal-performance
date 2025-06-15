@@ -54,9 +54,7 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
       });
       promises.push(vantaPromise);
 
-      // Minimum loading time for smooth experience
-      const minLoadTime = new Promise(resolve => setTimeout(resolve, 2000));
-      promises.push(minLoadTime);
+      // Minimum loading time removed for performance optimization
 
       try {
         await Promise.all(promises);
@@ -93,7 +91,7 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
         </div>
         
         {/* Company name */}
-        <h1 className="text-2xl md:text-3xl font-playfair font-bold text-signal-charcoal mt-4 animate-fade-in">
+        <h1 className="text-2xl md:text-3xl font-lora font-bold text-signal-charcoal mt-4 animate-fade-in">
           Signal Performance
         </h1>
         
