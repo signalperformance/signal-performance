@@ -158,7 +158,7 @@ const en = {
   'whoitsfor.for.title': '✅ This is for you if you…',
   'whoitsfor.for.item1': 'Want a structured, data-driven plan — no guessing, just clarity',
   'whoitsfor.for.item2': 'Value accountability and want to track your progress',
-  'whoitsfor.for.item3': 'Are ready to invest your time and train consistently each week',
+  'whoitsfor.for.item3': 'Are ready to train consistently each week',
   'whoitsfor.for.item4': 'Are willing to invest financially in your long-term development',
   'whoitsfor.notfor.title': '❌ This is not for you if you…',
   'whoitsfor.notfor.item1': 'Prefer to train without a clear plan or measurable goals',
