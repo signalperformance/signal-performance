@@ -163,7 +163,7 @@ const zh = {
   'whoitsfor.notfor.title': '如果您符合以下條件，這裡可能不適合您...',
   'whoitsfor.notfor.item1': '訓練沒有計畫或明確目標',
   'whoitsfor.notfor.item2': '逃避責任或進度追蹤',
-  'whoitsfor.notfor.item3': '無法承諾每週訓練',
+  'whoitsfor.notfor.item3': '無法每週固定參與訓練',
   'whoitsfor.notfor.item4': '只在乎最低價格',
 };
 
