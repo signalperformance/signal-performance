@@ -158,7 +158,7 @@ const zh = {
   'whoitsfor.for.title': '如果您符合以下條件，這裡適合您...',
   'whoitsfor.for.item1': '想要一個清晰、數據導向的計畫',
   'whoitsfor.for.item2': '重視責任感與進度追蹤',
-  'whoitsfor.for.item3': '承諾每週訓練',
+  'whoitsfor.for.item3': '願意每週固定參與訓練課程',
   'whoitsfor.for.item4': '準備好為長期成長進行投資',
   'whoitsfor.notfor.title': '如果您符合以下條件，這裡可能不適合您...',
   'whoitsfor.notfor.item1': '訓練沒有計畫或明確目標',
