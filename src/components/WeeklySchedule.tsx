@@ -43,10 +43,6 @@ const WeeklySchedule = () => {
     label: t('schedule.days.sunday')
   }];
   const timeSlots: TimeSlotItem[] = [{
-    id: 'ts-8',
-    hour24: 8,
-    label: `8 ${t('schedule.timePeriods.am')}`
-  }, {
     id: 'ts-9',
     hour24: 9,
     label: `9 ${t('schedule.timePeriods.am')}`
@@ -90,10 +86,6 @@ const WeeklySchedule = () => {
     id: 'ts-19',
     hour24: 19,
     label: `7 ${t('schedule.timePeriods.pm')}`
-  }, {
-    id: 'ts-20',
-    hour24: 20,
-    label: `8 ${t('schedule.timePeriods.pm')}`
   }];
   const getClassForSlot = (dayKey: DayKey, hour24: number) => {
     return filteredSchedule.find(entry => entry.dayKey === dayKey && entry.hour24 === hour24);
