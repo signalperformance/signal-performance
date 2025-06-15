@@ -1,4 +1,3 @@
-
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import React from 'react';
@@ -39,7 +38,6 @@ const GettingStarted = () => {
                     <p className="text-3xl font-bold text-white mb-2">
                         {t('gettingstarted.assessmentPackage.price')}
                     </p>
-                    <p className="text-xs text-muted-foreground">{t('gettingstarted.assessmentPackage.description')}</p>
                 </CardContent>
             </Card>
           </div>
@@ -49,27 +47,27 @@ const GettingStarted = () => {
             <div className="hidden md:block absolute left-0 right-0 top-8 z-0 h-0.5 bg-gradient-to-r from-signal-gold/50 via-gray-300 to-signal-gold/50"></div>
 
             {/* Desktop package annotation */}
-            <div className="hidden md:block absolute -top-28 left-0 w-3/4">
-              <div className="relative flex flex-col items-center">
-                <div className="w-2/3">
-                  <div className="w-full h-12 border-b-2 border-l-2 border-r-2 border-signal-charcoal rounded-b-xl"></div>
+            <div className="hidden md:block absolute -top-20 left-0 w-3/4">
+                <div className="relative flex flex-col items-center">
+                    {/* The bracket line */}
+                    <div className="w-full h-12 border-t-2 border-l-2 border-r-2 border-signal-charcoal rounded-t-xl" />
+                    
+                    {/* The card, centered and sitting on top of the line */}
+                    <div className="absolute top-0 -translate-y-1/2">
+                        <Card className="bg-signal-charcoal text-white border-signal-gold/50 shadow-xl w-full max-w-[220px]">
+                            <CardHeader className="p-3 text-center">
+                                <CardTitle className="text-base text-signal-gold font-semibold">
+                                    {t('gettingstarted.assessmentPackage.title')}
+                                </CardTitle>
+                            </CardHeader>
+                            <CardContent className="p-3 pt-0 text-center">
+                                <p className="text-2xl font-bold text-white">
+                                    {t('gettingstarted.assessmentPackage.price')}
+                                </p>
+                            </CardContent>
+                        </Card>
+                    </div>
                 </div>
-                <div className="relative -mt-10 z-10">
-                  <Card className="bg-signal-charcoal text-white border-signal-gold/50 shadow-xl w-full max-w-[220px]">
-                      <CardHeader className="p-3 text-center">
-                          <CardTitle className="text-base text-signal-gold font-semibold">
-                              {t('gettingstarted.assessmentPackage.title')}
-                          </CardTitle>
-                      </CardHeader>
-                      <CardContent className="p-3 pt-0 text-center">
-                          <p className="text-2xl font-bold text-white">
-                              {t('gettingstarted.assessmentPackage.price')}
-                          </p>
-                      </CardContent>
-                  </Card>
-                </div>
-                <p className="text-center text-sm text-muted-foreground mt-2">{t('gettingstarted.assessmentPackage.description')}</p>
-              </div>
             </div>
 
             {steps.map((step, index) => (
@@ -86,4 +84,3 @@ const GettingStarted = () => {
     </section>;
 };
 export default GettingStarted;
-
