@@ -129,7 +129,7 @@ const zh = {
   'gettingstarted.step2.subtitle': '討論評估結果並制定訓練計劃',
   'gettingstarted.step3.title': '私人教練課程',
   'gettingstarted.step3.subtitle': '三堂一對一課程學習基礎技能',
-  'gettingstarted.step4.title': '開始每月訓練計劃',
+  'gettingstarted.step4.title': '每月訓練計劃',
   'gettingstarted.step4.subtitle': '每週訓練，並進行每月評估追蹤',
   'gettingstarted.assessmentPackage.title': '評估套裝',
   'gettingstarted.assessmentPackage.price': 'NT$12,000',

@@ -138,6 +138,9 @@ const GettingStarted = () => {
               </div>
             </div>
 
+            {/* Vertical line for Monthly Program */}
+            <div className="absolute w-[3px] bg-signal-charcoal z-20 top-[20px] h-[85px] left-[87.5%] transform -translate-x-1/2" />
+
             <div className="flex justify-between items-start relative">
               {steps.map((step, index) => (
                 <div key={step.title} className="relative z-20 flex flex-col items-center text-center flex-1 group px-2">
