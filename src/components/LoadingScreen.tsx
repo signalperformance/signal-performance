@@ -54,9 +54,9 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
       });
       promises.push(vantaPromise);
 
-      // REMOVED: Minimum loading time for smoother experience
-      // const minLoadTime = new Promise(resolve => setTimeout(resolve, 2000));
-      // promises.push(minLoadTime);
+      // Minimum loading time for smooth experience
+      const minLoadTime = new Promise(resolve => setTimeout(resolve, 2000));
+      promises.push(minLoadTime);
 
       try {
         await Promise.all(promises);
@@ -109,4 +109,3 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
 };
 
 export default LoadingScreen;
-
