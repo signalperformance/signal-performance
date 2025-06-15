@@ -33,8 +33,9 @@ const GettingStarted = () => {
 
         <div className="relative">
           {/* Mobile view */}
-          <div className="md:hidden">
-            <div className="flex justify-center mb-12">
+          <div className="md:hidden flex flex-col items-center">
+            {/* Assessment Package Card */}
+            <div className="mb-4">
               <Card className="bg-signal-charcoal text-white border-signal-gold/50 shadow-xl w-full max-w-[280px] sm:max-w-xs text-center">
                   <CardHeader className="p-4">
                       <CardTitle className="text-xl text-signal-gold">
@@ -48,17 +49,40 @@ const GettingStarted = () => {
                   </CardContent>
               </Card>
             </div>
-            <div className="flex flex-col items-center gap-y-12">
-              {steps.map((step, index) => (
-                <div key={step.title} className="flex flex-col items-center text-center w-full max-w-xs">
-                  <div className="flex items-center justify-center w-16 h-16 mb-4 bg-signal-gold rounded-full shadow-lg">
-                    <span className="text-2xl font-bold text-signal-white">{index + 1}</span>
+            
+            {/* Connector line */}
+            <div className="h-8 w-px bg-gray-300" />
+
+            {/* Grouped Steps 1-3 */}
+            <div className="w-full max-w-xs bg-muted/50 rounded-xl p-6 border-2 border-dashed border-signal-gold/50">
+              <div className="flex flex-col items-center gap-y-10">
+                {steps.slice(0, 3).map((step, index) => (
+                  <div key={step.title} className="flex flex-col items-center text-center w-full">
+                    <div className="flex items-center justify-center w-16 h-16 mb-4 bg-signal-gold rounded-full shadow-lg">
+                      <span className="text-2xl font-bold text-signal-white">{index + 1}</span>
+                    </div>
+                    <h3 className="text-lg font-semibold text-signal-charcoal px-2">{step.title}</h3>
+                    <p className="text-muted-foreground text-sm mt-1 px-4">{step.subtitle}</p>
                   </div>
-                  <h3 className="text-lg font-semibold text-signal-charcoal px-2">{step.title}</h3>
-                  <p className="text-muted-foreground text-sm mt-1 px-4">{step.subtitle}</p>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
+            
+            {/* Connector line */}
+            <div className="h-8 w-px bg-gray-300 my-4" />
+
+            {/* Step 4 */}
+            {steps[3] && (
+              <div className="flex flex-col items-center text-center w-full max-w-xs">
+                <div key={steps[3].title} className="w-full">
+                  <div className="flex items-center justify-center w-16 h-16 mb-4 bg-signal-gold rounded-full shadow-lg mx-auto">
+                    <span className="text-2xl font-bold text-signal-white">{4}</span>
+                  </div>
+                  <h3 className="text-lg font-semibold text-signal-charcoal px-2">{steps[3].title}</h3>
+                  <p className="text-muted-foreground text-sm mt-1 px-4">{steps[3].subtitle}</p>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Desktop view */}
