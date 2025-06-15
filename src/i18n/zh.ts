@@ -1,4 +1,3 @@
-
 const zh = {
   // Navigation
   'nav.home': '首頁',
@@ -154,21 +153,17 @@ const zh = {
 
   // Who It's For
   'whoitsfor.title': '我們的服務對象',
-  'whoitsfor.subtitle': 'Signal Performance 專為致力於長期進步，而非尋求短期解決方案的認真高爾夫球手而設。如果左側的原則與您相符，您將是我們的理想人選；如果右側的原則更符合您的情況，則可能不太適合。',
-  'whoitsfor.for.title': '如果您符合以下條件，這裡適合您...',
-  'whoitsfor.for.item1': '想要系統化的訓練方法——沒有猜測，只有清晰的結構',
-  'whoitsfor.for.item2': '重視一致性、責任感和可衡量的進步',
-  'whoitsfor.for.item3': '以專業態度對待您的健康、體能和表現',
-  'whoitsfor.for.item4': '願意每週投入時間進行訓練、反思和成長',
-  'whoitsfor.for.item5': '希望成為志同道合、互相激勵的社群一員',
-  'whoitsfor.for.item6': '對於教練指導、回饋和高標準持開放態度',
-  'whoitsfor.notfor.title': '如果您符合以下條件，這裡可能不適合您...',
-  'whoitsfor.notfor.item1': '正在尋找快速見效的方法或神奇妙方',
-  'whoitsfor.notfor.item2': '喜歡沒有明確計畫或目標的訓練方式',
-  'whoitsfor.notfor.item3': '將體能訓練視為嗜好，而非提升表現的工具',
-  'whoitsfor.notfor.item4': '無法承諾每週固定參與訓練課程',
-  'whoitsfor.notfor.item5': '偏好單獨訓練，不想參與社群互動',
-  'whoitsfor.notfor.item6': '不願意接受建設性回饋或教練指導',
+  'whoitsfor.subtitle': '在 Signal Performance，我們並非適合所有人——這是刻意為之的。\n我們專為準備好投入、接受挑戰並尋求成長的高爾夫球手而設。',
+  'whoitsfor.for.title': '✅ 如果您符合以下條件，這裡適合您...',
+  'whoitsfor.for.item1': '想要一個有結構、數據導向的計畫——沒有猜測，只有清晰',
+  'whoitsfor.for.item2': '重視責任感並希望追踪進度',
+  'whoitsfor.for.item3': '準備好投入時間並每週持續訓練',
+  'whoitsfor.for.item4': '願意為您的長期發展進行財務投資',
+  'whoitsfor.notfor.title': '❌ 如果您符合以下條件，這裡可能不適合您...',
+  'whoitsfor.notfor.item1': '偏好沒有明確計畫或可衡量目標的訓練',
+  'whoitsfor.notfor.item2': '不想被追究責任或追踪進度',
+  'whoitsfor.notfor.item3': '難以承諾每週的訓練課程',
+  'whoitsfor.notfor.item4': '只尋找最便宜的選擇',
 };
 
 export default zh;

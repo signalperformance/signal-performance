@@ -11,8 +11,6 @@ const WhoItsFor = () => {
     'whoitsfor.for.item2',
     'whoitsfor.for.item3',
     'whoitsfor.for.item4',
-    'whoitsfor.for.item5',
-    'whoitsfor.for.item6',
   ];
 
   const notForItems = [
@@ -20,15 +18,13 @@ const WhoItsFor = () => {
     'whoitsfor.notfor.item2',
     'whoitsfor.notfor.item3',
     'whoitsfor.notfor.item4',
-    'whoitsfor.notfor.item5',
-    'whoitsfor.notfor.item6',
   ];
 
   return (
     <section id="who-its-for" className="section-padding bg-background">
       <div className="container mx-auto container-padding text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-4 font-lora text-signal-charcoal">{t('whoitsfor.title')}</h2>
-        <p className="max-w-4xl mx-auto text-lg text-muted-foreground mb-12">{t('whoitsfor.subtitle')}</p>
+        <p className="max-w-4xl mx-auto text-lg text-muted-foreground mb-12 whitespace-pre-line">{t('whoitsfor.subtitle')}</p>
         
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* "For You" Column */}
