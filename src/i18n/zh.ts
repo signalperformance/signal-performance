@@ -154,7 +154,7 @@ const zh = {
 
   // Who It's For
   'whoitsfor.title': '我們的理想會員',
-  'whoitsfor.subtitle': '在 Signal Performance，我們並非適合所有人——這是刻意為之的。',
+  'whoitsfor.subtitle': '在 Signal Performance，我們並非適合所有人，這是我們刻意的選擇。',
   'whoitsfor.for.title': '如果您符合以下條件，這裡適合您...',
   'whoitsfor.for.item1': '想要一個清晰、數據導向的計畫',
   'whoitsfor.for.item2': '重視責任感與進度追蹤',
