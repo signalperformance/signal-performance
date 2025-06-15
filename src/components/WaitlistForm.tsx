@@ -1,7 +1,6 @@
 
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@/components/ui/button';
 import {
@@ -17,24 +16,15 @@ import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/components/ui/use-toast';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { supabase } from '@/integrations/supabase/client';
-
-const formSchema = z.object({
-  name: z.string().min(2, { message: "Name must be at least 2 characters." }),
-  email: z.string().email({ message: "Please enter a valid email address." }),
-  phone: z.string().min(5, { message: "Please enter a valid phone number." }),
-  handicap: z.string(),
-  goals: z.string(),
-});
-
-type FormValues = z.infer<typeof formSchema>;
+import { waitlistFormSchema, WaitlistFormValues } from '@/lib/validations/waitlist';
 
 const WaitlistForm = () => {
   const { t } = useLanguage();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   
-  const form = useForm<FormValues>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<WaitlistFormValues>({
+    resolver: zodResolver(waitlistFormSchema),
     defaultValues: {
       name: "",
       email: "",
@@ -44,7 +34,7 @@ const WaitlistForm = () => {
     },
   });
 
-  const onSubmit = async (data: FormValues) => {
+  const onSubmit = async (data: WaitlistFormValues) => {
     setIsSubmitting(true);
     
     try {

@@ -1,7 +1,6 @@
 
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@/components/ui/button';
 import {
@@ -25,14 +24,8 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { ArrowRight } from 'lucide-react';
 import { useWaitlistDialog } from '@/hooks/useWaitlistDialog';
 import { supabase } from '@/integrations/supabase/client';
+import { waitlistDialogSchema, WaitlistDialogValues } from '@/lib/validations/waitlist';
 
-const formSchema = z.object({
-  name: z.string().min(2, { message: "Name must be at least 2 characters." }),
-  email: z.string().email({ message: "Please enter a valid email address." }),
-  phone: z.string().min(5, { message: "Please enter a valid phone number." }),
-});
-
-type FormValues = z.infer<typeof formSchema>;
 
 const WaitlistDialog = () => {
   const { t } = useLanguage();
@@ -66,8 +59,8 @@ const WaitlistDialog = () => {
     };
   }, []);
   
-  const form = useForm<FormValues>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<WaitlistDialogValues>({
+    resolver: zodResolver(waitlistDialogSchema),
     defaultValues: {
       name: "",
       email: "",
@@ -75,7 +68,7 @@ const WaitlistDialog = () => {
     },
   });
 
-  const onSubmit = async (data: FormValues) => {
+  const onSubmit = async (data: WaitlistDialogValues) => {
     setIsSubmitting(true);
     
     try {
