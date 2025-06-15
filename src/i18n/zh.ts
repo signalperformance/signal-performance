@@ -41,7 +41,7 @@ const zh = {
   'membership.golf.title': '高爾夫訓練',
   'membership.golf.frequency': '(每月1次)',
   'membership.golf.skillassessment': '技術評估',
-  'membership.golf.skillassessment.description': '全面評估，測試您比賽的各個環節並長期追蹤進度。',
+  'membership.golf.skillassessment.description': '全面性的高爾夫能力評估，檢測整體球技並持續追蹤進步。',
   'membership.golf.simulator': '模擬器使用時數：每月 5 小時',
   'membership.golf.simulator.description': '使用最先進的技術進行訓練，依您的時間表彈性安排。',
   'membership.golf.putting': '推桿果嶺使用時間：每月 2 小時',
