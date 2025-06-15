@@ -1,4 +1,3 @@
-
 const zh = {
   // Navigation
   'nav.home': '首頁',
@@ -21,7 +20,7 @@ const zh = {
   'membership.physical.title': '體能訓練',
   'membership.physical.assessment': '每季表現評估',
   'membership.physical.assessment.description': '每季評估提供客觀數據，指導您的個人化訓練計劃。',
-  'membership.physical.coaching': '每週三次 1 對 2 體能訓練課程',
+  'membership.physical.coaching': '每週四次 1 對 3 體能訓練課程',
   'membership.physical.coaching.description': '在半私人環境中進行完全符合您目標的訓練計畫。',
   'membership.physical.train': '自主訓練空間使用',
   'membership.physical.train.description': '在教練課程之外使用場館完成您的個人化訓練計畫：只需預約時間，開始訓練。',
@@ -30,19 +29,18 @@ const zh = {
 
   'membership.mental.title': '心理訓練',
   'membership.mental.coaching': '每月一次的 1 對 1 心理教練諮詢',
-  'membership.mental.coaching.description': '與認證心理績效顧問會面，進行針對場上場下表現提升的個人化課程。',
+  'membership.mental.coaching.description': '每月會面，透過專注於場上及場下表現的個人化指導，強化您的心理素質。',
   'membership.mental.plan': '系統化心理訓練計畫',
   'membership.mental.plan.description': '依循個人化計劃，透過有針對性的練習在課程間隔建立心理技能。',
   'membership.mental.toolkit': '居家練習工具包（含心率監測器與訓練 APP）',
   'membership.mental.toolkit.description': '獲得心率監測器與專屬訓練 APP，練習課程中學到的技能，並在課程之間追蹤進度。',
 
   'membership.golf.title': '高爾夫訓練',
-  'membership.golf.skillassessment': '高爾夫技能評估（每月一次）',
-  'membership.golf.skillassessment.description': '透過模擬器進行結構化評估，追蹤進步成果。',
+  'membership.golf.skillassessment': '技術評估',
+  'membership.golf.skillassessment.description': '全面評估，測試您比賽的各個環節並長期追蹤進度。',
   'membership.golf.simulator': '模擬器使用時數：每月 5 小時',
   'membership.golf.simulator.description': '使用最先進的技術進行訓練，依您的時間表彈性安排。',
   'membership.golf.putting': '推桿果嶺使用時間：每月 2 小時',
-  'membership.golf.putting.description': '使用尖端工具提升技術與對準，自主安排練習時間。',
   'membership.golf.tracking': '比賽數據分析',
   'membership.golf.tracking.description': '所有會員皆可使用數據分析軟體，使我們能夠深入了解您的比賽表現，並依此調整訓練重點。',
   'membership.golf.fitting': '球桿調整站',

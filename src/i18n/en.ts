@@ -1,4 +1,3 @@
-
 const en = {
   // Navigation
   'nav.home': 'Home',
@@ -21,7 +20,7 @@ const en = {
   'membership.physical.title': 'Physical Training',
   'membership.physical.assessment': 'Quarterly Performance Assessments',
   'membership.physical.assessment.description': 'Quarterly assessments provide objective data to guide your individualized training plan.',
-  'membership.physical.coaching': '1-on-2 Fitness Coaching (3x/Week)',
+  'membership.physical.coaching': '1-on-3 Fitness Coaching (4x/week)',
   'membership.physical.coaching.description': 'Train in a semi-private setting with a fully personalized program aligned with your goals.',
   'membership.physical.train': 'Train On Your Own',
   'membership.physical.train.description': 'Use the facility outside of coached sessions to complete your personalized program—just book your time and get to work.',
@@ -30,15 +29,15 @@ const en = {
 
   'membership.mental.title': 'Mental Training',
   'membership.mental.coaching': '1-on-1 Mental Coaching (1x/Month)',
-  'membership.mental.coaching.description': 'Meet with a certified mental performance consultant for personalized sessions to enhance performance on and off the course.',
+  'membership.mental.coaching.description': 'Meet monthly to strengthen your mental game with personalized guidance focused on performance — both on and off the course.',
   'membership.mental.plan': 'Structured Mental Training Plan',
   'membership.mental.plan.description': 'Follow a personalized plan with targeted exercises to build mental skills between sessions.',
   'membership.mental.toolkit': 'Home Practice Toolkit',
   'membership.mental.toolkit.description': 'Receive a heart rate monitor and mobile app to practice skills learned in coaching sessions and track progress between sessions.',
 
   'membership.golf.title': 'Golf Training',
-  'membership.golf.skillassessment': 'Golf Skill Assessment (1x/month)',
-  'membership.golf.skillassessment.description': 'Track progress with a structured simulator-based evaluation.',
+  'membership.golf.skillassessment': 'Skill Assessment',
+  'membership.golf.skillassessment.description': 'Comprehensive evaluation that tests all parts of your game and tracks progress over time.',
   'membership.golf.simulator': 'Simulator Access (5 hrs/month)',
   'membership.golf.simulator.description': 'Train with state-of-the-art technology — anytime that fits your schedule.',
   'membership.golf.putting': 'Putting Green Access (2 hrs/month)',
