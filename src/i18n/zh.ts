@@ -1,4 +1,3 @@
-
 const zh = {
   // Navigation
   'nav.home': '首頁',
@@ -124,6 +123,9 @@ const zh = {
   'gettingstarted.step2.title': '審查結果',
   'gettingstarted.step3.title': '完成 3 次一對一教練課程',
   'gettingstarted.step4.title': '開始月度計畫',
+  'gettingstarted.assessmentPackage.title': '評估套組',
+  'gettingstarted.assessmentPackage.price': 'NT$12,000',
+  'gettingstarted.assessmentPackage.description': '包含步驟 1-3，為您打造個人化表現計畫的基礎。',
 
   // Schedule
   'schedule.title': '每週訓練課表',
@@ -146,4 +148,5 @@ const zh = {
   'schedule.classes.power': '爆發力',
   'schedule.disclaimer': '時間表可能隨時更動，請與工作人員確認。',
 };
+
 export default zh;

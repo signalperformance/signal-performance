@@ -1,4 +1,3 @@
-
 const en = {
   // Navigation
   'nav.home': 'Home',
@@ -124,6 +123,9 @@ const en = {
   'gettingstarted.step2.title': 'Review Results',
   'gettingstarted.step3.title': 'Complete 3x 1-on-1 Coaching Sessions',
   'gettingstarted.step4.title': 'Start Monthly Program',
+  'gettingstarted.assessmentPackage.title': 'Assessment Package',
+  'gettingstarted.assessmentPackage.price': 'NT$12,000',
+  'gettingstarted.assessmentPackage.description': 'Includes Steps 1-3, your foundation for a personalized performance plan.',
 
   // Schedule
   'schedule.title': 'Weekly Training Schedule',
