@@ -121,7 +121,7 @@ const zh = {
   'gettingstarted.title': '如何開始',
   'gettingstarted.subtitle': '我們的流程簡單而有效，從初步評估開始，逐步引導您進入每月持續訓練。',
   'gettingstarted.step1.title': '完成評估',
-  'gettingstarted.step1.subtitle': '透過五項專業測評建立您的基礎數據',
+  'gettingstarted.step1.subtitle': '透過五項測評建立基礎數據',
   'gettingstarted.step2.title': '回顧結果',
   'gettingstarted.step2.subtitle': '討論評估結果並制定訓練計劃',
   'gettingstarted.step3.title': '私人教練課程',
