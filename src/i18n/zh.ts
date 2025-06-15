@@ -155,16 +155,16 @@ const zh = {
   // Who It's For
   'whoitsfor.title': '我們的服務對象',
   'whoitsfor.subtitle': '在 Signal Performance，我們並非適合所有人——這是刻意為之的。',
-  'whoitsfor.for.title': '✅ 如果您符合以下條件，這裡適合您...',
-  'whoitsfor.for.item1': '想要一個有結構、數據導向的計畫——沒有猜測，只有清晰',
-  'whoitsfor.for.item2': '重視責任感並希望追踪進度',
-  'whoitsfor.for.item3': '準備好每週持續訓練',
-  'whoitsfor.for.item4': '願意為您的長期發展進行財務投資',
-  'whoitsfor.notfor.title': '❌ 如果您符合以下條件，這裡可能不適合您...',
-  'whoitsfor.notfor.item1': '偏好沒有明確計畫或可衡量目標的訓練',
-  'whoitsfor.notfor.item2': '不想被追究責任或追踪進度',
-  'whoitsfor.notfor.item3': '難以承諾每週的訓練課程',
-  'whoitsfor.notfor.item4': '只尋找最便宜的選擇',
+  'whoitsfor.for.title': '如果您符合以下條件，這裡適合您...',
+  'whoitsfor.for.item1': '想要一個清晰、數據導向的計畫',
+  'whoitsfor.for.item2': '重視責任感與進度追蹤',
+  'whoitsfor.for.item3': '承諾每週訓練',
+  'whoitsfor.for.item4': '準備好為長期成長進行投資',
+  'whoitsfor.notfor.title': '如果您符合以下條件，這裡可能不適合您...',
+  'whoitsfor.notfor.item1': '訓練沒有計畫或明確目標',
+  'whoitsfor.notfor.item2': '逃避責任或進度追蹤',
+  'whoitsfor.notfor.item3': '無法承諾每週訓練',
+  'whoitsfor.notfor.item4': '只在乎最低價格',
 };
 
 export default zh;

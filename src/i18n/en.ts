@@ -155,16 +155,16 @@ const en = {
   // Who It's For
   'whoitsfor.title': 'Who It’s For',
   'whoitsfor.subtitle': 'At Signal Performance, we’re not for everyone — and that’s intentional.',
-  'whoitsfor.for.title': '✅ This is for you if you…',
-  'whoitsfor.for.item1': 'Want a structured, data-driven plan — no guessing, just clarity',
-  'whoitsfor.for.item2': 'Value accountability and want to track your progress',
-  'whoitsfor.for.item3': 'Are ready to train consistently each week',
-  'whoitsfor.for.item4': 'Are willing to invest financially in your long-term development',
-  'whoitsfor.notfor.title': '❌ This is not for you if you…',
-  'whoitsfor.notfor.item1': 'Prefer to train without a clear plan or measurable goals',
-  'whoitsfor.notfor.item2': 'Don’t want to be held accountable or track progress',
-  'whoitsfor.notfor.item3': 'Struggle to commit to weekly training sessions',
-  'whoitsfor.notfor.item4': 'Are only looking for the cheapest option',
+  'whoitsfor.for.title': 'This is for you if you…',
+  'whoitsfor.for.item1': 'Want a clear, data-driven plan',
+  'whoitsfor.for.item2': 'Value accountability and progress tracking',
+  'whoitsfor.for.item3': 'Commit to weekly training',
+  'whoitsfor.for.item4': 'Are ready to invest in long-term growth',
+  'whoitsfor.notfor.title': 'This is not for you if you…',
+  'whoitsfor.notfor.item1': 'Train without a plan or clear goals',
+  'whoitsfor.notfor.item2': 'Avoid accountability or tracking',
+  'whoitsfor.notfor.item3': 'Can’t commit weekly',
+  'whoitsfor.notfor.item4': 'Only care about the lowest price',
 };
 
 export default en;
