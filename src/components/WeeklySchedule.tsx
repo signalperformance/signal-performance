@@ -3,7 +3,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { cn } from '@/lib/utils';
 import { scheduleData } from '@/data/scheduleData';
 import { ScheduleEntry, TimeSlotItem, DayKey } from '@/data/scheduleTypes';
-import { Button } from '@/components/ui/button';
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 
 type FilterType = 'all' | 'pro' | 'amateur';
 
@@ -119,6 +119,8 @@ const WeeklySchedule = () => {
     name: t('schedule.key.open'),
     style: cn('bg-gray-600')
   }];
+  const toggleItemClasses = "rounded-full text-signal-charcoal border-signal-charcoal data-[state=on]:bg-primary data-[state=on]:text-primary-foreground data-[state=on]:border-primary data-[state=on]:hover:bg-primary/90";
+
   return <section id="schedule" className="section-padding text-signal-light-gray bg-signal-white">
       <div className="container mx-auto container-padding">
         <h2 className="text-3xl md:text-4xl font-bold mb-2 text-center font-lora text-signal-black">{t('schedule.title')}</h2>
@@ -126,32 +128,39 @@ const WeeklySchedule = () => {
           {t('schedule.subtitle')}
         </p>
 
-        <div className="flex justify-center items-center gap-2 mb-6 flex-wrap">
-          <Button
+        <ToggleGroup
+          type="single"
+          value={filter}
+          onValueChange={(value: FilterType) => {
+            if (value) setFilter(value);
+          }}
+          className="flex justify-center items-center gap-2 mb-6 flex-wrap"
+        >
+          <ToggleGroupItem
+            value="all"
             size="sm"
-            variant={filter === 'all' ? 'default' : 'outline'}
-            onClick={() => setFilter('all')}
-            className="rounded-full"
+            variant="outline"
+            className={toggleItemClasses}
           >
             {t('schedule.filter.all')}
-          </Button>
-          <Button
+          </ToggleGroupItem>
+          <ToggleGroupItem
+            value="pro"
             size="sm"
-            variant={filter === 'pro' ? 'default' : 'outline'}
-            onClick={() => setFilter('pro')}
-            className="rounded-full"
+            variant="outline"
+            className={toggleItemClasses}
           >
             {t('schedule.filter.pro')}
-          </Button>
-          <Button
+          </ToggleGroupItem>
+          <ToggleGroupItem
+            value="amateur"
             size="sm"
-            variant={filter === 'amateur' ? 'default' : 'outline'}
-            onClick={() => setFilter('amateur')}
-            className="rounded-full"
+            variant="outline"
+            className={toggleItemClasses}
           >
             {t('schedule.filter.open')}
-          </Button>
-        </div>
+          </ToggleGroupItem>
+        </ToggleGroup>
         
         <div className="overflow-x-auto">
           <div className="grid grid-cols-[auto_repeat(7,minmax(55px,1fr))] gap-px bg-gray-700 border border-gray-700 rounded-lg min-w-[600px] md:min-w-full">
