@@ -167,11 +167,11 @@ const zh = {
   'whoitsfor.for.item2': '重視責任感與進度追蹤',
   'whoitsfor.for.item3': '願意每週固定參與訓練',
   'whoitsfor.for.item4': '願意為高品質訓練進行投資',
-  'whoitsfor.notfor.title': '出現以下情況，這裡不適合您…',
-  'whoitsfor.notfor.item1': '訓練沒有計畫或明確目標',
+  'whoitsfor.notfor.title': '如果您有以下情況，這裡可能不太適合您…',
+  'whoitsfor.notfor.item1': '偏好沒有明確目標或架構的訓練',
   'whoitsfor.notfor.item2': '逃避責任或進度追蹤',
-  'whoitsfor.notfor.item3': '無法每週固定參與訓練',
-  'whoitsfor.notfor.item4': '只在乎最低價格',
+  'whoitsfor.notfor.item3': '無法承諾持續規律地訓練',
+  'whoitsfor.notfor.item4': '只專注於尋找最便宜的選項',
 };
 
 export default zh;

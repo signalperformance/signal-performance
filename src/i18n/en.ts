@@ -168,11 +168,11 @@ const en = {
   'whoitsfor.for.item2': 'Value accountability and progress tracking',
   'whoitsfor.for.item3': 'Commit to weekly training',
   'whoitsfor.for.item4': 'Want to invest in high-quality training',
-  'whoitsfor.notfor.title': 'This is not for you if you…',
-  'whoitsfor.notfor.item1': 'Train without a plan or clear goals',
+  'whoitsfor.notfor.title': 'This might not be the right fit if you…',
+  'whoitsfor.notfor.item1': 'Prefer to train without clear goals or structure',
   'whoitsfor.notfor.item2': 'Avoid accountability or progress tracking',
-  'whoitsfor.notfor.item3': 'Can’t commit to weekly training',
-  'whoitsfor.notfor.item4': 'Only care about the lowest price',
+  'whoitsfor.notfor.item3': 'Can’t commit to training consistently',
+  'whoitsfor.notfor.item4': 'Focus only on finding the cheapest option',
 };
 
 export default en;
