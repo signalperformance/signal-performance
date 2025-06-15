@@ -162,16 +162,17 @@ const zh = {
   // Who It's For
   'whoitsfor.title': '我們的理想會員',
   'whoitsfor.subtitle': '在 Signal Performance，我們並非適合所有人，這是我們刻意的選擇。',
-  'whoitsfor.for.title': '如果您符合以下條件，這裡會非常適合您',
-  'whoitsfor.for.item1': '想要一個數據導向的計畫',
+  'whoitsfor.for.title': '你會很適合這裡，如果你…',
+  'whoitsfor.for.item1': '想要一個以數據為基礎的訓練計劃',
   'whoitsfor.for.item2': '重視責任感與進度追蹤',
-  'whoitsfor.for.item3': '願意每週固定參與訓練',
-  'whoitsfor.for.item4': '願意為高品質訓練進行投資',
-  'whoitsfor.notfor.title': '如果您符合以下條件，這裡可能不太適合您',
-  'whoitsfor.notfor.item1': '偏好沒有明確目標或架構的訓練',
-  'whoitsfor.notfor.item2': '逃避責任或進度追蹤',
-  'whoitsfor.notfor.item3': '無法承諾持續規律地訓練',
-  'whoitsfor.notfor.item4': '只專注於尋找最便宜的選項',
+  'whoitsfor.for.item3': '能每週穩定參加訓練',
+  'whoitsfor.for.item4': '願意投資高品質的訓練',
+  'whoitsfor.notfor.title': '這裡可能不太適合你，如果你…',
+  'whoitsfor.notfor.item1': '偏好無目標或結構的訓練',
+  'whoitsfor.notfor.item2': '逃避責任或不追蹤進度',
+  'whoitsfor.notfor.item3': '無法穩定參與訓練',
+  'whoitsfor.notfor.item4': '只在乎找最便宜的選項',
 };
 
 export default zh;
+
