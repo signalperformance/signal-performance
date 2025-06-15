@@ -1,5 +1,3 @@
-
-```
 const zh = {
   // Navigation
   'nav.home': '首頁',
@@ -176,4 +174,3 @@ const zh = {
 };
 
 export default zh;
-```

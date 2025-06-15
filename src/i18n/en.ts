@@ -1,5 +1,3 @@
-
-```
 const en = {
   // Navigation
   'nav.home': 'Home',
@@ -177,4 +175,3 @@ const en = {
 };
 
 export default en;
-```

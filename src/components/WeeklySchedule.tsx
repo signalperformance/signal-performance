@@ -1,5 +1,3 @@
-
-```
 import React, { useState, useMemo } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { cn } from '@/lib/utils';
@@ -199,4 +197,3 @@ const WeeklySchedule = () => {
     </section>;
 };
 export default WeeklySchedule;
-```
