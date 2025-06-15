@@ -62,20 +62,20 @@ const GettingStarted = () => {
           </div>
 
           {/* Desktop view */}
-          <div className="hidden md:block relative" style={{ paddingTop: '80px' }}>
+          <div className="hidden md:block relative pt-20">
             {/* The gray connecting line for all circles */}
-            <div className="absolute h-0.5 bg-gray-300 z-10" style={{ top: 'calc(80px + 32px)', left: '12.5%', right: '12.5%' }}></div>
+            <div className="absolute h-0.5 bg-gray-300 z-10 top-[105px] left-[12.5%] right-[12.5%]" />
 
             {/* Assessment package bracket and box */}
             {/* Horizontal line */}
-            <div className="absolute h-[3px] bg-signal-charcoal z-20" style={{ top: '60px', left: '12.5%', width: '50%' }}></div>
+            <div className="absolute h-[3px] bg-signal-charcoal z-20 top-[20px] left-[12.5%] w-1/2" />
             {/* Vertical line left */}
-            <div className="absolute w-[3px] bg-signal-charcoal z-20" style={{ top: '60px', height: 'calc(80px + 32px - 60px)', left: '12.5%' }}></div>
+            <div className="absolute w-[3px] bg-signal-charcoal z-20 top-[20px] h-[85px] left-[12.5%]" />
             {/* Vertical line right */}
-            <div className="absolute w-[3px] bg-signal-charcoal z-20" style={{ top: '60px', height: 'calc(80px + 32px - 60px)', left: '62.5%' }}></div>
+            <div className="absolute w-[3px] bg-signal-charcoal z-20 top-[20px] h-[85px] left-[62.5%]" />
 
             {/* The package box */}
-            <div className="absolute z-30" style={{ top: '60px', left: '37.5%', transform: 'translate(-50%, -50%)' }}>
+            <div className="absolute z-30 top-[20px] left-[37.5%] transform -translate-x-1/2 -translate-y-1/2">
               <div className="bg-signal-charcoal text-white border border-signal-gold/50 shadow-xl rounded-md px-4 py-2 text-center whitespace-nowrap">
                 <p className="text-base text-signal-gold font-semibold">
                   {t('gettingstarted.assessmentPackage.title')}
@@ -89,8 +89,10 @@ const GettingStarted = () => {
             <div className="flex justify-between items-start relative">
               {steps.map((step, index) => (
                 <div key={step.title} className="relative z-20 flex flex-col items-center text-center flex-1 group px-2">
-                  <div className="flex items-center justify-center w-16 h-16 mb-4 bg-signal-gold rounded-full shadow-lg border-4 border-background transition-transform group-hover:scale-105">
-                    <span className="text-2xl font-bold text-signal-white">{index + 1}</span>
+                  <div className="flex items-center justify-center w-16 h-16 mb-6 bg-background rounded-full shadow-lg border-4 border-background transition-transform group-hover:scale-105">
+                    <div className="flex items-center justify-center w-full h-full bg-signal-gold rounded-full text-2xl font-bold text-signal-white">
+                      {index + 1}
+                    </div>
                   </div>
                   <h3 className="text-lg font-semibold text-signal-charcoal">{step.title}</h3>
                   <p className="text-sm text-muted-foreground mt-2 max-w-[200px]">{step.subtitle}</p>
