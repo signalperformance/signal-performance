@@ -1,4 +1,3 @@
-
 const en = {
   // Navigation
   'nav.home': 'Home',
@@ -120,10 +119,10 @@ const en = {
   // Getting Started
   'gettingstarted.title': 'How To Get Started',
   'gettingstarted.subtitle': 'Our process is designed to be simple and effective, guiding you from initial assessment to ongoing monthly training.',
-  'gettingstarted.step1.title': 'Book Assessment',
-  'gettingstarted.step1.subtitle': 'Choose a time that fits your schedule',
+  'gettingstarted.step1.title': 'Complete Assessment',
+  'gettingstarted.step1.subtitle': 'Establish your baseline with a five-part evaluation',
   'gettingstarted.step2.title': 'Review Results',
-  'gettingstarted.step2.subtitle': 'Establish your baseline and build your training plan',
+  'gettingstarted.step2.subtitle': 'Discuss results and build training plan',
   'gettingstarted.step3.title': 'Private Coaching',
   'gettingstarted.step3.subtitle': 'Learn foundational skills in three private coaching sessions',
   'gettingstarted.step4.title': 'Start Monthly Program',

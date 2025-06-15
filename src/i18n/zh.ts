@@ -119,10 +119,10 @@ const zh = {
   // Getting Started
   'gettingstarted.title': '如何開始',
   'gettingstarted.subtitle': '我們的流程設計簡單而有效，引導您從初步評估到持續的月度訓練。',
-  'gettingstarted.step1.title': '預約評估',
-  'gettingstarted.step1.subtitle': '選擇符合您行程的時間',
+  'gettingstarted.step1.title': '完成評估',
+  'gettingstarted.step1.subtitle': '透過五個部分的評估建立您的基準線',
   'gettingstarted.step2.title': '審查結果',
-  'gettingstarted.step2.subtitle': '建立您的基準線並制定訓練計畫',
+  'gettingstarted.step2.subtitle': '討論結果並建立訓練計畫',
   'gettingstarted.step3.title': '一對一教練課程',
   'gettingstarted.step3.subtitle': '在三次一對一教練課程中學習基礎技能',
   'gettingstarted.step4.title': '開始月度計畫',
