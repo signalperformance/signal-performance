@@ -153,13 +153,21 @@ const en = {
 
   // Who It's For
   'whoitsfor.title': 'Who It’s For',
-  'whoitsfor.subtitle': 'Signal Performance is built for serious golfers who are committed to long-term improvement — not just quick fixes. You’re a great fit if you:',
-  'whoitsfor.item1': 'Want a systematic approach to training — no guesswork, just clear structure',
-  'whoitsfor.item2': 'Value consistency, accountability, and measurable progress',
-  'whoitsfor.item3': 'Treat your health, fitness, and performance like a professional',
-  'whoitsfor.item4': 'Are willing to invest time each week to train, reflect, and grow',
-  'whoitsfor.item5': 'Want to be part of a like-minded community that pushes each other',
-  'whoitsfor.item6': 'Are open to coaching, feedback, and high standards',
+  'whoitsfor.subtitle': 'Signal Performance is built for serious golfers who are committed to long-term improvement — not just quick fixes. Our members are a great fit if they align with the principles on the left, and likely not a fit if they align with the principles on the right.',
+  'whoitsfor.for.title': 'This is for you if you...',
+  'whoitsfor.for.item1': 'Want a systematic approach to training — no guesswork, just clear structure',
+  'whoitsfor.for.item2': 'Value consistency, accountability, and measurable progress',
+  'whoitsfor.for.item3': 'Treat your health, fitness, and performance like a professional',
+  'whoitsfor.for.item4': 'Are willing to invest time each week to train, reflect, and grow',
+  'whoitsfor.for.item5': 'Want to be part of a like-minded community that pushes each other',
+  'whoitsfor.for.item6': 'Are open to coaching, feedback, and high standards',
+  'whoitsfor.notfor.title': 'This is not for you if you...',
+  'whoitsfor.notfor.item1': 'Are looking for a quick fix or a magic bullet',
+  'whoitsfor.notfor.item2': 'Prefer to train without a clear plan or goals',
+  'whoitsfor.notfor.item3': 'See fitness as a hobby rather than a performance tool',
+  'whoitsfor.notfor.item4': 'Are not able to commit to regular weekly sessions',
+  'whoitsfor.notfor.item5': 'Prefer to train alone and avoid a community setting',
+  'whoitsfor.notfor.item6': 'Are not open to constructive feedback or being coached',
 };
 
 export default en;
