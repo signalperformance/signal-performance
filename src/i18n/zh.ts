@@ -153,7 +153,7 @@ const zh = {
   'schedule.disclaimer': '時間表可能隨時更動，請與工作人員確認。',
 
   // Who It's For
-  'whoitsfor.title': '我們的服務對象',
+  'whoitsfor.title': '我們的理想會員',
   'whoitsfor.subtitle': '在 Signal Performance，我們並非適合所有人——這是刻意為之的。',
   'whoitsfor.for.title': '如果您符合以下條件，這裡適合您...',
   'whoitsfor.for.item1': '想要一個清晰、數據導向的計畫',

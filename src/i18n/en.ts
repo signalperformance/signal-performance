@@ -153,7 +153,7 @@ const en = {
   'schedule.disclaimer': 'Schedule subject to change. Please confirm with staff.',
 
   // Who It's For
-  'whoitsfor.title': 'Who It’s For',
+  'whoitsfor.title': 'Our Ideal Member',
   'whoitsfor.subtitle': 'At Signal Performance, we’re not for everyone — and that’s intentional.',
   'whoitsfor.for.title': 'This is for you if you…',
   'whoitsfor.for.item1': 'Want a clear, data-driven plan',
