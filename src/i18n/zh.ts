@@ -1,4 +1,3 @@
-
 const zh = {
   // Navigation
   'nav.home': '首頁',
@@ -55,7 +54,7 @@ const zh = {
 
   // Assessment Process
   'assessment.title': '我們的評估流程',
-  'assessment.description': '每季進行一次完整評估，涵蓋五大核心面向，確保訓練方向正確、有效，並持續朝表現目標邁進。',
+  'assessment.description': '每季進行五大核心評估，確保訓練有效並持續進步。',
 
   'assessment.joint.title': '關節健康',
   'assessment.joint.description': '評估每個主要關節的主動與被動活動範圍，找出動作受限的根本原因。這些資料將用來調整訓練計畫，降低受傷風險並維持長期關節健康。所有變化都會被紀錄與追蹤，持續優化訓練方向。',
