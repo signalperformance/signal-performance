@@ -1,5 +1,7 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
+
 const Membership = () => {
   const {
     t
@@ -30,23 +32,21 @@ const Membership = () => {
       }]
     }
   };
-  const getCategoryColor = (key: string) => {
-    switch (key) {
-      case 'physical':
-        return '#3b82f6';
-      // blue-500
-      case 'mental':
-        return '#ef4444';
-      // red-500
-      case 'golf':
-        return '#22c55e';
-      // green-500
-      case 'other':
-        return '#a855f7';
-      // purple-500
-      default:
-        return '#6b7280';
-      // gray-500
+  const categoryStyles = {
+    physical: {
+      bg: 'bg-signal-physical-light',
+      border: 'border-signal-physical',
+      text: 'text-signal-physical'
+    },
+    mental: {
+      bg: 'bg-signal-mental-light',
+      border: 'border-signal-mental',
+      text: 'text-signal-mental'
+    },
+    golf: {
+      bg: 'bg-signal-golf-light',
+      border: 'border-signal-golf',
+      text: 'text-signal-golf'
     }
   };
   return <section id="membership" className="section-padding bg-signal-light-gray">
@@ -61,19 +61,20 @@ const Membership = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {Object.entries(categories).map(([key, category]) => {
           const item = category.items[0];
-          return <Card key={key} className="bg-white shadow-lg rounded-xl overflow-hidden flex flex-col">
-                <CardContent className="p-6 md:p-8 flex-grow"> {/* Use p-6 for mobile, p-8 for desktop */}
+          const styles = categoryStyles[key as keyof typeof categoryStyles];
+          return <Card key={key} className={cn("shadow-lg rounded-xl overflow-hidden flex flex-col transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border-l-4", styles.bg, styles.border)}>
+                <CardContent className="p-6 md:p-8 flex-grow flex flex-col">
                   <div className="flex items-center mb-6">
                      
                     <div className="flex-grow">
                       <h3 className="text-xl md:text-2xl font-lora font-medium text-foreground">
                         {category.title}
                       </h3>
-                      <p className="text-sm text-muted-foreground">{category.frequency}</p>
+                      <p className={cn("text-sm font-semibold", styles.text)}>{category.frequency}</p>
                     </div>
                   </div>
 
-                  <div>
+                  <div className="flex-grow">
                     <h4 className="font-medium text-base md:text-lg">{item.title}</h4>
                     <p className="text-muted-foreground text-sm mt-1">
                       {item.description}
