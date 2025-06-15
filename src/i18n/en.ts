@@ -1,3 +1,4 @@
+
 const en = {
   // Navigation
   'nav.home': 'Home',
@@ -119,13 +120,16 @@ const en = {
   // Getting Started
   'gettingstarted.title': 'How To Get Started',
   'gettingstarted.subtitle': 'Our process is designed to be simple and effective, guiding you from initial assessment to ongoing monthly training.',
-  'gettingstarted.step1.title': 'Schedule Assessment',
+  'gettingstarted.step1.title': 'Book Assessment',
+  'gettingstarted.step1.subtitle': 'Choose a time that fits your schedule',
   'gettingstarted.step2.title': 'Review Results',
-  'gettingstarted.step3.title': 'Complete 3x 1-on-1 Coaching Sessions',
+  'gettingstarted.step2.subtitle': 'Establish your baseline and build your training plan',
+  'gettingstarted.step3.title': 'Private Coaching',
+  'gettingstarted.step3.subtitle': 'Learn foundational skills in three private coaching sessions',
   'gettingstarted.step4.title': 'Start Monthly Program',
+  'gettingstarted.step4.subtitle': 'Train weekly, and assess monthly.',
   'gettingstarted.assessmentPackage.title': 'Assessment Package',
   'gettingstarted.assessmentPackage.price': 'NT$12,000',
-  'gettingstarted.assessmentPackage.description': 'Includes Steps 1-3, your foundation for a personalized performance plan.',
 
   // Schedule
   'schedule.title': 'Weekly Training Schedule',

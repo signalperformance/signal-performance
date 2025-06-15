@@ -119,13 +119,16 @@ const zh = {
   // Getting Started
   'gettingstarted.title': '如何開始',
   'gettingstarted.subtitle': '我們的流程設計簡單而有效，引導您從初步評估到持續的月度訓練。',
-  'gettingstarted.step1.title': '安排評估',
+  'gettingstarted.step1.title': '預約評估',
+  'gettingstarted.step1.subtitle': '選擇符合您行程的時間',
   'gettingstarted.step2.title': '審查結果',
-  'gettingstarted.step3.title': '完成 3 次一對一教練課程',
+  'gettingstarted.step2.subtitle': '建立您的基準線並制定訓練計畫',
+  'gettingstarted.step3.title': '一對一教練課程',
+  'gettingstarted.step3.subtitle': '在三次一對一教練課程中學習基礎技能',
   'gettingstarted.step4.title': '開始月度計畫',
+  'gettingstarted.step4.subtitle': '每週訓練，每月評估。',
   'gettingstarted.assessmentPackage.title': '評估套組',
   'gettingstarted.assessmentPackage.price': 'NT$12,000',
-  'gettingstarted.assessmentPackage.description': '包含步驟 1-3，為您打造個人化表現計畫的基礎。',
 
   // Schedule
   'schedule.title': '每週訓練課表',
