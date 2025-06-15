@@ -130,7 +130,7 @@ const en = {
   'gettingstarted.step2.subtitle': 'Discuss results and build training plan',
   'gettingstarted.step3.title': 'Private Coaching',
   'gettingstarted.step3.subtitle': 'Learn foundational skills in three private coaching sessions',
-  'gettingstarted.step4.title': 'Start Monthly Program',
+  'gettingstarted.step4.title': 'Monthly Program',
   'gettingstarted.step4.subtitle': 'Train weekly, and assess monthly.',
   'gettingstarted.assessmentPackage.title': 'Assessment Package',
   'gettingstarted.assessmentPackage.price': 'NT$12,000',
