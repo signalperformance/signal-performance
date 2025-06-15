@@ -151,6 +151,16 @@ const zh = {
   'schedule.classes.cardio': '心肺',
   'schedule.classes.power': '爆發力',
   'schedule.disclaimer': '時間表可能隨時更動，請與工作人員確認。',
+
+  // Who It's For
+  'whoitsfor.title': '我們的服務對象',
+  'whoitsfor.subtitle': 'Signal Performance 專為致力於長期進步，而非尋求短期解決方案的認真高爾夫球手而設。如果您符合以下條件，您就是我們的理想人選：',
+  'whoitsfor.item1': '想要系統化的訓練方法——沒有猜測，只有清晰的結構',
+  'whoitsfor.item2': '重視一致性、責任感和可衡量的進步',
+  'whoitsfor.item3': '以專業態度對待您的健康、體能和表現',
+  'whoitsfor.item4': '願意每週投入時間進行訓練、反思和成長',
+  'whoitsfor.item5': '希望成為志同道合、互相激勵的社群一員',
+  'whoitsfor.item6': '對於教練指導、回饋和高標準持開放態度',
 };
 
 export default zh;

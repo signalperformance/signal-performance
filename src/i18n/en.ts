@@ -150,6 +150,16 @@ const en = {
   'schedule.classes.cardio': 'Cardio',
   'schedule.classes.power': 'Power',
   'schedule.disclaimer': 'Schedule subject to change. Please confirm with staff.',
+
+  // Who It's For
+  'whoitsfor.title': 'Who It’s For',
+  'whoitsfor.subtitle': 'Signal Performance is built for serious golfers who are committed to long-term improvement — not just quick fixes. You’re a great fit if you:',
+  'whoitsfor.item1': 'Want a systematic approach to training — no guesswork, just clear structure',
+  'whoitsfor.item2': 'Value consistency, accountability, and measurable progress',
+  'whoitsfor.item3': 'Treat your health, fitness, and performance like a professional',
+  'whoitsfor.item4': 'Are willing to invest time each week to train, reflect, and grow',
+  'whoitsfor.item5': 'Want to be part of a like-minded community that pushes each other',
+  'whoitsfor.item6': 'Are open to coaching, feedback, and high standards',
 };
 
 export default en;

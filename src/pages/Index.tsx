@@ -9,6 +9,7 @@ import Membership from "@/components/Membership";
 import AssessmentProcess from "@/components/AssessmentProcess";
 import GettingStarted from "@/components/GettingStarted";
 import Philosophy from "@/components/Philosophy";
+import WhoItsFor from "@/components/WhoItsFor";
 import WeeklySchedule from "@/components/WeeklySchedule";
 import Footer from "@/components/Footer";
 import WaitlistDialog from "@/components/WaitlistDialog";
@@ -29,6 +30,7 @@ const Index = () => {
       <Navbar />
       <Hero />
       <Philosophy />
+      <WhoItsFor />
       <AssessmentProcess />
       <Membership />
       <WeeklySchedule />
