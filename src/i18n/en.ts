@@ -162,8 +162,8 @@ const en = {
   'whoitsfor.for.item4': 'Are ready to invest in long-term growth',
   'whoitsfor.notfor.title': 'This is not for you if you…',
   'whoitsfor.notfor.item1': 'Train without a plan or clear goals',
-  'whoitsfor.notfor.item2': 'Avoid accountability or tracking',
-  'whoitsfor.notfor.item3': 'Can’t commit weekly',
+  'whoitsfor.notfor.item2': 'Avoid accountability or progress tracking',
+  'whoitsfor.notfor.item3': 'Can’t commit to weekly training',
   'whoitsfor.notfor.item4': 'Only care about the lowest price',
 };
 
