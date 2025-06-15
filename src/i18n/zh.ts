@@ -1,3 +1,4 @@
+
 const zh = {
   // Navigation
   'nav.home': '首頁',
@@ -161,11 +162,11 @@ const zh = {
   // Who It's For
   'whoitsfor.title': '我們的理想會員',
   'whoitsfor.subtitle': '在 Signal Performance，我們並非適合所有人，這是我們刻意的選擇。',
-  'whoitsfor.for.title': '具備以下特質，這裡適合您…',
-  'whoitsfor.for.item1': '想要一個清晰、數據導向的計畫',
+  'whoitsfor.for.title': '如果您具備以下特質，這裡就是您的最佳選擇…',
+  'whoitsfor.for.item1': '想要一個數據導向的計畫',
   'whoitsfor.for.item2': '重視責任感與進度追蹤',
-  'whoitsfor.for.item3': '願意每週固定參與訓練課程',
-  'whoitsfor.for.item4': '準備好為長期成長進行投資',
+  'whoitsfor.for.item3': '願意每週固定參與訓練',
+  'whoitsfor.for.item4': '願意為高品質訓練進行投資',
   'whoitsfor.notfor.title': '出現以下情況，這裡不適合您…',
   'whoitsfor.notfor.item1': '訓練沒有計畫或明確目標',
   'whoitsfor.notfor.item2': '逃避責任或進度追蹤',
