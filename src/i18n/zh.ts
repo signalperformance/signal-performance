@@ -1,4 +1,3 @@
-
 const zh = {
   // Navigation
   'nav.home': '首頁',
@@ -52,7 +51,7 @@ const zh = {
 
   'membership.report.title': '表現報告',
   'membership.report.frequency': '(每月1次)',
-  'membership.report.description': '每月總結您在體能、心理與高爾夫訓練的進步情況—提供個人化回饋與建議。',
+  'membership.report.description': '每月報告總結各方面的進展，並提供個人化回饋。',
 
   // Facility
   'membership.facility.title': '空間特色',

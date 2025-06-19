@@ -1,4 +1,3 @@
-
 const en = {
   // Navigation
   'nav.home': 'Home',
@@ -53,7 +52,7 @@ const en = {
 
   'membership.report.title': 'Performance Report',
   'membership.report.frequency': '(1x/month)',
-  'membership.report.description': 'Monthly report summarizing your progress across fitness, mental, and golf training — with personalized feedback and recommendations.',
+  'membership.report.description': 'Monthly report summarizing progress across all areas with personalized feedback.',
 
   // Facility
   'membership.facility.title': 'Facility Features',
