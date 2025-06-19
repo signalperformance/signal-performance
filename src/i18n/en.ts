@@ -1,3 +1,4 @@
+
 const en = {
   // Navigation
   'nav.home': 'Home',
@@ -51,6 +52,7 @@ const en = {
   'membership.golf.fitting.description': 'Access in-house tools to measure loft, lie, and other club specs — make data-informed equipment adjustments for peak performance.',
 
   'membership.report.title': 'Performance Report',
+  'membership.report.frequency': '(1x/month)',
   'membership.report.description': 'Monthly report summarizing your progress across fitness, mental, and golf training — with personalized feedback and recommendations.',
 
   // Facility

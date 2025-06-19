@@ -1,4 +1,3 @@
-
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
@@ -96,6 +95,7 @@ const Membership = () => {
                     <h3 className="text-xl md:text-2xl font-lora font-medium text-foreground">
                       {t('membership.report.title')}
                     </h3>
+                    <p className="text-sm font-semibold text-gray-600">{t('membership.report.frequency')}</p>
                   </div>
                 </div>
 

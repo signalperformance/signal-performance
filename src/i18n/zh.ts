@@ -1,3 +1,4 @@
+
 const zh = {
   // Navigation
   'nav.home': '首頁',
@@ -50,6 +51,7 @@ const zh = {
   'membership.golf.fitting.description': '使用專業設備測量桿面仰角、桿身傾角及其他規格，進行依據數據的調整，優化球桿設定以提升表現。',
 
   'membership.report.title': '表現報告',
+  'membership.report.frequency': '(每月1次)',
   'membership.report.description': '每月總結您在體能、心理與高爾夫訓練的進步情況—提供個人化回饋與建議。',
 
   // Facility
