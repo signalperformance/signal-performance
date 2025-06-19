@@ -1,4 +1,3 @@
-
 const en = {
   // Navigation
   'nav.home': 'Home',
@@ -50,6 +49,9 @@ const en = {
   'membership.golf.tracking.description': 'All members receive access to golf stat tracking software, allowing us to monitor your competitive performance and adjust your training focus accordingly.',
   'membership.golf.fitting': 'Club Fitting Station',
   'membership.golf.fitting.description': 'Access in-house tools to measure loft, lie, and other club specs — make data-informed equipment adjustments for peak performance.',
+
+  'membership.report.title': 'Performance Report',
+  'membership.report.description': 'Monthly report summarizing your progress across fitness, mental, and golf training — with personalized feedback and recommendations.',
 
   // Facility
   'membership.facility.title': 'Facility Features',

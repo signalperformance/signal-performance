@@ -1,3 +1,4 @@
+
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
@@ -58,7 +59,7 @@ const Membership = () => {
         </div>
 
         {/* Unified Grid Layout for all screen sizes */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-8">
           {Object.entries(categories).map(([key, category]) => {
           const item = category.items[0];
           const styles = categoryStyles[key as keyof typeof categoryStyles];
@@ -83,6 +84,29 @@ const Membership = () => {
                 </CardContent>
               </Card>;
         })}
+        </div>
+
+        {/* Performance Report Section */}
+        <div className="flex justify-center">
+          <div className="w-full md:w-1/3">
+            <Card className="shadow-lg rounded-xl overflow-hidden flex flex-col transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border-l-4 bg-gray-50 border-gray-400">
+              <CardContent className="p-6 md:p-8 flex-grow flex flex-col">
+                <div className="flex items-center mb-6">
+                  <div className="flex-grow">
+                    <h3 className="text-xl md:text-2xl font-lora font-medium text-foreground">
+                      {t('membership.report.title')}
+                    </h3>
+                  </div>
+                </div>
+
+                <div className="flex-grow">
+                  <p className="text-muted-foreground text-sm">
+                    {t('membership.report.description')}
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </div>
     </section>;
