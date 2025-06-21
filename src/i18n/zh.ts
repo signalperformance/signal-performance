@@ -8,7 +8,7 @@ const zh = {
   'nav.login': '會員登入',
 
   // Hero
-  'hero.headline': '高爾夫選手的整合式訓練空間',
+  'hero.headline': '高爾夫好手的整合式訓練空間',
   'hero.subheadline': '體能、心理與技術訓練集中於一個專業空間',
   'hero.cta.waitlist': '加入候補名單',
   'hero.cta.membership': '了解會員方案',
