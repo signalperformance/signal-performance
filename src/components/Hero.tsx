@@ -199,7 +199,7 @@ const Hero = () => {
 
   // Custom waitlist button text
   const getWaitlistButtonText = () => {
-    return language === 'zh' ? '預約評估' : 'Book Assessment';
+    return language === 'zh' ? '預約評估喔' : 'Book Assessment';
   };
 
   return (
@@ -234,15 +234,20 @@ const Hero = () => {
             {t('hero.cta.membership')}
           </Button>
           {/* Waitlist button with ID for tracking visibility - now links to LINE */}
-          <a 
+          <Button 
             id="hero-waitlist-button" 
-            href="https://lin.ee/CaWvRmo" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center font-medium border border-signal-charcoal/30 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg text-signal-white bg-signal-gold hover:bg-signal-gold hover:text-signal-white active:bg-signal-gold active:text-signal-white focus:bg-signal-gold focus:text-signal-white rounded-md transition-colors"
+            size="lg" 
+            asChild
+            className="font-medium px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg text-signal-white bg-signal-gold hover:bg-signal-gold/90 active:bg-signal-gold focus:bg-signal-gold"
           >
-            {getWaitlistButtonText()}
-          </a>
+            <a 
+              href="https://lin.ee/CaWvRmo" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              {getWaitlistButtonText()}
+            </a>
+          </Button>
         </div>
       </div>
     </section>
