@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -117,8 +118,8 @@ const WaitlistDialog = () => {
           <a href="https://lin.ee/CaWvRmo" target="_blank" rel="noopener noreferrer">
             <img 
               src="https://scdn.line-apps.com/n/line_add_friends/btn/zh-Hant.png" 
-              alt="加入好友" 
-              height="36" 
+              alt="預約評估" 
+              height="28" 
               className="shadow-lg hover:opacity-90 transition-opacity"
             />
           </a>
