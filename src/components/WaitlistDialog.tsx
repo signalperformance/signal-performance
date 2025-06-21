@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -21,7 +20,6 @@ import {
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { ArrowRight } from 'lucide-react';
 import { useWaitlistDialog } from '@/hooks/useWaitlistDialog';
 import { supabase } from '@/integrations/supabase/client';
 import { waitlistDialogSchema, WaitlistDialogValues } from '@/lib/validations/waitlist';
@@ -31,7 +29,7 @@ const WaitlistDialog = () => {
   const { t } = useLanguage();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { isOpen, closeWaitlist, openWaitlist } = useWaitlistDialog();
+  const { isOpen, closeWaitlist } = useWaitlistDialog();
   const [showFixedButton, setShowFixedButton] = useState(false);
   
   // Updated scroll event listener to check if the hero waitlist button is visible
@@ -113,16 +111,17 @@ const WaitlistDialog = () => {
 
   return (
     <>
-      {/* Fixed button at bottom right - only shown when hero waitlist button is not visible */}
+      {/* Fixed LINE add friend button at bottom right - only shown when hero waitlist button is not visible */}
       {showFixedButton && (
         <div className="fixed bottom-8 right-8 z-40">
-          <Button 
-            className="bg-signal-gold hover:bg-signal-gold/90 text-black font-semibold shadow-lg"
-            size="lg"
-            onClick={openWaitlist}
-          >
-            {t('nav.contact')} <ArrowRight className="ml-1 h-5 w-5" />
-          </Button>
+          <a href="https://lin.ee/CaWvRmo" target="_blank" rel="noopener noreferrer">
+            <img 
+              src="https://scdn.line-apps.com/n/line_add_friends/btn/zh-Hant.png" 
+              alt="加入好友" 
+              height="36" 
+              className="shadow-lg hover:opacity-90 transition-opacity"
+            />
+          </a>
         </div>
       )}
 
