@@ -60,7 +60,7 @@ const Hero = () => {
       
       {/* Content Card */}
       <div className="relative z-10 container mx-auto px-4 py-16 md:py-0">
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="max-w-6xl mx-auto text-center">
           {/* Modern card container with signal-charcoal background */}
           <div className="bg-signal-charcoal/95 backdrop-blur-sm rounded-2xl shadow-xl border border-signal-charcoal/60 p-8 md:p-12 lg:p-16">
             <h1 className={`font-bold mb-4 text-white leading-tight ${
