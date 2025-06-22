@@ -171,7 +171,7 @@ const Hero = () => {
       
       {/* Content Overlay */}
       <div className="relative z-10 container mx-auto px-4 text-center py-16 md:py-0">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-1 sm:mb-2 text-signal-charcoal max-w-6xl mx-auto leading-tight py-[35px]">
+        <h1 className="text-3xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-1 sm:mb-2 text-signal-charcoal max-w-8xl mx-auto leading-tight py-[35px]">
           {renderHeadline()}
         </h1>
         
