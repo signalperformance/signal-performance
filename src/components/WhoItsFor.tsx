@@ -18,7 +18,7 @@ const WhoItsFor = () => {
             <CardContent className="p-8 md:p-10">
               <div className="flex items-center mb-8">
                 
-                <h3 className="text-2xl md:text-3xl font-bold font-lora text-signal-charcoal group-hover:text-green-700 transition-colors duration-300">{t('whoitsfor.for.title')}</h3>
+                <h3 className="md:text-3xl font-bold font-lora text-signal-charcoal group-hover:text-green-700 transition-colors duration-300 text-lg">{t('whoitsfor.for.title')}</h3>
               </div>
               <ul className="space-y-6">
                 {forItems.map((itemKey, index) => <li key={itemKey} className="flex items-start group-hover:translate-x-2 transition-transform duration-300" style={{
@@ -36,7 +36,7 @@ const WhoItsFor = () => {
             <CardContent className="p-8 md:p-10">
               <div className="flex items-center mb-8">
                 
-                <h3 className="text-2xl md:text-3xl font-bold font-lora text-signal-charcoal group-hover:text-red-700 transition-colors duration-300">{t('whoitsfor.notfor.title')}</h3>
+                <h3 className="md:text-3xl font-bold font-lora text-signal-charcoal group-hover:text-red-700 transition-colors duration-300 text-lg">{t('whoitsfor.notfor.title')}</h3>
               </div>
               <ul className="space-y-6">
                 {notForItems.map((itemKey, index) => <li key={itemKey} className="flex items-start group-hover:translate-x-2 transition-transform duration-300" style={{
