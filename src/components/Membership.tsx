@@ -100,7 +100,7 @@ const Membership = () => {
                   </div>
 
                   <div className="flex-grow relative z-10">
-                    <h4 className="text-base md:text-lg mb-2 font-bold">{item.title}</h4>
+                    <h4 className="text-base mb-2 font-bold md:text-xl">{item.title}</h4>
                     <p className="text-muted-foreground text-sm">
                       {item.description}
                     </p>
