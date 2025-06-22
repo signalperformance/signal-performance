@@ -9,12 +9,13 @@ const FloatingAssessmentButton = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Get the hero section height (100svh)
+      // Get the hero section height (100svh) and calculate when buttons become invisible
       const heroHeight = window.innerHeight;
       const scrollPosition = window.scrollY;
       
-      // Show button when scrolled past hero section
-      setIsVisible(scrollPosition > heroHeight);
+      // Show button when scrolled past about 70% of hero section (when buttons start to disappear)
+      const triggerPoint = heroHeight * 0.7;
+      setIsVisible(scrollPosition > triggerPoint);
     };
 
     window.addEventListener('scroll', handleScroll);
