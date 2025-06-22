@@ -32,7 +32,7 @@ const en = {
   'membership.golf.skillassessment': 'Skill Assessment',
   'membership.golf.skillassessment.description': 'Comprehensive evaluation that tests all parts of your game and tracks progress over time.',
 
-  'membership.report.title': 'Other',
+  'membership.report.title': 'Progress Tracking',
   'membership.report.frequency': '1x/month',
   'membership.report.description': 'Monthly report summarizing progress across all areas with personalized feedback.',
 
