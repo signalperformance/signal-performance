@@ -1,7 +1,6 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-
 const Membership = () => {
   const {
     t
@@ -112,5 +111,4 @@ const Membership = () => {
       </div>
     </section>;
 };
-
 export default Membership;
