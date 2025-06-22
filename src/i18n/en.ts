@@ -1,3 +1,4 @@
+
 const en = {
   // Navigation
   'nav.home': 'Home',
@@ -12,6 +13,7 @@ const en = {
   'hero.subheadline': 'Physical, mental, and skill training — all in one place',
   'hero.cta.waitlist': 'Join the Waitlist',
   'hero.cta.membership': 'Explore Membership',
+  'hero.cta.assessment': 'Book Assessment',
 
   // Membership
   'membership.title': 'What\'s Included in Your Membership',
@@ -111,8 +113,6 @@ const en = {
   'waitlist.name': 'Full Name',
   'waitlist.email': 'Email Address',
   'waitlist.phone': 'Phone Number',
-  'waitlist.handicap': 'Current Handicap',
-  'waitlist.goals': 'Your Golf Goals',
   'waitlist.submit': 'Submit Application',
   'waitlist.success': 'Thank you for your interest! We will contact you soon.',
 
@@ -165,7 +165,7 @@ const en = {
 
   // Who It's For
   'whoitsfor.title': 'Our Ideal Member',
-  'whoitsfor.subtitle': 'At Signal Performance, we’re not for everyone — and that’s intentional.',
+  'whoitsfor.subtitle': 'At Signal Performance, we're not for everyone — and that's intentional.',
   'whoitsfor.for.title': "You're a great fit if you…",
   'whoitsfor.for.item1': 'Want a data-informed plan',
   'whoitsfor.for.item2': 'Value accountability and progress tracking',
@@ -174,8 +174,11 @@ const en = {
   'whoitsfor.notfor.title': 'This might not be the right fit if you…',
   'whoitsfor.notfor.item1': 'Prefer to train without clear goals or structure',
   'whoitsfor.notfor.item2': 'Avoid accountability or progress tracking',
-  'whoitsfor.notfor.item3': 'Can’t commit to training consistently',
+  'whoitsfor.notfor.item3': 'Can't commit to training consistently',
   'whoitsfor.notfor.item4': 'Focus only on finding the cheapest option',
+
+  // Errors
+  'errors.generic': 'Something went wrong. Please try again.',
 };
 
 export default en;

@@ -27,7 +27,7 @@ import { waitlistDialogSchema, WaitlistDialogValues } from '@/lib/validations/wa
 
 
 const WaitlistDialog = () => {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { isOpen, closeWaitlist } = useWaitlistDialog();
@@ -110,11 +110,6 @@ const WaitlistDialog = () => {
     }
   };
 
-  // Function to get Book Assessment button text based on language
-  const getBookAssessmentText = () => {
-    return language === 'zh' ? '預約評估' : 'Book Assessment';
-  };
-
   return (
     <>
       {/* Fixed Book Assessment button at bottom right - only shown when hero button is not visible */}
@@ -130,7 +125,7 @@ const WaitlistDialog = () => {
               target="_blank" 
               rel="noopener noreferrer"
             >
-              {getBookAssessmentText()}
+              {t('hero.cta.assessment')}
             </a>
           </Button>
         </div>

@@ -233,7 +233,7 @@ const Hero = () => {
           >
             {t('hero.cta.membership')}
           </Button>
-          {/* Waitlist button with ID for tracking visibility - now links to LINE */}
+          {/* Assessment button with ID for tracking visibility - now links to LINE */}
           <Button 
             id="hero-waitlist-button" 
             size="lg" 
@@ -245,7 +245,7 @@ const Hero = () => {
               target="_blank" 
               rel="noopener noreferrer"
             >
-              {getWaitlistButtonText()}
+              {t('hero.cta.assessment')}
             </a>
           </Button>
         </div>

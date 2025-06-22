@@ -1,3 +1,4 @@
+
 const zh = {
   // Navigation
   'nav.home': '首頁',
@@ -12,6 +13,7 @@ const zh = {
   'hero.subheadline': '體能、心理與技術訓練集中於一個專業空間',
   'hero.cta.waitlist': '加入候補名單',
   'hero.cta.membership': '了解會員方案',
+  'hero.cta.assessment': '預約評估',
 
   // Membership
   'membership.title': '會員專屬內容',
@@ -110,8 +112,6 @@ const zh = {
   'waitlist.name': '全名',
   'waitlist.email': '電子郵件',
   'waitlist.phone': '電話號碼',
-  'waitlist.handicap': '目前差點',
-  'waitlist.goals': '您的高爾夫目標',
   'waitlist.submit': '提交申請',
   'waitlist.success': '感謝您的興趣！我們將盡快與您聯繫。',
 
@@ -175,6 +175,9 @@ const zh = {
   'whoitsfor.notfor.item2': '逃避責任或不追蹤進度',
   'whoitsfor.notfor.item3': '無法穩定參與訓練',
   'whoitsfor.notfor.item4': '只在乎找最便宜的選項',
+
+  // Errors
+  'errors.generic': '發生錯誤，請重試。',
 };
 
 export default zh;
