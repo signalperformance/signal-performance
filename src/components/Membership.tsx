@@ -6,6 +6,7 @@ const Membership = () => {
   const {
     t
   } = useLanguage();
+  
   const categories = {
     physical: {
       title: t('membership.physical.title'),
@@ -40,6 +41,7 @@ const Membership = () => {
       }]
     }
   };
+  
   const categoryStyles = {
     physical: {
       bg: 'bg-signal-physical-light',
@@ -76,6 +78,7 @@ const Membership = () => {
         return 'bg-gradient-to-br from-slate-50 via-gray-50 to-blue-50/40';
     }
   };
+  
   return (
     <section id="membership" className="section-padding bg-signal-light-gray">
       <div className="container mx-auto container-padding">
@@ -93,7 +96,7 @@ const Membership = () => {
                   <div className="absolute inset-0 bg-gradient-to-br from-transparent via-slate-50/30 to-blue-50/20 pointer-events-none"></div>
                   
                   <div className="mb-1 relative z-10">
-                    <h3 className="text-2xl font-lora font-medium text-foreground mb-1 md:text-3xl">
+                    <h3 className="text-3xl font-lora font-medium text-foreground mb-1 md:text-3xl">
                       {category.title}
                     </h3>
                     <p className={cn("text-xl md:text-2xl font-bold", styles.text)}>
