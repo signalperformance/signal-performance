@@ -283,35 +283,42 @@ const AssessmentProcess = () => {
           
           {/* Right side: Description and Progress */}
           <div className="w-1/2">
-            <Card className="bg-white shadow-md">
-              <CardContent className="p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-4">
-                    <div className={cn("w-10 h-10 rounded-full flex items-center justify-center text-white font-bold", assessments[activeAssessment as keyof typeof assessments].color)}>
-                      {assessments[activeAssessment as keyof typeof assessments].number}
+            <Card className="bg-gradient-to-br from-gray-50 via-white to-blue-50/30 shadow-2xl border-2 border-gray-100/50 backdrop-blur-sm hover:shadow-3xl transition-all duration-500 hover:scale-[1.02]">
+              <CardContent className="p-8 relative overflow-hidden">
+                {/* Subtle background pattern */}
+                <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/50 to-blue-50/20 pointer-events-none"></div>
+                
+                <div className="relative z-10">
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="flex items-center gap-4">
+                      <div className={cn("w-12 h-12 rounded-full flex items-center justify-center text-white font-bold shadow-lg", assessments[activeAssessment as keyof typeof assessments].color)}>
+                        {assessments[activeAssessment as keyof typeof assessments].number}
+                      </div>
+                      <h3 className="text-2xl font-lora font-medium text-signal-charcoal">
+                        {assessments[activeAssessment as keyof typeof assessments].title}
+                      </h3>
                     </div>
-                    <h3 className="text-2xl font-lora font-medium">
-                      {assessments[activeAssessment as keyof typeof assessments].title}
-                    </h3>
+                    
+                    {/* Next Step Button moved to be inline with title */}
+                    <Button 
+                      onClick={handleNextStepClick}
+                      variant="outline"
+                      className="group border-2 border-signal-gold text-signal-gold hover:bg-signal-gold hover:text-white transition-all duration-300 shadow-md hover:shadow-lg"
+                      size="sm"
+                    >
+                      {language === 'zh' ? '下一步' : 'Next Step'}
+                      <ChevronRight className="ml-1 w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                    </Button>
                   </div>
                   
-                  {/* Next Step Button moved to be inline with title */}
-                  <Button 
-                    onClick={handleNextStepClick}
-                    variant="outline"
-                    className="group border-signal-gold text-signal-gold hover:bg-signal-gold/10 hover:text-signal-gold transition-all duration-300"
-                    size="sm"
-                  >
-                    {language === 'zh' ? '下一步' : 'Next Step'}
-                    <ChevronRight className="ml-1 w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-                  </Button>
+                  <div className="mb-6 bg-white/60 rounded-lg p-3 shadow-inner">
+                    <Progress value={getProgressValue()} className="h-3" />
+                  </div>
+                  
+                  <p className="text-muted-foreground text-lg leading-relaxed">
+                    {assessments[activeAssessment as keyof typeof assessments].description}
+                  </p>
                 </div>
-                
-                <Progress value={getProgressValue()} className="h-2 mb-6" />
-                
-                <p className="text-muted-foreground">
-                  {assessments[activeAssessment as keyof typeof assessments].description}
-                </p>
               </CardContent>
             </Card>
           </div>
