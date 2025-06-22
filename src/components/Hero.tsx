@@ -1,3 +1,4 @@
+
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useState, useEffect, useRef } from 'react';
@@ -23,11 +24,22 @@ const Hero = () => {
     ? '體能、心理與技術訓練集中於一個專業空間'
     : 'Physical, mental, and skill training — all in one place';
 
+  // Create mobile-friendly headline for English
+  const getMobileHeadline = () => {
+    if (language === 'zh' || !isMobile) {
+      return headlineText;
+    }
+    // For English on mobile, split after "Space"
+    return headlineText.replace('Space', 'Space\n');
+  };
+
+  const displayHeadline = getMobileHeadline();
+
   // Dynamic font sizing hooks with proper typing
   const { elementRef: titleRef, fontSize: titleFontSize } = useAutoFontSize<HTMLHeadingElement>({
     maxFontSize: 72, // xl:text-6xl equivalent
     minFontSize: 24, // text-2xl equivalent
-    text: headlineText
+    text: displayHeadline
   });
 
   const { elementRef: subtitleRef, fontSize: subtitleFontSize } = useAutoFontSize<HTMLParagraphElement>({
@@ -154,10 +166,10 @@ const Hero = () => {
           className="font-bold mb-1 sm:mb-2 text-signal-charcoal mx-auto leading-tight py-[35px]"
           style={{ 
             fontSize: `${titleFontSize}px`,
-            whiteSpace: 'nowrap'
+            whiteSpace: isMobile && language === 'en' ? 'pre-line' : 'nowrap'
           }}
         >
-          {headlineText}
+          {displayHeadline}
         </h1>
         
         <p 
