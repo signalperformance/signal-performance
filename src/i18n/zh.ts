@@ -127,6 +127,9 @@ const zh = {
   'schedule.classes.strength': '肌力',
   'schedule.classes.cardio': '心肺',
   'schedule.classes.power': '爆發力',
+  'schedule.keyTitle': '說明：',
+  'schedule.key.pro': 'PRO：僅限職業選手',
+  'schedule.key.open': 'AM：所有會員開放',
 
   // Who It's For
   'whoitsfor.title': '我們的理想會員',

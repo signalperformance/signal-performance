@@ -127,6 +127,9 @@ const en = {
   'schedule.classes.strength': 'Strength',
   'schedule.classes.cardio': 'Cardio',
   'schedule.classes.power': 'Power',
+  'schedule.keyTitle': 'Key:',
+  'schedule.key.pro': 'PRO: Pro\'s Only',
+  'schedule.key.open': 'AM: Open to All Members',
 
   // Who It's For
   'whoitsfor.title': 'Our Ideal Member',

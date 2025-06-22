@@ -159,39 +159,52 @@ const WeeklySchedule = () => {
             {/* Header: Empty Top Left Cell */}
             <div className="bg-signal-charcoal p-1.5"></div>
             {/* Header: Day Names */}
-            {daysOfWeek.map(day => <div key={day.key} className="bg-signal-charcoal text-center py-2 px-1 font-semibold text-xs sticky top-0 z-10">
+            {daysOfWeek.map(day => (
+              <div key={day.key} className="bg-signal-charcoal text-center py-2 px-1 font-semibold text-xs sticky top-0 z-10">
                 {day.label.toUpperCase()}
-              </div>)}
+              </div>
+            ))}
 
             {/* Time Slots and Schedule Entries */}
-            {timeSlots.map(timeSlot => <React.Fragment key={timeSlot.id}>
+            {timeSlots.map(timeSlot => (
+              <React.Fragment key={timeSlot.id}>
                 <div className="bg-signal-charcoal text-right py-1 pr-2 pl-1 text-xs font-medium sticky left-0 z-10 min-h-[40px] flex items-center justify-end">
                   {timeSlot.label}
                 </div>
                 {daysOfWeek.map(day => {
-              const scheduledClass = getClassForSlot(day.key, timeSlot.hour24);
-              return <div key={`${day.key}-${timeSlot.hour24}`} className="bg-signal-charcoal p-0.5 min-h-[40px] h-full">
-                      {scheduledClass ? <div className={cn("w-full h-full rounded-sm p-1 text-center text-xs leading-tight flex flex-col items-center justify-center transition-opacity duration-150", classStyles[t(`schedule.classes.${scheduledClass.name.toLowerCase()}`).toUpperCase()] || 'bg-gray-400 text-black')}>
+                  const scheduledClass = getClassForSlot(day.key, timeSlot.hour24);
+                  return (
+                    <div key={`${day.key}-${timeSlot.hour24}`} className="bg-signal-charcoal p-0.5 min-h-[40px] h-full">
+                      {scheduledClass ? (
+                        <div className={cn(
+                          "w-full h-full rounded-sm p-1 text-center text-xs leading-tight flex flex-col items-center justify-center transition-opacity duration-150",
+                          classStyles[t(`schedule.classes.${scheduledClass.name.toLowerCase()}`).toUpperCase()] || 'bg-gray-400 text-black'
+                        )}>
                           <span>
                             {t(`schedule.classes.${scheduledClass.name.toLowerCase()}`)}
-                            {scheduledClass.sessionType === 'pro' && <sup>PR</sup>}
-                            {scheduledClass.sessionType === 'amateur' && <sup>OP</sup>}
+                            {scheduledClass.sessionType === 'pro' && <sup>PRO</sup>}
+                            {scheduledClass.sessionType === 'amateur' && <sup>AM</sup>}
                           </span>
-                        </div> : <div className="w-full h-full"></div> // Empty cell
-                }
-                    </div>;
-            })}
-              </React.Fragment>)}
+                        </div>
+                      ) : (
+                        <div className="w-full h-full"></div> // Empty cell
+                      )}
+                    </div>
+                  );
+                })}
+              </React.Fragment>
+            ))}
           </div>
         </div>
         
         {/* Key/Legend items */}
         <div className="mt-6 flex flex-wrap justify-center items-center gap-x-4 gap-y-2 text-muted-foreground">
           <span className="text-sm font-semibold uppercase mr-2">{t('schedule.keyTitle')}</span>
-          {keyItems.map(item => <div key={item.name} className="flex items-center">
-              
+          {keyItems.map(item => (
+            <div key={item.name} className="flex items-center">
               <span className="text-xs">{item.name}</span>
-            </div>)}
+            </div>
+          ))}
         </div>
 
       </div>
