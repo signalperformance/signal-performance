@@ -1,4 +1,3 @@
-
 const zh = {
   // Navigation
   'nav.home': '首頁',
@@ -13,7 +12,6 @@ const zh = {
   'hero.subheadline': '體能、心理與技術訓練集中於一個專業空間',
   'hero.cta.waitlist': '加入候補名單',
   'hero.cta.membership': '了解會員方案',
-  'hero.cta.assessment': '預約評估',
 
   // Membership
   'membership.title': '會員專屬內容',
@@ -112,13 +110,15 @@ const zh = {
   'waitlist.name': '全名',
   'waitlist.email': '電子郵件',
   'waitlist.phone': '電話號碼',
+  'waitlist.handicap': '目前差點',
+  'waitlist.goals': '您的高爾夫目標',
   'waitlist.submit': '提交申請',
   'waitlist.success': '感謝您的興趣！我們將盡快與您聯繫。',
 
   // Philosophy
   'philosophy.title': '我們的理念',
   'philosophy.card1.title': '去除雜訊，聚焦訊號',
-  'philosophy.card1.content': '我們的名稱源自「訊號與雜訊比」的概念，這是資料科學與工程領域中的一項核心原則。所謂「訊號」，是具有意義且可採取行動的資訊；而「雜訊」則是那些分散注意、模糊重點的干擾。我們看待高爾夫表現的方式，就是辨識出真正重要的元素，排除無關雜訊，聚焦提升關鍵表現。',
+  'philosophy.card1.content': '我們的名稱源自「訊號與雜訊比例」的概念，這是資料科學與工程領域中的一項核心原則。所謂「訊號」，是具有意義且可採取行動的資訊；而「雜訊」則是那些分散注意、模糊重點的干擾。我們看待高爾夫表現的方式，就是辨識出真正重要的元素，排除無關雜訊，聚焦提升關鍵表現。',
   'philosophy.card2.title': '依據數據，不靠猜測',
   'philosophy.card2.content': '我們採取以數據為基礎、科學實證支持的訓練方式，不靠猜測，也不盲從數據。數據能提供方向，但不是唯一的決策依據。我們重視專業教練的經驗與判斷，並結合有意義的指標，打造出既有效又具個人化的訓練計畫，協助選手精準提升表現。',
   'philosophy.card3.title': '整合式訓練系統',
@@ -175,9 +175,6 @@ const zh = {
   'whoitsfor.notfor.item2': '逃避責任或不追蹤進度',
   'whoitsfor.notfor.item3': '無法穩定參與訓練',
   'whoitsfor.notfor.item4': '只在乎找最便宜的選項',
-
-  // Errors
-  'errors.generic': '發生錯誤，請重試。',
 };
 
 export default zh;
