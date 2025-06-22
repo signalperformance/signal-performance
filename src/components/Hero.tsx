@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useWaitlistDialog } from '@/hooks/useWaitlistDialog';
 import { useState, useEffect, useRef } from 'react';
-import AvailabilityCalendar from './AvailabilityCalendar';
+import GoogleCalendarScheduling from './GoogleCalendarScheduling';
 
 declare global {
   interface Window {
@@ -198,9 +198,9 @@ const Hero = () => {
     );
   };
 
-  // Updated waitlist button text for calendar
+  // Updated calendar button text
   const getCalendarButtonText = () => {
-    return language === 'zh' ? '查看可預約時間' : 'View Availability';
+    return language === 'zh' ? '立即預約' : 'Book Appointment';
   };
 
   return (
@@ -234,16 +234,16 @@ const Hero = () => {
           >
             {t('hero.cta.membership')}
           </Button>
-          {/* Availability Calendar button - replaces the LINE link */}
-          <AvailabilityCalendar>
+          {/* Google Calendar Scheduling button */}
+          <GoogleCalendarScheduling>
             <Button 
-              id="hero-availability-button" 
+              id="hero-booking-button" 
               size="lg" 
               className="font-medium px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg text-signal-white bg-signal-gold hover:bg-signal-gold/90 active:bg-signal-gold focus:bg-signal-gold"
             >
               {getCalendarButtonText()}
             </Button>
-          </AvailabilityCalendar>
+          </GoogleCalendarScheduling>
         </div>
       </div>
     </section>
