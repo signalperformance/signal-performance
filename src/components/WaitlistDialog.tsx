@@ -114,18 +114,15 @@ const WaitlistDialog = () => {
     <>
       {/* Fixed LINE add friend button at bottom right - only shown when hero waitlist button is not visible */}
       {showFixedButton && (
-        <div className="fixed bottom-8 right-8 z-40 flex flex-col gap-2">
-          <div className="bg-white rounded-lg p-2 shadow-lg text-center">
-            <p className="text-xs text-gray-600 mb-1">Quick Contact</p>
-            <a href="https://lin.ee/CaWvRmo" target="_blank" rel="noopener noreferrer">
-              <img 
-                src="https://scdn.line-apps.com/n/line_add_friends/btn/zh-Hant.png" 
-                alt="預約評估喔" 
-                height="28" 
-                className="hover:opacity-90 transition-opacity"
-              />
-            </a>
-          </div>
+        <div className="fixed bottom-8 right-8 z-40">
+          <a href="https://lin.ee/CaWvRmo" target="_blank" rel="noopener noreferrer">
+            <img 
+              src="https://scdn.line-apps.com/n/line_add_friends/btn/zh-Hant.png" 
+              alt="預約評估喔" 
+              height="28" 
+              className="shadow-lg hover:opacity-90 transition-opacity"
+            />
+          </a>
         </div>
       )}
 
@@ -197,23 +194,6 @@ const WaitlistDialog = () => {
                   </div>
                 ) : t('waitlist.submit')}
               </Button>
-              
-              <div className="text-center">
-                <p className="text-sm text-gray-600 mb-2">Or contact us directly:</p>
-                <a 
-                  href="https://lin.ee/CaWvRmo" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-block"
-                >
-                  <img 
-                    src="https://scdn.line-apps.com/n/line_add_friends/btn/zh-Hant.png" 
-                    alt="預約評估喔" 
-                    height="28" 
-                    className="hover:opacity-90 transition-opacity"
-                  />
-                </a>
-              </div>
             </form>
           </Form>
         </DialogContent>
