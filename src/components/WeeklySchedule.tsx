@@ -53,7 +53,12 @@ const WeeklySchedule = () => {
     amateur: 'bg-emerald-500 text-white hover:bg-emerald-600'
   };
 
-  const toggleItemClasses = "rounded-full text-signal-charcoal border-signal-charcoal data-[state=on]:bg-primary data-[state=on]:text-primary-foreground data-[state=on]:border-primary data-[state=on]:hover:bg-primary/90";
+  const toggleItemClasses = "rounded-full text-signal-charcoal border-signal-charcoal hover:bg-accent hover:text-accent-foreground";
+  const toggleItemSelectedClasses = {
+    all: "rounded-full data-[state=on]:bg-gray-500 data-[state=on]:text-white data-[state=on]:border-gray-500",
+    pro: "rounded-full data-[state=on]:bg-blue-500 data-[state=on]:text-white data-[state=on]:border-blue-500",
+    amateur: "rounded-full data-[state=on]:bg-emerald-500 data-[state=on]:text-white data-[state=on]:border-emerald-500"
+  };
 
   return (
     <section id="schedule" className="section-padding text-signal-light-gray bg-signal-white">
@@ -65,24 +70,56 @@ const WeeklySchedule = () => {
           {t('schedule.subtitle')}
         </p>
 
-        <ToggleGroup
-          type="single"
-          value={filter}
-          onValueChange={(value: FilterType) => {
-            if (value) setFilter(value);
-          }}
-          className="flex justify-center items-center gap-2 mb-6 flex-wrap"
-        >
-          <ToggleGroupItem value="all" size="sm" variant="outline" className={toggleItemClasses}>
-            {t('schedule.filter.all')}
-          </ToggleGroupItem>
-          <ToggleGroupItem value="pro" size="sm" variant="outline" className={toggleItemClasses}>
-            {t('schedule.filter.pro')}
-          </ToggleGroupItem>
-          <ToggleGroupItem value="amateur" size="sm" variant="outline" className={toggleItemClasses}>
-            {t('schedule.filter.open')}
-          </ToggleGroupItem>
-        </ToggleGroup>
+        {/* Filter and Legend Container */}
+        <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
+          {/* Filter Buttons */}
+          <ToggleGroup
+            type="single"
+            value={filter}
+            onValueChange={(value: FilterType) => {
+              if (value) setFilter(value);
+            }}
+            className="flex justify-center items-center gap-2"
+          >
+            <ToggleGroupItem 
+              value="all" 
+              size="sm" 
+              variant="outline" 
+              className={cn(toggleItemClasses, toggleItemSelectedClasses.all)}
+            >
+              {t('schedule.filter.all')}
+            </ToggleGroupItem>
+            <ToggleGroupItem 
+              value="pro" 
+              size="sm" 
+              variant="outline" 
+              className={cn(toggleItemClasses, toggleItemSelectedClasses.pro)}
+            >
+              {t('schedule.filter.pro')}
+            </ToggleGroupItem>
+            <ToggleGroupItem 
+              value="amateur" 
+              size="sm" 
+              variant="outline" 
+              className={cn(toggleItemClasses, toggleItemSelectedClasses.amateur)}
+            >
+              {t('schedule.filter.open')}
+            </ToggleGroupItem>
+          </ToggleGroup>
+
+          {/* Legend */}
+          <div className="flex items-center gap-4 text-signal-black text-sm">
+            <span className="font-medium">Class Types:</span>
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
+              <span>Pros</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 bg-emerald-500 rounded-full"></div>
+              <span>Amateurs</span>
+            </div>
+          </div>
+        </div>
         
         <div className="overflow-x-auto">
           <div className="grid grid-cols-[auto_repeat(7,minmax(80px,1fr))] gap-1 bg-gray-200 border border-gray-300 rounded-lg min-w-[700px] md:min-w-full p-2">
@@ -113,6 +150,9 @@ const WeeklySchedule = () => {
                         )}>
                           <span className="font-semibold">
                             {t(`schedule.classes.${scheduledClass.name.toLowerCase()}`)}
+                            <sup className="text-xs font-normal ml-0.5">
+                              {scheduledClass.sessionType.toUpperCase()}
+                            </sup>
                           </span>
                         </div>
                       ) : (
@@ -123,18 +163,6 @@ const WeeklySchedule = () => {
                 })}
               </React.Fragment>
             ))}
-          </div>
-        </div>
-        
-        {/* Enhanced Legend/Key */}
-        <div className="mt-8 flex flex-wrap justify-center items-center gap-6 text-signal-black">
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 bg-blue-500 rounded"></div>
-            <span className="text-sm font-medium">PRO: Professionals Only</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 bg-emerald-500 rounded"></div>
-            <span className="text-sm font-medium">AM: Open to All Members</span>
           </div>
         </div>
       </div>
