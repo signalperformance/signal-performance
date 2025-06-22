@@ -20,7 +20,7 @@ const zh = {
   'membership.physical.title': '體能訓練',
   'membership.physical.frequency': '每週4次',
   'membership.physical.coaching': '1 對 3 體能訓練課程',
-  'membership.physical.coaching.description': '在半私人環境中進行完全符合您目標的訓練計畫。',
+  'membership.physical.coaching.description': '在半私人環境中進行客製化訓練。',
 
   'membership.mental.title': '心理訓練',
   'membership.mental.frequency': '每月1次',
