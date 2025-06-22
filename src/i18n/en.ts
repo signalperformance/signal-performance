@@ -16,7 +16,7 @@ const en = {
 
   // Membership
   'membership.title': 'What\'s Included in Your Membership',
-  'membership.price': 'NT$18,000/month',
+  'membership.price': 'Total of 18 coaching sessions per month',
   'membership.subtitle': 'All-inclusive membership.',
   'membership.physical.title': 'Physical Training',
   'membership.physical.frequency': '4x/week',

@@ -16,7 +16,7 @@ const zh = {
 
   // Membership
   'membership.title': '會員專屬內容',
-  'membership.price': '每月 NT$18,000',
+  'membership.price': '每月包含18次專業訓練',
   'membership.subtitle': '全方位訓練課程皆包含在內',
   'membership.physical.title': '體能訓練',
   'membership.physical.frequency': '每週4次',
