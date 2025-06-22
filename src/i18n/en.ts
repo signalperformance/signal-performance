@@ -1,4 +1,3 @@
-
 const en = {
   // Navigation
   'nav.home': 'Home',
@@ -165,7 +164,7 @@ const en = {
 
   // Who It's For
   'whoitsfor.title': 'Our Ideal Member',
-  'whoitsfor.subtitle': 'At Signal Performance, we're not for everyone — and that's intentional.',
+  'whoitsfor.subtitle': 'At Signal Performance, we\'re not for everyone — and that\'s intentional.',
   'whoitsfor.for.title': "You're a great fit if you…",
   'whoitsfor.for.item1': 'Want a data-informed plan',
   'whoitsfor.for.item2': 'Value accountability and progress tracking',
@@ -174,7 +173,7 @@ const en = {
   'whoitsfor.notfor.title': 'This might not be the right fit if you…',
   'whoitsfor.notfor.item1': 'Prefer to train without clear goals or structure',
   'whoitsfor.notfor.item2': 'Avoid accountability or progress tracking',
-  'whoitsfor.notfor.item3': 'Can't commit to training consistently',
+  'whoitsfor.notfor.item3': 'Can\'t commit to training consistently',
   'whoitsfor.notfor.item4': 'Focus only on finding the cheapest option',
 
   // Errors
