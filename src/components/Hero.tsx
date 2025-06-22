@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useWaitlistDialog } from '@/hooks/useWaitlistDialog';
+import { useGoogleCalendarScheduling } from '@/hooks/useGoogleCalendarScheduling';
 import { useState, useEffect, useRef } from 'react';
 
 declare global {
@@ -12,7 +12,7 @@ declare global {
 
 const Hero = () => {
   const { t, language } = useLanguage();
-  const { openWaitlist } = useWaitlistDialog();
+  const { openScheduling } = useGoogleCalendarScheduling();
   const [isMobile, setIsMobile] = useState(false);
   const [vantaLoaded, setVantaLoaded] = useState(false);
   const vantaRef = useRef<HTMLDivElement>(null);
@@ -197,8 +197,8 @@ const Hero = () => {
     );
   };
 
-  // Custom waitlist button text
-  const getWaitlistButtonText = () => {
+  // Custom assessment button text
+  const getAssessmentButtonText = () => {
     return language === 'zh' ? '預約評估喔' : 'Book Assessment';
   };
 
@@ -233,20 +233,14 @@ const Hero = () => {
           >
             {t('hero.cta.membership')}
           </Button>
-          {/* Waitlist button with ID for tracking visibility - now links to LINE */}
+          {/* Google Calendar Scheduling button with custom styling */}
           <Button 
-            id="hero-waitlist-button" 
+            id="hero-assessment-button" 
             size="lg" 
-            asChild
+            onClick={openScheduling}
             className="font-medium px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg text-signal-white bg-signal-gold hover:bg-signal-gold/90 active:bg-signal-gold focus:bg-signal-gold"
           >
-            <a 
-              href="https://lin.ee/CaWvRmo" 
-              target="_blank" 
-              rel="noopener noreferrer"
-            >
-              {getWaitlistButtonText()}
-            </a>
+            {getAssessmentButtonText()}
           </Button>
         </div>
       </div>
