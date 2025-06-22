@@ -61,8 +61,8 @@ const Hero = () => {
       {/* Content Card */}
       <div className="relative z-10 container mx-auto px-4 py-16 md:py-0">
         <div className="max-w-4xl mx-auto text-center">
-          {/* Modern card container */}
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 p-8 md:p-12 lg:p-16">
+          {/* Modern card container with improved contrast */}
+          <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl border border-white/40 p-8 md:p-12 lg:p-16">
             <h1 className={`font-bold mb-4 text-signal-charcoal leading-tight ${
               isMobile 
                 ? 'text-3xl sm:text-4xl' 
