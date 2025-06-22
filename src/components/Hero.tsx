@@ -2,7 +2,6 @@ import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useWaitlistDialog } from '@/hooks/useWaitlistDialog';
 import { useState, useEffect, useRef } from 'react';
-import GoogleCalendarScheduling from './GoogleCalendarScheduling';
 
 declare global {
   interface Window {
@@ -198,9 +197,9 @@ const Hero = () => {
     );
   };
 
-  // Updated calendar button text
-  const getCalendarButtonText = () => {
-    return language === 'zh' ? '立即預約' : 'Book Appointment';
+  // Custom waitlist button text
+  const getWaitlistButtonText = () => {
+    return language === 'zh' ? '預約評估喔' : 'Book Assessment';
   };
 
   return (
@@ -234,16 +233,21 @@ const Hero = () => {
           >
             {t('hero.cta.membership')}
           </Button>
-          {/* Google Calendar Scheduling button */}
-          <GoogleCalendarScheduling>
-            <Button 
-              id="hero-booking-button" 
-              size="lg" 
-              className="font-medium px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg text-signal-white bg-signal-gold hover:bg-signal-gold/90 active:bg-signal-gold focus:bg-signal-gold"
+          {/* Waitlist button with ID for tracking visibility - now links to LINE */}
+          <Button 
+            id="hero-waitlist-button" 
+            size="lg" 
+            asChild
+            className="font-medium px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg text-signal-white bg-signal-gold hover:bg-signal-gold/90 active:bg-signal-gold focus:bg-signal-gold"
+          >
+            <a 
+              href="https://lin.ee/CaWvRmo" 
+              target="_blank" 
+              rel="noopener noreferrer"
             >
-              {getCalendarButtonText()}
-            </Button>
-          </GoogleCalendarScheduling>
+              {getWaitlistButtonText()}
+            </a>
+          </Button>
         </div>
       </div>
     </section>

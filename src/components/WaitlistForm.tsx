@@ -15,6 +15,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/components/ui/use-toast';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { supabase } from '@/integrations/supabase/client';
 import { waitlistFormSchema, WaitlistFormValues } from '@/lib/validations/waitlist';
 
 const WaitlistForm = () => {
@@ -37,16 +38,36 @@ const WaitlistForm = () => {
     setIsSubmitting(true);
     
     try {
-      // Simulate form submission without database storage
-      console.log('Form data:', data);
+      // Submit data to Supabase
+      const { error } = await supabase
+        .from('waitlist_entries')
+        .insert([
+          {
+            name: data.name,
+            email: data.email,
+            phone: data.phone,
+            handicap: data.handicap || null,
+            goals: data.goals || null,
+          }
+        ]);
       
-      toast({
-        title: t('waitlist.success'),
-        duration: 5000,
-      });
-      form.reset();
+      if (error) {
+        console.error('Error submitting to waitlist:', error);
+        toast({
+          title: t('errors.generic'),
+          description: error.message,
+          variant: "destructive",
+          duration: 5000,
+        });
+      } else {
+        toast({
+          title: t('waitlist.success'),
+          duration: 5000,
+        });
+        form.reset();
+      }
     } catch (err) {
-      console.error('Exception when submitting form:', err);
+      console.error('Exception when submitting to waitlist:', err);
       toast({
         title: t('errors.generic'),
         variant: "destructive",

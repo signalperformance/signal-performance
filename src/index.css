@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -120,49 +121,3 @@ html {
   background-size: 12px 12px; /* Controls the density of the pattern tiling */
 }
 
-/* Custom styling for Google Calendar scheduling button */
-.google-calendar-button button,
-[data-calendar-button] button,
-button[data-calendar-scheduling] {
-  font-family: 'Inter', sans-serif !important;
-  color: #FFFFFF !important;
-  font-weight: 500 !important;
-  font-size: 16px !important;
-  background-color: #c8ab70 !important;
-}
-
-/* More specific targeting for Google Calendar buttons */
-div[data-calendar-widget] button,
-.calendar-scheduling-button button {
-  font-family: 'Inter', sans-serif !important;
-  color: #FFFFFF !important;
-  font-weight: 500 !important;
-  font-size: 16px !important;
-  background-color: #c8ab70 !important;
-}
-
-/* Custom styling for Google Calendar scheduling button - More aggressive targeting */
-div[data-calendar-widget] button,
-.calendar-scheduling-button button,
-[data-calendar-button] button,
-button[data-calendar-scheduling],
-iframe button,
-div button[style*="background"] {
-  font-family: 'Inter', sans-serif !important;
-  color: #FFFFFF !important;
-  font-weight: 500 !important;
-  font-size: 16px !important;
-  background-color: #c8ab70 !important;
-  border: none !important;
-  border-radius: 6px !important;
-  padding: 12px 24px !important;
-}
-
-/* Target any button that appears in the Google Calendar container */
-div:has(button) button {
-  font-family: 'Inter', sans-serif !important;
-  color: #FFFFFF !important;
-  font-weight: 500 !important;
-  font-size: 16px !important;
-  background-color: #c8ab70 !important;
-}
