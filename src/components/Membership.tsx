@@ -1,6 +1,7 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+
 const Membership = () => {
   const {
     t
@@ -75,41 +76,53 @@ const Membership = () => {
         return 'bg-gradient-to-br from-slate-50 via-gray-50 to-blue-50/40';
     }
   };
-  return <section id="membership" className="section-padding bg-signal-light-gray">
+  return (
+    <section id="membership" className="section-padding bg-signal-light-gray">
       <div className="container mx-auto container-padding">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 font-lora">{t('membership.title')}</h2>
-          <p className="text-lg text-muted-foreground">{t('membership.price')}</p>
+        <div className="text-center mb-12 md:mb-16">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 font-lora">{t('membership.title')}</h2>
+          <p className="text-base md:text-lg text-muted-foreground">{t('membership.price')}</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
           {Object.entries(categories).map(([key, category]) => {
-          const item = category.items[0];
-          const styles = categoryStyles[key as keyof typeof categoryStyles];
-          return <Card key={key} className={cn("shadow-2xl rounded-xl overflow-hidden flex flex-col border-l-4 border-2 border-slate-200/60 backdrop-blur-sm hover:shadow-3xl transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1", getGradientBackground(key), styles.border)}>
-                <CardContent className="p-6 md:p-8 flex-grow flex flex-col relative overflow-hidden text-center">
+            const item = category.items[0];
+            const styles = categoryStyles[key as keyof typeof categoryStyles];
+            return (
+              <Card 
+                key={key} 
+                className={cn(
+                  "shadow-lg md:shadow-2xl rounded-xl overflow-hidden flex flex-col border-l-4 border-2 border-slate-200/60 backdrop-blur-sm hover:shadow-2xl md:hover:shadow-3xl transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1 min-h-[280px] md:min-h-[320px]", 
+                  getGradientBackground(key), 
+                  styles.border
+                )}
+              >
+                <CardContent className="p-4 md:p-6 lg:p-8 flex-grow flex flex-col relative overflow-hidden text-center">
                   <div className="absolute inset-0 bg-gradient-to-br from-transparent via-slate-50/30 to-blue-50/20 pointer-events-none"></div>
                   
-                  <div className="mb-6 relative z-10">
-                    <h3 className="text-xl md:text-2xl font-lora font-medium text-foreground mb-3">
+                  <div className="mb-4 md:mb-6 relative z-10">
+                    <h3 className="text-lg md:text-xl lg:text-2xl font-lora font-medium text-foreground mb-2 md:mb-3">
                       {category.title}
                     </h3>
-                    <p className={cn("text-xl md:text-2xl font-bold", styles.text)}>
+                    <p className={cn("text-lg md:text-xl lg:text-2xl font-bold", styles.text)}>
                       {category.frequency}
                     </p>
                   </div>
 
                   <div className="flex-grow relative z-10">
-                    <h4 className="text-base mb-2 font-bold md:text-lg">{item.title}</h4>
-                    <p className="text-muted-foreground text-base">
+                    <h4 className="text-sm md:text-base lg:text-lg mb-2 font-bold">{item.title}</h4>
+                    <p className="text-muted-foreground text-sm md:text-base leading-relaxed">
                       {item.description}
                     </p>
                   </div>
                 </CardContent>
-              </Card>;
-        })}
+              </Card>
+            );
+          })}
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default Membership;
