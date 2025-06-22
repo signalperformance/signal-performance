@@ -19,7 +19,7 @@ const zh = {
   'membership.price': '每月 NT$18,000',
   'membership.subtitle': '全方位訓練課程皆包含在內',
   'membership.physical.title': '體能訓練',
-  'membership.physical.frequency': '(每週4次)',
+  'membership.physical.frequency': '每週4次',
   'membership.physical.assessment': '每季表現評估',
   'membership.physical.assessment.description': '每季評估提供客觀數據，指導您的個人化訓練計劃。',
   'membership.physical.coaching': '1 對 3 體能訓練課程',
@@ -30,7 +30,7 @@ const zh = {
   'membership.physical.app.description': '隨時隨地查看您的訓練計劃—在場館、出差或在家—讓您在任何地方都能保持一致的訓練。',
 
   'membership.mental.title': '心理訓練',
-  'membership.mental.frequency': '(每月1次)',
+  'membership.mental.frequency': '每月1次',
   'membership.mental.coaching': '1 對 1 心理教練諮詢',
   'membership.mental.coaching.description': '個人化心理指導，專注於場上及場下的表現。',
   'membership.mental.plan': '系統化心理訓練計畫',
@@ -39,7 +39,7 @@ const zh = {
   'membership.mental.toolkit.description': '獲得心率監測器與專屬訓練 APP，練習課程中學到的技能，並在課程之間追蹤進度。',
 
   'membership.golf.title': '高爾夫訓練',
-  'membership.golf.frequency': '(每月1次)',
+  'membership.golf.frequency': '每月1次',
   'membership.golf.skillassessment': '技術評估',
   'membership.golf.skillassessment.description': '全面性的高爾夫能力評估，檢測整體球技並持續追蹤進步。',
   'membership.golf.simulator': '模擬器使用時數：每月 5 小時',
@@ -51,7 +51,7 @@ const zh = {
   'membership.golf.fitting.description': '使用專業設備測量桿面仰角、桿身傾角及其他規格，進行依據數據的調整，優化球桿設定以提升表現。',
 
   'membership.report.title': '表現報告',
-  'membership.report.frequency': '(每月1次)',
+  'membership.report.frequency': '每月1次',
   'membership.report.description': '每月報告總結各方面的進展，並提供個人化回饋。',
 
   // Facility
