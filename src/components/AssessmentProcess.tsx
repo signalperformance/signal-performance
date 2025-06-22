@@ -283,10 +283,10 @@ const AssessmentProcess = () => {
           
           {/* Right side: Description and Progress */}
           <div className="w-1/2">
-            <Card className="bg-gradient-to-br from-gray-50 via-white to-blue-50/30 shadow-2xl border-2 border-gray-100/50 backdrop-blur-sm hover:shadow-3xl transition-all duration-500 hover:scale-[1.02]">
+            <Card className="bg-gradient-to-br from-slate-50 via-gray-50 to-blue-50/40 shadow-2xl border-2 border-slate-200/60 backdrop-blur-sm hover:shadow-3xl transition-all duration-500 hover:scale-[1.02]">
               <CardContent className="p-8 relative overflow-hidden">
                 {/* Subtle background pattern */}
-                <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/50 to-blue-50/20 pointer-events-none"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-transparent via-slate-50/30 to-blue-50/20 pointer-events-none"></div>
                 
                 <div className="relative z-10">
                   <div className="flex items-center justify-between mb-6">
@@ -311,11 +311,11 @@ const AssessmentProcess = () => {
                     </Button>
                   </div>
                   
-                  <div className="mb-6 bg-white/60 rounded-lg p-3 shadow-inner">
+                  <div className="mb-6 bg-white/80 rounded-lg p-3 shadow-inner border border-slate-200/40">
                     <Progress value={getProgressValue()} className="h-3" />
                   </div>
                   
-                  <p className="text-muted-foreground text-lg leading-relaxed">
+                  <p className="text-slate-600 text-lg leading-relaxed">
                     {assessments[activeAssessment as keyof typeof assessments].description}
                   </p>
                 </div>
