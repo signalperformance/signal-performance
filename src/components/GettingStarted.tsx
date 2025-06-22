@@ -62,7 +62,7 @@ const GettingStarted = () => {
                     <div className="flex items-center justify-center w-16 h-16 mb-4 bg-signal-gold rounded-full shadow-lg">
                       <span className="text-2xl font-bold text-signal-white">{index + 1}</span>
                     </div>
-                    <h3 className="text-lg font-semibold text-signal-charcoal px-2">{step.title}</h3>
+                    <h3 className="text-signal-charcoal px-2 font-semibold text-2xl">{step.title}</h3>
                     <p className="text-sm font-medium text-signal-gold mb-1">{step.hours}</p>
                     <p className="text-muted-foreground mt-1 px-4 text-base">{step.subtitle}</p>
                   </div>)}
