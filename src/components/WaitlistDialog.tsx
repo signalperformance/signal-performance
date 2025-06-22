@@ -22,9 +22,7 @@ import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useWaitlistDialog } from '@/hooks/useWaitlistDialog';
-import { supabase } from '@/integrations/supabase/client';
 import { waitlistDialogSchema, WaitlistDialogValues } from '@/lib/validations/waitlist';
-
 
 const WaitlistDialog = () => {
   const { t } = useLanguage();
@@ -71,35 +69,17 @@ const WaitlistDialog = () => {
     setIsSubmitting(true);
     
     try {
-      // Submit data to Supabase
-      const { error } = await supabase
-        .from('waitlist_entries')
-        .insert([
-          {
-            name: data.name,
-            email: data.email,
-            phone: data.phone,
-          }
-        ]);
+      // Simulate form submission without database storage
+      console.log('Form data:', data);
       
-      if (error) {
-        console.error('Error submitting to waitlist:', error);
-        toast({
-          title: t('errors.generic'),
-          description: error.message,
-          variant: "destructive",
-          duration: 5000,
-        });
-      } else {
-        toast({
-          title: t('waitlist.success'),
-          duration: 5000,
-        });
-        form.reset();
-        closeWaitlist();
-      }
+      toast({
+        title: t('waitlist.success'),
+        duration: 5000,
+      });
+      form.reset();
+      closeWaitlist();
     } catch (err) {
-      console.error('Exception when submitting to waitlist:', err);
+      console.error('Exception when submitting form:', err);
       toast({
         title: t('errors.generic'),
         variant: "destructive",
