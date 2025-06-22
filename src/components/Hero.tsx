@@ -1,4 +1,3 @@
-
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useState, useEffect, useRef } from 'react';
@@ -115,9 +114,9 @@ const Hero = () => {
   const renderHeadline = () => {
     const headlineText = t('hero.headline');
     
-    // On desktop (sm and above), render as single unbroken text with proper centering
+    // On desktop (sm and above), render as single unbroken text with proper centering and prevent wrapping for English
     const desktopHeadline = (
-      <span className="hidden sm:inline text-center w-full block">{headlineText}</span>
+      <span className={`hidden sm:inline text-center w-full block ${language === 'en' ? 'whitespace-nowrap' : ''}`}>{headlineText}</span>
     );
     
     // On mobile, render with explicit breaks
