@@ -106,7 +106,7 @@ const AssessmentProcess = () => {
     if (autoProgressEnabled && isInViewport) {
       timerRef.current = setTimeout(() => {
         advanceToNextTab();
-      }, 8000); // Changed from 5000 to 8000 (8 seconds)
+      }, 18000); // Changed from 8000 to 18000 (18 seconds)
     }
     
     // Cleanup timer on unmount or when active assessment or viewport status changes
