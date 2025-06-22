@@ -334,11 +334,24 @@ const AssessmentProcess = () => {
             {Object.entries(assessments).map(([key, assessment]) => <TabsContent key={key} value={key} className="mt-0">
                 <Card className="border-0 shadow-md rounded-xl overflow-hidden">
                   <CardContent className="p-6">
-                    <div className="flex items-center gap-4 mb-4">
-                      <div className={cn("w-10 h-10 rounded-full flex items-center justify-center text-white font-bold", assessment.color)}>
-                        {assessment.number}
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center gap-4 flex-1 min-w-0">
+                        <div className={cn("w-10 h-10 rounded-full flex items-center justify-center text-white font-bold flex-shrink-0", assessment.color)}>
+                          {assessment.number}
+                        </div>
+                        <h3 className="text-xl font-lora font-medium truncate">{assessment.title}</h3>
                       </div>
-                      <h3 className="text-xl font-lora font-medium">{assessment.title}</h3>
+                      
+                      {/* Next Step Button for mobile - smaller size */}
+                      <Button 
+                        onClick={handleNextStepClick} 
+                        variant="outline" 
+                        className="group border border-signal-gold text-signal-gold hover:bg-signal-gold hover:text-white transition-all duration-300 shadow-sm hover:shadow-md flex-shrink-0 ml-2" 
+                        size="sm"
+                      >
+                        <span className="text-xs">{language === 'zh' ? '下一步' : 'Next'}</span>
+                        <ChevronRight className="ml-1 w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                      </Button>
                     </div>
                     <p className="text-muted-foreground">
                       {assessment.description}
