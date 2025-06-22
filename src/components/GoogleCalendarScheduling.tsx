@@ -34,6 +34,21 @@ const GoogleCalendarScheduling = ({ children }: GoogleCalendarSchedulingProps) =
           label: 'Book an appointment',
           target: targetRef.current,
         });
+
+        // Apply custom styling to override Google's default styles
+        setTimeout(() => {
+          const calendarButton = targetRef.current?.querySelector('button');
+          if (calendarButton) {
+            // Apply Inter font family and white text color
+            calendarButton.style.fontFamily = 'Inter, sans-serif';
+            calendarButton.style.color = '#FFFFFF';
+            calendarButton.style.fontWeight = '500';
+            calendarButton.style.fontSize = '16px';
+            // Ensure the background color stays as configured
+            calendarButton.style.backgroundColor = '#c8ab70';
+            console.log('✅ Applied custom styling to Google Calendar button');
+          }
+        }, 100);
       } else {
         console.log('⏳ Google Calendar scheduling not ready, retrying...');
         setTimeout(initializeScheduling, 100);
