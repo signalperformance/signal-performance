@@ -132,7 +132,7 @@ const WeeklySchedule = () => {
             </div>
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 bg-emerald-500 rounded-full"></div>
-              <span>Amateurs</span>
+              <span>Amateur</span>
             </div>
           </div>
         </div>
