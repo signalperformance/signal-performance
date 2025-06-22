@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useState, useEffect, useRef } from 'react';
+import { useAutoFontSize } from '@/hooks/useAutoFontSize';
 
 declare global {
   interface Window {
@@ -15,6 +16,25 @@ const Hero = () => {
   const [vantaLoaded, setVantaLoaded] = useState(false);
   const vantaRef = useRef<HTMLDivElement>(null);
   const vantaEffect = useRef<any>(null);
+
+  // Get headline and subtitle text
+  const headlineText = t('hero.headline');
+  const subtitleText = language === 'zh' 
+    ? '體能、心理與技術訓練集中於一個專業空間'
+    : 'Physical, mental, and skill training — all in one place';
+
+  // Dynamic font sizing hooks
+  const { elementRef: titleRef, fontSize: titleFontSize } = useAutoFontSize({
+    maxFontSize: 72, // xl:text-6xl equivalent
+    minFontSize: 24, // text-2xl equivalent
+    text: headlineText
+  });
+
+  const { elementRef: subtitleRef, fontSize: subtitleFontSize } = useAutoFontSize({
+    maxFontSize: 32, // text-2xl equivalent
+    minFontSize: 16, // text-base equivalent
+    text: subtitleText
+  });
 
   // Check for mobile device
   useEffect(() => {
@@ -110,48 +130,6 @@ const Hero = () => {
     };
   }, [vantaLoaded]);
 
-  // Function to render headline with responsive behavior
-  const renderHeadline = () => {
-    const headlineText = t('hero.headline');
-    
-    // Single line for both desktop and mobile, with natural wrapping when needed
-    return (
-      <span className="text-center w-full block">{headlineText}</span>
-    );
-  };
-
-  // Function to render subtitle with responsive behavior
-  const renderSubtitle = () => {
-    if (language === 'zh') {
-      // Chinese version - always single line
-      return '體能、心理與技術訓練集中於一個專業空間';
-    }
-    
-    // English version
-    const fullSubtitle = 'Physical, mental, and skill training — all in one place';
-    
-    // Desktop version - single line with em dash
-    const desktopSubtitle = (
-      <span className="hidden sm:inline">{fullSubtitle}</span>
-    );
-    
-    // Mobile version - two lines without em dash
-    const mobileSubtitle = (
-      <span className="sm:hidden">
-        <span>Physical, mental, and skill training</span>
-        <br />
-        <span>all in one place</span>
-      </span>
-    );
-    
-    return (
-      <>
-        {desktopSubtitle}
-        {mobileSubtitle}
-      </>
-    );
-  };
-
   // Custom assessment button text
   const getAssessmentButtonText = () => {
     return language === 'zh' ? '預約評估' : 'Book Assessment';
@@ -171,12 +149,26 @@ const Hero = () => {
       
       {/* Content Overlay */}
       <div className="relative z-10 container mx-auto px-4 text-center py-16 md:py-0">
-        <h1 className="text-3xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-1 sm:mb-2 text-signal-charcoal max-w-8xl mx-auto leading-tight py-[35px]">
-          {renderHeadline()}
+        <h1 
+          ref={titleRef}
+          className="font-bold mb-1 sm:mb-2 text-signal-charcoal mx-auto leading-tight py-[35px]"
+          style={{ 
+            fontSize: `${titleFontSize}px`,
+            whiteSpace: 'nowrap'
+          }}
+        >
+          {headlineText}
         </h1>
         
-        <p className="text-lg sm:text-xl md:text-2xl text-signal-charcoal mb-8 sm:mb-12 max-w-4xl mx-auto">
-          {renderSubtitle()}
+        <p 
+          ref={subtitleRef}
+          className="text-signal-charcoal mb-8 sm:mb-12 mx-auto"
+          style={{ 
+            fontSize: `${subtitleFontSize}px`,
+            whiteSpace: 'nowrap'
+          }}
+        >
+          {subtitleText}
         </p>
         
         <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
