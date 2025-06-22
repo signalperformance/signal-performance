@@ -1,3 +1,4 @@
+
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
@@ -34,7 +35,7 @@ const Membership = () => {
       title: t('membership.report.title'),
       frequency: t('membership.report.frequency'),
       items: [{
-        title: '',
+        title: t('membership.report.title'),
         description: t('membership.report.description')
       }]
     }
@@ -100,25 +101,21 @@ const Membership = () => {
                   styles.border
                 )}
               >
-                <CardContent className="p-6 md:p-8 flex-grow flex flex-col relative overflow-hidden">
+                <CardContent className="p-6 md:p-8 flex-grow flex flex-col relative overflow-hidden text-center">
                   <div className="absolute inset-0 bg-gradient-to-br from-transparent via-slate-50/30 to-blue-50/20 pointer-events-none"></div>
                   
-                  <div className="flex items-center mb-6 relative z-10">
-                    <div className="flex-grow">
-                      <h3 className="text-xl md:text-2xl font-lora font-medium text-foreground">
-                        {category.title}
-                      </h3>
-                      <p className={cn("text-sm font-semibold", styles.text)}>
-                        {category.frequency}
-                      </p>
-                    </div>
+                  <div className="mb-6 relative z-10">
+                    <h3 className="text-xl md:text-2xl font-lora font-medium text-foreground mb-3">
+                      {category.title}
+                    </h3>
+                    <p className={cn("text-lg md:text-xl font-bold", styles.text)}>
+                      {category.frequency}
+                    </p>
                   </div>
 
                   <div className="flex-grow relative z-10">
-                    {item.title && (
-                      <h4 className="font-medium text-base md:text-lg">{item.title}</h4>
-                    )}
-                    <p className="text-muted-foreground text-sm mt-1">
+                    <h4 className="font-medium text-base md:text-lg mb-2">{item.title}</h4>
+                    <p className="text-muted-foreground text-sm">
                       {item.description}
                     </p>
                   </div>
