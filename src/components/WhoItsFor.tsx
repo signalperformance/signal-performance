@@ -23,19 +23,24 @@ const WhoItsFor = () => {
   return (
     <section id="who-its-for" className="section-padding bg-background">
       <div className="container mx-auto container-padding text-center">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 font-lora text-signal-charcoal">{t('whoitsfor.title')}</h2>
-        <p className="max-w-4xl mx-auto text-lg text-muted-foreground mb-12 whitespace-pre-line">{t('whoitsfor.subtitle')}</p>
+        <h2 className="text-3xl md:text-4xl font-bold mb-4 font-lora text-signal-charcoal animate-fade-in">{t('whoitsfor.title')}</h2>
+        <p className="max-w-4xl mx-auto text-lg text-muted-foreground mb-16 whitespace-pre-line animate-fade-in">{t('whoitsfor.subtitle')}</p>
         
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
           {/* "For You" Column */}
-          <Card className="text-left shadow-lg bg-card h-full">
-            <CardContent className="p-6 md:p-8">
-              <h3 className="text-2xl font-bold mb-6 font-lora text-signal-charcoal">{t('whoitsfor.for.title')}</h3>
-              <ul className="space-y-4">
-                {forItems.map((itemKey) => (
-                  <li key={itemKey} className="flex items-start">
-                    <Check className="h-6 w-6 text-green-500 mr-4 mt-1 flex-shrink-0" />
-                    <span className="text-lg text-signal-charcoal">{t(itemKey)}</span>
+          <Card className="text-left shadow-xl bg-gradient-to-br from-emerald-50 via-white to-green-50 hover:shadow-2xl transition-all duration-500 hover:scale-105 h-full border-2 border-green-100 group animate-scale-in">
+            <CardContent className="p-8 md:p-10">
+              <div className="flex items-center mb-8">
+                <div className="p-3 bg-green-500 rounded-full mr-4 group-hover:scale-110 transition-transform duration-300">
+                  <Check className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-2xl md:text-3xl font-bold font-lora text-signal-charcoal group-hover:text-green-700 transition-colors duration-300">{t('whoitsfor.for.title')}</h3>
+              </div>
+              <ul className="space-y-6">
+                {forItems.map((itemKey, index) => (
+                  <li key={itemKey} className="flex items-start group-hover:translate-x-2 transition-transform duration-300" style={{ animationDelay: `${index * 100}ms` }}>
+                    <Check className="h-7 w-7 text-green-500 mr-5 mt-1 flex-shrink-0 group-hover:scale-110 transition-transform duration-300" />
+                    <span className="text-lg md:text-xl text-signal-charcoal leading-relaxed">{t(itemKey)}</span>
                   </li>
                 ))}
               </ul>
@@ -43,14 +48,19 @@ const WhoItsFor = () => {
           </Card>
 
           {/* "Not For You" Column */}
-          <Card className="text-left shadow-lg bg-card h-full">
-            <CardContent className="p-6 md:p-8">
-              <h3 className="text-2xl font-bold mb-6 font-lora text-signal-charcoal">{t('whoitsfor.notfor.title')}</h3>
-              <ul className="space-y-4">
-                {notForItems.map((itemKey) => (
-                  <li key={itemKey} className="flex items-start">
-                    <X className="h-6 w-6 text-red-500 mr-4 mt-1 flex-shrink-0" />
-                    <span className="text-lg text-signal-charcoal">{t(itemKey)}</span>
+          <Card className="text-left shadow-xl bg-gradient-to-br from-red-50 via-white to-rose-50 hover:shadow-2xl transition-all duration-500 hover:scale-105 h-full border-2 border-red-100 group animate-scale-in">
+            <CardContent className="p-8 md:p-10">
+              <div className="flex items-center mb-8">
+                <div className="p-3 bg-red-500 rounded-full mr-4 group-hover:scale-110 transition-transform duration-300">
+                  <X className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-2xl md:text-3xl font-bold font-lora text-signal-charcoal group-hover:text-red-700 transition-colors duration-300">{t('whoitsfor.notfor.title')}</h3>
+              </div>
+              <ul className="space-y-6">
+                {notForItems.map((itemKey, index) => (
+                  <li key={itemKey} className="flex items-start group-hover:translate-x-2 transition-transform duration-300" style={{ animationDelay: `${index * 100}ms` }}>
+                    <X className="h-7 w-7 text-red-500 mr-5 mt-1 flex-shrink-0 group-hover:scale-110 transition-transform duration-300" />
+                    <span className="text-lg md:text-xl text-signal-charcoal leading-relaxed">{t(itemKey)}</span>
                   </li>
                 ))}
               </ul>
