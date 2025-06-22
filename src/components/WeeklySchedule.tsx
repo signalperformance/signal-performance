@@ -121,13 +121,13 @@ const WeeklySchedule = () => {
         </div>
         
         <div className="overflow-x-auto">
-          <div className="grid grid-cols-[auto_repeat(7,minmax(100px,1fr))] gap-2 bg-gray-100 border border-gray-200 rounded-lg min-w-[800px] md:min-w-full p-3">
+          <div className="grid grid-cols-[auto_repeat(7,minmax(80px,1fr))] gap-1 bg-gray-100 border border-gray-200 rounded-lg min-w-[600px] md:min-w-full p-2">
             {/* Header: Empty Top Left Cell */}
-            <div className="bg-white rounded-md p-3 border border-gray-200"></div>
+            <div className="bg-white rounded p-2 border border-gray-200"></div>
             
             {/* Header: Day Names */}
             {daysOfWeek.map(day => (
-              <div key={day.key} className="bg-white rounded-md text-center py-4 px-3 font-semibold text-sm text-signal-black border border-gray-200 shadow-sm">
+              <div key={day.key} className="bg-white rounded text-center py-2 px-2 font-semibold text-xs text-signal-black border border-gray-200 shadow-sm">
                 {day.label.toUpperCase()}
               </div>
             ))}
@@ -135,16 +135,16 @@ const WeeklySchedule = () => {
             {/* Time Slots and Schedule Entries */}
             {timeSlots.map(timeSlot => (
               <React.Fragment key={timeSlot.id}>
-                <div className="bg-white rounded-md text-center py-4 px-3 text-sm font-semibold text-signal-black flex items-center justify-center border border-gray-200 shadow-sm">
+                <div className="bg-white rounded text-center py-2 px-2 text-xs font-semibold text-signal-black flex items-center justify-center border border-gray-200 shadow-sm">
                   {timeSlot.label}
                 </div>
                 {daysOfWeek.map(day => {
                   const scheduledClass = getClassForSlot(day.key, timeSlot.hour24);
                   return (
-                    <div key={`${day.key}-${timeSlot.hour24}`} className="bg-white rounded-md p-2 min-h-[70px] flex items-center justify-center border border-gray-200 shadow-sm">
+                    <div key={`${day.key}-${timeSlot.hour24}`} className="bg-white rounded p-1 min-h-[50px] flex items-center justify-center border border-gray-200 shadow-sm">
                       {scheduledClass ? (
                         <div className={cn(
-                          "w-full h-full rounded-lg p-3 text-center text-base font-semibold flex items-center justify-center transition-all duration-200 shadow-md",
+                          "w-full h-full rounded p-2 text-center text-sm font-semibold flex items-center justify-center transition-all duration-200 shadow-md",
                           sessionTypeStyles[scheduledClass.sessionType]
                         )}>
                           <span>
