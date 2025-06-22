@@ -23,14 +23,14 @@ const Hero = () => {
     ? '體能、心理與技術訓練集中於一個專業空間'
     : 'Physical, mental, and skill training — all in one place';
 
-  // Dynamic font sizing hooks
-  const { elementRef: titleRef, fontSize: titleFontSize } = useAutoFontSize({
+  // Dynamic font sizing hooks with proper typing
+  const { elementRef: titleRef, fontSize: titleFontSize } = useAutoFontSize<HTMLHeadingElement>({
     maxFontSize: 72, // xl:text-6xl equivalent
     minFontSize: 24, // text-2xl equivalent
     text: headlineText
   });
 
-  const { elementRef: subtitleRef, fontSize: subtitleFontSize } = useAutoFontSize({
+  const { elementRef: subtitleRef, fontSize: subtitleFontSize } = useAutoFontSize<HTMLParagraphElement>({
     maxFontSize: 32, // text-2xl equivalent
     minFontSize: 16, // text-base equivalent
     text: subtitleText

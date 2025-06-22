@@ -7,8 +7,8 @@ interface UseAutoFontSizeOptions {
   text: string;
 }
 
-export const useAutoFontSize = ({ maxFontSize, minFontSize, text }: UseAutoFontSizeOptions) => {
-  const elementRef = useRef<HTMLElement>(null);
+export const useAutoFontSize = <T extends HTMLElement>({ maxFontSize, minFontSize, text }: UseAutoFontSizeOptions) => {
+  const elementRef = useRef<T>(null);
   const [fontSize, setFontSize] = useState(maxFontSize);
 
   useEffect(() => {
