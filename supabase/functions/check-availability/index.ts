@@ -99,7 +99,7 @@ serve(async (req) => {
     // Generate hourly slots from 9am to 6pm (business hours)
     const hourlyAvailability = [];
     for (let hour = 9; hour < 18; hour++) {
-      // Create slot time range for the target date
+      // Create slot time range for the target date - using local time
       const slotStart = new Date(date + `T${hour.toString().padStart(2, '0')}:00:00`);
       const slotEnd = new Date(date + `T${(hour + 1).toString().padStart(2, '0')}:00:00`);
 
@@ -112,11 +112,15 @@ serve(async (req) => {
           const eventStart = new Date(event.start.dateTime);
           const eventEnd = new Date(event.end.dateTime);
           
-          // Check if event overlaps with this hour slot
+          // FIXED: Better overlap detection
+          // Events overlap if: eventStart < slotEnd AND eventEnd > slotStart
           const hasOverlap = eventStart < slotEnd && eventEnd > slotStart;
           
           if (hasOverlap) {
-            console.log(`🚫 Conflict found: "${event.summary}" (${eventStart.toISOString()} - ${eventEnd.toISOString()}) overlaps with ${hour}:00`);
+            console.log(`🚫 Conflict found: "${event.summary}" (${eventStart.toISOString()} - ${eventEnd.toISOString()}) overlaps with ${hour}:00-${hour+1}:00`);
+            console.log(`   Event start: ${eventStart.getHours()}:${eventStart.getMinutes().toString().padStart(2, '0')}`);
+            console.log(`   Event end: ${eventEnd.getHours()}:${eventEnd.getMinutes().toString().padStart(2, '0')}`);
+            console.log(`   Slot: ${hour}:00-${hour+1}:00`);
           }
           
           return hasOverlap;
