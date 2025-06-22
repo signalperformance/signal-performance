@@ -69,10 +69,23 @@ export const useGoogleCalendar = () => {
         target: tempContainer,
       });
 
-      // Wait for the button to be created, then trigger it and clean up
+      // Wait longer for the button to be created and try multiple selectors
       setTimeout(() => {
-        const calendarButton = tempContainer.querySelector('button');
+        // Try different selectors to find the calendar button
+        let calendarButton = tempContainer.querySelector('button');
+        if (!calendarButton) {
+          calendarButton = tempContainer.querySelector('a[role="button"]');
+        }
+        if (!calendarButton) {
+          calendarButton = tempContainer.querySelector('div[role="button"]');
+        }
+        if (!calendarButton) {
+          // Look for any clickable element in the container
+          calendarButton = tempContainer.querySelector('[onclick], [data-calendar]');
+        }
+        
         if (calendarButton) {
+          console.log('Found calendar button:', calendarButton);
           // Trigger the calendar popup
           calendarButton.click();
           
@@ -83,12 +96,18 @@ export const useGoogleCalendar = () => {
             }
           }, 500);
         } else {
-          console.error('Google Calendar button not found');
-          if (document.body.contains(tempContainer)) {
-            document.body.removeChild(tempContainer);
-          }
+          console.error('Google Calendar button not found, checking container contents:', tempContainer.innerHTML);
+          // Try to trigger any event listeners on the container itself
+          const event = new MouseEvent('click', { bubbles: true, cancelable: true });
+          tempContainer.dispatchEvent(event);
+          
+          setTimeout(() => {
+            if (document.body.contains(tempContainer)) {
+              document.body.removeChild(tempContainer);
+            }
+          }, 500);
         }
-      }, 200);
+      }, 500); // Increased wait time
     } catch (error) {
       console.error('Error opening Google Calendar:', error);
       if (document.body.contains(tempContainer)) {
