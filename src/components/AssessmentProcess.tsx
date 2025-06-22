@@ -172,6 +172,24 @@ const AssessmentProcess = () => {
       // gray-500
     }
   };
+
+  // Function to get gradient background based on assessment key
+  const getGradientBackground = (key: string) => {
+    switch (key) {
+      case 'mobility':
+        return 'bg-gradient-to-br from-blue-50 via-white to-blue-50/40';
+      case 'strength':
+        return 'bg-gradient-to-br from-red-50 via-white to-red-50/40';
+      case 'metabolic':
+        return 'bg-gradient-to-br from-green-50 via-white to-green-50/40';
+      case 'body':
+        return 'bg-gradient-to-br from-purple-50 via-white to-purple-50/40';
+      case 'golf':
+        return 'bg-gradient-to-br from-yellow-50 via-white to-yellow-50/40';
+      default:
+        return 'bg-gradient-to-br from-slate-50 via-gray-50 to-blue-50/40';
+    }
+  };
   
   return <section id="assessment" className="section-padding bg-white" ref={sectionRef}>
       <div className="container mx-auto container-padding">
@@ -283,7 +301,7 @@ const AssessmentProcess = () => {
           
           {/* Right side: Description and Progress */}
           <div className="w-1/2">
-            <Card className="bg-gradient-to-br from-slate-50 via-gray-50 to-blue-50/40 shadow-2xl border-2 border-slate-200/60 backdrop-blur-sm hover:shadow-3xl transition-all duration-500 hover:scale-[1.02]">
+            <Card className={cn("shadow-2xl border-2 border-slate-200/60 backdrop-blur-sm hover:shadow-3xl transition-all duration-500 hover:scale-[1.02]", getGradientBackground(activeAssessment))}>
               <CardContent className="p-8 relative overflow-hidden">
                 {/* Subtle background pattern */}
                 <div className="absolute inset-0 bg-gradient-to-br from-transparent via-slate-50/30 to-blue-50/20 pointer-events-none"></div>
