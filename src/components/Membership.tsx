@@ -35,7 +35,7 @@ const Membership = () => {
       title: t('membership.report.title'),
       frequency: t('membership.report.frequency'),
       items: [{
-        title: t('membership.report.title'),
+        title: 'Performance Report',
         description: t('membership.report.description')
       }]
     }
