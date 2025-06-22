@@ -1,4 +1,3 @@
-
 const en = {
   // Navigation
   'nav.home': 'Home',
@@ -107,6 +106,7 @@ const en = {
   'gettingstarted.step4.hours': '18 hours/month',
   'gettingstarted.assessmentPackage.title': 'Assessment Package',
   'gettingstarted.assessmentPackage.price': 'NT$12,000',
+  'gettingstarted.monthlyProgram.price': 'NT$18,000/month',
 
   // Schedule
   'schedule.title': 'Weekly Training Schedule',

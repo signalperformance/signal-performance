@@ -1,4 +1,3 @@
-
 const zh = {
   // Navigation
   'nav.home': '首頁',
@@ -107,6 +106,7 @@ const zh = {
   'gettingstarted.step4.hours': '18 小時/月',
   'gettingstarted.assessmentPackage.title': '評估方案',
   'gettingstarted.assessmentPackage.price': 'NT$12,000',
+  'gettingstarted.monthlyProgram.price': 'NT$18,000/月',
 
   // Schedule
   'schedule.title': '每週訓練課表',
