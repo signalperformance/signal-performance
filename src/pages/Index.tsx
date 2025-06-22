@@ -12,6 +12,7 @@ import Philosophy from "@/components/Philosophy";
 import WhoItsFor from "@/components/WhoItsFor";
 import WeeklySchedule from "@/components/WeeklySchedule";
 import Footer from "@/components/Footer";
+import FloatingAssessmentButton from "@/components/FloatingAssessmentButton";
 
 const Index = () => {
   const { isLoading, completeLoading } = useLoadingState();
@@ -36,6 +37,7 @@ const Index = () => {
       <GettingStarted />
       <About />
       <Footer />
+      <FloatingAssessmentButton />
     </div>
   );
 };
