@@ -19,7 +19,7 @@ const en = {
   'membership.price': 'NT$18,000/month',
   'membership.subtitle': 'All-inclusive membership.',
   'membership.physical.title': 'Physical Training',
-  'membership.physical.frequency': '(4x/week)',
+  'membership.physical.frequency': '4x/week',
   'membership.physical.assessment': 'Quarterly Performance Assessments',
   'membership.physical.assessment.description': 'Quarterly assessments provide objective data to guide your individualized training plan.',
   'membership.physical.coaching': '1-on-3 Fitness Coaching',
@@ -30,7 +30,7 @@ const en = {
   'membership.physical.app.description': 'Access your program anytime — in the facility, on the road, or at home — so you can train consistently anywhere.',
 
   'membership.mental.title': 'Mental Training',
-  'membership.mental.frequency': '(1x/month)',
+  'membership.mental.frequency': '1x/month',
   'membership.mental.coaching': '1-on-1 Mental Coaching',
   'membership.mental.coaching.description': 'Personalized mental coaching focused on performance — on and off the course.',
   'membership.mental.plan': 'Structured Mental Training Plan',
@@ -39,7 +39,7 @@ const en = {
   'membership.mental.toolkit.description': 'Receive a heart rate monitor and mobile app to practice skills learned in coaching sessions and track progress between sessions.',
 
   'membership.golf.title': 'Golf Training',
-  'membership.golf.frequency': '(1x/month)',
+  'membership.golf.frequency': '1x/month',
   'membership.golf.skillassessment': 'Skill Assessment',
   'membership.golf.skillassessment.description': 'Comprehensive evaluation that tests all parts of your game and tracks progress over time.',
   'membership.golf.simulator': 'Simulator Access (5 hrs/month)',
@@ -52,7 +52,7 @@ const en = {
   'membership.golf.fitting.description': 'Access in-house tools to measure loft, lie, and other club specs — make data-informed equipment adjustments for peak performance.',
 
   'membership.report.title': 'Performance Report',
-  'membership.report.frequency': '(1x/month)',
+  'membership.report.frequency': '1x/month',
   'membership.report.description': 'Monthly report summarizing progress across all areas with personalized feedback.',
 
   // Facility
