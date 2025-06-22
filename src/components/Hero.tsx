@@ -1,22 +1,22 @@
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useWaitlistDialog } from '@/hooks/useWaitlistDialog';
 import { useState, useEffect, useRef } from 'react';
 
 declare global {
   interface Window {
     VANTA: any;
     THREE: any;
-    calendar: any;
   }
 }
 
 const Hero = () => {
   const { t, language } = useLanguage();
+  const { openWaitlist } = useWaitlistDialog();
   const [isMobile, setIsMobile] = useState(false);
   const [vantaLoaded, setVantaLoaded] = useState(false);
   const vantaRef = useRef<HTMLDivElement>(null);
   const vantaEffect = useRef<any>(null);
-  const googleCalendarButtonRef = useRef<HTMLDivElement>(null);
 
   // Check for mobile device
   useEffect(() => {
@@ -24,8 +24,13 @@ const Hero = () => {
       setIsMobile(window.innerWidth < 768);
     };
 
+    // Set initial value
     checkIfMobile();
+
+    // Add event listener for window resize
     window.addEventListener('resize', checkIfMobile);
+
+    // Clean up
     return () => window.removeEventListener('resize', checkIfMobile);
   }, []);
 
@@ -50,6 +55,7 @@ const Hero = () => {
             scale: 1.00,
             scaleMobile: 1.00,
             color: 0x989b9b,
+            // Changed to medium gray color
             shininess: 0.00,
             waveHeight: 2.00,
             waveSpeed: 1.1,
@@ -69,6 +75,7 @@ const Hero = () => {
       }
     };
 
+    // Improved script loading detection with timeout and retries
     let retries = 0;
     const maxRetries = 50;
     const checkVanta = () => {
@@ -89,6 +96,7 @@ const Hero = () => {
       }
     };
 
+    // Add a timeout to prevent infinite retries
     const timeoutId = setTimeout(() => {
       if (!vantaLoaded) {
         console.error('⏰ VANTA loading timed out after 10 seconds');
@@ -104,53 +112,19 @@ const Hero = () => {
     };
   }, [vantaLoaded]);
 
-  // Load Google Calendar script and initialize button
-  useEffect(() => {
-    const loadGoogleCalendarScript = () => {
-      if (document.getElementById('google-calendar-script')) {
-        initializeGoogleCalendarButton();
-        return;
-      }
-
-      const script = document.createElement('script');
-      script.src = 'https://calendar.google.com/calendar/scheduling-button-script.js';
-      script.async = true;
-      script.id = 'google-calendar-script';
-      script.onload = () => {
-        initializeGoogleCalendarButton();
-      };
-      document.body.appendChild(script);
-
-      const link = document.createElement('link');
-      link.href = 'https://calendar.google.com/calendar/scheduling-button-script.css';
-      link.rel = 'stylesheet';
-      document.head.appendChild(link);
-    };
-
-    const initializeGoogleCalendarButton = () => {
-      if (window.calendar && window.calendar.schedulingButton && googleCalendarButtonRef.current) {
-        window.calendar.schedulingButton.load({
-          url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ0jnzzZw7z7Iwpdi24B5bFkJrr78-BVkS3GztoZgLiiP-3Uwevn0_rTk5CDgtDL_dyd2fYc4FZZ?gv=true',
-          color: '#039BE5',
-          label: 'Book an appointment',
-          target: googleCalendarButtonRef.current,
-        });
-      }
-    };
-
-    loadGoogleCalendarScript();
-  }, []);
-
   // Function to render headline with responsive behavior
   const renderHeadline = () => {
     const headlineText = t('hero.headline');
     
+    // On desktop (sm and above), render as single unbroken text with proper centering
     const desktopHeadline = (
       <span className="hidden sm:inline text-center w-full block">{headlineText}</span>
     );
     
+    // On mobile, render with explicit breaks
     const mobileHeadline = (() => {
       if (language === 'zh') {
+        // Split the Chinese title after "空間"
         const parts = headlineText.split('空間');
         if (parts.length > 1) {
           return (
@@ -164,6 +138,7 @@ const Hero = () => {
         return <span className="sm:hidden">{headlineText}</span>;
       }
       
+      // For English, find "Space" and add break after it
       const spaceWord = 'Space';
       if (headlineText.includes(spaceWord)) {
         const spaceIndex = headlineText.indexOf(spaceWord) + spaceWord.length;
@@ -193,15 +168,19 @@ const Hero = () => {
   // Function to render subtitle with responsive behavior
   const renderSubtitle = () => {
     if (language === 'zh') {
+      // Chinese version - always single line
       return '體能、心理與技術訓練集中於一個專業空間';
     }
     
+    // English version
     const fullSubtitle = 'Physical, mental, and skill training — all in one place';
     
+    // Desktop version - single line with em dash
     const desktopSubtitle = (
       <span className="hidden sm:inline">{fullSubtitle}</span>
     );
     
+    // Mobile version - two lines without em dash
     const mobileSubtitle = (
       <span className="sm:hidden">
         <span>Physical, mental, and skill training</span>
@@ -218,19 +197,14 @@ const Hero = () => {
     );
   };
 
+  // Custom waitlist button text
   const getWaitlistButtonText = () => {
     return language === 'zh' ? '預約評估喔' : 'Book Assessment';
   };
 
-  const handleBookAssessmentClick = () => {
-    const googleButton = document.querySelector('.scheduling-button');
-    if (googleButton instanceof HTMLElement) {
-      googleButton.click();
-    }
-  };
-
   return (
     <section id="home" className="relative min-h-[100svh] overflow-hidden flex items-center justify-center">
+      {/* VANTA Waves Background with fallback */}
       <div 
         ref={vantaRef} 
         className="absolute inset-0 w-full h-full z-0" 
@@ -240,6 +214,7 @@ const Hero = () => {
         }} 
       />
       
+      {/* Content Overlay */}
       <div className="relative z-10 container mx-auto px-4 text-center py-16 md:py-0">
         <h1 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-1 sm:mb-2 text-signal-charcoal max-w-5xl mx-auto leading-tight py-[35px] ${language === 'en' ? 'sm:!text-5xl md:!text-6xl lg:!text-6xl xl:!text-6xl' : ''}`}>
           {renderHeadline()}
@@ -250,6 +225,7 @@ const Hero = () => {
         </p>
         
         <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
+          {/* Philosophy button */}
           <Button 
             size="lg" 
             onClick={() => document.getElementById('philosophy')?.scrollIntoView({ behavior: 'smooth' })} 
@@ -257,17 +233,23 @@ const Hero = () => {
           >
             {t('hero.cta.membership')}
           </Button>
+          {/* Waitlist button with ID for tracking visibility - now links to LINE */}
           <Button 
             id="hero-waitlist-button" 
             size="lg" 
-            onClick={handleBookAssessmentClick}
+            asChild
             className="font-medium px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg text-signal-white bg-signal-gold hover:bg-signal-gold/90 active:bg-signal-gold focus:bg-signal-gold"
           >
-            {getWaitlistButtonText()}
+            <a 
+              href="https://lin.ee/CaWvRmo" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              {getWaitlistButtonText()}
+            </a>
           </Button>
         </div>
       </div>
-      <div ref={googleCalendarButtonRef} style={{ display: 'none' }} />
     </section>
   );
 };
