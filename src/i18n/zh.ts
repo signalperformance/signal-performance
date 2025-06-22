@@ -110,7 +110,7 @@ const zh = {
 
   // Schedule
   'schedule.title': '每週訓練課表',
-  'schedule.subtitle': '依據你的目標與訓練階段，選擇每週 4 堂課，由教練協助規劃。',
+  'schedule.subtitle': '依據你的目標與訓練階段，選擇每週 4 堂課，由教練協助規劃。我們區分專業組和業餘組。',
   'schedule.filter.all': '所有課程',
   'schedule.filter.pro': '僅限職業',
   'schedule.filter.open': '所有會員',
