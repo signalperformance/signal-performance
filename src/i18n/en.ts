@@ -8,7 +8,7 @@ const en = {
   'nav.login': 'Member Login',
 
   // Hero
-  'hero.headline': 'Holistic Training Space for Golfers',
+  'hero.headline': 'Holistic Training Space for Elite Golfers',
   'hero.subheadline': 'Physical, mental, and skill training — all in one place',
   'hero.cta.membership': 'Explore Membership',
   'hero.cta.assessment': 'Book Assessment',
