@@ -1,11 +1,10 @@
-
 import { useState, useEffect } from 'react';
 import { Calendar } from '@/components/ui/calendar';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/integrations/supabase/client';
 import { format, startOfMonth, endOfMonth, eachDayOfInterval } from 'date-fns';
-import { Clock } from 'lucide-react';
+import { Clock, AlertCircle, CheckCircle, Info } from 'lucide-react';
 
 interface AvailabilityCalendarProps {
   children: React.ReactNode;
@@ -24,6 +23,15 @@ interface HourlySlot {
 interface HourlyAvailability {
   date: string;
   hourlyAvailability: HourlySlot[];
+  totalEvents?: number;
+  relevantEvents?: number;
+  timezone?: string;
+  debugInfo?: {
+    searchRange?: string;
+    calendarId?: string;
+    message?: string;
+    suggestedFixes?: string[];
+  };
 }
 
 const AvailabilityCalendar = ({ children }: AvailabilityCalendarProps) => {
@@ -34,6 +42,7 @@ const AvailabilityCalendar = ({ children }: AvailabilityCalendarProps) => {
   const [loading, setLoading] = useState(false);
   const [loadingHourly, setLoadingHourly] = useState(false);
   const [currentMonth, setCurrentMonth] = useState(new Date());
+  const [debugMode, setDebugMode] = useState(false);
 
   // Function to check availability for a specific date
   const checkDateAvailability = async (date: Date) => {
@@ -64,16 +73,26 @@ const AvailabilityCalendar = ({ children }: AvailabilityCalendarProps) => {
     try {
       const dateString = format(date, 'yyyy-MM-dd');
       
+      console.log(`🔍 Fetching hourly availability for ${dateString}`);
+      
       const { data, error } = await supabase.functions.invoke('check-availability', {
         body: { date: dateString }
       });
 
       if (error) {
         console.error('Error checking hourly availability:', error);
-        setHourlyData(null);
+        setHourlyData({
+          date: dateString,
+          hourlyAvailability: [],
+          debugInfo: {
+            message: 'Error connecting to calendar service',
+            suggestedFixes: ['Check internet connection', 'Verify calendar integration']
+          }
+        });
         return;
       }
 
+      console.log('📊 Received availability data:', data);
       setHourlyData(data);
     } catch (error) {
       console.error('Error checking hourly availability:', error);
@@ -158,9 +177,19 @@ const AvailabilityCalendar = ({ children }: AvailabilityCalendarProps) => {
       <DialogTrigger asChild>
         {children}
       </DialogTrigger>
-      <DialogContent className="sm:max-w-2xl max-h-[80vh] overflow-y-auto">
+      <DialogContent className="sm:max-w-4xl max-h-[80vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>My Availability</DialogTitle>
+          <DialogTitle className="flex items-center justify-between">
+            My Availability
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setDebugMode(!debugMode)}
+              className="text-xs"
+            >
+              {debugMode ? 'Hide Debug' : 'Show Debug'}
+            </Button>
+          </DialogTitle>
         </DialogHeader>
         <div className="flex flex-col lg:flex-row gap-6">
           {/* Calendar Section */}
@@ -207,10 +236,26 @@ const AvailabilityCalendar = ({ children }: AvailabilityCalendarProps) => {
                     Loading hourly availability...
                   </div>
                 ) : hourlyData ? (
-                  <div className="space-y-2">
-                    <p className="text-sm text-muted-foreground mb-3">
-                      Business hours: 9:00 AM - 6:00 PM
-                    </p>
+                  <div className="space-y-4">
+                    {/* Summary Information */}
+                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                      <div className="flex items-center gap-2 mb-2">
+                        <Info className="w-4 h-4 text-blue-600" />
+                        <span className="text-sm font-medium text-blue-800">Calendar Status</span>
+                      </div>
+                      <div className="text-xs text-blue-700 space-y-1">
+                        <div>Business hours: 9:00 AM - 6:00 PM</div>
+                        {hourlyData.timezone && <div>Timezone: {hourlyData.timezone}</div>}
+                        {typeof hourlyData.totalEvents === 'number' && (
+                          <div>Total events found: {hourlyData.totalEvents}</div>
+                        )}
+                        {typeof hourlyData.relevantEvents === 'number' && (
+                          <div>Events on this date: {hourlyData.relevantEvents}</div>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Hourly Slots */}
                     <div className="grid gap-2">
                       {hourlyData.hourlyAvailability.map((slot) => (
                         <div
@@ -222,12 +267,50 @@ const AvailabilityCalendar = ({ children }: AvailabilityCalendarProps) => {
                           }`}
                         >
                           <span className="font-medium">{slot.time}</span>
-                          <span className="text-sm">
-                            {slot.available ? 'Available' : 'Busy'}
-                          </span>
+                          <div className="flex items-center gap-2">
+                            {slot.available ? (
+                              <CheckCircle className="w-4 h-4" />
+                            ) : (
+                              <AlertCircle className="w-4 h-4" />
+                            )}
+                            <span className="text-sm">
+                              {slot.available ? 'Available' : 'Busy'}
+                            </span>
+                          </div>
                         </div>
                       ))}
                     </div>
+
+                    {/* Debug Information */}
+                    {debugMode && hourlyData.debugInfo && (
+                      <div className="bg-gray-50 border border-gray-200 rounded-lg p-3">
+                        <div className="flex items-center gap-2 mb-2">
+                          <Info className="w-4 h-4 text-gray-600" />
+                          <span className="text-sm font-medium text-gray-800">Debug Information</span>
+                        </div>
+                        <div className="text-xs text-gray-600 space-y-1">
+                          {hourlyData.debugInfo.searchRange && (
+                            <div>Search range: {hourlyData.debugInfo.searchRange}</div>
+                          )}
+                          {hourlyData.debugInfo.calendarId && (
+                            <div>Calendar ID: {hourlyData.debugInfo.calendarId}</div>
+                          )}
+                          {hourlyData.debugInfo.message && (
+                            <div className="text-red-600 font-medium">{hourlyData.debugInfo.message}</div>
+                          )}
+                          {hourlyData.debugInfo.suggestedFixes && (
+                            <div>
+                              <div className="font-medium">Suggested fixes:</div>
+                              <ul className="list-disc list-inside ml-2">
+                                {hourlyData.debugInfo.suggestedFixes.map((fix, index) => (
+                                  <li key={index}>{fix}</li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 ) : (
                   <div className="text-sm text-muted-foreground">
