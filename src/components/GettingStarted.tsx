@@ -96,7 +96,7 @@ const GettingStarted = () => {
                   </div>
                   <h3 className="font-semibold text-signal-charcoal px-2 text-2xl">{steps[3].title}</h3>
                   <p className="font-medium text-signal-gold mb-1 text-lg">{steps[3].hours}</p>
-                  <p className="text-muted-foreground text-sm mt-1 px-4">{steps[3].subtitle}</p>
+                  <p className="text-muted-foreground mt-1 px-4 text-base">{steps[3].subtitle}</p>
                 </div>
               </div>}
           </div>
