@@ -8,7 +8,7 @@ const Footer = () => {
   return <footer className="bg-signal-black text-white py-6">
       <div className="container mx-auto container-padding">
         <div className="text-center text-muted-foreground text-sm">
-          <p className="text-slate-50 text-sm">{copyrightText}</p>
+          <p className="text-slate-50 text-xs">{copyrightText}</p>
         </div>
       </div>
     </footer>;
