@@ -66,7 +66,7 @@ const Hero = () => {
             <h1 className={`font-bold mb-4 text-white leading-tight ${
               isMobile 
                 ? 'text-3xl sm:text-4xl' 
-                : 'text-4xl md:text-5xl lg:text-6xl xl:text-7xl'
+                : 'text-3xl md:text-4xl lg:text-5xl xl:text-6xl'
             }`}
             style={{ 
               whiteSpace: isMobile && language === 'en' ? 'pre-line' : 'normal'
