@@ -61,9 +61,9 @@ const Hero = () => {
       {/* Content Card */}
       <div className="relative z-10 container mx-auto px-4 py-16 md:py-0">
         <div className="max-w-4xl mx-auto text-center">
-          {/* Modern card container with improved contrast */}
-          <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl border border-white/40 p-8 md:p-12 lg:p-16">
-            <h1 className={`font-bold mb-4 text-signal-charcoal leading-tight ${
+          {/* Modern card container with signal-charcoal background */}
+          <div className="bg-signal-charcoal/95 backdrop-blur-sm rounded-2xl shadow-xl border border-signal-charcoal/60 p-8 md:p-12 lg:p-16">
+            <h1 className={`font-bold mb-4 text-white leading-tight ${
               isMobile 
                 ? 'text-3xl sm:text-4xl' 
                 : 'text-4xl md:text-5xl lg:text-6xl xl:text-7xl'
@@ -74,7 +74,7 @@ const Hero = () => {
               {displayHeadline}
             </h1>
             
-            <p className={`text-signal-charcoal mb-8 sm:mb-12 ${
+            <p className={`text-white/90 mb-8 sm:mb-12 ${
               isMobile 
                 ? 'text-lg sm:text-xl' 
                 : 'text-xl md:text-2xl lg:text-3xl'
@@ -87,7 +87,7 @@ const Hero = () => {
               <Button 
                 size="lg" 
                 onClick={() => document.getElementById('philosophy')?.scrollIntoView({ behavior: 'smooth' })} 
-                className="text-white font-medium px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg flex items-center gap-2 bg-signal-charcoal hover:bg-signal-charcoal/90 active:bg-signal-charcoal focus:bg-signal-charcoal transition-all duration-300 hover:shadow-lg hover:scale-105"
+                className="text-signal-charcoal font-medium px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg flex items-center gap-2 bg-white hover:bg-white/90 active:bg-white focus:bg-white transition-all duration-300 hover:shadow-lg hover:scale-105"
               >
                 {t('hero.cta.membership')}
               </Button>
@@ -96,7 +96,7 @@ const Hero = () => {
               <Button 
                 size="lg" 
                 asChild
-                className="font-medium px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg text-signal-white bg-signal-gold hover:bg-signal-gold/90 active:bg-signal-gold focus:bg-signal-gold transition-all duration-300 hover:shadow-lg hover:scale-105"
+                className="font-medium px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg text-signal-charcoal bg-signal-gold hover:bg-signal-gold/90 active:bg-signal-gold focus:bg-signal-gold transition-all duration-300 hover:shadow-lg hover:scale-105"
               >
                 <a 
                   href="https://lin.ee/CaWvRmo" 
