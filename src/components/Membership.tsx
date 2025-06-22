@@ -1,7 +1,6 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-
 const Membership = () => {
   const {
     t
@@ -54,7 +53,7 @@ const Membership = () => {
         <div className="text-center mb-12"> {/* Increased bottom margin for better spacing */}
           <h2 className="text-3xl md:text-4xl font-bold mb-1 font-lora">{t('membership.title')}</h2>
           <p className="text-xl text-muted-foreground font-medium">{t('membership.price')}</p>
-          <p className="text-sm text-muted-foreground italic mt-1">{t('membership.subtitle')}</p>
+          
         </div>
 
         {/* Unified Grid Layout for all screen sizes */}
