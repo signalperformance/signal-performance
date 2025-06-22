@@ -64,6 +64,22 @@ const Membership = () => {
     }
   };
 
+  // Function to get gradient background based on category key
+  const getGradientBackground = (key: string) => {
+    switch (key) {
+      case 'physical':
+        return 'bg-gradient-to-br from-blue-50 via-white to-blue-50/40';
+      case 'mental':
+        return 'bg-gradient-to-br from-red-50 via-white to-red-50/40';
+      case 'golf':
+        return 'bg-gradient-to-br from-green-50 via-white to-green-50/40';
+      case 'report':
+        return 'bg-gradient-to-br from-gray-50 via-white to-gray-50/40';
+      default:
+        return 'bg-gradient-to-br from-slate-50 via-gray-50 to-blue-50/40';
+    }
+  };
+
   return (
     <section id="membership" className="section-padding bg-signal-light-gray">
       <div className="container mx-auto container-padding">
@@ -82,13 +98,16 @@ const Membership = () => {
               <Card 
                 key={key} 
                 className={cn(
-                  "shadow-lg rounded-xl overflow-hidden flex flex-col transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border-l-4",
-                  styles.bg,
+                  "shadow-2xl rounded-xl overflow-hidden flex flex-col border-l-4 border-2 border-slate-200/60 backdrop-blur-sm hover:shadow-3xl transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1",
+                  getGradientBackground(key),
                   styles.border
                 )}
               >
-                <CardContent className="p-6 md:p-8 flex-grow flex flex-col">
-                  <div className="flex items-center mb-6">
+                <CardContent className="p-6 md:p-8 flex-grow flex flex-col relative overflow-hidden">
+                  {/* Subtle background pattern */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-transparent via-slate-50/30 to-blue-50/20 pointer-events-none"></div>
+                  
+                  <div className="flex items-center mb-6 relative z-10">
                     <div className="flex-grow">
                       <h3 className="text-xl md:text-2xl font-lora font-medium text-foreground">
                         {category.title}
@@ -99,7 +118,7 @@ const Membership = () => {
                     </div>
                   </div>
 
-                  <div className="flex-grow">
+                  <div className="flex-grow relative z-10">
                     {item.title && (
                       <h4 className="font-medium text-base md:text-lg">{item.title}</h4>
                     )}
