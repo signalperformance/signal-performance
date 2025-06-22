@@ -27,7 +27,7 @@ import { waitlistDialogSchema, WaitlistDialogValues } from '@/lib/validations/wa
 
 
 const WaitlistDialog = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { isOpen, closeWaitlist } = useWaitlistDialog();
@@ -110,19 +110,29 @@ const WaitlistDialog = () => {
     }
   };
 
+  // Function to get Book Assessment button text based on language
+  const getBookAssessmentText = () => {
+    return language === 'zh' ? '預約評估' : 'Book Assessment';
+  };
+
   return (
     <>
-      {/* Fixed LINE add friend button at bottom right - only shown when hero waitlist button is not visible */}
+      {/* Fixed Book Assessment button at bottom right - only shown when hero button is not visible */}
       {showFixedButton && (
         <div className="fixed bottom-8 right-8 z-40">
-          <a href="https://lin.ee/CaWvRmo" target="_blank" rel="noopener noreferrer">
-            <img 
-              src="https://scdn.line-apps.com/n/line_add_friends/btn/zh-Hant.png" 
-              alt="預約評估喔" 
-              height="28" 
-              className="shadow-lg hover:opacity-90 transition-opacity"
-            />
-          </a>
+          <Button
+            size="lg"
+            asChild
+            className="font-medium px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg text-signal-white bg-signal-gold hover:bg-signal-gold/90 active:bg-signal-gold focus:bg-signal-gold shadow-lg"
+          >
+            <a 
+              href="https://lin.ee/CaWvRmo" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              {getBookAssessmentText()}
+            </a>
+          </Button>
         </div>
       )}
 
