@@ -199,7 +199,7 @@ const Hero = () => {
 
   // Custom waitlist button text
   const getWaitlistButtonText = () => {
-    return language === 'zh' ? '預約評估喔' : 'Book Assessment';
+    return language === 'zh' ? '預約評估' : 'Book Assessment';
   };
 
   return (
@@ -245,7 +245,7 @@ const Hero = () => {
               target="_blank" 
               rel="noopener noreferrer"
             >
-              {t('hero.cta.assessment')}
+              {getWaitlistButtonText()}
             </a>
           </Button>
         </div>
