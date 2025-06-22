@@ -1,4 +1,3 @@
-
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
@@ -35,7 +34,7 @@ const Membership = () => {
       title: t('membership.report.title'),
       frequency: t('membership.report.frequency'),
       items: [{
-        title: 'Performance Report',
+        title: t('membership.report.performancereport'),
         description: t('membership.report.description')
       }]
     }
@@ -108,7 +107,7 @@ const Membership = () => {
                     <h3 className="text-xl md:text-2xl font-lora font-medium text-foreground mb-3">
                       {category.title}
                     </h3>
-                    <p className={cn("text-lg md:text-xl font-bold", styles.text)}>
+                    <p className={cn("text-xl md:text-2xl font-bold", styles.text)}>
                       {category.frequency}
                     </p>
                   </div>

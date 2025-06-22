@@ -34,6 +34,7 @@ const en = {
 
   'membership.report.title': 'Progress Tracking',
   'membership.report.frequency': '1x/month',
+  'membership.report.performancereport': 'Performance Report',
   'membership.report.description': 'Monthly report summarizing progress across all areas with personalized feedback.',
 
   // Assessment Process
