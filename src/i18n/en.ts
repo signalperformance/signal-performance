@@ -113,7 +113,7 @@ const en = {
   'schedule.subtitle': 'Choose four sessions per week based on your goals and training phase. We offer separate groups for professionals and amateurs.',
   'schedule.filter.all': 'All Classes',
   'schedule.filter.pro': 'Pro Only',
-  'schedule.filter.open': 'Open to All',
+  'schedule.filter.open': 'Amateur Only',
   'schedule.days.monday': 'Mon',
   'schedule.days.tuesday': 'Tue',
   'schedule.days.wednesday': 'Wed',
