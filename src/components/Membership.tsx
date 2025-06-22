@@ -1,4 +1,3 @@
-
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
@@ -64,7 +63,6 @@ const Membership = () => {
     }
   };
 
-  // Function to get gradient background based on category key
   const getGradientBackground = (key: string) => {
     switch (key) {
       case 'physical':
@@ -83,13 +81,12 @@ const Membership = () => {
   return (
     <section id="membership" className="section-padding bg-signal-light-gray">
       <div className="container mx-auto container-padding">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-1 font-lora">{t('membership.title')}</h2>
-          <p className="text-xl text-muted-foreground font-medium">{t('membership.price')}</p>
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 font-lora">{t('membership.title')}</h2>
+          <p className="text-lg text-muted-foreground">{t('membership.price')}</p>
         </div>
 
-        {/* Single Grid Layout - 4 columns on desktop, responsive on mobile */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {Object.entries(categories).map(([key, category]) => {
             const item = category.items[0];
             const styles = categoryStyles[key as keyof typeof categoryStyles];
@@ -104,7 +101,6 @@ const Membership = () => {
                 )}
               >
                 <CardContent className="p-6 md:p-8 flex-grow flex flex-col relative overflow-hidden">
-                  {/* Subtle background pattern */}
                   <div className="absolute inset-0 bg-gradient-to-br from-transparent via-slate-50/30 to-blue-50/20 pointer-events-none"></div>
                   
                   <div className="flex items-center mb-6 relative z-10">
