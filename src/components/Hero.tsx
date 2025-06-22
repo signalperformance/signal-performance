@@ -1,4 +1,3 @@
-
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useState, useEffect, useRef } from 'react';
@@ -115,52 +114,9 @@ const Hero = () => {
   const renderHeadline = () => {
     const headlineText = t('hero.headline');
     
-    // On desktop (sm and above), render as single unbroken text with proper centering
-    const desktopHeadline = (
-      <span className="hidden sm:inline text-center w-full block">{headlineText}</span>
-    );
-    
-    // On mobile, render with explicit breaks
-    const mobileHeadline = (() => {
-      if (language === 'zh') {
-        // Split the Chinese title after "空間"
-        const parts = headlineText.split('空間');
-        if (parts.length > 1) {
-          return (
-            <span className="sm:hidden">
-              <span>{parts[0]}空間</span>
-              <br />
-              <span>{parts[1].trim()}</span>
-            </span>
-          );
-        }
-        return <span className="sm:hidden">{headlineText}</span>;
-      }
-      
-      // For English, find "Space" and add break after it
-      const spaceWord = 'Space';
-      if (headlineText.includes(spaceWord)) {
-        const spaceIndex = headlineText.indexOf(spaceWord) + spaceWord.length;
-        const beforeBreak = headlineText.substring(0, spaceIndex);
-        const afterBreak = headlineText.substring(spaceIndex).trim();
-        
-        return (
-          <span className="sm:hidden">
-            <span className="whitespace-nowrap">{beforeBreak}</span>
-            <br />
-            <span>{afterBreak}</span>
-          </span>
-        );
-      }
-      
-      return <span className="sm:hidden">{headlineText}</span>;
-    })();
-    
+    // Single line for both desktop and mobile, with natural wrapping when needed
     return (
-      <>
-        {desktopHeadline}
-        {mobileHeadline}
-      </>
+      <span className="text-center w-full block">{headlineText}</span>
     );
   };
 
@@ -215,7 +171,7 @@ const Hero = () => {
       
       {/* Content Overlay */}
       <div className="relative z-10 container mx-auto px-4 text-center py-16 md:py-0">
-        <h1 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-1 sm:mb-2 text-signal-charcoal max-w-5xl mx-auto leading-tight py-[35px] ${language === 'en' ? 'sm:!text-5xl md:!text-6xl lg:!text-6xl xl:!text-6xl' : ''}`}>
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-1 sm:mb-2 text-signal-charcoal max-w-6xl mx-auto leading-tight py-[35px]">
           {renderHeadline()}
         </h1>
         
