@@ -184,12 +184,13 @@ const AssessmentProcess = () => {
         return 'bg-gradient-to-br from-slate-50 via-gray-50 to-blue-50/40';
     }
   };
+
   return <section id="assessment" className="section-padding bg-white" ref={sectionRef}>
       <div className="container mx-auto container-padding">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 font-lora">{t('assessment.title')}</h2>
-          <p className="text-muted-foreground text-lg md:whitespace-nowrap md:flex md:justify-center">
-            <span className="max-w-2xl">{t('assessment.description')}</span>
+          <p className="text-muted-foreground text-lg text-center md:whitespace-nowrap">
+            <span className="max-w-2xl mx-auto block">{t('assessment.description')}</span>
           </p>
         </div>
 
