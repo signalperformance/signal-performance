@@ -6,7 +6,6 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Move, Activity, User, Dumbbell, Club, ChevronRight } from "lucide-react";
 import { useLanguage } from '@/contexts/LanguageContext';
-
 const AssessmentProcess = () => {
   const {
     t,
@@ -17,7 +16,6 @@ const AssessmentProcess = () => {
   const [isInViewport, setIsInViewport] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
-  
   const assessments = {
     mobility: {
       title: t('assessment.joint.title'),
@@ -72,21 +70,16 @@ const AssessmentProcess = () => {
 
   // Set up intersection observer to detect when the section is in viewport
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsInViewport(entry.isIntersecting);
-      },
-      {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.3, // When 30% of the element is visible
-      }
-    );
-
+    const observer = new IntersectionObserver(([entry]) => {
+      setIsInViewport(entry.isIntersecting);
+    }, {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.3 // When 30% of the element is visible
+    });
     if (sectionRef.current) {
       observer.observe(sectionRef.current);
     }
-
     return () => {
       if (sectionRef.current) {
         observer.unobserve(sectionRef.current);
@@ -101,14 +94,14 @@ const AssessmentProcess = () => {
       clearTimeout(timerRef.current);
       timerRef.current = null;
     }
-    
+
     // Only set a new timer if auto-progress is enabled AND component is in viewport
     if (autoProgressEnabled && isInViewport) {
       timerRef.current = setTimeout(() => {
         advanceToNextTab();
       }, 18000); // Changed from 8000 to 18000 (18 seconds)
     }
-    
+
     // Cleanup timer on unmount or when active assessment or viewport status changes
     return () => {
       if (timerRef.current) {
@@ -190,12 +183,11 @@ const AssessmentProcess = () => {
         return 'bg-gradient-to-br from-slate-50 via-gray-50 to-blue-50/40';
     }
   };
-  
   return <section id="assessment" className="section-padding bg-white" ref={sectionRef}>
       <div className="container mx-auto container-padding">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 font-lora">{t('assessment.title')}</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">{t('assessment.description')}</p>
+          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">{t('assessment.description')}</p>
         </div>
 
         {/* Desktop View: Radial Progress Wheel */}
@@ -216,84 +208,56 @@ const AssessmentProcess = () => {
                   
                   {/* Progress arcs - will draw in sequence based on active step */}
                   {Object.entries(assessments).map(([key, assessment], index) => {
-                    // Calculate the start and end angles for each segment
-                    const totalSegments = Object.keys(assessments).length;
-                    const segmentAngle = 360 / totalSegments;
-                    const startAngle = -90 + index * segmentAngle; // Start from top (12 o'clock)
-                    const endAngle = startAngle + segmentAngle;
+                  // Calculate the start and end angles for each segment
+                  const totalSegments = Object.keys(assessments).length;
+                  const segmentAngle = 360 / totalSegments;
+                  const startAngle = -90 + index * segmentAngle; // Start from top (12 o'clock)
+                  const endAngle = startAngle + segmentAngle;
 
-                    // Convert to radians for calculations
-                    const startRad = startAngle * Math.PI / 180;
-                    const endRad = endAngle * Math.PI / 180;
+                  // Convert to radians for calculations
+                  const startRad = startAngle * Math.PI / 180;
+                  const endRad = endAngle * Math.PI / 180;
 
-                    // Calculate points on circle for path
-                    const startX = 250 + 200 * Math.cos(startRad);
-                    const startY = 250 + 200 * Math.sin(startRad);
-                    const endX = 250 + 200 * Math.cos(endRad);
-                    const endY = 250 + 200 * Math.sin(endRad);
+                  // Calculate points on circle for path
+                  const startX = 250 + 200 * Math.cos(startRad);
+                  const startY = 250 + 200 * Math.sin(startRad);
+                  const endX = 250 + 200 * Math.cos(endRad);
+                  const endY = 250 + 200 * Math.sin(endRad);
 
-                    // Flag for large arc (0 for arc <180 degrees, 1 for arc >=180 degrees)
-                    const largeArcFlag = segmentAngle <= 180 ? "0" : "1";
+                  // Flag for large arc (0 for arc <180 degrees, 1 for arc >=180 degrees)
+                  const largeArcFlag = segmentAngle <= 180 ? "0" : "1";
 
-                    // Create the SVG arc path
-                    const path = `M ${250} ${250} L ${startX} ${startY} A 200 200 0 ${largeArcFlag} 1 ${endX} ${endY} Z`;
+                  // Create the SVG arc path
+                  const path = `M ${250} ${250} L ${startX} ${startY} A 200 200 0 ${largeArcFlag} 1 ${endX} ${endY} Z`;
 
-                    // Determine if this segment should be highlighted
-                    const isActive = activeAssessment === key;
-                    const shouldHighlight = assessments[activeAssessment as keyof typeof assessments].number >= assessment.number;
+                  // Determine if this segment should be highlighted
+                  const isActive = activeAssessment === key;
+                  const shouldHighlight = assessments[activeAssessment as keyof typeof assessments].number >= assessment.number;
 
-                    // Get the color matching the current segment's number
-                    const segmentColor = getCircleColor(key);
-                    return <path 
-                      key={key} 
-                      d={path} 
-                      fill={shouldHighlight ? segmentColor : "#f3f4f6"} 
-                      stroke="#fff" 
-                      strokeWidth="2" 
-                      opacity={isActive ? "1" : "0.7"} 
-                      className="transition-all duration-300 cursor-pointer hover:opacity-90" 
-                      onClick={() => handleTabClick(key)} 
-                    />;
-                  })}
+                  // Get the color matching the current segment's number
+                  const segmentColor = getCircleColor(key);
+                  return <path key={key} d={path} fill={shouldHighlight ? segmentColor : "#f3f4f6"} stroke="#fff" strokeWidth="2" opacity={isActive ? "1" : "0.7"} className="transition-all duration-300 cursor-pointer hover:opacity-90" onClick={() => handleTabClick(key)} />;
+                })}
                   
                   {/* Assessment number points on the wheel */}
                   {Object.entries(assessments).map(([key, assessment]) => {
-                    // Calculate position on the circle
-                    const angle = -90 + (assessment.number - 1) * (360 / Object.keys(assessments).length);
-                    const rad = angle * Math.PI / 180;
-                    const x = 250 + 200 * Math.cos(rad);
-                    const y = 250 + 200 * Math.sin(rad);
+                  // Calculate position on the circle
+                  const angle = -90 + (assessment.number - 1) * (360 / Object.keys(assessments).length);
+                  const rad = angle * Math.PI / 180;
+                  const x = 250 + 200 * Math.cos(rad);
+                  const y = 250 + 200 * Math.sin(rad);
 
-                    // Determine if this point should be highlighted
-                    const isActive = activeAssessment === key;
-                    // Get proper color for the circle based on assessment key
-                    const circleColor = getCircleColor(key);
-                    return <g 
-                      key={key} 
-                      onClick={() => handleTabClick(key)} 
-                      className="cursor-pointer">
-                          <circle 
-                            cx={x} 
-                            cy={y} 
-                            r="24" 
-                            fill={isActive ? "white" : "#f9fafb"} 
-                            stroke={isActive ? circleColor : "#e5e7eb"} 
-                            strokeWidth="2" 
-                            className="transition-all duration-300" 
-                          />
-                          <text 
-                            x={x} 
-                            y={y} 
-                            textAnchor="middle" 
-                            dominantBaseline="central" 
-                            fill={circleColor} 
-                            fontWeight="bold" 
-                            fontSize="16"
-                          >
+                  // Determine if this point should be highlighted
+                  const isActive = activeAssessment === key;
+                  // Get proper color for the circle based on assessment key
+                  const circleColor = getCircleColor(key);
+                  return <g key={key} onClick={() => handleTabClick(key)} className="cursor-pointer">
+                          <circle cx={x} cy={y} r="24" fill={isActive ? "white" : "#f9fafb"} stroke={isActive ? circleColor : "#e5e7eb"} strokeWidth="2" className="transition-all duration-300" />
+                          <text x={x} y={y} textAnchor="middle" dominantBaseline="central" fill={circleColor} fontWeight="bold" fontSize="16">
                             {assessment.number}
                           </text>
                         </g>;
-                  })}
+                })}
                 </svg>
               </div>
             </div>
@@ -318,12 +282,7 @@ const AssessmentProcess = () => {
                     </div>
                     
                     {/* Next Step Button moved to be inline with title */}
-                    <Button 
-                      onClick={handleNextStepClick}
-                      variant="outline"
-                      className="group border-2 border-signal-gold text-signal-gold hover:bg-signal-gold hover:text-white transition-all duration-300 shadow-md hover:shadow-lg"
-                      size="sm"
-                    >
+                    <Button onClick={handleNextStepClick} variant="outline" className="group border-2 border-signal-gold text-signal-gold hover:bg-signal-gold hover:text-white transition-all duration-300 shadow-md hover:shadow-lg" size="sm">
                       {language === 'zh' ? '下一步' : 'Next Step'}
                       <ChevronRight className="ml-1 w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                     </Button>
@@ -344,17 +303,13 @@ const AssessmentProcess = () => {
         
         {/* Mobile View: Improved Tabs Layout */}
         <div className="md:hidden">
-          <Tabs value={activeAssessment} onValueChange={(value) => handleTabClick(value)} className="w-full">
+          <Tabs value={activeAssessment} onValueChange={value => handleTabClick(value)} className="w-full">
             <TabsList className="grid grid-cols-5 mb-6 rounded-xl p-1 bg-muted/20 shadow-sm">
               {Object.entries(assessments).map(([key, assessment]) => {
               const textColorClass = getTextColorClass(key);
               const isActive = activeAssessment === key;
               const circleColor = getCircleColor(key);
-              return <TabsTrigger 
-                key={key} 
-                value={key} 
-                className={cn("flex justify-center py-3 rounded-lg transition-all", isActive ? "shadow-sm" : "hover:bg-muted/40")}
-              >
+              return <TabsTrigger key={key} value={key} className={cn("flex justify-center py-3 rounded-lg transition-all", isActive ? "shadow-sm" : "hover:bg-muted/40")}>
                     <div className={cn("w-10 h-10 rounded-full flex items-center justify-center", isActive ? "bg-white shadow-md" : "bg-gray-50")} style={{
                   border: isActive ? `2px solid ${circleColor}` : '1px solid #e5e7eb'
                 }}>
@@ -393,5 +348,4 @@ const AssessmentProcess = () => {
       </div>
     </section>;
 };
-
 export default AssessmentProcess;
