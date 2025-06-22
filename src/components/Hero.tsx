@@ -62,11 +62,11 @@ const Hero = () => {
       <div className="relative z-10 container mx-auto px-4 py-16 md:py-0">
         <div className="max-w-4xl mx-auto text-center">
           {/* Modern card container with gradient background like WhoItsFor section */}
-          <div className="bg-gradient-to-br from-signal-charcoal via-signal-charcoal/95 to-signal-black backdrop-blur-sm rounded-2xl shadow-xl border border-signal-charcoal/60 p-8 md:p-12 lg:p-16 hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1">
-            <div className="absolute inset-0 bg-gradient-to-br from-transparent via-signal-charcoal/30 to-signal-black/20 pointer-events-none rounded-2xl"></div>
+          <div className="bg-gradient-to-br from-slate-50 via-gray-50 to-blue-50/40 backdrop-blur-sm rounded-2xl shadow-xl border border-slate-200/60 p-8 md:p-12 lg:p-16 hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1">
+            <div className="absolute inset-0 bg-gradient-to-br from-transparent via-slate-50/30 to-blue-50/20 pointer-events-none rounded-2xl"></div>
             
             <div className="relative z-10">
-              <h1 className={`font-bold mb-4 text-white leading-tight ${
+              <h1 className={`font-bold mb-4 text-signal-charcoal leading-tight ${
                 isMobile 
                   ? 'text-3xl sm:text-4xl' 
                   : 'text-4xl md:text-5xl lg:text-6xl xl:text-7xl'
@@ -77,7 +77,7 @@ const Hero = () => {
                 {displayHeadline}
               </h1>
               
-              <p className={`text-white/90 mb-8 sm:mb-12 ${
+              <p className={`text-slate-600 mb-8 sm:mb-12 ${
                 isMobile 
                   ? 'text-lg sm:text-xl' 
                   : 'text-xl md:text-2xl lg:text-3xl'
