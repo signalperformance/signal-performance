@@ -33,6 +33,10 @@ const en = {
   'membership.golf.skillassessment': 'Skill Assessment',
   'membership.golf.skillassessment.description': 'Comprehensive evaluation that tests all parts of your game and tracks progress over time.',
 
+  'membership.report.title': 'Performance Report',
+  'membership.report.frequency': '1x/month',
+  'membership.report.description': 'Monthly report summarizing progress across all areas with personalized feedback.',
+
   // Assessment Process
   'assessment.title': 'Our Assessment Process',
   'assessment.description': 'Every quarter, members complete a full assessment across five essential areas to ensure their training is aligned, effective, and progressing toward their performance goals.',
@@ -119,6 +123,10 @@ const en = {
   'schedule.days.sunday': 'Sun',
   'schedule.timePeriods.am': 'AM',
   'schedule.timePeriods.pm': 'PM',
+  'schedule.classes.mobility': 'Mobility',
+  'schedule.classes.strength': 'Strength',
+  'schedule.classes.cardio': 'Cardio',
+  'schedule.classes.power': 'Power',
 
   // Who It's For
   'whoitsfor.title': 'Our Ideal Member',
