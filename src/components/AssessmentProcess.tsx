@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Move, Activity, User, Dumbbell, Club, ChevronRight } from "lucide-react";
 import { useLanguage } from '@/contexts/LanguageContext';
+
 const AssessmentProcess = () => {
   const {
     t,
@@ -187,7 +188,7 @@ const AssessmentProcess = () => {
       <div className="container mx-auto container-padding">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 font-lora">{t('assessment.title')}</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">{t('assessment.description')}</p>
+          <p className="text-muted-foreground max-w-2xl mx-auto text-lg md:whitespace-nowrap">{t('assessment.description')}</p>
         </div>
 
         {/* Desktop View: Radial Progress Wheel */}
@@ -348,4 +349,5 @@ const AssessmentProcess = () => {
       </div>
     </section>;
 };
+
 export default AssessmentProcess;
