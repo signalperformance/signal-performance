@@ -1,22 +1,11 @@
 
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useState, useEffect, useRef } from 'react';
-import { useAutoFontSize } from '@/hooks/useAutoFontSize';
-
-declare global {
-  interface Window {
-    VANTA: any;
-    THREE: any;
-  }
-}
+import { useState, useEffect } from 'react';
 
 const Hero = () => {
   const { t, language } = useLanguage();
   const [isMobile, setIsMobile] = useState(false);
-  const [vantaLoaded, setVantaLoaded] = useState(false);
-  const vantaRef = useRef<HTMLDivElement>(null);
-  const vantaEffect = useRef<any>(null);
 
   // Get headline and subtitle text
   const headlineText = t('hero.headline');
@@ -35,112 +24,16 @@ const Hero = () => {
 
   const displayHeadline = getMobileHeadline();
 
-  // Dynamic font sizing hooks with proper typing
-  const { elementRef: titleRef, fontSize: titleFontSize } = useAutoFontSize<HTMLHeadingElement>({
-    maxFontSize: 72, // xl:text-6xl equivalent
-    minFontSize: 24, // text-2xl equivalent
-    text: displayHeadline
-  });
-
-  const { elementRef: subtitleRef, fontSize: subtitleFontSize } = useAutoFontSize<HTMLParagraphElement>({
-    maxFontSize: 32, // text-2xl equivalent
-    minFontSize: 16, // text-base equivalent
-    text: subtitleText
-  });
-
   // Check for mobile device
   useEffect(() => {
     const checkIfMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
 
-    // Set initial value
     checkIfMobile();
-
-    // Add event listener for window resize
     window.addEventListener('resize', checkIfMobile);
-
-    // Clean up
     return () => window.removeEventListener('resize', checkIfMobile);
   }, []);
-
-  // Initialize VANTA effect with comprehensive debugging
-  useEffect(() => {
-    console.log('🌊 VANTA Hero useEffect started');
-    const initVanta = () => {
-      console.log('🌊 initVanta called');
-      console.log('🌊 window.THREE:', !!window.THREE);
-      console.log('🌊 window.VANTA:', !!window.VANTA);
-      console.log('🌊 vantaRef.current:', !!vantaRef.current);
-      if (vantaRef.current && window.VANTA && window.THREE) {
-        try {
-          console.log('🌊 Creating VANTA WAVES effect...');
-          vantaEffect.current = window.VANTA.WAVES({
-            el: vantaRef.current,
-            mouseControls: true,
-            touchControls: true,
-            gyroControls: false,
-            minHeight: 200.00,
-            minWidth: 200.00,
-            scale: 1.00,
-            scaleMobile: 1.00,
-            color: 0x989b9b,
-            // Changed to medium gray color
-            shininess: 0.00,
-            waveHeight: 2.00,
-            waveSpeed: 1.1,
-            zoom: 0.85
-          });
-          if (vantaEffect.current) {
-            console.log('✅ VANTA WAVES effect created successfully!');
-            setVantaLoaded(true);
-          } else {
-            console.error('❌ VANTA effect creation returned null/undefined');
-          }
-        } catch (error) {
-          console.error('❌ Error creating VANTA effect:', error);
-        }
-      } else {
-        console.log('❌ Missing dependencies for VANTA initialization');
-      }
-    };
-
-    // Improved script loading detection with timeout and retries
-    let retries = 0;
-    const maxRetries = 50;
-    const checkVanta = () => {
-      console.log('🔍 Checking VANTA availability... Attempt:', retries + 1);
-      if (window.VANTA && window.THREE) {
-        console.log('✅ VANTA and THREE.js are available');
-        initVanta();
-      } else {
-        console.log('⏳ VANTA or THREE.js not available, retrying...');
-        console.log('window.THREE available:', !!window.THREE);
-        console.log('window.VANTA available:', !!window.VANTA);
-        retries++;
-        if (retries < maxRetries) {
-          setTimeout(checkVanta, 100);
-        } else {
-          console.error('❌ VANTA loading failed after', maxRetries, 'attempts');
-        }
-      }
-    };
-
-    // Add a timeout to prevent infinite retries
-    const timeoutId = setTimeout(() => {
-      if (!vantaLoaded) {
-        console.error('⏰ VANTA loading timed out after 10 seconds');
-      }
-    }, 10000);
-    checkVanta();
-    return () => {
-      clearTimeout(timeoutId);
-      if (vantaEffect.current) {
-        console.log('🧹 Cleaning up VANTA effect');
-        vantaEffect.current.destroy();
-      }
-    };
-  }, [vantaLoaded]);
 
   // Custom assessment button text
   const getAssessmentButtonText = () => {
@@ -149,63 +42,72 @@ const Hero = () => {
 
   return (
     <section id="home" className="relative min-h-[100svh] overflow-hidden flex items-center justify-center">
-      {/* VANTA Waves Background with fallback */}
-      <div 
-        ref={vantaRef} 
-        className="absolute inset-0 w-full h-full z-0" 
-        style={{
-          backgroundColor: vantaLoaded ? 'transparent' : '#85858c',
-          transition: 'background-color 0.5s ease'
-        }} 
-      />
+      {/* Modern Background with CSS-only animations */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-gray-100">
+        {/* Animated geometric shapes */}
+        <div className="absolute top-10 left-10 w-32 h-32 bg-signal-gold/10 rounded-full blur-xl animate-pulse"></div>
+        <div className="absolute top-1/3 right-20 w-48 h-48 bg-signal-charcoal/5 rounded-full blur-2xl animate-gentle-pulse"></div>
+        <div className="absolute bottom-20 left-1/4 w-24 h-24 bg-signal-gold/15 rounded-full blur-lg animate-pulse delay-1000"></div>
+        
+        {/* Subtle grid pattern overlay */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `radial-gradient(circle at 1px 1px, rgba(66, 85, 99, 0.3) 1px, transparent 0)`,
+            backgroundSize: '20px 20px'
+          }}></div>
+        </div>
+      </div>
       
-      {/* Content Overlay */}
-      <div className="relative z-10 container mx-auto px-4 text-center py-16 md:py-0">
-        <h1 
-          ref={titleRef}
-          className="font-bold mb-1 sm:mb-2 text-signal-charcoal mx-auto leading-tight py-[35px]"
-          style={{ 
-            fontSize: `${titleFontSize}px`,
-            whiteSpace: isMobile && language === 'en' ? 'pre-line' : 'nowrap'
-          }}
-        >
-          {displayHeadline}
-        </h1>
-        
-        <p 
-          ref={subtitleRef}
-          className="text-signal-charcoal mb-8 sm:mb-12 mx-auto"
-          style={{ 
-            fontSize: `${subtitleFontSize}px`,
-            whiteSpace: 'nowrap'
-          }}
-        >
-          {subtitleText}
-        </p>
-        
-        <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
-          {/* Philosophy button */}
-          <Button 
-            size="lg" 
-            onClick={() => document.getElementById('philosophy')?.scrollIntoView({ behavior: 'smooth' })} 
-            className="text-white font-medium px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg flex items-center gap-2 bg-signal-charcoal hover:bg-signal-charcoal active:bg-signal-charcoal focus:bg-signal-charcoal"
-          >
-            {t('hero.cta.membership')}
-          </Button>
-          {/* Assessment button - now links to LINE */}
-          <Button 
-            size="lg" 
-            asChild
-            className="font-medium px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg text-signal-white bg-signal-gold hover:bg-signal-gold/90 active:bg-signal-gold focus:bg-signal-gold"
-          >
-            <a 
-              href="https://lin.ee/CaWvRmo" 
-              target="_blank" 
-              rel="noopener noreferrer"
-            >
-              {getAssessmentButtonText()}
-            </a>
-          </Button>
+      {/* Content Card */}
+      <div className="relative z-10 container mx-auto px-4 py-16 md:py-0">
+        <div className="max-w-4xl mx-auto text-center">
+          {/* Modern card container */}
+          <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 p-8 md:p-12 lg:p-16">
+            <h1 className={`font-bold mb-4 text-signal-charcoal leading-tight ${
+              isMobile 
+                ? 'text-3xl sm:text-4xl' 
+                : 'text-4xl md:text-5xl lg:text-6xl xl:text-7xl'
+            }`}
+            style={{ 
+              whiteSpace: isMobile && language === 'en' ? 'pre-line' : 'normal'
+            }}>
+              {displayHeadline}
+            </h1>
+            
+            <p className={`text-signal-charcoal mb-8 sm:mb-12 ${
+              isMobile 
+                ? 'text-lg sm:text-xl' 
+                : 'text-xl md:text-2xl lg:text-3xl'
+            }`}>
+              {subtitleText}
+            </p>
+            
+            <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
+              {/* Philosophy button */}
+              <Button 
+                size="lg" 
+                onClick={() => document.getElementById('philosophy')?.scrollIntoView({ behavior: 'smooth' })} 
+                className="text-white font-medium px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg flex items-center gap-2 bg-signal-charcoal hover:bg-signal-charcoal/90 active:bg-signal-charcoal focus:bg-signal-charcoal transition-all duration-300 hover:shadow-lg hover:scale-105"
+              >
+                {t('hero.cta.membership')}
+              </Button>
+              
+              {/* Assessment button - links to LINE */}
+              <Button 
+                size="lg" 
+                asChild
+                className="font-medium px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg text-signal-white bg-signal-gold hover:bg-signal-gold/90 active:bg-signal-gold focus:bg-signal-gold transition-all duration-300 hover:shadow-lg hover:scale-105"
+              >
+                <a 
+                  href="https://lin.ee/CaWvRmo" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  {getAssessmentButtonText()}
+                </a>
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
