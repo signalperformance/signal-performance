@@ -20,47 +20,18 @@ const en = {
   'membership.subtitle': 'All-inclusive membership.',
   'membership.physical.title': 'Physical Training',
   'membership.physical.frequency': '4x/week',
-  'membership.physical.assessment': 'Quarterly Performance Assessments',
-  'membership.physical.assessment.description': 'Quarterly assessments provide objective data to guide your individualized training plan.',
   'membership.physical.coaching': '1-on-3 Fitness Coaching',
   'membership.physical.coaching.description': 'Train in a semi-private setting with a fully personalized program aligned with your goals.',
-  'membership.physical.train': 'Train On Your Own',
-  'membership.physical.train.description': 'Use the facility outside of coached sessions to complete your personalized program—just book your time and get to work.',
-  'membership.physical.app': 'Mobile Training App',
-  'membership.physical.app.description': 'Access your program anytime — in the facility, on the road, or at home — so you can train consistently anywhere.',
 
   'membership.mental.title': 'Mental Training',
   'membership.mental.frequency': '1x/month',
   'membership.mental.coaching': '1-on-1 Mental Coaching',
   'membership.mental.coaching.description': 'Personalized mental coaching focused on performance — on and off the course.',
-  'membership.mental.plan': 'Structured Mental Training Plan',
-  'membership.mental.plan.description': 'Follow a personalized plan with targeted exercises to build mental skills between sessions.',
-  'membership.mental.toolkit': 'Home Practice Toolkit',
-  'membership.mental.toolkit.description': 'Receive a heart rate monitor and mobile app to practice skills learned in coaching sessions and track progress between sessions.',
 
   'membership.golf.title': 'Golf Training',
   'membership.golf.frequency': '1x/month',
   'membership.golf.skillassessment': 'Skill Assessment',
   'membership.golf.skillassessment.description': 'Comprehensive evaluation that tests all parts of your game and tracks progress over time.',
-  'membership.golf.simulator': 'Simulator Access (5 hrs/month)',
-  'membership.golf.simulator.description': 'Train with state-of-the-art technology — anytime that fits your schedule.',
-  'membership.golf.putting': 'Putting Green Access (2 hrs/month)',
-  'membership.golf.putting.description': 'Refine your mechanics and alignment with cutting-edge tools — on your own schedule.',
-  'membership.golf.tracking': 'On-Course Performance Tracking',
-  'membership.golf.tracking.description': 'All members receive access to golf stat tracking software, allowing us to monitor your competitive performance and adjust your training focus accordingly.',
-  'membership.golf.fitting': 'Club Fitting Station',
-  'membership.golf.fitting.description': 'Access in-house tools to measure loft, lie, and other club specs — make data-informed equipment adjustments for peak performance.',
-
-  'membership.report.title': 'Performance Report',
-  'membership.report.frequency': '1x/month',
-  'membership.report.description': 'Monthly report summarizing progress across all areas with personalized feedback.',
-
-  // Facility
-  'membership.facility.title': 'Facility Features',
-  'membership.facility.refresh': 'Refresh & Recharge',
-  'membership.facility.refresh.description': 'Includes modern shower and kitchenette with complimentary and member-priced options.',
-  'membership.facility.atmosphere': 'Private Training Environment',
-  'membership.facility.atmosphere.description': 'Membership is capped to ensure a quiet, focused, and accessible environment.',
 
   // Assessment Process
   'assessment.title': 'Our Assessment Process',
@@ -136,9 +107,6 @@ const en = {
   // Schedule
   'schedule.title': 'Weekly Training Schedule',
   'schedule.subtitle': 'Choose four sessions per week based on your goals and training phase — guided by your coach.',
-  'schedule.keyTitle': 'KEY:',
-  'schedule.key.pro': "PR: Pro's Only",
-  'schedule.key.open': "OP: Open to All Members",
   'schedule.filter.all': 'All Classes',
   'schedule.filter.pro': 'Pro Only',
   'schedule.filter.open': 'Open to All',
@@ -151,11 +119,6 @@ const en = {
   'schedule.days.sunday': 'Sun',
   'schedule.timePeriods.am': 'AM',
   'schedule.timePeriods.pm': 'PM',
-  'schedule.classes.mobility': 'Mobility',
-  'schedule.classes.strength': 'Strength',
-  'schedule.classes.cardio': 'Cardio',
-  'schedule.classes.power': 'Power',
-  'schedule.disclaimer': 'Schedule subject to change. Please confirm with staff.',
 
   // Who It's For
   'whoitsfor.title': 'Our Ideal Member',
@@ -170,9 +133,6 @@ const en = {
   'whoitsfor.notfor.item2': 'Avoid accountability or progress tracking',
   'whoitsfor.notfor.item3': 'Can\'t commit to training consistently',
   'whoitsfor.notfor.item4': 'Focus only on finding the cheapest option',
-
-  // Errors
-  'errors.generic': 'Something went wrong. Please try again.',
 };
 
 export default en;
