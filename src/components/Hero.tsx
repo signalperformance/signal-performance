@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useWaitlistDialog } from '@/hooks/useWaitlistDialog';
 import { useState, useEffect, useRef } from 'react';
+import AvailabilityCalendar from './AvailabilityCalendar';
 
 declare global {
   interface Window {
@@ -197,9 +198,9 @@ const Hero = () => {
     );
   };
 
-  // Custom waitlist button text
-  const getWaitlistButtonText = () => {
-    return language === 'zh' ? '預約評估喔' : 'Book Assessment';
+  // Updated waitlist button text for calendar
+  const getCalendarButtonText = () => {
+    return language === 'zh' ? '查看可預約時間' : 'View Availability';
   };
 
   return (
@@ -233,21 +234,16 @@ const Hero = () => {
           >
             {t('hero.cta.membership')}
           </Button>
-          {/* Waitlist button with ID for tracking visibility - now links to LINE */}
-          <Button 
-            id="hero-waitlist-button" 
-            size="lg" 
-            asChild
-            className="font-medium px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg text-signal-white bg-signal-gold hover:bg-signal-gold/90 active:bg-signal-gold focus:bg-signal-gold"
-          >
-            <a 
-              href="https://lin.ee/CaWvRmo" 
-              target="_blank" 
-              rel="noopener noreferrer"
+          {/* Availability Calendar button - replaces the LINE link */}
+          <AvailabilityCalendar>
+            <Button 
+              id="hero-availability-button" 
+              size="lg" 
+              className="font-medium px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg text-signal-white bg-signal-gold hover:bg-signal-gold/90 active:bg-signal-gold focus:bg-signal-gold"
             >
-              {getWaitlistButtonText()}
-            </a>
-          </Button>
+              {getCalendarButtonText()}
+            </Button>
+          </AvailabilityCalendar>
         </div>
       </div>
     </section>
