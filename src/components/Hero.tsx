@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useWaitlistDialog } from '@/hooks/useWaitlistDialog';
+import { useAppointmentDialog } from '@/hooks/useAppointmentDialog';
 import { useState, useEffect, useRef } from 'react';
 
 declare global {
@@ -12,7 +12,7 @@ declare global {
 
 const Hero = () => {
   const { t, language } = useLanguage();
-  const { openWaitlist } = useWaitlistDialog();
+  const { openAppointment } = useAppointmentDialog();
   const [isMobile, setIsMobile] = useState(false);
   const [vantaLoaded, setVantaLoaded] = useState(false);
   const vantaRef = useRef<HTMLDivElement>(null);
@@ -233,20 +233,14 @@ const Hero = () => {
           >
             {t('hero.cta.membership')}
           </Button>
-          {/* Waitlist button with ID for tracking visibility - now links to LINE */}
+          {/* Appointment booking button - now opens dialog */}
           <Button 
             id="hero-waitlist-button" 
             size="lg" 
-            asChild
+            onClick={openAppointment}
             className="font-medium px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg text-signal-white bg-signal-gold hover:bg-signal-gold/90 active:bg-signal-gold focus:bg-signal-gold"
           >
-            <a 
-              href="https://lin.ee/CaWvRmo" 
-              target="_blank" 
-              rel="noopener noreferrer"
-            >
-              {getWaitlistButtonText()}
-            </a>
+            {getWaitlistButtonText()}
           </Button>
         </div>
       </div>

@@ -13,6 +13,7 @@ import WhoItsFor from "@/components/WhoItsFor";
 import WeeklySchedule from "@/components/WeeklySchedule";
 import Footer from "@/components/Footer";
 import WaitlistDialog from "@/components/WaitlistDialog";
+import AppointmentDialog from "@/components/AppointmentDialog";
 
 const Index = () => {
   const { isLoading, completeLoading } = useLoadingState();
@@ -37,6 +38,7 @@ const Index = () => {
       <GettingStarted />
       <About />
       <WaitlistDialog />
+      <AppointmentDialog />
       <Footer />
     </div>
   );
