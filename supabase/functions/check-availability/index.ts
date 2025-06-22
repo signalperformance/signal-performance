@@ -23,16 +23,16 @@ serve(async (req) => {
       throw new Error('Missing Google Calendar credentials');
     }
 
-    // Set time range for the entire day
+    // Set time range for business hours (9am-6pm)
     const startOfDay = new Date(date);
-    startOfDay.setHours(0, 0, 0, 0);
+    startOfDay.setHours(9, 0, 0, 0);
     const endOfDay = new Date(date);
-    endOfDay.setHours(23, 59, 59, 999);
+    endOfDay.setHours(18, 0, 0, 0);
 
     const timeMin = startOfDay.toISOString();
     const timeMax = endOfDay.toISOString();
 
-    console.log(`Checking availability for ${date}`);
+    console.log(`Checking hourly availability for ${date}`);
     console.log(`Time range: ${timeMin} to ${timeMax}`);
 
     // Fetch events from Google Calendar
@@ -58,14 +58,34 @@ serve(async (req) => {
     
     console.log(`Found ${events.length} events for ${date}`);
 
-    // Check if there are any events (meaning the day is busy)
-    const isAvailable = events.length === 0;
+    // Generate hourly slots from 9am to 6pm
+    const hourlyAvailability = [];
+    for (let hour = 9; hour < 18; hour++) {
+      const slotStart = new Date(date);
+      slotStart.setHours(hour, 0, 0, 0);
+      const slotEnd = new Date(date);
+      slotEnd.setHours(hour + 1, 0, 0, 0);
+
+      // Check if any event conflicts with this hour
+      const isConflict = events.some(event => {
+        const eventStart = new Date(event.start.dateTime || event.start.date);
+        const eventEnd = new Date(event.end.dateTime || event.end.date);
+        
+        // Check if event overlaps with this hour slot
+        return (eventStart < slotEnd && eventEnd > slotStart);
+      });
+
+      hourlyAvailability.push({
+        hour: hour,
+        time: `${hour > 12 ? hour - 12 : hour}:00 ${hour >= 12 ? 'PM' : 'AM'}`,
+        available: !isConflict
+      });
+    }
 
     return new Response(
       JSON.stringify({ 
-        available: isAvailable,
-        eventCount: events.length,
-        date: date
+        date: date,
+        hourlyAvailability: hourlyAvailability
       }),
       { 
         headers: { 
@@ -80,7 +100,7 @@ serve(async (req) => {
     return new Response(
       JSON.stringify({ 
         error: error.message,
-        available: false 
+        hourlyAvailability: []
       }),
       { 
         status: 500,
