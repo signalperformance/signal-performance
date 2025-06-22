@@ -130,6 +130,8 @@ const en = {
   'schedule.keyTitle': 'Key:',
   'schedule.key.pro': 'PRO: Pro\'s Only',
   'schedule.key.open': 'AM: Open to All Members',
+  'schedule.legend.pros': 'Pro Only',
+  'schedule.legend.amateurs': 'Amateur Only',
 
   // Who It's For
   'whoitsfor.title': 'Our Ideal Member',

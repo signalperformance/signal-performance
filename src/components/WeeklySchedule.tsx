@@ -1,23 +1,12 @@
 
-import React, { useState, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { cn } from '@/lib/utils';
 import { scheduleData } from '@/data/scheduleData';
 import { ScheduleEntry, TimeSlotItem, DayKey } from '@/data/scheduleTypes';
-import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
-
-type FilterType = 'all' | 'pro' | 'amateur';
 
 const WeeklySchedule = () => {
   const { t } = useLanguage();
-  const [filter, setFilter] = useState<FilterType>('all');
-
-  const filteredSchedule = useMemo(() => {
-    if (filter === 'all') {
-      return scheduleData;
-    }
-    return scheduleData.filter(entry => entry.sessionType === filter);
-  }, [filter]);
 
   const daysOfWeek = [
     { key: 'monday' as DayKey, label: t('schedule.days.monday') },
@@ -44,20 +33,13 @@ const WeeklySchedule = () => {
   ];
 
   const getClassForSlot = (dayKey: DayKey, hour24: number) => {
-    return filteredSchedule.find(entry => entry.dayKey === dayKey && entry.hour24 === hour24);
+    return scheduleData.find(entry => entry.dayKey === dayKey && entry.hour24 === hour24);
   };
 
   // Session-type-based color system
   const sessionTypeStyles = {
     pro: 'bg-blue-500 text-white hover:bg-blue-600',
     amateur: 'bg-emerald-500 text-white hover:bg-emerald-600'
-  };
-
-  const toggleItemClasses = "rounded-full text-signal-charcoal border-signal-charcoal hover:bg-accent hover:text-accent-foreground";
-  const toggleItemSelectedClasses = {
-    all: "rounded-full data-[state=on]:bg-gray-500 data-[state=on]:text-white data-[state=on]:border-gray-500",
-    pro: "rounded-full data-[state=on]:bg-blue-500 data-[state=on]:text-white data-[state=on]:border-blue-500",
-    amateur: "rounded-full data-[state=on]:bg-emerald-500 data-[state=on]:text-white data-[state=on]:border-emerald-500"
   };
 
   return (
@@ -70,44 +52,8 @@ const WeeklySchedule = () => {
           {t('schedule.subtitle')}
         </p>
 
-        {/* Filter and Legend Container */}
-        <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
-          {/* Filter Buttons */}
-          <ToggleGroup 
-            type="single" 
-            value={filter} 
-            onValueChange={(value: FilterType) => {
-              if (value) setFilter(value);
-            }} 
-            className="flex justify-center items-center gap-2"
-          >
-            <ToggleGroupItem 
-              value="all" 
-              size="sm" 
-              variant="outline" 
-              className={cn(toggleItemClasses, toggleItemSelectedClasses.all)}
-            >
-              {t('schedule.filter.all')}
-            </ToggleGroupItem>
-            <ToggleGroupItem 
-              value="pro" 
-              size="sm" 
-              variant="outline" 
-              className={cn(toggleItemClasses, toggleItemSelectedClasses.pro)}
-            >
-              {t('schedule.filter.pro')}
-            </ToggleGroupItem>
-            <ToggleGroupItem 
-              value="amateur" 
-              size="sm" 
-              variant="outline" 
-              className={cn(toggleItemClasses, toggleItemSelectedClasses.amateur)}
-            >
-              {t('schedule.filter.open')}
-            </ToggleGroupItem>
-          </ToggleGroup>
-
-          {/* Legend */}
+        {/* Legend */}
+        <div className="flex justify-center items-center mb-6">
           <div className="flex items-center gap-4 text-signal-black text-sm">
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
@@ -121,7 +67,7 @@ const WeeklySchedule = () => {
         </div>
         
         <div className="overflow-x-auto">
-          <div className="grid grid-cols-[auto_repeat(7,minmax(60px,1fr))] gap-1 bg-gray-100 border border-gray-200 rounded-lg min-w-[500px] md:min-w-full p-1">
+          <div className="grid grid-cols-[auto_repeat(7,minmax(50px,1fr))] gap-0.5 bg-gray-100 border border-gray-200 rounded-lg min-w-[400px] md:min-w-full p-0.5">
             {/* Header: Empty Top Left Cell */}
             <div className="bg-white rounded p-1 border border-gray-200"></div>
             
@@ -129,7 +75,7 @@ const WeeklySchedule = () => {
             {daysOfWeek.map(day => (
               <div 
                 key={day.key} 
-                className="bg-white rounded text-center py-1 px-1 font-semibold text-xs text-signal-black border border-gray-200 shadow-sm"
+                className="bg-white rounded text-center py-1 px-0.5 font-semibold text-xs text-signal-black border border-gray-200 shadow-sm"
               >
                 {day.label.toUpperCase()}
               </div>
@@ -138,7 +84,7 @@ const WeeklySchedule = () => {
             {/* Time Slots and Schedule Entries */}
             {timeSlots.map(timeSlot => (
               <React.Fragment key={timeSlot.id}>
-                <div className="bg-white rounded text-center py-1 px-1 text-xs font-semibold text-signal-black flex items-center justify-center border border-gray-200 shadow-sm">
+                <div className="bg-white rounded text-center py-1 px-0.5 text-xs font-semibold text-signal-black flex items-center justify-center border border-gray-200 shadow-sm">
                   {timeSlot.label}
                 </div>
                 {daysOfWeek.map(day => {
@@ -146,12 +92,12 @@ const WeeklySchedule = () => {
                   return (
                     <div 
                       key={`${day.key}-${timeSlot.hour24}`} 
-                      className="bg-white rounded p-1 min-h-[35px] flex items-center justify-center border border-gray-200 shadow-sm"
+                      className="bg-white rounded p-0.5 min-h-[28px] flex items-center justify-center border border-gray-200 shadow-sm"
                     >
                       {scheduledClass ? (
                         <div 
                           className={cn(
-                            "w-full h-full rounded p-1 text-center text-xs font-semibold flex items-center justify-center transition-all duration-200 shadow-md",
+                            "w-full h-full rounded p-0.5 text-center text-xs font-semibold flex items-center justify-center transition-all duration-200 shadow-md",
                             sessionTypeStyles[scheduledClass.sessionType]
                           )}
                         >
