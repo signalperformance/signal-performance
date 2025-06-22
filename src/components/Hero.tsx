@@ -96,7 +96,7 @@ const Hero = () => {
               <Button 
                 size="lg" 
                 asChild
-                className="font-medium px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg text-signal-charcoal bg-signal-gold hover:bg-signal-gold/90 active:bg-signal-gold focus:bg-signal-gold transition-all duration-300 hover:shadow-lg hover:scale-105"
+                className="font-medium px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg text-white bg-signal-gold hover:bg-signal-gold/90 active:bg-signal-gold focus:bg-signal-gold transition-all duration-300 hover:shadow-lg hover:scale-105"
               >
                 <a 
                   href="https://lin.ee/CaWvRmo" 
