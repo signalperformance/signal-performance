@@ -7,16 +7,20 @@ const GettingStarted = () => {
   const { t } = useLanguage();
   const steps = [{
     title: t('gettingstarted.step1.title'),
-    subtitle: t('gettingstarted.step1.subtitle')
+    subtitle: t('gettingstarted.step1.subtitle'),
+    hours: t('gettingstarted.step1.hours')
   }, {
     title: t('gettingstarted.step2.title'),
-    subtitle: t('gettingstarted.step2.subtitle')
+    subtitle: t('gettingstarted.step2.subtitle'),
+    hours: t('gettingstarted.step2.hours')
   }, {
     title: t('gettingstarted.step3.title'),
-    subtitle: t('gettingstarted.step3.subtitle')
+    subtitle: t('gettingstarted.step3.subtitle'),
+    hours: t('gettingstarted.step3.hours')
   }, {
     title: t('gettingstarted.step4.title'),
-    subtitle: t('gettingstarted.step4.subtitle')
+    subtitle: t('gettingstarted.step4.subtitle'),
+    hours: t('gettingstarted.step4.hours')
   }];
 
   return (
@@ -62,6 +66,7 @@ const GettingStarted = () => {
                       <span className="text-2xl font-bold text-signal-white">{index + 1}</span>
                     </div>
                     <h3 className="text-lg font-semibold text-signal-charcoal px-2">{step.title}</h3>
+                    <p className="text-sm font-medium text-signal-gold mb-1">{step.hours}</p>
                     <p className="text-muted-foreground text-sm mt-1 px-4">{step.subtitle}</p>
                   </div>
                 ))}
@@ -95,6 +100,7 @@ const GettingStarted = () => {
                     <span className="text-2xl font-bold text-signal-white">{4}</span>
                   </div>
                   <h3 className="text-lg font-semibold text-signal-charcoal px-2">{steps[3].title}</h3>
+                  <p className="text-sm font-medium text-signal-gold mb-1">{steps[3].hours}</p>
                   <p className="text-muted-foreground text-sm mt-1 px-4">{steps[3].subtitle}</p>
                 </div>
               </div>
@@ -150,6 +156,7 @@ const GettingStarted = () => {
                     </div>
                   </div>
                   <h3 className="text-lg font-semibold text-signal-charcoal">{step.title}</h3>
+                  <p className="text-sm font-medium text-signal-gold mb-2">{step.hours}</p>
                   <p className="text-sm text-muted-foreground mt-2 max-w-[200px]">{step.subtitle}</p>
                 </div>
               ))}
@@ -161,4 +168,3 @@ const GettingStarted = () => {
   );
 };
 export default GettingStarted;
-
