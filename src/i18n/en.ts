@@ -110,7 +110,7 @@ const en = {
 
   // Schedule
   'schedule.title': 'Weekly Training Schedule',
-  'schedule.subtitle': 'Choose four sessions per week based on your goals and training phase — guided by your coach. We offer separate groups for professionals and amateurs.',
+  'schedule.subtitle': 'Choose four sessions per week based on your goals and training phase. We offer separate groups for professionals and amateurs.',
   'schedule.filter.all': 'All Classes',
   'schedule.filter.pro': 'Pro Only',
   'schedule.filter.open': 'Open to All',
