@@ -1,10 +1,10 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+
 const Membership = () => {
-  const {
-    t
-  } = useLanguage();
+  const { t } = useLanguage();
+  
   const categories = {
     physical: {
       title: t('membership.physical.title'),
@@ -39,6 +39,7 @@ const Membership = () => {
       }]
     }
   };
+
   const categoryStyles = {
     physical: {
       bg: 'bg-signal-physical-light',
@@ -61,6 +62,7 @@ const Membership = () => {
       text: 'text-gray-600'
     }
   };
+
   const getGradientBackground = (key: string) => {
     switch (key) {
       case 'physical':
@@ -75,18 +77,20 @@ const Membership = () => {
         return 'bg-gradient-to-br from-slate-50 via-gray-50 to-blue-50/40';
     }
   };
-  return <section id="membership" className="section-padding bg-signal-light-gray">
+
+  return (
+    <section id="membership" className="section-padding bg-signal-light-gray">
       <div className="container mx-auto container-padding">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 font-lora">{t('membership.title')}</h2>
-          <p className="text-lg text-muted-foreground">{t('membership.price')}</p>
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold font-lora">{t('membership.title')}</h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {Object.entries(categories).map(([key, category]) => {
-          const item = category.items[0];
-          const styles = categoryStyles[key as keyof typeof categoryStyles];
-          return <Card key={key} className={cn("shadow-2xl rounded-xl overflow-hidden flex flex-col border-l-4 border-2 border-slate-200/60 backdrop-blur-sm hover:shadow-3xl transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1", getGradientBackground(key), styles.border)}>
+            const item = category.items[0];
+            const styles = categoryStyles[key as keyof typeof categoryStyles];
+            return (
+              <Card key={key} className={cn("shadow-2xl rounded-xl overflow-hidden flex flex-col border-l-4 border-2 border-slate-200/60 backdrop-blur-sm hover:shadow-3xl transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1", getGradientBackground(key), styles.border)}>
                 <CardContent className="p-6 md:p-8 flex-grow flex flex-col relative overflow-hidden text-center">
                   <div className="absolute inset-0 bg-gradient-to-br from-transparent via-slate-50/30 to-blue-50/20 pointer-events-none"></div>
                   
@@ -106,10 +110,13 @@ const Membership = () => {
                     </p>
                   </div>
                 </CardContent>
-              </Card>;
-        })}
+              </Card>
+            );
+          })}
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default Membership;
