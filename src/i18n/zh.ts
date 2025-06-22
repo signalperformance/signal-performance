@@ -116,7 +116,7 @@ const zh = {
 
   // Getting Started
   'gettingstarted.title': '如何開始',
-  'gettingstarted.subtitle': '我們的流程簡單而有效，從初步評估開始，逐步引導您進入每月持續訓練。',
+  'gettingstarted.subtitle': '我們的全方位過程打下基礎，並建立明確基準，持續追蹤進展。',
   'gettingstarted.step1.title': '完成評估',
   'gettingstarted.step1.subtitle': '透過五項測評建立基礎數據',
   'gettingstarted.step2.title': '回顧結果',
