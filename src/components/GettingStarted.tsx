@@ -30,7 +30,7 @@ const GettingStarted = () => {
           <h2 className="text-3xl md:text-4xl font-semibold mb-4 text-signal-charcoal">
             {t('gettingstarted.title')}
           </h2>
-          <p className="max-w-2xl mx-auto text-lg text-muted-foreground">
+          <p className="mx-auto text-lg text-muted-foreground">
             {t('gettingstarted.subtitle')}
           </p>
         </div>
