@@ -130,6 +130,8 @@ const zh = {
   'schedule.keyTitle': '說明：',
   'schedule.key.pro': 'PRO：僅限職業選手',
   'schedule.key.open': 'AM：所有會員開放',
+  'schedule.legend.pros': '僅限職業',
+  'schedule.legend.amateurs': '僅限業餘',
 
   // Who It's For
   'whoitsfor.title': '我們的理想會員',
