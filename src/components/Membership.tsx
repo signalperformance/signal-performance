@@ -1,3 +1,4 @@
+
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
@@ -90,7 +91,7 @@ const Membership = () => {
                   <div className="absolute inset-0 bg-gradient-to-br from-transparent via-slate-50/30 to-blue-50/20 pointer-events-none"></div>
                   
                   <div className="mb-6 relative z-10">
-                    <h3 className="md:text-2xl font-lora font-medium text-foreground mb-3 text-xl">
+                    <h3 className="text-3xl md:text-2xl font-lora font-medium text-foreground mb-3">
                       {category.title}
                     </h3>
                     <p className={cn("text-xl md:text-2xl font-bold", styles.text)}>
