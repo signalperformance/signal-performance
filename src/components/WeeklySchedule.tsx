@@ -47,7 +47,7 @@ const WeeklySchedule = () => {
     return filteredSchedule.find(entry => entry.dayKey === dayKey && entry.hour24 === hour24);
   };
 
-  // New session-type-based color system
+  // Session-type-based color system
   const sessionTypeStyles = {
     pro: 'bg-blue-500 text-white hover:bg-blue-600',
     amateur: 'bg-emerald-500 text-white hover:bg-emerald-600'
@@ -109,7 +109,6 @@ const WeeklySchedule = () => {
 
           {/* Legend */}
           <div className="flex items-center gap-4 text-signal-black text-sm">
-            <span className="font-medium">Class Types:</span>
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
               <span>Pros</span>
@@ -122,13 +121,13 @@ const WeeklySchedule = () => {
         </div>
         
         <div className="overflow-x-auto">
-          <div className="grid grid-cols-[auto_repeat(7,minmax(80px,1fr))] gap-1 bg-gray-200 border border-gray-300 rounded-lg min-w-[700px] md:min-w-full p-2">
+          <div className="grid grid-cols-[auto_repeat(7,minmax(100px,1fr))] gap-2 bg-gray-100 border border-gray-200 rounded-lg min-w-[800px] md:min-w-full p-3">
             {/* Header: Empty Top Left Cell */}
-            <div className="bg-white rounded p-2"></div>
+            <div className="bg-white rounded-md p-3 border border-gray-200"></div>
             
             {/* Header: Day Names */}
             {daysOfWeek.map(day => (
-              <div key={day.key} className="bg-white rounded text-center py-3 px-2 font-semibold text-sm text-signal-black">
+              <div key={day.key} className="bg-white rounded-md text-center py-4 px-3 font-semibold text-sm text-signal-black border border-gray-200 shadow-sm">
                 {day.label.toUpperCase()}
               </div>
             ))}
@@ -136,23 +135,20 @@ const WeeklySchedule = () => {
             {/* Time Slots and Schedule Entries */}
             {timeSlots.map(timeSlot => (
               <React.Fragment key={timeSlot.id}>
-                <div className="bg-white rounded text-center py-3 px-2 text-sm font-medium text-signal-black flex items-center justify-center">
+                <div className="bg-white rounded-md text-center py-4 px-3 text-sm font-semibold text-signal-black flex items-center justify-center border border-gray-200 shadow-sm">
                   {timeSlot.label}
                 </div>
                 {daysOfWeek.map(day => {
                   const scheduledClass = getClassForSlot(day.key, timeSlot.hour24);
                   return (
-                    <div key={`${day.key}-${timeSlot.hour24}`} className="bg-white rounded p-1 min-h-[60px] flex items-center justify-center">
+                    <div key={`${day.key}-${timeSlot.hour24}`} className="bg-white rounded-md p-2 min-h-[70px] flex items-center justify-center border border-gray-200 shadow-sm">
                       {scheduledClass ? (
                         <div className={cn(
-                          "w-full h-full rounded-md p-2 text-center text-sm font-medium flex flex-col items-center justify-center transition-all duration-200 shadow-sm",
+                          "w-full h-full rounded-lg p-3 text-center text-base font-semibold flex items-center justify-center transition-all duration-200 shadow-md",
                           sessionTypeStyles[scheduledClass.sessionType]
                         )}>
-                          <span className="font-semibold">
+                          <span>
                             {t(`schedule.classes.${scheduledClass.name.toLowerCase()}`)}
-                            <sup className="text-xs font-normal ml-0.5">
-                              {scheduledClass.sessionType.toUpperCase()}
-                            </sup>
                           </span>
                         </div>
                       ) : (
