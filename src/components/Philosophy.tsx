@@ -45,9 +45,9 @@ const Philosophy = () => {
         
         {/* Philosophy cards - horizontal layout on desktop with 3D effects */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Card className="text-left shadow-xl bg-white hover:shadow-2xl transition-all duration-500 hover:scale-105 h-full border-2 border-gray-100 group animate-scale-in">
+          <Card className="text-left shadow-xl bg-gradient-to-br from-blue-50 via-white to-blue-50 hover:shadow-2xl transition-all duration-500 hover:scale-105 h-full border-2 border-blue-100 group animate-scale-in">
             <CardContent className="p-8 md:p-10">
-              <CardTitle className="text-xl md:text-2xl font-lora mb-4 text-signal-charcoal transition-colors duration-300">
+              <CardTitle className="text-xl md:text-2xl font-lora mb-4 text-signal-charcoal group-hover:text-blue-700 transition-colors duration-300">
                 {t('philosophy.card1.title')}
               </CardTitle>
               <p className="text-muted-foreground group-hover:translate-x-2 transition-transform duration-300">
@@ -56,9 +56,9 @@ const Philosophy = () => {
             </CardContent>
           </Card>
           
-          <Card className="text-left shadow-xl bg-white hover:shadow-2xl transition-all duration-500 hover:scale-105 h-full border-2 border-gray-100 group animate-scale-in">
+          <Card className="text-left shadow-xl bg-gradient-to-br from-red-50 via-white to-red-50 hover:shadow-2xl transition-all duration-500 hover:scale-105 h-full border-2 border-red-100 group animate-scale-in">
             <CardContent className="p-8 md:p-10">
-              <CardTitle className="text-xl md:text-2xl font-lora mb-4 text-signal-charcoal transition-colors duration-300">
+              <CardTitle className="text-xl md:text-2xl font-lora mb-4 text-signal-charcoal group-hover:text-red-700 transition-colors duration-300">
                 {t('philosophy.card2.title')}
               </CardTitle>
               <p className="text-muted-foreground group-hover:translate-x-2 transition-transform duration-300">
@@ -67,9 +67,9 @@ const Philosophy = () => {
             </CardContent>
           </Card>
           
-          <Card className="text-left shadow-xl bg-white hover:shadow-2xl transition-all duration-500 hover:scale-105 h-full border-2 border-gray-100 group animate-scale-in">
+          <Card className="text-left shadow-xl bg-gradient-to-br from-green-50 via-white to-green-50 hover:shadow-2xl transition-all duration-500 hover:scale-105 h-full border-2 border-green-100 group animate-scale-in">
             <CardContent className="p-8 md:p-10">
-              <CardTitle className="text-xl md:text-2xl font-lora mb-4 text-signal-charcoal transition-colors duration-300">
+              <CardTitle className="text-xl md:text-2xl font-lora mb-4 text-signal-charcoal group-hover:text-green-700 transition-colors duration-300">
                 {t('philosophy.card3.title')}
               </CardTitle>
               <p className="text-muted-foreground group-hover:translate-x-2 transition-transform duration-300">
