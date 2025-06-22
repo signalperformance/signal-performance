@@ -1,17 +1,18 @@
+
 const zh = {
   // Navigation
   'nav.home': '首頁',
   'nav.membership': '會員資格',
   'nav.about': '關於我們',
   'nav.founder': '創辦人',
-  'nav.contact': '加入候補名單',
+  'nav.contact': '聯絡我們',
   'nav.login': '會員登入',
 
   // Hero
   'hero.headline': '高爾夫好手的整合式訓練空間',
   'hero.subheadline': '體能、心理與技術訓練集中於一個專業空間',
-  'hero.cta.waitlist': '加入候補名單',
   'hero.cta.membership': '了解會員方案',
+  'hero.cta.assessment': '預約評估',
 
   // Membership
   'membership.title': '會員專屬內容',
@@ -103,17 +104,6 @@ const zh = {
   'founder.name': '陳志明',
   'founder.credentials': 'PGA認證專業人士 • 表現教練 • 前亞巡賽球員',
   'founder.bio': '擁有超過15年橫跨亞洲和北美的專業高爾夫經驗，志明創立了Signal Performance，為台灣精英高爾夫球手帶來全面的訓練方法。他的方法將東方的紀律與西方的運動科學相結合，創造了一個獨特而有效的訓練環境。',
-
-  // Waitlist
-  'waitlist.title': '加入我們的候補名單',
-  'waitlist.subtitle': '會員名額有限，僅接受申請',
-  'waitlist.name': '全名',
-  'waitlist.email': '電子郵件',
-  'waitlist.phone': '電話號碼',
-  'waitlist.handicap': '目前差點',
-  'waitlist.goals': '您的高爾夫目標',
-  'waitlist.submit': '提交申請',
-  'waitlist.success': '感謝您的興趣！我們將盡快與您聯繫。',
 
   // Philosophy
   'philosophy.title': '我們的理念',

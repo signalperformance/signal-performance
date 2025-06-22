@@ -12,7 +12,6 @@ import Philosophy from "@/components/Philosophy";
 import WhoItsFor from "@/components/WhoItsFor";
 import WeeklySchedule from "@/components/WeeklySchedule";
 import Footer from "@/components/Footer";
-import WaitlistDialog from "@/components/WaitlistDialog";
 
 const Index = () => {
   const { isLoading, completeLoading } = useLoadingState();
@@ -36,7 +35,6 @@ const Index = () => {
       <WeeklySchedule />
       <GettingStarted />
       <About />
-      <WaitlistDialog />
       <Footer />
     </div>
   );

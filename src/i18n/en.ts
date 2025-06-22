@@ -1,16 +1,16 @@
+
 const en = {
   // Navigation
   'nav.home': 'Home',
   'nav.membership': 'Membership',
   'nav.about': 'About',
   'nav.founder': 'Founder',
-  'nav.contact': 'Join Waitlist',
+  'nav.contact': 'Contact',
   'nav.login': 'Member Login',
 
   // Hero
   'hero.headline': 'Holistic Training Space for Golfers',
   'hero.subheadline': 'Physical, mental, and skill training — all in one place',
-  'hero.cta.waitlist': 'Join the Waitlist',
   'hero.cta.membership': 'Explore Membership',
   'hero.cta.assessment': 'Book Assessment',
 
@@ -105,15 +105,6 @@ const en = {
   'founder.name': 'Samuel Chen',
   'founder.credentials': 'PGA Certified Professional • Performance Coach • Former Asian Tour Player',
   'founder.bio': 'With over 15 years of experience in professional golf across Asia and North America, Samuel founded Signal Performance to bring a holistic training methodology to elite Taiwanese golfers. His approach combines Eastern discipline with Western sports science to create a uniquely effective training environment.',
-
-  // Waitlist
-  'waitlist.title': 'Join Our Waitlist',
-  'waitlist.subtitle': 'Membership is limited and by application only',
-  'waitlist.name': 'Full Name',
-  'waitlist.email': 'Email Address',
-  'waitlist.phone': 'Phone Number',
-  'waitlist.submit': 'Submit Application',
-  'waitlist.success': 'Thank you for your interest! We will contact you soon.',
 
   // Philosophy
   'philosophy.title': 'Our Philosophy',
