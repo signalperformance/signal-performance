@@ -92,7 +92,7 @@ const Membership = () => {
                 <CardContent className="p-6 md:p-8 flex-grow flex flex-col relative overflow-hidden text-center">
                   <div className="absolute inset-0 bg-gradient-to-br from-transparent via-slate-50/30 to-blue-50/20 pointer-events-none"></div>
                   
-                  <div className="mb-4 relative z-10">
+                  <div className="mb-1 relative z-10">
                     <h3 className="text-2xl font-lora font-medium text-foreground mb-1 md:text-3xl">
                       {category.title}
                     </h3>
@@ -107,7 +107,7 @@ const Membership = () => {
                   </div>
 
                   <div className="flex-grow relative z-10">
-                    <h4 className="mb-2 font-bold text-2xl md:text-base">{item.title}</h4>
+                    <h4 className="mb-2 font-bold text-2xl md:text-lg">{item.title}</h4>
                     <p className="text-muted-foreground text-sm">
                       {item.description}
                     </p>
