@@ -128,7 +128,7 @@ const WeeklySchedule = () => {
           <div className="flex items-center gap-4 text-signal-black text-sm">
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-              <span>Pro</span>
+              <span>Pro Only</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 bg-emerald-500 rounded-full"></div>
