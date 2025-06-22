@@ -117,7 +117,7 @@ const en = {
 
   // Getting Started
   'gettingstarted.title': 'How To Get Started',
-  'gettingstarted.subtitle': 'Our process is designed to be simple and effective, guiding you from initial assessment to ongoing monthly training.',
+  'gettingstarted.subtitle': 'Our comprehensive onboarding builds a strong foundation and clear baseline to track progress.',
   'gettingstarted.step1.title': 'Complete Assessment',
   'gettingstarted.step1.subtitle': 'Establish your baseline with a five-part evaluation',
   'gettingstarted.step2.title': 'Review Results',
