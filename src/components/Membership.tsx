@@ -1,3 +1,4 @@
+
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
@@ -99,7 +100,7 @@ const Membership = () => {
                   </div>
 
                   <div className="flex-grow relative z-10">
-                    <h4 className="mb-2 font-bold text-xl md:text-lg">{item.title}</h4>
+                    <h4 className="mb-2 font-bold md:text-lg text-lg">{item.title}</h4>
                     <p className="text-muted-foreground text-base">
                       {item.description}
                     </p>
