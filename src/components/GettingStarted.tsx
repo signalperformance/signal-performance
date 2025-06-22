@@ -40,7 +40,7 @@ const GettingStarted = () => {
             <div className="mb-4">
               <Card className="bg-signal-charcoal text-white border-signal-gold/50 shadow-xl w-full max-w-[280px] sm:max-w-xs text-center">
                   <CardHeader className="p-4">
-                      <CardTitle className="text-signal-gold text-3xl">
+                      <CardTitle className="text-signal-gold text-2xl">
                           {t('gettingstarted.assessmentPackage.title')}
                       </CardTitle>
                   </CardHeader>
@@ -76,7 +76,7 @@ const GettingStarted = () => {
             <div className="mb-4">
               <Card className="bg-signal-charcoal text-white border-signal-gold/50 shadow-xl w-full max-w-[280px] sm:max-w-xs text-center">
                   <CardHeader className="p-4">
-                      <CardTitle className="text-signal-gold text-3xl">
+                      <CardTitle className="text-signal-gold text-2xl">
                           {t('gettingstarted.step4.title')}
                       </CardTitle>
                   </CardHeader>
