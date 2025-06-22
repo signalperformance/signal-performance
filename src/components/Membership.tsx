@@ -1,6 +1,7 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+
 const Membership = () => {
   const {
     t
@@ -99,7 +100,7 @@ const Membership = () => {
                   </div>
 
                   <div className="flex-grow relative z-10">
-                    <h4 className="mb-2 font-bold md:text-base text-lg">{item.title}</h4>
+                    <h4 className="mb-2 font-bold text-xl md:text-base">{item.title}</h4>
                     <p className="text-muted-foreground text-sm">
                       {item.description}
                     </p>
@@ -111,4 +112,5 @@ const Membership = () => {
       </div>
     </section>;
 };
+
 export default Membership;
