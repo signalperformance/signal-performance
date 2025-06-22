@@ -74,7 +74,7 @@ const Hero = () => {
               {displayHeadline}
             </h1>
             
-            <p className={`text-white/90 mb-8 sm:mb-12 ${
+            <p className={`text-white mb-8 sm:mb-12 ${
               isMobile 
                 ? 'text-lg sm:text-xl' 
                 : 'text-xl md:text-2xl lg:text-3xl'
