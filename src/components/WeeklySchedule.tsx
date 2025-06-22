@@ -67,7 +67,7 @@ const WeeklySchedule = () => {
         </div>
         
         <div className="overflow-x-auto">
-          <div className="grid grid-cols-[auto_repeat(7,minmax(50px,1fr))] gap-0.5 bg-gray-100 border border-gray-200 rounded-lg min-w-[400px] md:min-w-full p-0.5">
+          <div className="grid grid-cols-[auto_repeat(7,minmax(70px,1fr))] md:grid-cols-[auto_repeat(7,minmax(50px,1fr))] gap-0.5 bg-gray-100 border border-gray-200 rounded-lg min-w-[600px] md:min-w-full p-0.5">
             {/* Header: Empty Top Left Cell */}
             <div className="bg-white rounded p-1 border border-gray-200"></div>
             
@@ -92,12 +92,12 @@ const WeeklySchedule = () => {
                   return (
                     <div 
                       key={`${day.key}-${timeSlot.hour24}`} 
-                      className="bg-white rounded p-0.5 min-h-[28px] flex items-center justify-center border border-gray-200 shadow-sm"
+                      className="bg-white rounded p-0.5 min-h-[32px] md:min-h-[28px] flex items-center justify-center border border-gray-200 shadow-sm"
                     >
                       {scheduledClass ? (
                         <div 
                           className={cn(
-                            "w-full h-full rounded p-0.5 text-center text-xs font-semibold flex items-center justify-center transition-all duration-200 shadow-md",
+                            "w-full h-full rounded p-1 md:p-0.5 text-center text-xs font-semibold flex items-center justify-center transition-all duration-200 shadow-md",
                             sessionTypeStyles[scheduledClass.sessionType]
                           )}
                         >
