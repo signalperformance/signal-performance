@@ -1,6 +1,7 @@
 
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
+import { create } from 'https://deno.land/x/djwt@v2.4/mod.ts'
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -29,37 +30,96 @@ serve(async (req) => {
   try {
     const { action, appointmentData, date, timeSlot } = await req.json()
     
-    // You'll need to set these secrets in Supabase
+    // Get environment variables
     const googleClientEmail = Deno.env.get('GOOGLE_CLIENT_EMAIL')
-    const googlePrivateKey = Deno.env.get('GOOGLE_PRIVATE_KEY')
+    const googlePrivateKey = Deno.env.get('GOOGLE_PRIVATE_KEY')?.replace(/\\n/g, '\n')
     const googleCalendarId = Deno.env.get('GOOGLE_CALENDAR_ID')
+    const supabaseUrl = Deno.env.get('SUPABASE_URL')
+    const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')
     
     if (!googleClientEmail || !googlePrivateKey || !googleCalendarId) {
       throw new Error('Google Calendar credentials not configured')
     }
 
-    // Simple JWT creation for Google service account
-    const header = btoa(JSON.stringify({ alg: 'RS256', typ: 'JWT' }))
+    console.log('Creating JWT for Google Calendar API')
+    
+    // Create signed JWT for Google API authentication
     const now = Math.floor(Date.now() / 1000)
-    const payload = btoa(JSON.stringify({
+    const jwtPayload = {
       iss: googleClientEmail,
       scope: 'https://www.googleapis.com/auth/calendar',
       aud: 'https://oauth2.googleapis.com/token',
       exp: now + 3600,
-      iat: now
-    }))
+      iat: now,
+    }
 
-    // For this demo, we'll use a simplified approach
-    // In production, you'd need proper JWT signing with the private key
+    // Import the private key
+    const privateKeyPem = googlePrivateKey
+    const privateKey = await crypto.subtle.importKey(
+      'pkcs8',
+      new TextEncoder().encode(privateKeyPem),
+      {
+        name: 'RSASSA-PKCS1-v1_5',
+        hash: 'SHA-256',
+      },
+      false,
+      ['sign']
+    )
+
+    const signedJwt = await create(
+      { alg: 'RS256', typ: 'JWT' },
+      jwtPayload,
+      privateKey
+    )
+
+    console.log('Exchanging JWT for access token')
     
+    // Exchange JWT for access token
+    const tokenResponse = await fetch('https://oauth2.googleapis.com/token', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams({
+        grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
+        assertion: signedJwt,
+      }).toString(),
+    })
+
+    const tokenData = await tokenResponse.json()
+    if (tokenData.error) {
+      console.error('Token exchange error:', tokenData)
+      throw new Error(`Failed to get access token: ${tokenData.error_description || tokenData.error}`)
+    }
+    
+    const accessToken = tokenData.access_token
+    console.log('Successfully obtained access token')
+
     if (action === 'checkAvailability') {
-      // Check if the time slot is available
-      const startDateTime = new Date(`${date}T${timeSlot}:00`)
-      const endDateTime = new Date(startDateTime.getTime() + 60 * 60 * 1000) // 1 hour appointment
+      console.log('Checking availability for:', date, timeSlot)
       
-      // Here you would make a request to Google Calendar API to check for conflicts
-      // For now, we'll simulate availability checking
-      const isAvailable = Math.random() > 0.2 // 80% chance of being available
+      const startDateTime = new Date(`${date}T${timeSlot}:00`)
+      const endDateTime = new Date(startDateTime.getTime() + 60 * 60 * 1000)
+      
+      const response = await fetch(
+        `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(googleCalendarId)}/events?timeMin=${startDateTime.toISOString()}&timeMax=${endDateTime.toISOString()}&singleEvents=true&orderBy=startTime`,
+        {
+          headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+
+      const data = await response.json()
+      
+      if (data.error) {
+        console.error('Google Calendar API Error (checkAvailability):', data.error)
+        throw new Error(`Google Calendar availability check failed: ${data.error.message}`)
+      }
+
+      const isAvailable = data.items.length === 0
+      console.log('Availability check result:', { isAvailable, eventsFound: data.items.length })
       
       return new Response(
         JSON.stringify({ available: isAvailable }),
@@ -68,14 +128,16 @@ serve(async (req) => {
     }
     
     if (action === 'createEvent') {
-      const { customerName, customerEmail, appointmentDate, appointmentTime, notes } = appointmentData
+      console.log('Creating calendar event for:', appointmentData.customerName)
+      
+      const { customerName, customerEmail, customerPhone, appointmentDate, appointmentTime, notes, supabaseAppointmentId } = appointmentData
       
       const startDateTime = new Date(`${appointmentDate}T${appointmentTime}:00`)
       const endDateTime = new Date(startDateTime.getTime() + 60 * 60 * 1000)
       
       const event: CalendarEvent = {
         summary: `Assessment Appointment - ${customerName}`,
-        description: `Appointment with ${customerName}\nEmail: ${customerEmail}\nNotes: ${notes || 'No additional notes'}`,
+        description: `Appointment with ${customerName}\nEmail: ${customerEmail}\nPhone: ${customerPhone || 'N/A'}\nNotes: ${notes || 'No additional notes'}`,
         start: {
           dateTime: startDateTime.toISOString(),
           timeZone: 'Asia/Taipei'
@@ -87,12 +149,46 @@ serve(async (req) => {
         attendees: [{ email: customerEmail }]
       }
       
-      // Here you would create the event in Google Calendar
-      // For now, we'll simulate event creation
-      const eventId = 'simulated_event_' + Date.now()
+      const response = await fetch(
+        `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(googleCalendarId)}/events`,
+        {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(event),
+        }
+      )
+
+      const data = await response.json()
+      
+      if (data.error) {
+        console.error('Google Calendar API Error (createEvent):', data.error)
+        throw new Error(`Google Calendar event creation failed: ${data.error.message}`)
+      }
+
+      const eventId = data.id
+      console.log('Successfully created Google Calendar event:', eventId)
+      
+      // Update Supabase database with Google event ID
+      if (supabaseUrl && supabaseServiceKey && supabaseAppointmentId) {
+        const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey)
+        
+        const { error: updateError } = await supabaseAdmin
+          .from('appointments')
+          .update({ google_event_id: eventId })
+          .eq('id', supabaseAppointmentId)
+
+        if (updateError) {
+          console.error('Failed to update Supabase with Google Event ID:', updateError)
+        } else {
+          console.log('Successfully updated database with Google Event ID')
+        }
+      }
       
       return new Response(
-        JSON.stringify({ success: true, eventId }),
+        JSON.stringify({ success: true, eventId, message: 'Event created and linked to database.' }),
         { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       )
     }
@@ -103,7 +199,7 @@ serve(async (req) => {
     )
     
   } catch (error) {
-    console.error('Error:', error)
+    console.error('Error in google-calendar function:', error)
     return new Response(
       JSON.stringify({ error: error.message }),
       { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }

@@ -34,6 +34,7 @@ const AppointmentDialog = () => {
   const [selectedDate, setSelectedDate] = useState<Date>();
   const [availableSlots, setAvailableSlots] = useState<string[]>([]);
   const [selectedTime, setSelectedTime] = useState<string>('');
+  const [isCheckingAvailability, setIsCheckingAvailability] = useState(false);
   const { isOpen, closeAppointment } = useAppointmentDialog();
   
   const form = useForm<AppointmentFormValues>({
@@ -58,11 +59,49 @@ const AppointmentDialog = () => {
     return slots;
   };
 
+  // Check availability for selected date
+  const checkDateAvailability = async (date: Date) => {
+    setIsCheckingAvailability(true);
+    const allSlots = generateTimeSlots();
+    const availableSlots: string[] = [];
+    
+    try {
+      for (const slot of allSlots) {
+        const availabilityResponse = await supabase.functions.invoke('google-calendar', {
+          body: {
+            action: 'checkAvailability',
+            date: format(date, 'yyyy-MM-dd'),
+            timeSlot: slot
+          }
+        });
+
+        if (availabilityResponse.error) {
+          console.error('Error checking availability for slot', slot, availabilityResponse.error);
+          continue;
+        }
+
+        if (availabilityResponse.data?.available) {
+          availableSlots.push(slot);
+        }
+      }
+    } catch (error) {
+      console.error('Error checking availability:', error);
+      toast({
+        title: 'Error',
+        description: 'Failed to check availability. Using all time slots.',
+        variant: "destructive",
+        duration: 3000,
+      });
+      availableSlots.push(...allSlots);
+    }
+    
+    setAvailableSlots(availableSlots);
+    setIsCheckingAvailability(false);
+  };
+
   useEffect(() => {
     if (selectedDate) {
-      // In a real implementation, you'd check Google Calendar for conflicts
-      // For now, we'll show all available slots
-      setAvailableSlots(generateTimeSlots());
+      checkDateAvailability(selectedDate);
       form.setValue('appointmentDate', format(selectedDate, 'yyyy-MM-dd'));
     }
   }, [selectedDate, form]);
@@ -77,7 +116,7 @@ const AppointmentDialog = () => {
     setIsSubmitting(true);
     
     try {
-      // First, check availability with Google Calendar
+      // Double-check availability before creating appointment
       const availabilityResponse = await supabase.functions.invoke('google-calendar', {
         body: {
           action: 'checkAvailability',
@@ -100,8 +139,8 @@ const AppointmentDialog = () => {
         return;
       }
 
-      // Create the appointment in database
-      const { error: dbError } = await supabase
+      // Create the appointment in database first
+      const { data: newAppointment, error: dbError } = await supabase
         .from('appointments')
         .insert([
           {
@@ -112,37 +151,48 @@ const AppointmentDialog = () => {
             appointment_time: data.appointmentTime,
             notes: data.notes,
           }
-        ]);
+        ])
+        .select();
       
-      if (dbError) {
+      if (dbError || !newAppointment || newAppointment.length === 0) {
         console.error('Error creating appointment:', dbError);
-        throw new Error('Failed to create appointment');
+        throw new Error('Failed to create appointment in database');
       }
 
-      // Create event in Google Calendar
+      const supabaseAppointmentId = newAppointment[0].id;
+
+      // Create event in Google Calendar with the appointment ID
       const calendarResponse = await supabase.functions.invoke('google-calendar', {
         body: {
           action: 'createEvent',
           appointmentData: {
             customerName: data.customerName,
             customerEmail: data.customerEmail,
+            customerPhone: data.customerPhone,
             appointmentDate: data.appointmentDate,
             appointmentTime: data.appointmentTime,
-            notes: data.notes
+            notes: data.notes,
+            supabaseAppointmentId: supabaseAppointmentId
           }
         }
       });
 
       if (calendarResponse.error) {
         console.error('Calendar integration error:', calendarResponse.error);
-        // Don't fail the whole process if calendar fails
+        // Don't fail the whole process if calendar fails, but show a warning
+        toast({
+          title: 'Appointment Booked with Warning',
+          description: 'Your appointment has been saved, but there was an issue adding it to the calendar. Please contact us to confirm.',
+          variant: "destructive",
+          duration: 8000,
+        });
+      } else {
+        toast({
+          title: 'Appointment Booked!',
+          description: 'Your assessment appointment has been scheduled and added to the calendar. You will receive a confirmation email shortly.',
+          duration: 5000,
+        });
       }
-
-      toast({
-        title: 'Appointment Booked!',
-        description: 'Your assessment appointment has been scheduled. You will receive a confirmation email shortly.',
-        duration: 5000,
-      });
       
       form.reset();
       setSelectedDate(undefined);
@@ -259,21 +309,34 @@ const AppointmentDialog = () => {
 
                 {selectedDate && (
                   <div>
-                    <label className="block text-sm font-medium mb-2">Available Times</label>
-                    <div className="grid grid-cols-2 gap-2 max-h-40 overflow-y-auto">
-                      {availableSlots.map((slot) => (
-                        <Button
-                          key={slot}
-                          type="button"
-                          variant={selectedTime === slot ? "default" : "outline"}
-                          size="sm"
-                          onClick={() => setSelectedTime(slot)}
-                          className="text-sm"
-                        >
-                          {slot}
-                        </Button>
-                      ))}
-                    </div>
+                    <label className="block text-sm font-medium mb-2">
+                      Available Times {isCheckingAvailability && '(Checking...)'}
+                    </label>
+                    {isCheckingAvailability ? (
+                      <div className="flex justify-center p-4">
+                        <svg className="animate-spin h-6 w-6 text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                      </div>
+                    ) : availableSlots.length > 0 ? (
+                      <div className="grid grid-cols-2 gap-2 max-h-40 overflow-y-auto">
+                        {availableSlots.map((slot) => (
+                          <Button
+                            key={slot}
+                            type="button"
+                            variant={selectedTime === slot ? "default" : "outline"}
+                            size="sm"
+                            onClick={() => setSelectedTime(slot)}
+                            className="text-sm"
+                          >
+                            {slot}
+                          </Button>
+                        ))}
+                      </div>
+                    ) : (
+                      <p className="text-sm text-gray-600">No available time slots for this date. Please select another date.</p>
+                    )}
                   </div>
                 )}
               </div>
@@ -291,7 +354,7 @@ const AppointmentDialog = () => {
               <Button 
                 type="submit" 
                 className="flex-1 bg-signal-gold hover:bg-signal-gold/90 text-black font-semibold"
-                disabled={isSubmitting || !selectedDate || !selectedTime}
+                disabled={isSubmitting || !selectedDate || !selectedTime || availableSlots.length === 0}
               >
                 {isSubmitting ? (
                   <div className="flex items-center justify-center">
