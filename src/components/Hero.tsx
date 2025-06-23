@@ -1,10 +1,12 @@
 
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useCalendly } from '@/hooks/useCalendly';
 import { useState, useEffect } from 'react';
 
 const Hero = () => {
   const { t, language } = useLanguage();
+  const { openCalendlyPopup } = useCalendly();
   const [isMobile, setIsMobile] = useState(false);
 
   // Get headline and subtitle text
@@ -38,6 +40,10 @@ const Hero = () => {
   // Custom assessment button text
   const getAssessmentButtonText = () => {
     return language === 'zh' ? '預約評估' : 'Book Assessment';
+  };
+
+  const handleBookAssessment = () => {
+    openCalendlyPopup();
   };
 
   return (
@@ -92,19 +98,13 @@ const Hero = () => {
                 {t('hero.cta.membership')}
               </Button>
               
-              {/* Assessment button - links to LINE */}
+              {/* Assessment button - now opens Calendly popup */}
               <Button 
                 size="lg" 
-                asChild
+                onClick={handleBookAssessment}
                 className="font-medium px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg text-white bg-signal-gold hover:bg-signal-gold/90 active:bg-signal-gold focus:bg-signal-gold transition-all duration-300 hover:shadow-lg hover:scale-105"
               >
-                <a 
-                  href="https://lin.ee/CaWvRmo" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                >
-                  {getAssessmentButtonText()}
-                </a>
+                {getAssessmentButtonText()}
               </Button>
             </div>
           </div>
