@@ -1,6 +1,14 @@
 
 import { useEffect, useState } from 'react';
 
+// Declare global types for libraries loaded via script tags
+declare global {
+  interface Window {
+    VANTA: any;
+    THREE: any;
+  }
+}
+
 interface LoadingScreenProps {
   onLoadingComplete: () => void;
 }
