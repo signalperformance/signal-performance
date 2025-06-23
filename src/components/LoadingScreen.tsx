@@ -1,14 +1,6 @@
 
 import { useEffect, useState } from 'react';
 
-// Declare global types for libraries loaded via script tags
-declare global {
-  interface Window {
-    VANTA: any;
-    THREE: any;
-  }
-}
-
 interface LoadingScreenProps {
   onLoadingComplete: () => void;
 }
@@ -39,28 +31,6 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
       // Wait for fonts to load
       const fontPromise = document.fonts.ready;
       promises.push(fontPromise);
-
-      // Wait for VANTA scripts to be available
-      const vantaPromise = new Promise((resolve) => {
-        let retries = 0;
-        const maxRetries = 50;
-        
-        const checkVanta = () => {
-          if (window.VANTA && window.THREE) {
-            resolve(true);
-          } else {
-            retries++;
-            if (retries < maxRetries) {
-              setTimeout(checkVanta, 100);
-            } else {
-              resolve(true); // Continue even if VANTA fails to load
-            }
-          }
-        };
-        
-        checkVanta();
-      });
-      promises.push(vantaPromise);
 
       // Minimum loading time for smooth experience
       const minLoadTime = new Promise(resolve => setTimeout(resolve, 2000));
