@@ -103,6 +103,11 @@
   body[data-language="en"] h6 {
     @apply font-lora;
   }
+
+  /* Force Playfair Display for brand name regardless of language */
+  .font-playfair {
+    font-family: 'Playfair Display', serif !important;
+  }
 }
 
 html {
