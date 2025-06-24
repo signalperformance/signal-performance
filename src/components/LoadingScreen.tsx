@@ -71,7 +71,7 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
         </div>
         
         {/* Company name */}
-        <h1 className="text-2xl md:text-3xl font-playfair font-bold text-signal-charcoal mt-4 animate-fade-in">
+        <h1 className="text-2xl md:text-3xl brand-font font-bold text-signal-charcoal mt-4 animate-fade-in">
           Signal Performance
         </h1>
         
