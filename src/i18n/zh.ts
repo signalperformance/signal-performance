@@ -65,7 +65,7 @@ const zh = {
 
   // Coach
   'about.coach.title': '您的教練',
-  'about.coach.name': 'Dr. Noah Sachs',
+  'about.coach.name': '諾亞薩克斯博士',
   'about.coach.position': '表現教練',
   'about.coach.academic': '學術背景',
   'about.coach.academic.degree': '運動與表現心理學博士',
