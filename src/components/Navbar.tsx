@@ -29,7 +29,7 @@ const Navbar = () => {
           <div className="w-8 md:w-10 h-8 md:h-10 flex-shrink-0">
             <img alt="Signal Performance Logo" className="h-full w-auto object-contain" src="/lovable-uploads/0959e8f0-e34c-4d16-9e3e-16462b6d8961.png" />
           </div>
-          <span className="text-signal-charcoal md:text-2xl font-playfair font-bold text-lg">Signal Performance</span>
+          <span className="text-signal-charcoal md:text-2xl font-bold text-lg">Signal Performance</span>
         </a>
 
         <div className="flex items-center space-x-2">
