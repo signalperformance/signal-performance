@@ -50,7 +50,19 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
         // Silently fail
       }
     }
+    
+    // Set data-language attribute on body for CSS font switching
+    if (typeof document !== 'undefined') {
+      document.body.setAttribute('data-language', language);
+    }
   }, [language]);
+
+  // Set initial data-language attribute
+  useEffect(() => {
+    if (typeof document !== 'undefined') {
+      document.body.setAttribute('data-language', language);
+    }
+  }, []);
 
   const t = (key: string): string => {
     return translations[language][key as keyof typeof translations[typeof language]] || key;

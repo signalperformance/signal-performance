@@ -1,12 +1,13 @@
-
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useCalendly } from '@/hooks/useCalendly';
+import { useDynamicFont } from '@/hooks/useDynamicFont';
 import { useState, useEffect } from 'react';
 
 const Hero = () => {
   const { t, language } = useLanguage();
   const { openCalendlyPopup } = useCalendly();
+  const { headingFont } = useDynamicFont();
   const [isMobile, setIsMobile] = useState(false);
 
   // Get headline and subtitle text
@@ -69,7 +70,7 @@ const Hero = () => {
         <div className="max-w-6xl mx-auto text-center">
           {/* Modern card container with signal-charcoal background */}
           <div className="bg-signal-charcoal/95 backdrop-blur-sm rounded-2xl shadow-xl border border-signal-charcoal/60 p-8 md:p-12 lg:p-16">
-            <h1 className={`font-bold mb-4 text-white leading-tight ${
+            <h1 className={`${headingFont} font-bold mb-4 text-white leading-tight ${
               isMobile 
                 ? 'text-3xl sm:text-4xl' 
                 : 'text-3xl md:text-4xl lg:text-5xl xl:text-6xl'

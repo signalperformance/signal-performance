@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -22,6 +21,7 @@ export default {
 			fontFamily: {
 				'lora': ['Lora', 'serif'],
 				'montserrat': ['Montserrat', 'sans-serif'],
+				'ibm-plex-sans-jp': ['IBM Plex Sans JP', 'sans-serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
@@ -73,12 +73,12 @@ export default {
 					white: '#FFFFFF',
 					gold: '#c9aa71',
 					'light-gray': '#f3f4f6',
-          'physical': '#3b82f6', // blue-500
-          'physical-light': '#eff6ff', // blue-50
-          'mental': '#ef4444', // red-500
-          'mental-light': '#fef2f2', // red-50
-          'golf': '#22c55e', // green-500
-          'golf-light': '#f0fdf4', // green-50
+          'physical': '#3b82f6',
+          'physical-light': '#eff6ff',
+          'mental': '#ef4444',
+          'mental-light': '#fef2f2',
+          'golf': '#22c55e',
+          'golf-light': '#f0fdf4',
 				}
 			},
 			borderRadius: {

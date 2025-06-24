@@ -73,10 +73,34 @@
   }
 
   body {
-    @apply bg-background text-foreground font-montserrat;
+    @apply bg-background text-foreground;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  /* Dynamic font application based on language */
+  body[data-language="zh"] {
+    @apply font-ibm-plex-sans-jp;
+  }
+
+  body[data-language="en"] {
+    @apply font-montserrat;
+  }
+
+  /* Heading fonts */
+  body[data-language="zh"] h1,
+  body[data-language="zh"] h2,
+  body[data-language="zh"] h3,
+  body[data-language="zh"] h4,
+  body[data-language="zh"] h5,
+  body[data-language="zh"] h6 {
+    @apply font-ibm-plex-sans-jp;
+  }
+
+  body[data-language="en"] h1,
+  body[data-language="en"] h2,
+  body[data-language="en"] h3,
+  body[data-language="en"] h4,
+  body[data-language="en"] h5,
+  body[data-language="en"] h6 {
     @apply font-lora;
   }
 }
@@ -113,11 +137,10 @@ html {
 .pattern-diagonal-stripes {
   background-image: repeating-linear-gradient(
     45deg,
-    rgba(0, 0, 0, 0.15), /* Stripe color: subtle dark semi-transparent */
-    rgba(0, 0, 0, 0.15) 4px,  /* Stripe width */
-    transparent 4px,          /* Space color (shows base bg) */
-    transparent 8px           /* Space width + stripe width = pattern repeat */
+    rgba(0, 0, 0, 0.15),
+    rgba(0, 0, 0, 0.15) 4px,
+    transparent 4px,
+    transparent 8px
   );
-  background-size: 12px 12px; /* Controls the density of the pattern tiling */
+  background-size: 12px 12px;
 }
-
