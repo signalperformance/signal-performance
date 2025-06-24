@@ -72,7 +72,7 @@ const zh = {
   'about.coach.experience': '專業經歷',
   'about.coach.experience.img': 'IMG Academy',
   'about.coach.experience.usaf': '美國空軍特種作戰司令部',
-  'about.coach.experience.pga': '美國高爾夫協會 Mission Hills 訓練中心',
+  'about.coach.experience.pga': '美國PGA高爾夫學院-觀瀾湖',
   'about.coach.certifications': '專業認證',
 
   // Founder
