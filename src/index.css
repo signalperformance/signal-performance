@@ -149,3 +149,40 @@ html {
   );
   background-size: 12px 12px;
 }
+
+/* Mobile Calendly fix - prevent zoom and viewport issues */
+@media only screen and (max-width: 768px) {
+  /* Prevent zoom when Calendly popup opens */
+  .calendly-overlay {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+  
+  /* Ensure body doesn't scroll behind modal */
+  body.calendly-popup-open {
+    position: fixed !important;
+    overflow: hidden !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+  
+  /* Prevent input zoom on iOS */
+  input, textarea, select, button {
+    font-size: 16px !important;
+  }
+  
+  /* Prevent horizontal scroll when popup opens */
+  html, body {
+    overflow-x: hidden;
+  }
+}
+
+/* Additional mobile viewport fixes */
+@supports (-webkit-touch-callout: none) {
+  /* iOS Safari specific fixes */
+  .calendly-popup-wrapper {
+    -webkit-overflow-scrolling: touch;
+  }
+}
