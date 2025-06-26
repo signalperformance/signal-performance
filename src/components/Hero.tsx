@@ -1,12 +1,11 @@
+
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useCalendly } from '@/hooks/useCalendly';
 import { useDynamicFont } from '@/hooks/useDynamicFont';
 import { useState, useEffect } from 'react';
 
 const Hero = () => {
   const { t, language } = useLanguage();
-  const { openCalendlyPopup } = useCalendly();
   const { headingFont } = useDynamicFont();
   const [isMobile, setIsMobile] = useState(false);
 
@@ -44,7 +43,7 @@ const Hero = () => {
   };
 
   const handleBookAssessment = () => {
-    openCalendlyPopup();
+    window.location.href = 'https://calendly.com/noah-signalperformance/assessment';
   };
 
   return (
@@ -99,7 +98,7 @@ const Hero = () => {
                 {t('hero.cta.membership')}
               </Button>
               
-              {/* Assessment button - now opens Calendly popup */}
+              {/* Assessment button - now navigates directly to Calendly */}
               <Button 
                 size="lg" 
                 onClick={handleBookAssessment}

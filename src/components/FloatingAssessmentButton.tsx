@@ -2,11 +2,9 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useCalendly } from '@/hooks/useCalendly';
 
 const FloatingAssessmentButton = () => {
   const { language } = useLanguage();
-  const { openCalendlyPopup } = useCalendly();
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -29,7 +27,7 @@ const FloatingAssessmentButton = () => {
   };
 
   const handleBookAssessment = () => {
-    openCalendlyPopup();
+    window.location.href = 'https://calendly.com/noah-signalperformance/assessment';
   };
 
   if (!isVisible) return null;

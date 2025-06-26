@@ -108,33 +108,6 @@
   .brand-font {
     font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
   }
-
-  /* Improved Mobile Calendly popup fixes */
-  @media (max-width: 768px) {
-    /* Only apply when class is present and let JS handle the positioning */
-    body.calendly-popup-open {
-      -webkit-overflow-scrolling: touch;
-      -webkit-user-select: none;
-      -webkit-touch-callout: none;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    /* Prevent background content interaction when popup is open */
-    body.calendly-popup-open > div:not([class*="calendly"]) {
-      pointer-events: none;
-    }
-
-    /* Ensure Calendly overlay stays on top */
-    .calendly-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 9999;
-      background: rgba(0, 0, 0, 0.5);
-    }
-  }
 }
 
 html {
