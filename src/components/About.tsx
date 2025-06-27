@@ -1,4 +1,3 @@
-
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
@@ -17,7 +16,7 @@ const About = () => {
             <Separator className="mx-auto w-24 bg-signal-gold h-0.5" />
           </div>
           
-          <div className="flex flex-col lg:flex-row gap-8 items-center lg:items-start">
+          <div className="flex flex-col lg:flex-row gap-8 items-center lg:items-start bg-[signal-light-gray]">
             {/* Profile Section */}
             <div className="w-full lg:w-1/3">
               <div className="mb-4 flex justify-center">
