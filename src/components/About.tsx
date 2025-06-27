@@ -4,13 +4,14 @@ import { Separator } from '@/components/ui/separator';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
+
 const About = () => {
-  const {
-    t
-  } = useLanguage();
-  return <section id="about" className="py-12 md:py-16 bg-white bg-[signal-light-gray]">
+  const { t } = useLanguage();
+
+  return (
+    <section id="about" className="py-12 md:py-16 bg-white">
       <div className="container mx-auto container-padding">
-        <div className="max-w-5xl mx-auto bg-[signal-light-gray]">
+        <div className="max-w-5xl mx-auto bg-white">
           <div className="text-center mb-8">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 font-lora text-signal-charcoal">{t('about.coach.title')}</h2>
             <Separator className="mx-auto w-24 bg-signal-gold h-0.5" />
@@ -141,6 +142,8 @@ const About = () => {
           </div>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default About;
