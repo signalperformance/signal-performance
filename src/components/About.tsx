@@ -1,4 +1,3 @@
-
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
@@ -9,9 +8,9 @@ const About = () => {
   const {
     t
   } = useLanguage();
-  return <section id="about" className="py-12 md:py-16 bg-white">
+  return <section id="about" className="py-12 md:py-16 bg-white bg-[signal-light-gray]">
       <div className="container mx-auto container-padding">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-5xl mx-auto bg-[signal-light-gray]">
           <div className="text-center mb-8">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 font-lora text-signal-charcoal">{t('about.coach.title')}</h2>
             <Separator className="mx-auto w-24 bg-signal-gold h-0.5" />
