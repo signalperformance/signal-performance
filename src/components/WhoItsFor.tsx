@@ -21,7 +21,7 @@ const WhoItsFor = () => {
   ];
 
   return (
-    <section id="who-its-for" className="section-padding bg-background">
+    <section id="who-its-for" className="section-padding bg-white">
       <div className="container mx-auto container-padding text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-12 font-lora text-signal-charcoal animate-fade-in">
           {t('whoitsfor.title')}
