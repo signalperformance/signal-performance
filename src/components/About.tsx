@@ -4,12 +4,11 @@ import { Separator } from '@/components/ui/separator';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
-
 const About = () => {
-  const { t } = useLanguage();
-
-  return (
-    <section id="about" className="py-12 md:py-16 bg-white">
+  const {
+    t
+  } = useLanguage();
+  return <section id="about" className="py-12 md:py-16 bg-white bg-[signal-light-gray]">
       <div className="container mx-auto container-padding">
         <div className="max-w-5xl mx-auto bg-white">
           <div className="text-center mb-8">
@@ -142,8 +141,6 @@ const About = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default About;
