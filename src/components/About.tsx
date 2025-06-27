@@ -1,3 +1,4 @@
+
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
@@ -8,15 +9,15 @@ const About = () => {
   const {
     t
   } = useLanguage();
-  return <section id="about" className="py-12 md:py-16 bg-signal-light-gray">
+  return <section id="about" className="py-12 md:py-16 bg-white">
       <div className="container mx-auto container-padding">
-        <div className="max-w-5xl mx-auto bg-white">
+        <div className="max-w-5xl mx-auto">
           <div className="text-center mb-8">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 font-lora text-signal-charcoal">{t('about.coach.title')}</h2>
             <Separator className="mx-auto w-24 bg-signal-gold h-0.5" />
           </div>
           
-          <div className="flex flex-col lg:flex-row gap-8 items-center lg:items-start bg-[signal-light-gray]">
+          <div className="flex flex-col lg:flex-row gap-8 items-center lg:items-start">
             {/* Profile Section */}
             <div className="w-full lg:w-1/3">
               <div className="mb-4 flex justify-center">
