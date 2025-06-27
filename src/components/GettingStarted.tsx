@@ -29,7 +29,7 @@ const GettingStarted = () => {
   ];
 
   return (
-    <section id="getting-started" className="section-padding bg-signal-light-gray">
+    <section id="getting-started" className="section-padding bg-white">
       <div className="container mx-auto container-padding">
         <div className="text-center mb-12 md:mb-20">
           <h2 className="text-3xl md:text-4xl font-semibold mb-4 text-signal-charcoal">
