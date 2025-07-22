@@ -147,6 +147,16 @@ const en = {
   'whoitsfor.notfor.item2': 'Avoid accountability or progress tracking',
   'whoitsfor.notfor.item3': 'Can\'t commit to training consistently',
   'whoitsfor.notfor.item4': 'Focus only on finding the cheapest option',
+
+  // Studio Location
+  'studio.title': 'Our Studio in Linkou',
+  'studio.features.title': 'Features:',
+  'studio.features.equipment': 'Premium fitness equipment',
+  'studio.features.consultation': 'Private consultation rooms',
+  'studio.features.access': 'Nearby access to simulator, range, and putting green',
+  'studio.address.title': 'Studio Address',
+  'studio.address.location': '2樓, 南勢里9鄰33-6號, Linkou District, New Taipei City, 244',
+  'studio.address.mapButton': 'View on Google Maps'
 };
 
 export default en;

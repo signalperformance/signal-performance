@@ -147,6 +147,16 @@ const zh = {
   'whoitsfor.notfor.item2': '逃避責任或不追蹤進度',
   'whoitsfor.notfor.item3': '無法穩定參與訓練',
   'whoitsfor.notfor.item4': '只在乎找最便宜的選項',
+
+  // Studio Location
+  'studio.title': '我們在林口的工作室',
+  'studio.features.title': '設施特色：',
+  'studio.features.equipment': '頂級健身設備',
+  'studio.features.consultation': '私人諮詢室',
+  'studio.features.access': '鄰近模擬器、練習場和推桿果嶺',
+  'studio.address.title': '工作室地址',
+  'studio.address.location': '244新北市林口區南勢里9鄰33-6號2樓',
+  'studio.address.mapButton': '在Google地圖上查看'
 };
 
 export default zh;

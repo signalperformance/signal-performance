@@ -1,7 +1,7 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { MapPin, ExternalLink } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 
 const StudioLocation = () => {
@@ -26,12 +26,8 @@ const StudioLocation = () => {
           {/* Section Header */}
           <div className="text-center mb-12 md:mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-signal-charcoal font-lora">
-              Our Studio in Linkou
+              {t('studio.title')}
             </h2>
-            <p className="text-lg text-signal-charcoal/80 max-w-3xl mx-auto">
-              Experience our state-of-the-art fitness facility featuring premium equipment, 
-              dedicated training areas, and professional consultation spaces designed for optimal performance.
-            </p>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -77,16 +73,13 @@ const StudioLocation = () => {
               <Card className="border-signal-gold/20 shadow-lg">
                 <CardContent className="p-8">
                   <div className="space-y-6">
-                    <div className="flex items-start space-x-3">
-                      <MapPin className="w-6 h-6 text-signal-gold flex-shrink-0 mt-1" />
-                      <div>
-                        <h3 className="text-xl font-semibold text-signal-charcoal mb-2">
-                          Studio Address
-                        </h3>
-                        <p className="text-signal-charcoal/80 leading-relaxed">
-                          {address}
-                        </p>
-                      </div>
+                    <div>
+                      <h3 className="text-xl font-semibold text-signal-charcoal mb-2">
+                        {t('studio.address.title')}
+                      </h3>
+                      <p className="text-signal-charcoal/80 leading-relaxed">
+                        {t('studio.address.location')}
+                      </p>
                     </div>
 
                     <div className="pt-4">
@@ -101,31 +94,27 @@ const StudioLocation = () => {
                           className="inline-flex items-center justify-center space-x-2"
                         >
                           <ExternalLink className="w-4 h-4" />
-                          <span>View on Google Maps</span>
+                          <span>{t('studio.address.mapButton')}</span>
                         </a>
                       </Button>
                     </div>
 
                     <div className="border-t border-signal-gold/20 pt-6">
                       <h4 className="text-lg font-semibold text-signal-charcoal mb-3">
-                        What You'll Find
+                        {t('studio.features.title')}
                       </h4>
                       <ul className="space-y-2 text-signal-charcoal/80">
                         <li className="flex items-center space-x-2">
                           <div className="w-2 h-2 bg-signal-gold rounded-full"></div>
-                          <span>Premium fitness equipment</span>
+                          <span>{t('studio.features.equipment')}</span>
                         </li>
                         <li className="flex items-center space-x-2">
                           <div className="w-2 h-2 bg-signal-gold rounded-full"></div>
-                          <span>Private consultation rooms</span>
+                          <span>{t('studio.features.consultation')}</span>
                         </li>
                         <li className="flex items-center space-x-2">
                           <div className="w-2 h-2 bg-signal-gold rounded-full"></div>
-                          <span>Specialized training areas</span>
-                        </li>
-                        <li className="flex items-center space-x-2">
-                          <div className="w-2 h-2 bg-signal-gold rounded-full"></div>
-                          <span>Modern, spacious environment</span>
+                          <span>{t('studio.features.access')}</span>
                         </li>
                       </ul>
                     </div>
