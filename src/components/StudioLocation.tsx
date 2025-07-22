@@ -8,10 +8,10 @@ const StudioLocation = () => {
   const { t } = useLanguage();
 
   const studioImages = [
-    "/lovable-uploads/fee6baaf-924e-4e08-a28d-08570d16ceab.png",
+    "/lovable-uploads/6723a627-2af6-4437-b182-0827e5f5607a.png",
     "/lovable-uploads/3f9f34d1-5282-432d-8d22-864d89331044.png",
     "/lovable-uploads/977dab8a-9542-465d-b44e-50204d8aeee4.png",
-    "/lovable-uploads/503a4780-a5cc-43ab-bbcd-93ea3c3bd9e4.png",
+    "/lovable-uploads/fee6baaf-924e-4e08-a28d-08570d16ceab.png",
     "/lovable-uploads/5684e079-9755-46d7-874d-979d3dd34fd1.png",
     "/lovable-uploads/ebb823c7-6279-445a-aa7e-3b361e6d2d30.png"
   ];
