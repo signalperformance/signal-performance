@@ -11,6 +11,7 @@ import GettingStarted from "@/components/GettingStarted";
 import Philosophy from "@/components/Philosophy";
 import WhoItsFor from "@/components/WhoItsFor";
 import WeeklySchedule from "@/components/WeeklySchedule";
+import StudioLocation from "@/components/StudioLocation";
 import Footer from "@/components/Footer";
 import FloatingAssessmentButton from "@/components/FloatingAssessmentButton";
 
@@ -34,6 +35,7 @@ const Index = () => {
       <Membership />
       <WeeklySchedule />
       <WhoItsFor />
+      <StudioLocation />
       <GettingStarted />
       <About />
       <Footer />

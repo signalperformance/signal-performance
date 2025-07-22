@@ -9,7 +9,7 @@ const About = () => {
   const { t } = useLanguage();
   
   return (
-    <section id="about" className="py-12 md:py-16 bg-signal-light-gray">
+    <section id="about" className="py-12 md:py-16 bg-white">
       <div className="container mx-auto container-padding">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-8">
