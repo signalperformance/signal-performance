@@ -32,7 +32,7 @@ const StudioLocation = () => {
 
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Images Carousel/Grid */}
-            <div className="order-2 lg:order-1">
+            <div className="order-1 lg:order-1">
               {/* Desktop: 2x2 Grid */}
               <div className="hidden md:grid grid-cols-2 gap-4">
                 {studioImages.slice(0, 4).map((image, index) => (
@@ -47,7 +47,7 @@ const StudioLocation = () => {
               </div>
 
               {/* Mobile: Carousel */}
-              <div className="md:hidden">
+              <div className="md:hidden relative">
                 <Carousel className="w-full">
                   <CarouselContent>
                     {studioImages.map((image, index) => (
@@ -62,14 +62,29 @@ const StudioLocation = () => {
                       </CarouselItem>
                     ))}
                   </CarouselContent>
-                  <CarouselPrevious />
-                  <CarouselNext />
+                  <CarouselPrevious className="left-2" />
+                  <CarouselNext className="right-2" />
                 </Carousel>
+                
+                {/* Swipe indicator dots */}
+                <div className="flex justify-center mt-4 space-x-2">
+                  {studioImages.map((_, index) => (
+                    <div 
+                      key={index} 
+                      className="w-2 h-2 rounded-full bg-signal-gold/30"
+                    />
+                  ))}
+                </div>
+                
+                {/* Swipe instruction text */}
+                <p className="text-center text-sm text-signal-charcoal/60 mt-2">
+                  Swipe to view more photos
+                </p>
               </div>
             </div>
 
             {/* Location Information */}
-            <div className="order-1 lg:order-2">
+            <div className="order-2 lg:order-2">
               <Card className="border-signal-gold/20 shadow-lg">
                 <CardContent className="p-8">
                   <div className="space-y-6">
