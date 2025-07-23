@@ -1,7 +1,7 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ExternalLink } from 'lucide-react';
+import { MapPin } from 'lucide-react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 
 const StudioLocation = () => {
@@ -59,17 +59,14 @@ const StudioLocation = () => {
                 <CardContent className="p-8">
                   <div className="space-y-6">
                     <div>
-                      <h3 className="text-xl font-semibold text-signal-charcoal mb-2">
-                        {t('studio.address.title')}
-                      </h3>
-                      <div className="flex items-center gap-2 mb-2">
-                        <p className="text-sm text-signal-charcoal/80 leading-relaxed flex-1">
-                          {t('studio.address.location')}
-                        </p>
+                      <div className="flex items-start justify-between mb-2">
+                        <h3 className="text-xl font-semibold text-signal-charcoal">
+                          {t('studio.address.title')}
+                        </h3>
                         <Button 
                           asChild
                           size="sm"
-                          className="bg-signal-gold hover:bg-signal-gold/90 text-white px-2 py-1 h-7 shrink-0"
+                          className="bg-signal-gold hover:bg-signal-gold/90 text-white px-2 py-1 h-8 shrink-0"
                         >
                           <a 
                             href={googleMapsLink}
@@ -77,9 +74,13 @@ const StudioLocation = () => {
                             rel="noopener noreferrer"
                             className="inline-flex items-center justify-center"
                           >
-                            <ExternalLink className="w-3 h-3" />
+                            <MapPin className="w-4 h-4" />
                           </a>
                         </Button>
+                      </div>
+                      <div className="text-signal-charcoal/80 leading-relaxed">
+                        <div>新北市林口區</div>
+                        <div>南勢里9鄰33-6號2樓</div>
                       </div>
                     </div>
 
