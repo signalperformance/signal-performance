@@ -88,16 +88,16 @@ const StudioLocation = () => {
                         {t('studio.features.title')}
                       </h4>
                       <ul className="space-y-2 text-signal-charcoal/80">
-                        <li className="flex items-center space-x-2">
-                          <div className="w-2 h-2 bg-signal-gold rounded-full"></div>
+                        <li className="flex items-start space-x-2">
+                          <div className="w-2 h-2 bg-signal-gold rounded-full mt-2"></div>
                           <span>{t('studio.features.equipment')}</span>
                         </li>
-                        <li className="flex items-center space-x-2">
-                          <div className="w-2 h-2 bg-signal-gold rounded-full"></div>
+                        <li className="flex items-start space-x-2">
+                          <div className="w-2 h-2 bg-signal-gold rounded-full mt-2"></div>
                           <span>{t('studio.features.consultation')}</span>
                         </li>
-                        <li className="flex items-center space-x-2">
-                          <div className="w-2 h-2 bg-signal-gold rounded-full"></div>
+                        <li className="flex items-start space-x-2">
+                          <div className="w-2 h-2 bg-signal-gold rounded-full mt-2"></div>
                           <span>{t('studio.features.access')}</span>
                         </li>
                       </ul>
