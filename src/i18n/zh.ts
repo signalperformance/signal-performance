@@ -149,7 +149,7 @@ const zh = {
   'whoitsfor.notfor.item4': '只在乎找最便宜的選項',
 
   // Studio Location
-  'studio.title': '我們在林口的工作室',
+  'studio.title': '我們的林口工作室',
   'studio.features.title': '設施特色：',
   'studio.features.equipment': '頂級健身設備',
   'studio.features.consultation': '私人諮詢室',
