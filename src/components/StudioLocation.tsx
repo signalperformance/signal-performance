@@ -62,33 +62,32 @@ const StudioLocation = () => {
                       <h3 className="text-xl font-semibold text-signal-charcoal mb-2">
                         {t('studio.address.title')}
                       </h3>
-                      <p className="text-signal-charcoal/80 leading-relaxed">
-                        {t('studio.address.location')}
-                      </p>
-                    </div>
-
-                    <div className="pt-4">
-                      <Button 
-                        asChild
-                        className="w-full bg-signal-gold hover:bg-signal-gold/90 text-white font-medium"
-                      >
-                        <a 
-                          href={googleMapsLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center justify-center space-x-2"
+                      <div className="flex items-center gap-2 mb-2">
+                        <p className="text-sm text-signal-charcoal/80 leading-relaxed flex-1">
+                          {t('studio.address.location')}
+                        </p>
+                        <Button 
+                          asChild
+                          size="sm"
+                          className="bg-signal-gold hover:bg-signal-gold/90 text-white px-2 py-1 h-7 shrink-0"
                         >
-                          <ExternalLink className="w-4 h-4" />
-                          <span>{t('studio.address.mapButton')}</span>
-                        </a>
-                      </Button>
+                          <a 
+                            href={googleMapsLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center"
+                          >
+                            <ExternalLink className="w-3 h-3" />
+                          </a>
+                        </Button>
+                      </div>
                     </div>
 
                     <div className="border-t border-signal-gold/20 pt-6">
                       <h4 className="text-lg font-semibold text-signal-charcoal mb-3">
                         {t('studio.features.title')}
                       </h4>
-                      <ul className="space-y-2 text-signal-charcoal/80">
+                      <ul className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-2 text-signal-charcoal/80 sm:grid-cols-2">
                         <li className="flex items-center space-x-2">
                           <div className="w-2 h-2 bg-signal-gold rounded-full"></div>
                           <span>{t('studio.features.equipment')}</span>
