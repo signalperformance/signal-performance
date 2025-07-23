@@ -33,21 +33,8 @@ const StudioLocation = () => {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Images Carousel/Grid */}
             <div className="order-1 lg:order-1">
-              {/* Desktop: 2x2 Grid */}
-              <div className="hidden md:grid grid-cols-2 gap-4">
-                {studioImages.slice(0, 4).map((image, index) => (
-                  <div key={index} className="aspect-[4/3] rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-                    <img 
-                      src={image} 
-                      alt={`Studio view ${index + 1}`}
-                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                    />
-                  </div>
-                ))}
-              </div>
-
-              {/* Mobile: Carousel */}
-              <div className="md:hidden relative">
+              {/* Carousel for both desktop and mobile */}
+              <div className="relative">
                 <Carousel className="w-full">
                   <CarouselContent>
                     {studioImages.map((image, index) => (
@@ -65,21 +52,6 @@ const StudioLocation = () => {
                   <CarouselPrevious className="left-2" />
                   <CarouselNext className="right-2" />
                 </Carousel>
-                
-                {/* Swipe indicator dots */}
-                <div className="flex justify-center mt-4 space-x-2">
-                  {studioImages.map((_, index) => (
-                    <div 
-                      key={index} 
-                      className="w-2 h-2 rounded-full bg-signal-gold/30"
-                    />
-                  ))}
-                </div>
-                
-                {/* Swipe instruction text */}
-                <p className="text-center text-sm text-signal-charcoal/60 mt-2">
-                  Swipe to view more photos
-                </p>
               </div>
             </div>
 
