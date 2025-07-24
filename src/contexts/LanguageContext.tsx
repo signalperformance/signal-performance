@@ -1,4 +1,3 @@
-
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { translations } from '@/i18n';
 
@@ -10,7 +9,14 @@ type LanguageContextType = {
   t: (key: string) => string;
 };
 
-const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
+// Create context with a default value instead of undefined
+const defaultContextValue: LanguageContextType = {
+  language: 'en',
+  setLanguage: () => {},
+  t: (key: string) => key
+};
+
+const LanguageContext = createContext<LanguageContextType>(defaultContextValue);
 
 // Helper function to check if localStorage is available
 const isLocalStorageAvailable = (): boolean => {
@@ -40,6 +46,7 @@ const getSavedLanguage = (): Language => {
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const [language, setLanguage] = useState<Language>(getSavedLanguage);
+  const [isInitialized, setIsInitialized] = useState(false);
 
   // Save language preference to localStorage whenever it changes
   useEffect(() => {
@@ -57,19 +64,36 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     }
   }, [language]);
 
-  // Set initial data-language attribute
+  // Set initial data-language attribute and mark as initialized
   useEffect(() => {
     if (typeof document !== 'undefined') {
       document.body.setAttribute('data-language', language);
     }
+    setIsInitialized(true);
   }, []);
 
   const t = (key: string): string => {
-    return translations[language][key as keyof typeof translations[typeof language]] || key;
+    if (!isInitialized) {
+      return key; // Return key as fallback if not initialized
+    }
+    
+    try {
+      const translation = translations[language]?.[key as keyof typeof translations[typeof language]];
+      return translation || key;
+    } catch (error) {
+      console.warn(`Translation error for key "${key}":`, error);
+      return key;
+    }
+  };
+
+  const contextValue: LanguageContextType = {
+    language,
+    setLanguage,
+    t
   };
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+    <LanguageContext.Provider value={contextValue}>
       {children}
     </LanguageContext.Provider>
   );
@@ -77,9 +101,13 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
 
 export const useLanguage = (): LanguageContextType => {
   const context = useContext(LanguageContext);
-  if (context === undefined) {
-    console.error('useLanguage hook used outside LanguageProvider. Make sure your component is wrapped with LanguageProvider.');
-    throw new Error('useLanguage must be used within a LanguageProvider');
+  
+  // Since we now provide a default value, context should never be undefined
+  // But we'll add extra safety checks just in case
+  if (!context) {
+    console.error('useLanguage hook called but context is null. Using fallback values.');
+    return defaultContextValue;
   }
+  
   return context;
 };
