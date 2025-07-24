@@ -54,9 +54,9 @@ const StudioLocation = () => {
             </div>
 
             {/* Location Information */}
-            <div className="order-2 lg:order-2">
-              <Card className="border-signal-gold/20 shadow-lg">
-                <CardContent className="p-8">
+            <div className="order-2 lg:order-2 h-full">
+              <Card className="border-signal-gold/20 shadow-lg h-full">
+                <CardContent className="p-8 h-full flex flex-col justify-center">
                   <div className="space-y-6">
                     <div>
                       <h3 className="text-xl font-semibold text-signal-charcoal mb-2">
