@@ -39,7 +39,10 @@ const getSavedLanguage = (): Language => {
 };
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  const [language, setLanguage] = useState<Language>(getSavedLanguage);
+  const [language, setLanguage] = useState<Language>(() => {
+    console.log('LanguageProvider initializing...');
+    return getSavedLanguage();
+  });
 
   // Save language preference to localStorage whenever it changes
   useEffect(() => {
@@ -65,6 +68,8 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const t = (key: string): string => {
+    console.log('Translation called with:', key, 'language:', language);
+    console.log('Available translations:', translations);
     return translations[language][key as keyof typeof translations[typeof language]] || key;
   };
 
@@ -78,6 +83,7 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
 export const useLanguage = (): LanguageContextType => {
   const context = useContext(LanguageContext);
   if (context === undefined) {
+    console.error('useLanguage hook used outside LanguageProvider. Make sure your component is wrapped with LanguageProvider.');
     throw new Error('useLanguage must be used within a LanguageProvider');
   }
   return context;
