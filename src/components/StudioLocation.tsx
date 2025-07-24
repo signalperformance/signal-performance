@@ -64,15 +64,15 @@ const StudioLocation = () => {
                       </h3>
                       <ul className="space-y-4 text-signal-charcoal/90 text-base md:text-lg">
                         <li className="flex space-x-3 items-start hover:text-signal-charcoal transition-colors duration-200">
-                          <div className="w-3 h-3 bg-signal-gold rounded-full flex-shrink-0 mt-[0.6rem] animate-pulse"></div>
+                          <div className="w-3 h-3 bg-signal-gold rounded-full flex-shrink-0 mt-[0.6rem]"></div>
                           <span className="flex-1 leading-relaxed">{t('studio.features.equipment')}</span>
                         </li>
                         <li className="flex space-x-3 items-start hover:text-signal-charcoal transition-colors duration-200">
-                          <div className="w-3 h-3 bg-signal-gold rounded-full flex-shrink-0 mt-[0.6rem] animate-pulse"></div>
+                          <div className="w-3 h-3 bg-signal-gold rounded-full flex-shrink-0 mt-[0.6rem]"></div>
                           <span className="flex-1 leading-relaxed">{t('studio.features.consultation')}</span>
                         </li>
                         <li className="flex space-x-3 items-start hover:text-signal-charcoal transition-colors duration-200">
-                          <div className="w-3 h-3 bg-signal-gold rounded-full flex-shrink-0 mt-[0.6rem] animate-pulse"></div>
+                          <div className="w-3 h-3 bg-signal-gold rounded-full flex-shrink-0 mt-[0.6rem]"></div>
                           <span className="flex-1 leading-relaxed">{t('studio.features.access')}</span>
                         </li>
                       </ul>

@@ -150,7 +150,7 @@ const zh = {
 
   // Studio Location
   'studio.title': '我們的林口工作室',
-  'studio.features.title': '設施特色：',
+  'studio.features.title': '設施特色',
   'studio.features.equipment': '頂級健身設備',
   'studio.features.consultation': '私人諮詢室',
   'studio.features.access': '鄰近模擬器、練習場和推桿果嶺',

@@ -150,9 +150,9 @@ const en = {
 
   // Studio Location
   'studio.title': 'Our Studio in Linkou',
-  'studio.features.title': 'Features:',
+  'studio.features.title': 'Features',
   'studio.features.equipment': 'Premium fitness equipment',
-  'studio.features.consultation': 'Private consultation rooms',
+  'studio.features.consultation': 'Private consultation room',
   'studio.features.access': 'Nearby access to simulator, range, and putting green',
   'studio.address.title': 'Studio Address',
   'studio.address.location': '2樓, 南勢里9鄰33-6號, Linkou District, New Taipei City, 244',
