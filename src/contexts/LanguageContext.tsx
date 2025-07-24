@@ -39,10 +39,7 @@ const getSavedLanguage = (): Language => {
 };
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  const [language, setLanguage] = useState<Language>(() => {
-    console.log('LanguageProvider initializing...');
-    return getSavedLanguage();
-  });
+  const [language, setLanguage] = useState<Language>(getSavedLanguage);
 
   // Save language preference to localStorage whenever it changes
   useEffect(() => {
@@ -68,8 +65,6 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const t = (key: string): string => {
-    console.log('Translation called with:', key, 'language:', language);
-    console.log('Available translations:', translations);
     return translations[language][key as keyof typeof translations[typeof language]] || key;
   };
 
