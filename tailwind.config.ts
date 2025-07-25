@@ -22,6 +22,7 @@ export default {
 				'lora': ['Lora', 'serif'],
 				'montserrat': ['Montserrat', 'sans-serif'],
 				'ibm-plex-sans-jp': ['IBM Plex Sans JP', 'sans-serif'],
+				'inter': ['Inter', 'sans-serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
