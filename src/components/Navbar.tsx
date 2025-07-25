@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Switch } from '@/components/ui/switch';
+import { LazyImage } from '@/components/LazyImage';
 
 const Navbar = () => {
   const {
@@ -27,7 +28,12 @@ const Navbar = () => {
       <div className="container mx-auto px-4 flex justify-between items-center">
         <a href="#home" className="flex items-center justify-start gap-1">
           <div className="w-8 md:w-10 h-8 md:h-10 flex-shrink-0">
-            <img alt="Signal Performance Logo" className="h-full w-auto object-contain" src="/lovable-uploads/0959e8f0-e34c-4d16-9e3e-16462b6d8961.png" />
+            <LazyImage
+              src="/lovable-uploads/0959e8f0-e34c-4d16-9e3e-16462b6d8961.png"
+              alt="Signal Performance Logo"
+              className="h-full w-auto object-contain"
+              priority={true}
+            />
           </div>
           <span className="text-signal-charcoal md:text-2xl font-bold text-lg brand-font">Signal Performance</span>
         </a>

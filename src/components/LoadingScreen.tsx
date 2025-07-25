@@ -1,5 +1,6 @@
 
 import { useEffect, useState } from 'react';
+import { LazyImage } from './LazyImage';
 
 interface LoadingScreenProps {
   onLoadingComplete: () => void;
@@ -32,8 +33,8 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
       const fontPromise = document.fonts.ready;
       promises.push(fontPromise);
 
-      // Minimum loading time for smooth experience
-      const minLoadTime = new Promise(resolve => setTimeout(resolve, 2000));
+      // Reduced loading time for better performance
+      const minLoadTime = new Promise(resolve => setTimeout(resolve, 1000));
       promises.push(minLoadTime);
 
       try {
@@ -63,10 +64,11 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
       <div className="flex flex-col items-center">
         {/* Gold logo with subtle pulse animation */}
         <div className="animate-pulse">
-          <img 
-            src="/lovable-uploads/a46da5a6-283e-4115-91d7-c1373de8fb80.png" 
-            alt="Signal Performance Logo" 
+          <LazyImage
+            src="/lovable-uploads/a46da5a6-283e-4115-91d7-c1373de8fb80.png"
+            alt="Signal Performance Logo"
             className="h-16 w-auto md:h-20 object-contain"
+            priority={true}
           />
         </div>
         
