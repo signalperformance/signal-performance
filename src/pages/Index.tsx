@@ -5,17 +5,15 @@ import LoadingScreen from "@/components/LoadingScreen";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
+import Membership from "@/components/Membership";
+import AssessmentProcess from "@/components/AssessmentProcess";
 import GettingStarted from "@/components/GettingStarted";
 import Philosophy from "@/components/Philosophy";
+import WhoItsFor from "@/components/WhoItsFor";
+import WeeklySchedule from "@/components/WeeklySchedule";
+import StudioLocation from "@/components/StudioLocation";
 import Footer from "@/components/Footer";
 import FloatingAssessmentButton from "@/components/FloatingAssessmentButton";
-import {
-  AssessmentProcessWithSuspense,
-  MembershipWithSuspense,
-  WeeklyScheduleWithSuspense,
-  WhoItsForWithSuspense,
-  StudioLocationWithSuspense,
-} from "@/components/LazyComponents";
 
 const Index = () => {
   const { isLoading, completeLoading } = useLoadingState();
@@ -33,11 +31,11 @@ const Index = () => {
       <Navbar />
       <Hero />
       <Philosophy />
-      <AssessmentProcessWithSuspense />
-      <MembershipWithSuspense />
-      <WeeklyScheduleWithSuspense />
-      <WhoItsForWithSuspense />
-      <StudioLocationWithSuspense />
+      <AssessmentProcess />
+      <Membership />
+      <WeeklySchedule />
+      <WhoItsFor />
+      <StudioLocation />
       <GettingStarted />
       <About />
       <Footer />
