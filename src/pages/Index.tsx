@@ -15,6 +15,7 @@ import StudioLocation from "@/components/StudioLocation";
 import Footer from "@/components/Footer";
 import FloatingAssessmentButton from "@/components/FloatingAssessmentButton";
 import { PricingSection } from "@/components/ui/pricing-section";
+import { PricingTable } from "@/components/ui/pricing-table";
 import { Trophy, Dumbbell } from "lucide-react";
 
 const Index = () => {
@@ -53,6 +54,18 @@ const Index = () => {
     },
   ];
 
+  const comparisonPlans = [
+    { name: "Golf Fitness Membership", level: "golf", price: { monthly: 12000, yearly: 12000 * 12 } },
+    { name: "Complete Performance", level: "complete", price: { monthly: 18000, yearly: 18000 * 12 }, popular: true },
+  ];
+
+  const comparisonFeatures = [
+    { name: "Physical Training", values: { golf: "3× / week (1-on-3)", complete: "4× / week (1-on-3)" } },
+    { name: "Mental Performance Training", values: { golf: "—", complete: "2× / month (1-on-1)" } },
+    { name: "Monthly Progress Tracking Review", values: { golf: true, complete: true } },
+    { name: "Approx. Sessions / Month", values: { golf: "~13", complete: "~19" } },
+  ];
+
   if (isLoading) {
     return <LoadingScreen onLoadingComplete={completeLoading} />;
   }
@@ -64,6 +77,13 @@ const Index = () => {
       <Philosophy />
       <AssessmentProcess />
       <Membership />
+      <PricingTable
+        title="What's included in your membership"
+        plans={comparisonPlans}
+        features={comparisonFeatures}
+        defaultPlan="complete"
+        defaultInterval="monthly"
+      />
       <WeeklySchedule />
       <WhoItsFor />
       <StudioLocation />
