@@ -1,7 +1,7 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { MapPin } from 'lucide-react';
+
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 
 const StudioLocation = () => {
@@ -90,7 +90,6 @@ const StudioLocation = () => {
                           rel="noopener noreferrer"
                           className="inline-flex items-center justify-center gap-2 sm:gap-3 w-full min-w-0 whitespace-normal text-center"
                         >
-                          <MapPin className="w-5 h-5 shrink-0" />
                           <span className="min-w-0 break-words text-balance leading-snug">{t('studio.address.mapButton')}</span>
                         </a>
                       </Button>
