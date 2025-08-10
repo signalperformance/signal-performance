@@ -174,9 +174,21 @@ const WeeklySchedule = () => {
             ))}
           </div>
           <aside className="mt-4 text-center text-xs text-muted-foreground">
-            <p>
-              <span className="mr-3">{t('schedule.footnote.pro')}</span>
-              <span>{t('schedule.footnote.am')}</span>
+            <p className="inline-flex items-center justify-center gap-6">
+              <span className="inline-flex items-center gap-2">
+                <span className="inline-flex items-center gap-1 rounded-full bg-signal-gold/20 text-signal-charcoal px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide ring-1 ring-signal-gold/40">
+                  {t('schedule.badge.pro')}
+                </span>
+                <span>=</span>
+                <span>{t('schedule.legend.pros')}</span>
+              </span>
+              <span className="inline-flex items-center gap-2">
+                <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 text-primary px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide ring-1 ring-primary/30">
+                  {t('schedule.badge.am')}
+                </span>
+                <span>=</span>
+                <span>{t('schedule.legend.amateurs')}</span>
+              </span>
             </p>
           </aside>
         </div>
