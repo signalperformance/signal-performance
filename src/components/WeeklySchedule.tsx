@@ -3,7 +3,7 @@ import React from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from '@/components/ui/tooltip';
-import { Clock, Move, Dumbbell, Activity, Zap, Crown } from 'lucide-react';
+import { Clock, Move, Dumbbell, Activity, Zap, Crown, Unlock } from 'lucide-react';
 
 const WeeklySchedule = () => {
   const { t } = useLanguage();
@@ -93,6 +93,19 @@ const WeeklySchedule = () => {
                               </TooltipTrigger>
                               <TooltipContent>
                                 Professional only class
+                              </TooltipContent>
+                            </Tooltip>
+                          )}
+                          {!it.pro && (
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <span className="ml-2 inline-flex items-center gap-1 rounded-full bg-primary/10 text-primary px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide ring-1 ring-primary/30">
+                                  <Unlock className="h-3 w-3" aria-hidden />
+                                  OPEN
+                                </span>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                Open to everyone
                               </TooltipContent>
                             </Tooltip>
                           )}
