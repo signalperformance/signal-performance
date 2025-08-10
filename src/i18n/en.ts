@@ -57,7 +57,7 @@ const en = {
   'assessment.golf.description': 'We measure distance and dispersion metrics across every club in the bag to assess your ball-striking and shot control in a controlled environment. When available, we combine this with your tournament performance data to better understand the relative contribution of technical, physical, and mental factors to your overall performance.',
 
   // Pricing
-  'pricing.title': 'Membership Plans',
+  'pricing.title': 'Membership Plans & Pricing',
   'pricing.mostPopular': 'Most Popular',
   'pricing.perMonth': '/month',
   'pricing.perYear': '/year',
@@ -148,10 +148,6 @@ const en = {
   'schedule.keyTitle': 'Key:',
   'schedule.key.pro': 'PRO: Pro\'s Only',
   'schedule.key.open': 'AM: Open to All Members',
-  'schedule.badge.pro': 'PRO',
-  'schedule.badge.am': 'AM',
-  'schedule.tooltips.pro': 'Professional group only',
-  'schedule.tooltips.am': 'Amateur group only',
   'schedule.legend.pros': 'Pro Only',
   'schedule.legend.amateurs': 'Amateur Only',
   'schedule.columns.mwf': 'Mon/Wed/Fri',
@@ -180,7 +176,7 @@ const en = {
   'studio.features.access': 'Nearby access to simulator, range, and putting green',
   'studio.address.title': 'Studio Address',
   'studio.address.location': '2樓, 南勢里9鄰33-6號, Linkou District, New Taipei City, 244',
-  'studio.address.mapButton': 'View on Google Maps'
+  'studio.address.mapButton': 'Google Maps'
 };
 
 export default en;
