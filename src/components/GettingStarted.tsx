@@ -88,7 +88,7 @@ const GettingStarted = () => {
                       </CardTitle>
                   </CardHeader>
                   <CardContent className="p-4 pt-0">
-                      <p className="text-2xl sm:text-3xl font-bold text-white mb-2 whitespace-nowrap">
+                      <p className="text-base sm:text-xl font-bold tracking-tight text-white mb-2 whitespace-nowrap">
                           {t('gettingstarted.monthlyProgram.price')}
                       </p>
                   </CardContent>
