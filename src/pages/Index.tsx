@@ -9,7 +9,7 @@ import Membership from "@/components/Membership";
 import AssessmentProcess from "@/components/AssessmentProcess";
 import GettingStarted from "@/components/GettingStarted";
 import Philosophy from "@/components/Philosophy";
-import WhoItsFor from "@/components/WhoItsFor";
+
 import WeeklySchedule from "@/components/WeeklySchedule";
 import StudioLocation from "@/components/StudioLocation";
 import Footer from "@/components/Footer";
@@ -113,9 +113,6 @@ const Index = () => {
         <StudioLocation />
       </section>
       <section className="bg-muted">
-        <WhoItsFor />
-      </section>
-      <section className="bg-background">
         <About />
       </section>
       <Footer />
