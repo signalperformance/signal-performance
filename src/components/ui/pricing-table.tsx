@@ -52,14 +52,7 @@ export function PricingTable({
       <div className={cn("container mx-auto container-padding", containerClassName)} {...props}>
         <div className="flex flex-col items-center gap-4 mb-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold font-lora">{title}</h2>
-          <div className="inline-flex items-center gap-2 text-xs sm:text-sm bg-card border border-border rounded-md p-1">
-            <button type="button" onClick={() => setIsYearly(false)} className={cn("px-3 py-1 rounded-md transition-colors", !isYearly ? "bg-primary text-primary-foreground" : "text-muted-foreground")}>
-              Monthly
-            </button>
-            <button type="button" onClick={() => setIsYearly(true)} className={cn("px-3 py-1 rounded-md transition-colors", isYearly ? "bg-primary text-primary-foreground" : "text-muted-foreground")}>
-              Yearly
-            </button>
-          </div>
+          
         </div>
 
         <div className="flex flex-col md:flex-row gap-4 mb-8">
@@ -91,9 +84,7 @@ export function PricingTable({
         </div>
 
         <div className="mt-8 text-center">
-          <Button className={cn("w-full sm:w-auto px-8", buttonClassName)}>
-            Get started <ArrowRight className="w-4 h-4 ml-2" />
-          </Button>
+          
         </div>
       </div>
     </section>;
