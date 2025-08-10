@@ -55,17 +55,14 @@ export function PricingTable({
           
         </div>
 
-        <div className="flex flex-col md:flex-row gap-4 mb-8">
-          {plans.map(plan => {})}
-        </div>
 
         <div className="border border-border rounded-xl overflow-hidden">
           <div>
             <div className="w-full divide-y divide-border">
               <div className="flex items-center p-4 bg-muted/40">
                 <div className="flex-1 text-sm font-medium">Features</div>
-                <div className="flex items-center gap-4 sm:gap-8 text-sm">
-                  {plans.map(plan => <div key={plan.level} className="w-24 sm:w-32 text-center font-medium">
+                <div className="flex items-center gap-3 md:gap-6 text-sm">
+                  {plans.map(plan => <div key={plan.level} className="w-20 md:w-24 lg:w-28 text-center font-medium">
                       {plan.name}
                     </div>)}
                 </div>
@@ -73,8 +70,8 @@ export function PricingTable({
 
               {features.map(feature => <div key={feature.name} className={cn("flex items-center p-4 transition-colors")}> 
                   <div className="flex-1 text-sm">{feature.name}</div>
-                  <div className="flex items-center gap-4 sm:gap-8 text-sm">
-                    {plans.map(plan => <div key={plan.level} className={cn("w-24 sm:w-32 flex justify-center text-center")}> 
+                  <div className="flex items-center gap-3 md:gap-6 text-sm">
+                    {plans.map(plan => <div key={plan.level} className={cn("w-20 md:w-24 lg:w-28 flex justify-center text-center")}> 
                         {renderCell(feature.values[plan.level])}
                       </div>)}
                   </div>
@@ -83,8 +80,8 @@ export function PricingTable({
           </div>
         </div>
 
-        <div className="mt-8 text-center">
-          
+        <div className="mt-4 text-center">
+          <p className="text-xs text-muted-foreground">Physical training sessions are 1-on-3 semi-private.</p>
         </div>
       </div>
     </section>;
