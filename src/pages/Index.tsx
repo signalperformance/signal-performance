@@ -49,6 +49,7 @@ const Index = () => {
       icon: <Dumbbell className="w-7 h-7" />,
       features: [
         { name: "3×/week Physical Training (1-on-3 semi-private)", included: true },
+        { name: "2×/month Mental Training (1-on-1)", included: false },
         { name: "Performance Report – Quarterly", included: true },
         { name: "Quarterly Assessment", included: true },
       ],
@@ -77,6 +78,10 @@ const Index = () => {
       <Hero />
       <Philosophy />
       <AssessmentProcess />
+      <PricingSection
+        title="Membership Options"
+        tiers={membershipTiers}
+      />
       <Membership />
       <PricingTable
         title="What's included in your membership"
@@ -89,10 +94,6 @@ const Index = () => {
       <WhoItsFor />
       <StudioLocation />
       <GettingStarted />
-      <PricingSection
-        title="Membership Options"
-        tiers={membershipTiers}
-      />
       <About />
       <Footer />
       <FloatingAssessmentButton />
