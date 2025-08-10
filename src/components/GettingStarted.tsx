@@ -41,39 +41,23 @@ const GettingStarted = () => {
         </div>
 
         <div className="relative">
-          {/* Pricing badges row (always visible) */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl mx-auto mb-10">
-            <Card className="bg-signal-charcoal text-white border-signal-gold/50 shadow-xl text-center">
-              <CardHeader className="p-4">
-                <CardTitle className="text-signal-gold text-xl md:text-2xl">
-                  {t('gettingstarted.assessmentPackage.title')}
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="p-4 pt-0">
-                <p className="text-2xl md:text-3xl font-bold text-white">
-                  {t('gettingstarted.assessmentPackage.price')}
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-signal-charcoal text-white border-signal-gold/50 shadow-xl text-center">
-              <CardHeader className="p-4">
-                <CardTitle className="text-signal-gold text-xl md:text-2xl">
-                  {t('gettingstarted.step4.title')}
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="p-4 pt-0">
-                <p className="text-2xl md:text-3xl font-bold text-white">
-                  {t('gettingstarted.monthlyProgram.price')}
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Vertical timeline for mobile and tablets */}
+          {/* Mobile/Tablet: Vertical timeline with group headers */}
           <div className="lg:hidden mx-auto max-w-xl">
             <ol className="relative border-l border-muted pl-6 space-y-8">
-              {steps.map((step, index) => (
+              {/* Group: Assessment Package covers steps 1–3 */}
+              <li className="relative">
+                <div className="ml-[-6px] pl-3 border-l-4 border-signal-gold">
+                  <div className="bg-signal-charcoal text-white rounded-md p-3 shadow">
+                    <div className="flex items-baseline justify-between gap-2">
+                      <h4 className="text-signal-gold font-semibold">{t('gettingstarted.assessmentPackage.title')}</h4>
+                      <span className="text-sm font-bold text-white whitespace-nowrap">{t('gettingstarted.assessmentPackage.price')}</span>
+                    </div>
+                    <p className="text-xs text-muted-foreground mt-1">{t('gettingstarted.assessmentPackage.covers')}</p>
+                  </div>
+                </div>
+              </li>
+
+              {steps.slice(0, 3).map((step, index) => (
                 <li key={step.title} className="relative">
                   <span className="absolute -left-[11px] flex items-center justify-center w-6 h-6 rounded-full bg-signal-gold text-signal-white text-xs font-bold ring-4 ring-background">
                     {index + 1}
@@ -83,28 +67,106 @@ const GettingStarted = () => {
                   <p className="text-muted-foreground mt-1 text-base">{step.subtitle}</p>
                 </li>
               ))}
+
+              {/* Group: Monthly Program covers step 4 */}
+              <li className="relative">
+                <div className="ml-[-6px] pl-3 border-l-4 border-signal-gold">
+                  <div className="bg-signal-charcoal text-white rounded-md p-3 shadow">
+                    <div className="flex items-baseline justify-between gap-2">
+                      <h4 className="text-signal-gold font-semibold">{t('gettingstarted.step4.title')}</h4>
+                      <span className="text-sm font-bold text-white whitespace-nowrap">{t('gettingstarted.monthlyProgram.price')}</span>
+                    </div>
+                    <p className="text-xs text-muted-foreground mt-1">{t('gettingstarted.monthlyProgram.covers')}</p>
+                  </div>
+                </div>
+              </li>
+
+              {/* Step 4 */}
+              <li className="relative">
+                <span className="absolute -left-[11px] flex items-center justify-center w-6 h-6 rounded-full bg-signal-gold text-signal-white text-xs font-bold ring-4 ring-background">
+                  4
+                </span>
+                <h3 className="text-signal-charcoal font-semibold text-xl md:text-2xl pr-2">{steps[3].title}</h3>
+                <p className="text-signal-gold font-bold mt-1">{steps[3].hours}</p>
+                <p className="text-muted-foreground mt-1 text-base">{steps[3].subtitle}</p>
+              </li>
             </ol>
           </div>
 
-          {/* Horizontal stepper for desktops */}
-          <div className="hidden lg:flex items-start gap-4">
-            {steps.map((step, index) => (
-              <React.Fragment key={step.title}>
-                <div className="flex flex-col items-center text-center min-w-[180px] max-w-[220px] px-2">
-                  <div className="mb-4">
-                    <div className="w-16 h-16 rounded-full bg-signal-gold text-signal-white flex items-center justify-center text-2xl font-bold shadow-lg">
-                      {index + 1}
+          {/* Desktop: Aligned badges above their covered steps */}
+          <div className="hidden lg:grid grid-cols-4 gap-4">
+            {/* Assessment Package above steps 1–3 */}
+            <div className="col-span-3">
+              <Card className="bg-signal-charcoal text-white border-signal-gold/50 shadow-xl text-center">
+                <CardHeader className="p-4">
+                  <CardTitle className="text-signal-gold text-xl md:text-2xl">
+                    {t('gettingstarted.assessmentPackage.title')}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="p-4 pt-0">
+                  <p className="text-2xl md:text-3xl font-bold text-white whitespace-nowrap">
+                    {t('gettingstarted.assessmentPackage.price')}
+                  </p>
+                </CardContent>
+              </Card>
+              <p className="text-center text-sm text-muted-foreground mt-2">
+                {t('gettingstarted.assessmentPackage.covers')}
+              </p>
+              <div className="mx-auto mt-2 w-0 h-0 border-l-8 border-r-8 border-transparent border-t-signal-gold" aria-hidden="true" />
+            </div>
+
+            {/* Monthly Program above step 4 */}
+            <div className="col-span-1">
+              <Card className="bg-signal-charcoal text-white border-signal-gold/50 shadow-xl text-center">
+                <CardHeader className="p-4">
+                  <CardTitle className="text-signal-gold text-xl md:text-2xl">
+                    {t('gettingstarted.step4.title')}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="p-4 pt-0">
+                  <p className="text-2xl md:text-3xl font-bold text-white whitespace-nowrap">
+                    {t('gettingstarted.monthlyProgram.price')}
+                  </p>
+                </CardContent>
+              </Card>
+              <p className="text-center text-sm text-muted-foreground mt-2">
+                {t('gettingstarted.monthlyProgram.covers')}
+              </p>
+              <div className="mx-auto mt-2 w-0 h-0 border-l-8 border-r-8 border-transparent border-t-signal-gold" aria-hidden="true" />
+            </div>
+
+            {/* Steps 1–3 */}
+            <div className="col-span-3 flex items-start gap-4">
+              {steps.slice(0, 3).map((step, index) => (
+                <React.Fragment key={step.title}>
+                  <div className="flex flex-col items-center text-center min-w-[180px] max-w-[220px] px-2">
+                    <div className="mb-4">
+                      <div className="w-16 h-16 rounded-full bg-signal-gold text-signal-white flex items-center justify-center text-2xl font-bold shadow-lg">
+                        {index + 1}
+                      </div>
                     </div>
+                    <h3 className="font-semibold text-signal-charcoal text-xl">{step.title}</h3>
+                    <p className="text-signal-gold font-bold mt-1">{step.hours}</p>
+                    <p className="text-muted-foreground mt-2 text-sm max-w-[220px]">{step.subtitle}</p>
                   </div>
-                  <h3 className="font-semibold text-signal-charcoal text-xl">{step.title}</h3>
-                  <p className="text-signal-gold font-bold mt-1">{step.hours}</p>
-                  <p className="text-muted-foreground mt-2 text-sm max-w-[220px]">{step.subtitle}</p>
+                  {index < 2 && (
+                    <div className="h-1 flex-1 bg-muted self-center rounded-full" aria-hidden="true" />
+                  )}
+                </React.Fragment>
+              ))}
+            </div>
+
+            {/* Step 4 */}
+            <div className="col-span-1 flex flex-col items-center text-center px-2">
+              <div className="mb-4">
+                <div className="w-16 h-16 rounded-full bg-signal-gold text-signal-white flex items-center justify-center text-2xl font-bold shadow-lg">
+                  4
                 </div>
-                {index < steps.length - 1 && (
-                  <div className="h-1 flex-1 bg-muted self-center rounded-full" aria-hidden="true" />
-                )}
-              </React.Fragment>
-            ))}
+              </div>
+              <h3 className="font-semibold text-signal-charcoal text-xl">{steps[3].title}</h3>
+              <p className="text-signal-gold font-bold mt-1">{steps[3].hours}</p>
+              <p className="text-muted-foreground mt-2 text-sm max-w-[220px]">{steps[3].subtitle}</p>
+            </div>
           </div>
         </div>
       </div>
