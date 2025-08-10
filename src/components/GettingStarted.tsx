@@ -52,9 +52,11 @@ const GettingStarted = () => {
 
               {steps.slice(0, 3).map((step, index) => <li key={step.title} className="relative">
                   
-                  <h3 className="text-signal-charcoal font-semibold text-xl md:text-2xl pr-2">{step.title}</h3>
-                  <p className="text-signal-gold font-bold mt-1">{step.hours}</p>
-                  <p className="text-muted-foreground mt-1 text-base">{step.subtitle}</p>
+                  <div className="w-full rounded-xl border border-border bg-card/40 p-4 shadow-sm">
+                    <h3 className="text-signal-charcoal font-semibold text-xl md:text-2xl pr-2">{step.title}</h3>
+                    <p className="text-signal-gold font-bold mt-1">{step.hours}</p>
+                    <p className="text-muted-foreground mt-1 text-base">{step.subtitle}</p>
+                  </div>
                 </li>)}
 
               {/* Group: Monthly Program covers step 4 */}
@@ -73,9 +75,11 @@ const GettingStarted = () => {
               {/* Step 4 */}
               <li className="relative">
                 
-                <h3 className="text-signal-charcoal font-semibold text-xl md:text-2xl pr-2">{steps[3].title}</h3>
-                <p className="text-signal-gold font-bold mt-1">{steps[3].hours}</p>
-                <p className="text-muted-foreground mt-1 text-base">{steps[3].subtitle}</p>
+                <div className="w-full rounded-xl border border-border bg-card/40 p-4 shadow-sm">
+                  <h3 className="text-signal-charcoal font-semibold text-xl md:text-2xl pr-2">{steps[3].title}</h3>
+                  <p className="text-signal-gold font-bold mt-1">{steps[3].hours}</p>
+                  <p className="text-muted-foreground mt-1 text-base">{steps[3].subtitle}</p>
+                </div>
               </li>
             </ol>
           </div>
@@ -134,7 +138,7 @@ const GettingStarted = () => {
             </div>
 
             {/* Step 4 */}
-            <div className="col-span-1 flex flex-col items-center text-center min-w-[180px] max-w-[220px] rounded-xl border border-border bg-card/40 p-5 shadow-sm">
+            <div className="col-span-1 flex flex-col items-center text-center w-full rounded-xl border border-border bg-card/40 p-5 shadow-sm">
               <div className="mb-4">
                 
               </div>
