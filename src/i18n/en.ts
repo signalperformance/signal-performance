@@ -57,7 +57,7 @@ const en = {
   'assessment.golf.description': 'We measure distance and dispersion metrics across every club in the bag to assess your ball-striking and shot control in a controlled environment. When available, we combine this with your tournament performance data to better understand the relative contribution of technical, physical, and mental factors to your overall performance.',
 
   // Pricing
-  'pricing.title': 'Membership Plans',
+  'pricing.title': 'Membership Plans & Pricing',
   'pricing.mostPopular': 'Most Popular',
   'pricing.perMonth': '/month',
   'pricing.perYear': '/year',
@@ -128,7 +128,7 @@ const en = {
 
   // Schedule
   'schedule.title': 'Weekly Training Schedule',
-  'schedule.subtitle': 'Choose four sessions per week based on your goals and training phase. We offer separate groups for professionals and amateurs.',
+  'schedule.subtitle': 'Choose four sessions per week based on your goals and training phase.',
   'schedule.filter.all': 'All Classes',
   'schedule.filter.pro': 'Pro Only',
   'schedule.filter.open': 'Amateur Only',
@@ -148,10 +148,6 @@ const en = {
   'schedule.keyTitle': 'Key:',
   'schedule.key.pro': 'PRO: Pro\'s Only',
   'schedule.key.open': 'AM: Open to All Members',
-  'schedule.badge.pro': 'PRO',
-  'schedule.badge.am': 'AM',
-  'schedule.tooltips.pro': 'Professional group only',
-  'schedule.tooltips.am': 'Amateur group only',
   'schedule.legend.pros': 'Pro Only',
   'schedule.legend.amateurs': 'Amateur Only',
   'schedule.columns.mwf': 'Mon/Wed/Fri',
