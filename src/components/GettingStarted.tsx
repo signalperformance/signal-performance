@@ -42,7 +42,7 @@ const GettingStarted = () => {
                 <div className="ml-[-6px] pl-3 border-l-4 border-primary">
                   <div className="bg-card text-card-foreground rounded-md p-3 shadow border border-border">
                     <div className="flex items-baseline justify-between gap-2">
-                      <h4 className="font-semibold text-signal-charcoal text-lg">{t('gettingstarted.assessmentPackage.title')}</h4>
+                      <h4 className="font-semibold text-signal-charcoal text-lg leading-tight tracking-tight">{t('gettingstarted.assessmentPackage.title')}</h4>
                       <span className="text-sm font-semibold text-signal-charcoal whitespace-nowrap">{t('gettingstarted.assessmentPackage.price')}</span>
                     </div>
                     
@@ -64,7 +64,7 @@ const GettingStarted = () => {
                 <div className="ml-[-6px] pl-3 border-l-4 border-primary">
                   <div className="bg-primary text-primary-foreground rounded-md p-3 shadow">
                     <div className="flex items-baseline justify-between gap-2">
-                      <h4 className="text-primary-foreground font-semibold">{t('gettingstarted.step4.title')}</h4>
+                      <h4 className="text-primary-foreground font-semibold text-lg leading-tight tracking-tight">{t('gettingstarted.step4.title')}</h4>
                       <span className="text-sm font-bold text-primary-foreground whitespace-nowrap">{t('gettingstarted.monthlyProgram.price')}</span>
                     </div>
                     
@@ -90,12 +90,12 @@ const GettingStarted = () => {
             <div className="col-span-3">
               <Card className="bg-card text-card-foreground border border-border shadow-xl text-center">
                 <CardHeader className="p-4">
-                  <CardTitle className="text-2xl md:text-3xl text-signal-charcoal">
+                  <CardTitle className="text-2xl md:text-3xl leading-tight tracking-tight text-signal-charcoal">
                     {t('gettingstarted.assessmentPackage.title')}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="p-4 pt-0">
-                  <p className="text-lg md:text-xl font-medium text-signal-charcoal whitespace-nowrap">
+                  <p className="text-base md:text-lg font-medium text-signal-charcoal whitespace-nowrap">
                     {t('gettingstarted.assessmentPackage.price')}
                   </p>
                 </CardContent>
@@ -106,14 +106,14 @@ const GettingStarted = () => {
 
             {/* Monthly Program above step 4 */}
             <div className="col-span-1">
-              <Card className="bg-primary text-primary-foreground border-primary/40 shadow-xl text-center">
+              <Card className="bg-primary text-primary-foreground border border-primary/40 shadow-xl text-center">
                 <CardHeader className="p-4">
-                  <CardTitle className="text-xl md:text-2xl text-primary-foreground">
+                  <CardTitle className="text-2xl md:text-3xl leading-tight tracking-tight text-primary-foreground">
                     {t('gettingstarted.step4.title')}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="p-4 pt-0">
-                  <p className="text-lg md:text-xl font-semibold text-primary-foreground whitespace-nowrap">
+                  <p className="text-base md:text-lg font-semibold text-primary-foreground whitespace-nowrap">
                     {t('gettingstarted.monthlyProgram.price')}
                   </p>
                 </CardContent>
