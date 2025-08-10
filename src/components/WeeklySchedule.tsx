@@ -139,7 +139,7 @@ const WeeklySchedule = () => {
                 <span>{t('schedule.legend.pros')}</span>
               </span>
               <span className="inline-flex items-center gap-2">
-                <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 text-primary px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide ring-1 ring-primary/30">
+                <span className="inline-flex items-center gap-1 rounded-full bg-signal-charcoal/15 text-signal-charcoal px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide ring-1 ring-signal-charcoal/40">
                   {t('schedule.badge.am')}
                 </span>
                 <span>=</span>
