@@ -52,7 +52,7 @@ const GettingStarted = () => {
 
               {steps.slice(0, 3).map((step, index) => <li key={step.title} className="relative">
                   
-                  <div className="relative overflow-hidden w-full rounded-xl border border-border bg-gradient-to-br from-slate-50 via-white to-blue-50/40 p-4 shadow-sm">
+                  <div className="w-full rounded-xl border border-border bg-card/40 p-4 shadow-sm">
                     <h3 className="text-signal-charcoal font-semibold text-xl md:text-2xl pr-2">{step.title}</h3>
                     <p className="text-signal-gold font-bold mt-1">{step.hours}</p>
                     <p className="text-muted-foreground mt-1 text-base">{step.subtitle}</p>
@@ -75,7 +75,7 @@ const GettingStarted = () => {
               {/* Step 4 */}
               <li className="relative">
                 
-                <div className="relative overflow-hidden w-full rounded-xl border border-border bg-gradient-to-br from-slate-50 via-white to-blue-50/40 p-4 shadow-sm">
+                <div className="w-full rounded-xl border border-border bg-card/40 p-4 shadow-sm">
                   <h3 className="text-signal-charcoal font-semibold text-xl md:text-2xl pr-2">{steps[3].title}</h3>
                   <p className="text-signal-gold font-bold mt-1">{steps[3].hours}</p>
                   <p className="text-muted-foreground mt-1 text-base">{steps[3].subtitle}</p>
@@ -106,13 +106,13 @@ const GettingStarted = () => {
 
             {/* Monthly Program above step 4 */}
             <div className="col-span-1">
-              <Card className="bg-signal-charcoal text-white border-signal-gold/50 shadow-xl text-center">
-                <CardHeader className="p-4">
-                  <CardTitle className="text-signal-gold text-xl md:text-2xl">
+              <Card className="text-white border-signal-gold/50 shadow-xl text-center bg-signal-gold">
+                <CardHeader className="p-4 bg-signal-gold">
+                  <CardTitle className="text-xl md:text-2xl text-signal-charcoal">
                     {t('gettingstarted.step4.title')}
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="p-4 pt-0">
+                <CardContent className="p-4 pt-0 bg-signal-gold">
                   <p className="text-2xl md:text-3xl font-bold text-white whitespace-nowrap">
                     {t('gettingstarted.monthlyProgram.price')}
                   </p>
@@ -125,7 +125,7 @@ const GettingStarted = () => {
             {/* Steps 1–3 */}
             <div className="col-span-3 flex items-start gap-4">
               {steps.slice(0, 3).map((step, index) => <React.Fragment key={step.title}>
-                  <div className="relative overflow-hidden flex flex-col items-center text-center min-w-[180px] max-w-[220px] rounded-xl border border-border bg-gradient-to-br from-slate-50 via-white to-blue-50/40 p-5 shadow-sm">
+                  <div className="flex flex-col items-center text-center min-w-[180px] max-w-[220px] rounded-xl border border-border bg-card/40 p-5 shadow-sm">
                     <div className="mb-4">
                       
                     </div>
@@ -138,7 +138,7 @@ const GettingStarted = () => {
             </div>
 
             {/* Step 4 */}
-            <div className="relative overflow-hidden col-span-1 flex flex-col items-center text-center w-full rounded-xl border border-border bg-gradient-to-br from-signal-gold/20 via-white to-signal-gold/10 p-5 shadow-sm">
+            <div className="col-span-1 flex flex-col items-center text-center w-full rounded-xl border border-border bg-card/40 p-5 shadow-sm">
               <div className="mb-4">
                 
               </div>
