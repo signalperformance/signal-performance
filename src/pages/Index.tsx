@@ -77,25 +77,47 @@ const Index = () => {
   return (
     <div className="min-h-screen flex flex-col animate-fade-in">
       <Navbar />
-      <Hero />
-      <Philosophy />
-      <AssessmentProcess />
-      <PricingSection
-        tiers={membershipTiers}
-      />
-      <Membership />
-      <PricingTable
-        title="What's included in your membership"
-        plans={comparisonPlans}
-        features={comparisonFeatures}
-        defaultPlan="complete"
-        defaultInterval="monthly"
-      />
-      <GettingStarted />
-      <WeeklySchedule />
-      <StudioLocation />
-      <WhoItsFor />
-      <About />
+      <section className="bg-background">
+        <Hero />
+      </section>
+      <section className="bg-muted">
+        <Philosophy />
+      </section>
+      <section className="bg-background">
+        <AssessmentProcess />
+      </section>
+      <section className="bg-muted">
+        <PricingSection
+          tiers={membershipTiers}
+        />
+      </section>
+      <section className="bg-background">
+        <Membership />
+      </section>
+      <section className="bg-muted">
+        <PricingTable
+          title="What's included in your membership"
+          plans={comparisonPlans}
+          features={comparisonFeatures}
+          defaultPlan="complete"
+          defaultInterval="monthly"
+        />
+      </section>
+      <section className="bg-background">
+        <GettingStarted />
+      </section>
+      <section className="bg-muted">
+        <WeeklySchedule />
+      </section>
+      <section className="bg-background">
+        <StudioLocation />
+      </section>
+      <section className="bg-muted">
+        <WhoItsFor />
+      </section>
+      <section className="bg-background">
+        <About />
+      </section>
       <Footer />
       <FloatingAssessmentButton />
     </div>
