@@ -68,7 +68,7 @@ const WeeklySchedule = () => {
             </p>
           </header>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
             {columns.map((col, idx) => (
               <article key={idx} className="relative">
                 <Card className="overflow-hidden border-border/70 shadow-sm hover:shadow-md transition-shadow">
