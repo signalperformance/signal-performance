@@ -125,7 +125,7 @@ const GettingStarted = () => {
             {/* Steps 1–3 */}
             <div className="col-span-3 flex items-start gap-4">
               {steps.slice(0, 3).map((step, index) => <React.Fragment key={step.title}>
-                  <div className="flex flex-col items-center text-center min-w-[180px] max-w-[220px] rounded-xl border border-border bg-card/40 p-5 shadow-sm">
+                  <div className="flex flex-col items-center text-center min-w-[180px] max-w-[220px] rounded-xl border border-border bg-[hsl(var(--getting-accent)/0.12)] p-5 shadow-sm">
                     <div className="mb-4">
                       
                     </div>
@@ -138,7 +138,7 @@ const GettingStarted = () => {
             </div>
 
             {/* Step 4 */}
-            <div className="col-span-1 flex flex-col items-center text-center w-full rounded-xl border border-border bg-card/40 p-5 shadow-sm">
+            <div className="col-span-1 flex flex-col items-center text-center w-full rounded-xl border border-border bg-[hsl(var(--getting-accent)/0.12)] p-5 shadow-sm">
               <div className="mb-4">
                 
               </div>

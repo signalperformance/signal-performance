@@ -32,6 +32,7 @@
     --border: 210 20% 90%;
     --input: 210 20% 90%;
     --ring: 210 30% 70%;
+    --getting-accent: 205 20% 32%;
 
     --radius: 0.3rem;
   }
@@ -64,6 +65,7 @@
     --border: 210 30% 20%;
     --input: 210 30% 20%;
     --ring: 210 30% 30%;
+    --getting-accent: 205 20% 32%;
   }
 }
 
