@@ -61,14 +61,14 @@ const zh = {
   'pricing.mostPopular': '最受歡迎',
   'pricing.perMonth': '／月',
   'pricing.perYear': '／年',
-  'pricing.plus.name': 'Plus',
-  'pricing.foundations.name': '基礎方案',
+  'pricing.plus.name': '專業',
+  'pricing.foundations.name': '基礎',
   'pricing.plus.description': '每月 18 堂課',
   'pricing.foundations.description': '每月 12 堂課',
   'pricing.features.physical.4x': '體能訓練 — 每週4次（1對3）',
   'pricing.features.physical.3x': '體能訓練 — 每週3次（1對3）',
   'pricing.features.mental.2x': '心理訓練 — 每月2次（1對1）',
-  'pricing.features.report.monthly': '表現報告 — 每月一次',
+  'pricing.features.report.monthly': '表現報告 — 每月1次',
   'pricing.features.assessment.quarterly': '季度評估',
 
   // About

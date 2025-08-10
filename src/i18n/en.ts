@@ -61,14 +61,14 @@ const en = {
   'pricing.mostPopular': 'Most Popular',
   'pricing.perMonth': '/month',
   'pricing.perYear': '/year',
-  'pricing.plus.name': 'Plus',
-  'pricing.foundations.name': 'Foundations',
+  'pricing.plus.name': 'Pro',
+  'pricing.foundations.name': 'Basic',
   'pricing.plus.description': '18 sessions/month',
   'pricing.foundations.description': '12 sessions/month',
   'pricing.features.physical.4x': 'Physical Training — 4×/week (1-on-3)',
   'pricing.features.physical.3x': 'Physical Training — 3×/week (1-on-3)',
   'pricing.features.mental.2x': 'Mental Training — 2×/month (1-on-1)',
-  'pricing.features.report.monthly': 'Performance Report — Monthly',
+  'pricing.features.report.monthly': 'Performance Report — 1x/month',
   'pricing.features.assessment.quarterly': 'Quarterly Assessment',
 
   // About
