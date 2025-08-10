@@ -150,6 +150,9 @@ const zh = {
   'schedule.key.open': 'AM：所有會員開放',
   'schedule.legend.pros': '僅限職業',
   'schedule.legend.amateurs': '僅限業餘',
+  'schedule.columns.mwf': '週一／週三／週五',
+  'schedule.columns.tth': '週二／週四',
+  'schedule.columns.weekend': '週末',
 
   // Who It's For
   'whoitsfor.title': '我們的理想會員',

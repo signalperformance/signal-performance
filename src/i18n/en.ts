@@ -150,6 +150,9 @@ const en = {
   'schedule.key.open': 'AM: Open to All Members',
   'schedule.legend.pros': 'Pro Only',
   'schedule.legend.amateurs': 'Amateur Only',
+  'schedule.columns.mwf': 'Mon/Wed/Fri',
+  'schedule.columns.tth': 'Tue/Thu',
+  'schedule.columns.weekend': 'Weekend',
 
   // Who It's For
   'whoitsfor.title': 'Our Ideal Member',
