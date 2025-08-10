@@ -11,7 +11,7 @@ type LanguageContextType = {
 
 // Create context with a default value instead of undefined
 const defaultContextValue: LanguageContextType = {
-  language: 'en',
+  language: 'zh',
   setLanguage: () => {},
   t: (key: string) => key
 };
@@ -30,7 +30,7 @@ const isLocalStorageAvailable = (): boolean => {
 // Helper function to get saved language from localStorage
 const getSavedLanguage = (): Language => {
   if (!isLocalStorageAvailable()) {
-    return 'en';
+    return 'zh';
   }
 
   try {
@@ -41,7 +41,7 @@ const getSavedLanguage = (): Language => {
   } catch (error) {
     // Silently fail
   }
-  return 'en'; // Default to English for first-time visitors
+  return 'zh'; // Default to Chinese for first-time visitors
 };
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
