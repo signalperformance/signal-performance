@@ -117,13 +117,13 @@ export function PricingTable({
         </div>
 
         <div className="border border-border rounded-xl overflow-hidden">
-          <div className="overflow-x-auto">
-            <div className="min-w-[680px] divide-y divide-border">
+          <div>
+            <div className="w-full divide-y divide-border">
               <div className="flex items-center p-4 bg-muted/40">
                 <div className="flex-1 text-sm font-medium">Features</div>
-                <div className="flex items-center gap-8 text-sm">
+                <div className="flex items-center gap-4 sm:gap-8 text-sm">
                   {plans.map((plan) => (
-                    <div key={plan.level} className="w-32 text-center font-medium">
+                    <div key={plan.level} className="w-24 sm:w-32 text-center font-medium">
                       {plan.name}
                     </div>
                   ))}
@@ -133,9 +133,9 @@ export function PricingTable({
               {features.map((feature) => (
                 <div key={feature.name} className={cn("flex items-center p-4 transition-colors")}> 
                   <div className="flex-1 text-sm">{feature.name}</div>
-                  <div className="flex items-center gap-8 text-sm">
+                  <div className="flex items-center gap-4 sm:gap-8 text-sm">
                     {plans.map((plan) => (
-                      <div key={plan.level} className={cn("w-32 flex justify-center text-center")}> 
+                      <div key={plan.level} className={cn("w-24 sm:w-32 flex justify-center text-center")}> 
                         {renderCell(feature.values[plan.level])}
                       </div>
                     ))}

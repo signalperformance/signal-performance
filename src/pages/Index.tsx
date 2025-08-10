@@ -61,9 +61,11 @@ const Index = () => {
 
   const comparisonFeatures = [
     { name: "Physical Training", values: { golf: "3× / week (1-on-3)", complete: "4× / week (1-on-3)" } },
-    { name: "Mental Performance Training", values: { golf: "—", complete: "2× / month (1-on-1)" } },
-    { name: "Monthly Progress Tracking Review", values: { golf: true, complete: true } },
-    { name: "Approx. Sessions / Month", values: { golf: "~13", complete: "~19" } },
+    { name: "Mental Training", values: { golf: "—", complete: "2× / month (1-on-1)" } },
+    { name: "Performance Report", values: { golf: "Quarterly", complete: "Monthly" } },
+    { name: "Quarterly Assessment", values: { golf: true, complete: true } },
+    { name: "Sessions / Month", values: { golf: "~13", complete: "~19" } },
+    { name: "Price", values: { golf: "NT$12,000", complete: "NT$18,000" } },
   ];
 
   if (isLoading) {
@@ -78,7 +80,7 @@ const Index = () => {
       <AssessmentProcess />
       <Membership />
       <PricingTable
-        title="What's included in your membership"
+        title="Membership Tiers"
         plans={comparisonPlans}
         features={comparisonFeatures}
         defaultPlan="complete"
