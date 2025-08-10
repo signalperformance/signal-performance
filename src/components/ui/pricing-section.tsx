@@ -38,7 +38,7 @@ function PricingSection({
   } = useLanguage();
   const [isYearly, setIsYearly] = useState(false);
   const sectionTitle = title ?? t("pricing.title");
-  return <section className={cn("section-padding bg-background text-foreground", "overflow-hidden", className)}>
+  return <section className={cn("section-padding text-foreground", "overflow-hidden", className)}>
       <div className="container mx-auto container-padding">
         <div className="flex flex-col items-center gap-4 mb-10 md:mb-14 text-center">
           <h2 className="text-3xl md:text-4xl font-bold font-lora">{sectionTitle}</h2>
