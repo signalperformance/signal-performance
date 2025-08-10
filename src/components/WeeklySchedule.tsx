@@ -125,46 +125,47 @@ const WeeklySchedule = () => {
                   <CardContent className="pt-0">
                     <ul className="space-y-2" role="list">
                       {col.items.map((it, i) => (
-                        <li
-                          key={i}
-                          className={`relative flex items-center justify-between rounded-md border border-border/60 px-3 py-2 ${
-                            it.pro ? 'bg-signal-gold/10' : 'bg-card/50'
-                          }`}
-                        >
-                          {it.pro && (
-                            <span
-                              className="absolute left-0 top-0 h-full w-1 bg-signal-gold"
-                              aria-hidden
-                            />
-                          )}
-                          <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
-                            <Clock className="h-3.5 w-3.5" aria-hidden />
-                            {it.time}
-                          </span>
-                          <span className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground">
-                            {t(`schedule.classes.${it.labelKey}`)}
+                          <li
+                            key={i}
+                            className={`relative grid grid-cols-[auto_1fr_auto] items-center gap-2 rounded-md border border-border/60 px-3 py-2 ${
+                              it.pro ? 'bg-signal-gold/10' : 'bg-card/50'
+                            }`}
+                          >
                             {it.pro && (
-                              <Tooltip>
-                                <TooltipTrigger asChild>
-                                  <span className="ml-2 inline-flex items-center gap-1 rounded-full bg-signal-gold/20 text-signal-charcoal px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide ring-1 ring-signal-gold/40">
-                                    PRO
-                                  </span>
-                                </TooltipTrigger>
-                                <TooltipContent>Professional only class</TooltipContent>
-                              </Tooltip>
+                              <span
+                                className="absolute left-0 top-0 h-full w-1 bg-signal-gold"
+                                aria-hidden
+                              />
                             )}
-                            {!it.pro && (
-                              <Tooltip>
-                                <TooltipTrigger asChild>
-                                  <span className="ml-2 inline-flex items-center gap-1 rounded-full bg-primary/10 text-primary px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide ring-1 ring-primary/30">
-                                    OPEN
-                                  </span>
-                                </TooltipTrigger>
-                                <TooltipContent>Open to everyone</TooltipContent>
-                              </Tooltip>
-                            )}
-                          </span>
-                        </li>
+                            <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
+                              <Clock className="h-3.5 w-3.5" aria-hidden />
+                              {it.time}
+                            </span>
+                            <span className="text-sm font-bold text-foreground text-center justify-self-center">
+                              {t(`schedule.classes.${it.labelKey}`)}
+                            </span>
+                            <span className="justify-self-end">
+                              {it.pro ? (
+                                <Tooltip>
+                                  <TooltipTrigger asChild>
+                                    <span className="inline-flex items-center gap-1 rounded-full bg-signal-gold/20 text-signal-charcoal px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide ring-1 ring-signal-gold/40">
+                                      PRO
+                                    </span>
+                                  </TooltipTrigger>
+                                  <TooltipContent>Professional only class</TooltipContent>
+                                </Tooltip>
+                              ) : (
+                                <Tooltip>
+                                  <TooltipTrigger asChild>
+                                    <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 text-primary px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide ring-1 ring-primary/30">
+                                      OPEN
+                                    </span>
+                                  </TooltipTrigger>
+                                  <TooltipContent>Open to everyone</TooltipContent>
+                                </Tooltip>
+                              )}
+                            </span>
+                          </li>
                       ))}
                     </ul>
                   </CardContent>
