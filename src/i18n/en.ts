@@ -141,6 +141,8 @@ const en = {
   'schedule.days.sunday': 'Sun',
   'schedule.timePeriods.am': 'AM',
   'schedule.timePeriods.pm': 'PM',
+  'schedule.badge.pro': 'PRO',
+  'schedule.badge.am': 'AM',
   'schedule.classes.mobility': 'Mobility',
   'schedule.classes.strength': 'Strength',
   'schedule.classes.cardio': 'Cardio',
