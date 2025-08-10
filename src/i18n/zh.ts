@@ -65,11 +65,10 @@ const zh = {
   'pricing.foundations.name': '基礎方案',
   'pricing.plus.description': '每月 18 堂課',
   'pricing.foundations.description': '每月 12 堂課',
-  'pricing.features.physical.4x': '每週 4 次體能訓練（1 對 3 小團體）',
-  'pricing.features.physical.3x': '每週 3 次體能訓練（1 對 3 小團體）',
-  'pricing.features.mental.2x': '每月 2 次心理訓練（1 對 1）',
-  'pricing.features.report.monthly': '每月表現報告',
-  'pricing.features.report.quarterly': '季度表現報告',
+  'pricing.features.physical.4x': '體能訓練 — 每週4次（1對3）',
+  'pricing.features.physical.3x': '體能訓練 — 每週3次（1對3）',
+  'pricing.features.mental.2x': '心理訓練 — 每月2次（1對1）',
+  'pricing.features.report.monthly': '表現報告 — 每月一次',
   'pricing.features.assessment.quarterly': '季度評估',
 
   // About
