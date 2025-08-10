@@ -128,7 +128,7 @@ const zh = {
 
   // Schedule
   'schedule.title': '每週訓練課表',
-  'schedule.subtitle': '依據你的目標與訓練階段，選擇每週 4 堂課，由教練協助規劃。我們區分專業組和業餘組。',
+  'schedule.subtitle': '根據您的目標與訓練階段，每週選擇四堂課。',
   'schedule.filter.all': '所有課程',
   'schedule.filter.pro': '僅限職業',
   'schedule.filter.open': '僅限業餘',
@@ -146,19 +146,13 @@ const zh = {
   'schedule.classes.cardio': '心肺',
   'schedule.classes.power': '爆發力',
   'schedule.keyTitle': '說明：',
-  'schedule.key.pro': 'PRO：僅限職業',
-  'schedule.key.open': 'AM：僅限業餘',
+  'schedule.key.pro': 'PRO：僅限職業選手',
+  'schedule.key.open': 'AM：所有會員開放',
   'schedule.legend.pros': '僅限職業',
   'schedule.legend.amateurs': '僅限業餘',
   'schedule.columns.mwf': '週一／週三／週五',
   'schedule.columns.tth': '週二／週四',
   'schedule.columns.weekend': '週末',
-  'schedule.badge.pro': '職業',
-  'schedule.badge.am': '業餘',
-  'schedule.tooltips.pro': '僅限職業',
-  'schedule.tooltips.am': '僅限業餘',
-  'schedule.footnote.pro': '職業＝僅限職業',
-  'schedule.footnote.am': '業餘＝僅限業餘',
 
   // Who It's For
   'whoitsfor.title': '我們的理想會員',
