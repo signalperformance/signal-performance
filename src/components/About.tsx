@@ -38,7 +38,7 @@ const About = () => {
             {/* Bio & Certification Section */}
             <div className="w-full lg:w-2/3">
               {/* Academic & Experience Card */}
-              <Card className="mb-4 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105 border-2 border-gray-100">
+              <Card className="mb-4 shadow-xl border-2 border-gray-100">
                 <CardContent className="pt-6">
                   <div className="mb-4">
                     <h4 className="text-xl font-bold mb-3 text-signal-charcoal">{t('about.coach.academic')}</h4>
@@ -59,7 +59,7 @@ const About = () => {
               </Card>
               
               {/* Certifications Card */}
-              <Card className="shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105 border-2 border-gray-100">
+              <Card className="shadow-xl border-2 border-gray-100">
                 <CardContent className="pt-6">
                   <h4 className="text-xl font-bold mb-4 text-signal-charcoal">{t('about.coach.certifications')}</h4>
                   
