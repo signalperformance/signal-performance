@@ -189,12 +189,12 @@ const AssessmentProcess = () => {
   return <section id="assessment" className="section-padding bg-white" ref={sectionRef}>
       <div className="container mx-auto container-padding">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 font-lora">{t('assessment.title')}</h2>
+          <h2 className="text-3xl lg:text-4xl font-bold mb-4 font-lora">{t('assessment.title')}</h2>
           <p className="max-w-4xl mx-auto text-lg text-muted-foreground whitespace-pre-line">{t('assessment.description')}</p>
         </div>
 
         {/* Desktop View: Radial Progress Wheel */}
-        <div className="hidden md:flex md:flex-row md:gap-8 md:items-center">
+        <div className="hidden lg:flex lg:flex-row lg:gap-8 lg:items-center">
           {/* Left side: Radial Progress Wheel */}
           <div className="w-1/2">
             <div className="relative w-[500px] h-[500px] mx-auto">
@@ -305,7 +305,7 @@ const AssessmentProcess = () => {
         </div>
         
         {/* Mobile View: Improved Tabs Layout */}
-        <div className="md:hidden">
+        <div className="lg:hidden">
           <Tabs value={activeAssessment} onValueChange={value => handleTabClick(value)} className="w-full">
             <TabsList className="grid grid-cols-5 mb-6 rounded-xl p-1 bg-muted/20 shadow-sm">
               {Object.entries(assessments).map(([key, assessment]) => {
