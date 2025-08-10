@@ -141,7 +141,7 @@ const WeeklySchedule = () => {
                               <Clock className="h-3.5 w-3.5" aria-hidden />
                               {it.time}
                             </span>
-                            <span className="text-sm font-bold text-foreground text-center justify-self-center">
+                            <span className="text-base md:text-lg font-extrabold font-lora text-foreground text-center justify-self-center">
                               {t(`schedule.classes.${it.labelKey}`)}
                             </span>
                             <span className="justify-self-end">
@@ -149,19 +149,19 @@ const WeeklySchedule = () => {
                                 <Tooltip>
                                   <TooltipTrigger asChild>
                                     <span className="inline-flex items-center gap-1 rounded-full bg-signal-gold/20 text-signal-charcoal px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide ring-1 ring-signal-gold/40">
-                                      PRO
+                                      {t('schedule.badge.pro')}
                                     </span>
                                   </TooltipTrigger>
-                                  <TooltipContent>Professional only class</TooltipContent>
+                                  <TooltipContent>{t('schedule.tooltips.pro')}</TooltipContent>
                                 </Tooltip>
                               ) : (
                                 <Tooltip>
                                   <TooltipTrigger asChild>
                                     <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 text-primary px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide ring-1 ring-primary/30">
-                                      OPEN
+                                      {t('schedule.badge.am')}
                                     </span>
                                   </TooltipTrigger>
-                                  <TooltipContent>Open to everyone</TooltipContent>
+                                  <TooltipContent>{t('schedule.tooltips.am')}</TooltipContent>
                                 </Tooltip>
                               )}
                             </span>
@@ -173,6 +173,12 @@ const WeeklySchedule = () => {
               </article>
             ))}
           </div>
+          <aside className="mt-4 text-center text-xs text-muted-foreground">
+            <p>
+              <span className="mr-3">{t('schedule.footnote.pro')}</span>
+              <span>{t('schedule.footnote.am')}</span>
+            </p>
+          </aside>
         </div>
       </section>
     </TooltipProvider>
