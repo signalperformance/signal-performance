@@ -122,7 +122,7 @@ const zh = {
   'gettingstarted.step4.hours': '18 小時/月',
   'gettingstarted.assessmentPackage.title': '評估方案',
   'gettingstarted.assessmentPackage.price': '12,000元',
-  'gettingstarted.monthlyProgram.price': 'NT$10,000–15,000／月',
+  'gettingstarted.monthlyProgram.price': '每月18,000元',
 
   // Schedule
   'schedule.title': '每週訓練課表',

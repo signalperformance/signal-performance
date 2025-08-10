@@ -122,7 +122,7 @@ const en = {
   'gettingstarted.step4.hours': '18 hours/month',
   'gettingstarted.assessmentPackage.title': 'Assessment Package',
   'gettingstarted.assessmentPackage.price': 'NT$12,000',
-  'gettingstarted.monthlyProgram.price': 'NT$10,000–15,000/month',
+  'gettingstarted.monthlyProgram.price': 'NT$18,000/month',
 
   // Schedule
   'schedule.title': 'Weekly Training Schedule',
