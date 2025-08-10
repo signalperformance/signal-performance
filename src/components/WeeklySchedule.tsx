@@ -130,15 +130,15 @@ const WeeklySchedule = () => {
             ))}
           </div>
           <aside className="mt-4 text-center text-xs text-muted-foreground">
-            <p className="inline-flex items-center justify-center gap-6">
-              <span className="inline-flex items-center gap-2">
+            <p className="flex flex-wrap items-center justify-center gap-3 sm:gap-6">
+              <span className="flex items-center gap-2">
                 <span className="inline-flex items-center gap-1 rounded-full bg-signal-gold/20 text-signal-charcoal px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide ring-1 ring-signal-gold/40">
                   {t('schedule.badge.pro')}
                 </span>
                 <span>=</span>
                 <span>{t('schedule.legend.pros')}</span>
               </span>
-              <span className="inline-flex items-center gap-2">
+              <span className="flex items-center gap-2">
                 <span className="inline-flex items-center gap-1 rounded-full bg-signal-charcoal/15 text-signal-charcoal px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide ring-1 ring-signal-charcoal/40">
                   {t('schedule.badge.am')}
                 </span>
