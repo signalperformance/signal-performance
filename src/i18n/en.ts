@@ -127,7 +127,7 @@ const en = {
   'gettingstarted.monthlyProgram.covers': 'Covers step 4',
 
   // Schedule
-  'schedule.title': 'Weekly Training Schedule',
+  'schedule.title': 'Training Schedule',
   'schedule.subtitle': 'Choose four sessions per week based on your goals and training phase. We offer separate groups for professionals and amateurs.',
   'schedule.filter.all': 'All Classes',
   'schedule.filter.pro': 'Pro Only',
