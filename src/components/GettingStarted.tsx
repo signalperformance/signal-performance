@@ -135,7 +135,7 @@ const GettingStarted = () => {
 
             {/* Monthly Program box */}
             <div className="absolute z-30 top-[20px] left-[87.5%] transform -translate-x-1/2 -translate-y-1/2">
-              <div className="bg-signal-charcoal text-white border border-signal-gold/50 shadow-xl rounded-md px-4 py-2 text-center whitespace-nowrap">
+              <div className="bg-signal-charcoal text-white border border-signal-gold/50 shadow-xl rounded-md px-3 py-1.5 md:px-4 md:py-2 text-center max-w-[85vw] md:max-w-xs lg:max-w-sm">
                 <p className="text-base text-signal-gold font-semibold">
                   {t('gettingstarted.step4.title')}
                 </p>
