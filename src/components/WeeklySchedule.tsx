@@ -64,7 +64,7 @@ const WeeklySchedule = () => {
               {t('schedule.title')}
             </h2>
             <p className="text-base md:text-lg text-muted-foreground font-montserrat">
-              {t('schedule.subtitle')}
+              {t('schedule.subtitle') || 'Choose four sessions per week based on your goals and training phase. We offer separate groups for professionals and amateurs.'}
             </p>
           </header>
 
