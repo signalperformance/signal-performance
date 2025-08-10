@@ -119,7 +119,7 @@ const en = {
   'gettingstarted.step3.hours': '3 hours',
   'gettingstarted.step4.title': 'Monthly Program',
   'gettingstarted.step4.subtitle': 'Train weekly, and assess quarterly to track progress.',
-  'gettingstarted.step4.hours': '12 or 18 hours/month',
+  'gettingstarted.step4.hours': '18 hours/month',
   'gettingstarted.assessmentPackage.title': 'Assessment Package',
   'gettingstarted.assessmentPackage.price': 'NT$12,000',
   'gettingstarted.assessmentPackage.covers': 'Covers steps 1–3',

@@ -123,7 +123,7 @@ const zh = {
   'gettingstarted.assessmentPackage.title': '評估方案',
   'gettingstarted.assessmentPackage.price': '12,000元',
   'gettingstarted.assessmentPackage.covers': '包含第 1–3 步',
-  'gettingstarted.monthlyProgram.price': '每月18,000元',
+  'gettingstarted.monthlyProgram.price': '每月15,000元',
   'gettingstarted.monthlyProgram.covers': '包含第 4 步',
 
   // Schedule
