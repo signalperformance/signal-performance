@@ -91,8 +91,8 @@ const Index = () => {
         defaultPlan="complete"
         defaultInterval="monthly"
       />
-      <GettingStarted />
       <WeeklySchedule />
+      <GettingStarted />
       <WhoItsFor />
       <StudioLocation />
       <About />
