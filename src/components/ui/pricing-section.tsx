@@ -8,6 +8,7 @@ type Feature = {
   included: boolean;
 };
 export type PricingTier = {
+  id: string;
   name: string;
   price: {
     monthly: number;
@@ -48,7 +49,7 @@ function PricingSection({
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-          {tiers.map(tier => <article key={tier.name} className={cn("relative group backdrop-blur-sm", "rounded-3xl transition-all duration-300", "flex flex-col bg-card border border-border shadow-lg hover:shadow-xl", tier.highlight && "ring-1 ring-primary/40 bg-gradient-to-b from-primary/5 to-transparent")}>
+          {tiers.map(tier => <article key={tier.id} className={cn("relative group", "rounded-3xl transition-all duration-300", "flex flex-col bg-card border border-border shadow-lg hover:shadow-xl", tier.highlight && "ring-1 ring-primary/40 bg-gradient-to-b from-primary/5 to-transparent")}>
               {tier.badge && tier.highlight && <div className="absolute -top-4 left-1/2 -translate-x-1/2">
                   <Badge className="px-4 py-1.5 text-xs md:text-sm font-medium bg-primary text-primary-foreground border-none shadow">
                     {tier.badge}
@@ -62,7 +63,7 @@ function PricingSection({
                 </div>
 
                 <div className="mb-6">
-                  <div className="flex items-baseline gap-2">
+                  <div className="flex items-baseline gap-2 min-h-[2.75rem]">
                     <span className="text-4xl font-bold">
                       {tier.currency ?? "NT$"}
                       {formatNumber(isYearly ? tier.price.yearly : tier.price.monthly)}

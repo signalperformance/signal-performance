@@ -1,5 +1,5 @@
 
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useLoadingState } from "@/hooks/useLoadingState";
 import LoadingScreen from "@/components/LoadingScreen";
 import Navbar from "@/components/Navbar";
@@ -27,8 +27,9 @@ const Index = () => {
     document.title = "Signal Performance";
   }, []);
 
-  const membershipTiers = [
+  const membershipTiers = useMemo(() => ([
     {
+      id: "plus",
       name: t('pricing.plus.name'),
       currency: "NT$",
       price: { monthly: 15000, yearly: 15000 * 12 },
@@ -44,6 +45,7 @@ const Index = () => {
       ],
     },
     {
+      id: "foundations",
       name: t('pricing.foundations.name'),
       currency: "NT$",
       price: { monthly: 10000, yearly: 10000 * 12 },
@@ -56,7 +58,7 @@ const Index = () => {
         { name: t('pricing.features.assessment.quarterly'), included: true },
       ],
     },
-  ];
+  ]), [t]);
 
   const comparisonPlans = [
     { name: "Foundations", level: "golf", price: { monthly: 12000, yearly: 12000 * 12 } },
