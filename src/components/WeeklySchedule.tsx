@@ -2,17 +2,11 @@ import React from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from '@/components/ui/tooltip';
-import { Clock, Move, Dumbbell, Activity, Zap, Crown, Unlock } from 'lucide-react';
+import { Clock } from 'lucide-react';
 const WeeklySchedule = () => {
   const {
     t
   } = useLanguage();
-  const classIconMap: Record<string, React.ReactNode> = {
-    mobility: <Move className="h-3.5 w-3.5 text-signal-charcoal" aria-hidden />,
-    strength: <Dumbbell className="h-3.5 w-3.5 text-signal-charcoal" aria-hidden />,
-    cardio: <Activity className="h-3.5 w-3.5 text-signal-charcoal" aria-hidden />,
-    power: <Zap className="h-3.5 w-3.5 text-signal-charcoal" aria-hidden />
-  };
   type Item = {
     time: string;
     labelKey: 'mobility' | 'strength' | 'cardio' | 'power';
@@ -115,7 +109,7 @@ const WeeklySchedule = () => {
                           {it.time}
                         </span>
                         <span className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground">
-                          {classIconMap[it.labelKey]}
+                          
                           {t(`schedule.classes.${it.labelKey}`)}
                           {it.pro && <Tooltip>
                               <TooltipTrigger asChild>
