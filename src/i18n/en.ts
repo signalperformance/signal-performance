@@ -56,6 +56,22 @@ const en = {
   'assessment.golf.title': 'Skill Assessment',
   'assessment.golf.description': 'We measure distance and dispersion metrics across every club in the bag to assess your ball-striking and shot control in a controlled environment. When available, we combine this with your tournament performance data to better understand the relative contribution of technical, physical, and mental factors to your overall performance.',
 
+  // Pricing
+  'pricing.title': 'Membership Plans & Pricing',
+  'pricing.mostPopular': 'Most Popular',
+  'pricing.perMonth': '/month',
+  'pricing.perYear': '/year',
+  'pricing.plus.name': 'Plus',
+  'pricing.foundations.name': 'Foundations',
+  'pricing.plus.description': '18 sessions/month',
+  'pricing.foundations.description': '12 sessions/month',
+  'pricing.features.physical.4x': '4×/week Physical Training (1-on-3 semi-private)',
+  'pricing.features.physical.3x': '3×/week Physical Training (1-on-3 semi-private)',
+  'pricing.features.mental.2x': '2×/month Mental Training (1-on-1)',
+  'pricing.features.report.monthly': 'Performance Report – Monthly',
+  'pricing.features.report.quarterly': 'Performance Report – Quarterly',
+  'pricing.features.assessment.quarterly': 'Quarterly Assessment',
+
   // About
   'about.title': 'About Signal Performance',
   'about.subtitle': 'Redefining golf training through integration',

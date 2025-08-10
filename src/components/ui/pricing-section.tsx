@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/contexts/LanguageContext";
 type Feature = {
   name: string;
   description?: string;
@@ -29,14 +30,16 @@ const formatNumber = (value: number) => new Intl.NumberFormat("en-US").format(va
 function PricingSection({
   tiers,
   className,
-  title = "Membership Options",
+  title,
   subtitle
 }: PricingSectionProps) {
+  const { t } = useLanguage();
   const [isYearly, setIsYearly] = useState(false);
+  const sectionTitle = title ?? t("pricing.title");
   return <section className={cn("section-padding bg-background text-foreground", "overflow-hidden", className)}>
       <div className="container mx-auto container-padding">
         <div className="flex flex-col items-center gap-4 mb-10 md:mb-14 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold font-lora">{title}</h2>
+          <h2 className="text-3xl md:text-4xl font-bold font-lora">{sectionTitle}</h2>
           {subtitle && <p className="text-muted-foreground max-w-2xl">{subtitle}</p>}
 
           
@@ -62,7 +65,7 @@ function PricingSection({
                       {tier.currency ?? "NT$"}
                       {formatNumber(isYearly ? tier.price.yearly : tier.price.monthly)}
                     </span>
-                    <span className="text-sm text-muted-foreground">/{isYearly ? "year" : "month"}</span>
+                    <span className="text-sm text-muted-foreground">{isYearly ? t("pricing.perYear") : t("pricing.perMonth")}</span>
                   </div>
                   {tier.description && <p className="mt-2 text-sm text-muted-foreground">{tier.description}</p>}
                 </div>

@@ -56,6 +56,22 @@ const zh = {
   'assessment.golf.title': '高爾夫表現評估',
   'assessment.golf.description': '我們在受控環境中測量每支球桿的擊球距離與落點分佈，以評估您的擊球品質與球路控制表現。若具備比賽數據，將進一步整合分析，以深入解析技術、體能與心理因素對整體表現的相對貢獻。',
 
+  // Pricing
+  'pricing.title': '會員方案與價格',
+  'pricing.mostPopular': '最受歡迎',
+  'pricing.perMonth': '／月',
+  'pricing.perYear': '／年',
+  'pricing.plus.name': 'Plus',
+  'pricing.foundations.name': '基礎方案',
+  'pricing.plus.description': '每月 18 堂課',
+  'pricing.foundations.description': '每月 12 堂課',
+  'pricing.features.physical.4x': '每週 4 次體能訓練（1 對 3 小團體）',
+  'pricing.features.physical.3x': '每週 3 次體能訓練（1 對 3 小團體）',
+  'pricing.features.mental.2x': '每月 2 次心理訓練（1 對 1）',
+  'pricing.features.report.monthly': '每月表現報告',
+  'pricing.features.report.quarterly': '季度表現報告',
+  'pricing.features.assessment.quarterly': '季度評估',
+
   // About
   'about.title': '關於 Signal Performance',
   'about.subtitle': '透過整合重新定義高爾夫訓練',

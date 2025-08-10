@@ -17,9 +17,11 @@ import FloatingAssessmentButton from "@/components/FloatingAssessmentButton";
 import { PricingSection } from "@/components/ui/pricing-section";
 import { PricingTable } from "@/components/ui/pricing-table";
 import { Trophy, Dumbbell } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Index = () => {
   const { isLoading, completeLoading } = useLoadingState();
+  const { t } = useLanguage();
 
   useEffect(() => {
     document.title = "Signal Performance";
@@ -27,31 +29,31 @@ const Index = () => {
 
   const membershipTiers = [
     {
-      name: "Plus",
+      name: t('pricing.plus.name'),
       currency: "NT$",
       price: { monthly: 15000, yearly: 15000 * 12 },
-      description: "18 sessions/month",
+      description: t('pricing.plus.description'),
       highlight: true,
-      badge: "Most Popular",
+      badge: t('pricing.mostPopular'),
       icon: <Trophy className="w-7 h-7" />,
       features: [
-        { name: "4×/week Physical Training (1-on-3 semi-private)", included: true },
-        { name: "2×/month Mental Training (1-on-1)", included: true },
-        { name: "Performance Report – Monthly", included: true },
-        { name: "Quarterly Assessment", included: true },
+        { name: t('pricing.features.physical.4x'), included: true },
+        { name: t('pricing.features.mental.2x'), included: true },
+        { name: t('pricing.features.report.monthly'), included: true },
+        { name: t('pricing.features.assessment.quarterly'), included: true },
       ],
     },
     {
-      name: "Foundations",
+      name: t('pricing.foundations.name'),
       currency: "NT$",
       price: { monthly: 10000, yearly: 10000 * 12 },
-      description: "12 sessions/month",
+      description: t('pricing.foundations.description'),
       icon: <Dumbbell className="w-7 h-7" />,
       features: [
-        { name: "3×/week Physical Training (1-on-3 semi-private)", included: true },
-        { name: "2×/month Mental Training (1-on-1)", included: false },
-        { name: "Performance Report – Quarterly", included: true },
-        { name: "Quarterly Assessment", included: true },
+        { name: t('pricing.features.physical.3x'), included: true },
+        { name: t('pricing.features.mental.2x'), included: false },
+        { name: t('pricing.features.report.quarterly'), included: true },
+        { name: t('pricing.features.assessment.quarterly'), included: true },
       ],
     },
   ];
@@ -79,7 +81,6 @@ const Index = () => {
       <Philosophy />
       <AssessmentProcess />
       <PricingSection
-        title="Membership Options"
         tiers={membershipTiers}
       />
       <Membership />
