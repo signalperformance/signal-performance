@@ -141,6 +141,8 @@ const zh = {
   'schedule.days.sunday': '週日',
   'schedule.timePeriods.am': '上午',
   'schedule.timePeriods.pm': '下午',
+  'schedule.badge.pro': 'PRO',
+  'schedule.badge.am': 'AM',
   'schedule.classes.mobility': '活動度',
   'schedule.classes.strength': '肌力',
   'schedule.classes.cardio': '心肺',
