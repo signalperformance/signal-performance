@@ -55,8 +55,8 @@ const Index = () => {
   ];
 
   const comparisonPlans = [
-    { name: "Golf Fitness Membership", level: "golf", price: { monthly: 12000, yearly: 12000 * 12 } },
-    { name: "Complete Performance", level: "complete", price: { monthly: 18000, yearly: 18000 * 12 }, popular: true },
+    { name: "Foundations", level: "golf", price: { monthly: 12000, yearly: 12000 * 12 } },
+    { name: "Plus", level: "complete", price: { monthly: 18000, yearly: 18000 * 12 }, popular: true },
   ];
 
   const comparisonFeatures = [

@@ -56,22 +56,27 @@ export function PricingTable({
         </div>
 
 
-        <div className="border border-border rounded-xl overflow-hidden">
+        <div className="border border-border rounded-xl overflow-hidden bg-card shadow-sm md:shadow-md">
           <div>
             <div className="w-full divide-y divide-border">
-              <div className="flex items-center p-4 bg-muted/40">
+              <div className="flex items-center p-3 md:p-4 bg-muted/40">
                 <div className="flex-1 text-sm font-medium">Features</div>
                 <div className="flex items-center gap-3 md:gap-6 text-sm">
-                  {plans.map(plan => <div key={plan.level} className="w-20 md:w-24 lg:w-28 text-center font-medium">
+                  {plans.map(plan => <div key={plan.level} className="relative w-20 md:w-24 lg:w-28 text-center font-semibold">
+                      {plan.popular && (
+                        <span className="absolute -top-5 left-1/2 -translate-x-1/2 rounded-full bg-primary text-primary-foreground px-2.5 py-1 text-[10px] shadow">
+                          Most Popular
+                        </span>
+                      )}
                       {plan.name}
                     </div>)}
                 </div>
               </div>
 
-              {features.map(feature => <div key={feature.name} className={cn("flex items-center p-4 transition-colors")}> 
+              {features.map(feature => <div key={feature.name} className={cn("flex items-center p-3 md:p-4 transition-colors")}> 
                   <div className="flex-1 text-sm">{feature.name}</div>
                   <div className="flex items-center gap-3 md:gap-6 text-sm">
-                    {plans.map(plan => <div key={plan.level} className={cn("w-20 md:w-24 lg:w-28 flex justify-center text-center")}> 
+                    {plans.map(plan => <div key={plan.level} className={cn("w-20 md:w-24 lg:w-28 flex justify-center text-center", plan.popular ? "font-semibold text-foreground" : "text-muted-foreground")}> 
                         {renderCell(feature.values[plan.level])}
                       </div>)}
                   </div>
