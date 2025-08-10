@@ -27,12 +27,12 @@ const Index = () => {
 
   const membershipTiers = [
     {
-      name: "Complete Performance (Flagship)",
+      name: "Plus",
       currency: "NT$",
       price: { monthly: 18000, yearly: 18000 * 12 },
       description: "~19 sessions/month",
       highlight: true,
-      badge: "Best Value",
+      badge: "Most Popular",
       icon: <Trophy className="w-7 h-7" />,
       features: [
         { name: "4×/week Physical Training (1-on-3 semi-private)", included: true },
@@ -41,7 +41,7 @@ const Index = () => {
       ],
     },
     {
-      name: "Golf Fitness Membership",
+      name: "Foundations",
       currency: "NT$",
       price: { monthly: 12000, yearly: 12000 * 12 },
       description: "~13 sessions/month",

@@ -75,14 +75,14 @@ function PricingSection({ tiers, className, title = "Membership Options", subtit
               key={tier.name}
               className={cn(
                 "relative group backdrop-blur-sm",
-                "rounded-2xl transition-all duration-300",
-                "flex flex-col bg-card border border-border shadow-md hover:shadow-lg",
+                "rounded-3xl transition-all duration-300",
+                "flex flex-col bg-card border border-border shadow-lg hover:shadow-xl",
                 tier.highlight && "ring-1 ring-primary/40 bg-gradient-to-b from-primary/5 to-transparent",
               )}
             >
               {tier.badge && tier.highlight && (
-                <div className="absolute -top-3 left-6">
-                  <Badge className="px-4 py-1.5 text-sm font-medium bg-primary text-primary-foreground border-none shadow">
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                  <Badge className="px-4 py-1.5 text-xs md:text-sm font-medium bg-primary text-primary-foreground border-none shadow">
                     {tier.badge}
                   </Badge>
                 </div>
