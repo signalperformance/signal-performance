@@ -130,7 +130,7 @@ const WeeklySchedule = () => {
             ))}
           </div>
           <aside className="mt-4 text-center text-xs text-muted-foreground">
-            <p className="flex flex-wrap items-center justify-center gap-3 sm:gap-6">
+            <p className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 lg:text-sm">
               <span className="flex items-center gap-2">
                 <span className="inline-flex items-center gap-1 rounded-full bg-signal-gold/20 text-signal-charcoal px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide ring-1 ring-signal-gold/40">
                   {t('schedule.badge.pro')}
