@@ -40,10 +40,10 @@ const GettingStarted = () => {
               {/* Group: Assessment Package covers steps 1–3 */}
               <li className="relative">
                 <div className="ml-[-6px] pl-3 border-l-4 border-primary">
-                  <div className="bg-secondary text-secondary-foreground rounded-md p-3 shadow border border-primary/40">
+                  <div className="bg-card text-card-foreground rounded-md p-3 shadow border border-border">
                     <div className="flex items-baseline justify-between gap-2">
-                      <h4 className="text-primary font-semibold">{t('gettingstarted.assessmentPackage.title')}</h4>
-                      <span className="text-sm font-bold text-secondary-foreground whitespace-nowrap">{t('gettingstarted.assessmentPackage.price')}</span>
+                      <h4 className="font-semibold text-card-foreground">{t('gettingstarted.assessmentPackage.title')}</h4>
+                      <span className="text-sm font-semibold text-card-foreground whitespace-nowrap">{t('gettingstarted.assessmentPackage.price')}</span>
                     </div>
                     
                   </div>
@@ -88,14 +88,14 @@ const GettingStarted = () => {
           <div className="hidden lg:grid grid-cols-4 gap-4">
             {/* Assessment Package above steps 1–3 */}
             <div className="col-span-3">
-              <Card className="bg-secondary text-secondary-foreground border-primary/40 shadow-xl text-center">
+              <Card className="bg-card text-card-foreground border border-border shadow-xl text-center">
                 <CardHeader className="p-4">
-                  <CardTitle className="text-primary text-xl md:text-2xl">
+                  <CardTitle className="text-xl md:text-2xl">
                     {t('gettingstarted.assessmentPackage.title')}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="p-4 pt-0">
-                  <p className="text-2xl md:text-3xl font-bold text-secondary-foreground whitespace-nowrap">
+                  <p className="text-xl md:text-2xl font-semibold text-card-foreground whitespace-nowrap">
                     {t('gettingstarted.assessmentPackage.price')}
                   </p>
                 </CardContent>
