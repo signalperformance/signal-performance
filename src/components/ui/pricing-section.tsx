@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
+
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
@@ -135,15 +135,6 @@ function PricingSection({ tiers, className, title = "Membership Options", subtit
                 </ul>
               </div>
 
-              <div className="p-6 pt-0 mt-auto">
-                <Button
-                  variant={tier.highlight ? "default" : "outline"}
-                  size="lg"
-                  className="w-full"
-                >
-                  {tier.highlight ? "Buy now" : "Get started"}
-                </Button>
-              </div>
             </article>
           ))}
         </div>
