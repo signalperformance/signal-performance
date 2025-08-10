@@ -68,7 +68,7 @@ const en = {
   'pricing.features.physical.4x': '4×/week Physical Training (1-on-3 semi-private)',
   'pricing.features.physical.3x': '3×/week Physical Training (1-on-3 semi-private)',
   'pricing.features.mental.2x': '2×/month Mental Training (1-on-1)',
-  'pricing.features.report.monthly': 'Performance Report – Monthly',
+  'pricing.features.report.monthly': '1x/month Performance Report',
   'pricing.features.report.quarterly': 'Performance Report – Quarterly',
   'pricing.features.assessment.quarterly': 'Quarterly Assessment',
 

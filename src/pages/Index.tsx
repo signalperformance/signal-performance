@@ -52,7 +52,7 @@ const Index = () => {
       features: [
         { name: t('pricing.features.physical.3x'), included: true },
         { name: t('pricing.features.mental.2x'), included: false },
-        { name: t('pricing.features.report.quarterly'), included: true },
+        { name: t('pricing.features.report.monthly'), included: false },
         { name: t('pricing.features.assessment.quarterly'), included: true },
       ],
     },
