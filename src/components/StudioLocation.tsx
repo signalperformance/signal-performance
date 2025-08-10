@@ -37,11 +37,11 @@ const StudioLocation = () => {
                   <CarouselContent>
                     {studioImages.map((image, index) => (
                       <CarouselItem key={index}>
-                        <div className="aspect-[4/3] rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+                        <div className="aspect-[4/3] rounded-lg overflow-hidden shadow-lg">
                           <img 
                             src={image} 
                             alt={`Studio view ${index + 1}`}
-                            className="w-full h-full object-cover md:hover:scale-105 transition-transform duration-300"
+                            className="w-full h-full object-cover"
                           />
                         </div>
                       </CarouselItem>
@@ -55,7 +55,7 @@ const StudioLocation = () => {
 
             {/* Location Information */}
             <div className="order-2 lg:order-2 h-full animate-fade-in">
-              <Card className="border-signal-gold/20 shadow-xl hover:shadow-2xl transition-all duration-500 md:hover:scale-105 border-2 border-gray-100 h-full">
+              <Card className="border-signal-gold/20 shadow-xl border-2 border-gray-100 h-full">
                 <CardContent className="p-8 md:p-10 h-full flex flex-col justify-center">
                   <div className="space-y-8">
                     <div>
@@ -63,15 +63,15 @@ const StudioLocation = () => {
                         {t('studio.features.title')}
                       </h3>
                       <ul className="space-y-4 text-signal-charcoal/90 text-base md:text-lg">
-                        <li className="flex space-x-3 items-start hover:text-signal-charcoal transition-colors duration-200">
+                        <li className="flex space-x-3 items-start">
                           <div className="w-3 h-3 bg-signal-gold rounded-full flex-shrink-0 mt-[0.6rem]"></div>
                           <span className="flex-1 leading-relaxed">{t('studio.features.equipment')}</span>
                         </li>
-                        <li className="flex space-x-3 items-start hover:text-signal-charcoal transition-colors duration-200">
+                        <li className="flex space-x-3 items-start">
                           <div className="w-3 h-3 bg-signal-gold rounded-full flex-shrink-0 mt-[0.6rem]"></div>
                           <span className="flex-1 leading-relaxed">{t('studio.features.consultation')}</span>
                         </li>
-                        <li className="flex space-x-3 items-start hover:text-signal-charcoal transition-colors duration-200">
+                        <li className="flex space-x-3 items-start">
                           <div className="w-3 h-3 bg-signal-gold rounded-full flex-shrink-0 mt-[0.6rem]"></div>
                           <span className="flex-1 leading-relaxed">{t('studio.features.access')}</span>
                         </li>
@@ -82,7 +82,7 @@ const StudioLocation = () => {
                       <Button 
                         asChild
                         size="lg"
-                        className="bg-signal-gold hover:bg-signal-gold/90 text-white w-full text-lg py-6 font-semibold transition-all duration-300 md:hover:scale-105 shadow-lg hover:shadow-xl"
+                        className="bg-signal-gold text-white w-full text-lg py-6 font-semibold shadow-lg"
                       >
                         <a 
                           href={googleMapsLink}
