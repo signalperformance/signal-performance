@@ -339,7 +339,7 @@ const AssessmentProcess = () => {
                         <div className={cn("w-10 h-10 rounded-full flex items-center justify-center text-white font-bold flex-shrink-0", assessment.color)}>
                           {assessment.number}
                         </div>
-                        <h3 className="text-xl font-lora font-medium truncate">{assessment.title}</h3>
+                        <h3 className="text-base sm:text-lg font-lora font-medium leading-tight break-words">{assessment.title}</h3>
                       </div>
                       
                       {/* Next Step Button for mobile - smaller size */}
