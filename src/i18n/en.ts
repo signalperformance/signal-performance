@@ -148,6 +148,8 @@ const en = {
   'schedule.keyTitle': 'Key:',
   'schedule.key.pro': 'PRO: Pro\'s Only',
   'schedule.key.open': 'AM: Open to All Members',
+  'schedule.badge.pro': 'Pro',
+  'schedule.badge.am': 'Am',
   'schedule.legend.pros': 'Pro Only',
   'schedule.legend.amateurs': 'Amateur Only',
   'schedule.columns.mwf': 'Mon/Wed/Fri',
