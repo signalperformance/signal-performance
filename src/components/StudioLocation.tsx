@@ -82,16 +82,16 @@ const StudioLocation = () => {
                       <Button 
                         asChild
                         size="lg"
-                        className="bg-signal-gold text-white w-full text-lg py-6 font-semibold shadow-lg"
+                        className="bg-signal-gold text-white w-full text-lg py-6 font-semibold shadow-lg whitespace-normal min-w-0"
                       >
                         <a 
                           href={googleMapsLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center justify-center gap-3"
+                          className="inline-flex items-center justify-center gap-2 sm:gap-3 w-full min-w-0 whitespace-normal text-center"
                         >
-                          <MapPin className="w-5 h-5" />
-                          <span>{t('studio.address.mapButton')}</span>
+                          <MapPin className="w-5 h-5 shrink-0" />
+                          <span className="min-w-0 break-words text-balance leading-snug">{t('studio.address.mapButton')}</span>
                         </a>
                       </Button>
                     </div>
