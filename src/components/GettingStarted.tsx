@@ -41,125 +41,70 @@ const GettingStarted = () => {
         </div>
 
         <div className="relative">
-          {/* Mobile view */}
-          <div className="md:hidden flex flex-col items-center">
-            {/* Assessment Package Card */}
-            <div className="mb-4">
-              <Card className="bg-signal-charcoal text-white border-signal-gold/50 shadow-xl w-full max-w-[280px] sm:max-w-xs text-center">
-                  <CardHeader className="p-4">
-                      <CardTitle className="text-signal-gold text-2xl">
-                          {t('gettingstarted.assessmentPackage.title')}
-                      </CardTitle>
-                  </CardHeader>
-                  <CardContent className="p-4 pt-0">
-                      <p className="text-3xl font-bold text-white mb-2">
-                          {t('gettingstarted.assessmentPackage.price')}
-                      </p>
-                  </CardContent>
-              </Card>
-            </div>
-            
-            {/* Connector line */}
-            <div className="h-8 w-px bg-gray-300" />
-
-            {/* Grouped Steps 1-3 */}
-            <div className="w-full max-w-xs bg-muted/50 rounded-xl p-6 border-2 border-dashed border-signal-gold/50">
-              <div className="flex flex-col items-center gap-y-10">
-                {steps.slice(0, 3).map((step, index) => <div key={step.title} className="flex flex-col items-center text-center w-full">
-                    <div className="flex items-center justify-center w-16 h-16 mb-4 bg-signal-gold rounded-full shadow-lg">
-                      <span className="text-2xl font-bold text-signal-white">{index + 1}</span>
-                    </div>
-                    <h3 className="text-signal-charcoal px-2 font-semibold text-2xl">{step.title}</h3>
-                    <p className="font-medium text-signal-gold mb-1 text-lg">{step.hours}</p>
-                    <p className="text-muted-foreground mt-1 px-4 text-base">{step.subtitle}</p>
-                  </div>)}
-              </div>
-            </div>
-            
-            {/* Connector line */}
-            <div className="h-8 w-px bg-gray-300 my-4" />
-
-            {/* Monthly Program Card */}
-            <div className="mb-4">
-              <Card className="bg-signal-charcoal text-white border-signal-gold/50 shadow-xl w-full max-w-[280px] sm:max-w-xs text-center">
-                  <CardHeader className="p-4">
-                      <CardTitle className="text-signal-gold text-2xl">
-                          {t('gettingstarted.step4.title')}
-                      </CardTitle>
-                  </CardHeader>
-                  <CardContent className="p-4 pt-0">
-                      <p className="text-3xl font-bold text-white mb-2">
-                          {t('gettingstarted.monthlyProgram.price')}
-                      </p>
-                  </CardContent>
-              </Card>
-            </div>
-
-            {/* Step 4 */}
-            {steps[3] && <div className="flex flex-col items-center text-center w-full max-w-xs">
-                <div key={steps[3].title} className="w-full">
-                  <div className="flex items-center justify-center w-16 h-16 mb-4 bg-signal-gold rounded-full shadow-lg mx-auto">
-                    <span className="text-2xl font-bold text-signal-white">{4}</span>
-                  </div>
-                  <h3 className="font-semibold text-signal-charcoal px-2 text-2xl">{steps[3].title}</h3>
-                  <p className="font-medium text-signal-gold mb-1 text-lg">{steps[3].hours}</p>
-                  <p className="text-muted-foreground mt-1 px-4 text-base">{steps[3].subtitle}</p>
-                </div>
-              </div>}
-          </div>
-
-          {/* Desktop view */}
-          <div className="hidden md:block relative pt-20">
-            {/* The gray connecting line for all circles */}
-            <div className="absolute h-0.5 bg-gray-300 z-10 top-[105px] left-[12.5%] right-[12.5%]" />
-
-            {/* Assessment package bracket and box */}
-            {/* Horizontal line */}
-            <div className="absolute h-[3px] bg-signal-charcoal z-20 top-[20px] left-[12.5%] w-1/2" />
-            {/* Vertical line left */}
-            <div className="absolute w-[3px] bg-signal-charcoal z-20 top-[20px] h-[85px] left-[12.5%]" />
-            {/* Vertical line right */}
-            <div className="absolute w-[3px] bg-signal-charcoal z-20 top-[20px] h-[85px] left-[62.5%]" />
-
-            {/* The package box */}
-            <div className="absolute z-30 top-[20px] left-[37.5%] transform -translate-x-1/2 -translate-y-1/2">
-              <div className="bg-signal-charcoal text-white border border-signal-gold/50 shadow-xl rounded-md px-4 py-2 text-center whitespace-nowrap">
-                <p className="text-base text-signal-gold font-semibold">
+          {/* Pricing badges row (always visible) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl mx-auto mb-10">
+            <Card className="bg-signal-charcoal text-white border-signal-gold/50 shadow-xl text-center">
+              <CardHeader className="p-4">
+                <CardTitle className="text-signal-gold text-xl md:text-2xl">
                   {t('gettingstarted.assessmentPackage.title')}
-                </p>
-                <p className="text-2xl font-bold text-white">
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="p-4 pt-0">
+                <p className="text-2xl md:text-3xl font-bold text-white">
                   {t('gettingstarted.assessmentPackage.price')}
                 </p>
-              </div>
-            </div>
+              </CardContent>
+            </Card>
 
-            {/* Monthly Program box */}
-            <div className="absolute z-30 top-[20px] left-[87.5%] transform -translate-x-1/2 -translate-y-1/2">
-              <div className="bg-signal-charcoal text-white border border-signal-gold/50 shadow-xl rounded-md px-4 py-2 text-center whitespace-nowrap">
-                <p className="text-base text-signal-gold font-semibold">
+            <Card className="bg-signal-charcoal text-white border-signal-gold/50 shadow-xl text-center">
+              <CardHeader className="p-4">
+                <CardTitle className="text-signal-gold text-xl md:text-2xl">
                   {t('gettingstarted.step4.title')}
-                </p>
-                <p className="text-2xl font-bold text-white">
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="p-4 pt-0">
+                <p className="text-2xl md:text-3xl font-bold text-white">
                   {t('gettingstarted.monthlyProgram.price')}
                 </p>
-              </div>
-            </div>
+              </CardContent>
+            </Card>
+          </div>
 
-            {/* Vertical line for Monthly Program */}
-            <div className="absolute w-[3px] bg-signal-charcoal z-20 top-[20px] h-[85px] left-[87.5%] transform -translate-x-1/2" />
+          {/* Vertical timeline for mobile and tablets */}
+          <div className="lg:hidden mx-auto max-w-xl">
+            <ol className="relative border-l border-muted pl-6 space-y-8">
+              {steps.map((step, index) => (
+                <li key={step.title} className="relative">
+                  <span className="absolute -left-[11px] flex items-center justify-center w-6 h-6 rounded-full bg-signal-gold text-signal-white text-xs font-bold ring-4 ring-background">
+                    {index + 1}
+                  </span>
+                  <h3 className="text-signal-charcoal font-semibold text-xl md:text-2xl pr-2">{step.title}</h3>
+                  <p className="text-signal-gold font-bold mt-1">{step.hours}</p>
+                  <p className="text-muted-foreground mt-1 text-base">{step.subtitle}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
 
-            <div className="flex justify-between items-start relative">
-              {steps.map((step, index) => <div key={step.title} className="relative z-20 flex flex-col items-center text-center flex-1 group px-2">
-                  <div className="flex items-center justify-center w-16 h-16 mb-6 bg-background rounded-full shadow-lg border-4 border-background transition-transform group-hover:scale-105">
-                    <div className="flex items-center justify-center w-full h-full bg-signal-gold rounded-full text-2xl font-bold text-signal-white">
+          {/* Horizontal stepper for desktops */}
+          <div className="hidden lg:flex items-start gap-4">
+            {steps.map((step, index) => (
+              <React.Fragment key={step.title}>
+                <div className="flex flex-col items-center text-center min-w-[180px] max-w-[220px] px-2">
+                  <div className="mb-4">
+                    <div className="w-16 h-16 rounded-full bg-signal-gold text-signal-white flex items-center justify-center text-2xl font-bold shadow-lg">
                       {index + 1}
                     </div>
                   </div>
-                  <h3 className="font-semibold text-signal-charcoal text-2xl">{step.title}</h3>
-                  <p className="text-signal-gold mb-2 font-bold text-lg">{step.hours}</p>
-                  <p className="text-sm text-muted-foreground mt-2 max-w-[200px]">{step.subtitle}</p>
-                </div>)}
-            </div>
+                  <h3 className="font-semibold text-signal-charcoal text-xl">{step.title}</h3>
+                  <p className="text-signal-gold font-bold mt-1">{step.hours}</p>
+                  <p className="text-muted-foreground mt-2 text-sm max-w-[220px]">{step.subtitle}</p>
+                </div>
+                {index < steps.length - 1 && (
+                  <div className="h-1 flex-1 bg-muted self-center rounded-full" aria-hidden="true" />
+                )}
+              </React.Fragment>
+            ))}
           </div>
         </div>
       </div>
