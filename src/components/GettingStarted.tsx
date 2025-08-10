@@ -42,8 +42,8 @@ const GettingStarted = () => {
                 <div className="ml-[-6px] pl-3 border-l-4 border-primary">
                   <div className="bg-card text-card-foreground rounded-md p-3 shadow border border-border">
                     <div className="flex items-baseline justify-between gap-2">
-                      <h4 className="font-semibold text-card-foreground">{t('gettingstarted.assessmentPackage.title')}</h4>
-                      <span className="text-sm font-semibold text-card-foreground whitespace-nowrap">{t('gettingstarted.assessmentPackage.price')}</span>
+                      <h4 className="font-semibold text-signal-charcoal text-lg">{t('gettingstarted.assessmentPackage.title')}</h4>
+                      <span className="text-sm font-semibold text-signal-charcoal whitespace-nowrap">{t('gettingstarted.assessmentPackage.price')}</span>
                     </div>
                     
                   </div>
@@ -90,12 +90,12 @@ const GettingStarted = () => {
             <div className="col-span-3">
               <Card className="bg-card text-card-foreground border border-border shadow-xl text-center">
                 <CardHeader className="p-4">
-                  <CardTitle className="text-xl md:text-2xl">
+                  <CardTitle className="text-2xl md:text-3xl text-signal-charcoal">
                     {t('gettingstarted.assessmentPackage.title')}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="p-4 pt-0">
-                  <p className="text-xl md:text-2xl font-semibold text-card-foreground whitespace-nowrap">
+                  <p className="text-lg md:text-xl font-medium text-signal-charcoal whitespace-nowrap">
                     {t('gettingstarted.assessmentPackage.price')}
                   </p>
                 </CardContent>
@@ -113,7 +113,7 @@ const GettingStarted = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="p-4 pt-0">
-                  <p className="text-2xl md:text-3xl font-bold text-primary-foreground whitespace-nowrap">
+                  <p className="text-lg md:text-xl font-semibold text-primary-foreground whitespace-nowrap">
                     {t('gettingstarted.monthlyProgram.price')}
                   </p>
                 </CardContent>
