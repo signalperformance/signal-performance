@@ -138,7 +138,7 @@ const GettingStarted = () => {
             </div>
 
             {/* Step 4 */}
-            <div className="relative overflow-hidden col-span-1 flex flex-col items-center text-center w-full rounded-xl border border-border bg-gradient-to-br from-slate-50 via-white to-blue-50/40 p-5 shadow-sm">
+            <div className="relative overflow-hidden col-span-1 flex flex-col items-center text-center w-full rounded-xl border border-border bg-gradient-to-br from-signal-gold/20 via-white to-signal-gold/10 p-5 shadow-sm">
               <div className="mb-4">
                 
               </div>
