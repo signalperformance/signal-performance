@@ -22,7 +22,7 @@ const GettingStarted = () => {
     subtitle: t('gettingstarted.step4.subtitle'),
     hours: t('gettingstarted.step4.hours')
   }];
-  return <section id="getting-started" className="section-padding bg-signal-light-gray">
+  return <section id="getting-started" className="section-padding">
       <div className="container mx-auto container-padding">
         <div className="text-center mb-12 md:mb-20">
           <h2 className="text-3xl md:text-4xl font-semibold mb-4 text-signal-charcoal">
