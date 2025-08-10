@@ -93,8 +93,8 @@ const Index = () => {
       />
       <GettingStarted />
       <WeeklySchedule />
-      <WhoItsFor />
       <StudioLocation />
+      <WhoItsFor />
       <About />
       <Footer />
       <FloatingAssessmentButton />
