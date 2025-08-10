@@ -33,7 +33,9 @@ function PricingSection({
   title,
   subtitle
 }: PricingSectionProps) {
-  const { t } = useLanguage();
+  const {
+    t
+  } = useLanguage();
   const [isYearly, setIsYearly] = useState(false);
   const sectionTitle = title ?? t("pricing.title");
   return <section className={cn("section-padding bg-background text-foreground", "overflow-hidden", className)}>
@@ -55,7 +57,7 @@ function PricingSection({
 
               <div className="p-6 md:p-8 flex-1">
                 <div className="flex items-center justify-between mb-4">
-                  <div className={cn("p-3 rounded-xl bg-muted text-foreground/80")}>{tier.icon}</div>
+                  
                   <h3 className="text-xl font-semibold">{tier.name}</h3>
                 </div>
 
@@ -74,15 +76,11 @@ function PricingSection({
                   {tier.features.map(feature => <li key={feature.name} className="flex gap-3">
                       <div className={cn("mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full border", feature.included ? "border-primary text-primary" : "border-muted text-muted-foreground")} aria-hidden>
                         {/* simple check marker */}
-                        {feature.included ? (
-                          <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                        {feature.included ? <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M20 6L9 17l-5-5" />
-                          </svg>
-                        ) : (
-                          <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                          </svg> : <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M6 6l12 12M6 18L18 6" />
-                          </svg>
-                        )}
+                          </svg>}
                       </div>
                       <div>
                         <div className={cn("text-sm font-medium", !feature.included && "line-through text-muted-foreground")}>{feature.name}</div>
