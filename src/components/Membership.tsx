@@ -109,6 +109,6 @@ const Membership = () => {
       }
     };
   }, []);
-  return;
+  return null;
 };
 export default Membership;

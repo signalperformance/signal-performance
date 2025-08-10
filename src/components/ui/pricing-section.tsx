@@ -86,7 +86,7 @@ function PricingSection({
                       </div>
                       <div>
                         <div className={cn("text-sm font-medium", !feature.included && "line-through text-muted-foreground")}>{feature.name}</div>
-                        {feature.description && <div className="text-sm text-muted-foreground">{feature.description}</div>}
+                        {feature.description && <div className={cn("text-sm text-muted-foreground", !feature.included && "line-through")}>{feature.description}</div>}
                       </div>
                     </li>)}
                 </ul>

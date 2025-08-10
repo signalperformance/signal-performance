@@ -48,7 +48,7 @@ export function PricingTable({
     setSelectedPlan(plan);
     onPlanSelect?.(plan);
   };
-  return;
+  return null;
 }
 function renderCell(value: CellValue | undefined) {
   if (value === true) return <Check className="w-5 h-5 text-primary" aria-label="Included" />;
