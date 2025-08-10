@@ -88,14 +88,14 @@ const GettingStarted = () => {
           <div className="hidden lg:grid grid-cols-4 gap-4">
             {/* Assessment Package above steps 1–3 */}
             <div className="col-span-3">
-              <Card className="bg-card text-card-foreground border border-border shadow-xl text-center">
+              <Card className="bg-signal-charcoal text-signal-white border border-border shadow-xl text-center">
                 <CardHeader className="p-4">
-                  <CardTitle className="text-2xl md:text-3xl leading-tight tracking-tight text-signal-charcoal">
+                  <CardTitle className="text-2xl md:text-3xl leading-tight tracking-tight text-signal-white">
                     {t('gettingstarted.assessmentPackage.title')}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="p-4 pt-0">
-                  <p className="text-base md:text-lg font-medium text-signal-charcoal whitespace-nowrap">
+                  <p className="text-base md:text-lg font-medium text-signal-white whitespace-nowrap">
                     {t('gettingstarted.assessmentPackage.price')}
                   </p>
                 </CardContent>
