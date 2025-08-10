@@ -20,7 +20,7 @@ const StudioLocation = () => {
   return (
     <section id="studio-location" className="section-padding bg-white overflow-x-clip">
       <div className="container mx-auto container-padding">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-6xl mx-auto overflow-x-hidden">
           {/* Section Header */}
           <div className="text-center mb-12 md:mb-16 animate-fade-in">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-signal-charcoal font-lora">
