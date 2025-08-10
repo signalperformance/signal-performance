@@ -88,7 +88,7 @@ const GettingStarted = () => {
                       </CardTitle>
                   </CardHeader>
                   <CardContent className="p-4 pt-0">
-                      <p className="text-3xl font-bold text-white mb-2">
+                      <p className="text-2xl sm:text-3xl font-bold text-white mb-2 whitespace-nowrap">
                           {t('gettingstarted.monthlyProgram.price')}
                       </p>
                   </CardContent>
@@ -139,7 +139,7 @@ const GettingStarted = () => {
                 <p className="text-base text-signal-gold font-semibold">
                   {t('gettingstarted.step4.title')}
                 </p>
-                <p className="text-2xl font-bold text-white">
+                <p className="text-xl md:text-2xl font-bold text-white whitespace-nowrap">
                   {t('gettingstarted.monthlyProgram.price')}
                 </p>
               </div>
