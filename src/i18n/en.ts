@@ -57,7 +57,7 @@ const en = {
   'assessment.golf.description': 'We measure distance and dispersion metrics across every club in the bag to assess your ball-striking and shot control in a controlled environment. When available, we combine this with your tournament performance data to better understand the relative contribution of technical, physical, and mental factors to your overall performance.',
 
   // Pricing
-  'pricing.title': 'Membership Plans & Pricing',
+  'pricing.title': 'Membership Plans',
   'pricing.mostPopular': 'Most Popular',
   'pricing.perMonth': '/month',
   'pricing.perYear': '/year',
@@ -146,19 +146,13 @@ const en = {
   'schedule.classes.cardio': 'Cardio',
   'schedule.classes.power': 'Power',
   'schedule.keyTitle': 'Key:',
-  'schedule.key.pro': 'PRO: Pro Only',
-  'schedule.key.open': 'AM: Amateurs Only',
+  'schedule.key.pro': 'PRO: Pro\'s Only',
+  'schedule.key.open': 'AM: Open to All Members',
   'schedule.legend.pros': 'Pro Only',
   'schedule.legend.amateurs': 'Amateur Only',
   'schedule.columns.mwf': 'Mon/Wed/Fri',
   'schedule.columns.tth': 'Tue/Thu',
   'schedule.columns.weekend': 'Weekend',
-  'schedule.badge.pro': 'PRO',
-  'schedule.badge.am': 'AM',
-  'schedule.tooltips.pro': 'Pro only',
-  'schedule.tooltips.am': 'Amateurs only',
-  'schedule.footnote.pro': 'PRO = Pro Only',
-  'schedule.footnote.am': 'AM = Amateurs Only',
 
   // Who It's For
   'whoitsfor.title': 'Our Ideal Member',
