@@ -5,92 +5,38 @@ import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from '@/comp
 import { Clock } from 'lucide-react';
 
 const WeeklySchedule = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   type Item = {
-    time: string;
+    hour24: number;
     labelKey: 'mobility' | 'strength' | 'cardio' | 'power';
     pro?: boolean;
   };
 
   // Pro classes at 12/1/2 PM updated per request
   const mwf: Item[] = [
-    {
-      time: `12 ${t('schedule.timePeriods.pm')}`,
-      labelKey: 'mobility',
-      pro: true,
-    },
-    {
-      time: `1 ${t('schedule.timePeriods.pm')}`,
-      labelKey: 'strength',
-      pro: true,
-    },
-    {
-      time: `2 ${t('schedule.timePeriods.pm')}`,
-      labelKey: 'strength',
-      pro: true,
-    },
-    {
-      time: `5 ${t('schedule.timePeriods.pm')}`,
-      labelKey: 'mobility',
-    },
-    {
-      time: `6 ${t('schedule.timePeriods.pm')}`,
-      labelKey: 'strength',
-    },
-    {
-      time: `7 ${t('schedule.timePeriods.pm')}`,
-      labelKey: 'strength',
-    },
+    { hour24: 12, labelKey: 'mobility', pro: true },
+    { hour24: 13, labelKey: 'strength', pro: true },
+    { hour24: 14, labelKey: 'strength', pro: true },
+    { hour24: 17, labelKey: 'mobility' },
+    { hour24: 18, labelKey: 'strength' },
+    { hour24: 19, labelKey: 'strength' },
   ];
 
   const tth: Item[] = [
-    {
-      time: `12 ${t('schedule.timePeriods.pm')}`,
-      labelKey: 'power',
-      pro: true,
-    },
-    {
-      time: `1 ${t('schedule.timePeriods.pm')}`,
-      labelKey: 'cardio',
-      pro: true,
-    },
-    {
-      time: `2 ${t('schedule.timePeriods.pm')}`,
-      labelKey: 'power',
-      pro: true,
-    },
-    {
-      time: `5 ${t('schedule.timePeriods.pm')}`,
-      labelKey: 'power',
-    },
-    {
-      time: `6 ${t('schedule.timePeriods.pm')}`,
-      labelKey: 'cardio',
-    },
-    {
-      time: `7 ${t('schedule.timePeriods.pm')}`,
-      labelKey: 'power',
-    },
+    { hour24: 12, labelKey: 'power', pro: true },
+    { hour24: 13, labelKey: 'cardio', pro: true },
+    { hour24: 14, labelKey: 'power', pro: true },
+    { hour24: 17, labelKey: 'power' },
+    { hour24: 18, labelKey: 'cardio' },
+    { hour24: 19, labelKey: 'power' },
   ];
 
   const weekend: Item[] = [
-    {
-      time: `9 ${t('schedule.timePeriods.am')}`,
-      labelKey: 'mobility',
-    },
-    {
-      time: `10 ${t('schedule.timePeriods.am')}`,
-      labelKey: 'strength',
-    },
-    {
-      time: `11 ${t('schedule.timePeriods.am')}`,
-      labelKey: 'cardio',
-    },
-    {
-      time: `12 ${t('schedule.timePeriods.pm')}`,
-      labelKey: 'power',
-    },
+    { hour24: 9, labelKey: 'mobility' },
+    { hour24: 10, labelKey: 'strength' },
+    { hour24: 11, labelKey: 'cardio' },
+    { hour24: 12, labelKey: 'power' },
   ];
 
   const columns = [
@@ -98,6 +44,16 @@ const WeeklySchedule = () => {
     { title: t('schedule.columns.tth'), items: tth },
     { title: t('schedule.columns.weekend'), items: weekend },
   ];
+
+  const formatTime = (hour24: number) => {
+    if (language === 'zh') {
+      return `${String(hour24).padStart(2, '0')}:00`;
+    }
+    const isPM = hour24 >= 12;
+    let hour12 = hour24 % 12 || 12;
+    const period = t(isPM ? 'schedule.timePeriods.pm' : 'schedule.timePeriods.am');
+    return `${hour12} ${period}`;
+  };
 
   return (
     <TooltipProvider>
@@ -139,7 +95,7 @@ const WeeklySchedule = () => {
                             )}
                             <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
                               <Clock className="h-3.5 w-3.5" aria-hidden />
-                              {it.time}
+                              {formatTime(it.hour24)}
                             </span>
                             <span className="text-base md:text-lg font-extrabold font-lora text-foreground text-center justify-self-center">
                               {t(`schedule.classes.${it.labelKey}`)}
