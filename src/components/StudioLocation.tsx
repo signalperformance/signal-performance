@@ -18,7 +18,7 @@ const StudioLocation = () => {
   const googleMapsLink = "https://www.google.com/maps/place/Signal+Performance/@25.0624007,121.3655983,15z/data=!4m6!3m5!1s0x3442a181e6db2efb:0xa10dc5b0275a90b9!8m2!3d25.0699173!4d121.351446!16s%2Fg%2F11xn5z_b3t?entry=ttu&g_ep=EgoyMDI1MDcyMC4wIKXMDSoASAFQAw%3D%3D";
 
   return (
-    <section id="studio-location" className="section-padding bg-white">
+    <section id="studio-location" className="section-padding bg-white overflow-x-clip">
       <div className="container mx-auto container-padding">
         <div className="max-w-6xl mx-auto">
           {/* Section Header */}
@@ -32,7 +32,7 @@ const StudioLocation = () => {
             {/* Images Carousel/Grid */}
             <div className="order-1 lg:order-1 animate-fade-in">
               {/* Carousel for both desktop and mobile */}
-              <div className="relative">
+              <div className="relative overflow-x-clip">
                 <Carousel className="w-full" opts={{ loop: true }}>
                   <CarouselContent>
                     {studioImages.map((image, index) => (
@@ -41,7 +41,7 @@ const StudioLocation = () => {
                           <img 
                             src={image} 
                             alt={`Studio view ${index + 1}`}
-                            className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                            className="w-full h-full object-cover md:hover:scale-105 transition-transform duration-300"
                           />
                         </div>
                       </CarouselItem>
@@ -55,7 +55,7 @@ const StudioLocation = () => {
 
             {/* Location Information */}
             <div className="order-2 lg:order-2 h-full animate-fade-in">
-              <Card className="border-signal-gold/20 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105 border-2 border-gray-100 h-full">
+              <Card className="border-signal-gold/20 shadow-xl hover:shadow-2xl transition-all duration-500 md:hover:scale-105 border-2 border-gray-100 h-full">
                 <CardContent className="p-8 md:p-10 h-full flex flex-col justify-center">
                   <div className="space-y-8">
                     <div>
@@ -82,7 +82,7 @@ const StudioLocation = () => {
                       <Button 
                         asChild
                         size="lg"
-                        className="bg-signal-gold hover:bg-signal-gold/90 text-white w-full text-lg py-6 font-semibold transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+                        className="bg-signal-gold hover:bg-signal-gold/90 text-white w-full text-lg py-6 font-semibold transition-all duration-300 md:hover:scale-105 shadow-lg hover:shadow-xl"
                       >
                         <a 
                           href={googleMapsLink}
