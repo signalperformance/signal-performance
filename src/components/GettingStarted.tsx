@@ -1,35 +1,28 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import React from 'react';
-
 const GettingStarted = () => {
-  const { t } = useLanguage();
-
-  const steps = [
-    {
-      title: t('gettingstarted.step1.title'),
-      subtitle: t('gettingstarted.step1.subtitle'),
-      hours: t('gettingstarted.step1.hours')
-    },
-    {
-      title: t('gettingstarted.step2.title'),
-      subtitle: t('gettingstarted.step2.subtitle'),
-      hours: t('gettingstarted.step2.hours')
-    },
-    {
-      title: t('gettingstarted.step3.title'),
-      subtitle: t('gettingstarted.step3.subtitle'),
-      hours: t('gettingstarted.step3.hours')
-    },
-    {
-      title: t('gettingstarted.step4.title'),
-      subtitle: t('gettingstarted.step4.subtitle'),
-      hours: t('gettingstarted.step4.hours')
-    }
-  ];
-
-  return (
-    <section id="getting-started" className="section-padding bg-signal-light-gray">
+  const {
+    t
+  } = useLanguage();
+  const steps = [{
+    title: t('gettingstarted.step1.title'),
+    subtitle: t('gettingstarted.step1.subtitle'),
+    hours: t('gettingstarted.step1.hours')
+  }, {
+    title: t('gettingstarted.step2.title'),
+    subtitle: t('gettingstarted.step2.subtitle'),
+    hours: t('gettingstarted.step2.hours')
+  }, {
+    title: t('gettingstarted.step3.title'),
+    subtitle: t('gettingstarted.step3.subtitle'),
+    hours: t('gettingstarted.step3.hours')
+  }, {
+    title: t('gettingstarted.step4.title'),
+    subtitle: t('gettingstarted.step4.subtitle'),
+    hours: t('gettingstarted.step4.hours')
+  }];
+  return <section id="getting-started" className="section-padding bg-signal-light-gray">
       <div className="container mx-auto container-padding">
         <div className="text-center mb-12 md:mb-20">
           <h2 className="text-3xl md:text-4xl font-semibold mb-4 text-signal-charcoal">
@@ -52,21 +45,17 @@ const GettingStarted = () => {
                       <h4 className="text-signal-gold font-semibold">{t('gettingstarted.assessmentPackage.title')}</h4>
                       <span className="text-sm font-bold text-white whitespace-nowrap">{t('gettingstarted.assessmentPackage.price')}</span>
                     </div>
-                    <p className="text-xs text-muted-foreground mt-1">{t('gettingstarted.assessmentPackage.covers')}</p>
+                    
                   </div>
                 </div>
               </li>
 
-              {steps.slice(0, 3).map((step, index) => (
-                <li key={step.title} className="relative">
-                  <span className="absolute -left-[11px] flex items-center justify-center w-6 h-6 rounded-full bg-signal-gold text-signal-white text-xs font-bold ring-4 ring-background">
-                    {index + 1}
-                  </span>
+              {steps.slice(0, 3).map((step, index) => <li key={step.title} className="relative">
+                  
                   <h3 className="text-signal-charcoal font-semibold text-xl md:text-2xl pr-2">{step.title}</h3>
                   <p className="text-signal-gold font-bold mt-1">{step.hours}</p>
                   <p className="text-muted-foreground mt-1 text-base">{step.subtitle}</p>
-                </li>
-              ))}
+                </li>)}
 
               {/* Group: Monthly Program covers step 4 */}
               <li className="relative">
@@ -76,16 +65,14 @@ const GettingStarted = () => {
                       <h4 className="text-signal-gold font-semibold">{t('gettingstarted.step4.title')}</h4>
                       <span className="text-sm font-bold text-white whitespace-nowrap">{t('gettingstarted.monthlyProgram.price')}</span>
                     </div>
-                    <p className="text-xs text-muted-foreground mt-1">{t('gettingstarted.monthlyProgram.covers')}</p>
+                    
                   </div>
                 </div>
               </li>
 
               {/* Step 4 */}
               <li className="relative">
-                <span className="absolute -left-[11px] flex items-center justify-center w-6 h-6 rounded-full bg-signal-gold text-signal-white text-xs font-bold ring-4 ring-background">
-                  4
-                </span>
+                
                 <h3 className="text-signal-charcoal font-semibold text-xl md:text-2xl pr-2">{steps[3].title}</h3>
                 <p className="text-signal-gold font-bold mt-1">{steps[3].hours}</p>
                 <p className="text-muted-foreground mt-1 text-base">{steps[3].subtitle}</p>
@@ -109,9 +96,7 @@ const GettingStarted = () => {
                   </p>
                 </CardContent>
               </Card>
-              <p className="text-center text-sm text-muted-foreground mt-2">
-                {t('gettingstarted.assessmentPackage.covers')}
-              </p>
+              
               <div className="mx-auto mt-2 w-0 h-0 border-l-8 border-r-8 border-transparent border-t-signal-gold" aria-hidden="true" />
             </div>
 
@@ -129,39 +114,29 @@ const GettingStarted = () => {
                   </p>
                 </CardContent>
               </Card>
-              <p className="text-center text-sm text-muted-foreground mt-2">
-                {t('gettingstarted.monthlyProgram.covers')}
-              </p>
+              
               <div className="mx-auto mt-2 w-0 h-0 border-l-8 border-r-8 border-transparent border-t-signal-gold" aria-hidden="true" />
             </div>
 
             {/* Steps 1–3 */}
             <div className="col-span-3 flex items-start gap-4">
-              {steps.slice(0, 3).map((step, index) => (
-                <React.Fragment key={step.title}>
+              {steps.slice(0, 3).map((step, index) => <React.Fragment key={step.title}>
                   <div className="flex flex-col items-center text-center min-w-[180px] max-w-[220px] px-2">
                     <div className="mb-4">
-                      <div className="w-16 h-16 rounded-full bg-signal-gold text-signal-white flex items-center justify-center text-2xl font-bold shadow-lg">
-                        {index + 1}
-                      </div>
+                      
                     </div>
                     <h3 className="font-semibold text-signal-charcoal text-xl">{step.title}</h3>
                     <p className="text-signal-gold font-bold mt-1">{step.hours}</p>
                     <p className="text-muted-foreground mt-2 text-sm max-w-[220px]">{step.subtitle}</p>
                   </div>
-                  {index < 2 && (
-                    <div className="h-1 flex-1 bg-muted self-center rounded-full" aria-hidden="true" />
-                  )}
-                </React.Fragment>
-              ))}
+                  {index < 2 && <div className="h-1 flex-1 bg-muted self-center rounded-full" aria-hidden="true" />}
+                </React.Fragment>)}
             </div>
 
             {/* Step 4 */}
             <div className="col-span-1 flex flex-col items-center text-center px-2">
               <div className="mb-4">
-                <div className="w-16 h-16 rounded-full bg-signal-gold text-signal-white flex items-center justify-center text-2xl font-bold shadow-lg">
-                  4
-                </div>
+                
               </div>
               <h3 className="font-semibold text-signal-charcoal text-xl">{steps[3].title}</h3>
               <p className="text-signal-gold font-bold mt-1">{steps[3].hours}</p>
@@ -170,8 +145,6 @@ const GettingStarted = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default GettingStarted;
