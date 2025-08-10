@@ -22,7 +22,7 @@ const GettingStarted = () => {
     subtitle: t('gettingstarted.step4.subtitle'),
     hours: t('gettingstarted.step4.hours')
   }];
-  return <section id="getting-started" className="section-padding bg-background">
+  return <section id="getting-started" className="section-padding bg-background overflow-x-hidden">
       <div className="container mx-auto container-padding">
         <div className="text-center mb-12 md:mb-20">
           <h2 className="text-3xl md:text-4xl font-semibold mb-4 text-foreground">
@@ -39,7 +39,7 @@ const GettingStarted = () => {
             <ol className="relative border-l border-muted pl-6 space-y-8">
               {/* Group: Assessment Package covers steps 1–3 */}
               <li className="relative">
-                <div className="ml-[-6px] pl-3 border-l-4 border-primary">
+                <div className="pl-4 border-l-4 border-primary">
                   <div className="bg-card text-card-foreground rounded-md p-3 shadow border border-border">
                     <div className="flex items-baseline justify-between gap-2">
                       <h4 className="font-semibold text-signal-charcoal text-lg leading-tight tracking-tight">{t('gettingstarted.assessmentPackage.title')}</h4>
@@ -61,7 +61,7 @@ const GettingStarted = () => {
 
               {/* Group: Monthly Program covers step 4 */}
               <li className="relative">
-                <div className="ml-[-6px] pl-3 border-l-4 border-primary">
+                <div className="pl-4 border-l-4 border-primary">
                   <div className="bg-primary text-primary-foreground rounded-md p-3 shadow">
                     <div className="flex items-baseline justify-between gap-2">
                       <h4 className="text-primary-foreground font-semibold text-lg leading-tight tracking-tight">{t('gettingstarted.step4.title')}</h4>
