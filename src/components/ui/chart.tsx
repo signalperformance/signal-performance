@@ -74,6 +74,28 @@ const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
     return null
   }
 
+  // Sanitize CSS color values to prevent CSS injection
+  const DISALLOWED_CSS_CHARS = /[;{}]/
+  const HEX = /^#([0-9a-fA-F]{3,4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/
+  const RGB = /^rgba?\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}(\s*,\s*(0|1|0?\.\d+))?\s*\)$/
+  const HSL = /^hsla?\(\s*\d{1,3}\s*,\s*\d{1,3}%\s*,\s*\d{1,3}%(\s*,\s*(0|1|0?\.\d+))?\s*\)$/
+  const CSS_VAR = /^var\(\s*--[a-zA-Z0-9-_]+\s*\)$/
+
+  const isSafeColor = (v: unknown): v is string => {
+    if (typeof v !== "string" || DISALLOWED_CSS_CHARS.test(v)) return false
+    return (
+      HEX.test(v) ||
+      RGB.test(v) ||
+      HSL.test(v) ||
+      CSS_VAR.test(v) ||
+      /^currentColor$/i.test(v) ||
+      /^transparent$/i.test(v)
+    )
+  }
+
+  const sanitizeColor = (v: unknown): string | null =>
+    isSafeColor(v) ? (v as string) : null
+
   return (
     <style
       dangerouslySetInnerHTML={{
@@ -83,9 +105,9 @@ const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
 ${prefix} [data-chart=${id}] {
 ${colorConfig
   .map(([key, itemConfig]) => {
-    const color =
-      itemConfig.theme?.[theme as keyof typeof itemConfig.theme] ||
-      itemConfig.color
+    const themeMap = (itemConfig as any).theme as Record<string, string> | undefined
+    const rawColor = themeMap ? themeMap[theme] : (itemConfig as any).color
+    const color = sanitizeColor(rawColor)
     return color ? `  --color-${key}: ${color};` : null
   })
   .join("\n")}
@@ -300,7 +322,10 @@ const ChartLegendContent = React.forwardRef<
                 <div
                   className="h-2 w-2 shrink-0 rounded-[2px]"
                   style={{
-                    backgroundColor: item.color,
+                    backgroundColor:
+                      typeof item.color === "string" && !/[;{}]/.test(item.color)
+                        ? (item.color as string)
+                        : undefined,
                   }}
                 />
               )}
