@@ -128,7 +128,7 @@ const en = {
 
   // Schedule
   'schedule.title': 'Training Schedule',
-  'schedule.subtitle': 'Choose four sessions per week based on your goals and training phase. We offer separate groups for professionals and amateurs.',
+  'schedule.subtitle': 'Choose up to 4 workouts per week that fit your schedule and match your goals.',
   'schedule.filter.all': 'All Classes',
   'schedule.filter.pro': 'Pro Only',
   'schedule.filter.open': 'Amateur Only',
