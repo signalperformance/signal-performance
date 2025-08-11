@@ -107,7 +107,7 @@ const en = {
 
   // Getting Started
   'gettingstarted.title': 'How To Get Started',
-  'gettingstarted.subtitle': 'Our comprehensive onboarding builds a strong foundation and clear baseline to track progress.',
+  'gettingstarted.subtitle': 'Start with a comprehensive assessment with baseline data collection and private training, then begin your monthly program.',
   'gettingstarted.step1.title': 'Assess',
   'gettingstarted.step1.subtitle': 'Establish baseline with comprehensive testing',
   'gettingstarted.step1.hours': '3 hours',
