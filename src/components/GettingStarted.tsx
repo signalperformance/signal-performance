@@ -166,7 +166,7 @@ const GettingStarted = () => {
             </div>
 
             {/* Steps 1–3 */}
-            <div className="col-span-2 mt-4 flex items-start gap-4">
+            <div className="col-span-2 mt-2 flex items-start gap-4">
               {steps.slice(0, 3).map((step, index) => <React.Fragment key={step.title}>
                   <div className="flex flex-col items-center text-center min-w-[180px] max-w-[220px] rounded-xl border border-signal-charcoal/30 bg-signal-charcoal/5 p-5 shadow-sm overflow-hidden">
                     <div className="mb-4">
