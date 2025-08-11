@@ -128,25 +128,24 @@ const GettingStarted = () => {
                   <p className="text-base md:text-lg font-medium text-signal-white whitespace-nowrap">
                     {t('gettingstarted.assessmentPackage.price')}
                   </p>
+                  <div className="my-4 h-px bg-border" aria-hidden="true" />
+                  <div className="mt-2 flex items-start gap-4 justify-center">
+                    {steps.slice(0, 3).map((step, index) => (
+                      <React.Fragment key={step.title}>
+                        <div className="flex flex-col items-center text-center min-w-[180px] max-w-[220px] rounded-xl border border-signal-charcoal/30 bg-signal-charcoal/5 p-5 shadow-sm overflow-hidden">
+                          <div className="mb-4"></div>
+                          <h3 className="font-semibold text-foreground text-xl">{step.title}</h3>
+                          <p className="text-primary font-bold mt-1">{step.hours}</p>
+                          <p className="text-muted-foreground mt-2 text-sm max-w-[220px]">{step.subtitle}</p>
+                        </div>
+                        {index < 2 && (
+                          <div className="h-1 w-8 self-center bg-muted rounded-full" aria-hidden="true" />
+                        )}
+                      </React.Fragment>
+                    ))}
+                  </div>
                 </CardContent>
               </Card>
-              
-              <div className="mx-auto mt-2 w-0 h-0 border-l-8 border-r-8 border-transparent border-t-primary" aria-hidden="true" />
-              <div className="mt-4 flex items-start gap-4">
-                {steps.slice(0, 3).map((step, index) => (
-                  <React.Fragment key={step.title}>
-                    <div className="flex flex-col items-center text-center min-w-[180px] max-w-[220px] rounded-xl border border-signal-charcoal/30 bg-signal-charcoal/5 p-5 shadow-sm overflow-hidden">
-                      <div className="mb-4">
-                        
-                      </div>
-                      <h3 className="font-semibold text-foreground text-xl">{step.title}</h3>
-                      <p className="text-primary font-bold mt-1">{step.hours}</p>
-                      <p className="text-muted-foreground mt-2 text-sm max-w-[220px]">{step.subtitle}</p>
-                    </div>
-                    {index < 2 && <div className="h-1 flex-1 bg-muted self-center rounded-full" aria-hidden="true" />}
-                  </React.Fragment>
-                ))}
-              </div>
             </div>
 
             {/* Monthly Program above step 4 */}
