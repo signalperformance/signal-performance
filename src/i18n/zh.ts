@@ -107,7 +107,7 @@ const zh = {
 
   // Getting Started
   'gettingstarted.title': '如何開始',
-  'gettingstarted.subtitle': '我們的全方位過程打下基礎，並建立明確基準，持續追蹤進展。',
+  'gettingstarted.subtitle': '先進行完整評估，包含基礎數據收集與私人訓練，之後開始您的每月訓練課程。',
   'gettingstarted.step1.title': '完成評估',
   'gettingstarted.step1.subtitle': '透過五項測評建立基礎數據',
   'gettingstarted.step1.hours': '3 小時',
