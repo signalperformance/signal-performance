@@ -71,6 +71,10 @@ const en = {
   'pricing.features.report.monthly': 'Performance Report — 1x/month',
   'pricing.features.assessment.quarterly': 'Quarterly Assessment',
 
+  // Flow
+  'flow.step1': 'Step 1',
+  'flow.step2': 'Step 2',
+
   // About
   'about.title': 'About Signal Performance',
   'about.subtitle': 'Redefining golf training through integration',

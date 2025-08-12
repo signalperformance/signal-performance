@@ -71,6 +71,10 @@ const zh = {
   'pricing.features.report.monthly': '表現報告 — 每月1次',
   'pricing.features.assessment.quarterly': '季度評估',
 
+  // Flow
+  'flow.step1': '第 1 步',
+  'flow.step2': '第 2 步',
+
   // About
   'about.title': '關於 Signal Performance',
   'about.subtitle': '透過整合重新定義高爾夫訓練',

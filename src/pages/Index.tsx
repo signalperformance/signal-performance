@@ -14,7 +14,7 @@ import WeeklySchedule from "@/components/WeeklySchedule";
 import StudioLocation from "@/components/StudioLocation";
 import Footer from "@/components/Footer";
 import FloatingAssessmentButton from "@/components/FloatingAssessmentButton";
-import { PricingSection } from "@/components/ui/pricing-section";
+import { MembershipFlow } from "@/components/ui/membership-flow";
 import { PricingTable } from "@/components/ui/pricing-table";
 import { Trophy, Dumbbell } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -89,9 +89,7 @@ const Index = () => {
         <AssessmentProcess />
       </section>
       <section className="bg-muted">
-        <PricingSection
-          tiers={membershipTiers}
-        />
+        <MembershipFlow tiers={membershipTiers} />
       </section>
       <section className="bg-background">
         <Membership />
