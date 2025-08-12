@@ -43,7 +43,7 @@ export function MembershipFlow({
           <article className={cn("relative group", "rounded-3xl transition-all duration-300", "flex flex-col bg-card border border-border shadow-lg hover:shadow-xl")}>
             <div className="p-6 md:p-8 flex-1">
               <div className="mb-4">
-                <Badge className="rounded-full px-4 py-1.5 text-xs md:text-sm font-medium whitespace-nowrap bg-primary text-primary-foreground border-none shadow">
+                <Badge variant="secondary" className="rounded-full px-4 py-1.5 text-xs md:text-sm font-medium whitespace-nowrap">
                   {t("flow.step1")}
                 </Badge>
               </div>
@@ -59,7 +59,7 @@ export function MembershipFlow({
 
               <ul className="space-y-4">
                 {assessmentFeatures.map(name => <li key={name} className="flex gap-3">
-                    <div className={cn("mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full border", "border-primary text-primary")} aria-hidden>
+                    <div className={cn("mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full border", "border-accent text-accent-foreground")} aria-hidden>
                       <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M20 6L9 17l-5-5" />
                       </svg>
@@ -71,13 +71,17 @@ export function MembershipFlow({
               </ul>
 
               <div className="mt-6">
-                <Button onClick={() => {
-                const el = document.getElementById("assessment-process");
-                el?.scrollIntoView({
-                  behavior: "smooth",
-                  block: "start"
-                });
-              }} className="w-full sm:w-auto">
+                <Button
+                  variant="secondary"
+                  onClick={() => {
+                    const el = document.getElementById("assessment-process");
+                    el?.scrollIntoView({
+                      behavior: "smooth",
+                      block: "start"
+                    });
+                  }}
+                  className="w-full sm:w-auto"
+                >
                   {t("cta.learnMore")}
                 </Button>
               </div>
@@ -91,13 +95,12 @@ export function MembershipFlow({
             "rounded-3xl transition-all duration-300",
             "flex flex-col border border-border shadow-lg hover:shadow-xl",
             "bg-card",
-            activeTier === "plus" &&
-              "bg-gradient-to-br from-primary/5 via-transparent to-transparent ring-1 ring-primary/20"
+            activeTier === "plus" && "ring-1 ring-primary/20"
           )}>
             <div className="p-6 md:p-8 flex-1">
               <Tabs value={activeTier} onValueChange={setActiveTier} className="w-full">
                 <div className="mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                  <Badge className="rounded-full px-4 py-1.5 text-xs md:text-sm font-medium whitespace-nowrap bg-primary text-primary-foreground border-none shadow">
+                  <Badge variant="secondary" className="rounded-full px-4 py-1.5 text-xs md:text-sm font-medium whitespace-nowrap">
                     {t("flow.step2")}
                   </Badge>
                   <TabsList className="bg-transparent border border-border rounded-full p-1 text-muted-foreground flex w-full h-auto sm:h-10 overflow-visible sm:overflow-visible justify-between sm:justify-center gap-1 sm:gap-2 flex-nowrap sm:w-auto">
@@ -107,7 +110,7 @@ export function MembershipFlow({
                         value={tier.id}
                         className={cn(
                           "flex flex-1 basis-1/2 w-full min-w-0 justify-center rounded-full px-2 py-1 text-xs sm:flex-none sm:basis-auto sm:w-auto sm:min-w-[96px] sm:px-3 sm:py-1.5 sm:text-sm truncate",
-                          "data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                          "data-[state=active]:bg-secondary data-[state=active]:text-secondary-foreground data-[state=active]:ring-1 data-[state=active]:ring-primary/30"
                         )}
                       >
                         {tier.name}
@@ -135,7 +138,7 @@ export function MembershipFlow({
                           <div
                             className={cn(
                               "mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full border",
-                              feature.included ? "border-primary text-primary" : "border-muted text-muted-foreground"
+                              feature.included ? "border-accent text-accent-foreground" : "border-muted text-muted-foreground"
                             )}
                             aria-hidden
                           >
