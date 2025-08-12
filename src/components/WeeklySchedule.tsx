@@ -41,6 +41,8 @@ const WeeklySchedule = () => {
     { hour24: 10, minute: 30, labelKey: 'strength' },
     { hour24: 12, minute: 0, labelKey: 'cardio' },
     { hour24: 13, minute: 30, labelKey: 'power' },
+    { hour24: 15, minute: 0, labelKey: 'mobility', pro: true },
+    { hour24: 16, minute: 30, labelKey: 'power', pro: true },
   ];
 
   const columns = [
