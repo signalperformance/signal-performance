@@ -131,9 +131,9 @@ const en = {
   'gettingstarted.assessmentPackage.covers': 'Covers steps 1–3',
   'gettingstarted.monthlyProgram.price': 'NT$15,000/month',
   'gettingstarted.monthlyProgram.covers': 'Covers step 4',
-  'gettingstarted.assessmentPackage.bullets.assess': 'Assess (3 hrs) – Establish baseline',
-  'gettingstarted.assessmentPackage.bullets.review': 'Review (1 hr) – Discuss results + build your training plan',
-  'gettingstarted.assessmentPackage.bullets.train': 'Train (3 hrs) – Three private coaching sessions',
+  'gettingstarted.assessmentPackage.bullets.assess': 'Assess – Baseline testing (3h)',
+  'gettingstarted.assessmentPackage.bullets.review': 'Review – Results & plan (1h)',
+  'gettingstarted.assessmentPackage.bullets.train': 'Train – 3 private sessions (3h)',
 
   // Schedule
   'schedule.title': 'Training Schedule',
