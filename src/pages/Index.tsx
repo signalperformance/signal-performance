@@ -100,7 +100,7 @@ const Index = () => {
           defaultInterval="monthly"
         />
       </section>
-      <section className="bg-background">
+      <section className="bg-card">
         <GettingStarted />
       </section>
       <section className="bg-muted">
@@ -112,7 +112,7 @@ const Index = () => {
       <section className="bg-background">
         <StudioLocation />
       </section>
-      <section className="bg-muted">
+      <section className="bg-card">
         <About />
       </section>
       <Footer />
