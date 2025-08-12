@@ -41,14 +41,12 @@ export function MembershipFlow({
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
           {/* Step 1: Assessment Card */}
           <article className={cn("relative group", "rounded-3xl transition-all duration-300", "flex flex-col bg-card border border-border shadow-lg hover:shadow-xl")}>
-            <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-              <Badge className="px-4 py-1.5 text-xs md:text-sm font-medium whitespace-nowrap bg-primary text-primary-foreground border-none shadow">
-                {t("flow.step1")}
-              </Badge>
-            </div>
-
             <div className="p-6 md:p-8 flex-1">
-              <div className="mb-3 hidden lg:block lg:min-h-12" aria-hidden />
+              <div className="mb-4">
+                <Badge className="rounded-full px-4 py-1.5 text-xs md:text-sm font-medium whitespace-nowrap bg-primary text-primary-foreground border-none shadow">
+                  {t("flow.step1")}
+                </Badge>
+              </div>
 
               <div className="mb-6">
                 <div className="flex items-baseline gap-2 min-h-[2.75rem] my-[3px]">
@@ -89,24 +87,30 @@ export function MembershipFlow({
 
           {/* Step 2: Membership selection with toggle */}
           <article className={cn("relative group", "rounded-3xl transition-all duration-300", "flex flex-col border border-border shadow-lg hover:shadow-xl", activeTier === "plus" ? "bg-primary/10" : "bg-card")}>
-            <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-              <Badge className="px-4 py-1.5 text-xs md:text-sm font-medium whitespace-nowrap bg-primary text-primary-foreground border-none shadow">
-                {t("flow.step2")}
-              </Badge>
-            </div>
-
             <div className="p-6 md:p-8 flex-1">
-              {/* Toggle */}
               <Tabs value={activeTier} onValueChange={setActiveTier} className="w-full">
-              <div className="flex items-center justify-center mb-3 lg:mb-4 lg:min-h-12 my-[4px]">
-                <TabsList className="bg-muted">
-                  {orderedTiers.map(tier => <TabsTrigger key={tier.id} value={tier.id} className="min-w-[96px]">
-                      {tier.name}
-                    </TabsTrigger>)}
-                </TabsList>
-              </div>
+                <div className="mb-4 flex items-center justify-between">
+                  <Badge className="rounded-full px-4 py-1.5 text-xs md:text-sm font-medium whitespace-nowrap bg-primary text-primary-foreground border-none shadow">
+                    {t("flow.step2")}
+                  </Badge>
+                  <TabsList className="bg-transparent border border-border rounded-full p-1 text-muted-foreground">
+                    {orderedTiers.map(tier => (
+                      <TabsTrigger
+                        key={tier.id}
+                        value={tier.id}
+                        className={cn(
+                          "min-w-[96px] rounded-full px-3 py-1.5",
+                          "data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                        )}
+                      >
+                        {tier.name}
+                      </TabsTrigger>
+                    ))}
+                  </TabsList>
+                </div>
 
-                {orderedTiers.map(tier => <TabsContent key={tier.id} value={tier.id} className="mt-0">
+                {orderedTiers.map(tier => (
+                  <TabsContent key={tier.id} value={tier.id} className="mt-0">
                     <div className="mb-6">
                       <div className="flex items-baseline gap-2 min-h-[2.75rem] my-[12px]">
                         <span className="text-4xl font-bold">
@@ -119,23 +123,38 @@ export function MembershipFlow({
                     </div>
 
                     <ul className="space-y-4">
-                      {tier.features.map(feature => <li key={feature.name} className="flex gap-3">
-                          <div className={cn("mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full border", feature.included ? "border-primary text-primary" : "border-muted text-muted-foreground")} aria-hidden>
-                            {feature.included ? <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                      {tier.features.map(feature => (
+                        <li key={feature.name} className="flex gap-3">
+                          <div
+                            className={cn(
+                              "mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full border",
+                              feature.included ? "border-primary text-primary" : "border-muted text-muted-foreground"
+                            )}
+                            aria-hidden
+                          >
+                            {feature.included ? (
+                              <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M20 6L9 17l-5-5" />
-                              </svg> : <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                              </svg>
+                            ) : (
+                              <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M6 6l12 12M6 18L18 6" />
-                              </svg>}
+                              </svg>
+                            )}
                           </div>
                           <div>
                             <div className={cn("text-sm font-medium", !feature.included && "line-through text-muted-foreground")}>{feature.name}</div>
-                            {feature.description && <div className={cn("text-sm text-muted-foreground", !feature.included && "line-through")}>
+                            {feature.description && (
+                              <div className={cn("text-sm text-muted-foreground", !feature.included && "line-through")}>
                                 {feature.description}
-                              </div>}
+                              </div>
+                            )}
                           </div>
-                        </li>)}
+                        </li>
+                      ))}
                     </ul>
-                  </TabsContent>)}
+                  </TabsContent>
+                ))}
               </Tabs>
             </div>
           </article>
