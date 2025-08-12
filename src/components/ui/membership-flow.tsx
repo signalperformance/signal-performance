@@ -43,14 +43,14 @@ export function MembershipFlow({
           <article className={cn("relative group", "rounded-3xl transition-all duration-300", "flex flex-col bg-card border border-border shadow-lg hover:shadow-xl")}>
             <div className="p-6 md:p-8 flex-1">
               <div className="mb-4">
-                <Badge variant="secondary" className="rounded-full px-4 py-1.5 text-xs md:text-sm font-medium whitespace-nowrap">
+                <Badge variant="outline" className="rounded-full border border-primary bg-primary/10 text-foreground px-4 py-1.5 text-xs md:text-sm font-medium whitespace-nowrap">
                   {t("flow.step1")}
                 </Badge>
               </div>
 
               <div className="mb-6">
                 <div className="flex items-baseline gap-2 min-h-[2.75rem] my-[3px]">
-                  <span className="text-4xl font-bold">{t("gettingstarted.assessmentPackage.price")}</span>
+                  <span className="text-4xl font-bold text-foreground">{t("gettingstarted.assessmentPackage.price")}</span>
                 </div>
                 <p className="mt-2 text-sm text-muted-foreground">
                   {t("assessment.description")}
@@ -59,7 +59,7 @@ export function MembershipFlow({
 
               <ul className="space-y-4">
                 {assessmentFeatures.map(name => <li key={name} className="flex gap-3">
-                    <div className={cn("mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full border", "border-primary text-primary")} aria-hidden>
+                    <div className={cn("mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full border", "border-primary text-foreground")} aria-hidden>
                       <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M20 6L9 17l-5-5" />
                       </svg>
@@ -72,7 +72,7 @@ export function MembershipFlow({
 
               <div className="mt-6">
                 <Button
-                  variant="secondary"
+                  variant="default"
                   onClick={() => {
                     const el = document.getElementById("assessment-process");
                     el?.scrollIntoView({
@@ -80,7 +80,7 @@ export function MembershipFlow({
                       block: "start"
                     });
                   }}
-                  className="w-full sm:w-auto"
+                  className="w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90"
                 >
                   {t("cta.learnMore")}
                 </Button>
@@ -94,28 +94,23 @@ export function MembershipFlow({
             "relative group",
             "rounded-3xl transition-all duration-300",
             "flex flex-col border border-border shadow-lg hover:shadow-xl",
-            "bg-card",
+            "bg-secondary",
             activeTier === "plus" && "ring-1 ring-primary/20"
           )}>
             <div className="p-6 md:p-8 flex-1">
               <Tabs value={activeTier} onValueChange={setActiveTier} className="w-full">
                 <div className="mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                  <Badge variant="secondary" className="rounded-full px-4 py-1.5 text-xs md:text-sm font-medium whitespace-nowrap">
+                  <Badge variant="outline" className="rounded-full border border-primary bg-primary/10 text-foreground px-4 py-1.5 text-xs md:text-sm font-medium whitespace-nowrap">
                     {t("flow.step2")}
                   </Badge>
-                  <TabsList className="bg-transparent border border-border rounded-full p-1 text-muted-foreground flex w-full h-auto sm:h-10 overflow-visible sm:overflow-visible justify-between sm:justify-center gap-1 sm:gap-2 flex-nowrap sm:w-auto">
+                  <TabsList className="bg-primary/10 border border-primary/30 rounded-full p-1 text-muted-foreground flex w-full h-auto sm:h-10 overflow-visible sm:overflow-visible justify-between sm:justify-center gap-1 sm:gap-2 flex-nowrap sm:w-auto">
                     {orderedTiers.map(tier => (
                       <TabsTrigger
                         key={tier.id}
                         value={tier.id}
                         className={cn(
-                          "flex flex-1 basis-1/2 w-full min-w-0 justify-center rounded-full px-2 py-1 text-xs sm:flex-none sm:basis-auto sm:w-auto sm:min-w-[96px] sm:px-3 sm:py-1.5 sm:text-sm truncate",
-                          tier.id === activeTier
-                            ? activeTier === "plus"
-                              ? "bg-primary text-primary-foreground"
-                              : "bg-secondary text-secondary-foreground"
-                            : undefined,
-                          "data-[state=active]:ring-1 data-[state=active]:ring-primary/30"
+                          "flex flex-1 basis-1/2 w-full min-w-0 justify-center rounded-full px-2 py-1 text-xs sm:flex-none sm:basis-auto sm:w-auto sm:min-w-[96px] sm:px-3 sm:py-1.5 sm:text-sm truncate border bg-card text-primary border-primary",
+                          "data-[state=active]:bg-primary/15 data-[state=active]:text-foreground data-[state=active]:border-primary"
                         )}
                       >
                         {tier.name}
@@ -128,7 +123,7 @@ export function MembershipFlow({
                   <TabsContent key={tier.id} value={tier.id} className="mt-0">
                     <div className="mb-6">
                       <div className="flex items-baseline gap-2 min-h-[2.75rem] my-[12px]">
-                        <span className="text-4xl font-bold">
+                        <span className="text-4xl font-bold text-foreground">
                           {tier.currency ?? "NT$"}
                           {formatNumber(tier.price.monthly)}
                         </span>
@@ -143,7 +138,7 @@ export function MembershipFlow({
                           <div
                             className={cn(
                               "mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full border",
-                              feature.included ? "border-primary text-primary" : "border-muted text-muted-foreground"
+                              feature.included ? "border-primary text-foreground" : "border-muted text-muted-foreground"
                             )}
                             aria-hidden
                           >
