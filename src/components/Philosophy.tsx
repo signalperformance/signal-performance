@@ -71,8 +71,8 @@ const Philosophy = () => {
           <Carousel setApi={setApi} opts={{ align: "start", loop: false }}>
             <CarouselContent>
               {cards.map((c) => (
-                <CarouselItem key={c.key}>
-                  <Card className="text-left shadow-xl bg-white hover:shadow-2xl transition-all duration-500 hover:scale-105 h-full border-2 border-gray-100 group animate-scale-in">
+                <CarouselItem key={c.key} className="basis-full">
+                  <Card className="text-left shadow-xl bg-white lg:hover:shadow-2xl transition-all duration-500 lg:hover:scale-105 h-full border-2 border-gray-100 group animate-scale-in">
                     <CardContent className="p-8">
                       <CardTitle className="text-xl font-lora mb-4 text-signal-charcoal transition-colors duration-300">
                         {c.title}
@@ -85,8 +85,6 @@ const Philosophy = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="left-2 top-1/2 -translate-y-1/2 bg-background/90 backdrop-blur-sm shadow-sm" />
-            <CarouselNext className="right-2 top-1/2 -translate-y-1/2 bg-background/90 backdrop-blur-sm shadow-sm" />
           </Carousel>
 
           {/* Dots indicator */}
