@@ -72,8 +72,8 @@ const en = {
   'pricing.features.assessment.quarterly': 'Quarterly Assessment',
 
   // Flow
-  'flow.step1': 'Step 1',
-  'flow.step2': 'Step 2',
+  'flow.step1': 'Step 1 - Complete Baseline Assessment',
+  'flow.step2': 'Step 2 - Select Monthly Program',
   'flow.selectMonthlyProgram': 'Select Monthly Program',
 
   // About
