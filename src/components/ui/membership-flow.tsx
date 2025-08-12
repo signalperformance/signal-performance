@@ -103,14 +103,14 @@ export function MembershipFlow({
                   <Badge variant="outline" className="rounded-full border border-primary bg-primary/10 text-foreground px-4 py-1.5 text-xs md:text-sm font-medium whitespace-nowrap text-center sm:text-left justify-center sm:justify-start">
                     {t("flow.step2")}
                   </Badge>
-                  <TabsList className="bg-primary/10 border border-primary/30 rounded-full p-1 text-muted-foreground flex w-full h-auto sm:h-10 overflow-visible sm:overflow-visible justify-between sm:justify-center gap-1 sm:gap-2 flex-nowrap sm:w-auto">
+                  <TabsList className="bg-transparent border border-primary/30 rounded-full p-1 flex w-full h-auto sm:h-10 overflow-visible sm:overflow-visible justify-between sm:justify-center gap-1 sm:gap-2 flex-nowrap sm:w-auto">
                     {orderedTiers.map(tier => (
                       <TabsTrigger
                         key={tier.id}
                         value={tier.id}
                         className={cn(
-                          "flex flex-1 basis-1/2 w-full min-w-0 justify-center rounded-full px-2 py-1 text-xs sm:flex-none sm:basis-auto sm:w-auto sm:min-w-[96px] sm:px-3 sm:py-1.5 sm:text-sm truncate border bg-card text-primary border-primary",
-                          "data-[state=active]:bg-primary/15 data-[state=active]:text-foreground data-[state=active]:border-primary"
+                          "flex flex-1 basis-1/2 w-full min-w-0 justify-center rounded-full px-2 py-1 text-xs sm:flex-none sm:basis-auto sm:w-auto sm:min-w-[96px] sm:px-3 sm:py-1.5 sm:text-sm truncate border bg-card text-primary border-primary hover:bg-primary/5",
+                          "data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:border-primary data-[state=active]:shadow-sm data-[state=active]:font-semibold"
                         )}
                       >
                         {tier.name}
