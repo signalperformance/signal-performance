@@ -10,34 +10,37 @@ const WeeklySchedule = () => {
 
   type Item = {
     hour24: number;
+    minute?: number;
     labelKey: 'mobility' | 'strength' | 'cardio' | 'power';
     pro?: boolean;
   };
 
-  // Pro classes at 12/1/2 PM updated per request
+  // Pro and Amateur classes with 30-minute buffers
   const mwf: Item[] = [
-    { hour24: 12, labelKey: 'mobility', pro: true },
-    { hour24: 13, labelKey: 'strength', pro: true },
-    { hour24: 14, labelKey: 'strength', pro: true },
-    { hour24: 17, labelKey: 'mobility' },
-    { hour24: 18, labelKey: 'strength' },
-    { hour24: 19, labelKey: 'strength' },
+    { hour24: 12, minute: 0, labelKey: 'mobility', pro: true },
+    { hour24: 13, minute: 30, labelKey: 'strength', pro: true },
+    { hour24: 15, minute: 0, labelKey: 'mobility', pro: true }, // updated per request
+    { hour24: 16, minute: 30, labelKey: 'power', pro: true }, // additional pro session
+    { hour24: 17, minute: 0, labelKey: 'mobility' },
+    { hour24: 18, minute: 30, labelKey: 'strength' },
+    { hour24: 20, minute: 0, labelKey: 'strength' },
   ];
 
   const tth: Item[] = [
-    { hour24: 12, labelKey: 'power', pro: true },
-    { hour24: 13, labelKey: 'cardio', pro: true },
-    { hour24: 14, labelKey: 'power', pro: true },
-    { hour24: 17, labelKey: 'power' },
-    { hour24: 18, labelKey: 'cardio' },
-    { hour24: 19, labelKey: 'power' },
+    { hour24: 12, minute: 0, labelKey: 'power', pro: true },
+    { hour24: 13, minute: 30, labelKey: 'cardio', pro: true },
+    { hour24: 15, minute: 0, labelKey: 'power', pro: true },
+    { hour24: 16, minute: 30, labelKey: 'power', pro: true }, // additional pro session
+    { hour24: 17, minute: 0, labelKey: 'power' },
+    { hour24: 18, minute: 30, labelKey: 'cardio' },
+    { hour24: 20, minute: 0, labelKey: 'power' },
   ];
 
   const weekend: Item[] = [
-    { hour24: 9, labelKey: 'mobility' },
-    { hour24: 10, labelKey: 'strength' },
-    { hour24: 11, labelKey: 'cardio' },
-    { hour24: 12, labelKey: 'power' },
+    { hour24: 9, minute: 0, labelKey: 'mobility' },
+    { hour24: 10, minute: 30, labelKey: 'strength' },
+    { hour24: 12, minute: 0, labelKey: 'cardio' },
+    { hour24: 13, minute: 30, labelKey: 'power' },
   ];
 
   const columns = [
@@ -46,14 +49,15 @@ const WeeklySchedule = () => {
     { title: t('schedule.columns.weekend'), items: weekend },
   ];
 
-  const formatTime = (hour24: number) => {
+  const formatTime = (hour24: number, minute: number = 0) => {
     if (language === 'zh') {
-      return `${String(hour24).padStart(2, '0')}:00`;
+      return `${String(hour24).padStart(2, '0')}:${String(minute).padStart(2, '0')}`;
     }
     const isPM = hour24 >= 12;
     let hour12 = hour24 % 12 || 12;
     const period = t(isPM ? 'schedule.timePeriods.pm' : 'schedule.timePeriods.am');
-    return `${hour12} ${period}`;
+    const minuteStr = String(minute).padStart(2, '0');
+    return `${hour12}:${minuteStr} ${period}`;
   };
 
   return (
@@ -96,7 +100,7 @@ const WeeklySchedule = () => {
                             )}
                             <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
                               <Clock className="h-3.5 w-3.5" aria-hidden />
-                              {formatTime(it.hour24)}
+                              {formatTime(it.hour24, it.minute)}
                             </span>
                             <span className="text-base font-extrabold font-lora text-foreground text-center justify-self-center">
                               {t(`schedule.classes.${it.labelKey}`)}
@@ -160,7 +164,7 @@ const WeeklySchedule = () => {
                             )}
                             <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
                               <Clock className="h-3.5 w-3.5" aria-hidden />
-                              {formatTime(it.hour24)}
+                              {formatTime(it.hour24, it.minute)}
                             </span>
                             <span className="text-base md:text-lg font-extrabold font-lora text-foreground text-center justify-self-center">
                               {t(`schedule.classes.${it.labelKey}`)}
