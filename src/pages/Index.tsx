@@ -89,7 +89,7 @@ const Index = () => {
         <AssessmentProcess />
       </section>
       <section className="bg-muted">
-        <MembershipFlow tiers={membershipTiers} />
+        <MembershipFlow tiers={membershipTiers} subtitle={t('gettingstarted.subtitle')} />
       </section>
       <section className="bg-background">
         <Membership />

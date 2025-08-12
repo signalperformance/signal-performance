@@ -22,6 +22,6 @@ const GettingStarted = () => {
     subtitle: t('gettingstarted.step4.subtitle'),
     hours: t('gettingstarted.step4.hours')
   }];
-  return;
+  return null;
 };
 export default GettingStarted;
