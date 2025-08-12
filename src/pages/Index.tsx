@@ -80,16 +80,16 @@ const Index = () => {
       <section className="bg-muted">
         <Membership />
       </section>
-      <section className="bg-card">
+      <section className="bg-muted">
         <WeeklySchedule />
       </section>
       <section className="bg-muted">
         <AssessmentProcess />
       </section>
-      <section className="bg-card">
+      <section className="bg-muted">
         <StudioLocation />
       </section>
-      <section className="bg-muted">
+      <section className="bg-card">
         <About />
       </section>
       <Footer />
