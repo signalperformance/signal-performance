@@ -89,17 +89,17 @@ export function MembershipFlow({
           <article className={cn("relative group", "rounded-3xl transition-all duration-300", "flex flex-col border border-border shadow-lg hover:shadow-xl", activeTier === "plus" ? "bg-primary/10" : "bg-card")}>
             <div className="p-6 md:p-8 flex-1">
               <Tabs value={activeTier} onValueChange={setActiveTier} className="w-full">
-                <div className="mb-4 flex items-center justify-between">
+                <div className="mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                   <Badge className="rounded-full px-4 py-1.5 text-xs md:text-sm font-medium whitespace-nowrap bg-primary text-primary-foreground border-none shadow">
                     {t("flow.step2")}
                   </Badge>
-                  <TabsList className="bg-transparent border border-border rounded-full p-1 text-muted-foreground">
+                  <TabsList className="bg-transparent border border-border rounded-full p-1 text-muted-foreground flex-wrap sm:flex-nowrap w-full sm:w-auto h-auto sm:h-10 overflow-x-auto sm:overflow-visible justify-start sm:justify-center gap-1 sm:gap-2">
                     {orderedTiers.map(tier => (
                       <TabsTrigger
                         key={tier.id}
                         value={tier.id}
                         className={cn(
-                          "min-w-[96px] rounded-full px-3 py-1.5",
+                          "min-w-[84px] sm:min-w-[96px] rounded-full px-2 py-1 text-xs sm:px-3 sm:py-1.5 sm:text-sm",
                           "data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
                         )}
                       >
