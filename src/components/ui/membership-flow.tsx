@@ -59,7 +59,7 @@ export function MembershipFlow({
 
               <ul className="space-y-4">
                 {assessmentFeatures.map(name => <li key={name} className="flex gap-3">
-                    <div className={cn("mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full border", "border-accent text-accent-foreground")} aria-hidden>
+                    <div className={cn("mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full border", "border-primary text-primary")} aria-hidden>
                       <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M20 6L9 17l-5-5" />
                       </svg>
@@ -110,7 +110,12 @@ export function MembershipFlow({
                         value={tier.id}
                         className={cn(
                           "flex flex-1 basis-1/2 w-full min-w-0 justify-center rounded-full px-2 py-1 text-xs sm:flex-none sm:basis-auto sm:w-auto sm:min-w-[96px] sm:px-3 sm:py-1.5 sm:text-sm truncate",
-                          "data-[state=active]:bg-secondary data-[state=active]:text-secondary-foreground data-[state=active]:ring-1 data-[state=active]:ring-primary/30"
+                          tier.id === activeTier
+                            ? activeTier === "plus"
+                              ? "bg-primary text-primary-foreground"
+                              : "bg-secondary text-secondary-foreground"
+                            : undefined,
+                          "data-[state=active]:ring-1 data-[state=active]:ring-primary/30"
                         )}
                       >
                         {tier.name}
@@ -138,7 +143,7 @@ export function MembershipFlow({
                           <div
                             className={cn(
                               "mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full border",
-                              feature.included ? "border-accent text-accent-foreground" : "border-muted text-muted-foreground"
+                              feature.included ? "border-primary text-primary" : "border-muted text-muted-foreground"
                             )}
                             aria-hidden
                           >
