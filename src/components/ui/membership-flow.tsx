@@ -108,7 +108,7 @@ export function MembershipFlow({
 
                 {orderedTiers.map(tier => <TabsContent key={tier.id} value={tier.id} className="mt-0">
                     <div className="mb-6">
-                      <div className="flex items-baseline gap-2 min-h-[2.75rem]">
+                      <div className="flex items-baseline gap-2 min-h-[2.75rem] my-[12px]">
                         <span className="text-4xl font-bold">
                           {tier.currency ?? "NT$"}
                           {formatNumber(tier.price.monthly)}
