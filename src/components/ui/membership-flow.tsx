@@ -93,13 +93,13 @@ export function MembershipFlow({
                   <Badge className="rounded-full px-4 py-1.5 text-xs md:text-sm font-medium whitespace-nowrap bg-primary text-primary-foreground border-none shadow">
                     {t("flow.step2")}
                   </Badge>
-                  <TabsList className="bg-transparent border border-border rounded-full p-1 text-muted-foreground flex-wrap sm:flex-nowrap w-full sm:w-auto h-auto sm:h-10 overflow-x-auto sm:overflow-visible justify-start sm:justify-center gap-1 sm:gap-2">
+                  <TabsList className="bg-transparent border border-border rounded-full p-1 text-muted-foreground flex w-full h-auto sm:h-10 overflow-visible sm:overflow-visible justify-between sm:justify-center gap-1 sm:gap-2 flex-nowrap sm:w-auto">
                     {orderedTiers.map(tier => (
                       <TabsTrigger
                         key={tier.id}
                         value={tier.id}
                         className={cn(
-                          "min-w-[84px] sm:min-w-[96px] rounded-full px-2 py-1 text-xs sm:px-3 sm:py-1.5 sm:text-sm",
+                          "flex flex-1 basis-1/2 w-full min-w-0 justify-center rounded-full px-2 py-1 text-xs sm:flex-none sm:basis-auto sm:w-auto sm:min-w-[96px] sm:px-3 sm:py-1.5 sm:text-sm truncate",
                           "data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
                         )}
                       >
