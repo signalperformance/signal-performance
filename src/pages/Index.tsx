@@ -18,14 +18,27 @@ import { MembershipFlow } from "@/components/ui/membership-flow";
 
 import { Trophy, Dumbbell } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useLocation } from "react-router-dom";
 
 const Index = () => {
   const { isLoading, completeLoading } = useLoadingState();
   const { t } = useLanguage();
-
+  const location = useLocation();
   useEffect(() => {
     document.title = "Signal Performance";
   }, []);
+
+  useEffect(() => {
+    if (isLoading) return;
+    const params = new URLSearchParams(location.search);
+    const targetId =
+      (location.hash || "").replace("#", "") || params.get("section");
+    if (!targetId) return;
+    const el = document.getElementById(targetId);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [isLoading, location.hash, location.search]);
 
   const membershipTiers = useMemo(() => ([
     {
@@ -68,28 +81,28 @@ const Index = () => {
   return (
     <div className="min-h-screen flex flex-col animate-fade-in">
       <Navbar />
-      <section className="bg-background">
+      <section id="home" className="bg-background scroll-mt-24 lg:scroll-mt-32">
         <Hero />
       </section>
-      <section className="bg-muted">
+      <section id="philosophy" className="bg-muted scroll-mt-24 lg:scroll-mt-32">
         <Philosophy />
       </section>
-      <section className="bg-card">
+      <section id="getting-started" className="bg-card scroll-mt-24 lg:scroll-mt-32">
         <MembershipFlow tiers={membershipTiers} subtitle={t('gettingstarted.subtitle')} />
       </section>
-      <section className="bg-muted">
+      <section id="membership" className="bg-muted scroll-mt-24 lg:scroll-mt-32">
         <Membership />
       </section>
-      <section className="bg-muted">
+      <section id="weekly-schedule" className="bg-muted scroll-mt-24 lg:scroll-mt-32">
         <WeeklySchedule />
       </section>
-      <section className="bg-muted">
+      <section id="assessment-process" className="bg-muted scroll-mt-24 lg:scroll-mt-32">
         <AssessmentProcess />
       </section>
-      <section className="bg-muted">
+      <section id="studio-location" className="bg-muted scroll-mt-24 lg:scroll-mt-32">
         <StudioLocation />
       </section>
-      <section className="bg-card">
+      <section id="about" className="bg-card scroll-mt-24 lg:scroll-mt-32">
         <About />
       </section>
       <Footer />

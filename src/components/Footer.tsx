@@ -5,7 +5,7 @@ const Footer = () => {
   } = useLanguage();
   const currentYear = new Date().getFullYear();
   const copyrightText = language === 'zh' ? `© ${currentYear} Signal Performance。版權所有，保留一切權利。` : `© ${currentYear} Signal Performance. All rights reserved.`;
-  return <footer className="bg-signal-black text-white py-6">
+  return <footer id="contact" className="bg-signal-black text-white py-6 scroll-mt-24 lg:scroll-mt-32">
       <div className="container mx-auto container-padding">
         <div className="text-center text-muted-foreground text-sm">
           <p className="text-slate-50 text-xs">{copyrightText}</p>
