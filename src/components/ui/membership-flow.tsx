@@ -127,7 +127,7 @@ export function MembershipFlow({ tiers, className, title, subtitle }: Membership
               {/* Toggle */}
               <Tabs value={activeTier} onValueChange={setActiveTier} className="w-full">
                 <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-xl font-semibold">{currentTier?.name}</h3>
+                  <h3 className="text-xl font-semibold">{t("flow.selectMonthlyProgram")}</h3>
                   <TabsList className="bg-muted">
                     {orderedTiers.map((tier) => (
                       <TabsTrigger key={tier.id} value={tier.id} className="min-w-[96px]">

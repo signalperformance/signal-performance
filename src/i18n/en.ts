@@ -74,6 +74,7 @@ const en = {
   // Flow
   'flow.step1': 'Step 1',
   'flow.step2': 'Step 2',
+  'flow.selectMonthlyProgram': 'Select Monthly Program',
 
   // About
   'about.title': 'About Signal Performance',

@@ -74,6 +74,7 @@ const zh = {
   // Flow
   'flow.step1': '第 1 步',
   'flow.step2': '第 2 步',
+  'flow.selectMonthlyProgram': '選擇每月方案',
 
   // About
   'about.title': '關於 Signal Performance',
