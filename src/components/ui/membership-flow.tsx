@@ -100,7 +100,7 @@ export function MembershipFlow({
             <div className="p-6 md:p-8 flex-1">
               <Tabs value={activeTier} onValueChange={setActiveTier} className="w-full">
                 <div className="mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                  <Badge variant="outline" className="rounded-full border border-primary bg-primary/10 text-foreground px-4 py-1.5 text-xs md:text-sm font-medium whitespace-nowrap">
+                  <Badge variant="outline" className="rounded-full border border-primary bg-primary/10 text-foreground px-4 py-1.5 text-xs md:text-sm font-medium whitespace-nowrap text-center sm:text-left justify-center sm:justify-start">
                     {t("flow.step2")}
                   </Badge>
                   <TabsList className="bg-primary/10 border border-primary/30 rounded-full p-1 text-muted-foreground flex w-full h-auto sm:h-10 overflow-visible sm:overflow-visible justify-between sm:justify-center gap-1 sm:gap-2 flex-nowrap sm:w-auto">
