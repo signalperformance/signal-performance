@@ -39,7 +39,7 @@ const en = {
 
   // Assessment Process
   'assessment.title': 'Our Assessment Process',
-  'assessment.description': 'Every quarter, members complete a five-part assessment to ensure training stays aligned and effective.',
+  'assessment.description': '7 Hours of Assessment + Training',
 
   'assessment.joint.title': 'Joint Health',
   'assessment.joint.description': 'We assess the passive and active range of motion of every major joint to identify movement limitations and their root causes. These insights inform your fitness program to help reduce injury risk and support long-term joint health. We also track changes in range of motion over time to monitor progress and guide ongoing adjustments.',
