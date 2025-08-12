@@ -74,7 +74,6 @@ export function MembershipFlow({ tiers, className, title, subtitle }: Membership
               <div className="mb-6">
                 <div className="flex items-baseline gap-2 min-h-[2.75rem]">
                   <span className="text-4xl font-bold">{t("gettingstarted.assessmentPackage.price")}</span>
-                  <span className="text-sm text-muted-foreground">{t("pricing.perMonth", "") && ""}</span>
                 </div>
                 <p className="mt-2 text-sm text-muted-foreground">
                   {t("assessment.description")}
@@ -122,7 +121,7 @@ export function MembershipFlow({ tiers, className, title, subtitle }: Membership
           >
             <div className="absolute -top-4 left-1/2 -translate-x-1/2">
               <Badge className="px-4 py-1.5 text-xs md:text-sm font-medium bg-primary text-primary-foreground border-none shadow">
-                {t("flow.step2", "Step 2")}
+                {t("flow.step2")}
               </Badge>
             </div>
 
