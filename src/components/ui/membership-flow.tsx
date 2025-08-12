@@ -65,9 +65,7 @@ export function MembershipFlow({ tiers, className, title, subtitle }: Membership
             </div>
 
             <div className="p-6 md:p-8 flex-1">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-xl font-semibold">{t("gettingstarted.assessmentPackage.title")}</h3>
-              </div>
+              <div className="mb-4 min-h-12" aria-hidden />
 
               <div className="mb-6">
                 <div className="flex items-baseline gap-2 min-h-[2.75rem]">
@@ -126,16 +124,15 @@ export function MembershipFlow({ tiers, className, title, subtitle }: Membership
             <div className="p-6 md:p-8 flex-1">
               {/* Toggle */}
               <Tabs value={activeTier} onValueChange={setActiveTier} className="w-full">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-xl font-semibold">{t("flow.selectMonthlyProgram")}</h3>
-                  <TabsList className="bg-muted">
-                    {orderedTiers.map((tier) => (
-                      <TabsTrigger key={tier.id} value={tier.id} className="min-w-[96px]">
-                        {tier.name}
-                      </TabsTrigger>
-                    ))}
-                  </TabsList>
-                </div>
+              <div className="flex items-center justify-center mb-4 min-h-12">
+                <TabsList className="bg-muted">
+                  {orderedTiers.map((tier) => (
+                    <TabsTrigger key={tier.id} value={tier.id} className="min-w-[96px]">
+                      {tier.name}
+                    </TabsTrigger>
+                  ))}
+                </TabsList>
+              </div>
 
                 {orderedTiers.map((tier) => (
                   <TabsContent key={tier.id} value={tier.id} className="mt-0">
