@@ -86,7 +86,14 @@ export function MembershipFlow({
           </article>
 
           {/* Step 2: Membership selection with toggle */}
-          <article className={cn("relative group", "rounded-3xl transition-all duration-300", "flex flex-col border border-border shadow-lg hover:shadow-xl", activeTier === "plus" ? "bg-primary/10" : "bg-card")}>
+          <article className={cn(
+            "relative group",
+            "rounded-3xl transition-all duration-300",
+            "flex flex-col border border-border shadow-lg hover:shadow-xl",
+            "bg-card",
+            activeTier === "plus" &&
+              "bg-gradient-to-br from-primary/5 via-transparent to-transparent ring-1 ring-primary/20"
+          )}>
             <div className="p-6 md:p-8 flex-1">
               <Tabs value={activeTier} onValueChange={setActiveTier} className="w-full">
                 <div className="mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
