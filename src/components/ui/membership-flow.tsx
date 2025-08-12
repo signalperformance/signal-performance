@@ -19,11 +19,9 @@ export function MembershipFlow({ tiers, className, title, subtitle }: Membership
 
   const assessmentFeatures = useMemo(
     () => [
-      t("assessment.joint.title"),
-      t("assessment.strength.title"),
-      t("assessment.metabolic.title"),
-      t("assessment.body.title"),
-      t("assessment.golf.title"),
+      t("gettingstarted.assessmentPackage.bullets.assess"),
+      t("gettingstarted.assessmentPackage.bullets.review"),
+      t("gettingstarted.assessmentPackage.bullets.train"),
     ],
     [t]
   );

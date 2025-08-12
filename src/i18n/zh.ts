@@ -129,6 +129,9 @@ const zh = {
   'gettingstarted.assessmentPackage.covers': '包含第 1–3 步',
   'gettingstarted.monthlyProgram.price': '每月15,000元',
   'gettingstarted.monthlyProgram.covers': '包含第 4 步',
+  'gettingstarted.assessmentPackage.bullets.assess': '評估（3 小時）— 建立基礎數據',
+  'gettingstarted.assessmentPackage.bullets.review': '回顧（1 小時）— 討論結果並制定訓練計畫',
+  'gettingstarted.assessmentPackage.bullets.train': '訓練（3 小時）— 三堂私人教練課',
 
   // Schedule
   'schedule.title': '每週訓練課表',
