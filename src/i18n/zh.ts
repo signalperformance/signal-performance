@@ -40,6 +40,7 @@ const zh = {
   // Assessment Process
   'assessment.title': '我們的評估流程',
   'assessment.description': '7 小時評估與訓練。',
+  'assessment.processDescription': '每季，會員會完成一項由五部分組成的評估，以確保訓練保持一致且有效。',
 
   'assessment.joint.title': '關節健康',
   'assessment.joint.description': '評估每個主要關節的主動與被動活動範圍，找出動作受限的根本原因。這些資料將用來調整訓練計畫，降低受傷風險並維持長期關節健康。所有變化都會被紀錄與追蹤，持續優化訓練方向。',

@@ -190,7 +190,7 @@ const AssessmentProcess = () => {
       <div className="container mx-auto container-padding">
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold mb-4 font-lora">{t('assessment.title')}</h2>
-          <p className="max-w-4xl mx-auto text-lg text-muted-foreground whitespace-pre-line">{t('assessment.description')}</p>
+          <p className="max-w-4xl mx-auto text-lg text-muted-foreground whitespace-pre-line">{t('assessment.processDescription')}</p>
         </div>
 
         {/* Desktop View: Radial Progress Wheel */}
