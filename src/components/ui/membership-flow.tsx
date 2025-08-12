@@ -125,25 +125,13 @@ export function MembershipFlow({ tiers, className, title, subtitle }: Membership
               {/* Toggle */}
               <Tabs value={activeTier} onValueChange={setActiveTier} className="w-full">
               <div className="flex items-center justify-center mb-3 lg:mb-4 lg:min-h-12">
-                <div className="relative inline-block">
-                  <TabsList className="bg-muted">
-                    {orderedTiers.map((tier) => (
-                      <TabsTrigger key={tier.id} value={tier.id} className="min-w-[96px]">
-                        {tier.name}
-                      </TabsTrigger>
-                    ))}
-                  </TabsList>
-
-                  {orderedTiers[0]?.id === "plus" && (
-                    <Badge
-                      variant="secondary"
-                      className="pointer-events-none absolute -top-2 left-2 z-10 px-2.5 py-0.5 text-[10px] md:text-xs font-medium whitespace-nowrap shadow"
-                      aria-hidden
-                    >
-                      {t("pricing.mostPopular")}
-                    </Badge>
-                  )}
-                </div>
+                <TabsList className="bg-muted">
+                  {orderedTiers.map((tier) => (
+                    <TabsTrigger key={tier.id} value={tier.id} className="min-w-[96px]">
+                      {tier.name}
+                    </TabsTrigger>
+                  ))}
+                </TabsList>
               </div>
 
                 {orderedTiers.map((tier) => (
