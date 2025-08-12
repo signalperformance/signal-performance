@@ -58,7 +58,7 @@ const zh = {
   'assessment.golf.description': '我們在受控環境中測量每支球桿的擊球距離與落點分佈，以評估您的擊球品質與球路控制表現。若具備比賽數據，將進一步整合分析，以深入解析技術、體能與心理因素對整體表現的相對貢獻。',
 
   // Pricing
-  'pricing.title': '會員方案與價格',
+  'pricing.title': '如何開始',
   'pricing.mostPopular': '最受歡迎',
   'pricing.perMonth': '／月',
   'pricing.perYear': '／年',
