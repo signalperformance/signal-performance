@@ -43,7 +43,7 @@ export function MembershipFlow({
           <article className={cn("relative group", "rounded-3xl transition-all duration-300", "flex flex-col bg-card border border-border shadow-lg hover:shadow-xl")}>
             <div className="p-6 md:p-8 flex-1">
               <div className="mb-4">
-                <Badge variant="secondary" className="rounded-full px-4 py-1.5 text-xs md:text-sm font-medium whitespace-nowrap bg-signal-gold">
+                <Badge variant="secondary" className="rounded-full px-4 py-1.5 text-xs md:text-sm font-medium whitespace-nowrap">
                   {t("flow.step1")}
                 </Badge>
               </div>
@@ -71,13 +71,17 @@ export function MembershipFlow({
               </ul>
 
               <div className="mt-6">
-                <Button variant="secondary" onClick={() => {
-                const el = document.getElementById("assessment-process");
-                el?.scrollIntoView({
-                  behavior: "smooth",
-                  block: "start"
-                });
-              }} className="w-full sm:w-auto">
+                <Button
+                  variant="secondary"
+                  onClick={() => {
+                    const el = document.getElementById("assessment-process");
+                    el?.scrollIntoView({
+                      behavior: "smooth",
+                      block: "start"
+                    });
+                  }}
+                  className="w-full sm:w-auto"
+                >
                   {t("cta.learnMore")}
                 </Button>
               </div>
@@ -86,21 +90,42 @@ export function MembershipFlow({
           </article>
 
           {/* Step 2: Membership selection with toggle */}
-          <article className={cn("relative group", "rounded-3xl transition-all duration-300", "flex flex-col border border-border shadow-lg hover:shadow-xl", "bg-card", activeTier === "plus" && "ring-1 ring-primary/20")}>
+          <article className={cn(
+            "relative group",
+            "rounded-3xl transition-all duration-300",
+            "flex flex-col border border-border shadow-lg hover:shadow-xl",
+            "bg-card",
+            activeTier === "plus" && "ring-1 ring-primary/20"
+          )}>
             <div className="p-6 md:p-8 flex-1">
               <Tabs value={activeTier} onValueChange={setActiveTier} className="w-full">
                 <div className="mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                  <Badge variant="secondary" className="rounded-full px-4 py-1.5 text-xs md:text-sm font-medium whitespace-nowrap bg-signal-gold">
+                  <Badge variant="secondary" className="rounded-full px-4 py-1.5 text-xs md:text-sm font-medium whitespace-nowrap">
                     {t("flow.step2")}
                   </Badge>
                   <TabsList className="bg-transparent border border-border rounded-full p-1 text-muted-foreground flex w-full h-auto sm:h-10 overflow-visible sm:overflow-visible justify-between sm:justify-center gap-1 sm:gap-2 flex-nowrap sm:w-auto">
-                    {orderedTiers.map(tier => <TabsTrigger key={tier.id} value={tier.id} className={cn("flex flex-1 basis-1/2 w-full min-w-0 justify-center rounded-full px-2 py-1 text-xs sm:flex-none sm:basis-auto sm:w-auto sm:min-w-[96px] sm:px-3 sm:py-1.5 sm:text-sm truncate", tier.id === activeTier ? activeTier === "plus" ? "bg-primary text-primary-foreground" : "bg-secondary text-secondary-foreground" : undefined, "data-[state=active]:ring-1 data-[state=active]:ring-primary/30")}>
+                    {orderedTiers.map(tier => (
+                      <TabsTrigger
+                        key={tier.id}
+                        value={tier.id}
+                        className={cn(
+                          "flex flex-1 basis-1/2 w-full min-w-0 justify-center rounded-full px-2 py-1 text-xs sm:flex-none sm:basis-auto sm:w-auto sm:min-w-[96px] sm:px-3 sm:py-1.5 sm:text-sm truncate",
+                          tier.id === activeTier
+                            ? activeTier === "plus"
+                              ? "bg-primary text-primary-foreground"
+                              : "bg-secondary text-secondary-foreground"
+                            : undefined,
+                          "data-[state=active]:ring-1 data-[state=active]:ring-primary/30"
+                        )}
+                      >
                         {tier.name}
-                      </TabsTrigger>)}
+                      </TabsTrigger>
+                    ))}
                   </TabsList>
                 </div>
 
-                {orderedTiers.map(tier => <TabsContent key={tier.id} value={tier.id} className="mt-0">
+                {orderedTiers.map(tier => (
+                  <TabsContent key={tier.id} value={tier.id} className="mt-0">
                     <div className="mb-6">
                       <div className="flex items-baseline gap-2 min-h-[2.75rem] my-[12px]">
                         <span className="text-4xl font-bold">
@@ -113,23 +138,38 @@ export function MembershipFlow({
                     </div>
 
                     <ul className="space-y-4">
-                      {tier.features.map(feature => <li key={feature.name} className="flex gap-3">
-                          <div className={cn("mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full border", feature.included ? "border-primary text-primary" : "border-muted text-muted-foreground")} aria-hidden>
-                            {feature.included ? <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                      {tier.features.map(feature => (
+                        <li key={feature.name} className="flex gap-3">
+                          <div
+                            className={cn(
+                              "mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full border",
+                              feature.included ? "border-primary text-primary" : "border-muted text-muted-foreground"
+                            )}
+                            aria-hidden
+                          >
+                            {feature.included ? (
+                              <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M20 6L9 17l-5-5" />
-                              </svg> : <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                              </svg>
+                            ) : (
+                              <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M6 6l12 12M6 18L18 6" />
-                              </svg>}
+                              </svg>
+                            )}
                           </div>
                           <div>
                             <div className={cn("text-sm font-medium", !feature.included && "line-through text-muted-foreground")}>{feature.name}</div>
-                            {feature.description && <div className={cn("text-sm text-muted-foreground", !feature.included && "line-through")}>
+                            {feature.description && (
+                              <div className={cn("text-sm text-muted-foreground", !feature.included && "line-through")}>
                                 {feature.description}
-                              </div>}
+                              </div>
+                            )}
                           </div>
-                        </li>)}
+                        </li>
+                      ))}
                     </ul>
-                  </TabsContent>)}
+                  </TabsContent>
+                ))}
               </Tabs>
             </div>
           </article>
