@@ -57,7 +57,7 @@ const en = {
   'assessment.golf.description': 'We measure distance and dispersion metrics across every club in the bag to assess your ball-striking and shot control in a controlled environment. When available, we combine this with your tournament performance data to better understand the relative contribution of technical, physical, and mental factors to your overall performance.',
 
   // Pricing
-  'pricing.title': 'Membership Plans',
+  'pricing.title': 'How To Get Started',
   'pricing.mostPopular': 'Most Popular',
   'pricing.perMonth': '/month',
   'pricing.perYear': '/year',
