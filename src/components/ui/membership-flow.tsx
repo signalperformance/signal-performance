@@ -74,11 +74,22 @@ export function MembershipFlow({
                 <Button
                   variant="default"
                   onClick={() => {
-                    const el = document.getElementById("assessment-process");
-                    el?.scrollIntoView({
-                      behavior: "smooth",
-                      block: "start"
-                    });
+                    const section = document.getElementById("assessment-process");
+                    if (!section) return;
+
+                    const nav = document.getElementById("site-nav");
+                    const offset = (nav?.offsetHeight ?? 0) + 12;
+
+                    const anchor = section.querySelector(
+                      "[data-scroll-anchor], h1, h2, h3"
+                    ) as HTMLElement | null;
+                    const target = anchor ?? section;
+
+                    const top = target.getBoundingClientRect().top + window.scrollY - offset;
+                    window.scrollTo({ top, behavior: "smooth" });
+
+                    // Keep URL in sync without triggering default jump
+                    history.replaceState(null, "", "#assessment-process");
                   }}
                   className="w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90"
                 >
