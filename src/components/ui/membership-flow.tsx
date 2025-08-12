@@ -34,7 +34,7 @@ export function MembershipFlow({
   return <section className={cn("section-padding text-foreground", "overflow-hidden", className)}>
       <div className="container mx-auto container-padding">
         <div className="flex flex-col items-center gap-4 mb-10 md:mb-14 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold font-lora">{sectionTitle}</h2>
+          <h2 data-scroll-anchor className="text-3xl md:text-4xl font-bold font-lora">{sectionTitle}</h2>
           {subtitle && <p className="text-muted-foreground max-w-2xl">{subtitle}</p>}
         </div>
 

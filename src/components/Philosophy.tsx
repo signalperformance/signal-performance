@@ -28,9 +28,9 @@ const Philosophy = () => {
   ];
 
   return (
-    <section id="philosophy" className="section-padding bg-signal-light-gray">
+    <section className="section-padding bg-signal-light-gray">
       <div className="container mx-auto container-padding">
-        <h2 className="text-3xl lg:text-4xl font-bold mb-0 lg:mb-12 text-center font-lora">{t('philosophy.title')}</h2>
+        <h2 data-scroll-anchor className="text-3xl lg:text-4xl font-bold mb-0 lg:mb-12 text-center font-lora">{t('philosophy.title')}</h2>
         
         {/* Signal wave graphic - responsive images for different screen sizes and languages */}
         <div className="w-full mb-6 lg:mb-12 relative h-36 lg:h-32 flex items-center justify-center">

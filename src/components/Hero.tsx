@@ -47,7 +47,7 @@ const Hero = () => {
   };
 
   return (
-    <section id="home" className="relative min-h-[100svh] overflow-hidden flex items-center justify-center">
+    <section className="relative min-h-[100svh] overflow-hidden flex items-center justify-center">
       {/* Modern Background with CSS-only animations */}
       <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-gray-100">
         {/* Animated geometric shapes */}
@@ -69,7 +69,7 @@ const Hero = () => {
         <div className="max-w-6xl mx-auto text-center">
           {/* Modern card container with signal-charcoal background */}
           <div className="bg-signal-charcoal/95 backdrop-blur-sm rounded-2xl shadow-xl border border-signal-charcoal/60 p-8 md:p-12 lg:p-16">
-            <h1 className={`${headingFont} font-bold mb-4 text-white leading-tight ${
+            <h1 data-scroll-anchor className={`${headingFont} font-bold mb-4 text-white leading-tight ${
               isMobile 
                 ? 'text-3xl sm:text-4xl' 
                 : 'text-3xl md:text-4xl lg:text-5xl xl:text-6xl'

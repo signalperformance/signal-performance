@@ -34,13 +34,17 @@ const Index = () => {
     const targetId =
       (location.hash || "").replace("#", "") || params.get("section");
     if (!targetId) return;
-    const el = document.getElementById(targetId);
-    if (el) {
-      const nav = document.getElementById("site-nav");
-      const offset = (nav?.offsetHeight ?? 0) + 8; // small extra space
-      const top = el.getBoundingClientRect().top + window.scrollY - offset;
-      window.scrollTo({ top, behavior: "smooth" });
-    }
+    const section = document.getElementById(targetId);
+    if (!section) return;
+
+    const nav = document.getElementById("site-nav");
+    const offset = (nav?.offsetHeight ?? 0) + 12; // extra space so previous section color isn't visible
+
+    const anchor = section.querySelector("[data-scroll-anchor], h1, h2, h3") as HTMLElement | null;
+    const target = anchor ?? section;
+
+    const top = target.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top, behavior: "smooth" });
   }, [isLoading, location.hash, location.search]);
 
   const membershipTiers = useMemo(() => ([

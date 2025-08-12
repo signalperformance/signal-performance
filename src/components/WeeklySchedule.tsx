@@ -67,7 +67,7 @@ const WeeklySchedule = () => {
       <section id="schedule" className="section-padding">
         <div className="container mx-auto container-padding">
           <header className="mb-6 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold font-lora text-signal-black mb-2">
+            <h2 data-scroll-anchor className="text-3xl md:text-4xl font-bold font-lora text-signal-black mb-2">
               {t('schedule.title')}
             </h2>
             <p className="text-base md:text-lg text-muted-foreground font-montserrat">

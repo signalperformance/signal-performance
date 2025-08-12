@@ -18,12 +18,12 @@ const StudioLocation = () => {
   const googleMapsLink = "https://www.google.com/maps/place/Signal+Performance/@25.0624007,121.3655983,15z/data=!4m6!3m5!1s0x3442a181e6db2efb:0xa10dc5b0275a90b9!8m2!3d25.0699173!4d121.351446!16s%2Fg%2F11xn5z_b3t?entry=ttu&g_ep=EgoyMDI1MDcyMC4wIKXMDSoASAFQAw%3D%3D";
 
   return (
-    <section id="studio-location" className="section-padding bg-transparent overflow-x-clip">
+    <section className="section-padding bg-transparent overflow-x-clip">
       <div className="container mx-auto container-padding">
         <div className="max-w-6xl mx-auto overflow-x-hidden">
           {/* Section Header */}
           <div className="text-center mb-12 md:mb-16 animate-fade-in">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-signal-charcoal font-lora">
+            <h2 data-scroll-anchor className="text-3xl md:text-4xl font-bold mb-4 text-signal-charcoal font-lora">
               {t('studio.title')}
             </h2>
           </div>
