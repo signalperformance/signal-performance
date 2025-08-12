@@ -73,8 +73,8 @@ const zh = {
   'pricing.features.assessment.quarterly': '季度評估',
 
   // Flow
-  'flow.step1': '1) 進行基礎評估',
-  'flow.step2': '2) 選擇方案',
+  'flow.step1': '1 - 進行基礎評估',
+  'flow.step2': '2 - 選擇方案',
   'flow.selectMonthlyProgram': '選擇每月方案',
 
   // About
