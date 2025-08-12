@@ -88,7 +88,7 @@ export function MembershipFlow({
           </article>
 
           {/* Step 2: Membership selection with toggle */}
-          <article className={cn("relative group", "rounded-3xl transition-all duration-300", "flex flex-col border border-border shadow-lg hover:shadow-xl", activeTier === "plus" ? "bg-muted" : "bg-card")}>
+          <article className={cn("relative group", "rounded-3xl transition-all duration-300", "flex flex-col border border-border shadow-lg hover:shadow-xl", activeTier === "plus" ? "bg-primary/10" : "bg-card")}>
             <div className="absolute -top-4 left-1/2 -translate-x-1/2">
               <Badge className="px-4 py-1.5 text-xs md:text-sm font-medium whitespace-nowrap bg-primary text-primary-foreground border-none shadow">
                 {t("flow.step2")}
