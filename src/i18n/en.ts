@@ -187,7 +187,10 @@ const en = {
   'studio.features.access': 'Nearby access to simulator, range, and putting green',
   'studio.address.title': 'Studio Address',
   'studio.address.location': '2樓, 南勢里9鄰33-6號, Linkou District, New Taipei City, 244',
-  'studio.address.mapButton': 'View on Google Maps'
+  'studio.address.mapButton': 'View on Google Maps',
+
+  // CTA
+  'cta.learnMore': 'Learn More'
 };
 
 export default en;

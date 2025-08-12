@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/contexts/LanguageContext";
 import type { PricingTier } from "@/components/ui/pricing-section";
@@ -104,6 +105,19 @@ export function MembershipFlow({ tiers, className, title, subtitle }: Membership
                   </li>
                 ))}
               </ul>
+
+              <div className="mt-6">
+                <Button
+                  onClick={() => {
+                    const el = document.getElementById("assessment-process");
+                    el?.scrollIntoView({ behavior: "smooth", block: "start" });
+                  }}
+                  className="w-full sm:w-auto"
+                >
+                  {t("cta.learnMore")}
+                </Button>
+              </div>
+
             </div>
           </article>
 

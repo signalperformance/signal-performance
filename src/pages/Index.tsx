@@ -85,9 +85,6 @@ const Index = () => {
       <section className="bg-muted">
         <Philosophy />
       </section>
-      <section className="bg-background">
-        <AssessmentProcess />
-      </section>
       <section className="bg-muted">
         <MembershipFlow tiers={membershipTiers} subtitle={t('gettingstarted.subtitle')} />
       </section>
@@ -108,6 +105,9 @@ const Index = () => {
       </section>
       <section className="bg-muted">
         <WeeklySchedule />
+      </section>
+      <section className="bg-background">
+        <AssessmentProcess />
       </section>
       <section className="bg-background">
         <StudioLocation />

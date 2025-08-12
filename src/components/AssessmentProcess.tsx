@@ -186,7 +186,7 @@ const AssessmentProcess = () => {
     }
   };
 
-  return <section id="assessment" className="section-padding bg-white" ref={sectionRef}>
+  return <section id="assessment-process" className="section-padding bg-white scroll-mt-24 lg:scroll-mt-32" ref={sectionRef}>
       <div className="container mx-auto container-padding">
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold mb-4 font-lora">{t('assessment.title')}</h2>

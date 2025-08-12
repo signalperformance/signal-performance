@@ -187,7 +187,10 @@ const zh = {
   'studio.features.access': '鄰近模擬器、練習場和推桿果嶺',
   'studio.address.title': '工作室地址',
   'studio.address.location': '244新北市林口區南勢里9鄰33-6號2樓',
-  'studio.address.mapButton': '在Google地圖上查看'
+  'studio.address.mapButton': '在Google地圖上查看',
+
+  // CTA
+  'cta.learnMore': '了解更多'
 };
 
 export default zh;
