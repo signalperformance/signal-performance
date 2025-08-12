@@ -269,7 +269,7 @@ const AssessmentProcess = () => {
           {/* Right side: Description and Progress */}
           <div className="w-1/2">
             <Card className={cn("shadow-2xl border-2 border-slate-200/60 backdrop-blur-sm hover:shadow-3xl transition-all duration-500 hover:scale-[1.02]", getGradientBackground(activeAssessment))}>
-              <CardContent className="p-8 relative overflow-hidden lg:min-h-[500px]">
+              <CardContent className="p-8 relative overflow-hidden">
                 {/* Subtle background pattern */}
                 <div className="absolute inset-0 bg-gradient-to-br from-transparent via-slate-50/30 to-blue-50/20 pointer-events-none"></div>
                 
