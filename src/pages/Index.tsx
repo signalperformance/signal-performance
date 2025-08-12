@@ -36,7 +36,10 @@ const Index = () => {
     if (!targetId) return;
     const el = document.getElementById(targetId);
     if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      const nav = document.getElementById("site-nav");
+      const offset = (nav?.offsetHeight ?? 0) + 8; // small extra space
+      const top = el.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: "smooth" });
     }
   }, [isLoading, location.hash, location.search]);
 

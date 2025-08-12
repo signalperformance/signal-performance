@@ -23,7 +23,7 @@ const Navbar = () => {
     setLanguage(language === 'en' ? 'zh' : 'en');
   };
 
-  return <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-md py-2' : 'bg-white py-4'}`}>
+  return <nav id="site-nav" className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-md py-2' : 'bg-white py-4'}`}>
       <div className="container mx-auto px-4 flex justify-between items-center">
         <a href="#home" className="flex items-center justify-start gap-1">
           <div className="w-8 md:w-10 h-8 md:h-10 flex-shrink-0">
