@@ -208,7 +208,7 @@ const en = {
   'assessment.prep.reminders.arriveEarly': 'Arrive 15 minutes early to complete all tests smoothly',
   'assessment.prep.reminders.restAndHydrate': 'Get sufficient sleep and stay hydrated to ensure accurate results',
   'assessment.prep.contactInfo': 'If you have any questions, please contact our team at noah@signalperformance.golf',
-  'assessment.prep.lineButton.title': 'Connect with Us',
+  'assessment.prep.lineButton.title': 'Questions? Contact Us!',
   'assessment.prep.lineButton.text': 'Add LINE Friend'
 };
 

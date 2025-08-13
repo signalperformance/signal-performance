@@ -208,7 +208,7 @@ const zh = {
   'assessment.prep.reminders.arriveEarly': '提前15分鐘到場，以順利完成測試',
   'assessment.prep.reminders.restAndHydrate': '保持充足睡眠並補充水分，確保測試結果準確',
   'assessment.prep.contactInfo': '如有任何問題，請聯繫我們的團隊：noah@signalperformance.golf',
-  'assessment.prep.lineButton.title': '聯繫我們',
+  'assessment.prep.lineButton.title': '有問題嗎？聯絡我們！',
   'assessment.prep.lineButton.text': '加入 LINE 好友'
 };
 
