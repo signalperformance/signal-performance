@@ -190,7 +190,24 @@ const en = {
   'studio.address.mapButton': 'View on Google Maps',
 
   // CTA
-  'cta.learnMore': 'Learn More'
+  'cta.learnMore': 'Learn More',
+
+  // Assessment Preparation
+  'assessment.prep.title': 'Assessment Preparation',
+  'assessment.prep.subtitle': 'To ensure your assessment goes smoothly and we get the most accurate results, please bring the following items and note these important reminders.',
+  'assessment.prep.whatToBring.title': 'What to Bring',
+  'assessment.prep.whatToBring.golfClubs': 'Golf clubs',
+  'assessment.prep.whatToBring.athleticWear': 'Athletic wear',
+  'assessment.prep.whatToBring.shoes': 'Golf shoes and running shoes',
+  'assessment.prep.whatToBring.waterBottle': 'Water bottle',
+  'assessment.prep.whatToBring.towel': 'Towel',
+  'assessment.prep.whatToBring.changeOfClothes': 'Change of clothes and personal toiletries',
+  'assessment.prep.whatToBring.snacks': 'Healthy snacks',
+  'assessment.prep.reminders.title': 'Important Reminders',
+  'assessment.prep.reminders.avoidOvereating': 'Please avoid overeating before your assessment',
+  'assessment.prep.reminders.arriveEarly': 'Please arrive 15 minutes early to complete all tests smoothly',
+  'assessment.prep.reminders.restAndHydrate': 'Please get adequate sleep and stay hydrated to ensure accurate test results',
+  'assessment.prep.contactInfo': 'If you have any questions, please contact our team.'
 };
 
 export default en;

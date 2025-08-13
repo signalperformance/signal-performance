@@ -190,7 +190,24 @@ const zh = {
   'studio.address.mapButton': '在Google地圖上查看',
 
   // CTA
-  'cta.learnMore': '了解更多'
+  'cta.learnMore': '了解更多',
+
+  // Assessment Preparation
+  'assessment.prep.title': '評估準備事項',
+  'assessment.prep.subtitle': '為了確保評估順利進行並獲得最準確的結果，請準備以下物品並注意重要提醒。',
+  'assessment.prep.whatToBring.title': '請攜帶物品',
+  'assessment.prep.whatToBring.golfClubs': '高爾夫球桿',
+  'assessment.prep.whatToBring.athleticWear': '運動服裝',
+  'assessment.prep.whatToBring.shoes': '高爾夫鞋與跑鞋',
+  'assessment.prep.whatToBring.waterBottle': '水瓶',
+  'assessment.prep.whatToBring.towel': '毛巾',
+  'assessment.prep.whatToBring.changeOfClothes': '更換衣物與個人盥洗用品',
+  'assessment.prep.whatToBring.snacks': '健康小點心',
+  'assessment.prep.reminders.title': '重要提醒',
+  'assessment.prep.reminders.avoidOvereating': '請避免在評估前進食過量',
+  'assessment.prep.reminders.arriveEarly': '請提前 15 分鐘到場，以順利完成所有測試',
+  'assessment.prep.reminders.restAndHydrate': '請保持充足睡眠並補充水分，以確保測試結果準確',
+  'assessment.prep.contactInfo': '如有任何問題，請聯繫我們的團隊。'
 };
 
 export default zh;
