@@ -84,7 +84,7 @@ const Assessment = () => {
                     <span>{t('assessment.prep.reminders.avoidOvereating')}</span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <Clock className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                    <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
                     <span>{t('assessment.prep.reminders.arriveEarly')}</span>
                   </li>
                   <li className="flex items-start gap-3">
