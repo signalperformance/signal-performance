@@ -194,20 +194,20 @@ const en = {
 
   // Assessment Preparation
   'assessment.prep.title': 'Assessment Preparation',
-  'assessment.prep.subtitle': 'To ensure your assessment goes smoothly and we get the most accurate results, please bring the following items and note these important reminders.',
+  'assessment.prep.subtitle': 'To ensure your assessment goes smoothly and results are accurate, please bring the following items and review the important reminders.',
   'assessment.prep.whatToBring.title': 'What to Bring',
   'assessment.prep.whatToBring.golfClubs': 'Golf clubs',
-  'assessment.prep.whatToBring.athleticWear': 'Athletic wear',
-  'assessment.prep.whatToBring.shoes': 'Golf shoes and running shoes',
+  'assessment.prep.whatToBring.athleticWear': 'Workout clothes',
+  'assessment.prep.whatToBring.shoes': 'Golf shoes + running shoes',
   'assessment.prep.whatToBring.waterBottle': 'Water bottle',
   'assessment.prep.whatToBring.towel': 'Towel',
   'assessment.prep.whatToBring.changeOfClothes': 'Change of clothes and personal toiletries',
   'assessment.prep.whatToBring.snacks': 'Healthy snacks',
   'assessment.prep.reminders.title': 'Important Reminders',
-  'assessment.prep.reminders.avoidOvereating': 'Please avoid overeating before your assessment',
-  'assessment.prep.reminders.arriveEarly': 'Please arrive 15 minutes early to complete all tests smoothly',
-  'assessment.prep.reminders.restAndHydrate': 'Please get adequate sleep and stay hydrated to ensure accurate test results',
-  'assessment.prep.contactInfo': 'If you have any questions, please contact our team.'
+  'assessment.prep.reminders.avoidOvereating': 'Avoid eating a large meal before the assessment',
+  'assessment.prep.reminders.arriveEarly': 'Arrive 15 minutes early to complete all tests smoothly',
+  'assessment.prep.reminders.restAndHydrate': 'Get sufficient sleep and stay hydrated to ensure accurate results',
+  'assessment.prep.contactInfo': 'If you have any questions, please contact our team at noah@signalperformance.golf'
 };
 
 export default en;

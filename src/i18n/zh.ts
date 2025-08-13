@@ -207,7 +207,7 @@ const zh = {
   'assessment.prep.reminders.avoidOvereating': '評估前避免進食過量',
   'assessment.prep.reminders.arriveEarly': '提前15分鐘到場，以順利完成測試',
   'assessment.prep.reminders.restAndHydrate': '保持充足睡眠並補充水分，確保測試結果準確',
-  'assessment.prep.contactInfo': '如有任何問題，請聯繫我們的團隊。'
+  'assessment.prep.contactInfo': '如有任何問題，請聯繫我們的團隊：noah@signalperformance.golf'
 };
 
 export default zh;
