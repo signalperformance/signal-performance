@@ -4,16 +4,14 @@ import Navbar from "@/components/Navbar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Backpack, Clock, AlertCircle, MessageCircle } from "lucide-react";
-
 const Assessment = () => {
-  const { t } = useLanguage();
-
+  const {
+    t
+  } = useLanguage();
   useEffect(() => {
     document.title = `${t('assessment.prep.title')} - Signal Performance`;
   }, [t]);
-
-  return (
-    <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background">
       <Navbar />
       
       <main className="container mx-auto px-4 pt-24 pb-12">
@@ -33,7 +31,7 @@ const Assessment = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-3">
-                  <Backpack className="w-6 h-6 text-primary" />
+                  
                   {t('assessment.prep.whatToBring.title')}
                 </CardTitle>
               </CardHeader>
@@ -75,7 +73,7 @@ const Assessment = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-3">
-                  <AlertCircle className="w-6 h-6 text-primary" />
+                  
                   {t('assessment.prep.reminders.title')}
                 </CardTitle>
               </CardHeader>
@@ -103,22 +101,13 @@ const Assessment = () => {
             <Card>
               <CardHeader className="text-center">
                 <CardTitle className="flex items-center justify-center gap-3">
-                  <MessageCircle className="w-6 h-6 text-primary" />
+                  
                   {t('assessment.prep.lineButton.title')}
                 </CardTitle>
               </CardHeader>
               <CardContent className="text-center">
-                <Button 
-                  asChild
-                  className="bg-[#00B900] hover:bg-[#00A000] text-white font-medium px-8 py-3 h-auto"
-                  size="lg"
-                >
-                  <a 
-                    href="https://lin.ee/2mE17yG" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2"
-                  >
+                <Button asChild className="bg-[#00B900] hover:bg-[#00A000] text-white font-medium px-8 py-3 h-auto" size="lg">
+                  <a href="https://lin.ee/2mE17yG" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
                     <MessageCircle className="w-5 h-5" />
                     {t('assessment.prep.lineButton.text')}
                   </a>
@@ -135,8 +124,6 @@ const Assessment = () => {
           </div>
         </div>
       </main>
-    </div>
-  );
+    </div>;
 };
-
 export default Assessment;
