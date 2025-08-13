@@ -116,12 +116,6 @@ const Assessment = () => {
             </Card>
           </div>
 
-          {/* Contact Info */}
-          <div className="mt-12 text-center">
-            <p className="text-muted-foreground">
-              {t('assessment.prep.contactInfo')}
-            </p>
-          </div>
         </div>
       </main>
     </div>;
