@@ -14,12 +14,21 @@ export type PricingTier = {
     monthly: number;
     yearly: number;
   };
+  originalPrice?: {
+    monthly: number;
+    yearly: number;
+  };
   description?: string;
   features: Feature[];
   highlight?: boolean;
   badge?: string;
   icon: React.ReactNode;
   currency?: string; // e.g., "NT$"
+  isPromo?: boolean;
+  promoDetails?: {
+    spotsRemaining: number;
+    totalSpots: number;
+  };
 };
 interface PricingSectionProps {
   tiers: PricingTier[];
@@ -44,8 +53,26 @@ function PricingSection({
         <div className="flex flex-col items-center gap-4 mb-10 md:mb-14 text-center">
           <h2 className="text-3xl md:text-4xl font-bold font-lora">{sectionTitle}</h2>
           {subtitle && <p className="text-muted-foreground max-w-2xl">{subtitle}</p>}
-
           
+          {/* Promotional Banner */}
+          {tiers.some(tier => tier.isPromo) && (
+            <div className="bg-gradient-to-r from-red-50 to-orange-50 border border-red-200 rounded-xl px-6 py-3 max-w-md">
+              <p className="text-red-800 font-semibold text-sm md:text-base">
+                {t("promo.earlyBird")} - {t("promo.firstMembers")}
+              </p>
+              <div className="flex items-center justify-center gap-2 mt-1">
+                <div className="bg-red-200 rounded-full h-2 flex-1 max-w-32">
+                  <div 
+                    className="bg-red-500 h-2 rounded-full transition-all duration-300"
+                    style={{ width: `${(4/10) * 100}%` }}
+                  />
+                </div>
+                <span className="text-red-700 text-xs font-medium">
+                  6 {t("promo.of")} 10 {t("promo.spotsRemaining")}
+                </span>
+              </div>
+            </div>
+          )}
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
@@ -64,12 +91,39 @@ function PricingSection({
 
                 <div className="mb-6">
                   <div className="flex items-baseline gap-2 min-h-[2.75rem]">
-                    <span className="text-4xl font-bold">
-                      {tier.currency ?? "NT$"}
-                      {formatNumber(isYearly ? tier.price.yearly : tier.price.monthly)}
-                    </span>
-                    <span className="text-sm text-muted-foreground">{isYearly ? t("pricing.perYear") : t("pricing.perMonth")}</span>
+                    {tier.originalPrice && tier.isPromo && (
+                      <div className="flex flex-col">
+                        <span className="text-lg line-through text-muted-foreground">
+                          {tier.currency ?? "NT$"}
+                          {formatNumber(isYearly ? tier.originalPrice.yearly : tier.originalPrice.monthly)}
+                        </span>
+                        <div className="flex items-baseline gap-2">
+                          <span className="text-4xl font-bold text-green-600">
+                            {tier.currency ?? "NT$"}
+                            {formatNumber(isYearly ? tier.price.yearly : tier.price.monthly)}
+                          </span>
+                          <span className="text-sm text-muted-foreground">{isYearly ? t("pricing.perYear") : t("pricing.perMonth")}</span>
+                        </div>
+                      </div>
+                    )}
+                    {!tier.isPromo && (
+                      <>
+                        <span className="text-4xl font-bold">
+                          {tier.currency ?? "NT$"}
+                          {formatNumber(isYearly ? tier.price.yearly : tier.price.monthly)}
+                        </span>
+                        <span className="text-sm text-muted-foreground">{isYearly ? t("pricing.perYear") : t("pricing.perMonth")}</span>
+                      </>
+                    )}
                   </div>
+                  {tier.originalPrice && tier.isPromo && (
+                    <div className="mt-2">
+                      <Badge className="bg-green-100 text-green-800 hover:bg-green-100">
+                        {t("promo.save")} {tier.currency ?? "NT$"}
+                        {formatNumber((isYearly ? tier.originalPrice.yearly : tier.originalPrice.monthly) - (isYearly ? tier.price.yearly : tier.price.monthly))}
+                      </Badge>
+                    </div>
+                  )}
                   {tier.description && <p className="mt-2 text-sm text-muted-foreground">{tier.description}</p>}
                 </div>
 

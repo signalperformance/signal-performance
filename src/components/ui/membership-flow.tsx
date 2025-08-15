@@ -48,14 +48,24 @@ export function MembershipFlow({
                 </Badge>
               </div>
 
-              <div className="mb-6">
-                <div className="flex items-baseline gap-2 min-h-[2.75rem] my-[3px]">
-                  <span className="text-4xl font-bold text-foreground">{t("gettingstarted.assessmentPackage.price")}</span>
+                <div className="mb-6">
+                  <div className="flex items-baseline gap-2 min-h-[2.75rem] my-[3px]">
+                    <div className="flex flex-col">
+                      <span className="text-lg line-through text-muted-foreground">NT$12,000</span>
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-4xl font-bold text-green-600">{t("gettingstarted.assessmentPackage.price")}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="mt-2">
+                    <Badge className="bg-green-100 text-green-800 hover:bg-green-100">
+                      {t("promo.save")} NT$2,000
+                    </Badge>
+                  </div>
+                  <p className="mt-2 text-sm text-muted-foreground">
+                    {t("assessment.description")}
+                  </p>
                 </div>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  {t("assessment.description")}
-                </p>
-              </div>
 
               <ul className="space-y-4">
                 {assessmentFeatures.map(name => <li key={name} className="flex gap-3">
@@ -134,12 +144,39 @@ export function MembershipFlow({
                   <TabsContent key={tier.id} value={tier.id} className="mt-0">
                     <div className="mb-6">
                       <div className="flex items-baseline gap-2 min-h-[2.75rem] my-[12px]">
-                        <span className="text-4xl font-bold text-foreground">
-                          {tier.currency ?? "NT$"}
-                          {formatNumber(tier.price.monthly)}
-                        </span>
-                        <span className="text-sm text-muted-foreground">{t("pricing.perMonth")}</span>
+                        {tier.originalPrice && tier.isPromo && (
+                          <div className="flex flex-col">
+                            <span className="text-lg line-through text-muted-foreground">
+                              {tier.currency ?? "NT$"}
+                              {formatNumber(tier.originalPrice.monthly)}
+                            </span>
+                            <div className="flex items-baseline gap-2">
+                              <span className="text-4xl font-bold text-green-600">
+                                {tier.currency ?? "NT$"}
+                                {formatNumber(tier.price.monthly)}
+                              </span>
+                              <span className="text-sm text-muted-foreground">{t("pricing.perMonth")}</span>
+                            </div>
+                          </div>
+                        )}
+                        {!tier.isPromo && (
+                          <>
+                            <span className="text-4xl font-bold text-foreground">
+                              {tier.currency ?? "NT$"}
+                              {formatNumber(tier.price.monthly)}
+                            </span>
+                            <span className="text-sm text-muted-foreground">{t("pricing.perMonth")}</span>
+                          </>
+                        )}
                       </div>
+                      {tier.originalPrice && tier.isPromo && (
+                        <div className="mt-2">
+                          <Badge className="bg-green-100 text-green-800 hover:bg-green-100">
+                            {t("promo.save")} {tier.currency ?? "NT$"}
+                            {formatNumber(tier.originalPrice.monthly - tier.price.monthly)}
+                          </Badge>
+                        </div>
+                      )}
                       {tier.description && <p className="mt-2 text-sm text-muted-foreground">{tier.description}</p>}
                     </div>
 

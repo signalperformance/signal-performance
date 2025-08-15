@@ -127,7 +127,7 @@ const en = {
   'gettingstarted.step4.subtitle': 'Train weekly, and assess quarterly to track progress.',
   'gettingstarted.step4.hours': '18 hours/month',
   'gettingstarted.assessmentPackage.title': 'Assessment Package',
-  'gettingstarted.assessmentPackage.price': 'NT$12,000',
+  'gettingstarted.assessmentPackage.price': 'NT$10,000',
   'gettingstarted.assessmentPackage.covers': 'Covers steps 1–3',
   'gettingstarted.monthlyProgram.price': 'NT$15,000/month',
   'gettingstarted.monthlyProgram.covers': 'Covers step 4',
@@ -191,6 +191,15 @@ const en = {
 
   // CTA
   'cta.learnMore': 'Learn More',
+
+  // Promotional
+  'promo.limitedTime': 'Limited Time Offer',
+  'promo.spotsRemaining': 'spots remaining',
+  'promo.of': 'of',
+  'promo.save': 'Save',
+  'promo.originalPrice': 'Original Price',
+  'promo.earlyBird': 'Early Bird Special',
+  'promo.firstMembers': 'Limited to First 10 Members',
 
   // Assessment Preparation
   'assessment.prep.title': 'Assessment Preparation',

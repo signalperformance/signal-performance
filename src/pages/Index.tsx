@@ -53,10 +53,16 @@ const Index = () => {
       name: t('pricing.plus.name'),
       currency: "NT$",
       price: { monthly: 15000, yearly: 15000 * 12 },
+      originalPrice: { monthly: 18000, yearly: 18000 * 12 },
       description: t('pricing.plus.description'),
       highlight: true,
       badge: t('pricing.mostPopular'),
       icon: <Trophy className="w-7 h-7" />,
+      isPromo: true,
+      promoDetails: {
+        spotsRemaining: 6,
+        totalSpots: 10
+      },
       features: [
         { name: t('pricing.features.physical.4x'), included: true },
         { name: t('pricing.features.mental.2x'), included: true },
@@ -69,8 +75,14 @@ const Index = () => {
       name: t('pricing.foundations.name'),
       currency: "NT$",
       price: { monthly: 10000, yearly: 10000 * 12 },
+      originalPrice: { monthly: 14000, yearly: 14000 * 12 },
       description: t('pricing.foundations.description'),
       icon: <Dumbbell className="w-7 h-7" />,
+      isPromo: true,
+      promoDetails: {
+        spotsRemaining: 6,
+        totalSpots: 10
+      },
       features: [
         { name: t('pricing.features.physical.3x'), included: true },
         { name: t('pricing.features.mental.2x'), included: false },

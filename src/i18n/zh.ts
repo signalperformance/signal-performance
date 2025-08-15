@@ -127,7 +127,7 @@ const zh = {
   'gettingstarted.step4.subtitle': '每週訓練，並進行每月評估追蹤',
   'gettingstarted.step4.hours': '18 小時/月',
   'gettingstarted.assessmentPackage.title': '評估方案',
-  'gettingstarted.assessmentPackage.price': '12,000元',
+  'gettingstarted.assessmentPackage.price': '10,000元',
   'gettingstarted.assessmentPackage.covers': '包含第 1–3 步',
   'gettingstarted.monthlyProgram.price': '每月15,000元',
   'gettingstarted.monthlyProgram.covers': '包含第 4 步',
@@ -191,6 +191,15 @@ const zh = {
 
   // CTA
   'cta.learnMore': '了解更多',
+
+  // Promotional
+  'promo.limitedTime': '限時優惠',
+  'promo.spotsRemaining': '個名額剩餘',
+  'promo.of': '/',
+  'promo.save': '省',
+  'promo.originalPrice': '原價',
+  'promo.earlyBird': '早鳥優惠',
+  'promo.firstMembers': '限前 10 名會員',
 
   // Assessment Preparation
   'assessment.prep.title': '評估準備事項',
