@@ -75,7 +75,7 @@ const Index = () => {
       name: t('pricing.foundations.name'),
       currency: "NT$",
       price: { monthly: 10000, yearly: 10000 * 12 },
-      originalPrice: { monthly: 14000, yearly: 14000 * 12 },
+      originalPrice: { monthly: 13000, yearly: 13000 * 12 },
       description: t('pricing.foundations.description'),
       icon: <Dumbbell className="w-7 h-7" />,
       isPromo: true,
