@@ -39,7 +39,7 @@ const zh = {
 
   // Assessment Process
   'assessment.title': '我們的評估流程',
-  'assessment.description': '7 小時評估與訓練。',
+  'assessment.description': '7 小時評估與訓練',
   'assessment.processDescription': '每季，會員會完成一項由五部分組成的評估，以確保訓練保持一致且有效。',
 
   'assessment.joint.title': '關節健康',
