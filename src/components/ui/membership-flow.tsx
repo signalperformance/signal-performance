@@ -31,8 +31,35 @@ export function MembershipFlow({
   const [activeTier, setActiveTier] = useState<string>(orderedTiers[0]?.id ?? tiers[0]?.id);
   const currentTier = useMemo(() => orderedTiers.find(x => x.id === activeTier) ?? orderedTiers[0] ?? tiers[0], [activeTier, orderedTiers, tiers]);
   const sectionTitle = title ?? t("pricing.title");
+  
+  // Check if any tier is promotional to show banner
+  const hasPromoTier = useMemo(() => tiers.some(tier => tier.isPromo), [tiers]);
+  
   return <section className={cn("section-padding text-foreground", "overflow-hidden", className)}>
       <div className="container mx-auto container-padding">
+        {/* Promotional Banner */}
+        {hasPromoTier && (
+          <div className="mb-8 bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-2xl p-6 text-center">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="flex-1">
+                <h3 className="font-bold text-lg mb-2">{t("promo.limitedOffer")}</h3>
+                <p className="text-sm opacity-90">{t("promo.urgencyMessage")}</p>
+              </div>
+              <div className="flex flex-col items-center gap-2 min-w-[200px]">
+                <div className="w-full bg-white/20 rounded-full h-3">
+                  <div 
+                    className="bg-white rounded-full h-3 transition-all duration-500"
+                    style={{ width: "40%" }}
+                  />
+                </div>
+                <div className="text-sm font-medium">
+                  <span className="font-bold">4</span> {t("promo.spotsTaken")} • <span className="font-bold">6</span> {t("promo.remaining")}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+        
         <div className="flex flex-col items-center gap-4 mb-10 md:mb-14 text-center">
           <h2 data-scroll-anchor className="text-3xl md:text-4xl font-bold font-lora">{sectionTitle}</h2>
           {subtitle && <p className="text-muted-foreground max-w-2xl">{subtitle}</p>}
