@@ -46,6 +46,20 @@ const Hero = () => {
     window.location.href = 'https://calendly.com/noah-signalperformance/assessment';
   };
 
+  const handleScrollToPhilosophy = () => {
+    const section = document.getElementById('philosophy');
+    if (!section) return;
+
+    const nav = document.getElementById("site-nav");
+    const offset = (nav?.offsetHeight ?? 0) + 12; // extra space so previous section color isn't visible
+
+    const anchor = section.querySelector("[data-scroll-anchor], h1, h2, h3") as HTMLElement | null;
+    const target = anchor ?? section;
+
+    const top = target.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top, behavior: "smooth" });
+  };
+
   return (
     <section className="relative min-h-[100svh] overflow-hidden flex items-center justify-center">
       {/* Modern Background with CSS-only animations */}
@@ -92,7 +106,7 @@ const Hero = () => {
               {/* Philosophy button */}
               <Button 
                 size="lg" 
-                onClick={() => document.getElementById('philosophy')?.scrollIntoView({ behavior: 'smooth' })} 
+                onClick={handleScrollToPhilosophy} 
                 className="text-signal-charcoal font-medium px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg flex items-center gap-2 bg-white hover:bg-white/90 active:bg-white focus:bg-white transition-all duration-300 hover:shadow-lg hover:scale-105"
               >
                 {t('hero.cta.membership')}
