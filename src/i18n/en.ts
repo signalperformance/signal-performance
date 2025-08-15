@@ -200,6 +200,10 @@ const en = {
   'promo.originalPrice': 'Original Price',
   'promo.earlyBird': 'Early Bird Special',
   'promo.firstMembers': 'Limited to First 10 Members',
+  'promo.limitedOffer': 'Limited Time Offer!',
+  'promo.urgencyMessage': 'Only a few spots left - secure your membership today!',
+  'promo.spotsTaken': 'spots taken',
+  'promo.remaining': 'remaining',
 
   // Assessment Preparation
   'assessment.prep.title': 'Assessment Preparation',

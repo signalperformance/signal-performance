@@ -200,6 +200,10 @@ const zh = {
   'promo.originalPrice': '原價',
   'promo.earlyBird': '早鳥優惠',
   'promo.firstMembers': '限前 10 名會員',
+  'promo.limitedOffer': '限時優惠！',
+  'promo.urgencyMessage': '僅剩少數名額 - 立即預約！',
+  'promo.spotsTaken': '名額已預約',
+  'promo.remaining': '剩餘',
 
   // Assessment Preparation
   'assessment.prep.title': '評估準備事項',
