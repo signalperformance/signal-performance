@@ -12,28 +12,26 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
     const preloadResources = async () => {
       const promises = [];
 
-      // Preload the new gold logo image for loading screen
-      const logoPromise = new Promise((resolve) => {
+      // Only preload critical images for faster loading
+      const criticalImages = [
+        "/lovable-uploads/a46da5a6-283e-4115-91d7-c1373de8fb80.png", // Loading logo
+        "/lovable-uploads/0959e8f0-e34c-4d16-9e3e-16462b6d8961.png"  // Navbar logo
+      ];
+      
+      const imagePromises = criticalImages.map(src => new Promise((resolve) => {
         const img = new Image();
         img.onload = () => resolve(true);
-        img.src = "/lovable-uploads/a46da5a6-283e-4115-91d7-c1373de8fb80.png";
-      });
-      promises.push(logoPromise);
-
-      // Preload the navbar logo to prevent flash
-      const navbarLogoPromise = new Promise((resolve) => {
-        const img = new Image();
-        img.onload = () => resolve(true);
-        img.src = "/lovable-uploads/0959e8f0-e34c-4d16-9e3e-16462b6d8961.png";
-      });
-      promises.push(navbarLogoPromise);
+        img.onerror = () => resolve(true); // Don't fail loading if image fails
+        img.src = src;
+      }));
+      promises.push(...imagePromises);
 
       // Wait for fonts to load
       const fontPromise = document.fonts.ready;
       promises.push(fontPromise);
 
-      // Minimum loading time for smooth experience
-      const minLoadTime = new Promise(resolve => setTimeout(resolve, 2000));
+      // Reduced loading time for better performance
+      const minLoadTime = new Promise(resolve => setTimeout(resolve, 800));
       promises.push(minLoadTime);
 
       try {

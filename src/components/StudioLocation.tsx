@@ -42,6 +42,7 @@ const StudioLocation = () => {
                             src={image} 
                             alt={`Studio view ${index + 1}`}
                             className="w-full h-full object-cover"
+                            loading="lazy"
                           />
                         </div>
                       </CarouselItem>

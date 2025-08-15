@@ -1,5 +1,5 @@
 
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, Suspense } from "react";
 import { useLoadingState } from "@/hooks/useLoadingState";
 import LoadingScreen from "@/components/LoadingScreen";
 import Navbar from "@/components/Navbar";
@@ -8,10 +8,10 @@ import About from "@/components/About";
 import Membership from "@/components/Membership";
 import AssessmentProcess from "@/components/AssessmentProcess";
 
-import Philosophy from "@/components/Philosophy";
+import LazyPhilosophy from "@/components/lazy/LazyPhilosophy";
 
-import WeeklySchedule from "@/components/WeeklySchedule";
-import StudioLocation from "@/components/StudioLocation";
+import LazyWeeklySchedule from "@/components/lazy/LazyWeeklySchedule";
+import LazyStudioLocation from "@/components/lazy/LazyStudioLocation";
 import Footer from "@/components/Footer";
 import FloatingAssessmentButton from "@/components/FloatingAssessmentButton";
 import { MembershipFlow } from "@/components/ui/membership-flow";
@@ -99,7 +99,9 @@ const Index = () => {
         <Hero />
       </section>
       <section id="philosophy" className="bg-muted scroll-mt-24 lg:scroll-mt-32">
-        <Philosophy />
+        <Suspense fallback={<div className="min-h-[400px] flex items-center justify-center"><div className="animate-spin w-8 h-8 border-2 border-signal-gold border-t-transparent rounded-full"></div></div>}>
+          <LazyPhilosophy />
+        </Suspense>
       </section>
       <section id="getting-started" className="bg-card scroll-mt-24 lg:scroll-mt-32">
         <MembershipFlow tiers={membershipTiers} subtitle={t('gettingstarted.subtitle')} />
@@ -108,13 +110,17 @@ const Index = () => {
         <Membership />
       </section>
       <section id="weekly-schedule" className="bg-muted scroll-mt-24 lg:scroll-mt-32">
-        <WeeklySchedule />
+        <Suspense fallback={<div className="min-h-[400px] flex items-center justify-center"><div className="animate-spin w-8 h-8 border-2 border-signal-gold border-t-transparent rounded-full"></div></div>}>
+          <LazyWeeklySchedule />
+        </Suspense>
       </section>
       <section id="assessment-process" className="bg-muted scroll-mt-24 lg:scroll-mt-32">
         <AssessmentProcess />
       </section>
       <section id="studio-location" className="bg-muted scroll-mt-24 lg:scroll-mt-32">
-        <StudioLocation />
+        <Suspense fallback={<div className="min-h-[400px] flex items-center justify-center"><div className="animate-spin w-8 h-8 border-2 border-signal-gold border-t-transparent rounded-full"></div></div>}>
+          <LazyStudioLocation />
+        </Suspense>
       </section>
       <section id="about" className="bg-card scroll-mt-24 lg:scroll-mt-32">
         <About />
