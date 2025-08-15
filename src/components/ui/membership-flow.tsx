@@ -32,34 +32,8 @@ export function MembershipFlow({
   const currentTier = useMemo(() => orderedTiers.find(x => x.id === activeTier) ?? orderedTiers[0] ?? tiers[0], [activeTier, orderedTiers, tiers]);
   const sectionTitle = title ?? t("pricing.title");
   
-  // Check if any tier is promotional to show banner
-  const hasPromoTier = useMemo(() => tiers.some(tier => tier.isPromo), [tiers]);
-  
   return <section className={cn("section-padding text-foreground", "overflow-hidden", className)}>
       <div className="container mx-auto container-padding">
-        {/* Promotional Banner */}
-        {hasPromoTier && (
-          <div className="mb-8 bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-2xl p-6 text-center">
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="flex-1">
-                <h3 className="font-bold text-lg mb-2">{t("promo.limitedOffer")}</h3>
-                
-              </div>
-              <div className="flex flex-col items-center gap-2 min-w-[200px]">
-                <div className="w-full bg-white/20 rounded-full h-3">
-                  <div 
-                    className="bg-white rounded-full h-3 transition-all duration-500"
-                    style={{ width: "40%" }}
-                  />
-                </div>
-                <div className="text-sm font-medium">
-                  <span className="font-bold">4</span> {t("promo.spotsTaken")} • <span className="font-bold">6</span> {t("promo.remaining")}
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-        
         <div className="flex flex-col items-center gap-4 mb-10 md:mb-14 text-center">
           <h2 data-scroll-anchor className="text-3xl md:text-4xl font-bold font-lora">{sectionTitle}</h2>
           {subtitle && <p className="text-muted-foreground max-w-2xl">{subtitle}</p>}
@@ -73,6 +47,26 @@ export function MembershipFlow({
                 <Badge variant="outline" className="rounded-full border border-primary bg-primary/10 text-foreground px-4 py-1.5 text-xs md:text-sm font-medium whitespace-nowrap">
                   {t("flow.step1")}
                 </Badge>
+              </div>
+
+              {/* Assessment Promo Banner */}
+              <div className="mb-4 bg-gradient-to-r from-red-500/90 to-orange-500/90 text-white rounded-xl p-4">
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
+                  <div className="flex-1 text-center sm:text-left">
+                    <h4 className="font-bold text-sm">{t("promo.limitedOffer")}</h4>
+                  </div>
+                  <div className="flex flex-col items-center gap-1.5 min-w-[160px]">
+                    <div className="w-full bg-white/20 rounded-full h-2">
+                      <div 
+                        className="bg-white rounded-full h-2 transition-all duration-500"
+                        style={{ width: "40%" }}
+                      />
+                    </div>
+                    <div className="text-xs font-medium">
+                      <span className="font-bold">4</span> {t("promo.spotsTaken")} • <span className="font-bold">6</span> {t("promo.remaining")}
+                    </div>
+                  </div>
+                </div>
               </div>
 
                 <div className="mb-6">
@@ -169,6 +163,28 @@ export function MembershipFlow({
 
                 {orderedTiers.map(tier => (
                   <TabsContent key={tier.id} value={tier.id} className="mt-0">
+                    {/* Monthly Program Promo Banner - Only show for promotional tiers */}
+                    {tier.isPromo && (
+                      <div className="mb-4 bg-gradient-to-r from-red-500/90 to-orange-500/90 text-white rounded-xl p-4">
+                        <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
+                          <div className="flex-1 text-center sm:text-left">
+                            <h4 className="font-bold text-sm">{t("promo.limitedOffer")}</h4>
+                          </div>
+                          <div className="flex flex-col items-center gap-1.5 min-w-[160px]">
+                            <div className="w-full bg-white/20 rounded-full h-2">
+                              <div 
+                                className="bg-white rounded-full h-2 transition-all duration-500"
+                                style={{ width: "40%" }}
+                              />
+                            </div>
+                            <div className="text-xs font-medium">
+                              <span className="font-bold">4</span> {t("promo.spotsTaken")} • <span className="font-bold">6</span> {t("promo.remaining")}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                    
                     <div className="mb-6">
                       <div className="flex items-baseline gap-2 min-h-[2.75rem] my-[12px]">
                         {tier.originalPrice && tier.isPromo && (
