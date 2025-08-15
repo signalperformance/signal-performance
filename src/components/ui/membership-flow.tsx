@@ -43,7 +43,7 @@ export function MembershipFlow({
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="flex-1">
                 <h3 className="font-bold text-lg mb-2">{t("promo.limitedOffer")}</h3>
-                <p className="text-sm opacity-90">{t("promo.urgencyMessage")}</p>
+                
               </div>
               <div className="flex flex-col items-center gap-2 min-w-[200px]">
                 <div className="w-full bg-white/20 rounded-full h-3">
