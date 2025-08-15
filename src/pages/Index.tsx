@@ -74,15 +74,10 @@ const Index = () => {
       id: "foundations",
       name: t('pricing.foundations.name'),
       currency: "NT$",
-      price: { monthly: 10000, yearly: 10000 * 12 },
-      originalPrice: { monthly: 13000, yearly: 13000 * 12 },
+      price: { monthly: 13000, yearly: 13000 * 12 },
       description: t('pricing.foundations.description'),
       icon: <Dumbbell className="w-7 h-7" />,
-      isPromo: true,
-      promoDetails: {
-        spotsRemaining: 6,
-        totalSpots: 10
-      },
+      isPromo: false,
       features: [
         { name: t('pricing.features.physical.3x'), included: true },
         { name: t('pricing.features.mental.2x'), included: false },
