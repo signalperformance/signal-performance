@@ -46,7 +46,7 @@ const en = {
   'assessment.joint.description': 'We assess passive and active range of motion across all joints to identify limitations and their causes. These insights shape your program to reduce injury risk, support long-term joint health, and track progress over time.',
 
   'assessment.strength.title': 'Maximal Strength',
-  'assessment.strength.description': 'We assess maximal strength to measure how effectively the neuromuscular system generates force. Greater maximal strength allows lighter loads—like a golf club—to be moved faster, directly supporting increases in swing speed.',
+  'assessment.strength.description': 'We assess maximal strength to measure how effectively the neuromuscular system generates force. Greater strength lowers the relative effort of lighter weights, such as a golf club, creating the potential for faster swing speed.',
 
   'assessment.metabolic.title': 'Cardiorespiratory Endurance',
   'assessment.metabolic.description': 'We evaluate cardiovascular endurance to understand how efficiently your body delivers and uses oxygen. This allows us to set personalized training zones that improve stamina, accelerate recovery, and support consistent performance throughout multiple rounds of golf.',

@@ -46,7 +46,7 @@ const zh = {
   'assessment.joint.description': '評估每個主要關節的主動與被動活動範圍，找出動作受限的根本原因。這些資料將用來調整訓練計畫，降低受傷風險並維持長期關節健康。所有變化都會被紀錄與追蹤，持續優化訓練方向。',
 
   'assessment.strength.title': '最大肌力',
-  'assessment.strength.description': '透過臥推、硬舉等複合動作測量最大肌力，了解神經肌肉系統的出力效率。隨著最大肌力提升，你將能更快地揮動像高爾夫球桿這類較輕的器具，進而提升揮桿速度。',
+  'assessment.strength.description': '我們評估最大肌力，以測量神經肌肉系統產生力量的效率。更高的肌力能降低處理較輕重量的相對用力，提升動作速度與揮桿表現的潛力。',
 
   'assessment.metabolic.title': '心肺耐力',
   'assessment.metabolic.description': '我們評估心肺耐力，以了解身體輸送與利用氧氣的效率。透過這些結果，我們能制定個人化的訓練區間，幫助提升體能、加快恢復，並在多回合比賽中維持穩定表現。',
