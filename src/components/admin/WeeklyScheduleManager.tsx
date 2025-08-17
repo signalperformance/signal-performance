@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Plus, Trash2 } from 'lucide-react';
-import { ScheduleEntry, DayOfWeek, ClassType } from '@/types/admin';
+import { ScheduleEntry, DayOfWeek, ClassType, SessionType } from '@/types/admin';
 import { mockSchedule } from '@/data/mockAdminData';
 import { BulkAddClassModal } from './BulkAddClassModal';
 import { EditClassModal } from './EditClassModal';
@@ -30,6 +30,12 @@ export function WeeklyScheduleManager() {
       power: 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200',
     };
     return colors[classType];
+  };
+
+  const getSessionCardColor = (sessionType: SessionType) => {
+    return sessionType === 'pro' 
+      ? 'bg-signal-gold/20 border-signal-gold/30 hover:bg-signal-gold/30' 
+      : 'bg-charcoal/10 border-charcoal/20 hover:bg-charcoal/20';
   };
 
   const handleAddClasses = (classesData: Omit<ScheduleEntry, 'id'>[]) => {
@@ -94,7 +100,7 @@ export function WeeklyScheduleManager() {
                       dayClasses.map((entry) => (
                         <div 
                           key={entry.id} 
-                          className="bg-muted/50 rounded-lg p-3 space-y-2 group hover:bg-muted/80 transition-colors cursor-pointer"
+                          className={`rounded-lg p-3 space-y-2 group transition-colors cursor-pointer border ${getSessionCardColor(entry.sessionType)}`}
                           onClick={() => handleEditClass(entry)}
                         >
                           <div className="flex items-center justify-between">
@@ -105,9 +111,6 @@ export function WeeklyScheduleManager() {
                                   className={getClassTypeColor(entry.classType)}
                                 >
                                   {entry.classType.charAt(0).toUpperCase()}
-                                </Badge>
-                                <Badge variant={entry.sessionType === 'pro' ? 'default' : 'outline'}>
-                                  {entry.sessionType}
                                 </Badge>
                               </div>
                               <p className="text-sm font-medium">
