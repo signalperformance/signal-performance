@@ -14,6 +14,152 @@ export type Database = {
   }
   public: {
     Tables: {
+      clients: {
+        Row: {
+          created_at: string | null
+          email: string
+          goals: string | null
+          handicap: string | null
+          id: string
+          name: string
+          phone: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          email: string
+          goals?: string | null
+          handicap?: string | null
+          id?: string
+          name: string
+          phone?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          email?: string
+          goals?: string | null
+          handicap?: string | null
+          id?: string
+          name?: string
+          phone?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      membership_plans: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          id: string
+          monthly_price: number
+          name: string
+          type: Database["public"]["Enums"]["membership_plan_type"]
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          monthly_price: number
+          name: string
+          type: Database["public"]["Enums"]["membership_plan_type"]
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          monthly_price?: number
+          name?: string
+          type?: Database["public"]["Enums"]["membership_plan_type"]
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      memberships: {
+        Row: {
+          client_id: string
+          created_at: string | null
+          id: string
+          plan_id: string
+          start_date: string
+          status: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          client_id: string
+          created_at?: string | null
+          id?: string
+          plan_id: string
+          start_date: string
+          status?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          client_id?: string
+          created_at?: string | null
+          id?: string
+          plan_id?: string
+          start_date?: string
+          status?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "memberships_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "memberships_plan_id_fkey"
+            columns: ["plan_id"]
+            isOneToOne: false
+            referencedRelation: "membership_plans"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      one_on_one_slots: {
+        Row: {
+          client_id: string | null
+          created_at: string | null
+          day_of_week: Database["public"]["Enums"]["weekday"]
+          id: string
+          is_available: boolean | null
+          start_time: string
+          updated_at: string | null
+        }
+        Insert: {
+          client_id?: string | null
+          created_at?: string | null
+          day_of_week: Database["public"]["Enums"]["weekday"]
+          id?: string
+          is_available?: boolean | null
+          start_time: string
+          updated_at?: string | null
+        }
+        Update: {
+          client_id?: string | null
+          created_at?: string | null
+          day_of_week?: Database["public"]["Enums"]["weekday"]
+          id?: string
+          is_available?: boolean | null
+          start_time?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "one_on_one_slots_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_roles: {
         Row: {
           id: string
@@ -62,6 +208,39 @@ export type Database = {
         }
         Relationships: []
       }
+      weekly_class_templates: {
+        Row: {
+          class_type: Database["public"]["Enums"]["class_type"]
+          created_at: string | null
+          day_of_week: Database["public"]["Enums"]["weekday"]
+          id: string
+          session_level: Database["public"]["Enums"]["session_level"]
+          slots_available: number
+          start_time: string
+          updated_at: string | null
+        }
+        Insert: {
+          class_type: Database["public"]["Enums"]["class_type"]
+          created_at?: string | null
+          day_of_week: Database["public"]["Enums"]["weekday"]
+          id?: string
+          session_level: Database["public"]["Enums"]["session_level"]
+          slots_available?: number
+          start_time: string
+          updated_at?: string | null
+        }
+        Update: {
+          class_type?: Database["public"]["Enums"]["class_type"]
+          created_at?: string | null
+          day_of_week?: Database["public"]["Enums"]["weekday"]
+          id?: string
+          session_level?: Database["public"]["Enums"]["session_level"]
+          slots_available?: number
+          start_time?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -77,6 +256,17 @@ export type Database = {
     }
     Enums: {
       app_role: "admin" | "moderator" | "user"
+      class_type: "mobility" | "strength" | "conditioning" | "recovery"
+      membership_plan_type: "basic" | "premium" | "elite"
+      session_level: "pro" | "amateur"
+      weekday:
+        | "monday"
+        | "tuesday"
+        | "wednesday"
+        | "thursday"
+        | "friday"
+        | "saturday"
+        | "sunday"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -205,6 +395,18 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "moderator", "user"],
+      class_type: ["mobility", "strength", "conditioning", "recovery"],
+      membership_plan_type: ["basic", "premium", "elite"],
+      session_level: ["pro", "amateur"],
+      weekday: [
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday",
+        "saturday",
+        "sunday",
+      ],
     },
   },
 } as const
