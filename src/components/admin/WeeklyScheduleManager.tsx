@@ -2,17 +2,27 @@ import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Plus, Edit, Trash2 } from 'lucide-react';
+import { Plus, Edit, Trash2, Calendar, Save, Upload } from 'lucide-react';
 import { ScheduleEntry, DayOfWeek, ClassType, SessionType } from '@/types/admin';
 import { mockSchedule } from '@/data/mockAdminData';
 import { AddClassModal } from './AddClassModal';
+import { BulkAddClassModal } from './BulkAddClassModal';
+import { ScheduleTemplateModal } from './ScheduleTemplateModal';
 
 const daysOfWeek: DayOfWeek[] = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+
+interface ScheduleTemplate {
+  name: string;
+  schedule: ScheduleEntry[];
+}
 
 export function WeeklyScheduleManager() {
   const [schedule, setSchedule] = useState<ScheduleEntry[]>(mockSchedule);
   const [selectedDay, setSelectedDay] = useState<DayOfWeek>('monday');
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isBulkAddModalOpen, setIsBulkAddModalOpen] = useState(false);
+  const [isTemplateModalOpen, setIsTemplateModalOpen] = useState(false);
+  const [savedTemplates, setSavedTemplates] = useState<ScheduleTemplate[]>([]);
 
   const getDaySchedule = (day: DayOfWeek) => {
     return schedule
@@ -38,28 +48,113 @@ export function WeeklyScheduleManager() {
     setSchedule(prev => [...prev, newClass]);
   };
 
+  const handleAddClasses = (classesData: Omit<ScheduleEntry, 'id'>[]) => {
+    const newClasses = classesData.map((classData, index) => ({
+      ...classData,
+      id: (schedule.length + index + 1).toString(),
+    }));
+    setSchedule(prev => [...prev, ...newClasses]);
+  };
+
   const handleDeleteClass = (classId: string) => {
     setSchedule(prev => prev.filter(entry => entry.id !== classId));
+  };
+
+  const handleSaveTemplate = (template: ScheduleTemplate) => {
+    setSavedTemplates(prev => [...prev, template]);
+  };
+
+  const handleLoadTemplate = (templateSchedule: ScheduleEntry[]) => {
+    // Generate new IDs for loaded template
+    const newSchedule = templateSchedule.map((entry, index) => ({
+      ...entry,
+      id: (index + 1).toString(),
+    }));
+    setSchedule(newSchedule);
+  };
+
+  const clearSchedule = () => {
+    if (confirm('Are you sure you want to clear the entire schedule?')) {
+      setSchedule([]);
+    }
   };
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold">Weekly Schedule Manager</h2>
-          <p className="text-muted-foreground">Manage your weekly class schedule</p>
+          <h2 className="text-2xl font-bold">Default Weekly Schedule</h2>
+          <p className="text-muted-foreground">Set your standard recurring weekly class schedule</p>
         </div>
-        <Button onClick={() => setIsAddModalOpen(true)}>
-          <Plus className="h-4 w-4 mr-2" />
-          Add New Class
-        </Button>
+        <div className="flex gap-2">
+          <Button variant="outline" onClick={() => setIsTemplateModalOpen(true)}>
+            <Save className="h-4 w-4 mr-2" />
+            Templates
+          </Button>
+          <Button variant="outline" onClick={clearSchedule}>
+            Clear All
+          </Button>
+          <Button variant="outline" onClick={() => setIsBulkAddModalOpen(true)}>
+            <Calendar className="h-4 w-4 mr-2" />
+            Add Recurring
+          </Button>
+          <Button onClick={() => setIsAddModalOpen(true)}>
+            <Plus className="h-4 w-4 mr-2" />
+            Add Single Class
+          </Button>
+        </div>
       </div>
 
       {/* Day Selector */}
       <Card>
         <CardHeader>
-          <CardTitle>Select Day</CardTitle>
-          <CardDescription>Choose a day to view and manage classes</CardDescription>
+          <CardTitle>Quick Actions</CardTitle>
+          <CardDescription>Manage your schedule efficiently</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="p-4 border border-border rounded-lg text-center">
+              <Calendar className="h-8 w-8 mx-auto mb-2 text-primary" />
+              <h4 className="font-medium mb-1">Recurring Classes</h4>
+              <p className="text-sm text-muted-foreground mb-3">Add the same class to multiple days</p>
+              <Button 
+                variant="outline" 
+                size="sm" 
+                onClick={() => setIsBulkAddModalOpen(true)}
+                className="w-full"
+              >
+                Add Recurring
+              </Button>
+            </div>
+            
+            <div className="p-4 border border-border rounded-lg text-center">
+              <Save className="h-8 w-8 mx-auto mb-2 text-primary" />
+              <h4 className="font-medium mb-1">Save Template</h4>
+              <p className="text-sm text-muted-foreground mb-3">Save current schedule as template</p>
+              <Button 
+                variant="outline" 
+                size="sm" 
+                onClick={() => setIsTemplateModalOpen(true)}
+                className="w-full"
+              >
+                Manage Templates
+              </Button>
+            </div>
+            
+            <div className="p-4 border border-border rounded-lg text-center">
+              <div className="text-2xl font-bold text-primary mb-1">{schedule.length}</div>
+              <h4 className="font-medium mb-1">Total Classes</h4>
+              <p className="text-sm text-muted-foreground">In current schedule</p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Day Selector */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Day View</CardTitle>
+          <CardDescription>Select a day to view and manage individual classes</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="flex flex-wrap gap-2">
@@ -176,6 +271,21 @@ export function WeeklyScheduleManager() {
         onClose={() => setIsAddModalOpen(false)}
         onAddClass={handleAddClass}
         selectedDay={selectedDay}
+      />
+
+      <BulkAddClassModal
+        isOpen={isBulkAddModalOpen}
+        onClose={() => setIsBulkAddModalOpen(false)}
+        onAddClasses={handleAddClasses}
+      />
+
+      <ScheduleTemplateModal
+        isOpen={isTemplateModalOpen}
+        onClose={() => setIsTemplateModalOpen(false)}
+        onSaveTemplate={handleSaveTemplate}
+        onLoadTemplate={handleLoadTemplate}
+        currentSchedule={schedule}
+        savedTemplates={savedTemplates}
       />
     </div>
   );
