@@ -42,19 +42,19 @@ const zh = {
   'assessment.description': '7 小時評估與訓練',
   'assessment.processDescription': '每季，會員會完成一項由五部分組成的評估，以確保訓練保持一致且有效。',
 
-  'assessment.joint.title': '關節健康',
+  'assessment.joint.title': '關節活動度',
   'assessment.joint.description': '評估每個主要關節的主動與被動活動範圍，找出動作受限的根本原因。這些資料將用來調整訓練計畫，降低受傷風險並維持長期關節健康。所有變化都會被紀錄與追蹤，持續優化訓練方向。',
 
   'assessment.strength.title': '最大肌力',
   'assessment.strength.description': '透過臥推、硬舉等複合動作測量最大肌力，了解神經肌肉系統的出力效率。隨著最大肌力提升，你將能更快地揮動像高爾夫球桿這類較輕的器具，進而提升揮桿速度。',
 
-  'assessment.metabolic.title': '新陳代謝測試',
+  'assessment.metabolic.title': '心肺耐力',
   'assessment.metabolic.description': '透過有氧與無氧測試，評估你在不同運動強度下的能量供應效率。我們據此設定個人化心率區間，並設計能提升耐力、加速恢復、讓你多回合比賽中保持穩定表現的體能訓練計畫。',
 
   'assessment.body.title': '身體組成',
   'assessment.body.description': '我們追踪肌肉量和體脂百分比的變化，評估您的訓練是否產生正確的適應。這比單純體重提供更可靠的反饋，並幫助確保您的進步與表現目標一致。',
 
-  'assessment.golf.title': '高爾夫表現評估',
+  'assessment.golf.title': '高爾夫技術',
   'assessment.golf.description': '我們在受控環境中測量每支球桿的擊球距離與落點分佈，以評估您的擊球品質與球路控制表現。若具備比賽數據，將進一步整合分析，以深入解析技術、體能與心理因素對整體表現的相對貢獻。',
 
   // Pricing
