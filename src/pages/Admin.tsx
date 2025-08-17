@@ -2,28 +2,22 @@ import { useState } from 'react';
 import { SidebarProvider } from '@/components/ui/sidebar';
 import { AdminSidebar } from '@/components/admin/AdminSidebar';
 import { AdminHeader } from '@/components/admin/AdminHeader';
-import { AdminDashboard } from '@/components/admin/AdminDashboard';
 import { WeeklyScheduleManager } from '@/components/admin/WeeklyScheduleManager';
 import { UserProfilesManager } from '@/components/admin/UserProfilesManager';
-import { AdminSettings } from '@/components/admin/AdminSettings';
 
-type AdminSection = 'dashboard' | 'schedule' | 'users' | 'settings';
+type AdminSection = 'schedule' | 'users';
 
 const Admin = () => {
-  const [activeSection, setActiveSection] = useState<AdminSection>('dashboard');
+  const [activeSection, setActiveSection] = useState<AdminSection>('schedule');
 
   const renderContent = () => {
     switch (activeSection) {
-      case 'dashboard':
-        return <AdminDashboard />;
       case 'schedule':
         return <WeeklyScheduleManager />;
       case 'users':
         return <UserProfilesManager />;
-      case 'settings':
-        return <AdminSettings />;
       default:
-        return <AdminDashboard />;
+        return <WeeklyScheduleManager />;
     }
   };
 

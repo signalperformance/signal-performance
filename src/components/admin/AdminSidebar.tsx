@@ -1,4 +1,4 @@
-import { LayoutDashboard, Calendar, Users, Settings } from 'lucide-react';
+import { Calendar, Users } from 'lucide-react';
 import {
   Sidebar,
   SidebarContent,
@@ -11,7 +11,7 @@ import {
   SidebarTrigger,
 } from '@/components/ui/sidebar';
 
-type AdminSection = 'dashboard' | 'schedule' | 'users' | 'settings';
+type AdminSection = 'schedule' | 'users';
 
 interface AdminSidebarProps {
   activeSection: AdminSection;
@@ -19,11 +19,6 @@ interface AdminSidebarProps {
 }
 
 const menuItems = [
-  {
-    id: 'dashboard' as AdminSection,
-    title: 'Dashboard',
-    icon: LayoutDashboard,
-  },
   {
     id: 'schedule' as AdminSection,
     title: 'Weekly Schedule',
@@ -33,11 +28,6 @@ const menuItems = [
     id: 'users' as AdminSection,
     title: 'User Profiles',
     icon: Users,
-  },
-  {
-    id: 'settings' as AdminSection,
-    title: 'Settings',
-    icon: Settings,
   },
 ];
 
