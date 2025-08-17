@@ -113,13 +113,6 @@ export type Database = {
             referencedRelation: "clients"
             referencedColumns: ["id"]
           },
-          {
-            foreignKeyName: "memberships_plan_id_fkey"
-            columns: ["plan_id"]
-            isOneToOne: false
-            referencedRelation: "membership_plans"
-            referencedColumns: ["id"]
-          },
         ]
       }
       one_on_one_slots: {
@@ -257,7 +250,7 @@ export type Database = {
     Enums: {
       app_role: "admin" | "moderator" | "user"
       class_type: "mobility" | "strength" | "conditioning" | "recovery"
-      membership_plan_type: "basic" | "premium" | "elite"
+      membership_plan_type: "basic" | "pro"
       session_level: "pro" | "amateur"
       weekday:
         | "monday"
@@ -396,7 +389,7 @@ export const Constants = {
     Enums: {
       app_role: ["admin", "moderator", "user"],
       class_type: ["mobility", "strength", "conditioning", "recovery"],
-      membership_plan_type: ["basic", "premium", "elite"],
+      membership_plan_type: ["basic", "pro"],
       session_level: ["pro", "amateur"],
       weekday: [
         "monday",
