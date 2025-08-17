@@ -52,7 +52,7 @@ const zh = {
   'assessment.metabolic.description': '我們評估心肺耐力，以了解身體輸送與利用氧氣的效率。透過這些結果，我們能制定個人化的訓練區間，幫助提升體能、加快恢復，並在多回合比賽中維持穩定表現。',
 
   'assessment.body.title': '身體組成',
-  'assessment.body.description': '我們追踪肌肉量和體脂百分比的變化，評估您的訓練是否產生正確的適應。這比單純體重提供更可靠的反饋，並幫助確保您的進步與表現目標一致。',
+  'assessment.body.description': '我們追蹤肌肉量與體脂，以評估訓練適應，比單純的體重更能提供可靠的回饋，並顯示訓練是否帶來正確的改變。',
 
   'assessment.golf.title': '高爾夫技術',
   'assessment.golf.description': '我們在受控環境中測量每支球桿的擊球距離與落點分佈，以評估您的擊球品質與球路控制表現。若具備比賽數據，將進一步整合分析，以深入解析技術、體能與心理因素對整體表現的相對貢獻。',
