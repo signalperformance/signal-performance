@@ -52,7 +52,7 @@ const en = {
   'assessment.metabolic.description': 'We evaluate cardiovascular endurance to understand how efficiently your body delivers and uses oxygen. This allows us to set personalized training zones that improve stamina, accelerate recovery, and support consistent performance throughout multiple rounds of golf.',
 
   'assessment.body.title': 'Body Composition',
-  'assessment.body.description': 'e track muscle mass and body fat to evaluate training adaptations, giving more reliable feedback than body weight alone and showing whether your training is driving the right changes.',
+  'assessment.body.description': 'We track muscle mass and body fat to evaluate training adaptations, giving more reliable feedback than body weight alone and showing whether your training is driving the right changes.',
 
   'assessment.golf.title': 'Skill Assessment',
   'assessment.golf.description': 'We measure distance and dispersion across every club to assess ball-striking and shot control in a controlled setting. When available, we combine this with tournament data to better understand how technical, physical, and mental factors contribute to overall performance.',
