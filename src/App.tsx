@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 
 // Lazy load non-critical pages for better initial load performance
 const Assessment = lazy(() => import("./pages/Assessment"));
+const Admin = lazy(() => import("./pages/Admin"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const App = () => (
@@ -21,6 +22,14 @@ const App = () => (
         element={
           <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="animate-spin w-8 h-8 border-2 border-signal-gold border-t-transparent rounded-full"></div></div>}>
             <Assessment />
+          </Suspense>
+        } 
+      />
+      <Route 
+        path="/admin" 
+        element={
+          <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="animate-spin w-8 h-8 border-2 border-signal-gold border-t-transparent rounded-full"></div></div>}>
+            <Admin />
           </Suspense>
         } 
       />
