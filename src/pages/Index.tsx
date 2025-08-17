@@ -49,7 +49,7 @@ const Index = () => {
 
   const membershipTiers = useMemo(() => ([
     {
-      id: "plus",
+      id: "pro",
       name: t('pricing.plus.name'),
       currency: "NT$",
       price: { monthly: 15000, yearly: 15000 * 12 },
@@ -71,7 +71,7 @@ const Index = () => {
       ],
     },
     {
-      id: "foundations",
+      id: "basic",
       name: t('pricing.foundations.name'),
       currency: "NT$",
       price: { monthly: 13000, yearly: 13000 * 12 },

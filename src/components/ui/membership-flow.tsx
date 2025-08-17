@@ -23,9 +23,9 @@ export function MembershipFlow({
   } = useLanguage();
   const assessmentFeatures = useMemo(() => [t("gettingstarted.assessmentPackage.bullets.assess"), t("gettingstarted.assessmentPackage.bullets.review"), t("gettingstarted.assessmentPackage.bullets.train")], [t]);
   const orderedTiers = useMemo(() => {
-    // Ensure Pro (plus) shows first by default
-    const pro = tiers.find(x => x.id === "plus");
-    const basic = tiers.find(x => x.id === "foundations");
+    // Ensure Pro shows first by default
+    const pro = tiers.find(x => x.id === "pro");
+    const basic = tiers.find(x => x.id === "basic");
     return [pro, basic].filter(Boolean) as PricingTier[];
   }, [tiers]);
   const [activeTier, setActiveTier] = useState<string>(orderedTiers[0]?.id ?? tiers[0]?.id);
@@ -137,7 +137,7 @@ export function MembershipFlow({
             "rounded-3xl transition-all duration-300",
             "flex flex-col border border-border shadow-lg hover:shadow-xl",
             "bg-secondary",
-            activeTier === "plus" && "ring-1 ring-primary/20"
+            activeTier === "pro" && "ring-1 ring-primary/20"
           )}>
             <div className="p-6 md:p-8 flex-1">
               <Tabs value={activeTier} onValueChange={setActiveTier} className="w-full">
