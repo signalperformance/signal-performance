@@ -104,7 +104,7 @@ export function AdminDashboard() {
                       </Badge>
                     </div>
                     <p className="text-sm text-muted-foreground">
-                      {entry.startTime} - {entry.endTime}
+                      {entry.startTime} ({entry.duration}min)
                     </p>
                   </div>
                   <div className="text-right">

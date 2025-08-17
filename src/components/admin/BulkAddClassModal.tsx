@@ -26,10 +26,10 @@ export function BulkAddClassModal({ isOpen, onClose, onAddClasses }: BulkAddClas
   const [selectedDays, setSelectedDays] = useState<DayOfWeek[]>([]);
   const [formData, setFormData] = useState({
     startTime: '',
-    endTime: '',
+    duration: 60,
     classType: 'mobility' as ClassType,
     sessionType: 'amateur' as SessionType,
-    maxParticipants: 8,
+    maxParticipants: 3,
     isActive: true,
   });
 
@@ -44,7 +44,7 @@ export function BulkAddClassModal({ isOpen, onClose, onAddClasses }: BulkAddClas
     const newClasses = selectedDays.map(day => ({
       dayOfWeek: day,
       startTime: formData.startTime,
-      endTime: formData.endTime,
+      duration: formData.duration,
       classType: formData.classType,
       sessionType: formData.sessionType,
       maxParticipants: formData.maxParticipants,
@@ -57,10 +57,10 @@ export function BulkAddClassModal({ isOpen, onClose, onAddClasses }: BulkAddClas
     setSelectedDays([]);
     setFormData({
       startTime: '',
-      endTime: '',
+      duration: 60,
       classType: 'mobility',
       sessionType: 'amateur',
-      maxParticipants: 8,
+      maxParticipants: 3,
       isActive: true,
     });
     onClose();
@@ -150,12 +150,15 @@ export function BulkAddClassModal({ isOpen, onClose, onAddClasses }: BulkAddClas
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="endTime">End Time</Label>
+              <Label htmlFor="duration">Duration (minutes)</Label>
               <Input
-                id="endTime"
-                type="time"
-                value={formData.endTime}
-                onChange={(e) => handleInputChange('endTime', e.target.value)}
+                id="duration"
+                type="number"
+                min="15"
+                max="180"
+                step="15"
+                value={formData.duration}
+                onChange={(e) => handleInputChange('duration', parseInt(e.target.value))}
                 required
               />
             </div>

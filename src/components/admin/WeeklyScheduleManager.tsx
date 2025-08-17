@@ -6,12 +6,15 @@ import { Plus, Trash2 } from 'lucide-react';
 import { ScheduleEntry, DayOfWeek, ClassType } from '@/types/admin';
 import { mockSchedule } from '@/data/mockAdminData';
 import { BulkAddClassModal } from './BulkAddClassModal';
+import { EditClassModal } from './EditClassModal';
 
 const daysOfWeek: DayOfWeek[] = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
 
 export function WeeklyScheduleManager() {
   const [schedule, setSchedule] = useState<ScheduleEntry[]>(mockSchedule);
   const [isBulkAddModalOpen, setIsBulkAddModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [selectedClass, setSelectedClass] = useState<ScheduleEntry | null>(null);
 
   const getDaySchedule = (day: DayOfWeek) => {
     return schedule
@@ -39,6 +42,17 @@ export function WeeklyScheduleManager() {
 
   const handleDeleteClass = (classId: string) => {
     setSchedule(prev => prev.filter(entry => entry.id !== classId));
+  };
+
+  const handleEditClass = (classEntry: ScheduleEntry) => {
+    setSelectedClass(classEntry);
+    setIsEditModalOpen(true);
+  };
+
+  const handleUpdateClass = (updatedClass: ScheduleEntry) => {
+    setSchedule(prev => prev.map(entry => 
+      entry.id === updatedClass.id ? updatedClass : entry
+    ));
   };
 
   return (
@@ -80,7 +94,8 @@ export function WeeklyScheduleManager() {
                       dayClasses.map((entry) => (
                         <div 
                           key={entry.id} 
-                          className="bg-muted/50 rounded-lg p-3 space-y-2 group hover:bg-muted/80 transition-colors"
+                          className="bg-muted/50 rounded-lg p-3 space-y-2 group hover:bg-muted/80 transition-colors cursor-pointer"
+                          onClick={() => handleEditClass(entry)}
                         >
                           <div className="flex items-center justify-between">
                             <div className="space-y-1">
@@ -96,7 +111,7 @@ export function WeeklyScheduleManager() {
                                 </Badge>
                               </div>
                               <p className="text-sm font-medium">
-                                {entry.startTime} - {entry.endTime}
+                                {entry.startTime} ({entry.duration}min)
                               </p>
                               <p className="text-xs text-muted-foreground">
                                 Max: {entry.maxParticipants}
@@ -106,7 +121,10 @@ export function WeeklyScheduleManager() {
                               variant="ghost"
                               size="icon"
                               className="opacity-0 group-hover:opacity-100 transition-opacity h-6 w-6"
-                              onClick={() => handleDeleteClass(entry.id)}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleDeleteClass(entry.id);
+                              }}
                             >
                               <Trash2 className="h-3 w-3" />
                             </Button>
@@ -126,6 +144,13 @@ export function WeeklyScheduleManager() {
         isOpen={isBulkAddModalOpen}
         onClose={() => setIsBulkAddModalOpen(false)}
         onAddClasses={handleAddClasses}
+      />
+
+      <EditClassModal
+        isOpen={isEditModalOpen}
+        onClose={() => setIsEditModalOpen(false)}
+        classEntry={selectedClass}
+        onUpdateClass={handleUpdateClass}
       />
     </div>
   );

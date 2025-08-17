@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -11,97 +11,89 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { ScheduleEntry, DayOfWeek, ClassType, SessionType } from '@/types/admin';
+import { ScheduleEntry, ClassType, SessionType } from '@/types/admin';
 
-interface AddClassModalProps {
+interface EditClassModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onAddClass: (classEntry: Omit<ScheduleEntry, 'id'>) => void;
-  selectedDay: DayOfWeek;
+  classEntry: ScheduleEntry | null;
+  onUpdateClass: (updatedClass: ScheduleEntry) => void;
 }
 
-export function AddClassModal({ isOpen, onClose, onAddClass, selectedDay }: AddClassModalProps) {
+export function EditClassModal({ isOpen, onClose, classEntry, onUpdateClass }: EditClassModalProps) {
   const [formData, setFormData] = useState({
-    dayOfWeek: selectedDay,
     startTime: '',
-    endTime: '',
+    duration: 60,
     classType: 'mobility' as ClassType,
     sessionType: 'amateur' as SessionType,
-    maxParticipants: 8,
-    isActive: true,
+    maxParticipants: 3,
   });
+
+  useEffect(() => {
+    if (classEntry) {
+      setFormData({
+        startTime: classEntry.startTime,
+        duration: classEntry.duration,
+        classType: classEntry.classType,
+        sessionType: classEntry.sessionType,
+        maxParticipants: classEntry.maxParticipants,
+      });
+    }
+  }, [classEntry]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onAddClass(formData);
-    setFormData({
-      dayOfWeek: selectedDay,
-      startTime: '',
-      endTime: '',
-      classType: 'mobility',
-      sessionType: 'amateur',
-      maxParticipants: 8,
-      isActive: true,
-    });
+    
+    if (!classEntry) return;
+
+    const updatedClass: ScheduleEntry = {
+      ...classEntry,
+      ...formData,
+    };
+
+    onUpdateClass(updatedClass);
     onClose();
   };
 
-  const handleInputChange = (field: string, value: string | number | boolean) => {
+  const handleInputChange = (field: string, value: string | number) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
+  if (!classEntry) return null;
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[400px]">
         <DialogHeader>
-          <DialogTitle>Add New Class</DialogTitle>
+          <DialogTitle>Edit Class</DialogTitle>
           <DialogDescription>
-            Create a new class for {selectedDay}.
+            Modify the class details for {classEntry.dayOfWeek}.
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="dayOfWeek">Day</Label>
-            <Select
-              value={formData.dayOfWeek}
-              onValueChange={(value) => handleInputChange('dayOfWeek', value)}
-            >
-              <SelectTrigger>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="monday">Monday</SelectItem>
-                <SelectItem value="tuesday">Tuesday</SelectItem>
-                <SelectItem value="wednesday">Wednesday</SelectItem>
-                <SelectItem value="thursday">Thursday</SelectItem>
-                <SelectItem value="friday">Friday</SelectItem>
-                <SelectItem value="saturday">Saturday</SelectItem>
-                <SelectItem value="sunday">Sunday</SelectItem>
-              </SelectContent>
-            </Select>
+            <Label htmlFor="startTime">Start Time</Label>
+            <Input
+              id="startTime"
+              type="time"
+              value={formData.startTime}
+              onChange={(e) => handleInputChange('startTime', e.target.value)}
+              required
+            />
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="startTime">Start Time</Label>
-              <Input
-                id="startTime"
-                type="time"
-                value={formData.startTime}
-                onChange={(e) => handleInputChange('startTime', e.target.value)}
-                required
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="endTime">End Time</Label>
-              <Input
-                id="endTime"
-                type="time"
-                value={formData.endTime}
-                onChange={(e) => handleInputChange('endTime', e.target.value)}
-                required
-              />
-            </div>
+          <div className="space-y-2">
+            <Label htmlFor="duration">Duration (minutes)</Label>
+            <Input
+              id="duration"
+              type="number"
+              min="15"
+              max="180"
+              step="15"
+              value={formData.duration}
+              onChange={(e) => handleInputChange('duration', parseInt(e.target.value))}
+              required
+            />
           </div>
 
           <div className="space-y-2">
@@ -155,7 +147,9 @@ export function AddClassModal({ isOpen, onClose, onAddClass, selectedDay }: AddC
             <Button type="button" variant="outline" onClick={onClose}>
               Cancel
             </Button>
-            <Button type="submit">Add Class</Button>
+            <Button type="submit">
+              Update Class
+            </Button>
           </DialogFooter>
         </form>
       </DialogContent>

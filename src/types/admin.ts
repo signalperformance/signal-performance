@@ -24,7 +24,7 @@ export interface ScheduleEntry {
   id: string;
   dayOfWeek: DayOfWeek;
   startTime: string; // "09:00"
-  endTime: string; // "10:00"
+  duration: number; // duration in minutes
   classType: ClassType;
   sessionType: SessionType;
   maxParticipants: number;
