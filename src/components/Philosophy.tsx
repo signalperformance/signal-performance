@@ -40,14 +40,14 @@ const Philosophy = () => {
               alt="Signal wave with red spike (Chinese)" 
               className="w-full max-w-5xl h-auto object-contain lg:hidden" 
               src="/lovable-uploads/4bdd82f1-a74e-471c-ad2d-72a158c7e24e.png"
-              loading="lazy"
+              loading="eager"
             />
           ) : (
             <img 
               alt="Signal wave with red spike" 
               className="w-full max-w-5xl h-auto object-contain lg:hidden" 
               src="/lovable-uploads/bad88ef0-fed5-4d79-90c4-5fbeed980400.png"
-              loading="lazy"
+              loading="eager"
             />
           )}
           
@@ -57,14 +57,14 @@ const Philosophy = () => {
               alt="Signal wave with red spike (Chinese)" 
               className="w-full max-w-5xl h-auto object-contain hidden lg:block" 
               src="/lovable-uploads/23ce2472-9cbc-4d05-bd80-cd0ac6eb27a8.png"
-              loading="lazy"
+              loading="eager"
             />
           ) : (
             <img 
               alt="Signal wave with red spike" 
               className="w-full max-w-5xl h-auto object-contain hidden lg:block" 
               src="/lovable-uploads/2277bfb2-f510-4e78-bf50-410d94a0f83b.png"
-              loading="lazy"
+              loading="eager"
             />
           )}
         </div>

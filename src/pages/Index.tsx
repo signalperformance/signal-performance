@@ -8,7 +8,7 @@ import About from "@/components/About";
 import Membership from "@/components/Membership";
 import AssessmentProcess from "@/components/AssessmentProcess";
 
-import LazyPhilosophy from "@/components/lazy/LazyPhilosophy";
+import Philosophy from "@/components/Philosophy";
 
 import LazyWeeklySchedule from "@/components/lazy/LazyWeeklySchedule";
 import LazyStudioLocation from "@/components/lazy/LazyStudioLocation";
@@ -99,9 +99,7 @@ const Index = () => {
         <Hero />
       </section>
       <section id="philosophy" className="bg-muted scroll-mt-24 lg:scroll-mt-32">
-        <Suspense fallback={<div className="min-h-[400px] flex items-center justify-center"><div className="animate-spin w-8 h-8 border-2 border-signal-gold border-t-transparent rounded-full"></div></div>}>
-          <LazyPhilosophy />
-        </Suspense>
+        <Philosophy />
       </section>
       <section id="getting-started" className="bg-card scroll-mt-24 lg:scroll-mt-32">
         <MembershipFlow tiers={membershipTiers} subtitle={t('gettingstarted.subtitle')} />
