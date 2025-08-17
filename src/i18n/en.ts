@@ -49,7 +49,7 @@ const en = {
   'assessment.strength.description': 'We assess maximal strength using compound lifts like the bench press and deadlift to measure how effectively your neuromuscular system produces force. As maximal strength increases, you\'re able to move lighter loads — like a golf club — more quickly, directly supporting gains in swing speed.',
 
   'assessment.metabolic.title': 'Cardiorespiratory Endurance',
-  'assessment.metabolic.description': 'We assess how efficiently your body produces and uses energy through aerobic and anaerobic testing. This allows us to define your personalized heart rate zones and design a conditioning program that improves endurance, enhances recovery, and supports sustained performance over multiple rounds of competitive golf.',
+  'assessment.metabolic.description': 'We evaluate cardiovascular endurance to understand how efficiently your body delivers and uses oxygen. This allows us to set personalized training zones that improve stamina, accelerate recovery, and support consistent performance throughout multiple rounds of golf.',
 
   'assessment.body.title': 'Body Composition',
   'assessment.body.description': 'We track changes in muscle mass and body fat percentage to evaluate whether your training is producing the right adaptations. This gives us more reliable feedback than body weight alone and helps ensure your progress aligns with performance goals.',
