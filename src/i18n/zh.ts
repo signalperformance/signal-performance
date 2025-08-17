@@ -49,7 +49,7 @@ const zh = {
   'assessment.strength.description': '透過臥推、硬舉等複合動作測量最大肌力，了解神經肌肉系統的出力效率。隨著最大肌力提升，你將能更快地揮動像高爾夫球桿這類較輕的器具，進而提升揮桿速度。',
 
   'assessment.metabolic.title': '心肺耐力',
-  'assessment.metabolic.description': '透過有氧與無氧測試，評估你在不同運動強度下的能量供應效率。我們據此設定個人化心率區間，並設計能提升耐力、加速恢復、讓你多回合比賽中保持穩定表現的體能訓練計畫。',
+  'assessment.metabolic.description': '我們評估心肺耐力，以了解身體輸送與利用氧氣的效率。透過這些結果，我們能制定個人化的訓練區間，幫助提升體能、加快恢復，並在多回合比賽中維持穩定表現。',
 
   'assessment.body.title': '身體組成',
   'assessment.body.description': '我們追踪肌肉量和體脂百分比的變化，評估您的訓練是否產生正確的適應。這比單純體重提供更可靠的反饋，並幫助確保您的進步與表現目標一致。',
