@@ -14,10 +14,14 @@ import {
 import { Plus, Search, Edit, Trash2, Download } from 'lucide-react';
 import { UserProfile } from '@/types/admin';
 import { mockUsers } from '@/data/mockAdminData';
+import { AddUserModal } from './AddUserModal';
+import { EditUserModal } from './EditUserModal';
 
 export function UserProfilesManager() {
   const [users, setUsers] = useState<UserProfile[]>(mockUsers);
   const [searchTerm, setSearchTerm] = useState('');
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [editingUser, setEditingUser] = useState<UserProfile | null>(null);
 
   const filteredUsers = users.filter(user =>
     user.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -27,6 +31,27 @@ export function UserProfilesManager() {
 
   const activeUsers = users.filter(user => user.isActive).length;
   const proMembers = users.filter(user => user.membershipPlan === 'pro').length;
+
+  const handleAddUser = (userData: Omit<UserProfile, 'id' | 'createdAt' | 'updatedAt'>) => {
+    const newUser: UserProfile = {
+      ...userData,
+      id: (users.length + 1).toString(),
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+    setUsers(prev => [...prev, newUser]);
+  };
+
+  const handleUpdateUser = (updatedUser: UserProfile) => {
+    setUsers(prev => prev.map(user => 
+      user.id === updatedUser.id ? updatedUser : user
+    ));
+    setEditingUser(null);
+  };
+
+  const handleDeleteUser = (userId: string) => {
+    setUsers(prev => prev.filter(user => user.id !== userId));
+  };
 
   return (
     <div className="space-y-6">
@@ -40,7 +65,7 @@ export function UserProfilesManager() {
             <Download className="h-4 w-4 mr-2" />
             Export
           </Button>
-          <Button>
+          <Button onClick={() => setIsAddModalOpen(true)}>
             <Plus className="h-4 w-4 mr-2" />
             Add User
           </Button>
@@ -143,10 +168,18 @@ export function UserProfilesManager() {
                   <TableCell>{user.createdAt.toLocaleDateString()}</TableCell>
                   <TableCell className="text-right">
                     <div className="flex justify-end gap-2">
-                      <Button variant="ghost" size="icon">
+                      <Button 
+                        variant="ghost" 
+                        size="icon"
+                        onClick={() => setEditingUser(user)}
+                      >
                         <Edit className="h-4 w-4" />
                       </Button>
-                      <Button variant="ghost" size="icon">
+                      <Button 
+                        variant="ghost" 
+                        size="icon"
+                        onClick={() => handleDeleteUser(user.id)}
+                      >
                         <Trash2 className="h-4 w-4" />
                       </Button>
                     </div>
@@ -157,6 +190,21 @@ export function UserProfilesManager() {
           </Table>
         </CardContent>
       </Card>
+
+      <AddUserModal
+        isOpen={isAddModalOpen}
+        onClose={() => setIsAddModalOpen(false)}
+        onAddUser={handleAddUser}
+      />
+
+      {editingUser && (
+        <EditUserModal
+          isOpen={!!editingUser}
+          onClose={() => setEditingUser(null)}
+          onUpdateUser={handleUpdateUser}
+          user={editingUser}
+        />
+      )}
     </div>
   );
 }

@@ -5,12 +5,14 @@ import { Badge } from '@/components/ui/badge';
 import { Plus, Edit, Trash2 } from 'lucide-react';
 import { ScheduleEntry, DayOfWeek, ClassType, SessionType } from '@/types/admin';
 import { mockSchedule } from '@/data/mockAdminData';
+import { AddClassModal } from './AddClassModal';
 
 const daysOfWeek: DayOfWeek[] = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
 
 export function WeeklyScheduleManager() {
   const [schedule, setSchedule] = useState<ScheduleEntry[]>(mockSchedule);
   const [selectedDay, setSelectedDay] = useState<DayOfWeek>('monday');
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
   const getDaySchedule = (day: DayOfWeek) => {
     return schedule
@@ -28,6 +30,18 @@ export function WeeklyScheduleManager() {
     return colors[classType];
   };
 
+  const handleAddClass = (classData: Omit<ScheduleEntry, 'id'>) => {
+    const newClass: ScheduleEntry = {
+      ...classData,
+      id: (schedule.length + 1).toString(),
+    };
+    setSchedule(prev => [...prev, newClass]);
+  };
+
+  const handleDeleteClass = (classId: string) => {
+    setSchedule(prev => prev.filter(entry => entry.id !== classId));
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -35,7 +49,7 @@ export function WeeklyScheduleManager() {
           <h2 className="text-2xl font-bold">Weekly Schedule Manager</h2>
           <p className="text-muted-foreground">Manage your weekly class schedule</p>
         </div>
-        <Button>
+        <Button onClick={() => setIsAddModalOpen(true)}>
           <Plus className="h-4 w-4 mr-2" />
           Add New Class
         </Button>
@@ -76,7 +90,7 @@ export function WeeklyScheduleManager() {
             {getDaySchedule(selectedDay).length === 0 ? (
               <div className="text-center py-8">
                 <p className="text-muted-foreground">No classes scheduled for {selectedDay}</p>
-                <Button variant="outline" className="mt-4">
+                <Button variant="outline" onClick={() => setIsAddModalOpen(true)}>
                   <Plus className="h-4 w-4 mr-2" />
                   Add First Class
                 </Button>
@@ -106,7 +120,11 @@ export function WeeklyScheduleManager() {
                     <Button variant="ghost" size="icon">
                       <Edit className="h-4 w-4" />
                     </Button>
-                    <Button variant="ghost" size="icon">
+                    <Button 
+                      variant="ghost" 
+                      size="icon"
+                      onClick={() => handleDeleteClass(entry.id)}
+                    >
                       <Trash2 className="h-4 w-4" />
                     </Button>
                   </div>
@@ -152,6 +170,13 @@ export function WeeklyScheduleManager() {
           </div>
         </CardContent>
       </Card>
+
+      <AddClassModal
+        isOpen={isAddModalOpen}
+        onClose={() => setIsAddModalOpen(false)}
+        onAddClass={handleAddClass}
+        selectedDay={selectedDay}
+      />
     </div>
   );
 }
