@@ -104,7 +104,7 @@ export function WeeklyScheduleManager() {
                                   variant="secondary"
                                   className={getClassTypeColor(entry.classType)}
                                 >
-                                  {entry.classType}
+                                  {entry.classType.charAt(0).toUpperCase()}
                                 </Badge>
                                 <Badge variant={entry.sessionType === 'pro' ? 'default' : 'outline'}>
                                   {entry.sessionType}
