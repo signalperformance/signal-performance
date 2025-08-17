@@ -43,7 +43,7 @@ const en = {
   'assessment.processDescription': 'Every quarter, members complete a five-part assessment to ensure training stays aligned and effective.',
 
   'assessment.joint.title': 'Joint Health',
-  'assessment.joint.description': 'We assess the passive and active range of motion of every major joint to identify movement limitations and their root causes. These insights inform your fitness program to help reduce injury risk and support long-term joint health. We also track changes in range of motion over time to monitor progress and guide ongoing adjustments.',
+  'assessment.joint.description': 'We assess the passive and active range of motion of every joint to identify movement limitations and their root causes. These insights inform your fitness program to help reduce injury risk and support long-term joint health. We also track changes in range of motion over time to monitor progress and guide ongoing adjustments.',
 
   'assessment.strength.title': 'Maximal Strength',
   'assessment.strength.description': 'We assess maximal strength using compound lifts like the bench press and deadlift to measure how effectively your neuromuscular system produces force. As maximal strength increases, you\'re able to move lighter loads — like a golf club — more quickly, directly supporting gains in swing speed.',
