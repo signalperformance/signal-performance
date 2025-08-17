@@ -15,6 +15,7 @@ export interface UserProfile {
   membershipPlan: MembershipPlan;
   profilePicture?: string;
   notes: string;
+  monthlyRenewalDate: string; // "YYYY-MM-DD" format
   createdAt: Date;
   updatedAt: Date;
   isActive: boolean;
