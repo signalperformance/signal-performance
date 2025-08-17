@@ -1,6 +1,7 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import LazyImage from '@/components/LazyImage';
 
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 
@@ -37,14 +38,14 @@ const StudioLocation = () => {
                   <CarouselContent>
                     {studioImages.map((image, index) => (
                       <CarouselItem key={index}>
-                        <div className="aspect-[4/3] rounded-lg overflow-hidden shadow-lg">
-                          <img 
-                            src={image} 
-                            alt={`Studio view ${index + 1}`}
-                            className="w-full h-full object-cover"
-                            loading="lazy"
-                          />
-                        </div>
+                         <div className="aspect-[4/3] rounded-lg overflow-hidden shadow-lg">
+                           <LazyImage 
+                             src={image} 
+                             alt={`Studio view ${index + 1}`}
+                             className="w-full h-full object-cover"
+                             loading="eager"
+                           />
+                         </div>
                       </CarouselItem>
                     ))}
                   </CarouselContent>
