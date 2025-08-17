@@ -46,16 +46,16 @@ const en = {
   'assessment.joint.description': 'We assess passive and active range of motion across all joints to identify limitations and their causes. These insights shape your program to reduce injury risk, support long-term joint health, and track progress over time.',
 
   'assessment.strength.title': 'Maximal Strength',
-  'assessment.strength.description': 'We assess maximal strength using compound lifts like the bench press and deadlift to measure how effectively your neuromuscular system produces force. As maximal strength increases, you\'re able to move lighter loads — like a golf club — more quickly, directly supporting gains in swing speed.',
+  'assessment.strength.description': 'We assess maximal strength to measure how effectively the neuromuscular system generates force. Greater maximal strength allows lighter loads—like a golf club—to be moved faster, directly supporting increases in swing speed.',
 
   'assessment.metabolic.title': 'Cardiorespiratory Endurance',
   'assessment.metabolic.description': 'We evaluate cardiovascular endurance to understand how efficiently your body delivers and uses oxygen. This allows us to set personalized training zones that improve stamina, accelerate recovery, and support consistent performance throughout multiple rounds of golf.',
 
   'assessment.body.title': 'Body Composition',
-  'assessment.body.description': 'We track changes in muscle mass and body fat percentage to evaluate whether your training is producing the right adaptations. This gives us more reliable feedback than body weight alone and helps ensure your progress aligns with performance goals.',
+  'assessment.body.description': 'We track muscle mass and body fat to evaluate training adaptations, providing more reliable feedback than body weight alone and ensuring progress aligns with performance goals.',
 
   'assessment.golf.title': 'Skill Assessment',
-  'assessment.golf.description': 'We measure distance and dispersion metrics across every club in the bag to assess your ball-striking and shot control in a controlled environment. When available, we combine this with your tournament performance data to better understand the relative contribution of technical, physical, and mental factors to your overall performance.',
+  'assessment.golf.description': 'We measure distance and dispersion across every club to assess ball-striking and shot control in a controlled setting. When available, we combine this with tournament data to better understand how technical, physical, and mental factors contribute to overall performance.',
 
   // Pricing
   'pricing.title': 'How To Get Started',
