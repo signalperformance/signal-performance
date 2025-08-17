@@ -12,6 +12,7 @@ import {
   TableRow 
 } from '@/components/ui/table';
 import { Plus, Search, Edit, Trash2, Download } from 'lucide-react';
+import { addMonths, isAfter, format, parseISO } from 'date-fns';
 import { UserProfile } from '@/types/admin';
 import { mockUsers } from '@/data/mockAdminData';
 import { AddUserModal } from './AddUserModal';
@@ -51,6 +52,21 @@ export function UserProfilesManager() {
 
   const handleDeleteUser = (userId: string) => {
     setUsers(prev => prev.filter(user => user.id !== userId));
+  };
+
+  const getNextPaymentDue = (monthlyRenewalDate: string): Date => {
+    const today = new Date();
+    const renewalDate = parseISO(monthlyRenewalDate);
+    
+    // Create a date for this month with the renewal day
+    const thisMonthRenewal = new Date(today.getFullYear(), today.getMonth(), renewalDate.getDate());
+    
+    // If this month's renewal date has already passed, get next month's date
+    if (isAfter(today, thisMonthRenewal)) {
+      return addMonths(thisMonthRenewal, 1);
+    }
+    
+    return thisMonthRenewal;
   };
 
   return (
@@ -143,7 +159,7 @@ export function UserProfilesManager() {
                 <TableHead>Phone</TableHead>
                 <TableHead>Membership</TableHead>
                 <TableHead>Status</TableHead>
-                <TableHead>Joined</TableHead>
+                <TableHead>Next Payment Due</TableHead>
                 <TableHead className="text-right">Actions</TableHead>
               </TableRow>
             </TableHeader>
@@ -165,7 +181,9 @@ export function UserProfilesManager() {
                       {user.isActive ? 'Active' : 'Inactive'}
                     </Badge>
                   </TableCell>
-                  <TableCell>{user.createdAt.toLocaleDateString()}</TableCell>
+                  <TableCell>
+                    {format(getNextPaymentDue(user.monthlyRenewalDate), 'MMM dd, yyyy')}
+                  </TableCell>
                   <TableCell className="text-right">
                     <div className="flex justify-end gap-2">
                       <Button 
