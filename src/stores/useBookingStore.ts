@@ -47,7 +47,7 @@ export const useBookingStore = create<BookingStore>((set, get) => ({
         hour24: parseInt(b.live_schedule_instances.start_time.split(':')[0]),
         sessionName: b.live_schedule_instances.class_name,
         sessionType: b.live_schedule_instances.session_type,
-        bookingDate: new Date(b.live_schedule_instances.class_date),
+        bookingDate: new Date(`${b.live_schedule_instances.class_date}T${b.live_schedule_instances.start_time}:00`),
         createdAt: new Date(b.created_at),
       })) || [];
 
