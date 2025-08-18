@@ -3,6 +3,7 @@ import { ChevronLeft, ChevronRight, Users, Clock, Calendar as CalendarIcon, Plus
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { EditLiveClassModal } from './EditLiveClassModal';
@@ -253,24 +254,32 @@ export function LiveCalendarView() {
                           {cls.session_type}
                         </Badge>
                         <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                          <Users className="h-3 w-3" />
-                          {cls.booking_count}
+                          <HoverCard>
+                            <HoverCardTrigger asChild>
+                              <div className="flex items-center gap-1 cursor-pointer">
+                                <Users className="h-3 w-3" />
+                                {cls.booking_count}
+                              </div>
+                            </HoverCardTrigger>
+                            <HoverCardContent className="w-auto p-3">
+                              <div className="space-y-1">
+                                <p className="text-sm font-medium">Booked Users</p>
+                                {cls.bookings.length > 0 ? (
+                                  <div className="space-y-1">
+                                    {cls.bookings.map((booking) => (
+                                      <div key={booking.id} className="text-sm">
+                                        {booking.user_profiles?.first_name} {booking.user_profiles?.last_name}
+                                      </div>
+                                    ))}
+                                  </div>
+                                ) : (
+                                  <p className="text-sm text-muted-foreground">No bookings</p>
+                                )}
+                              </div>
+                            </HoverCardContent>
+                          </HoverCard>
                         </div>
                       </div>
-                      
-                      {/* Show booked users */}
-                      {cls.bookings.length > 0 && (
-                        <div className="text-xs text-muted-foreground">
-                          {cls.bookings.slice(0, 2).map((booking, i) => (
-                            <div key={booking.id}>
-                              {booking.user_profiles?.first_name} {booking.user_profiles?.last_name}
-                            </div>
-                          ))}
-                          {cls.bookings.length > 2 && (
-                            <div>+{cls.bookings.length - 2} more</div>
-                          )}
-                        </div>
-                      )}
                     </div>
                   </Card>
                 ))}
