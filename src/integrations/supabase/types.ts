@@ -68,6 +68,13 @@ export type Database = {
             referencedRelation: "live_schedule_instances"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "bookings_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "user_profiles"
+            referencedColumns: ["id"]
+          },
         ]
       }
       live_schedule_instances: {
