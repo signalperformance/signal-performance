@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Users, Clock, Calendar as CalendarIcon } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Users, Clock, Calendar as CalendarIcon, Plus, Edit } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { EditLiveClassModal } from './EditLiveClassModal';
+import { AddLiveClassModal } from './AddLiveClassModal';
 import { 
   format, 
   startOfWeek, 
@@ -51,6 +53,10 @@ export function LiveCalendarView() {
   );
   const [classes, setClasses] = useState<ClassWithBookings[]>([]);
   const [loading, setLoading] = useState(true);
+  const [editModalOpen, setEditModalOpen] = useState(false);
+  const [addModalOpen, setAddModalOpen] = useState(false);
+  const [selectedClass, setSelectedClass] = useState<ClassWithBookings | null>(null);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -143,6 +149,27 @@ export function LiveCalendarView() {
     return 'default';
   };
 
+  const handleEditClass = (classInstance: ClassWithBookings) => {
+    setSelectedClass(classInstance);
+    setEditModalOpen(true);
+  };
+
+  const handleAddClass = (date: Date) => {
+    setSelectedDate(date);
+    setAddModalOpen(true);
+  };
+
+  const handleCloseModals = () => {
+    setEditModalOpen(false);
+    setAddModalOpen(false);
+    setSelectedClass(null);
+    setSelectedDate(null);
+  };
+
+  const handleUpdateSuccess = () => {
+    loadLiveCalendar();
+  };
+
   if (loading) {
     return <div className="flex items-center justify-center p-8">Loading live calendar...</div>;
   }
@@ -185,18 +212,30 @@ export function LiveCalendarView() {
               
               <div className="space-y-2">
                 {dayClasses.map((cls) => (
-                  <Card key={cls.id} className="p-2">
+                  <Card 
+                    key={cls.id} 
+                    className={`p-2 cursor-pointer hover:bg-accent transition-colors ${cls.is_cancelled ? 'opacity-60' : ''}`}
+                    onClick={() => handleEditClass(cls)}
+                  >
                     <div className="space-y-1">
                       <div className="flex items-center justify-between">
                         <div className="text-xs font-medium">{formatTime(cls.start_time)}</div>
-                        <Badge 
-                          variant={getAvailabilityColor(cls.availability, cls.max_participants)}
-                          className="text-xs"
-                        >
-                          {cls.availability}/{cls.max_participants}
-                        </Badge>
+                        <div className="flex items-center gap-1">
+                          <Badge 
+                            variant={getAvailabilityColor(cls.availability, cls.max_participants)}
+                            className="text-xs"
+                          >
+                            {cls.availability}/{cls.max_participants}
+                          </Badge>
+                          <Button size="sm" variant="ghost" className="h-5 w-5 p-0">
+                            <Edit className="h-3 w-3" />
+                          </Button>
+                        </div>
                       </div>
-                      <div className="text-xs font-medium">{cls.class_name}</div>
+                      <div className={`text-xs font-medium ${cls.is_cancelled ? 'line-through' : ''}`}>
+                        {cls.class_name}
+                        {cls.is_cancelled && <span className="text-destructive ml-1">(Cancelled)</span>}
+                      </div>
                       <div className="flex items-center justify-between">
                         <Badge variant={cls.session_type === 'pro' ? 'default' : 'secondary'} className="text-xs">
                           {cls.session_type}
@@ -224,11 +263,25 @@ export function LiveCalendarView() {
                   </Card>
                 ))}
                 
-                {dayClasses.length === 0 && (
-                  <div className="text-xs text-muted-foreground text-center py-4">
-                    No classes
-                  </div>
-                )}
+                <div className="space-y-1">
+                  {dayClasses.length === 0 && (
+                    <div className="text-xs text-muted-foreground text-center py-2">
+                      No classes
+                    </div>
+                  )}
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="w-full h-8 text-xs"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleAddClass(currentDate);
+                    }}
+                  >
+                    <Plus className="h-3 w-3 mr-1" />
+                    Add Class
+                  </Button>
+                </div>
               </div>
             </div>
           );
@@ -288,6 +341,22 @@ export function LiveCalendarView() {
           </CardContent>
         </Card>
       </div>
+
+      {/* Modals */}
+      <EditLiveClassModal
+        isOpen={editModalOpen}
+        onClose={handleCloseModals}
+        classInstance={selectedClass}
+        onUpdateClass={handleUpdateSuccess}
+        bookingCount={selectedClass?.booking_count || 0}
+      />
+
+      <AddLiveClassModal
+        isOpen={addModalOpen}
+        onClose={handleCloseModals}
+        onAddClass={handleUpdateSuccess}
+        selectedDate={selectedDate || undefined}
+      />
     </div>
   );
 }
