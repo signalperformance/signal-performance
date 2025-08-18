@@ -88,7 +88,15 @@ export const useBookingStore = create<BookingStore>((set, get) => ({
   getUpcomingBookings: (userId: string) => {
     const { getUserBookings } = get();
     const now = new Date();
-    return getUserBookings(userId).filter(booking => booking.bookingDate >= now);
+    const userBookings = getUserBookings(userId);
+    console.log('All user bookings:', userBookings);
+    console.log('Current time:', now);
+    const upcoming = userBookings.filter(booking => {
+      console.log('Checking booking:', booking.bookingDate, 'vs now:', now, 'is upcoming:', booking.bookingDate >= now);
+      return booking.bookingDate >= now;
+    });
+    console.log('Upcoming bookings:', upcoming);
+    return upcoming;
   },
 
   getScheduleWithAvailability: () => {
