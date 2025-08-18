@@ -14,51 +14,153 @@ export type Database = {
   }
   public: {
     Tables: {
-      user_roles: {
-        Row: {
-          id: string
-          role: Database["public"]["Enums"]["app_role"]
-          user_id: string
-        }
-        Insert: {
-          id?: string
-          role: Database["public"]["Enums"]["app_role"]
-          user_id: string
-        }
-        Update: {
-          id?: string
-          role?: Database["public"]["Enums"]["app_role"]
-          user_id?: string
-        }
-        Relationships: []
-      }
-      waitlist_entries: {
+      admin_users: {
         Row: {
           created_at: string
           email: string
-          goals: string | null
-          handicap: string | null
           id: string
-          name: string
-          phone: string
+          password: string
+          updated_at: string
         }
         Insert: {
           created_at?: string
           email: string
-          goals?: string | null
-          handicap?: string | null
           id?: string
-          name: string
-          phone: string
+          password: string
+          updated_at?: string
         }
         Update: {
           created_at?: string
           email?: string
-          goals?: string | null
-          handicap?: string | null
           id?: string
-          name?: string
-          phone?: string
+          password?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      bookings: {
+        Row: {
+          booking_date: string
+          created_at: string
+          id: string
+          schedule_entry_id: string
+          user_id: string
+        }
+        Insert: {
+          booking_date: string
+          created_at?: string
+          id?: string
+          schedule_entry_id: string
+          user_id: string
+        }
+        Update: {
+          booking_date?: string
+          created_at?: string
+          id?: string
+          schedule_entry_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bookings_schedule_entry_id_fkey"
+            columns: ["schedule_entry_id"]
+            isOneToOne: false
+            referencedRelation: "schedule_entries"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "bookings_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "user_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      schedule_entries: {
+        Row: {
+          class_name: string
+          created_at: string
+          day_of_week: Database["public"]["Enums"]["day_of_week"]
+          duration: number
+          id: string
+          is_active: boolean
+          max_participants: number
+          session_type: Database["public"]["Enums"]["session_type"]
+          start_time: string
+          updated_at: string
+        }
+        Insert: {
+          class_name: string
+          created_at?: string
+          day_of_week: Database["public"]["Enums"]["day_of_week"]
+          duration: number
+          id?: string
+          is_active?: boolean
+          max_participants?: number
+          session_type: Database["public"]["Enums"]["session_type"]
+          start_time: string
+          updated_at?: string
+        }
+        Update: {
+          class_name?: string
+          created_at?: string
+          day_of_week?: Database["public"]["Enums"]["day_of_week"]
+          duration?: number
+          id?: string
+          is_active?: boolean
+          max_participants?: number
+          session_type?: Database["public"]["Enums"]["session_type"]
+          start_time?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      user_profiles: {
+        Row: {
+          created_at: string
+          email: string
+          first_name: string
+          id: string
+          is_active: boolean
+          last_name: string
+          membership_plan: Database["public"]["Enums"]["membership_plan"]
+          monthly_renewal_date: string | null
+          notes: string | null
+          password: string
+          phone: string | null
+          profile_picture: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          first_name: string
+          id?: string
+          is_active?: boolean
+          last_name: string
+          membership_plan?: Database["public"]["Enums"]["membership_plan"]
+          monthly_renewal_date?: string | null
+          notes?: string | null
+          password: string
+          phone?: string | null
+          profile_picture?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          first_name?: string
+          id?: string
+          is_active?: boolean
+          last_name?: string
+          membership_plan?: Database["public"]["Enums"]["membership_plan"]
+          monthly_renewal_date?: string | null
+          notes?: string | null
+          password?: string
+          phone?: string | null
+          profile_picture?: string | null
+          updated_at?: string
         }
         Relationships: []
       }
@@ -77,6 +179,27 @@ export type Database = {
     }
     Enums: {
       app_role: "admin" | "moderator" | "user"
+      class_type: "mobility" | "strength" | "conditioning" | "recovery"
+      day_of_week:
+        | "monday"
+        | "tuesday"
+        | "wednesday"
+        | "thursday"
+        | "friday"
+        | "saturday"
+        | "sunday"
+      membership_plan: "basic" | "pro"
+      membership_plan_type: "basic" | "pro"
+      session_level: "pro" | "amateur"
+      session_type: "pro" | "amateur"
+      weekday:
+        | "monday"
+        | "tuesday"
+        | "wednesday"
+        | "thursday"
+        | "friday"
+        | "saturday"
+        | "sunday"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -205,6 +328,29 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "moderator", "user"],
+      class_type: ["mobility", "strength", "conditioning", "recovery"],
+      day_of_week: [
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday",
+        "saturday",
+        "sunday",
+      ],
+      membership_plan: ["basic", "pro"],
+      membership_plan_type: ["basic", "pro"],
+      session_level: ["pro", "amateur"],
+      session_type: ["pro", "amateur"],
+      weekday: [
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday",
+        "saturday",
+        "sunday",
+      ],
     },
   },
 } as const
