@@ -65,14 +65,7 @@ export type Database = {
             foreignKeyName: "bookings_schedule_entry_id_fkey"
             columns: ["schedule_entry_id"]
             isOneToOne: false
-            referencedRelation: "schedule_entries"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "bookings_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "user_profiles"
+            referencedRelation: "live_schedule_instances"
             referencedColumns: ["id"]
           },
         ]
