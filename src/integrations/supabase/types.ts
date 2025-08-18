@@ -77,6 +77,66 @@ export type Database = {
           },
         ]
       }
+      live_schedule_instances: {
+        Row: {
+          class_date: string
+          class_name: string
+          created_at: string
+          duration: number
+          id: string
+          is_cancelled: boolean
+          max_participants: number
+          period_id: string
+          session_type: Database["public"]["Enums"]["session_type"]
+          start_time: string
+          template_entry_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          class_date: string
+          class_name: string
+          created_at?: string
+          duration: number
+          id?: string
+          is_cancelled?: boolean
+          max_participants?: number
+          period_id: string
+          session_type: Database["public"]["Enums"]["session_type"]
+          start_time: string
+          template_entry_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          class_date?: string
+          class_name?: string
+          created_at?: string
+          duration?: number
+          id?: string
+          is_cancelled?: boolean
+          max_participants?: number
+          period_id?: string
+          session_type?: Database["public"]["Enums"]["session_type"]
+          start_time?: string
+          template_entry_id?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "live_schedule_instances_period_id_fkey"
+            columns: ["period_id"]
+            isOneToOne: false
+            referencedRelation: "schedule_periods"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "live_schedule_instances_template_entry_id_fkey"
+            columns: ["template_entry_id"]
+            isOneToOne: false
+            referencedRelation: "schedule_template_entries"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       schedule_entries: {
         Row: {
           class_name: string
@@ -112,6 +172,118 @@ export type Database = {
           max_participants?: number
           session_type?: Database["public"]["Enums"]["session_type"]
           start_time?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      schedule_periods: {
+        Row: {
+          created_at: string
+          end_date: string
+          id: string
+          is_active: boolean
+          start_date: string
+          template_id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          end_date: string
+          id?: string
+          is_active?: boolean
+          start_date: string
+          template_id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          end_date?: string
+          id?: string
+          is_active?: boolean
+          start_date?: string
+          template_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "schedule_periods_template_id_fkey"
+            columns: ["template_id"]
+            isOneToOne: false
+            referencedRelation: "schedule_templates"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      schedule_template_entries: {
+        Row: {
+          class_name: string
+          created_at: string
+          day_of_week: Database["public"]["Enums"]["day_of_week"]
+          duration: number
+          id: string
+          max_participants: number
+          session_type: Database["public"]["Enums"]["session_type"]
+          start_time: string
+          template_id: string
+          updated_at: string
+        }
+        Insert: {
+          class_name: string
+          created_at?: string
+          day_of_week: Database["public"]["Enums"]["day_of_week"]
+          duration: number
+          id?: string
+          max_participants?: number
+          session_type: Database["public"]["Enums"]["session_type"]
+          start_time: string
+          template_id: string
+          updated_at?: string
+        }
+        Update: {
+          class_name?: string
+          created_at?: string
+          day_of_week?: Database["public"]["Enums"]["day_of_week"]
+          duration?: number
+          id?: string
+          max_participants?: number
+          session_type?: Database["public"]["Enums"]["session_type"]
+          start_time?: string
+          template_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "schedule_template_entries_template_id_fkey"
+            columns: ["template_id"]
+            isOneToOne: false
+            referencedRelation: "schedule_templates"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      schedule_templates: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          is_active: boolean
+          name: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          name: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          name?: string
           updated_at?: string
         }
         Relationships: []

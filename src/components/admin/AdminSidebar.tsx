@@ -1,4 +1,4 @@
-import { Calendar, Users } from 'lucide-react';
+import { Calendar, Users, CalendarDays, CalendarCheck } from 'lucide-react';
 import {
   Sidebar,
   SidebarContent,
@@ -11,7 +11,7 @@ import {
   SidebarTrigger,
 } from '@/components/ui/sidebar';
 
-type AdminSection = 'schedule' | 'users';
+type AdminSection = 'templates' | 'periods' | 'live-calendar' | 'users';
 
 interface AdminSidebarProps {
   activeSection: AdminSection;
@@ -20,9 +20,19 @@ interface AdminSidebarProps {
 
 const menuItems = [
   {
-    id: 'schedule' as AdminSection,
-    title: 'Weekly Schedule',
+    id: 'templates' as AdminSection,
+    title: 'Schedule Templates',
     icon: Calendar,
+  },
+  {
+    id: 'periods' as AdminSection,
+    title: 'Schedule Periods',
+    icon: CalendarDays,
+  },
+  {
+    id: 'live-calendar' as AdminSection,
+    title: 'Live Calendar',
+    icon: CalendarCheck,
   },
   {
     id: 'users' as AdminSection,

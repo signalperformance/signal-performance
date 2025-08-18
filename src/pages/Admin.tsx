@@ -2,22 +2,28 @@ import { useState } from 'react';
 import { SidebarProvider } from '@/components/ui/sidebar';
 import { AdminSidebar } from '@/components/admin/AdminSidebar';
 import { AdminHeader } from '@/components/admin/AdminHeader';
-import { WeeklyScheduleManager } from '@/components/admin/WeeklyScheduleManager';
+import { ScheduleTemplateManager } from '@/components/admin/ScheduleTemplateManager';
+import { SchedulePeriodsManager } from '@/components/admin/SchedulePeriodsManager';
+import { LiveCalendarView } from '@/components/admin/LiveCalendarView';
 import { UserProfilesManager } from '@/components/admin/UserProfilesManager';
 
-type AdminSection = 'schedule' | 'users';
+type AdminSection = 'templates' | 'periods' | 'live-calendar' | 'users';
 
 const Admin = () => {
-  const [activeSection, setActiveSection] = useState<AdminSection>('schedule');
+  const [activeSection, setActiveSection] = useState<AdminSection>('templates');
 
   const renderContent = () => {
     switch (activeSection) {
-      case 'schedule':
-        return <WeeklyScheduleManager />;
+      case 'templates':
+        return <ScheduleTemplateManager />;
+      case 'periods':
+        return <SchedulePeriodsManager />;
+      case 'live-calendar':
+        return <LiveCalendarView />;
       case 'users':
         return <UserProfilesManager />;
       default:
-        return <WeeklyScheduleManager />;
+        return <ScheduleTemplateManager />;
     }
   };
 
