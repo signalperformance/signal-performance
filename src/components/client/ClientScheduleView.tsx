@@ -1,6 +1,6 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
-import { useBookings } from '@/hooks/useBookings';
+import { useBookingStore } from '@/stores/useBookingStore';
 import { ScheduleWithAvailability } from '@/types/client';
 import { SessionCard } from './SessionCard';
 import { BookingModal } from './BookingModal';
@@ -14,8 +14,12 @@ import { useToast } from '@/hooks/use-toast';
 
 export const ClientScheduleView: React.FC = () => {
   const { user } = useAuth();
-  const { getScheduleWithAvailability, bookSession, cancelBooking, getUserBookings } = useBookings();
+  const { getScheduleWithAvailability, bookSession, cancelBooking, getUserBookings, loadBookings } = useBookingStore();
   const { toast } = useToast();
+
+  useEffect(() => {
+    loadBookings();
+  }, [loadBookings]);
 
   const [selectedSession, setSelectedSession] = useState<ScheduleWithAvailability | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);

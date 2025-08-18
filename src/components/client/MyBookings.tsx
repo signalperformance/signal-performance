@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
-import { useBookings } from '@/hooks/useBookings';
+import { useBookingStore } from '@/stores/useBookingStore';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -21,8 +21,12 @@ import {
 
 export const MyBookings: React.FC = () => {
   const { user } = useAuth();
-  const { getUpcomingBookings, cancelBooking } = useBookings();
+  const { getUpcomingBookings, cancelBooking, loadBookings } = useBookingStore();
   const { toast } = useToast();
+
+  useEffect(() => {
+    loadBookings();
+  }, [loadBookings]);
 
   const upcomingBookings = user ? getUpcomingBookings(user.id) : [];
 
