@@ -40,9 +40,22 @@ export const ClientScheduleView: React.FC = () => {
   };
 
   const getSessionsForDay = (date: Date) => {
-    return scheduleWithAvailability.filter(session => 
+    const allSessions = scheduleWithAvailability.filter(session => 
       isSameDay(session.date, date)
-    ).sort((a, b) => a.hour24 - b.hour24);
+    );
+    
+    // Filter sessions based on user membership level
+    const filteredSessions = allSessions.filter(session => {
+      if (!user) return false;
+      if (user.membershipPlan === 'basic') {
+        return session.sessionType === 'amateur';
+      } else if (user.membershipPlan === 'pro') {
+        return session.sessionType === 'pro';
+      }
+      return false;
+    });
+    
+    return filteredSessions.sort((a, b) => a.hour24 - b.hour24);
   };
 
   const isSessionBooked = (session: ScheduleWithAvailability) => {
