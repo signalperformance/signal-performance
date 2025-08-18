@@ -1,41 +1,74 @@
 import { create } from 'zustand';
 import { Booking, ScheduleWithAvailability } from '@/types/client';
-import { mockBookings, SESSION_CONFIG } from '@/data/mockClientData';
-import { scheduleData } from '@/data/scheduleData';
+import { supabase } from '@/integrations/supabase/client';
 import { addDays, startOfWeek, format, isSameDay } from 'date-fns';
 
 interface BookingStore {
   bookings: Booking[];
-  loadBookings: () => void;
-  saveBookings: (bookings: Booking[]) => void;
+  scheduleEntries: any[];
+  loadBookings: () => Promise<void>;
+  loadSchedule: () => Promise<void>;
   getUserBookings: (userId: string) => Booking[];
   getUpcomingBookings: (userId: string) => Booking[];
   getScheduleWithAvailability: () => ScheduleWithAvailability[];
-  bookSession: (scheduleEntry: ScheduleWithAvailability, userId: string) => boolean;
-  cancelBooking: (bookingId: string) => boolean;
+  bookSession: (scheduleEntry: ScheduleWithAvailability, userId: string) => Promise<boolean>;
+  cancelBooking: (bookingId: string) => Promise<boolean>;
 }
 
 export const useBookingStore = create<BookingStore>((set, get) => ({
   bookings: [],
+  scheduleEntries: [],
 
-  loadBookings: () => {
-    const savedBookings = localStorage.getItem('client-bookings');
-    if (savedBookings) {
-      const parsed = JSON.parse(savedBookings);
-      const bookings = parsed.map((b: any) => ({
-        ...b,
-        bookingDate: new Date(b.bookingDate),
-        createdAt: new Date(b.createdAt),
-      }));
+  loadBookings: async () => {
+    try {
+      const { data, error } = await supabase
+        .from('bookings')
+        .select(`
+          id,
+          user_id,
+          schedule_entry_id,
+          booking_date,
+          created_at,
+          schedule_entries!inner(
+            day_of_week,
+            start_time,
+            class_name,
+            session_type
+          )
+        `);
+
+      if (error) throw error;
+
+      const bookings: Booking[] = data?.map((b: any) => ({
+        id: b.id,
+        userId: b.user_id,
+        scheduleEntryId: b.schedule_entry_id,
+        dayKey: b.schedule_entries.day_of_week,
+        hour24: parseInt(b.schedule_entries.start_time.split(':')[0]),
+        sessionName: b.schedule_entries.class_name,
+        sessionType: b.schedule_entries.session_type,
+        bookingDate: new Date(b.booking_date),
+        createdAt: new Date(b.created_at),
+      })) || [];
+
       set({ bookings });
-    } else {
-      set({ bookings: mockBookings });
+    } catch (error) {
+      console.error('Failed to load bookings:', error);
     }
   },
 
-  saveBookings: (newBookings: Booking[]) => {
-    set({ bookings: newBookings });
-    localStorage.setItem('client-bookings', JSON.stringify(newBookings));
+  loadSchedule: async () => {
+    try {
+      const { data, error } = await supabase
+        .from('schedule_entries')
+        .select('*')
+        .eq('is_active', true);
+
+      if (error) throw error;
+      set({ scheduleEntries: data || [] });
+    } catch (error) {
+      console.error('Failed to load schedule:', error);
+    }
   },
 
   getUserBookings: (userId: string) => {
@@ -50,7 +83,7 @@ export const useBookingStore = create<BookingStore>((set, get) => ({
   },
 
   getScheduleWithAvailability: () => {
-    const { bookings } = get();
+    const { bookings, scheduleEntries } = get();
     const today = new Date();
     const startOfThisWeek = startOfWeek(today, { weekStartsOn: 1 }); // Monday
     const scheduleWithDates: ScheduleWithAvailability[] = [];
@@ -59,30 +92,31 @@ export const useBookingStore = create<BookingStore>((set, get) => ({
     for (let weekOffset = 0; weekOffset < 2; weekOffset++) {
       for (let dayOffset = 0; dayOffset < 7; dayOffset++) {
         const currentDate = addDays(startOfThisWeek, weekOffset * 7 + dayOffset);
-        const dayKey = format(currentDate, 'EEEE').toLowerCase() as any;
+        const dayKey = format(currentDate, 'EEEE').toLowerCase();
 
         // Find sessions for this day
-        const daySessions = scheduleData.filter(session => session.dayKey === dayKey);
+        const daySessions = scheduleEntries.filter(session => session.day_of_week === dayKey);
 
-        daySessions.forEach((session, index) => {
-          const sessionId = `${dayKey}-${session.hour24}-${weekOffset}-${dayOffset}`;
+        daySessions.forEach((session) => {
+          const sessionId = `${dayKey}-${session.start_time}-${weekOffset}-${dayOffset}`;
+          const hour24 = parseInt(session.start_time.split(':')[0]);
           
           // Count current bookings for this session on this date
           const currentBookings = bookings.filter(booking => 
-            booking.dayKey === dayKey &&
-            booking.hour24 === session.hour24 &&
+            booking.scheduleEntryId === session.id &&
             isSameDay(booking.bookingDate, currentDate)
           ).length;
 
           scheduleWithDates.push({
             id: sessionId,
-            dayKey: session.dayKey,
-            hour24: session.hour24,
-            name: session.name,
-            sessionType: session.sessionType,
-            maxParticipants: SESSION_CONFIG.maxParticipants[session.sessionType],
+            dayKey: session.day_of_week,
+            hour24,
+            name: session.class_name,
+            sessionType: session.session_type,
+            maxParticipants: session.max_participants,
             currentBookings,
             date: currentDate,
+            scheduleEntryId: session.id,
           });
         });
       }
@@ -91,46 +125,62 @@ export const useBookingStore = create<BookingStore>((set, get) => ({
     return scheduleWithDates;
   },
 
-  bookSession: (scheduleEntry: ScheduleWithAvailability, userId: string) => {
-    const { bookings, saveBookings } = get();
-    
-    // Check if user already booked this session
-    const existingBooking = bookings.find(booking =>
-      booking.userId === userId &&
-      booking.dayKey === scheduleEntry.dayKey &&
-      booking.hour24 === scheduleEntry.hour24 &&
-      isSameDay(booking.bookingDate, scheduleEntry.date)
-    );
+  bookSession: async (scheduleEntry: ScheduleWithAvailability, userId: string) => {
+    try {
+      const { bookings } = get();
+      
+      // Check if user already booked this session
+      const existingBooking = bookings.find(booking =>
+        booking.userId === userId &&
+        booking.scheduleEntryId === (scheduleEntry as any).scheduleEntryId &&
+        isSameDay(booking.bookingDate, scheduleEntry.date)
+      );
 
-    if (existingBooking) {
-      return false; // Already booked
+      if (existingBooking) {
+        return false; // Already booked
+      }
+
+      // Check if session is full
+      if (scheduleEntry.currentBookings >= scheduleEntry.maxParticipants) {
+        return false; // Session full
+      }
+
+      const { data, error } = await supabase
+        .from('bookings')
+        .insert({
+          user_id: userId,
+          schedule_entry_id: (scheduleEntry as any).scheduleEntryId,
+          booking_date: format(scheduleEntry.date, 'yyyy-MM-dd'),
+        })
+        .select()
+        .single();
+
+      if (error) throw error;
+
+      // Reload bookings to update state
+      await get().loadBookings();
+      return true;
+    } catch (error) {
+      console.error('Failed to book session:', error);
+      return false;
     }
-
-    // Check if session is full
-    if (scheduleEntry.currentBookings >= scheduleEntry.maxParticipants) {
-      return false; // Session full
-    }
-
-    const newBooking: Booking = {
-      id: `booking-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
-      userId,
-      scheduleEntryId: scheduleEntry.id,
-      dayKey: scheduleEntry.dayKey,
-      hour24: scheduleEntry.hour24,
-      sessionName: scheduleEntry.name,
-      sessionType: scheduleEntry.sessionType,
-      bookingDate: scheduleEntry.date,
-      createdAt: new Date(),
-    };
-
-    saveBookings([...bookings, newBooking]);
-    return true;
   },
 
-  cancelBooking: (bookingId: string) => {
-    const { bookings, saveBookings } = get();
-    const updatedBookings = bookings.filter(booking => booking.id !== bookingId);
-    saveBookings(updatedBookings);
-    return true;
+  cancelBooking: async (bookingId: string) => {
+    try {
+      const { error } = await supabase
+        .from('bookings')
+        .delete()
+        .eq('id', bookingId);
+
+      if (error) throw error;
+
+      // Reload bookings to update state
+      await get().loadBookings();
+      return true;
+    } catch (error) {
+      console.error('Failed to cancel booking:', error);
+      return false;
+    }
   },
 }));

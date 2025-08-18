@@ -1,35 +1,69 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Plus, Trash2 } from 'lucide-react';
-import { ScheduleEntry, DayOfWeek, ClassType, SessionType } from '@/types/admin';
-import { mockSchedule } from '@/data/mockAdminData';
+import { supabase } from '@/integrations/supabase/client';
 import { BulkAddClassModal } from './BulkAddClassModal';
 import { EditClassModal } from './EditClassModal';
+
+type DayOfWeek = 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday';
+type ClassType = 'mobility' | 'strength' | 'cardio' | 'power';
+type SessionType = 'pro' | 'amateur';
+
+interface ScheduleEntry {
+  id: string;
+  day_of_week: DayOfWeek;
+  start_time: string;
+  duration: number;
+  class_name: string;
+  session_type: SessionType;
+  max_participants: number;
+  is_active: boolean;
+}
 
 const daysOfWeek: DayOfWeek[] = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
 
 export function WeeklyScheduleManager() {
-  const [schedule, setSchedule] = useState<ScheduleEntry[]>(mockSchedule);
+  const [schedule, setSchedule] = useState<ScheduleEntry[]>([]);
   const [isBulkAddModalOpen, setIsBulkAddModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedClass, setSelectedClass] = useState<ScheduleEntry | null>(null);
 
-  const getDaySchedule = (day: DayOfWeek) => {
-    return schedule
-      .filter(entry => entry.dayOfWeek === day && entry.isActive)
-      .sort((a, b) => a.startTime.localeCompare(b.startTime));
+  useEffect(() => {
+    loadSchedule();
+  }, []);
+
+  const loadSchedule = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('schedule_entries')
+        .select('*')
+        .eq('is_active', true)
+        .order('day_of_week')
+        .order('start_time');
+
+      if (error) throw error;
+      setSchedule(data || []);
+    } catch (error) {
+      console.error('Failed to load schedule:', error);
+    }
   };
 
-  const getClassTypeColor = (classType: ClassType) => {
+  const getDaySchedule = (day: DayOfWeek) => {
+    return schedule
+      .filter(entry => entry.day_of_week === day && entry.is_active)
+      .sort((a, b) => a.start_time.localeCompare(b.start_time));
+  };
+
+  const getClassTypeColor = (classType: string) => {
     const colors = {
       mobility: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200',
       strength: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200',
       cardio: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200',
       power: 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200',
     };
-    return colors[classType];
+    return colors[classType as keyof typeof colors] || colors.mobility;
   };
 
   const getSessionCardColor = (sessionType: SessionType) => {
@@ -38,16 +72,39 @@ export function WeeklyScheduleManager() {
       : 'bg-charcoal/10 border-charcoal/20 hover:bg-charcoal/20';
   };
 
-  const handleAddClasses = (classesData: Omit<ScheduleEntry, 'id'>[]) => {
-    const newClasses = classesData.map((classData, index) => ({
-      ...classData,
-      id: (schedule.length + index + 1).toString(),
-    }));
-    setSchedule(prev => [...prev, ...newClasses]);
+  const handleAddClasses = async (classesData: any[]) => {
+    try {
+      const { data, error } = await supabase
+        .from('schedule_entries')
+        .insert(classesData.map(classData => ({
+          day_of_week: classData.dayOfWeek,
+          start_time: classData.startTime,
+          duration: classData.duration,
+          class_name: `${classData.classType.toUpperCase()} (${classData.sessionType.toUpperCase()})`,
+          session_type: classData.sessionType,
+          max_participants: classData.maxParticipants,
+          is_active: classData.isActive,
+        })));
+
+      if (error) throw error;
+      loadSchedule(); // Reload after adding
+    } catch (error) {
+      console.error('Failed to add classes:', error);
+    }
   };
 
-  const handleDeleteClass = (classId: string) => {
-    setSchedule(prev => prev.filter(entry => entry.id !== classId));
+  const handleDeleteClass = async (classId: string) => {
+    try {
+      const { error } = await supabase
+        .from('schedule_entries')
+        .delete()
+        .eq('id', classId);
+
+      if (error) throw error;
+      setSchedule(prev => prev.filter(entry => entry.id !== classId));
+    } catch (error) {
+      console.error('Failed to delete class:', error);
+    }
   };
 
   const handleEditClass = (classEntry: ScheduleEntry) => {
@@ -55,10 +112,27 @@ export function WeeklyScheduleManager() {
     setIsEditModalOpen(true);
   };
 
-  const handleUpdateClass = (updatedClass: ScheduleEntry) => {
-    setSchedule(prev => prev.map(entry => 
-      entry.id === updatedClass.id ? updatedClass : entry
-    ));
+  const handleUpdateClass = async (updatedClass: ScheduleEntry) => {
+    try {
+      const { error } = await supabase
+        .from('schedule_entries')
+        .update({
+          start_time: updatedClass.start_time,
+          duration: updatedClass.duration,
+          class_name: updatedClass.class_name,
+          session_type: updatedClass.session_type,
+          max_participants: updatedClass.max_participants,
+        })
+        .eq('id', updatedClass.id);
+
+      if (error) throw error;
+      
+      setSchedule(prev => prev.map(entry => 
+        entry.id === updatedClass.id ? updatedClass : entry
+      ));
+    } catch (error) {
+      console.error('Failed to update class:', error);
+    }
   };
 
   return (
@@ -100,7 +174,7 @@ export function WeeklyScheduleManager() {
                       dayClasses.map((entry) => (
                         <div 
                           key={entry.id} 
-                          className={`rounded-lg p-3 space-y-2 group transition-colors cursor-pointer border ${getSessionCardColor(entry.sessionType)}`}
+                          className={`rounded-lg p-3 space-y-2 group transition-colors cursor-pointer border ${getSessionCardColor(entry.session_type)}`}
                           onClick={() => handleEditClass(entry)}
                         >
                           <div className="flex items-center justify-between">
@@ -108,16 +182,16 @@ export function WeeklyScheduleManager() {
                               <div className="flex items-center gap-2">
                                 <Badge
                                   variant="secondary"
-                                  className={getClassTypeColor(entry.classType)}
+                                  className={getClassTypeColor(entry.class_name.split(' ')[0].toLowerCase())}
                                 >
-                                  {entry.classType.charAt(0).toUpperCase()}
+                                  {entry.class_name.split(' ')[0].charAt(0).toUpperCase()}
                                 </Badge>
                               </div>
                               <p className="text-sm font-medium">
-                                {entry.startTime} ({entry.duration}min)
+                                {entry.start_time} ({entry.duration}min)
                               </p>
                               <p className="text-xs text-muted-foreground">
-                                Max: {entry.maxParticipants}
+                                Max: {entry.max_participants}
                               </p>
                             </div>
                             <Button
@@ -153,7 +227,11 @@ export function WeeklyScheduleManager() {
         isOpen={isEditModalOpen}
         onClose={() => setIsEditModalOpen(false)}
         classEntry={selectedClass}
-        onUpdateClass={handleUpdateClass}
+        onUpdateClass={() => {
+          setIsEditModalOpen(false);
+          setSelectedClass(null);
+          loadSchedule();
+        }}
       />
     </div>
   );

@@ -13,16 +13,20 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Eye, EyeOff } from 'lucide-react';
-import { UserProfile, MembershipPlan } from '@/types/admin';
+import { MembershipPlan } from '@/types/admin';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
 
 interface AddUserModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onAddUser: (user: Omit<UserProfile, 'id' | 'createdAt' | 'updatedAt'>) => void;
+  onAddUser: (user: any) => void;
 }
 
 export function AddUserModal({ isOpen, onClose, onAddUser }: AddUserModalProps) {
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast();
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -35,35 +39,59 @@ export function AddUserModal({ isOpen, onClose, onAddUser }: AddUserModalProps) 
     isActive: true,
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
     
-    const newUser: Omit<UserProfile, 'id' | 'createdAt' | 'updatedAt'> = {
-      firstName: formData.firstName,
-      lastName: formData.lastName,
-      email: formData.email,
-      phone: formData.phone,
-      membershipPlan: formData.membershipPlan,
-      monthlyRenewalDate: formData.monthlyRenewalDate,
-      notes: formData.notes,
-      isActive: formData.isActive,
-    };
+    try {
+      const { data, error } = await supabase.functions.invoke('admin-create-client', {
+        body: {
+          email: formData.email,
+          password: formData.password,
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          phone: formData.phone || null,
+          membershipPlan: formData.membershipPlan,
+          monthlyRenewalDate: formData.monthlyRenewalDate || null,
+          notes: formData.notes || null,
+          isActive: formData.isActive,
+        }
+      });
 
-    onAddUser(newUser);
-    
-    // Reset form
-    setFormData({
-      firstName: '',
-      lastName: '',
-      email: '',
-      phone: '',
-      password: '',
-      membershipPlan: 'basic',
-      monthlyRenewalDate: '',
-      notes: '',
-      isActive: true,
-    });
-    onClose();
+      if (error) {
+        throw error;
+      }
+
+      if (data?.profile) {
+        onAddUser(data.profile);
+        toast({
+          title: "User created successfully",
+          description: `${formData.firstName} ${formData.lastName} has been added with login credentials.`,
+        });
+        
+        // Reset form
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          phone: '',
+          password: '',
+          membershipPlan: 'basic',
+          monthlyRenewalDate: '',
+          notes: '',
+          isActive: true,
+        });
+        onClose();
+      }
+    } catch (error: any) {
+      toast({
+        title: "Failed to create user",
+        description: error.message || "An error occurred while creating the user.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleInputChange = (field: string, value: string | boolean) => {
@@ -189,7 +217,9 @@ export function AddUserModal({ isOpen, onClose, onAddUser }: AddUserModalProps) 
             <Button type="button" variant="outline" onClick={onClose}>
               Cancel
             </Button>
-            <Button type="submit">Add User</Button>
+            <Button type="submit" disabled={isLoading}>
+              {isLoading ? 'Creating...' : 'Add User'}
+            </Button>
           </DialogFooter>
         </form>
       </DialogContent>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -13,34 +13,59 @@ import {
 } from '@/components/ui/table';
 import { Plus, Search, Edit, Trash2, Download } from 'lucide-react';
 import { addMonths, isAfter, format, parseISO } from 'date-fns';
-import { UserProfile } from '@/types/admin';
-import { mockUsers } from '@/data/mockAdminData';
+import { supabase } from '@/integrations/supabase/client';
 import { AddUserModal } from './AddUserModal';
 import { EditUserModal } from './EditUserModal';
 
+interface UserProfile {
+  id: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone?: string;
+  membership_plan: 'basic' | 'pro';
+  monthly_renewal_date?: string;
+  notes?: string;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
 export function UserProfilesManager() {
-  const [users, setUsers] = useState<UserProfile[]>(mockUsers);
+  const [users, setUsers] = useState<UserProfile[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [editingUser, setEditingUser] = useState<UserProfile | null>(null);
 
+  useEffect(() => {
+    loadUsers();
+  }, []);
+
+  const loadUsers = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('user_profiles')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setUsers(data || []);
+    } catch (error) {
+      console.error('Failed to load users:', error);
+    }
+  };
+
   const filteredUsers = users.filter(user =>
-    user.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    user.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    user.first_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    user.last_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     user.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const activeUsers = users.filter(user => user.isActive).length;
-  const proMembers = users.filter(user => user.membershipPlan === 'pro').length;
+  const activeUsers = users.filter(user => user.is_active).length;
+  const proMembers = users.filter(user => user.membership_plan === 'pro').length;
 
-  const handleAddUser = (userData: Omit<UserProfile, 'id' | 'createdAt' | 'updatedAt'>) => {
-    const newUser: UserProfile = {
-      ...userData,
-      id: (users.length + 1).toString(),
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
-    setUsers(prev => [...prev, newUser]);
+  const handleAddUser = (userData: any) => {
+    loadUsers(); // Reload users after adding
   };
 
   const handleUpdateUser = (updatedUser: UserProfile) => {
@@ -50,11 +75,23 @@ export function UserProfilesManager() {
     setEditingUser(null);
   };
 
-  const handleDeleteUser = (userId: string) => {
-    setUsers(prev => prev.filter(user => user.id !== userId));
+  const handleDeleteUser = async (userId: string) => {
+    try {
+      const { error } = await supabase
+        .from('user_profiles')
+        .delete()
+        .eq('id', userId);
+
+      if (error) throw error;
+      setUsers(prev => prev.filter(user => user.id !== userId));
+    } catch (error) {
+      console.error('Failed to delete user:', error);
+    }
   };
 
-  const getNextPaymentDue = (monthlyRenewalDate: string): Date => {
+  const getNextPaymentDue = (monthlyRenewalDate?: string): Date => {
+    if (!monthlyRenewalDate) return new Date();
+    
     const today = new Date();
     const renewalDate = parseISO(monthlyRenewalDate);
     
@@ -167,22 +204,25 @@ export function UserProfilesManager() {
               {filteredUsers.map((user) => (
                 <TableRow key={user.id}>
                   <TableCell className="font-medium">
-                    {user.firstName} {user.lastName}
+                    {user.first_name} {user.last_name}
                   </TableCell>
                   <TableCell>{user.email}</TableCell>
                   <TableCell>{user.phone}</TableCell>
                   <TableCell>
-                    <Badge variant={user.membershipPlan === 'pro' ? 'default' : 'secondary'}>
-                      {user.membershipPlan}
+                    <Badge variant={user.membership_plan === 'pro' ? 'default' : 'secondary'}>
+                      {user.membership_plan}
                     </Badge>
                   </TableCell>
                   <TableCell>
-                    <Badge variant={user.isActive ? 'default' : 'destructive'}>
-                      {user.isActive ? 'Active' : 'Inactive'}
+                    <Badge variant={user.is_active ? 'default' : 'destructive'}>
+                      {user.is_active ? 'Active' : 'Inactive'}
                     </Badge>
                   </TableCell>
                   <TableCell>
-                    {format(getNextPaymentDue(user.monthlyRenewalDate), 'MMM dd, yyyy')}
+                    {user.monthly_renewal_date ? 
+                      format(getNextPaymentDue(user.monthly_renewal_date), 'MMM dd, yyyy') :
+                      'Not set'
+                    }
                   </TableCell>
                   <TableCell className="text-right">
                     <div className="flex justify-end gap-2">
@@ -219,7 +259,10 @@ export function UserProfilesManager() {
         <EditUserModal
           isOpen={!!editingUser}
           onClose={() => setEditingUser(null)}
-          onUpdateUser={handleUpdateUser}
+          onUpdateUser={() => {
+            setEditingUser(null);
+            loadUsers();
+          }}
           user={editingUser}
         />
       )}

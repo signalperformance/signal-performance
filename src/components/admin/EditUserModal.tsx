@@ -19,8 +19,8 @@ import { UserProfile, MembershipPlan } from '@/types/admin';
 interface EditUserModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onUpdateUser: (user: UserProfile) => void;
-  user: UserProfile;
+  onUpdateUser: () => void;
+  user: any;
 }
 
 export function EditUserModal({ isOpen, onClose, onUpdateUser, user }: EditUserModalProps) {
@@ -55,18 +55,7 @@ export function EditUserModal({ isOpen, onClose, onUpdateUser, user }: EditUserM
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onUpdateUser({
-      ...user,
-      firstName: formData.firstName,
-      lastName: formData.lastName,
-      email: formData.email,
-      phone: formData.phone,
-      membershipPlan: formData.membershipPlan,
-      monthlyRenewalDate: formData.monthlyRenewalDate,
-      notes: formData.notes,
-      isActive: formData.isActive,
-      updatedAt: new Date(),
-    });
+    onUpdateUser();
     onClose();
   };
 

@@ -29,6 +29,7 @@ export interface ScheduleWithAvailability {
   maxParticipants: number;
   currentBookings: number;
   date: Date;
+  scheduleEntryId?: string;
 }
 
 export interface AuthState {

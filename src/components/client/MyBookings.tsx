@@ -21,12 +21,16 @@ import {
 
 export const MyBookings: React.FC = () => {
   const { user } = useAuth();
-  const { getUpcomingBookings, cancelBooking, loadBookings } = useBookingStore();
+  const { getUpcomingBookings, cancelBooking, loadBookings, loadSchedule } = useBookingStore();
   const { toast } = useToast();
 
   useEffect(() => {
-    loadBookings();
-  }, [loadBookings]);
+    const initializeData = async () => {
+      await loadSchedule();
+      await loadBookings();
+    };
+    initializeData();
+  }, [loadBookings, loadSchedule]);
 
   const upcomingBookings = user ? getUpcomingBookings(user.id) : [];
 
@@ -48,8 +52,9 @@ export const MyBookings: React.FC = () => {
     return format(date, 'EEEE, MMM dd');
   };
 
-  const handleCancelBooking = (bookingId: string, sessionName: string, date: Date) => {
-    if (cancelBooking(bookingId)) {
+  const handleCancelBooking = async (bookingId: string, sessionName: string, date: Date) => {
+    const success = await cancelBooking(bookingId);
+    if (success) {
       toast({
         title: "Booking cancelled",
         description: `Cancelled ${sessionName} on ${format(date, 'EEEE, MMM dd')}`,

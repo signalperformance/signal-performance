@@ -14,12 +14,23 @@ import { useToast } from '@/hooks/use-toast';
 
 export const ClientScheduleView: React.FC = () => {
   const { user } = useAuth();
-  const { getScheduleWithAvailability, bookSession, cancelBooking, getUserBookings, loadBookings } = useBookingStore();
+  const { 
+    getScheduleWithAvailability, 
+    bookSession, 
+    cancelBooking, 
+    getUserBookings, 
+    loadBookings, 
+    loadSchedule 
+  } = useBookingStore();
   const { toast } = useToast();
 
   useEffect(() => {
-    loadBookings();
-  }, [loadBookings]);
+    const initializeData = async () => {
+      await loadSchedule();
+      await loadBookings();
+    };
+    initializeData();
+  }, [loadBookings, loadSchedule]);
 
   const [selectedSession, setSelectedSession] = useState<ScheduleWithAvailability | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -81,7 +92,7 @@ export const ClientScheduleView: React.FC = () => {
     setIsModalOpen(true);
   };
 
-  const handleBookingConfirm = () => {
+  const handleBookingConfirm = async () => {
     if (!selectedSession || !user) return;
 
     const isBooked = isSessionBooked(selectedSession);
@@ -94,7 +105,7 @@ export const ClientScheduleView: React.FC = () => {
         isSameDay(b.bookingDate, selectedSession.date)
       );
       
-      if (booking && cancelBooking(booking.id)) {
+      if (booking && await cancelBooking(booking.id)) {
         toast({
           title: "Booking cancelled",
           description: `Cancelled ${selectedSession.name} on ${format(selectedSession.date, 'EEEE, MMM dd')}`,
@@ -102,7 +113,8 @@ export const ClientScheduleView: React.FC = () => {
       }
     } else {
       // Book session
-      if (bookSession(selectedSession, user.id)) {
+      const success = await bookSession(selectedSession, user.id);
+      if (success) {
         toast({
           title: "Session booked!",
           description: `Booked ${selectedSession.name} on ${format(selectedSession.date, 'EEEE, MMM dd')}`,

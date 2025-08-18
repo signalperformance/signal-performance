@@ -16,8 +16,8 @@ import { ScheduleEntry, ClassType, SessionType } from '@/types/admin';
 interface EditClassModalProps {
   isOpen: boolean;
   onClose: () => void;
-  classEntry: ScheduleEntry | null;
-  onUpdateClass: (updatedClass: ScheduleEntry) => void;
+  classEntry: any;
+  onUpdateClass: () => void;
 }
 
 export function EditClassModal({ isOpen, onClose, classEntry, onUpdateClass }: EditClassModalProps) {
@@ -46,12 +46,7 @@ export function EditClassModal({ isOpen, onClose, classEntry, onUpdateClass }: E
     
     if (!classEntry) return;
 
-    const updatedClass: ScheduleEntry = {
-      ...classEntry,
-      ...formData,
-    };
-
-    onUpdateClass(updatedClass);
+    onUpdateClass();
     onClose();
   };
 
