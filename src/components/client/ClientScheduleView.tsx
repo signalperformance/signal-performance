@@ -47,10 +47,20 @@ export const ClientScheduleView: React.FC = () => {
 
   const getWeekDays = () => {
     const weekStart = getCurrentWeekStart();
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Start of today
+    
     return Array.from({ length: 7 }, (_, i) => {
       const date = new Date(weekStart);
       date.setDate(weekStart.getDate() + i);
       return date;
+    }).filter(date => {
+      // For current week, only show today and future days
+      if (weekOffset === 0) {
+        return date >= today;
+      }
+      // For future weeks, show all days
+      return true;
     });
   };
 
@@ -137,17 +147,20 @@ export const ClientScheduleView: React.FC = () => {
   const weekEnd = new Date(weekStart);
   weekEnd.setDate(weekStart.getDate() + 6);
 
-  // Set default selected day to today (or first day with sessions)
+  // Set default selected day to today (or first available day)
   const defaultDay = useMemo(() => {
     const today = new Date();
     const todayStr = format(today, 'yyyy-MM-dd');
-    const weekDayStrs = weekDays.map(day => format(day, 'yyyy-MM-dd'));
     
-    if (weekDayStrs.includes(todayStr)) {
-      return todayStr;
+    // For current week, prefer today if it's available
+    if (weekOffset === 0 && weekDays.length > 0) {
+      const weekDayStrs = weekDays.map(day => format(day, 'yyyy-MM-dd'));
+      if (weekDayStrs.includes(todayStr)) {
+        return todayStr;
+      }
     }
     
-    // Find first day with sessions
+    // Find first day with sessions, or just first available day
     for (const day of weekDays) {
       const sessions = getSessionsForDay(day);
       if (sessions.length > 0) {
@@ -155,8 +168,8 @@ export const ClientScheduleView: React.FC = () => {
       }
     }
     
-    return format(weekDays[0], 'yyyy-MM-dd');
-  }, [weekDays, scheduleWithAvailability]);
+    return weekDays.length > 0 ? format(weekDays[0], 'yyyy-MM-dd') : '';
+  }, [weekDays, scheduleWithAvailability, weekOffset]);
 
   // Update selected day when week changes or on first load
   React.useEffect(() => {

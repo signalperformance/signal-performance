@@ -74,7 +74,15 @@ export const useBookingStore = create<BookingStore>((set, get) => ({
         .order('start_time');
 
       if (error) throw error;
-      set({ scheduleEntries: data || [] });
+      
+      // Filter out sessions that have already passed
+      const now = new Date();
+      const futureEntries = (data || []).filter(instance => {
+        const sessionDateTime = new Date(`${instance.class_date}T${instance.start_time}`);
+        return sessionDateTime >= now;
+      });
+      
+      set({ scheduleEntries: futureEntries });
     } catch (error) {
       console.error('Failed to load schedule:', error);
     }
@@ -102,30 +110,36 @@ export const useBookingStore = create<BookingStore>((set, get) => ({
   getScheduleWithAvailability: () => {
     const { bookings, scheduleEntries } = get();
     const scheduleWithDates: ScheduleWithAvailability[] = [];
+    const now = new Date();
 
-    // Use live schedule instances directly
+    // Use live schedule instances directly and filter by current time
     scheduleEntries.forEach((instance: any) => {
       const instanceDate = new Date(instance.class_date);
-      const dayKey = instanceDate.toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase();
-      const hour24 = parseInt(instance.start_time.split(':')[0]);
+      const sessionDateTime = new Date(`${instance.class_date}T${instance.start_time}`);
       
-      // Count current bookings for this instance
-      const currentBookings = bookings.filter(booking => 
-        booking.scheduleEntryId === instance.id &&
-        isSameDay(booking.bookingDate, instanceDate)
-      ).length;
+      // Only include sessions that haven't started yet
+      if (sessionDateTime >= now) {
+        const dayKey = instanceDate.toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase();
+        const hour24 = parseInt(instance.start_time.split(':')[0]);
+        
+        // Count current bookings for this instance
+        const currentBookings = bookings.filter(booking => 
+          booking.scheduleEntryId === instance.id &&
+          isSameDay(booking.bookingDate, instanceDate)
+        ).length;
 
-      scheduleWithDates.push({
-        id: instance.id,
-        dayKey,
-        hour24,
-        name: instance.class_name,
-        sessionType: instance.session_type,
-        maxParticipants: instance.max_participants,
-        currentBookings,
-        date: instanceDate,
-        scheduleEntryId: instance.id,
-      });
+        scheduleWithDates.push({
+          id: instance.id,
+          dayKey,
+          hour24,
+          name: instance.class_name,
+          sessionType: instance.session_type,
+          maxParticipants: instance.max_participants,
+          currentBookings,
+          date: instanceDate,
+          scheduleEntryId: instance.id,
+        });
+      }
     });
 
     return scheduleWithDates;
