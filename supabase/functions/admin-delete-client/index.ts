@@ -64,15 +64,33 @@ serve(async (req) => {
 
     console.log('Deleting user:', userId);
 
-    // Delete user from auth (this will cascade to user_profiles due to foreign key)
+    // 1) Delete profile row (id matches our app's user id)
+    const { error: profileDeleteError } = await supabaseService
+      .from('user_profiles')
+      .delete()
+      .eq('id', userId);
+
+    if (profileDeleteError) {
+      console.error('Profile delete error:', profileDeleteError);
+      return new Response(JSON.stringify({ error: 'Failed to delete user profile: ' + profileDeleteError.message }), {
+        status: 400,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+      });
+    }
+
+    // 2) Try to delete auth user (tolerate 404 user_not_found)
     const { error: authDeleteError } = await supabaseService.auth.admin.deleteUser(userId);
 
-    if (authDeleteError) {
+    if (authDeleteError && (authDeleteError as any).status !== 404 && (authDeleteError as any).code !== 'user_not_found') {
       console.error('Auth delete error:', authDeleteError);
       return new Response(JSON.stringify({ error: 'Failed to delete auth user: ' + authDeleteError.message }), {
         status: 400,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' }
       });
+    }
+
+    if (authDeleteError && ((authDeleteError as any).status === 404 || (authDeleteError as any).code === 'user_not_found')) {
+      console.warn('Auth user not found, continuing deletion for profile only:', userId);
     }
 
     console.log('Successfully deleted user:', userId);
