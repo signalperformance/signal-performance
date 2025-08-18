@@ -8,12 +8,14 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Eye, EyeOff, Shield } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
 
 export default function AdminLogin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isCreatingAdmin, setIsCreatingAdmin] = useState(false);
   const [error, setError] = useState('');
 
   const { login, isAuthenticated } = useAdminAuth();
@@ -41,12 +43,42 @@ export default function AdminLogin() {
         });
         navigate('/admin');
       } else {
-        setError('Invalid admin credentials. Please check your email and password.');
+        setError('Invalid admin credentials. The admin user might not exist in Supabase Auth yet.');
       }
     } catch (err) {
       setError('An error occurred during login. Please try again.');
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleCreateAdminUser = async () => {
+    setIsCreatingAdmin(true);
+    setError('');
+
+    try {
+      const { data, error } = await supabase.functions.invoke('bootstrap-admin');
+      
+      if (error) {
+        throw error;
+      }
+
+      if (data.success) {
+        toast({
+          title: "Success",
+          description: data.message,
+        });
+        // Pre-fill the form with admin credentials
+        setEmail('admin@example.com');
+        setPassword('admin123');
+      } else {
+        setError(data.error || 'Failed to create admin user');
+      }
+    } catch (err: any) {
+      console.error('Error creating admin user:', err);
+      setError('Failed to create admin user: ' + (err.message || 'Unknown error'));
+    } finally {
+      setIsCreatingAdmin(false);
     }
   };
 
@@ -113,7 +145,7 @@ export default function AdminLogin() {
               <Button
                 type="submit"
                 className="w-full"
-                disabled={isLoading}
+                disabled={isLoading || isCreatingAdmin}
               >
                 {isLoading ? (
                   <div className="flex items-center gap-2">
@@ -127,6 +159,25 @@ export default function AdminLogin() {
                   </div>
                 )}
               </Button>
+
+              {error && error.includes('might not exist') && (
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="w-full"
+                  disabled={isCreatingAdmin || isLoading}
+                  onClick={handleCreateAdminUser}
+                >
+                  {isCreatingAdmin ? (
+                    <div className="flex items-center gap-2">
+                      <div className="animate-spin w-4 h-4 border-2 border-foreground border-t-transparent rounded-full"></div>
+                      Creating Admin User...
+                    </div>
+                  ) : (
+                    'Create Admin User'
+                  )}
+                </Button>
+              )}
             </form>
 
             <div className="mt-6 text-center text-sm text-muted-foreground">
