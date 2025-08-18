@@ -11,3 +11,9 @@ verify_jwt = true
 
 [functions.admin-delete-client]
 verify_jwt = true
+
+[functions.migrate-schedule-to-live-system]
+verify_jwt = false
+
+[functions.trigger-migration]
+verify_jwt = false
