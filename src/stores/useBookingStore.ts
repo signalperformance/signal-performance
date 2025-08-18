@@ -29,8 +29,8 @@ export const useBookingStore = create<BookingStore>((set, get) => ({
           schedule_entry_id,
           booking_date,
           created_at,
-          schedule_entries!inner(
-            day_of_week,
+          live_schedule_instances!inner(
+            class_date,
             start_time,
             class_name,
             session_type
@@ -43,10 +43,10 @@ export const useBookingStore = create<BookingStore>((set, get) => ({
         id: b.id,
         userId: b.user_id,
         scheduleEntryId: b.schedule_entry_id,
-        dayKey: b.schedule_entries.day_of_week,
-        hour24: parseInt(b.schedule_entries.start_time.split(':')[0]),
-        sessionName: b.schedule_entries.class_name,
-        sessionType: b.schedule_entries.session_type,
+        dayKey: new Date(b.live_schedule_instances.class_date).toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase(),
+        hour24: parseInt(b.live_schedule_instances.start_time.split(':')[0]),
+        sessionName: b.live_schedule_instances.class_name,
+        sessionType: b.live_schedule_instances.session_type,
         bookingDate: new Date(b.booking_date),
         createdAt: new Date(b.created_at),
       })) || [];
@@ -59,10 +59,19 @@ export const useBookingStore = create<BookingStore>((set, get) => ({
 
   loadSchedule: async () => {
     try {
+      // Load live schedule instances for the next 2 weeks
+      const today = new Date();
+      const twoWeeksFromNow = new Date(today);
+      twoWeeksFromNow.setDate(today.getDate() + 14);
+
       const { data, error } = await supabase
-        .from('schedule_entries')
+        .from('live_schedule_instances')
         .select('*')
-        .eq('is_active', true);
+        .eq('is_cancelled', false)
+        .gte('class_date', today.toISOString().split('T')[0])
+        .lte('class_date', twoWeeksFromNow.toISOString().split('T')[0])
+        .order('class_date')
+        .order('start_time');
 
       if (error) throw error;
       set({ scheduleEntries: data || [] });
@@ -84,43 +93,32 @@ export const useBookingStore = create<BookingStore>((set, get) => ({
 
   getScheduleWithAvailability: () => {
     const { bookings, scheduleEntries } = get();
-    const today = new Date();
-    const startOfThisWeek = startOfWeek(today, { weekStartsOn: 1 }); // Monday
     const scheduleWithDates: ScheduleWithAvailability[] = [];
 
-    // Generate schedule for current week and next week (14 days)
-    for (let weekOffset = 0; weekOffset < 2; weekOffset++) {
-      for (let dayOffset = 0; dayOffset < 7; dayOffset++) {
-        const currentDate = addDays(startOfThisWeek, weekOffset * 7 + dayOffset);
-        const dayKey = format(currentDate, 'EEEE').toLowerCase();
+    // Use live schedule instances directly
+    scheduleEntries.forEach((instance: any) => {
+      const instanceDate = new Date(instance.class_date);
+      const dayKey = instanceDate.toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase();
+      const hour24 = parseInt(instance.start_time.split(':')[0]);
+      
+      // Count current bookings for this instance
+      const currentBookings = bookings.filter(booking => 
+        booking.scheduleEntryId === instance.id &&
+        isSameDay(booking.bookingDate, instanceDate)
+      ).length;
 
-        // Find sessions for this day
-        const daySessions = scheduleEntries.filter(session => session.day_of_week === dayKey);
-
-        daySessions.forEach((session) => {
-          const sessionId = `${dayKey}-${session.start_time}-${weekOffset}-${dayOffset}`;
-          const hour24 = parseInt(session.start_time.split(':')[0]);
-          
-          // Count current bookings for this session on this date
-          const currentBookings = bookings.filter(booking => 
-            booking.scheduleEntryId === session.id &&
-            isSameDay(booking.bookingDate, currentDate)
-          ).length;
-
-          scheduleWithDates.push({
-            id: sessionId,
-            dayKey: session.day_of_week,
-            hour24,
-            name: session.class_name,
-            sessionType: session.session_type,
-            maxParticipants: session.max_participants,
-            currentBookings,
-            date: currentDate,
-            scheduleEntryId: session.id,
-          });
-        });
-      }
-    }
+      scheduleWithDates.push({
+        id: instance.id,
+        dayKey,
+        hour24,
+        name: instance.class_name,
+        sessionType: instance.session_type,
+        maxParticipants: instance.max_participants,
+        currentBookings,
+        date: instanceDate,
+        scheduleEntryId: instance.id,
+      });
+    });
 
     return scheduleWithDates;
   },
@@ -149,7 +147,7 @@ export const useBookingStore = create<BookingStore>((set, get) => ({
         .from('bookings')
         .insert({
           user_id: userId,
-          schedule_entry_id: (scheduleEntry as any).scheduleEntryId,
+          schedule_entry_id: scheduleEntry.scheduleEntryId,
           booking_date: format(scheduleEntry.date, 'yyyy-MM-dd'),
         })
         .select()
