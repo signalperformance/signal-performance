@@ -172,11 +172,29 @@ export function SchedulePeriodsManager() {
 
   const generateInstances = async (periodId: string) => {
     try {
-      // This would trigger instance generation - for now just show success
+      setLoading(true);
+      console.log('Generating instances for period:', periodId);
+      
+      const { data, error } = await supabase.functions.invoke('generate-schedule-instances', {
+        body: { period_id: periodId }
+      });
+
+      if (error) {
+        console.error('Failed to generate instances:', error);
+        toast({
+          title: "Error",
+          description: "Failed to generate schedule instances",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      console.log('Instances generated successfully:', data);
       toast({
         title: "Success",
-        description: "Live schedule instances generated successfully",
+        description: `Generated ${data?.instances_count || 0} live schedule instances`,
       });
+      
     } catch (error) {
       console.error('Error generating instances:', error);
       toast({
@@ -184,6 +202,8 @@ export function SchedulePeriodsManager() {
         description: "Failed to generate schedule instances",
         variant: "destructive",
       });
+    } finally {
+      setLoading(false);
     }
   };
 

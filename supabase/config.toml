@@ -17,3 +17,6 @@ verify_jwt = false
 
 [functions.trigger-migration]
 verify_jwt = false
+
+[functions.generate-schedule-instances]
+verify_jwt = false
