@@ -127,19 +127,27 @@ export const useBookingStore = create<BookingStore>((set, get) => ({
     try {
       const { bookings } = get();
       
+      console.log('Booking session:', { 
+        scheduleEntryId: scheduleEntry.scheduleEntryId, 
+        userId, 
+        date: scheduleEntry.date 
+      });
+      
       // Check if user already booked this session
       const existingBooking = bookings.find(booking =>
         booking.userId === userId &&
-        booking.scheduleEntryId === (scheduleEntry as any).scheduleEntryId &&
+        booking.scheduleEntryId === scheduleEntry.scheduleEntryId &&
         isSameDay(booking.bookingDate, scheduleEntry.date)
       );
 
       if (existingBooking) {
+        console.log('User already booked this session');
         return false; // Already booked
       }
 
       // Check if session is full
       if (scheduleEntry.currentBookings >= scheduleEntry.maxParticipants) {
+        console.log('Session is full');
         return false; // Session full
       }
 
@@ -153,7 +161,12 @@ export const useBookingStore = create<BookingStore>((set, get) => ({
         .select()
         .single();
 
-      if (error) throw error;
+      if (error) {
+        console.error('Supabase booking error:', error);
+        throw error;
+      }
+
+      console.log('Booking successful:', data);
 
       // Reload bookings to update state
       await get().loadBookings();
