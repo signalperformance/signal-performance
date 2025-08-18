@@ -15,6 +15,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Switch } from '@/components/ui/switch';
 import { Eye, EyeOff } from 'lucide-react';
 import { UserProfile, MembershipPlan } from '@/types/admin';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
 
 interface EditUserModalProps {
   isOpen: boolean;
@@ -25,6 +27,8 @@ interface EditUserModalProps {
 
 export function EditUserModal({ isOpen, onClose, onUpdateUser, user }: EditUserModalProps) {
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast();
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -40,23 +44,69 @@ export function EditUserModal({ isOpen, onClose, onUpdateUser, user }: EditUserM
   useEffect(() => {
     if (user) {
       setFormData({
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
-        phone: user.phone,
+        firstName: user.first_name || '',
+        lastName: user.last_name || '',
+        email: user.email || '',
+        phone: user.phone || '',
         password: '', // Don't populate password for security
-        membershipPlan: user.membershipPlan,
-        monthlyRenewalDate: user.monthlyRenewalDate,
-        notes: user.notes,
-        isActive: user.isActive,
+        membershipPlan: user.membership_plan || 'basic',
+        monthlyRenewalDate: user.monthly_renewal_date || '',
+        notes: user.notes || '',
+        isActive: user.is_active !== undefined ? user.is_active : true,
       });
     }
   }, [user]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    onUpdateUser();
-    onClose();
+    if (!user) return;
+    
+    setIsLoading(true);
+    
+    try {
+      // Call the admin-update-client edge function
+      const { error } = await supabase.functions.invoke('admin-update-client', {
+        body: {
+          userId: user.id,
+          email: formData.email,
+          password: formData.password || undefined, // Only send if provided
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          phone: formData.phone,
+          membershipPlan: formData.membershipPlan,
+          monthlyRenewalDate: formData.monthlyRenewalDate,
+          notes: formData.notes,
+          isActive: formData.isActive,
+        }
+      });
+
+      if (error) {
+        console.error('Error updating user:', error);
+        toast({
+          title: "Error",
+          description: "Failed to update user. Please try again.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      toast({
+        title: "Success",
+        description: "User updated successfully.",
+      });
+
+      onUpdateUser(); // Refresh the user list
+      onClose();
+    } catch (error) {
+      console.error('Unexpected error:', error);
+      toast({
+        title: "Error",
+        description: "An unexpected error occurred. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleInputChange = (field: string, value: string | boolean) => {
@@ -189,10 +239,12 @@ export function EditUserModal({ isOpen, onClose, onUpdateUser, user }: EditUserM
           </div>
           
           <DialogFooter>
-            <Button type="button" variant="outline" onClick={onClose}>
+            <Button type="button" variant="outline" onClick={onClose} disabled={isLoading}>
               Cancel
             </Button>
-            <Button type="submit">Update User</Button>
+            <Button type="submit" disabled={isLoading}>
+              {isLoading ? "Updating..." : "Update User"}
+            </Button>
           </DialogFooter>
         </form>
       </DialogContent>

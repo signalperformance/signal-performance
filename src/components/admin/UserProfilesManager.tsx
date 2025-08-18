@@ -14,6 +14,7 @@ import {
 import { Plus, Search, Edit, Trash2, Download } from 'lucide-react';
 import { addMonths, isAfter, format, parseISO } from 'date-fns';
 import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
 import { AddUserModal } from './AddUserModal';
 import { EditUserModal } from './EditUserModal';
 
@@ -36,6 +37,7 @@ export function UserProfilesManager() {
   const [searchTerm, setSearchTerm] = useState('');
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [editingUser, setEditingUser] = useState<UserProfile | null>(null);
+  const { toast } = useToast();
 
   useEffect(() => {
     loadUsers();
@@ -68,24 +70,40 @@ export function UserProfilesManager() {
     loadUsers(); // Reload users after adding
   };
 
-  const handleUpdateUser = (updatedUser: UserProfile) => {
-    setUsers(prev => prev.map(user => 
-      user.id === updatedUser.id ? updatedUser : user
-    ));
+  const handleUpdateUser = () => {
+    loadUsers(); // Reload users after updating
     setEditingUser(null);
   };
 
   const handleDeleteUser = async (userId: string) => {
     try {
-      const { error } = await supabase
-        .from('user_profiles')
-        .delete()
-        .eq('id', userId);
+      const { error } = await supabase.functions.invoke('admin-delete-client', {
+        body: { userId }
+      });
 
-      if (error) throw error;
-      setUsers(prev => prev.filter(user => user.id !== userId));
+      if (error) {
+        console.error('Error deleting user:', error);
+        toast({
+          title: "Error",
+          description: "Failed to delete user. Please try again.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      toast({
+        title: "Success",
+        description: "User deleted successfully.",
+      });
+
+      await loadUsers();
     } catch (error) {
-      console.error('Failed to delete user:', error);
+      console.error('Unexpected error:', error);
+      toast({
+        title: "Error",
+        description: "An unexpected error occurred. Please try again.",
+        variant: "destructive",
+      });
     }
   };
 
