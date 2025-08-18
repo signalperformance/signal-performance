@@ -86,22 +86,34 @@ export function LiveCalendarView() {
       // Load bookings for the same period
       const { data: bookings, error: bookingsError } = await supabase
         .from('bookings')
-        .select(`
-          *,
-          user_profiles!inner(first_name, last_name)
-        `)
+        .select('*')
         .gte('booking_date', format(weekStart, 'yyyy-MM-dd'))
         .lte('booking_date', format(weekEnd, 'yyyy-MM-dd'));
 
       if (bookingsError) throw bookingsError;
 
+      // Load user profiles for bookings
+      const userIds = bookings?.map(b => b.user_id).filter(Boolean) || [];
+      let userProfiles: any[] = [];
+      
+      if (userIds.length > 0) {
+        const { data: profiles, error: profilesError } = await supabase
+          .from('user_profiles')
+          .select('id, first_name, last_name')
+          .in('id', userIds);
+        
+        if (profilesError) throw profilesError;
+        userProfiles = profiles || [];
+      }
+
       // Combine instances with their bookings
       const classesWithBookings: ClassWithBookings[] = (instances || []).map(instance => {
         const instanceBookings = (bookings || []).filter(booking => 
-          isSameDay(new Date(booking.booking_date), new Date(instance.class_date)) &&
-          // For now, match by class name and time since we don't have direct FK yet
           booking.schedule_entry_id === instance.id
-        );
+        ).map(booking => ({
+          ...booking,
+          user_profiles: userProfiles.find(profile => profile.id === booking.user_id)
+        }));
 
         return {
           ...instance,
