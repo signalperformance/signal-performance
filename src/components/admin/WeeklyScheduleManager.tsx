@@ -225,13 +225,12 @@ export function WeeklyScheduleManager() {
 
       <EditClassModal
         isOpen={isEditModalOpen}
-        onClose={() => setIsEditModalOpen(false)}
-        classEntry={selectedClass}
-        onUpdateClass={() => {
+        onClose={() => {
           setIsEditModalOpen(false);
           setSelectedClass(null);
-          loadSchedule();
         }}
+        classEntry={selectedClass}
+        onUpdateClass={handleUpdateClass}
       />
     </div>
   );

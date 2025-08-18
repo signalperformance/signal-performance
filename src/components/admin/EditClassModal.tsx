@@ -11,43 +11,98 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { ScheduleEntry, ClassType, SessionType } from '@/types/admin';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
+
+type SessionType = 'pro' | 'amateur';
+
+interface ScheduleEntry {
+  id: string;
+  day_of_week: string;
+  start_time: string;
+  duration: number;
+  class_name: string;
+  session_type: SessionType;
+  max_participants: number;
+  is_active: boolean;
+}
 
 interface EditClassModalProps {
   isOpen: boolean;
   onClose: () => void;
-  classEntry: any;
-  onUpdateClass: () => void;
+  classEntry: ScheduleEntry | null;
+  onUpdateClass: (updatedClass: ScheduleEntry) => void;
 }
 
 export function EditClassModal({ isOpen, onClose, classEntry, onUpdateClass }: EditClassModalProps) {
   const [formData, setFormData] = useState({
     startTime: '',
     duration: 60,
-    classType: 'mobility' as ClassType,
+    className: '',
     sessionType: 'amateur' as SessionType,
-    maxParticipants: 3,
+    maxParticipants: 8,
   });
+  const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast();
 
   useEffect(() => {
     if (classEntry) {
       setFormData({
-        startTime: classEntry.startTime,
-        duration: classEntry.duration,
-        classType: classEntry.classType,
-        sessionType: classEntry.sessionType,
-        maxParticipants: classEntry.maxParticipants,
+        startTime: classEntry.start_time,
+        duration: classEntry.duration || 60,
+        className: classEntry.class_name,
+        sessionType: classEntry.session_type,
+        maxParticipants: classEntry.max_participants || 8,
       });
     }
   }, [classEntry]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!classEntry) return;
 
-    onUpdateClass();
-    onClose();
+    setIsLoading(true);
+    
+    try {
+      const updatedClass = {
+        ...classEntry,
+        start_time: formData.startTime,
+        duration: formData.duration,
+        class_name: formData.className,
+        session_type: formData.sessionType,
+        max_participants: formData.maxParticipants,
+      };
+
+      const { error } = await supabase
+        .from('schedule_entries')
+        .update({
+          start_time: updatedClass.start_time,
+          duration: updatedClass.duration,
+          class_name: updatedClass.class_name,
+          session_type: updatedClass.session_type,
+          max_participants: updatedClass.max_participants,
+        })
+        .eq('id', updatedClass.id);
+
+      if (error) throw error;
+
+      onUpdateClass(updatedClass);
+      toast({
+        title: "Class updated",
+        description: "The class has been updated successfully.",
+      });
+      onClose();
+    } catch (error) {
+      console.error('Failed to update class:', error);
+      toast({
+        title: "Error",
+        description: "Failed to update class. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleInputChange = (field: string, value: string | number) => {
@@ -62,7 +117,7 @@ export function EditClassModal({ isOpen, onClose, classEntry, onUpdateClass }: E
         <DialogHeader>
           <DialogTitle>Edit Class</DialogTitle>
           <DialogDescription>
-            Modify the class details for {classEntry.dayOfWeek}.
+            Modify the class details for {classEntry.day_of_week}.
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -85,35 +140,29 @@ export function EditClassModal({ isOpen, onClose, classEntry, onUpdateClass }: E
               min="15"
               max="180"
               step="15"
-              value={formData.duration}
-              onChange={(e) => handleInputChange('duration', parseInt(e.target.value))}
+              value={formData.duration || ''}
+              onChange={(e) => handleInputChange('duration', parseInt(e.target.value) || 60)}
               required
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="classType">Class Type</Label>
-            <Select
-              value={formData.classType}
-              onValueChange={(value) => handleInputChange('classType', value)}
-            >
-              <SelectTrigger>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="mobility">Mobility</SelectItem>
-                <SelectItem value="strength">Strength</SelectItem>
-                <SelectItem value="cardio">Cardio</SelectItem>
-                <SelectItem value="power">Power</SelectItem>
-              </SelectContent>
-            </Select>
+            <Label htmlFor="className">Class Name</Label>
+            <Input
+              id="className"
+              type="text"
+              value={formData.className}
+              onChange={(e) => handleInputChange('className', e.target.value)}
+              placeholder="e.g., MOBILITY (PRO)"
+              required
+            />
           </div>
 
           <div className="space-y-2">
             <Label htmlFor="sessionType">Session Type</Label>
             <Select
               value={formData.sessionType}
-              onValueChange={(value) => handleInputChange('sessionType', value)}
+              onValueChange={(value) => handleInputChange('sessionType', value as SessionType)}
             >
               <SelectTrigger>
                 <SelectValue />
@@ -132,18 +181,25 @@ export function EditClassModal({ isOpen, onClose, classEntry, onUpdateClass }: E
               type="number"
               min="1"
               max="20"
-              value={formData.maxParticipants}
-              onChange={(e) => handleInputChange('maxParticipants', parseInt(e.target.value))}
+              value={formData.maxParticipants || ''}
+              onChange={(e) => handleInputChange('maxParticipants', parseInt(e.target.value) || 8)}
               required
             />
           </div>
 
           <DialogFooter>
-            <Button type="button" variant="outline" onClick={onClose}>
+            <Button type="button" variant="outline" onClick={onClose} disabled={isLoading}>
               Cancel
             </Button>
-            <Button type="submit">
-              Update Class
+            <Button type="submit" disabled={isLoading}>
+              {isLoading ? (
+                <div className="flex items-center gap-2">
+                  <div className="animate-spin w-4 h-4 border-2 border-background border-t-transparent rounded-full"></div>
+                  Updating...
+                </div>
+              ) : (
+                'Update Class'
+              )}
             </Button>
           </DialogFooter>
         </form>
