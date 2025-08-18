@@ -10,6 +10,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { TemplateEditorModal } from './TemplateEditorModal';
 
 type DayOfWeek = 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday';
 type SessionType = 'pro' | 'amateur';
@@ -45,6 +46,8 @@ export function ScheduleTemplateManager() {
   const [loading, setLoading] = useState(true);
   const [showCreateDialog, setShowCreateDialog] = useState(false);
   const [editingTemplate, setEditingTemplate] = useState<TemplateWithEntries | null>(null);
+  const [showTemplateEditor, setShowTemplateEditor] = useState(false);
+  const [selectedTemplate, setSelectedTemplate] = useState<{ id: string; name: string; description?: string } | null>(null);
   const [newTemplate, setNewTemplate] = useState({ name: '', description: '' });
   const { toast } = useToast();
 
@@ -223,6 +226,24 @@ export function ScheduleTemplateManager() {
       .sort((a, b) => a.start_time.localeCompare(b.start_time));
   };
 
+  const getClassTypeColor = (className: string) => {
+    const type = className.toLowerCase();
+    if (type.includes('mobility')) return 'bg-green-100 text-green-800 border-green-200';
+    if (type.includes('strength')) return 'bg-blue-100 text-blue-800 border-blue-200';
+    if (type.includes('cardio')) return 'bg-red-100 text-red-800 border-red-200';
+    if (type.includes('power')) return 'bg-purple-100 text-purple-800 border-purple-200';
+    return 'bg-gray-100 text-gray-800 border-gray-200';
+  };
+
+  const handleEditTemplate = (template: TemplateWithEntries) => {
+    setSelectedTemplate({
+      id: template.id,
+      name: template.name,
+      description: template.description
+    });
+    setShowTemplateEditor(true);
+  };
+
   if (loading) {
     return <div className="flex items-center justify-center p-8">Loading templates...</div>;
   }
@@ -258,7 +279,7 @@ export function ScheduleTemplateManager() {
                   <Button variant="ghost" size="sm" onClick={() => duplicateTemplate(template)}>
                     <Copy className="h-4 w-4" />
                   </Button>
-                  <Button variant="ghost" size="sm" onClick={() => setEditingTemplate(template)}>
+                  <Button variant="ghost" size="sm" onClick={() => handleEditTemplate(template)}>
                     <Edit2 className="h-4 w-4" />
                   </Button>
                   <Button 
@@ -279,12 +300,17 @@ export function ScheduleTemplateManager() {
                     <h4 className="font-medium text-sm capitalize">{day}</h4>
                     <div className="space-y-1">
                       {getDaySchedule(template, day).map((entry) => (
-                        <div key={entry.id} className="p-2 bg-muted rounded text-xs">
+                        <div key={entry.id} className={`p-2 rounded text-xs border ${getClassTypeColor(entry.class_name)}`}>
                           <div className="font-medium">{formatTime(entry.start_time)}</div>
-                          <div className="text-muted-foreground">{entry.class_name}</div>
-                          <Badge variant={entry.session_type === 'pro' ? 'default' : 'secondary'} className="text-xs">
-                            {entry.session_type}
-                          </Badge>
+                          <div className="text-xs font-medium">{entry.class_name}</div>
+                          <div className="flex items-center justify-between mt-1">
+                            <Badge variant={entry.session_type === 'pro' ? 'default' : 'secondary'} className="text-xs">
+                              {entry.session_type}
+                            </Badge>
+                            <div className="text-xs text-muted-foreground">
+                              {entry.max_participants} max
+                            </div>
+                          </div>
                         </div>
                       ))}
                     </div>
@@ -343,6 +369,13 @@ export function ScheduleTemplateManager() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      <TemplateEditorModal
+        isOpen={showTemplateEditor}
+        onClose={() => setShowTemplateEditor(false)}
+        template={selectedTemplate}
+        onTemplateUpdated={loadTemplates}
+      />
     </div>
   );
 }
