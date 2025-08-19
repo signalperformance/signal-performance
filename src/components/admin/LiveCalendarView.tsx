@@ -231,7 +231,7 @@ export function LiveCalendarView() {
                     className={cn(
                       "p-3 cursor-pointer transition-colors",
                       cls.session_type === 'pro' 
-                        ? "bg-yellow-100 border-yellow-300 hover:bg-yellow-200 text-yellow-900" 
+                        ? "bg-primary/20 border-primary/30 hover:bg-primary/30 text-primary-foreground" 
                         : "bg-muted/50 border-muted hover:bg-muted/70 text-foreground",
                       cls.is_cancelled && "opacity-60"
                     )}
