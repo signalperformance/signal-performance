@@ -55,16 +55,6 @@ export const UserSessionHistoryModal = ({ isOpen, onClose, user }: UserSessionHi
           booking_date,
           created_at,
           schedule_entry_id,
-          live_schedule_instances!inner (
-            id,
-            class_date,
-            start_time,
-            duration,
-            class_name,
-            session_type,
-            max_participants,
-            is_cancelled
-          ),
           user_attendance (
             attended,
             notes,
@@ -76,15 +66,36 @@ export const UserSessionHistoryModal = ({ isOpen, onClose, user }: UserSessionHi
 
       if (error) throw error;
 
-      // Get participant counts for each session
-      const sessionIds = data?.map(booking => 
-        booking.schedule_entry_id
-      ).filter(Boolean) || [];
+      // Get live schedule instances for the booked sessions
+      const scheduleIds = data?.map(booking => booking.schedule_entry_id).filter(Boolean) || [];
+      
+      const { data: scheduleData, error: scheduleError } = await supabase
+        .from('live_schedule_instances')
+        .select(`
+          id,
+          class_date,
+          start_time,
+          duration,
+          class_name,
+          session_type,
+          max_participants,
+          is_cancelled
+        `)
+        .in('id', scheduleIds);
 
+      if (scheduleError) throw scheduleError;
+
+      // Create a map of schedule instances by ID
+      const scheduleMap = scheduleData?.reduce((acc: any, schedule: any) => {
+        acc[schedule.id] = schedule;
+        return acc;
+      }, {}) || {};
+
+      // Get participant counts for each session
       const { data: participantCounts } = await supabase
         .from('bookings')
         .select('schedule_entry_id')
-        .in('schedule_entry_id', sessionIds);
+        .in('schedule_entry_id', scheduleIds);
 
       const participantCountMap = participantCounts?.reduce((acc: any, booking: any) => {
         acc[booking.schedule_entry_id] = (acc[booking.schedule_entry_id] || 0) + 1;
@@ -92,7 +103,9 @@ export const UserSessionHistoryModal = ({ isOpen, onClose, user }: UserSessionHi
       }, {}) || {};
 
       const formattedData: SessionHistoryEntry[] = data?.map(booking => {
-        const session = booking.live_schedule_instances;
+        const session = scheduleMap[booking.schedule_entry_id];
+        if (!session) return null; // Skip if no matching session found
+        
         const attendance = Array.isArray(booking.user_attendance) ? booking.user_attendance[0] : booking.user_attendance;
         const sessionDate = new Date(session.class_date);
         const now = new Date();
@@ -116,7 +129,7 @@ export const UserSessionHistoryModal = ({ isOpen, onClose, user }: UserSessionHi
           marked_at: attendance?.marked_at,
           can_cancel: canCancel && !session.is_cancelled
         };
-      }) || [];
+      }).filter(Boolean) || [];
 
       setSessionHistory(formattedData);
     } catch (error) {
