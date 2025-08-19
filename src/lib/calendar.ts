@@ -32,7 +32,7 @@ export const bookingToCalendarEvent = (booking: Booking): CalendarEvent => {
     title: `體能課：${booking.sessionName}`,
     startDate: taiwanStartDate,
     endDate: taiwanEndDate,
-    description: `Reminder: Sessions cannot be cancelled within 3 hours of start time.`,
+    description: '',
     location: '2樓, 南勢里9鄰33-6號, Linkou District, New Taipei City, 244'
   };
 };
