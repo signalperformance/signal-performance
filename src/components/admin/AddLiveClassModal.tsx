@@ -8,6 +8,7 @@ import { Loader2 } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { format } from 'date-fns';
+import { ClassType } from '@/types/admin';
 
 interface AddLiveClassModalProps {
   isOpen: boolean;
@@ -26,7 +27,7 @@ export function AddLiveClassModal({
     class_date: selectedDate ? format(selectedDate, 'yyyy-MM-dd') : format(new Date(), 'yyyy-MM-dd'),
     start_time: '09:00',
     duration: 60,
-    class_name: '',
+    class_type: 'mobility' as ClassType,
     session_type: 'amateur' as 'pro' | 'amateur',
     max_participants: 8
   });
@@ -58,7 +59,7 @@ export function AddLiveClassModal({
           class_date: formData.class_date,
           start_time: formData.start_time,
           duration: formData.duration,
-          class_name: formData.class_name,
+          class_name: generateClassName(formData.class_type, formData.session_type),
           session_type: formData.session_type,
           max_participants: formData.max_participants,
           is_cancelled: false
@@ -76,7 +77,7 @@ export function AddLiveClassModal({
         class_date: selectedDate ? format(selectedDate, 'yyyy-MM-dd') : format(new Date(), 'yyyy-MM-dd'),
         start_time: '09:00',
         duration: 60,
-        class_name: '',
+        class_type: 'mobility',
         session_type: 'amateur',
         max_participants: 8
       });
@@ -97,6 +98,11 @@ export function AddLiveClassModal({
 
   const handleInputChange = (field: string, value: any) => {
     setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  // Generate class name from class type and session type
+  const generateClassName = (classType: ClassType, sessionType: 'pro' | 'amateur') => {
+    return `${classType.toUpperCase()} (${sessionType.toUpperCase()})`;
   };
 
   return (
@@ -157,31 +163,43 @@ export function AddLiveClassModal({
             </div>
           </div>
 
-          <div>
-            <Label htmlFor="class_name">Class Name</Label>
-            <Input
-              id="class_name"
-              value={formData.class_name}
-              onChange={(e) => handleInputChange('class_name', e.target.value)}
-              placeholder="e.g., Morning Yoga, HIIT Training"
-              required
-            />
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <Label htmlFor="class_type">Class Type</Label>
+              <Select 
+                value={formData.class_type} 
+                onValueChange={(value) => handleInputChange('class_type', value)}
+              >
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="mobility">Mobility</SelectItem>
+                  <SelectItem value="strength">Strength</SelectItem>
+                  <SelectItem value="cardio">Cardio</SelectItem>
+                  <SelectItem value="power">Power</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <Label htmlFor="session_type">Session Type</Label>
+              <Select 
+                value={formData.session_type} 
+                onValueChange={(value) => handleInputChange('session_type', value)}
+              >
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="amateur">Amateur</SelectItem>
+                  <SelectItem value="pro">Pro</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
 
-          <div>
-            <Label htmlFor="session_type">Session Type</Label>
-            <Select 
-              value={formData.session_type} 
-              onValueChange={(value) => handleInputChange('session_type', value)}
-            >
-              <SelectTrigger>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="amateur">Amateur</SelectItem>
-                <SelectItem value="pro">Pro</SelectItem>
-              </SelectContent>
-            </Select>
+          <div className="text-sm text-muted-foreground">
+            Class name will be: <span className="font-medium">{generateClassName(formData.class_type, formData.session_type)}</span>
           </div>
 
           <DialogFooter>
