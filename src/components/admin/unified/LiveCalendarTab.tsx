@@ -202,6 +202,60 @@ export function LiveCalendarTab() {
         </div>
       </div>
 
+      {/* Summary stats - responsive grid */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+        <Card>
+          <CardContent className="pt-4 md:pt-6">
+            <div className="flex items-center space-x-2">
+              <CalendarIcon className="h-4 w-4 text-muted-foreground" />
+              <div>
+                <p className="text-lg md:text-2xl font-bold">{classes.length}</p>
+                <p className="text-xs text-muted-foreground">Total Classes</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardContent className="pt-4 md:pt-6">
+            <div className="flex items-center space-x-2">
+              <Users className="h-4 w-4 text-muted-foreground" />
+              <div>
+                <p className="text-lg md:text-2xl font-bold">{classes.reduce((sum, cls) => sum + cls.booking_count, 0)}</p>
+                <p className="text-xs text-muted-foreground">Total Bookings</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardContent className="pt-4 md:pt-6">
+            <div className="flex items-center space-x-2">
+              <Clock className="h-4 w-4 text-muted-foreground" />
+              <div>
+                <p className="text-lg md:text-2xl font-bold">{classes.filter(cls => cls.availability === 0).length}</p>
+                <p className="text-xs text-muted-foreground">Full Classes</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardContent className="pt-4 md:pt-6">
+            <div className="flex items-center space-x-2">
+              <div className="h-4 w-4 rounded-full bg-green-500" />
+              <div>
+                <p className="text-lg md:text-2xl font-bold">
+                  {Math.round((classes.reduce((sum, cls) => sum + cls.booking_count, 0) / 
+                    classes.reduce((sum, cls) => sum + cls.max_participants, 0)) * 100) || 0}%
+                </p>
+                <p className="text-xs text-muted-foreground">Capacity Used</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
       {/* Mobile calendar view */}
       <div className="block lg:hidden space-y-4">
         {Array.from({ length: 14 }, (_, index) => {
@@ -356,60 +410,6 @@ export function LiveCalendarTab() {
             </div>
           );
         })}
-      </div>
-
-      {/* Summary stats - responsive grid */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
-        <Card>
-          <CardContent className="pt-4 md:pt-6">
-            <div className="flex items-center space-x-2">
-              <CalendarIcon className="h-4 w-4 text-muted-foreground" />
-              <div>
-                <p className="text-lg md:text-2xl font-bold">{classes.length}</p>
-                <p className="text-xs text-muted-foreground">Total Classes</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        
-        <Card>
-          <CardContent className="pt-4 md:pt-6">
-            <div className="flex items-center space-x-2">
-              <Users className="h-4 w-4 text-muted-foreground" />
-              <div>
-                <p className="text-lg md:text-2xl font-bold">{classes.reduce((sum, cls) => sum + cls.booking_count, 0)}</p>
-                <p className="text-xs text-muted-foreground">Total Bookings</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        
-        <Card>
-          <CardContent className="pt-4 md:pt-6">
-            <div className="flex items-center space-x-2">
-              <Clock className="h-4 w-4 text-muted-foreground" />
-              <div>
-                <p className="text-lg md:text-2xl font-bold">{classes.filter(cls => cls.availability === 0).length}</p>
-                <p className="text-xs text-muted-foreground">Full Classes</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        
-        <Card>
-          <CardContent className="pt-4 md:pt-6">
-            <div className="flex items-center space-x-2">
-              <div className="h-4 w-4 rounded-full bg-green-500" />
-              <div>
-                <p className="text-lg md:text-2xl font-bold">
-                  {Math.round((classes.reduce((sum, cls) => sum + cls.booking_count, 0) / 
-                    classes.reduce((sum, cls) => sum + cls.max_participants, 0)) * 100) || 0}%
-                </p>
-                <p className="text-xs text-muted-foreground">Capacity Used</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
       </div>
 
       {/* Modals */}
