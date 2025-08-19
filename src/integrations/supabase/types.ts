@@ -288,6 +288,45 @@ export type Database = {
         }
         Relationships: []
       }
+      user_attendance: {
+        Row: {
+          attended: boolean | null
+          booking_id: string
+          created_at: string
+          id: string
+          live_schedule_instance_id: string
+          marked_at: string | null
+          marked_by_admin_id: string | null
+          notes: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          attended?: boolean | null
+          booking_id: string
+          created_at?: string
+          id?: string
+          live_schedule_instance_id: string
+          marked_at?: string | null
+          marked_by_admin_id?: string | null
+          notes?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          attended?: boolean | null
+          booking_id?: string
+          created_at?: string
+          id?: string
+          live_schedule_instance_id?: string
+          marked_at?: string | null
+          marked_by_admin_id?: string | null
+          notes?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_payment_records: {
         Row: {
           created_at: string

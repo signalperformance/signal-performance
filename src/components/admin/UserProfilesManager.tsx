@@ -11,12 +11,13 @@ import {
   TableHeader, 
   TableRow 
 } from '@/components/ui/table';
-import { Plus, Search, Edit, Trash2, Download } from 'lucide-react';
+import { Plus, Search, Edit, Trash2, Download, Calendar } from 'lucide-react';
 import { addMonths, isAfter, format, parseISO } from 'date-fns';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { AddUserModal } from './AddUserModal';
 import { EditUserModal } from './EditUserModal';
+import { UserSessionHistoryModal } from './UserSessionHistoryModal';
 
 interface UserProfile {
   id: string;
@@ -38,6 +39,7 @@ export function UserProfilesManager() {
   const [searchTerm, setSearchTerm] = useState('');
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [editingUser, setEditingUser] = useState<UserProfile | null>(null);
+  const [sessionHistoryUser, setSessionHistoryUser] = useState<UserProfile | null>(null);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -260,24 +262,32 @@ export function UserProfilesManager() {
                       'Not set'
                     }
                   </TableCell>
-                  <TableCell className="text-right">
-                    <div className="flex justify-end gap-2">
-                      <Button 
-                        variant="ghost" 
-                        size="icon"
-                        onClick={() => setEditingUser(user)}
-                      >
-                        <Edit className="h-4 w-4" />
-                      </Button>
-                      <Button 
-                        variant="ghost" 
-                        size="icon"
-                        onClick={() => handleDeleteUser(user.id)}
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  </TableCell>
+                   <TableCell className="text-right">
+                     <div className="flex justify-end gap-2">
+                       <Button 
+                         variant="ghost" 
+                         size="icon"
+                         onClick={() => setSessionHistoryUser(user)}
+                         title="View Session History"
+                       >
+                         <Calendar className="h-4 w-4" />
+                       </Button>
+                       <Button 
+                         variant="ghost" 
+                         size="icon"
+                         onClick={() => setEditingUser(user)}
+                       >
+                         <Edit className="h-4 w-4" />
+                       </Button>
+                       <Button 
+                         variant="ghost" 
+                         size="icon"
+                         onClick={() => handleDeleteUser(user.id)}
+                       >
+                         <Trash2 className="h-4 w-4" />
+                       </Button>
+                     </div>
+                   </TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -300,6 +310,14 @@ export function UserProfilesManager() {
             loadUsers();
           }}
           user={editingUser}
+        />
+      )}
+
+      {sessionHistoryUser && (
+        <UserSessionHistoryModal
+          isOpen={!!sessionHistoryUser}
+          onClose={() => setSessionHistoryUser(null)}
+          user={sessionHistoryUser}
         />
       )}
     </div>
