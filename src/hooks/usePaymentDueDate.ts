@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { format, addWeeks, differenceInDays, isPast, isToday } from 'date-fns';
+import { format, addMonths, differenceInDays, isPast, isToday } from 'date-fns';
 
 interface PaymentDueDateInfo {
   nextDueDate: Date;
@@ -18,15 +18,20 @@ export const usePaymentDueDate = (renewalDate?: Date): PaymentDueDateInfo | null
     const today = new Date();
     let nextDueDate = new Date(renewalDate);
 
-    // Find the next 4-week cycle due date
+    // Find the next monthly due date (same day each month)
     while (isPast(nextDueDate) && !isToday(nextDueDate)) {
-      nextDueDate = addWeeks(nextDueDate, 4);
+      nextDueDate = addMonths(nextDueDate, 1);
     }
 
     const daysUntilDue = differenceInDays(nextDueDate, today);
     const isOverdue = daysUntilDue < 0;
     const isDueToday = isToday(nextDueDate);
     const isDueSoon = daysUntilDue <= 7 && daysUntilDue >= 0;
+
+    // Only show badge if payment is due within 7 days
+    if (!isDueSoon && !isDueToday && !isOverdue) {
+      return null;
+    }
 
     const formattedDate = format(nextDueDate, 'MMM dd');
 
@@ -35,10 +40,8 @@ export const usePaymentDueDate = (renewalDate?: Date): PaymentDueDateInfo | null
       displayText = 'Payment overdue';
     } else if (isDueToday) {
       displayText = 'Payment due today';
-    } else if (isDueSoon) {
-      displayText = `Due in ${daysUntilDue} ${daysUntilDue === 1 ? 'day' : 'days'}`;
     } else {
-      displayText = `Next: ${formattedDate}`;
+      displayText = `Due ${formattedDate}`;
     }
 
     return {
