@@ -75,14 +75,8 @@ export const BookingModal: React.FC<BookingModalProps> = ({
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle className="flex items-center gap-2">
+          <DialogTitle>
             {session.name}
-            <Badge 
-              className={getSessionTypeColor(session.sessionType)}
-              variant="secondary"
-            >
-              {session.sessionType.toUpperCase()}
-            </Badge>
           </DialogTitle>
           <DialogDescription>
             {isBooked ? 'Manage your booking' : 'Book this training session'}
@@ -101,27 +95,10 @@ export const BookingModal: React.FC<BookingModalProps> = ({
               <Clock className="h-4 w-4 text-muted-foreground" />
               <span className="text-sm">{formatTime(session.hour24)}</span>
             </div>
-            <div className="flex items-center gap-2">
-              <Users className="h-4 w-4 text-muted-foreground" />
-              <span className="text-sm">
-                {session.currentBookings}/{session.maxParticipants} spots
-              </span>
-            </div>
-            <div className="flex items-center gap-2">
-              <MapPin className="h-4 w-4 text-muted-foreground" />
-              <span className="text-sm">Main Studio</span>
-            </div>
           </div>
 
           <Separator />
 
-          {spotsLeft <= 3 && spotsLeft > 0 && !isBooked && (
-            <div className="bg-orange-50 dark:bg-orange-950 border border-orange-200 dark:border-orange-800 rounded-lg p-3">
-              <p className="text-sm text-orange-800 dark:text-orange-200">
-                ⚠️ Only {spotsLeft} {spotsLeft === 1 ? 'spot' : 'spots'} remaining!
-              </p>
-            </div>
-          )}
 
           {getBookingMessage() && (
             <div className="bg-muted border rounded-lg p-3">
