@@ -45,7 +45,7 @@ export function EditTemplateClassModal({ isOpen, onClose, entry, onUpdateEntry }
 
   useEffect(() => {
     if (entry) {
-      // Extract class type from class name (e.g., "MOBILITY" -> "Mobility")  
+      // Extract class type from class name (now without suffixes)
       const classType = entry.class_name.charAt(0) + entry.class_name.slice(1).toLowerCase();
       
       setFormData({

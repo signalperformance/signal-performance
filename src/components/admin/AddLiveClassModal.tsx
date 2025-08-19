@@ -100,7 +100,6 @@ export function AddLiveClassModal({
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  // Generate class name from class type only
   const generateClassName = (classType: ClassType, sessionType: 'pro' | 'amateur') => {
     return classType.toUpperCase();
   };
