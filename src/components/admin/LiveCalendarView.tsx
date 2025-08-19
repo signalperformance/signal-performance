@@ -231,7 +231,33 @@ export function LiveCalendarView() {
                     onClick={() => handleEditClass(cls)}
                   >
                     <div className="space-y-1 text-center">
-                      <div className="text-sm font-medium">{formatTime(cls.start_time)}</div>
+                      <div className="flex items-center justify-between">
+                        <div className="text-sm font-medium">{formatTime(cls.start_time)}</div>
+                        <HoverCard>
+                          <HoverCardTrigger asChild>
+                            <div className="flex items-center gap-1 cursor-pointer text-xs text-muted-foreground">
+                              <Users className="h-3 w-3" />
+                              {cls.booking_count}
+                            </div>
+                          </HoverCardTrigger>
+                          <HoverCardContent className="w-auto p-3">
+                            <div className="space-y-1">
+                              <p className="text-sm font-medium">Booked Users</p>
+                              {cls.bookings.length > 0 ? (
+                                <div className="space-y-1">
+                                  {cls.bookings.map((booking) => (
+                                    <div key={booking.id} className="text-sm">
+                                      {booking.user_profiles?.first_name} {booking.user_profiles?.last_name}
+                                    </div>
+                                  ))}
+                                </div>
+                              ) : (
+                                <p className="text-sm text-muted-foreground">No bookings</p>
+                              )}
+                            </div>
+                          </HoverCardContent>
+                        </HoverCard>
+                      </div>
                       <div className={`text-xs ${cls.is_cancelled ? 'line-through' : ''}`}>
                         {cls.class_name}
                         {cls.is_cancelled && <span className="text-destructive ml-1">(Cancelled)</span>}
