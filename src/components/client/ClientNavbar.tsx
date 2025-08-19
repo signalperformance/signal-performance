@@ -75,11 +75,6 @@ export const ClientNavbar: React.FC<ClientNavbarProps> = ({ activeTab, onTabChan
               </Badge>
             )}
             <div className="hidden sm:flex items-center space-x-3">
-              <Avatar className="h-8 w-8">
-                <AvatarFallback className="bg-primary text-primary-foreground">
-                  {user?.firstName?.[0]}{user?.lastName?.[0]}
-                </AvatarFallback>
-              </Avatar>
               <div className="text-sm">
                 <div className="font-medium">{user?.firstName} {user?.lastName}</div>
                 <div className="text-muted-foreground capitalize">{user?.membershipPlan} Member</div>
