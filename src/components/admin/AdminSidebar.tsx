@@ -1,5 +1,5 @@
 
-import { Calendar, Users, CalendarDays, CalendarCheck, CreditCard } from 'lucide-react';
+import { Calendar, Users, CreditCard } from 'lucide-react';
 import {
   Sidebar,
   SidebarContent,
@@ -12,7 +12,7 @@ import {
   SidebarTrigger,
 } from '@/components/ui/sidebar';
 
-type AdminSection = 'templates' | 'periods' | 'live-calendar' | 'users' | 'payments';
+type AdminSection = 'schedule' | 'users' | 'payments';
 
 interface AdminSidebarProps {
   activeSection: AdminSection;
@@ -21,19 +21,9 @@ interface AdminSidebarProps {
 
 const menuItems = [
   {
-    id: 'templates' as AdminSection,
-    title: 'Schedule Templates',
+    id: 'schedule' as AdminSection,
+    title: 'Schedule Management',
     icon: Calendar,
-  },
-  {
-    id: 'periods' as AdminSection,
-    title: 'Schedule Periods',
-    icon: CalendarDays,
-  },
-  {
-    id: 'live-calendar' as AdminSection,
-    title: 'Live Calendar',
-    icon: CalendarCheck,
   },
   {
     id: 'users' as AdminSection,

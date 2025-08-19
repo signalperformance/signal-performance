@@ -3,31 +3,25 @@ import { useState } from 'react';
 import { SidebarProvider } from '@/components/ui/sidebar';
 import { AdminSidebar } from '@/components/admin/AdminSidebar';
 import { AdminHeader } from '@/components/admin/AdminHeader';
-import { ScheduleTemplateManager } from '@/components/admin/ScheduleTemplateManager';
-import { SchedulePeriodsManager } from '@/components/admin/SchedulePeriodsManager';
-import { LiveCalendarView } from '@/components/admin/LiveCalendarView';
+import { UnifiedScheduleManager } from '@/components/admin/UnifiedScheduleManager';
 import { UserProfilesManager } from '@/components/admin/UserProfilesManager';
 import { PaymentsManager } from '@/components/admin/PaymentsManager';
 
-type AdminSection = 'templates' | 'periods' | 'live-calendar' | 'users' | 'payments';
+type AdminSection = 'schedule' | 'users' | 'payments';
 
 const Admin = () => {
-  const [activeSection, setActiveSection] = useState<AdminSection>('live-calendar');
+  const [activeSection, setActiveSection] = useState<AdminSection>('schedule');
 
   const renderContent = () => {
     switch (activeSection) {
-      case 'templates':
-        return <ScheduleTemplateManager />;
-      case 'periods':
-        return <SchedulePeriodsManager />;
-      case 'live-calendar':
-        return <LiveCalendarView />;
+      case 'schedule':
+        return <UnifiedScheduleManager />;
       case 'users':
         return <UserProfilesManager />;
       case 'payments':
         return <PaymentsManager />;
       default:
-        return <LiveCalendarView />;
+        return <UnifiedScheduleManager />;
     }
   };
 
