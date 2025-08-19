@@ -20,7 +20,6 @@ const WeeklySchedule = () => {
     { hour24: 12, minute: 0, labelKey: 'mobility', pro: true },
     { hour24: 13, minute: 30, labelKey: 'strength', pro: true },
     { hour24: 15, minute: 0, labelKey: 'mobility', pro: true }, // updated per request
-    { hour24: 16, minute: 30, labelKey: 'power', pro: true }, // additional pro session
     { hour24: 17, minute: 0, labelKey: 'mobility' },
     { hour24: 18, minute: 30, labelKey: 'strength' },
     { hour24: 20, minute: 0, labelKey: 'strength' },
@@ -30,7 +29,6 @@ const WeeklySchedule = () => {
     { hour24: 12, minute: 0, labelKey: 'power', pro: true },
     { hour24: 13, minute: 30, labelKey: 'cardio', pro: true },
     { hour24: 15, minute: 0, labelKey: 'power', pro: true },
-    { hour24: 16, minute: 30, labelKey: 'power', pro: true }, // additional pro session
     { hour24: 17, minute: 0, labelKey: 'power' },
     { hour24: 18, minute: 30, labelKey: 'cardio' },
     { hour24: 20, minute: 0, labelKey: 'power' },
