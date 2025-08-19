@@ -79,7 +79,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
             {session.name}
           </DialogTitle>
           <DialogDescription>
-            {isBooked ? 'Manage your booking' : 'Book this training session'}
+            {isBooked ? 'Booking details' : 'Book this training session'}
           </DialogDescription>
         </DialogHeader>
 
@@ -132,14 +132,16 @@ export const BookingModal: React.FC<BookingModalProps> = ({
             >
               Close
             </Button>
-            <Button
-              onClick={onConfirm}
-              disabled={!canUserBook()}
-              variant={isBooked ? "destructive" : "default"}
-              className="flex-1"
-            >
-              {isBooked ? 'Cancel Booking' : 'Book Session'}
-            </Button>
+            {!isBooked && (
+              <Button
+                onClick={onConfirm}
+                disabled={!canUserBook()}
+                variant="default"
+                className="flex-1"
+              >
+                Book Session
+              </Button>
+            )}
           </div>
         </div>
       </DialogContent>

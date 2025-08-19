@@ -107,37 +107,19 @@ export const ClientScheduleView: React.FC = () => {
   const handleBookingConfirm = async () => {
     if (!selectedSession || !user) return;
 
-    const isBooked = isSessionBooked(selectedSession);
-
-    if (isBooked) {
-      // Cancel booking
-      const booking = userBookings.find(b =>
-        b.dayKey === selectedSession.dayKey &&
-        b.hour24 === selectedSession.hour24 &&
-        isSameDay(b.bookingDate, selectedSession.date)
-      );
-      
-      if (booking && await cancelBooking(booking.id)) {
-        toast({
-          title: "Booking cancelled",
-          description: `Cancelled ${selectedSession.name} on ${format(selectedSession.date, 'EEEE, MMM dd')}`,
-        });
-      }
+    // Only handle booking, not cancellation
+    const success = await bookSession(selectedSession, user.id);
+    if (success) {
+      toast({
+        title: "Session booked!",
+        description: `Booked ${selectedSession.name} on ${format(selectedSession.date, 'EEEE, MMM dd')}`,
+      });
     } else {
-      // Book session
-      const success = await bookSession(selectedSession, user.id);
-      if (success) {
-        toast({
-          title: "Session booked!",
-          description: `Booked ${selectedSession.name} on ${format(selectedSession.date, 'EEEE, MMM dd')}`,
-        });
-      } else {
-        toast({
-          title: "Booking failed",
-          description: "Unable to book session. It may be full or you may already be booked.",
-          variant: "destructive",
-        });
-      }
+      toast({
+        title: "Booking failed",
+        description: "Unable to book session. It may be full or you may already be booked.",
+        variant: "destructive",
+      });
     }
 
     setIsModalOpen(false);

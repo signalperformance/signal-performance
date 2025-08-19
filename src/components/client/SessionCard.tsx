@@ -78,13 +78,13 @@ export const SessionCard: React.FC<SessionCardProps> = ({
         </h4>
 
         <Button 
-          onClick={onBook}
-          disabled={!canBook || (isFull && !isBooked)}
+          onClick={isBooked ? undefined : onBook}
+          disabled={isBooked || !canBook || (isFull && !isBooked)}
           variant={isBooked ? "outline" : "default"}
           className="w-full"
           size={isMobile ? "lg" : "sm"}
         >
-          {isBooked ? 'Cancel Booking' : isFull ? 'Full' : 'Book Session'}
+          {isBooked ? 'Booked' : isFull ? 'Full' : 'Book Session'}
         </Button>
       </CardContent>
     </Card>
