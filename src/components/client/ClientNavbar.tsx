@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { LogOut, Calendar, BookOpen } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useSessionLimits } from '@/hooks/useSessionLimits';
-import { usePaymentDueDate } from '@/hooks/usePaymentDueDate';
+import { useClientPaymentStatus } from '@/hooks/useClientPaymentStatus';
 
 interface ClientNavbarProps {
   activeTab: 'schedule' | 'bookings';
@@ -16,7 +16,7 @@ interface ClientNavbarProps {
 export const ClientNavbar: React.FC<ClientNavbarProps> = ({ activeTab, onTabChange }) => {
   const { user, logout } = useAuth();
   const { sessionInfo, loading } = useSessionLimits();
-  const paymentInfo = usePaymentDueDate(user?.monthlyRenewalDate);
+  const paymentInfo = useClientPaymentStatus(user?.id, user?.monthlyRenewalDate);
   const { toast } = useToast();
 
   const handleLogout = () => {
