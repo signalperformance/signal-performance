@@ -1,5 +1,5 @@
 import { SidebarTrigger } from '@/components/ui/sidebar';
-import { Bell, User, LogOut } from 'lucide-react';
+import { LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAdminAuth } from '@/contexts/AdminAuthContext';
 import { useToast } from '@/hooks/use-toast';
@@ -38,12 +38,6 @@ export function AdminHeader() {
         <span className="text-sm text-muted-foreground hidden sm:block">
           {adminUser?.email}
         </span>
-        <Button variant="ghost" size="icon">
-          <Bell className="h-4 w-4" />
-        </Button>
-        <Button variant="ghost" size="icon">
-          <User className="h-4 w-4" />
-        </Button>
         <Button variant="ghost" size="icon" onClick={handleLogout}>
           <LogOut className="h-4 w-4" />
         </Button>
