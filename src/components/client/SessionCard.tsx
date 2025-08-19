@@ -52,23 +52,6 @@ export const SessionCard: React.FC<SessionCardProps> = ({
             <Clock className="h-4 w-4 text-muted-foreground" />
             <span className="font-medium">{formatTime(session.hour24)}</span>
           </div>
-          <Badge 
-            className={getSessionTypeColor(session.sessionType)}
-            variant="secondary"
-          >
-            {session.sessionType.toUpperCase()}
-          </Badge>
-        </div>
-
-        <h4 className="font-semibold text-lg mb-2">{session.name}</h4>
-        
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Users className="h-4 w-4" />
-            <span>
-              {session.currentBookings}/{session.maxParticipants} spots
-            </span>
-          </div>
           
           {spotsLeft <= 3 && spotsLeft > 0 && (
             <Badge variant="outline" className="text-xs">
@@ -82,6 +65,8 @@ export const SessionCard: React.FC<SessionCardProps> = ({
             </Badge>
           )}
         </div>
+
+        <h4 className="font-semibold text-lg mb-4">{session.name}</h4>
 
         <Button 
           onClick={onBook}
