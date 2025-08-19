@@ -26,27 +26,20 @@ export function AdminHeader() {
       });
     }
   };
-  return <header className="h-16 border-b border-border bg-background flex items-center justify-between px-6">
-      <div className="flex items-center gap-4">
+  return <header className="h-14 md:h-16 border-b border-border bg-background flex items-center justify-between px-3 md:px-6">
+      <div className="flex items-center gap-2 md:gap-4">
         <SidebarTrigger />
         <div>
-          <h1 className="text-xl font-semibold">Admin Portal</h1>
-          
+          <h1 className="text-lg md:text-xl font-semibold">Admin Portal</h1>
         </div>
       </div>
       
-      <div className="flex items-center gap-2">
-        <span className="text-sm text-muted-foreground hidden sm:block">
+      <div className="flex items-center gap-1 md:gap-2">
+        <span className="text-xs md:text-sm text-muted-foreground hidden lg:block max-w-[120px] md:max-w-none truncate">
           {adminUser?.email}
         </span>
-        <Button variant="ghost" size="icon">
-          <Bell className="h-4 w-4" />
-        </Button>
-        <Button variant="ghost" size="icon">
-          <User className="h-4 w-4" />
-        </Button>
-        <Button variant="ghost" size="icon" onClick={handleLogout}>
-          <LogOut className="h-4 w-4" />
+        <Button variant="ghost" size="sm" className="h-8 w-8 md:h-10 md:w-10" onClick={handleLogout}>
+          <LogOut className="h-3 w-3 md:h-4 md:w-4" />
         </Button>
       </div>
     </header>;

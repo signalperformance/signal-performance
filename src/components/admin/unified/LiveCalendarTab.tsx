@@ -181,27 +181,95 @@ export function LiveCalendarTab() {
   }
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
+    <div className="space-y-4 md:space-y-6">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-bold">Live Calendar</h2>
-          <p className="text-muted-foreground">View and manage scheduled classes and bookings</p>
+          <h2 className="text-xl md:text-2xl font-bold">Live Calendar</h2>
+          <p className="text-sm text-muted-foreground">View and manage scheduled classes and bookings</p>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1 md:gap-2">
           <Button variant="outline" size="sm" onClick={() => navigateWeek('prev')}>
-            <ChevronLeft className="h-4 w-4" />
+            <ChevronLeft className="h-3 w-3 md:h-4 md:w-4" />
+            <span className="sr-only">Previous week</span>
           </Button>
-          <div className="text-sm font-medium min-w-[200px] text-center">
+          <div className="text-xs md:text-sm font-medium min-w-[160px] md:min-w-[200px] text-center px-2">
             {format(currentWeekStart, 'MMM d')} - {format(addDays(currentWeekStart, 13), 'MMM d, yyyy')}
           </div>
           <Button variant="outline" size="sm" onClick={() => navigateWeek('next')}>
-            <ChevronRight className="h-4 w-4" />
+            <ChevronRight className="h-3 w-3 md:h-4 md:w-4" />
+            <span className="sr-only">Next week</span>
           </Button>
         </div>
       </div>
 
-      {/* Two-week calendar grid */}
-      <div className="grid grid-cols-7 gap-4">
+      {/* Mobile calendar view */}
+      <div className="block lg:hidden space-y-4">
+        {Array.from({ length: 14 }, (_, index) => {
+          const dayOffset = index;
+          const currentDate = addDays(currentWeekStart, dayOffset);
+          const dayClasses = getClassesForDay(dayOffset);
+          const isNewWeek = index === 7;
+
+          return (
+            <div key={index} className={`${isNewWeek ? 'border-t-2 border-border pt-4' : ''}`}>
+              <div className="mb-3">
+                <h3 className="text-lg font-semibold">
+                  {daysOfWeek[index % 7]}, {format(currentDate, 'MMM d')}
+                </h3>
+              </div>
+              
+              <div className="space-y-3">
+                {dayClasses.map((cls) => (
+                  <Card 
+                    key={cls.id} 
+                    className={cn(
+                      "p-4 cursor-pointer transition-colors",
+                      cls.session_type === 'pro' 
+                        ? "bg-primary/20 border-primary/30 hover:bg-primary/30" 
+                        : "bg-muted/50 border-muted hover:bg-muted/70",
+                      cls.is_cancelled && "opacity-60"
+                    )}
+                    onClick={() => handleEditClass(cls)}
+                  >
+                    <div className="flex items-center justify-between">
+                      <div className="space-y-1">
+                        <div className="font-medium">{cls.class_name}</div>
+                        <div className="text-sm text-muted-foreground">{formatTime(cls.start_time)}</div>
+                      </div>
+                      <div className="flex items-center gap-2 text-muted-foreground">
+                        <Users className="h-4 w-4" />
+                        <span className="text-sm">{cls.booking_count}/{cls.max_participants}</span>
+                      </div>
+                    </div>
+                  </Card>
+                ))}
+                
+                {dayClasses.length === 0 && (
+                  <div className="text-sm text-muted-foreground text-center py-4 border-2 border-dashed border-border rounded-lg">
+                    No classes scheduled
+                  </div>
+                )}
+                
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="w-full"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleAddClass(currentDate);
+                  }}
+                >
+                  <Plus className="h-4 w-4 mr-2" />
+                  Add Class for {format(currentDate, 'MMM d')}
+                </Button>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Desktop calendar grid */}
+      <div className="hidden lg:grid grid-cols-7 gap-4">
         {Array.from({ length: 14 }, (_, index) => {
           const dayOffset = index;
           const currentDate = addDays(currentWeekStart, dayOffset);
@@ -290,14 +358,14 @@ export function LiveCalendarTab() {
         })}
       </div>
 
-      {/* Summary stats */}
-      <div className="grid grid-cols-4 gap-4">
+      {/* Summary stats - responsive grid */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
         <Card>
-          <CardContent className="pt-6">
+          <CardContent className="pt-4 md:pt-6">
             <div className="flex items-center space-x-2">
               <CalendarIcon className="h-4 w-4 text-muted-foreground" />
               <div>
-                <p className="text-2xl font-bold">{classes.length}</p>
+                <p className="text-lg md:text-2xl font-bold">{classes.length}</p>
                 <p className="text-xs text-muted-foreground">Total Classes</p>
               </div>
             </div>
@@ -305,11 +373,11 @@ export function LiveCalendarTab() {
         </Card>
         
         <Card>
-          <CardContent className="pt-6">
+          <CardContent className="pt-4 md:pt-6">
             <div className="flex items-center space-x-2">
               <Users className="h-4 w-4 text-muted-foreground" />
               <div>
-                <p className="text-2xl font-bold">{classes.reduce((sum, cls) => sum + cls.booking_count, 0)}</p>
+                <p className="text-lg md:text-2xl font-bold">{classes.reduce((sum, cls) => sum + cls.booking_count, 0)}</p>
                 <p className="text-xs text-muted-foreground">Total Bookings</p>
               </div>
             </div>
@@ -317,11 +385,11 @@ export function LiveCalendarTab() {
         </Card>
         
         <Card>
-          <CardContent className="pt-6">
+          <CardContent className="pt-4 md:pt-6">
             <div className="flex items-center space-x-2">
               <Clock className="h-4 w-4 text-muted-foreground" />
               <div>
-                <p className="text-2xl font-bold">{classes.filter(cls => cls.availability === 0).length}</p>
+                <p className="text-lg md:text-2xl font-bold">{classes.filter(cls => cls.availability === 0).length}</p>
                 <p className="text-xs text-muted-foreground">Full Classes</p>
               </div>
             </div>
@@ -329,11 +397,11 @@ export function LiveCalendarTab() {
         </Card>
         
         <Card>
-          <CardContent className="pt-6">
+          <CardContent className="pt-4 md:pt-6">
             <div className="flex items-center space-x-2">
               <div className="h-4 w-4 rounded-full bg-green-500" />
               <div>
-                <p className="text-2xl font-bold">
+                <p className="text-lg md:text-2xl font-bold">
                   {Math.round((classes.reduce((sum, cls) => sum + cls.booking_count, 0) / 
                     classes.reduce((sum, cls) => sum + cls.max_participants, 0)) * 100) || 0}%
                 </p>

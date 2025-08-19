@@ -52,31 +52,35 @@ export function UnifiedScheduleManager() {
   }
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
+    <div className="space-y-4 md:space-y-6">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold">Schedule Management</h1>
-          <p className="text-muted-foreground">Unified interface for managing schedules, templates, and live classes</p>
+          <h1 className="text-2xl md:text-3xl font-bold">Schedule Management</h1>
+          <p className="text-sm md:text-base text-muted-foreground">Unified interface for managing schedules, templates, and live classes</p>
         </div>
-        <Button variant="outline" onClick={refreshData}>
+        <Button variant="outline" onClick={refreshData} size="sm" className="self-start sm:self-auto">
           <RefreshCw className="h-4 w-4 mr-2" />
-          Refresh All
+          <span className="hidden sm:inline">Refresh All</span>
+          <span className="sm:hidden">Refresh</span>
         </Button>
       </div>
 
-      <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4 md:space-y-6">
         <TabsList className="grid grid-cols-3 w-full">
-          <TabsTrigger value="live" className="flex items-center gap-2">
-            <CalendarCheck className="h-4 w-4" />
-            Live Calendar
+          <TabsTrigger value="live" className="flex items-center gap-1 md:gap-2 text-xs md:text-sm">
+            <CalendarCheck className="h-3 w-3 md:h-4 md:w-4" />
+            <span className="hidden sm:inline">Live Calendar</span>
+            <span className="sm:hidden">Live</span>
           </TabsTrigger>
-          <TabsTrigger value="templates" className="flex items-center gap-2">
-            <Calendar className="h-4 w-4" />
-            Templates
+          <TabsTrigger value="templates" className="flex items-center gap-1 md:gap-2 text-xs md:text-sm">
+            <Calendar className="h-3 w-3 md:h-4 md:w-4" />
+            <span className="hidden sm:inline">Templates</span>
+            <span className="sm:hidden">Templates</span>
           </TabsTrigger>
-          <TabsTrigger value="periods" className="flex items-center gap-2">
-            <CalendarDays className="h-4 w-4" />
-            Periods
+          <TabsTrigger value="periods" className="flex items-center gap-1 md:gap-2 text-xs md:text-sm">
+            <CalendarDays className="h-3 w-3 md:h-4 md:w-4" />
+            <span className="hidden sm:inline">Periods</span>
+            <span className="sm:hidden">Periods</span>
           </TabsTrigger>
         </TabsList>
 

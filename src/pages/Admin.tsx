@@ -27,7 +27,7 @@ const Admin = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <SidebarProvider>
+      <SidebarProvider defaultOpen={false}>
         <div className="flex min-h-screen w-full">
           <AdminSidebar 
             activeSection={activeSection} 
@@ -35,7 +35,7 @@ const Admin = () => {
           />
           <div className="flex-1 flex flex-col">
             <AdminHeader />
-            <main className="flex-1 p-6">
+            <main className="flex-1 p-3 md:p-6">
               {renderContent()}
             </main>
           </div>
