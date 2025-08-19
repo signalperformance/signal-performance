@@ -62,13 +62,9 @@ export function ScheduleTemplatesTab() {
       .sort((a: any, b: any) => a.start_time.localeCompare(b.start_time));
   };
 
-  const getClassTypeColor = (className: string) => {
-    const type = className.toLowerCase();
-    if (type.includes('mobility')) return 'bg-green-100 text-green-800 border-green-200';
-    if (type.includes('strength')) return 'bg-blue-100 text-blue-800 border-blue-200';
-    if (type.includes('cardio')) return 'bg-red-100 text-red-800 border-red-200';
-    if (type.includes('power')) return 'bg-purple-100 text-purple-800 border-purple-200';
-    return 'bg-gray-100 text-gray-800 border-gray-200';
+  const getSessionTypeColor = (sessionType: string) => {
+    if (sessionType === 'pro') return 'bg-yellow-100 text-yellow-900 border-yellow-300';
+    return 'bg-blue-100 text-blue-900 border-blue-300';
   };
 
   return (
@@ -123,13 +119,10 @@ export function ScheduleTemplatesTab() {
                     <h4 className="font-medium text-sm capitalize">{day}</h4>
                     <div className="space-y-1">
                       {getDaySchedule(template, day).map((entry: any) => (
-                        <div key={entry.id} className={`p-2 rounded text-xs border ${getClassTypeColor(entry.class_name)}`}>
+                        <div key={entry.id} className={`p-2 rounded text-xs border ${getSessionTypeColor(entry.session_type)}`}>
                           <div className="font-medium">{formatTime(entry.start_time)}</div>
                           <div className="text-xs font-medium">{entry.class_name}</div>
-                          <div className="flex items-center justify-between mt-1">
-                            <Badge variant={entry.session_type === 'pro' ? 'default' : 'secondary'} className="text-xs">
-                              {entry.session_type}
-                            </Badge>
+                          <div className="flex items-center justify-end mt-1">
                             <div className="text-xs text-muted-foreground">
                               {entry.max_participants} max
                             </div>
