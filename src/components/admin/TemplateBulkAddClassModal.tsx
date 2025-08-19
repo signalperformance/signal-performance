@@ -56,7 +56,7 @@ export function TemplateBulkAddClassModal({ isOpen, onClose, onAddClasses }: Tem
       return;
     }
 
-    const className = `${formData.classType.toUpperCase()} (${formData.sessionType.toUpperCase()})`;
+    const className = formData.classType.toUpperCase();
 
     const newClasses = selectedDays.map(day => ({
       day_of_week: day,

@@ -80,7 +80,7 @@ export function WeeklyScheduleManager() {
           day_of_week: classData.dayOfWeek,
           start_time: classData.startTime,
           duration: classData.duration,
-          class_name: `${classData.classType.toUpperCase()} (${classData.sessionType.toUpperCase()})`,
+          class_name: classData.classType.toUpperCase(),
           session_type: classData.sessionType,
           max_participants: classData.maxParticipants,
           is_active: classData.isActive,
