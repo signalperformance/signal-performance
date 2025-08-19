@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Calendar, Clock, MapPin, X } from 'lucide-react';
+import { AddToCalendarButton } from './AddToCalendarButton';
 import { format, isPast, isToday, isTomorrow, addHours } from 'date-fns';
 import { useToast } from '@/hooks/use-toast';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -190,8 +191,16 @@ export const MyBookings: React.FC = () => {
                           </div>
                         </div>
 
-                        {canCancel && (
-                          <AlertDialog>
+                        <div className={`flex ${isMobile ? 'flex-col space-y-2' : 'items-center gap-2'}`}>
+                          <AddToCalendarButton 
+                            booking={booking}
+                            variant="outline"
+                            size={isMobile ? "default" : "sm"}
+                            className={isMobile ? "w-full" : ""}
+                          />
+                          
+                          {canCancel && (
+                            <AlertDialog>
                             <AlertDialogTrigger asChild>
                               <Button 
                                 variant={isMobile ? "destructive" : "ghost"}
@@ -223,8 +232,9 @@ export const MyBookings: React.FC = () => {
                                 </AlertDialogAction>
                               </AlertDialogFooter>
                             </AlertDialogContent>
-                          </AlertDialog>
-                        )}
+                            </AlertDialog>
+                          )}
+                        </div>
                       </div>
                     </CardContent>
                   </Card>
