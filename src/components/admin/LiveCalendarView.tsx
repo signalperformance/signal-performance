@@ -8,6 +8,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { EditLiveClassModal } from './EditLiveClassModal';
 import { AddLiveClassModal } from './AddLiveClassModal';
+import { cn } from '@/lib/utils';
 import { 
   format, 
   startOfWeek, 
@@ -227,7 +228,13 @@ export function LiveCalendarView() {
                 {dayClasses.map((cls) => (
                   <Card 
                     key={cls.id} 
-                    className={`p-3 cursor-pointer hover:bg-accent transition-colors ${cls.is_cancelled ? 'opacity-60' : ''}`}
+                    className={cn(
+                      "p-3 cursor-pointer transition-colors",
+                      cls.session_type === 'pro' 
+                        ? "bg-yellow-100 border-yellow-300 hover:bg-yellow-200 text-yellow-900" 
+                        : "bg-muted/50 border-muted hover:bg-muted/70 text-foreground",
+                      cls.is_cancelled && "opacity-60"
+                    )}
                     onClick={() => handleEditClass(cls)}
                   >
                     <div className="space-y-1 text-center">
