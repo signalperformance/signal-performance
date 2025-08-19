@@ -50,21 +50,20 @@ export const ClientScheduleView: React.FC = () => {
 
   const getWeekDays = () => {
     const weekStart = getCurrentWeekStart();
-    const today = new Date();
-    today.setHours(0, 0, 0, 0); // Start of today
     
     return Array.from({ length: 7 }, (_, i) => {
       const date = new Date(weekStart);
       date.setDate(weekStart.getDate() + i);
       return date;
-    }).filter(date => {
-      // For current week, only show today and future days
-      if (weekOffset === 0) {
-        return date >= today;
-      }
-      // For future weeks, show all days
-      return true;
     });
+  };
+
+  const isPastDate = (date: Date) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const checkDate = new Date(date);
+    checkDate.setHours(0, 0, 0, 0);
+    return checkDate < today;
   };
 
   const getSessionsForDay = (date: Date) => {
@@ -156,22 +155,27 @@ export const ClientScheduleView: React.FC = () => {
     const todayStr = format(today, 'yyyy-MM-dd');
     
     // For current week, prefer today if it's available
-    if (weekOffset === 0 && weekDays.length > 0) {
+    if (weekOffset === 0) {
       const weekDayStrs = weekDays.map(day => format(day, 'yyyy-MM-dd'));
       if (weekDayStrs.includes(todayStr)) {
         return todayStr;
       }
     }
     
-    // Find first day with sessions, or just first available day
+    // Find first non-past day with sessions, or just first non-past day
     for (const day of weekDays) {
-      const sessions = getSessionsForDay(day);
-      if (sessions.length > 0) {
-        return format(day, 'yyyy-MM-dd');
+      if (!isPastDate(day)) {
+        const sessions = getSessionsForDay(day);
+        if (sessions.length > 0) {
+          return format(day, 'yyyy-MM-dd');
+        }
       }
     }
     
-    return weekDays.length > 0 ? format(weekDays[0], 'yyyy-MM-dd') : '';
+    // Fallback to first non-past day, or first day if all are past
+    const firstNonPastDay = weekDays.find(day => !isPastDate(day));
+    return firstNonPastDay ? format(firstNonPastDay, 'yyyy-MM-dd') : 
+           (weekDays.length > 0 ? format(weekDays[0], 'yyyy-MM-dd') : '');
   }, [weekDays, scheduleWithAvailability, weekOffset]);
 
   // Update selected day when week changes or on first load
@@ -239,35 +243,24 @@ export const ClientScheduleView: React.FC = () => {
               const dayStr = format(date, 'yyyy-MM-dd');
               const dayName = format(date, 'EEE');
               const dateNum = format(date, 'dd');
-              const sessions = getSessionsForDay(date);
-              const userBookingsCount = sessions.filter(session => isSessionBooked(session)).length;
               const isSelected = selectedDay === dayStr;
+              const isPast = isPastDate(date);
               
               return (
                 <button
                   key={dayStr}
-                  onClick={() => setSelectedDay(dayStr)}
+                  onClick={() => !isPast && setSelectedDay(dayStr)}
+                  disabled={isPast}
                   className={`flex flex-col items-center p-2 rounded-lg border transition-all min-h-[44px] ${
-                    isSelected 
-                      ? 'bg-primary text-primary-foreground border-primary' 
-                      : 'bg-background border-border hover:bg-muted'
+                    isPast 
+                      ? 'bg-muted text-muted-foreground border-muted cursor-not-allowed opacity-50'
+                      : isSelected 
+                        ? 'bg-primary text-primary-foreground border-primary' 
+                        : 'bg-background border-border hover:bg-muted'
                   }`}
                 >
                   <div className="text-xs font-medium">{dayName}</div>
                   <div className="text-lg font-bold">{dateNum}</div>
-                  {(sessions.length > 0 || userBookingsCount > 0 || isToday(date)) && (
-                    <div className="flex items-center gap-1 mt-1">
-                      {sessions.length > 0 && (
-                        <div className={`w-1.5 h-1.5 rounded-full ${isSelected ? 'bg-primary-foreground' : 'bg-muted-foreground'}`}></div>
-                      )}
-                      {userBookingsCount > 0 && (
-                        <div className={`w-1.5 h-1.5 rounded-full ${isSelected ? 'bg-primary-foreground' : 'bg-primary'}`}></div>
-                      )}
-                      {isToday(date) && (
-                        <div className={`w-2 h-2 rounded-full ${isSelected ? 'bg-primary-foreground' : 'bg-primary'}`}></div>
-                      )}
-                    </div>
-                  )}
                 </button>
               );
             })}
@@ -280,12 +273,16 @@ export const ClientScheduleView: React.FC = () => {
               const dateNum = format(date, 'dd');
               const sessions = getSessionsForDay(date);
               const userBookingsCount = sessions.filter(session => isSessionBooked(session)).length;
+              const isPast = isPastDate(date);
               
               return (
                 <TabsTrigger
                   key={dayStr}
                   value={dayStr}
-                  className="flex flex-col p-3 h-auto data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                  disabled={isPast}
+                  className={`flex flex-col p-3 h-auto data-[state=active]:bg-primary data-[state=active]:text-primary-foreground ${
+                    isPast ? 'opacity-50 cursor-not-allowed' : ''
+                  }`}
                 >
                   <div className="text-xs font-medium">{dayName}</div>
                   <div className="text-lg font-bold">{dateNum}</div>
