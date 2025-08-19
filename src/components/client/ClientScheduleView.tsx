@@ -298,7 +298,7 @@ export const ClientScheduleView: React.FC = () => {
             <CardHeader>
               <CardTitle className="flex items-center justify-between">
                 <span>
-                  {format(selectedDate, 'EEEE, MMMM dd')}
+                  {isMobile ? format(selectedDate, 'MMMM dd') : format(selectedDate, 'EEEE, MMMM dd')}
                   {isToday(selectedDate) && <Badge variant="outline" className="ml-2">Today</Badge>}
                 </span>
                 <Badge variant="secondary">
