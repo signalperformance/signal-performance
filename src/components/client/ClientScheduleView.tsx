@@ -234,54 +234,44 @@ export const ClientScheduleView: React.FC = () => {
       {/* Day Selection Tabs */}
       <Tabs value={selectedDay} onValueChange={setSelectedDay}>
         {isMobile ? (
-          <ScrollArea className="w-full">
-            <div className="flex space-x-2 p-1">
-              {weekDays.map((date) => {
-                const dayStr = format(date, 'yyyy-MM-dd');
-                const dayName = format(date, 'EEE');
-                const dateNum = format(date, 'dd');
-                const sessions = getSessionsForDay(date);
-                const userBookingsCount = sessions.filter(session => isSessionBooked(session)).length;
-                const isSelected = selectedDay === dayStr;
-                
-                return (
-                  <button
-                    key={dayStr}
-                    onClick={() => setSelectedDay(dayStr)}
-                    className={`flex-shrink-0 flex flex-col items-center p-4 rounded-lg border-2 transition-all min-w-[80px] ${
-                      isSelected 
-                        ? 'bg-primary text-primary-foreground border-primary' 
-                        : 'bg-background border-border hover:bg-muted'
-                    }`}
-                  >
-                    <div className="text-xs font-medium mb-1">{dayName}</div>
-                    <div className="text-xl font-bold mb-2">{dateNum}</div>
-                    <div className="flex flex-col items-center gap-1">
+          <div className="grid grid-cols-7 gap-1 p-1">
+            {weekDays.map((date) => {
+              const dayStr = format(date, 'yyyy-MM-dd');
+              const dayName = format(date, 'EEE');
+              const dateNum = format(date, 'dd');
+              const sessions = getSessionsForDay(date);
+              const userBookingsCount = sessions.filter(session => isSessionBooked(session)).length;
+              const isSelected = selectedDay === dayStr;
+              
+              return (
+                <button
+                  key={dayStr}
+                  onClick={() => setSelectedDay(dayStr)}
+                  className={`flex flex-col items-center p-2 rounded-lg border transition-all min-h-[44px] ${
+                    isSelected 
+                      ? 'bg-primary text-primary-foreground border-primary' 
+                      : 'bg-background border-border hover:bg-muted'
+                  }`}
+                >
+                  <div className="text-xs font-medium">{dayName}</div>
+                  <div className="text-lg font-bold">{dateNum}</div>
+                  {(sessions.length > 0 || userBookingsCount > 0 || isToday(date)) && (
+                    <div className="flex items-center gap-1 mt-1">
                       {sessions.length > 0 && (
-                        <Badge 
-                          variant={isSelected ? "outline" : "secondary"} 
-                          className="text-xs px-2 py-0"
-                        >
-                          {sessions.length}
-                        </Badge>
+                        <div className={`w-1.5 h-1.5 rounded-full ${isSelected ? 'bg-primary-foreground' : 'bg-muted-foreground'}`}></div>
                       )}
                       {userBookingsCount > 0 && (
-                        <Badge 
-                          variant="default" 
-                          className={`text-xs px-2 py-0 ${isSelected ? 'bg-primary-foreground text-primary' : 'bg-primary text-primary-foreground'}`}
-                        >
-                          {userBookingsCount} booked
-                        </Badge>
+                        <div className={`w-1.5 h-1.5 rounded-full ${isSelected ? 'bg-primary-foreground' : 'bg-primary'}`}></div>
                       )}
                       {isToday(date) && (
                         <div className={`w-2 h-2 rounded-full ${isSelected ? 'bg-primary-foreground' : 'bg-primary'}`}></div>
                       )}
                     </div>
-                  </button>
-                );
-              })}
-            </div>
-          </ScrollArea>
+                  )}
+                </button>
+              );
+            })}
+          </div>
         ) : (
           <TabsList className="grid w-full grid-cols-7 h-auto">
             {weekDays.map((date) => {
