@@ -173,7 +173,7 @@ export function UserProfilesManager() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{proMembers}</div>
-            <p className="text-xs text-muted-foreground">16 sessions/4 weeks</p>
+            <p className="text-xs text-muted-foreground">16 sessions</p>
           </CardContent>
         </Card>
 

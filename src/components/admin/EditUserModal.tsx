@@ -201,8 +201,8 @@ export function EditUserModal({ isOpen, onClose, onUpdateUser, user }: EditUserM
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="basic">Basic (12 sessions/4 weeks)</SelectItem>
-                  <SelectItem value="pro">Pro (16 sessions/4 weeks)</SelectItem>
+                  <SelectItem value="basic">Basic (12)</SelectItem>
+                  <SelectItem value="pro">Pro (16)</SelectItem>
                 </SelectContent>
               </Select>
             </div>
