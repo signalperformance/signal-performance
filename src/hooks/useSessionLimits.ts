@@ -14,7 +14,7 @@ export interface SessionLimitInfo {
 
 export const useSessionLimits = () => {
   const { user } = useAuth();
-  const { getUserBookings, loadBookings } = useBookingStore();
+  const { getUserBookings, loadBookings, bookings } = useBookingStore();
   const [sessionInfo, setSessionInfo] = useState<SessionLimitInfo | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -63,8 +63,9 @@ export const useSessionLimits = () => {
     };
   };
 
+  // Initial load
   useEffect(() => {
-    const updateSessionInfo = async () => {
+    const initializeData = async () => {
       if (!user) {
         setSessionInfo(null);
         setLoading(false);
@@ -73,13 +74,19 @@ export const useSessionLimits = () => {
 
       setLoading(true);
       await loadBookings();
-      const info = calculateSessionLimits();
-      setSessionInfo(info);
       setLoading(false);
     };
 
-    updateSessionInfo();
+    initializeData();
   }, [user, loadBookings]);
+
+  // Recalculate when bookings change
+  useEffect(() => {
+    if (user && bookings.length >= 0) { // Check >= 0 to handle empty arrays
+      const info = calculateSessionLimits();
+      setSessionInfo(info);
+    }
+  }, [user, bookings]);
 
   const canBookSession = (): boolean => {
     return sessionInfo ? !sessionInfo.isAtLimit : false;
