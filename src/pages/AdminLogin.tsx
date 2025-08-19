@@ -43,7 +43,7 @@ export default function AdminLogin() {
         });
         navigate('/admin');
       } else {
-        setError('Invalid admin credentials. The admin user might not exist in Supabase Auth yet.');
+        setError('Invalid credentials or you are not an admin user.');
       }
     } catch (err) {
       setError('An error occurred during login. Please try again.');

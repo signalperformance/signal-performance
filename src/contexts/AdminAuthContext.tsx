@@ -29,7 +29,7 @@ export const AdminAuthProvider: React.FC<{ children: React.ReactNode }> = ({ chi
           const { data: adminData } = await supabase
             .from('admin_users')
             .select('*')
-            .eq('email', session.user!.email)
+            .ilike('email', session.user!.email)
             .maybeSingle();
 
           if (adminData) {
@@ -58,7 +58,7 @@ export const AdminAuthProvider: React.FC<{ children: React.ReactNode }> = ({ chi
         const { data: adminData } = await supabase
           .from('admin_users')
           .select('*')
-          .eq('email', session.user.email)
+          .ilike('email', session.user.email)
           .maybeSingle();
 
         if (adminData) {
@@ -80,24 +80,26 @@ export const AdminAuthProvider: React.FC<{ children: React.ReactNode }> = ({ chi
 
   const login = async (email: string, password: string): Promise<boolean> => {
     try {
-      // First check if user exists in admin_users table
-      const { data: adminData } = await supabase
-        .from('admin_users')
-        .select('*')
-        .eq('email', email)
-        .maybeSingle();
-
-      if (!adminData) {
-        return false; // Not an admin user
-      }
-
-      // Then authenticate with Supabase Auth
+      // First authenticate with Supabase Auth
       const { data, error } = await supabase.auth.signInWithPassword({ 
         email, 
         password 
       });
 
       if (error || !data.session) {
+        return false;
+      }
+
+      // Then check if authenticated user is an admin (case-insensitive)
+      const { data: adminData } = await supabase
+        .from('admin_users')
+        .select('*')
+        .ilike('email', email)
+        .maybeSingle();
+
+      if (!adminData) {
+        // User authenticated but is not an admin, sign them out
+        await supabase.auth.signOut();
         return false;
       }
 
