@@ -1,4 +1,4 @@
-import { Calendar, Users, CalendarDays, CalendarCheck, Database } from 'lucide-react';
+import { Calendar, Users, CalendarDays, CalendarCheck } from 'lucide-react';
 import {
   Sidebar,
   SidebarContent,
@@ -11,7 +11,7 @@ import {
   SidebarTrigger,
 } from '@/components/ui/sidebar';
 
-type AdminSection = 'templates' | 'periods' | 'live-calendar' | 'users' | 'migration';
+type AdminSection = 'templates' | 'periods' | 'live-calendar' | 'users';
 
 interface AdminSidebarProps {
   activeSection: AdminSection;
@@ -38,11 +38,6 @@ const menuItems = [
     id: 'users' as AdminSection,
     title: 'User Profiles',
     icon: Users,
-  },
-  {
-    id: 'migration' as AdminSection,
-    title: 'Data Migration',
-    icon: Database,
   },
 ];
 

@@ -5,13 +5,13 @@ import { AdminHeader } from '@/components/admin/AdminHeader';
 import { ScheduleTemplateManager } from '@/components/admin/ScheduleTemplateManager';
 import { SchedulePeriodsManager } from '@/components/admin/SchedulePeriodsManager';
 import { LiveCalendarView } from '@/components/admin/LiveCalendarView';
-import { DataMigrationManager } from '@/components/admin/DataMigrationManager';
+
 import { UserProfilesManager } from '@/components/admin/UserProfilesManager';
 
-type AdminSection = 'templates' | 'periods' | 'live-calendar' | 'users' | 'migration';
+type AdminSection = 'templates' | 'periods' | 'live-calendar' | 'users';
 
 const Admin = () => {
-  const [activeSection, setActiveSection] = useState<AdminSection>('migration');
+  const [activeSection, setActiveSection] = useState<AdminSection>('live-calendar');
 
   const renderContent = () => {
     switch (activeSection) {
@@ -23,10 +23,8 @@ const Admin = () => {
         return <LiveCalendarView />;
       case 'users':
         return <UserProfilesManager />;
-      case 'migration':
-        return <DataMigrationManager />;
       default:
-        return <DataMigrationManager />;
+        return <LiveCalendarView />;
     }
   };
 
