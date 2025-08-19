@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { ClientNavbar } from '@/components/client/ClientNavbar';
 import { ClientScheduleView } from '@/components/client/ClientScheduleView';
 import { MyBookings } from '@/components/client/MyBookings';
+import { AccountDeactivatedModal } from '@/components/client/AccountDeactivatedModal';
 
 export default function ClientPortal() {
   const { user, isAuthenticated } = useAuth();
@@ -20,6 +21,15 @@ export default function ClientPortal() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="animate-spin w-8 h-8 border-2 border-signal-gold border-t-transparent rounded-full"></div>
+      </div>
+    );
+  }
+
+  // Show deactivated modal if user account is inactive
+  if (!user.isActive) {
+    return (
+      <div className="min-h-screen bg-background">
+        <AccountDeactivatedModal open={true} />
       </div>
     );
   }
