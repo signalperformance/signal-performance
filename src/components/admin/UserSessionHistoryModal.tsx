@@ -47,89 +47,133 @@ export const UserSessionHistoryModal = ({ isOpen, onClose, user }: UserSessionHi
     
     setLoading(true);
     try {
-      // Get all bookings with session details and attendance
-      const { data, error } = await supabase
+      // Get all bookings for this user (no nested relations to avoid FK issues)
+      const { data: bookings, error } = await supabase
         .from('bookings')
-        .select(`
-          id,
-          booking_date,
-          created_at,
-          schedule_entry_id,
-          user_attendance (
-            attended,
-            notes,
-            marked_at
-          )
-        `)
+        .select(
+          `id, booking_date, created_at, schedule_entry_id`
+        )
         .eq('user_id', user.id)
         .order('booking_date', { ascending: false });
 
       if (error) throw error;
 
-      // Get live schedule instances for the booked sessions
-      const scheduleIds = data?.map(booking => booking.schedule_entry_id).filter(Boolean) || [];
-      
-      const { data: scheduleData, error: scheduleError } = await supabase
-        .from('live_schedule_instances')
-        .select(`
-          id,
-          class_date,
-          start_time,
-          duration,
-          class_name,
-          session_type,
-          max_participants,
-          is_cancelled
-        `)
-        .in('id', scheduleIds);
+      const bookingIds: string[] = bookings?.map((b: any) => b.id) || [];
+      const scheduleEntryIds: string[] = (bookings?.map((b: any) => b.schedule_entry_id).filter(Boolean)) || [];
+      const bookingDates: string[] = Array.from(
+        new Set((bookings?.map((b: any) => b.booking_date).filter(Boolean)) || [])
+      );
 
-      if (scheduleError) throw scheduleError;
+      // Fetch schedule entry details for timing/class meta
+      let scheduleEntriesMap: Record<string, any> = {};
+      if (scheduleEntryIds.length) {
+        const { data: scheduleEntries, error: seError } = await supabase
+          .from('schedule_entries')
+          .select('id, start_time, duration, class_name, session_type, max_participants')
+          .in('id', scheduleEntryIds);
+        if (seError) throw seError;
+        scheduleEntriesMap = (scheduleEntries || []).reduce((acc: any, se: any) => {
+          acc[se.id] = se;
+          return acc;
+        }, {});
+      }
 
-      // Create a map of schedule instances by ID
-      const scheduleMap = scheduleData?.reduce((acc: any, schedule: any) => {
-        acc[schedule.id] = schedule;
-        return acc;
-      }, {}) || {};
+      // Build filters for live instances
+      const startTimes = Array.from(new Set(
+        scheduleEntryIds.map((id: string) => scheduleEntriesMap[id]?.start_time).filter(Boolean)
+      ));
+      const classNames = Array.from(new Set(
+        scheduleEntryIds.map((id: string) => scheduleEntriesMap[id]?.class_name).filter(Boolean)
+      ));
+      const sessionTypes = Array.from(new Set(
+        scheduleEntryIds.map((id: string) => scheduleEntriesMap[id]?.session_type).filter(Boolean)
+      ));
 
-      // Get participant counts for each session
-      const { data: participantCounts } = await supabase
-        .from('bookings')
-        .select('schedule_entry_id')
-        .in('schedule_entry_id', scheduleIds);
+      // Fetch matching live schedule instances by date + time + class (and type) to locate IDs
+      let liveInstanceMap: Record<string, any> = {};
+      if (bookingDates.length && startTimes.length && classNames.length) {
+        const { data: liveInstances, error: liError } = await supabase
+          .from('live_schedule_instances')
+          .select('id, class_date, start_time, duration, class_name, session_type, max_participants, is_cancelled')
+          .in('class_date', bookingDates)
+          .in('start_time', startTimes)
+          .in('class_name', classNames);
+        if (!liError) {
+          liveInstanceMap = (liveInstances || []).reduce((acc: any, inst: any) => {
+            const key = `${inst.class_date}|${inst.start_time}|${inst.class_name}|${inst.session_type}`;
+            acc[key] = inst;
+            return acc;
+          }, {});
+        } else {
+          console.warn('Live instances lookup failed:', liError);
+        }
+      }
 
-      const participantCountMap = participantCounts?.reduce((acc: any, booking: any) => {
-        acc[booking.schedule_entry_id] = (acc[booking.schedule_entry_id] || 0) + 1;
-        return acc;
-      }, {}) || {};
+      // Participant counts grouped by entry and date
+      let participantCountMap: Record<string, number> = {};
+      if (scheduleEntryIds.length && bookingDates.length) {
+        const { data: participantCounts } = await supabase
+          .from('bookings')
+          .select('schedule_entry_id, booking_date')
+          .in('schedule_entry_id', scheduleEntryIds)
+          .in('booking_date', bookingDates);
+        participantCountMap = (participantCounts || []).reduce((acc: any, row: any) => {
+          const k = `${row.schedule_entry_id}|${row.booking_date}`;
+          acc[k] = (acc[k] || 0) + 1;
+          return acc;
+        }, {});
+      }
 
-      const formattedData: SessionHistoryEntry[] = data?.map(booking => {
-        const session = scheduleMap[booking.schedule_entry_id];
-        if (!session) return null; // Skip if no matching session found
-        
-        const attendance = Array.isArray(booking.user_attendance) ? booking.user_attendance[0] : booking.user_attendance;
-        const sessionDate = new Date(session.class_date);
-        const now = new Date();
-        const sessionDateTime = new Date(`${session.class_date}T${session.start_time}`);
-        const canCancel = sessionDateTime.getTime() - now.getTime() > 3 * 60 * 60 * 1000; // 3 hours
+      // Fetch attendance separately; if it fails due to RLS, continue gracefully
+      let attendanceMap: Record<string, any> = {};
+      try {
+        if (bookingIds.length) {
+          const { data: attendanceData } = await supabase
+            .from('user_attendance')
+            .select('booking_id, attended, notes, marked_at, live_schedule_instance_id')
+            .in('booking_id', bookingIds)
+            .eq('user_id', user.id);
+          attendanceMap = (attendanceData || []).reduce((acc: any, a: any) => {
+            acc[a.booking_id] = a;
+            return acc;
+          }, {});
+        }
+      } catch (attErr) {
+        console.warn('Attendance fetch skipped:', attErr);
+      }
 
-        return {
-          booking_id: booking.id,
-          live_schedule_instance_id: session.id,
-          class_date: session.class_date,
-          start_time: session.start_time,
-          duration: session.duration,
-          class_name: session.class_name,
-          session_type: session.session_type,
-          max_participants: session.max_participants,
-          current_participants: participantCountMap[booking.schedule_entry_id] || 0,
-          booking_created_at: booking.created_at,
-          is_cancelled: session.is_cancelled,
-          attended: attendance?.attended,
-          attendance_notes: attendance?.notes,
-          marked_at: attendance?.marked_at,
-          can_cancel: canCancel && !session.is_cancelled
-        };
-      }).filter(Boolean) || [];
+      const formattedData: SessionHistoryEntry[] = (bookings || [])
+        .map((booking: any) => {
+          const se = scheduleEntriesMap[booking.schedule_entry_id];
+          if (!se) return null; // Skip if no schedule entry meta found
+
+          const key = `${booking.booking_date}|${se.start_time}|${se.class_name}|${se.session_type}`;
+          const inst = liveInstanceMap[key];
+          const attendance = attendanceMap[booking.id];
+
+          const now = new Date();
+          const sessionDateTime = new Date(`${booking.booking_date}T${se.start_time}`);
+          const canCancel = sessionDateTime.getTime() - now.getTime() > 3 * 60 * 60 * 1000; // 3 hours
+
+          return {
+            booking_id: booking.id,
+            live_schedule_instance_id: inst?.id || '',
+            class_date: booking.booking_date,
+            start_time: se.start_time,
+            duration: se.duration,
+            class_name: se.class_name,
+            session_type: se.session_type,
+            max_participants: inst?.max_participants ?? se.max_participants,
+            current_participants: participantCountMap[`${booking.schedule_entry_id}|${booking.booking_date}`] || 0,
+            booking_created_at: booking.created_at,
+            is_cancelled: inst?.is_cancelled ?? false,
+            attended: attendance?.attended ?? null,
+            attendance_notes: attendance?.notes,
+            marked_at: attendance?.marked_at,
+            can_cancel: canCancel && !(inst?.is_cancelled)
+          } as SessionHistoryEntry;
+        })
+        .filter(Boolean) as SessionHistoryEntry[];
 
       setSessionHistory(formattedData);
     } catch (error) {
@@ -151,7 +195,14 @@ export const UserSessionHistoryModal = ({ isOpen, onClose, user }: UserSessionHi
       if (!session) {
         throw new Error('Session not found');
       }
-
+      if (!session.live_schedule_instance_id) {
+        toast({
+          title: "Missing session link",
+          description: "This booking isn't linked to a live session yet. Please regenerate live instances or contact support.",
+          variant: "destructive",
+        });
+        return;
+      }
       const { error } = await supabase
         .from('user_attendance')
         .upsert({
