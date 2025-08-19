@@ -9,9 +9,11 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Calendar, Clock, Users, MapPin } from 'lucide-react';
 import { format } from 'date-fns';
 import { Separator } from '@/components/ui/separator';
+import { useSessionLimits } from '@/hooks/useSessionLimits';
 
 interface BookingModalProps {
   session: ScheduleWithAvailability | null;
@@ -32,10 +34,13 @@ export const BookingModal: React.FC<BookingModalProps> = ({
   canBook,
   userMembershipPlan,
 }) => {
+  const { canBookSession, getSessionLimitMessage } = useSessionLimits();
+  
   if (!session) return null;
 
   const isFull = session.currentBookings >= session.maxParticipants;
   const spotsLeft = session.maxParticipants - session.currentBookings;
+  const sessionLimitMessage = getSessionLimitMessage();
   
   const formatTime = (hour24: number) => {
     const date = new Date();
@@ -53,6 +58,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
     if (isBooked) return true; // Can cancel
     if (isFull) return false;
     if (session.sessionType === 'pro' && userMembershipPlan === 'basic') return false;
+    if (!canBookSession()) return false; // Check session limits
     return canBook;
   };
 
@@ -131,6 +137,14 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                 ✅ You are booked for this session
               </p>
             </div>
+          )}
+
+          {sessionLimitMessage && !isBooked && (
+            <Alert className="border-amber-200 bg-amber-50 dark:bg-amber-950 dark:border-amber-800">
+              <AlertDescription className="text-amber-800 dark:text-amber-200">
+                {sessionLimitMessage}
+              </AlertDescription>
+            </Alert>
           )}
 
           <div className="flex gap-2 pt-4">

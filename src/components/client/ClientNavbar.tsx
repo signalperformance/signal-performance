@@ -2,8 +2,10 @@ import React from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Badge } from '@/components/ui/badge';
 import { LogOut, Calendar, BookOpen } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { useSessionLimits } from '@/hooks/useSessionLimits';
 
 interface ClientNavbarProps {
   activeTab: 'schedule' | 'bookings';
@@ -12,6 +14,7 @@ interface ClientNavbarProps {
 
 export const ClientNavbar: React.FC<ClientNavbarProps> = ({ activeTab, onTabChange }) => {
   const { user, logout } = useAuth();
+  const { sessionInfo, loading } = useSessionLimits();
   const { toast } = useToast();
 
   const handleLogout = () => {
@@ -52,6 +55,14 @@ export const ClientNavbar: React.FC<ClientNavbarProps> = ({ activeTab, onTabChan
           </div>
 
           <div className="flex items-center space-x-4">
+            {sessionInfo && !loading && (
+              <Badge 
+                variant={sessionInfo.remainingSessions <= 2 ? "destructive" : "secondary"}
+                className="text-xs font-semibold hidden sm:inline-flex"
+              >
+                {sessionInfo.usedSessions}/{sessionInfo.totalSessions} sessions
+              </Badge>
+            )}
             <div className="hidden sm:flex items-center space-x-3">
               <Avatar className="h-8 w-8">
                 <AvatarFallback className="bg-primary text-primary-foreground">
