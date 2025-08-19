@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Calendar, Clock, MapPin, X } from 'lucide-react';
-import { format, isPast, isToday, isTomorrow } from 'date-fns';
+import { format, isPast, isToday, isTomorrow, addHours } from 'date-fns';
 import { useToast } from '@/hooks/use-toast';
 import { useIsMobile } from '@/hooks/use-mobile';
 import {
@@ -55,6 +55,19 @@ export const MyBookings: React.FC = () => {
   };
 
   const handleCancelBooking = async (bookingId: string, sessionName: string, date: Date) => {
+    // Check if cancellation is within 3 hours of session start
+    const now = new Date();
+    const threeHoursCutoff = addHours(date, -3);
+    
+    if (now >= threeHoursCutoff) {
+      toast({
+        title: "Cancellation not allowed",
+        description: "Sessions cannot be cancelled within 3 hours of the start time.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     const success = await cancelBooking(bookingId);
     if (success) {
       toast({
@@ -132,7 +145,9 @@ export const MyBookings: React.FC = () => {
             </CardHeader>
             <CardContent className="space-y-4">
               {sortedBookings.map((booking) => {
-                const canCancel = !isPast(booking.bookingDate);
+                const now = new Date();
+                const threeHoursCutoff = addHours(booking.bookingDate, -3);
+                const canCancel = !isPast(booking.bookingDate) && now < threeHoursCutoff;
 
                 return (
                   <Card key={booking.id} className="border-l-4 border-l-primary">
@@ -157,6 +172,20 @@ export const MyBookings: React.FC = () => {
                               <span className={isMobile ? 'text-base' : ''}>
                                 {formatTime(booking.hour24)}
                               </span>
+                              {(() => {
+                                const now = new Date();
+                                const threeHoursCutoff = addHours(booking.bookingDate, -3);
+                                const isWithinCutoff = now >= threeHoursCutoff;
+                                
+                                if (isWithinCutoff && !isPast(booking.bookingDate)) {
+                                  return (
+                                    <Badge variant="outline" className="text-xs text-amber-600 border-amber-300">
+                                      Can't cancel
+                                    </Badge>
+                                  );
+                                }
+                                return null;
+                              })()}
                             </div>
                           </div>
                         </div>
@@ -178,6 +207,10 @@ export const MyBookings: React.FC = () => {
                                 <AlertDialogTitle>Cancel Booking</AlertDialogTitle>
                                 <AlertDialogDescription>
                                   Are you sure you want to cancel your booking for {booking.sessionName} on {getDateLabel(booking.bookingDate)} at {formatTime(booking.hour24)}?
+                                  <br /><br />
+                                  <span className="text-amber-600 text-sm">
+                                    Note: Sessions cannot be cancelled within 3 hours of the start time.
+                                  </span>
                                 </AlertDialogDescription>
                               </AlertDialogHeader>
                               <AlertDialogFooter>

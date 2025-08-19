@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { Booking, ScheduleWithAvailability } from '@/types/client';
 import { supabase } from '@/integrations/supabase/client';
-import { addDays, startOfWeek, format, isSameDay } from 'date-fns';
+import { addDays, startOfWeek, format, isSameDay, addHours } from 'date-fns';
 
 interface BookingStore {
   bookings: Booking[];
@@ -226,6 +226,31 @@ export const useBookingStore = create<BookingStore>((set, get) => ({
 
   cancelBooking: async (bookingId: string) => {
     try {
+      // Get booking details to check if cancellation is allowed
+      const { data: bookingData, error: fetchError } = await supabase
+        .from('bookings')
+        .select(`
+          id,
+          live_schedule_instances!inner(
+            class_date,
+            start_time
+          )
+        `)
+        .eq('id', bookingId)
+        .single();
+
+      if (fetchError) throw fetchError;
+
+      // Check 3-hour cancellation policy
+      const sessionDateTime = new Date(`${bookingData.live_schedule_instances.class_date}T${bookingData.live_schedule_instances.start_time}`);
+      const now = new Date();
+      const threeHoursCutoff = addHours(sessionDateTime, -3);
+
+      if (now >= threeHoursCutoff) {
+        console.log('Cancellation not allowed: within 3 hours of session start');
+        return false;
+      }
+
       const { error } = await supabase
         .from('bookings')
         .delete()
