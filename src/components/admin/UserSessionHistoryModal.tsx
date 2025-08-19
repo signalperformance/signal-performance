@@ -191,14 +191,17 @@ export const UserSessionHistoryModal = ({ isOpen, onClose, user }: UserSessionHi
       }
       const { error } = await supabase
         .from('user_attendance')
-        .upsert({
-          booking_id: bookingId,
-          user_id: user.id,
-          live_schedule_instance_id: session.live_schedule_instance_id,
-          attended,
-          notes: notes || null,
-          marked_at: new Date().toISOString()
-        });
+        .upsert(
+          {
+            booking_id: bookingId,
+            user_id: user.id,
+            live_schedule_instance_id: session.live_schedule_instance_id,
+            attended,
+            notes: notes || null,
+            marked_at: new Date().toISOString(),
+          },
+          { onConflict: 'booking_id' }
+        );
 
       if (error) throw error;
 
@@ -210,12 +213,13 @@ export const UserSessionHistoryModal = ({ isOpen, onClose, user }: UserSessionHi
       setEditingAttendance(null);
       setAttendanceNotes('');
       loadSessionHistory();
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error marking attendance:', error);
+      const message = typeof error?.message === 'string' ? error.message : 'Failed to mark attendance';
       toast({
-        title: "Error",
-        description: "Failed to mark attendance",
-        variant: "destructive",
+        title: 'Error',
+        description: message,
+        variant: 'destructive',
       });
     }
   };
