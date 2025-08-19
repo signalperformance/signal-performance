@@ -18,6 +18,16 @@ import { useToast } from '@/hooks/use-toast';
 import { AddUserModal } from './AddUserModal';
 import { EditUserModal } from './EditUserModal';
 import { UserSessionHistoryModal } from './UserSessionHistoryModal';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
 
 interface UserProfile {
   id: string;
@@ -40,6 +50,7 @@ export function UserProfilesManager() {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [editingUser, setEditingUser] = useState<UserProfile | null>(null);
   const [sessionHistoryUser, setSessionHistoryUser] = useState<UserProfile | null>(null);
+  const [userToDelete, setUserToDelete] = useState<UserProfile | null>(null);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -100,6 +111,7 @@ export function UserProfilesManager() {
         description: "User deleted successfully.",
       });
 
+      setUserToDelete(null);
       await loadUsers();
     } catch (error) {
       console.error('Unexpected error:', error);
@@ -279,13 +291,15 @@ export function UserProfilesManager() {
                        >
                          <Edit className="h-4 w-4" />
                        </Button>
-                       <Button 
-                         variant="ghost" 
-                         size="icon"
-                         onClick={() => handleDeleteUser(user.id)}
-                       >
-                         <Trash2 className="h-4 w-4" />
-                       </Button>
+                        <AlertDialog>
+                          <Button 
+                            variant="ghost" 
+                            size="icon"
+                            onClick={() => setUserToDelete(user)}
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
+                        </AlertDialog>
                      </div>
                    </TableCell>
                 </TableRow>
@@ -320,6 +334,27 @@ export function UserProfilesManager() {
           user={sessionHistoryUser}
         />
       )}
+
+      <AlertDialog open={!!userToDelete} onOpenChange={() => setUserToDelete(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Delete User Profile</AlertDialogTitle>
+            <AlertDialogDescription>
+              Are you sure you want to delete <strong>{userToDelete?.first_name} {userToDelete?.last_name}</strong>? 
+              This action cannot be undone. All user data, bookings, and payment records will be permanently removed.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+              onClick={() => userToDelete && handleDeleteUser(userToDelete.id)}
+            >
+              Delete Profile
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }
