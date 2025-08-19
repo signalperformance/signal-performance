@@ -43,7 +43,8 @@ interface PaymentRecord {
   updated_at: string;
 }
 
-type StatusFilter = 'all' | 'paid' | 'due-soon' | 'overdue' | 'unpaid';
+type Status = 'paid' | 'due-soon' | 'overdue' | 'unpaid';
+type StatusFilter = 'all' | Status;
 
 function getMonthFirst(date: Date) {
   return new Date(date.getFullYear(), date.getMonth(), 1);
@@ -66,7 +67,7 @@ function dueDateForMonth(renewalDateStr: string | null, monthDate: Date): Date |
   return new Date(monthDate.getFullYear(), monthDate.getMonth(), dueDay);
 }
 
-function computeStatus(record: PaymentRecord | undefined, dueDate: Date | null): StatusFilter {
+function computeStatus(record: PaymentRecord | undefined, dueDate: Date | null): Status {
   if (record?.is_paid) return 'paid';
   if (!dueDate) return 'unpaid';
   const today = new Date();
