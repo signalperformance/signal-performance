@@ -45,9 +45,8 @@ export function EditTemplateClassModal({ isOpen, onClose, entry, onUpdateEntry }
 
   useEffect(() => {
     if (entry) {
-      // Extract class type from class name (e.g., "MOBILITY (PRO)" -> "Mobility")
-      const classTypePart = entry.class_name.split('(')[0].trim();
-      const classType = classTypePart.charAt(0) + classTypePart.slice(1).toLowerCase();
+      // Extract class type from class name (e.g., "MOBILITY" -> "Mobility")  
+      const classType = entry.class_name.charAt(0) + entry.class_name.slice(1).toLowerCase();
       
       setFormData({
         startTime: entry.start_time,
@@ -67,7 +66,7 @@ export function EditTemplateClassModal({ isOpen, onClose, entry, onUpdateEntry }
     setIsLoading(true);
     
     try {
-      const className = `${formData.classType.toUpperCase()} (${formData.sessionType.toUpperCase()})`;
+      const className = formData.classType.toUpperCase();
       
       const updatedEntry = {
         ...entry,

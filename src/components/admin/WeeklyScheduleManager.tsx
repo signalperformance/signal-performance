@@ -182,9 +182,9 @@ export function WeeklyScheduleManager() {
                               <div className="flex items-center gap-2">
                                 <Badge
                                   variant="secondary"
-                                  className={getClassTypeColor(entry.class_name.split(' ')[0].toLowerCase())}
+                                  className={getClassTypeColor(entry.class_name.toLowerCase())}
                                 >
-                                  {entry.class_name.split(' ')[0].charAt(0).toUpperCase()}
+                                  {entry.class_name.charAt(0).toUpperCase()}
                                 </Badge>
                               </div>
                               <p className="text-sm font-medium">
