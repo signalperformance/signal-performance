@@ -19,21 +19,18 @@ export type Database = {
           created_at: string
           email: string
           id: string
-          password: string
           updated_at: string
         }
         Insert: {
           created_at?: string
           email: string
           id?: string
-          password: string
           updated_at?: string
         }
         Update: {
           created_at?: string
           email?: string
           id?: string
-          password?: string
           updated_at?: string
         }
         Relationships: []
@@ -432,6 +429,10 @@ export type Database = {
           _role: Database["public"]["Enums"]["app_role"]
           _user_id: string
         }
+        Returns: boolean
+      }
+      is_admin: {
+        Args: Record<PropertyKey, never>
         Returns: boolean
       }
     }
