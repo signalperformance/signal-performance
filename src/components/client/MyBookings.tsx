@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Calendar, Clock, MapPin, X } from 'lucide-react';
 import { format, isPast, isToday, isTomorrow } from 'date-fns';
 import { useToast } from '@/hooks/use-toast';
+import { useIsMobile } from '@/hooks/use-mobile';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -23,6 +24,7 @@ export const MyBookings: React.FC = () => {
   const { user } = useAuth();
   const { getUpcomingBookings, cancelBooking, loadBookings, loadSchedule } = useBookingStore();
   const { toast } = useToast();
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const initializeData = async () => {
@@ -134,11 +136,13 @@ export const MyBookings: React.FC = () => {
 
                 return (
                   <Card key={booking.id} className="border-l-4 border-l-primary">
-                    <CardContent className="p-4">
-                      <div className="flex items-start justify-between">
-                        <div className="space-y-2">
-                          <div className="flex items-center gap-2">
-                            <h4 className="font-semibold">{booking.sessionName}</h4>
+                    <CardContent className={isMobile ? "p-6" : "p-4"}>
+                      <div className={`flex ${isMobile ? 'flex-col space-y-4' : 'items-start justify-between'}`}>
+                        <div className="space-y-3 flex-1">
+                          <div className={`flex items-center ${isMobile ? 'flex-col items-start space-y-2' : 'gap-2'}`}>
+                            <h4 className={`font-semibold ${isMobile ? 'text-lg' : ''}`}>
+                              {booking.sessionName}
+                            </h4>
                             <Badge 
                               className={getSessionTypeColor(booking.sessionType)}
                               variant="secondary"
@@ -147,18 +151,22 @@ export const MyBookings: React.FC = () => {
                             </Badge>
                           </div>
                           
-                          <div className="grid grid-cols-2 gap-4 text-sm text-muted-foreground">
+                          <div className={`grid ${isMobile ? 'grid-cols-1 gap-3' : 'grid-cols-2 gap-4'} text-sm text-muted-foreground`}>
                             <div className="flex items-center gap-2">
-                              <Clock className="h-4 w-4" />
-                              {formatTime(booking.hour24)}
+                              <Clock className={`${isMobile ? 'h-5 w-5' : 'h-4 w-4'}`} />
+                              <span className={isMobile ? 'text-base' : ''}>
+                                {formatTime(booking.hour24)}
+                              </span>
                             </div>
                             <div className="flex items-center gap-2">
-                              <MapPin className="h-4 w-4" />
-                              Main Studio
+                              <MapPin className={`${isMobile ? 'h-5 w-5' : 'h-4 w-4'}`} />
+                              <span className={isMobile ? 'text-base' : ''}>
+                                Main Studio
+                              </span>
                             </div>
                           </div>
                           
-                          <div className="text-xs text-muted-foreground">
+                          <div className={`text-muted-foreground ${isMobile ? 'text-sm' : 'text-xs'}`}>
                             Booked on {format(booking.createdAt, 'MMM dd, yyyy')}
                           </div>
                         </div>
@@ -167,11 +175,12 @@ export const MyBookings: React.FC = () => {
                           <AlertDialog>
                             <AlertDialogTrigger asChild>
                               <Button 
-                                variant="ghost" 
-                                size="sm"
-                                className="text-destructive hover:text-destructive"
+                                variant={isMobile ? "destructive" : "ghost"}
+                                size={isMobile ? "lg" : "sm"}
+                                className={isMobile ? "w-full" : "text-destructive hover:text-destructive"}
                               >
-                                <X className="h-4 w-4" />
+                                <X className={`${isMobile ? 'h-5 w-5 mr-2' : 'h-4 w-4'}`} />
+                                {isMobile && "Cancel Booking"}
                               </Button>
                             </AlertDialogTrigger>
                             <AlertDialogContent>

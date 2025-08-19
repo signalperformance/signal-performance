@@ -13,6 +13,7 @@ interface SessionCardProps {
   canBook?: boolean;
   onBook: () => void;
   className?: string;
+  isMobile?: boolean;
 }
 
 export const SessionCard: React.FC<SessionCardProps> = ({
@@ -21,6 +22,7 @@ export const SessionCard: React.FC<SessionCardProps> = ({
   canBook = true,
   onBook,
   className,
+  isMobile = false,
 }) => {
   const isFull = session.currentBookings >= session.maxParticipants;
   const spotsLeft = session.maxParticipants - session.currentBookings;
@@ -43,37 +45,44 @@ export const SessionCard: React.FC<SessionCardProps> = ({
         "transition-all duration-200 hover:shadow-md",
         isBooked && "ring-2 ring-primary",
         isFull && !isBooked && "opacity-60",
+        isMobile && "touch-manipulation",
         className
       )}
     >
-      <CardContent className="p-4">
-        <div className="flex items-center justify-between mb-3">
-          <div className="flex items-center gap-2">
-            <Clock className="h-4 w-4 text-muted-foreground" />
-            <span className="font-medium">{formatTime(session.hour24)}</span>
+      <CardContent className={isMobile ? "p-6" : "p-4"}>
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-3">
+            <Clock className={`${isMobile ? 'h-5 w-5' : 'h-4 w-4'} text-muted-foreground`} />
+            <span className={`font-medium ${isMobile ? 'text-lg' : ''}`}>
+              {formatTime(session.hour24)}
+            </span>
           </div>
           
-          {spotsLeft <= 3 && spotsLeft > 0 && (
-            <Badge variant="outline" className="text-xs">
-              {spotsLeft} left
-            </Badge>
-          )}
-          
-          {isFull && (
-            <Badge variant="destructive" className="text-xs">
-              Full
-            </Badge>
-          )}
+          <div className="flex gap-2">
+            {spotsLeft <= 3 && spotsLeft > 0 && (
+              <Badge variant="outline" className={isMobile ? "text-sm px-3 py-1" : "text-xs"}>
+                {spotsLeft} left
+              </Badge>
+            )}
+            
+            {isFull && (
+              <Badge variant="destructive" className={isMobile ? "text-sm px-3 py-1" : "text-xs"}>
+                Full
+              </Badge>
+            )}
+          </div>
         </div>
 
-        <h4 className="font-semibold text-lg mb-4">{session.name}</h4>
+        <h4 className={`font-semibold mb-4 ${isMobile ? 'text-xl' : 'text-lg'}`}>
+          {session.name}
+        </h4>
 
         <Button 
           onClick={onBook}
           disabled={!canBook || (isFull && !isBooked)}
           variant={isBooked ? "outline" : "default"}
           className="w-full"
-          size="sm"
+          size={isMobile ? "lg" : "sm"}
         >
           {isBooked ? 'Cancel Booking' : isFull ? 'Full' : 'Book Session'}
         </Button>

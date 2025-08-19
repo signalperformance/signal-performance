@@ -11,6 +11,8 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { format, startOfWeek, addWeeks, isSameDay, isToday } from 'date-fns';
 import { useToast } from '@/hooks/use-toast';
+import { useIsMobile } from '@/hooks/use-mobile';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 export const ClientScheduleView: React.FC = () => {
   const { user } = useAuth();
@@ -23,6 +25,7 @@ export const ClientScheduleView: React.FC = () => {
     loadSchedule 
   } = useBookingStore();
   const { toast } = useToast();
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const initializeData = async () => {
@@ -187,73 +190,135 @@ export const ClientScheduleView: React.FC = () => {
       <Card>
         <CardHeader>
           <div className="flex items-center justify-between">
-            <CardTitle className="flex items-center gap-2">
+            <CardTitle className={`flex items-center gap-2 ${isMobile ? 'text-lg' : ''}`}>
               Training Schedule
-              <Badge variant="outline">
-                {format(weekStart, 'MMM dd')} - {format(weekEnd, 'MMM dd, yyyy')}
-              </Badge>
+              {!isMobile && (
+                <Badge variant="outline">
+                  {format(weekStart, 'MMM dd')} - {format(weekEnd, 'MMM dd, yyyy')}
+                </Badge>
+              )}
             </CardTitle>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1">
               <Button
                 variant="outline"
-                size="sm"
+                size={isMobile ? "default" : "sm"}
                 onClick={() => setWeekOffset(Math.max(0, weekOffset - 1))}
                 disabled={weekOffset === 0}
+                className={isMobile ? "px-3" : ""}
               >
                 <ChevronLeft className="h-4 w-4" />
-                Previous
+                {!isMobile && "Previous"}
               </Button>
               <Button
                 variant="outline"
-                size="sm"
+                size={isMobile ? "default" : "sm"}
                 onClick={() => setWeekOffset(Math.min(1, weekOffset + 1))}
                 disabled={weekOffset === 1}
+                className={isMobile ? "px-3" : ""}
               >
-                Next
+                {!isMobile && "Next"}
                 <ChevronRight className="h-4 w-4" />
               </Button>
             </div>
           </div>
+          {isMobile && (
+            <div className="mt-2">
+              <Badge variant="outline" className="text-xs">
+                {format(weekStart, 'MMM dd')} - {format(weekEnd, 'MMM dd, yyyy')}
+              </Badge>
+            </div>
+          )}
         </CardHeader>
       </Card>
 
       {/* Day Selection Tabs */}
       <Tabs value={selectedDay} onValueChange={setSelectedDay}>
-        <TabsList className="grid w-full grid-cols-7 h-auto">
-          {weekDays.map((date) => {
-            const dayStr = format(date, 'yyyy-MM-dd');
-            const dayName = format(date, 'EEE');
-            const dateNum = format(date, 'dd');
-            const sessions = getSessionsForDay(date);
-            const userBookingsCount = sessions.filter(session => isSessionBooked(session)).length;
-            
-            return (
-              <TabsTrigger
-                key={dayStr}
-                value={dayStr}
-                className="flex flex-col p-3 h-auto data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
-              >
-                <div className="text-xs font-medium">{dayName}</div>
-                <div className="text-lg font-bold">{dateNum}</div>
-                <div className="flex gap-1 mt-1">
-                  {sessions.length > 0 && (
-                    <Badge variant="secondary" className="text-xs px-1 py-0">
-                      {sessions.length}
-                    </Badge>
-                  )}
-                  {userBookingsCount > 0 && (
-                    <Badge variant="default" className="text-xs px-1 py-0 bg-primary">
-                      {userBookingsCount}
-                    </Badge>
-                  )}
-                  {isToday(date) && (
-                    <div className="w-2 h-2 bg-primary rounded-full"></div>
-                  )}
-                </div>
-              </TabsTrigger>
-            );
-          })}
-        </TabsList>
+        {isMobile ? (
+          <ScrollArea className="w-full">
+            <div className="flex space-x-2 p-1">
+              {weekDays.map((date) => {
+                const dayStr = format(date, 'yyyy-MM-dd');
+                const dayName = format(date, 'EEE');
+                const dateNum = format(date, 'dd');
+                const sessions = getSessionsForDay(date);
+                const userBookingsCount = sessions.filter(session => isSessionBooked(session)).length;
+                const isSelected = selectedDay === dayStr;
+                
+                return (
+                  <button
+                    key={dayStr}
+                    onClick={() => setSelectedDay(dayStr)}
+                    className={`flex-shrink-0 flex flex-col items-center p-4 rounded-lg border-2 transition-all min-w-[80px] ${
+                      isSelected 
+                        ? 'bg-primary text-primary-foreground border-primary' 
+                        : 'bg-background border-border hover:bg-muted'
+                    }`}
+                  >
+                    <div className="text-xs font-medium mb-1">{dayName}</div>
+                    <div className="text-xl font-bold mb-2">{dateNum}</div>
+                    <div className="flex flex-col items-center gap-1">
+                      {sessions.length > 0 && (
+                        <Badge 
+                          variant={isSelected ? "outline" : "secondary"} 
+                          className="text-xs px-2 py-0"
+                        >
+                          {sessions.length}
+                        </Badge>
+                      )}
+                      {userBookingsCount > 0 && (
+                        <Badge 
+                          variant="default" 
+                          className={`text-xs px-2 py-0 ${isSelected ? 'bg-primary-foreground text-primary' : 'bg-primary text-primary-foreground'}`}
+                        >
+                          {userBookingsCount} booked
+                        </Badge>
+                      )}
+                      {isToday(date) && (
+                        <div className={`w-2 h-2 rounded-full ${isSelected ? 'bg-primary-foreground' : 'bg-primary'}`}></div>
+                      )}
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </ScrollArea>
+        ) : (
+          <TabsList className="grid w-full grid-cols-7 h-auto">
+            {weekDays.map((date) => {
+              const dayStr = format(date, 'yyyy-MM-dd');
+              const dayName = format(date, 'EEE');
+              const dateNum = format(date, 'dd');
+              const sessions = getSessionsForDay(date);
+              const userBookingsCount = sessions.filter(session => isSessionBooked(session)).length;
+              
+              return (
+                <TabsTrigger
+                  key={dayStr}
+                  value={dayStr}
+                  className="flex flex-col p-3 h-auto data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                >
+                  <div className="text-xs font-medium">{dayName}</div>
+                  <div className="text-lg font-bold">{dateNum}</div>
+                  <div className="flex gap-1 mt-1">
+                    {sessions.length > 0 && (
+                      <Badge variant="secondary" className="text-xs px-1 py-0">
+                        {sessions.length}
+                      </Badge>
+                    )}
+                    {userBookingsCount > 0 && (
+                      <Badge variant="default" className="text-xs px-1 py-0 bg-primary">
+                        {userBookingsCount}
+                      </Badge>
+                    )}
+                    {isToday(date) && (
+                      <div className="w-2 h-2 bg-primary rounded-full"></div>
+                    )}
+                  </div>
+                </TabsTrigger>
+              );
+            })}
+          </TabsList>
+        )}
 
         {/* Selected Day Sessions */}
         <TabsContent value={selectedDay} className="mt-6">
@@ -275,7 +340,7 @@ export const ClientScheduleView: React.FC = () => {
                   <p className="text-muted-foreground">No sessions scheduled for this day</p>
                 </div>
               ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className={`grid gap-4 ${isMobile ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'}`}>
                   {selectedDaySessions.map((session) => (
                     <SessionCard
                       key={session.id}
@@ -283,6 +348,7 @@ export const ClientScheduleView: React.FC = () => {
                       isBooked={isSessionBooked(session)}
                       canBook={canUserBookSession(session)}
                       onBook={() => handleSessionClick(session)}
+                      isMobile={isMobile}
                     />
                   ))}
                 </div>
