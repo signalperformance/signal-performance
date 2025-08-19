@@ -301,6 +301,7 @@ export type Database = {
           notes: string | null
           password: string
           phone: string | null
+          player_type: Database["public"]["Enums"]["player_type"]
           profile_picture: string | null
           updated_at: string
         }
@@ -316,6 +317,7 @@ export type Database = {
           notes?: string | null
           password: string
           phone?: string | null
+          player_type?: Database["public"]["Enums"]["player_type"]
           profile_picture?: string | null
           updated_at?: string
         }
@@ -331,6 +333,7 @@ export type Database = {
           notes?: string | null
           password?: string
           phone?: string | null
+          player_type?: Database["public"]["Enums"]["player_type"]
           profile_picture?: string | null
           updated_at?: string
         }
@@ -362,6 +365,7 @@ export type Database = {
         | "sunday"
       membership_plan: "basic" | "pro"
       membership_plan_type: "basic" | "pro"
+      player_type: "amateur" | "pro"
       session_level: "pro" | "amateur"
       session_type: "pro" | "amateur"
       weekday:
@@ -512,6 +516,7 @@ export const Constants = {
       ],
       membership_plan: ["basic", "pro"],
       membership_plan_type: ["basic", "pro"],
+      player_type: ["amateur", "pro"],
       session_level: ["pro", "amateur"],
       session_type: ["pro", "amateur"],
       weekday: [

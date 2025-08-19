@@ -5,6 +5,7 @@ export interface ClientUser {
   firstName: string;
   lastName: string;
   membershipPlan: 'basic' | 'pro';
+  playerType: 'amateur' | 'pro';
   isActive: boolean;
 }
 

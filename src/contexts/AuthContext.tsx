@@ -15,6 +15,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     firstName: profile.first_name,
     lastName: profile.last_name,
     membershipPlan: profile.membership_plan,
+    playerType: profile.player_type,
     isActive: profile.is_active,
   });
 

@@ -52,6 +52,7 @@ serve(async (req) => {
       lastName,
       phone,
       membershipPlan,
+      playerType,
       monthlyRenewalDate, // YYYY-MM-DD
       notes,
       isActive,
@@ -62,6 +63,7 @@ serve(async (req) => {
       lastName: string;
       phone?: string;
       membershipPlan: "basic" | "pro";
+      playerType: "amateur" | "pro";
       monthlyRenewalDate?: string;
       notes?: string;
       isActive?: boolean;
@@ -108,6 +110,7 @@ serve(async (req) => {
         last_name: lastName,
         phone: phone || null,
         membership_plan: membershipPlan,
+        player_type: playerType,
         profile_picture: null,
         notes: notes || null,
         monthly_renewal_date: monthlyRenewalDate ? new Date(monthlyRenewalDate).toISOString().slice(0, 10) : null,

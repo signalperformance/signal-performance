@@ -25,6 +25,7 @@ interface UserProfile {
   email: string;
   phone?: string;
   membership_plan: 'basic' | 'pro';
+  player_type: 'amateur' | 'pro';
   monthly_renewal_date?: string;
   notes?: string;
   is_active: boolean;
@@ -65,6 +66,7 @@ export function UserProfilesManager() {
 
   const activeUsers = users.filter(user => user.is_active).length;
   const proMembers = users.filter(user => user.membership_plan === 'pro').length;
+  const proPlayers = users.filter(user => user.player_type === 'pro').length;
 
   const handleAddUser = (userData: any) => {
     loadUsers(); // Reload users after adding
@@ -144,7 +146,7 @@ export function UserProfilesManager() {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <Card>
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium">Total Users</CardTitle>
@@ -167,11 +169,21 @@ export function UserProfilesManager() {
 
         <Card>
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium">Pro Members</CardTitle>
+            <CardTitle className="text-sm font-medium">Pro Membership</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{proMembers}</div>
-            <p className="text-xs text-muted-foreground">Premium membership</p>
+            <p className="text-xs text-muted-foreground">16 sessions/4 weeks</p>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm font-medium">Pro Players</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{proPlayers}</div>
+            <p className="text-xs text-muted-foreground">Access to pro sessions</p>
           </CardContent>
         </Card>
       </div>
@@ -213,6 +225,7 @@ export function UserProfilesManager() {
                 <TableHead>Email</TableHead>
                 <TableHead>Phone</TableHead>
                 <TableHead>Membership</TableHead>
+                <TableHead>Player Type</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead>Next Payment Due</TableHead>
                 <TableHead className="text-right">Actions</TableHead>
@@ -229,6 +242,11 @@ export function UserProfilesManager() {
                   <TableCell>
                     <Badge variant={user.membership_plan === 'pro' ? 'default' : 'secondary'}>
                       {user.membership_plan}
+                    </Badge>
+                  </TableCell>
+                  <TableCell>
+                    <Badge variant={user.player_type === 'pro' ? 'default' : 'outline'}>
+                      {user.player_type}
                     </Badge>
                   </TableCell>
                   <TableCell>

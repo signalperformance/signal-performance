@@ -61,6 +61,7 @@ serve(async (req) => {
       lastName, 
       phone, 
       membershipPlan, 
+      playerType,
       monthlyRenewalDate, 
       notes, 
       isActive 
@@ -97,6 +98,7 @@ serve(async (req) => {
         email: email,
         phone: phone,
         membership_plan: membershipPlan,
+        player_type: playerType,
         monthly_renewal_date: monthlyRenewalDate,
         notes: notes,
         is_active: isActive

@@ -9,6 +9,7 @@ export const mockClientUsers: ClientUser[] = mockUsers.map(user => ({
   firstName: user.firstName,
   lastName: user.lastName,
   membershipPlan: user.membershipPlan,
+  playerType: user.playerType,
   isActive: user.isActive,
 }));
 

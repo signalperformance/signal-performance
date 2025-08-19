@@ -4,6 +4,8 @@ export type ClassType = 'mobility' | 'strength' | 'cardio' | 'power';
 
 export type SessionType = 'pro' | 'amateur';
 
+export type PlayerType = 'amateur' | 'pro';
+
 export type DayOfWeek = 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday';
 
 export interface UserProfile {
@@ -13,6 +15,7 @@ export interface UserProfile {
   email: string;
   phone: string;
   membershipPlan: MembershipPlan;
+  playerType: PlayerType;
   profilePicture?: string;
   notes: string;
   monthlyRenewalDate: string; // "YYYY-MM-DD" format

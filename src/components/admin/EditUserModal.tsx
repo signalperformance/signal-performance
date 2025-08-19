@@ -36,6 +36,7 @@ export function EditUserModal({ isOpen, onClose, onUpdateUser, user }: EditUserM
     phone: '',
     password: '',
     membershipPlan: 'basic' as MembershipPlan,
+    playerType: 'amateur' as 'amateur' | 'pro',
     monthlyRenewalDate: '',
     notes: '',
     isActive: true,
@@ -50,6 +51,7 @@ export function EditUserModal({ isOpen, onClose, onUpdateUser, user }: EditUserM
         phone: user.phone || '',
         password: '', // Don't populate password for security
         membershipPlan: user.membership_plan || 'basic',
+        playerType: user.player_type || 'amateur',
         monthlyRenewalDate: user.monthly_renewal_date || '',
         notes: user.notes || '',
         isActive: user.is_active !== undefined ? user.is_active : true,
@@ -74,6 +76,7 @@ export function EditUserModal({ isOpen, onClose, onUpdateUser, user }: EditUserM
           lastName: formData.lastName,
           phone: formData.phone,
           membershipPlan: formData.membershipPlan,
+          playerType: formData.playerType,
           monthlyRenewalDate: formData.monthlyRenewalDate,
           notes: formData.notes,
           isActive: formData.isActive,
@@ -198,21 +201,37 @@ export function EditUserModal({ isOpen, onClose, onUpdateUser, user }: EditUserM
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="basic">Basic</SelectItem>
-                  <SelectItem value="pro">Pro</SelectItem>
+                  <SelectItem value="basic">Basic (12 sessions/4 weeks)</SelectItem>
+                  <SelectItem value="pro">Pro (16 sessions/4 weeks)</SelectItem>
                 </SelectContent>
               </Select>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="monthlyRenewalDate">Monthly Renewal Date</Label>
-              <Input
-                id="monthlyRenewalDate"
-                type="date"
-                value={formData.monthlyRenewalDate}
-                onChange={(e) => handleInputChange('monthlyRenewalDate', e.target.value)}
-                required
-              />
+              <Label htmlFor="playerType">Player Type</Label>
+              <Select
+                value={formData.playerType}
+                onValueChange={(value) => handleInputChange('playerType', value)}
+              >
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="amateur">Amateur</SelectItem>
+                  <SelectItem value="pro">Pro</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="monthlyRenewalDate">Monthly Renewal Date</Label>
+            <Input
+              id="monthlyRenewalDate"
+              type="date"
+              value={formData.monthlyRenewalDate}
+              onChange={(e) => handleInputChange('monthlyRenewalDate', e.target.value)}
+              required
+            />
           </div>
           
           <div className="flex items-center justify-between">
