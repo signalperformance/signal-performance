@@ -151,23 +151,13 @@ export const MyBookings: React.FC = () => {
                             </Badge>
                           </div>
                           
-                          <div className={`grid ${isMobile ? 'grid-cols-1 gap-3' : 'grid-cols-2 gap-4'} text-sm text-muted-foreground`}>
+                          <div className={`grid ${isMobile ? 'grid-cols-1 gap-3' : 'grid-cols-1 gap-4'} text-sm text-muted-foreground`}>
                             <div className="flex items-center gap-2">
                               <Clock className={`${isMobile ? 'h-5 w-5' : 'h-4 w-4'}`} />
                               <span className={isMobile ? 'text-base' : ''}>
                                 {formatTime(booking.hour24)}
                               </span>
                             </div>
-                            <div className="flex items-center gap-2">
-                              <MapPin className={`${isMobile ? 'h-5 w-5' : 'h-4 w-4'}`} />
-                              <span className={isMobile ? 'text-base' : ''}>
-                                Main Studio
-                              </span>
-                            </div>
-                          </div>
-                          
-                          <div className={`text-muted-foreground ${isMobile ? 'text-sm' : 'text-xs'}`}>
-                            Booked on {format(booking.createdAt, 'MMM dd, yyyy')}
                           </div>
                         </div>
 
