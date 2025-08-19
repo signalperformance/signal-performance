@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { AdminAuthProvider } from "@/contexts/AdminAuthContext";
 import { ProtectedAdminRoute } from "@/components/admin/ProtectedAdminRoute";
+import { SubdomainRouter } from "@/components/SubdomainRouter";
 
 // Lazy load non-critical pages for better initial load performance
 const Assessment = lazy(() => import("./pages/Assessment"));
@@ -23,6 +24,7 @@ const App = () => (
       <AdminAuthProvider>
         <Toaster />
         <Sonner />
+        <SubdomainRouter />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route 
