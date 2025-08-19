@@ -17,6 +17,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     membershipPlan: profile.membership_plan,
     playerType: profile.player_type,
     isActive: profile.is_active,
+    monthlyRenewalDate: profile.monthly_renewal_date ? new Date(profile.monthly_renewal_date) : undefined,
   });
 
   useEffect(() => {

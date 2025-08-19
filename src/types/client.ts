@@ -7,6 +7,7 @@ export interface ClientUser {
   membershipPlan: 'basic' | 'pro';
   playerType: 'amateur' | 'pro';
   isActive: boolean;
+  monthlyRenewalDate?: Date;
 }
 
 export interface Booking {

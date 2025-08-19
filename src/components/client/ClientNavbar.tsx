@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { LogOut, Calendar, BookOpen } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useSessionLimits } from '@/hooks/useSessionLimits';
+import { usePaymentDueDate } from '@/hooks/usePaymentDueDate';
 
 interface ClientNavbarProps {
   activeTab: 'schedule' | 'bookings';
@@ -15,6 +16,7 @@ interface ClientNavbarProps {
 export const ClientNavbar: React.FC<ClientNavbarProps> = ({ activeTab, onTabChange }) => {
   const { user, logout } = useAuth();
   const { sessionInfo, loading } = useSessionLimits();
+  const paymentInfo = usePaymentDueDate(user?.monthlyRenewalDate);
   const { toast } = useToast();
 
   const handleLogout = () => {
@@ -61,6 +63,15 @@ export const ClientNavbar: React.FC<ClientNavbarProps> = ({ activeTab, onTabChan
                 className="text-xs font-semibold hidden sm:inline-flex"
               >
                 {sessionInfo.usedSessions}/{sessionInfo.totalSessions} sessions
+              </Badge>
+            )}
+            {paymentInfo && (
+              <Badge 
+                variant={paymentInfo.isOverdue || paymentInfo.isDueToday ? "destructive" : 
+                        paymentInfo.isDueSoon ? "secondary" : "outline"}
+                className="text-xs font-semibold hidden sm:inline-flex"
+              >
+                {paymentInfo.displayText}
               </Badge>
             )}
             <div className="hidden sm:flex items-center space-x-3">
