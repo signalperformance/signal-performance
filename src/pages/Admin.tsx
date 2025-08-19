@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { SidebarProvider } from '@/components/ui/sidebar';
 import { AdminSidebar } from '@/components/admin/AdminSidebar';
@@ -5,10 +6,10 @@ import { AdminHeader } from '@/components/admin/AdminHeader';
 import { ScheduleTemplateManager } from '@/components/admin/ScheduleTemplateManager';
 import { SchedulePeriodsManager } from '@/components/admin/SchedulePeriodsManager';
 import { LiveCalendarView } from '@/components/admin/LiveCalendarView';
-
 import { UserProfilesManager } from '@/components/admin/UserProfilesManager';
+import { PaymentsManager } from '@/components/admin/PaymentsManager';
 
-type AdminSection = 'templates' | 'periods' | 'live-calendar' | 'users';
+type AdminSection = 'templates' | 'periods' | 'live-calendar' | 'users' | 'payments';
 
 const Admin = () => {
   const [activeSection, setActiveSection] = useState<AdminSection>('live-calendar');
@@ -23,6 +24,8 @@ const Admin = () => {
         return <LiveCalendarView />;
       case 'users':
         return <UserProfilesManager />;
+      case 'payments':
+        return <PaymentsManager />;
       default:
         return <LiveCalendarView />;
     }

@@ -288,6 +288,50 @@ export type Database = {
         }
         Relationships: []
       }
+      user_payment_records: {
+        Row: {
+          created_at: string
+          id: string
+          is_paid: boolean
+          notes: string | null
+          paid_at: string | null
+          payment_method: Database["public"]["Enums"]["payment_method"] | null
+          period_month: string
+          updated_at: string
+          user_profile_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_paid?: boolean
+          notes?: string | null
+          paid_at?: string | null
+          payment_method?: Database["public"]["Enums"]["payment_method"] | null
+          period_month: string
+          updated_at?: string
+          user_profile_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_paid?: boolean
+          notes?: string | null
+          paid_at?: string | null
+          payment_method?: Database["public"]["Enums"]["payment_method"] | null
+          period_month?: string
+          updated_at?: string
+          user_profile_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_payment_records_user_profile_id_fkey"
+            columns: ["user_profile_id"]
+            isOneToOne: false
+            referencedRelation: "user_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_profiles: {
         Row: {
           created_at: string
@@ -365,6 +409,7 @@ export type Database = {
         | "sunday"
       membership_plan: "basic" | "pro"
       membership_plan_type: "basic" | "pro"
+      payment_method: "cash" | "card" | "bank_transfer" | "stripe" | "other"
       player_type: "amateur" | "pro"
       session_level: "pro" | "amateur"
       session_type: "pro" | "amateur"
@@ -516,6 +561,7 @@ export const Constants = {
       ],
       membership_plan: ["basic", "pro"],
       membership_plan_type: ["basic", "pro"],
+      payment_method: ["cash", "card", "bank_transfer", "stripe", "other"],
       player_type: ["amateur", "pro"],
       session_level: ["pro", "amateur"],
       session_type: ["pro", "amateur"],
