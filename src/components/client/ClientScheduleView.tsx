@@ -286,21 +286,6 @@ export const ClientScheduleView: React.FC = () => {
                 >
                   <div className="text-xs font-medium">{dayName}</div>
                   <div className="text-lg font-bold">{dateNum}</div>
-                  <div className="flex gap-1 mt-1">
-                    {sessions.length > 0 && (
-                      <Badge variant="secondary" className="text-xs px-1 py-0">
-                        {sessions.length}
-                      </Badge>
-                    )}
-                    {userBookingsCount > 0 && (
-                      <Badge variant="default" className="text-xs px-1 py-0 bg-primary">
-                        {userBookingsCount}
-                      </Badge>
-                    )}
-                    {isToday(date) && (
-                      <div className="w-2 h-2 bg-primary rounded-full"></div>
-                    )}
-                  </div>
                 </TabsTrigger>
               );
             })}
