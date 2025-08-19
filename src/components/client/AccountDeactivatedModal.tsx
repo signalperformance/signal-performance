@@ -14,20 +14,8 @@ export const AccountDeactivatedModal: React.FC<AccountDeactivatedModalProps> = (
   const { toast } = useToast();
 
   const handleContactSupport = () => {
-    // Copy LINE contact info or open LINE if available
-    navigator.clipboard.writeText('@yourlineaccount')
-      .then(() => {
-        toast({
-          title: "Contact info copied",
-          description: "LINE contact information has been copied to your clipboard",
-        });
-      })
-      .catch(() => {
-        toast({
-          title: "Contact Support",
-          description: "Please contact us via our official LINE channel: @yourlineaccount",
-        });
-      });
+    // Open LINE page in new tab
+    window.open('https://page.line.me/116wwdfe', '_blank');
   };
 
   const handleLogout = () => {
@@ -41,7 +29,7 @@ export const AccountDeactivatedModal: React.FC<AccountDeactivatedModalProps> = (
           <div className="mx-auto mb-4 w-12 h-12 rounded-full bg-destructive/10 flex items-center justify-center">
             <AlertTriangle className="w-6 h-6 text-destructive" />
           </div>
-          <DialogTitle className="text-xl font-semibold">
+          <DialogTitle className="text-xl font-semibold text-center">
             Account Temporarily Deactivated
           </DialogTitle>
           <DialogDescription className="text-center space-y-3 pt-2">
