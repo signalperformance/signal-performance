@@ -17,7 +17,16 @@ export default function ClientPortal() {
     }
   }, [isAuthenticated, navigate]);
 
-  if (!isAuthenticated || !user) {
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin w-8 h-8 border-2 border-signal-gold border-t-transparent rounded-full"></div>
+      </div>
+    );
+  }
+
+  // Show loading if authenticated but user profile is still loading
+  if (!user) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="animate-spin w-8 h-8 border-2 border-signal-gold border-t-transparent rounded-full"></div>
