@@ -227,58 +227,14 @@ export function LiveCalendarView() {
                 {dayClasses.map((cls) => (
                   <Card 
                     key={cls.id} 
-                    className={`p-2 cursor-pointer hover:bg-accent transition-colors ${cls.is_cancelled ? 'opacity-60' : ''}`}
+                    className={`p-3 cursor-pointer hover:bg-accent transition-colors ${cls.is_cancelled ? 'opacity-60' : ''}`}
                     onClick={() => handleEditClass(cls)}
                   >
-                    <div className="space-y-1">
-                      <div className="flex items-center justify-between">
-                        <div className="text-xs font-medium">{formatTime(cls.start_time)}</div>
-                        <div className="flex items-center gap-1">
-                          <Badge 
-                            variant={getAvailabilityColor(cls.availability, cls.max_participants)}
-                            className="text-xs"
-                          >
-                            {cls.availability}/{cls.max_participants}
-                          </Badge>
-                          <Button size="sm" variant="ghost" className="h-5 w-5 p-0">
-                            <Edit className="h-3 w-3" />
-                          </Button>
-                        </div>
-                      </div>
-                      <div className={`text-xs font-medium ${cls.is_cancelled ? 'line-through' : ''}`}>
+                    <div className="space-y-1 text-center">
+                      <div className="text-sm font-medium">{formatTime(cls.start_time)}</div>
+                      <div className={`text-xs ${cls.is_cancelled ? 'line-through' : ''}`}>
                         {cls.class_name}
                         {cls.is_cancelled && <span className="text-destructive ml-1">(Cancelled)</span>}
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <Badge variant={cls.session_type === 'pro' ? 'default' : 'secondary'} className="text-xs">
-                          {cls.session_type}
-                        </Badge>
-                        <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                          <HoverCard>
-                            <HoverCardTrigger asChild>
-                              <div className="flex items-center gap-1 cursor-pointer">
-                                <Users className="h-3 w-3" />
-                                {cls.booking_count}
-                              </div>
-                            </HoverCardTrigger>
-                            <HoverCardContent className="w-auto p-3">
-                              <div className="space-y-1">
-                                <p className="text-sm font-medium">Booked Users</p>
-                                {cls.bookings.length > 0 ? (
-                                  <div className="space-y-1">
-                                    {cls.bookings.map((booking) => (
-                                      <div key={booking.id} className="text-sm">
-                                        {booking.user_profiles?.first_name} {booking.user_profiles?.last_name}
-                                      </div>
-                                    ))}
-                                  </div>
-                                ) : (
-                                  <p className="text-sm text-muted-foreground">No bookings</p>
-                                )}
-                              </div>
-                            </HoverCardContent>
-                          </HoverCard>
-                        </div>
                       </div>
                     </div>
                   </Card>
