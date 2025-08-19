@@ -54,10 +54,24 @@ export const BookingModal: React.FC<BookingModalProps> = ({
       : 'bg-charcoal text-charcoal-foreground';
   };
 
+  const isDateBookable = (date: Date) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    
+    const checkDate = new Date(date);
+    checkDate.setHours(0, 0, 0, 0);
+    
+    const twoWeeksFromToday = new Date(today);
+    twoWeeksFromToday.setDate(today.getDate() + 14);
+    
+    return checkDate >= today && checkDate <= twoWeeksFromToday;
+  };
+
   const canUserBook = () => {
     if (isBooked) return true; // Can cancel
     if (isFull) return false;
     if (session.sessionType === 'pro' && userMembershipPlan === 'basic') return false;
+    if (!isDateBookable(session.date)) return false;
     if (!canBookSession()) return false; // Check session limits
     return canBook;
   };
@@ -65,6 +79,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
   const getBookingMessage = () => {
     if (isBooked) return null;
     if (isFull) return "This session is currently full.";
+    if (!isDateBookable(session.date)) return "This session is more than 2 weeks away and cannot be booked yet.";
     if (session.sessionType === 'pro' && userMembershipPlan === 'basic') {
       return "Pro sessions are only available to Pro members. Upgrade your membership to access this session.";
     }

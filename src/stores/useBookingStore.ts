@@ -59,17 +59,17 @@ export const useBookingStore = create<BookingStore>((set, get) => ({
 
   loadSchedule: async () => {
     try {
-      // Load live schedule instances for the next 2 weeks
+      // Load live schedule instances for the next 4-5 weeks to support navigation
       const today = new Date();
-      const twoWeeksFromNow = new Date(today);
-      twoWeeksFromNow.setDate(today.getDate() + 14);
+      const fiveWeeksFromNow = new Date(today);
+      fiveWeeksFromNow.setDate(today.getDate() + 35);
 
       const { data, error } = await supabase
         .from('live_schedule_instances')
         .select('*')
         .eq('is_cancelled', false)
         .gte('class_date', today.toISOString().split('T')[0])
-        .lte('class_date', twoWeeksFromNow.toISOString().split('T')[0])
+        .lte('class_date', fiveWeeksFromNow.toISOString().split('T')[0])
         .order('class_date')
         .order('start_time');
 

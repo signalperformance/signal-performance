@@ -58,6 +58,19 @@ export const ClientScheduleView: React.FC = () => {
     });
   };
 
+  const isDateBookable = (date: Date) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    
+    const checkDate = new Date(date);
+    checkDate.setHours(0, 0, 0, 0);
+    
+    const twoWeeksFromToday = new Date(today);
+    twoWeeksFromToday.setDate(today.getDate() + 14);
+    
+    return checkDate >= today && checkDate <= twoWeeksFromToday;
+  };
+
   const isPastDate = (date: Date) => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -96,6 +109,7 @@ export const ClientScheduleView: React.FC = () => {
   const canUserBookSession = (session: ScheduleWithAvailability) => {
     if (!user) return false;
     if (session.sessionType === 'pro' && user.membershipPlan === 'basic') return false;
+    if (!isDateBookable(session.date)) return false;
     return true;
   };
 
@@ -144,9 +158,9 @@ export const ClientScheduleView: React.FC = () => {
       }
     }
     
-    // Find first non-past day with sessions, or just first non-past day
+    // Find first bookable day with sessions, or just first bookable day
     for (const day of weekDays) {
-      if (!isPastDate(day)) {
+      if (isDateBookable(day)) {
         const sessions = getSessionsForDay(day);
         if (sessions.length > 0) {
           return format(day, 'yyyy-MM-dd');
@@ -154,9 +168,9 @@ export const ClientScheduleView: React.FC = () => {
       }
     }
     
-    // Fallback to first non-past day, or first day if all are past
-    const firstNonPastDay = weekDays.find(day => !isPastDate(day));
-    return firstNonPastDay ? format(firstNonPastDay, 'yyyy-MM-dd') : 
+    // Fallback to first bookable day, or first day if all are unbookable
+    const firstBookableDay = weekDays.find(day => isDateBookable(day));
+    return firstBookableDay ? format(firstBookableDay, 'yyyy-MM-dd') : 
            (weekDays.length > 0 ? format(weekDays[0], 'yyyy-MM-dd') : '');
   }, [weekDays, scheduleWithAvailability, weekOffset]);
 
@@ -198,8 +212,17 @@ export const ClientScheduleView: React.FC = () => {
               <Button
                 variant="outline"
                 size={isMobile ? "default" : "sm"}
-                onClick={() => setWeekOffset(Math.min(1, weekOffset + 1))}
-                disabled={weekOffset === 1}
+                onClick={() => setWeekOffset(weekOffset + 1)}
+                disabled={(() => {
+                  // Check if next week has any bookable dates
+                  const nextWeekStart = addWeeks(startOfWeek(new Date(), { weekStartsOn: 1 }), weekOffset + 1);
+                  const nextWeekDays = Array.from({ length: 7 }, (_, i) => {
+                    const date = new Date(nextWeekStart);
+                    date.setDate(nextWeekStart.getDate() + i);
+                    return date;
+                  });
+                  return !nextWeekDays.some(day => isDateBookable(day));
+                })()}
                 className={isMobile ? "px-3" : ""}
               >
                 {!isMobile && "Next"}
@@ -231,10 +254,10 @@ export const ClientScheduleView: React.FC = () => {
               return (
                 <button
                   key={dayStr}
-                  onClick={() => !isPast && setSelectedDay(dayStr)}
-                  disabled={isPast}
+                  onClick={() => isDateBookable(date) && setSelectedDay(dayStr)}
+                  disabled={!isDateBookable(date)}
                   className={`flex flex-col items-center p-2 rounded-lg border transition-all min-h-[44px] ${
-                    isPast 
+                    !isDateBookable(date) 
                       ? 'bg-muted text-muted-foreground border-muted cursor-not-allowed opacity-50'
                       : isSelected 
                         ? 'bg-primary text-primary-foreground border-primary' 
@@ -261,9 +284,9 @@ export const ClientScheduleView: React.FC = () => {
                 <TabsTrigger
                   key={dayStr}
                   value={dayStr}
-                  disabled={isPast}
+                  disabled={!isDateBookable(date)}
                   className={`flex flex-col p-3 h-auto data-[state=active]:bg-primary data-[state=active]:text-primary-foreground ${
-                    isPast ? 'opacity-50 cursor-not-allowed' : ''
+                    !isDateBookable(date) ? 'opacity-50 cursor-not-allowed' : ''
                   }`}
                 >
                   <div className="text-xs font-medium">{dayName}</div>
