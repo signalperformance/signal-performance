@@ -375,6 +375,10 @@ const en = {
   'portal.schedule.session': 'session',
   'portal.schedule.sessions': 'sessions',
   
+  // Session Limits
+  'portal.limits.reachedMessage': "You've reached your {{count}} session limit for this 4-week period.",
+  'portal.limits.remainingMessage': 'Only {{count}} sessions remaining in this period.',
+  
   // Empty States
   'portal.empty.noBookingsTitle': 'No upcoming bookings',
   'portal.empty.noBookingsDesc': "You haven't booked any sessions yet. Check the schedule to book your first session!"

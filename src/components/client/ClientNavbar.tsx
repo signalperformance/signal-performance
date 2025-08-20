@@ -138,7 +138,7 @@ export const ClientNavbar: React.FC<ClientNavbarProps> = ({ activeTab, onTabChan
                 variant={sessionInfo.remainingSessions <= 2 ? "destructive" : "secondary"}
                 className="text-xs font-semibold"
               >
-                {sessionInfo.usedSessions}/{sessionInfo.totalSessions} sessions
+                {sessionInfo.usedSessions}/{sessionInfo.totalSessions} {t('portal.schedule.sessions')}
               </Badge>
             )}
             {paymentInfo && (paymentInfo.isOverdue || paymentInfo.isDueToday || paymentInfo.isDueSoon) && (

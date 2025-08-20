@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useBookingStore } from '@/stores/useBookingStore';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { addWeeks, isWithinInterval, startOfDay } from 'date-fns';
 
 export interface SessionLimitInfo {
@@ -15,6 +16,7 @@ export interface SessionLimitInfo {
 export const useSessionLimits = () => {
   const { user } = useAuth();
   const { getUserBookings, loadBookings, bookings } = useBookingStore();
+  const { t } = useLanguage();
   const [sessionInfo, setSessionInfo] = useState<SessionLimitInfo | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -96,11 +98,11 @@ export const useSessionLimits = () => {
     if (!sessionInfo) return '';
     
     if (sessionInfo.isAtLimit) {
-      return `You've reached your ${sessionInfo.totalSessions} session limit for this 4-week period.`;
+      return t('portal.limits.reachedMessage').replace('{{count}}', sessionInfo.totalSessions.toString());
     }
     
     if (sessionInfo.remainingSessions <= 2) {
-      return `Only ${sessionInfo.remainingSessions} sessions remaining in this period.`;
+      return t('portal.limits.remainingMessage').replace('{{count}}', sessionInfo.remainingSessions.toString());
     }
     
     return '';
