@@ -37,17 +37,17 @@ export const AddToCalendarButton: React.FC<AddToCalendarButtonProps> = ({
 
   const handleAddToCalendar = (service: CalendarService) => {
     try {
-      addToCalendar(booking, service);
+      addToCalendar(booking, service, t);
       
       if (service === 'ics' || service === 'apple') {
         toast({
           title: t('client.calendar.success'),
-          description: t('client.calendar.successMessage'),
+          description: t('client.calendar.downloadSuccess'),
         });
       } else {
         toast({
           title: t('client.calendar.success'),
-          description: t('client.calendar.successMessage'),
+          description: t('client.calendar.openCalendar'),
         });
       }
     } catch (error) {
