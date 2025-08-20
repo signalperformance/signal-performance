@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Switch } from '@/components/ui/switch';
 import { LogOut, Calendar, BookOpen, Menu, User, Clock, CreditCard } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useSessionLimits } from '@/hooks/useSessionLimits';
@@ -32,6 +33,16 @@ export const ClientNavbar: React.FC<ClientNavbarProps> = ({ activeTab, onTabChan
 
   const MobileUserInfo = () => (
     <div className="space-y-4">
+      {/* Language Toggle - Mobile */}
+      <div className="flex items-center justify-center space-x-1 p-3 bg-muted rounded-lg">
+        <span className="text-xs font-medium text-signal-gold">EN</span>
+        <Switch 
+          checked={false} 
+          className="data-[state=checked]:bg-signal-gold data-[state=unchecked]:bg-signal-charcoal" 
+        />
+        <span className="text-xs font-medium text-signal-charcoal">中文</span>
+      </div>
+
       <div className="flex items-center space-x-3 p-4 bg-muted rounded-lg">
         <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
           <User className="h-5 w-5 text-primary-foreground" />
@@ -136,6 +147,16 @@ export const ClientNavbar: React.FC<ClientNavbarProps> = ({ activeTab, onTabChan
                 <div className="font-medium">{user?.firstName} {user?.lastName}</div>
                 <div className="text-muted-foreground capitalize">{user?.membershipPlan} Member</div>
               </div>
+            </div>
+
+            {/* Language Toggle - Desktop */}
+            <div className="flex items-center space-x-2">
+              <span className="text-xs md:text-sm font-medium text-signal-gold">EN</span>
+              <Switch 
+                checked={false} 
+                className="data-[state=checked]:bg-signal-gold data-[state=unchecked]:bg-signal-charcoal" 
+              />
+              <span className="text-xs md:text-sm font-medium text-signal-charcoal">中文</span>
             </div>
             
             <Button variant="ghost" size="sm" onClick={handleLogout}>
