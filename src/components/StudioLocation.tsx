@@ -16,7 +16,7 @@ const StudioLocation = () => {
   ];
 
   const address = "2樓, 南勢里9鄰33-6號, Linkou District, New Taipei City, 244";
-  const googleMapsLink = "https://www.google.com/maps/place/Signal+Performance/@25.0624007,121.3655983,15z/data=!4m6!3m5!1s0x3442a181e6db2efb:0xa10dc5b0275a90b9!8m2!3d25.0699173!4d121.351446!16s%2Fg%2F11xn5z_b3t?entry=ttu&g_ep=EgoyMDI1MDcyMC4wIKXMDSoASAFQAw%3D%3D";
+  const googleMapsLink = "https://www.google.com/maps/place/Dream+Golf+Academy+%E6%9E%97%E5%8F%A3%E5%AD%B8%E9%99%A2/@25.0698122,121.348911,17z/data=!3m1!4b1!4m6!3m5!1s0x3442a7d9e7a6f137:0x10fa63df3e3cf681!8m2!3d25.0698074!4d121.3514859!16s%2Fg%2F11h6499l9p?entry=ttu&g_ep=EgoyMDI1MDgxNy4wIKXMDSoASAFQAw%3D%3D";
 
   return (
     <section className="section-padding bg-transparent overflow-x-clip">
