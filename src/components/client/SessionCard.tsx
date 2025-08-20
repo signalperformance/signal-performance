@@ -41,6 +41,11 @@ export const SessionCard: React.FC<SessionCardProps> = ({
     return format(date, 'h:mm a');
   };
 
+  const getSessionName = (sessionName: string) => {
+    const translationKey = `portal.sessionNames.${sessionName}`;
+    return t(translationKey) !== translationKey ? t(translationKey) : sessionName;
+  };
+
   return (
     <Card 
       className={cn(
@@ -76,7 +81,7 @@ export const SessionCard: React.FC<SessionCardProps> = ({
         </div>
 
         <h4 className={`font-semibold mb-4 ${isMobile ? 'text-xl' : 'text-lg'}`}>
-          {session.name}
+          {getSessionName(session.name)}
         </h4>
 
         <Button 
