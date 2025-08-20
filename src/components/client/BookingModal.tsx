@@ -1,5 +1,6 @@
 import React from 'react';
 import { ScheduleWithAvailability } from '@/types/client';
+import { useLanguage } from '@/contexts/LanguageContext';
 import {
   Dialog,
   DialogContent,
@@ -34,6 +35,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
   canBook,
   userMembershipPlan,
 }) => {
+  const { t } = useLanguage();
   const { canBookSession, getSessionLimitMessage } = useSessionLimits();
   
   if (!session) return null;
@@ -78,10 +80,10 @@ export const BookingModal: React.FC<BookingModalProps> = ({
 
   const getBookingMessage = () => {
     if (isBooked) return null;
-    if (isFull) return "This session is currently full.";
-    if (!isDateBookable(session.date)) return "This session is more than 2 weeks away and cannot be booked yet.";
+    if (isFull) return t('client.booking.sessionFull');
+    if (!isDateBookable(session.date)) return t('client.booking.outsideWindow');
     if (session.sessionType === 'pro' && userMembershipPlan === 'basic') {
-      return "Pro sessions are only available to Pro members. Upgrade your membership to access this session.";
+      return t('client.booking.membershipRestriction');
     }
     return null;
   };
@@ -94,7 +96,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
             {session.name}
           </DialogTitle>
           <DialogDescription>
-            {isBooked ? 'Booking details' : 'Book this training session'}
+            {isBooked ? t('client.booking.sessionDetails') : t('client.booking.title')}
           </DialogDescription>
         </DialogHeader>
 
@@ -126,7 +128,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
           {isBooked && (
             <div className="bg-green-50 dark:bg-green-950 border border-green-200 dark:border-green-800 rounded-lg p-3">
               <p className="text-sm text-green-800 dark:text-green-200">
-                ✅ You are booked for this session
+                ✅ {t('client.booking.alreadyBooked')}
               </p>
             </div>
           )}
@@ -145,7 +147,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
               onClick={onClose}
               className="flex-1"
             >
-              Close
+              {t('client.booking.close')}
             </Button>
             {!isBooked && (
               <Button
@@ -154,7 +156,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                 variant="default"
                 className="flex-1"
               >
-                Book Session
+                {t('client.booking.confirm')}
               </Button>
             )}
           </div>

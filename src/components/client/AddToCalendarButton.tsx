@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -31,6 +32,7 @@ export const AddToCalendarButton: React.FC<AddToCalendarButtonProps> = ({
   size = 'sm',
   className
 }) => {
+  const { t } = useLanguage();
   const { toast } = useToast();
 
   const handleAddToCalendar = (service: CalendarService) => {
@@ -39,19 +41,19 @@ export const AddToCalendarButton: React.FC<AddToCalendarButtonProps> = ({
       
       if (service === 'ics' || service === 'apple') {
         toast({
-          title: "Calendar file downloaded",
-          description: "The calendar event file has been downloaded. Open it to add to your calendar.",
+          title: t('client.calendar.success'),
+          description: t('client.calendar.successMessage'),
         });
       } else {
         toast({
-          title: "Opening calendar",
-          description: `Opening ${service === 'google' ? 'Google' : 'Outlook'} Calendar in a new tab.`,
+          title: t('client.calendar.success'),
+          description: t('client.calendar.successMessage'),
         });
       }
     } catch (error) {
       toast({
-        title: "Error",
-        description: "Failed to add event to calendar. Please try again.",
+        title: t('client.calendar.error'),
+        description: t('client.calendar.errorMessage'),
         variant: "destructive",
       });
     }
@@ -62,25 +64,25 @@ export const AddToCalendarButton: React.FC<AddToCalendarButtonProps> = ({
       <DropdownMenuTrigger asChild>
         <Button variant={variant} size={size} className={className}>
           <Calendar className="h-4 w-4 mr-2" />
-          Add to Calendar
+          {t('client.calendar.addToCalendar')}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-48">
         <DropdownMenuItem onClick={() => handleAddToCalendar('google')}>
           <ExternalLink className="h-4 w-4 mr-2" />
-          Google Calendar
+          {t('client.calendar.googleCalendar')}
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => handleAddToCalendar('outlook')}>
           <ExternalLink className="h-4 w-4 mr-2" />
-          Outlook Calendar
+          {t('client.calendar.outlookCalendar')}
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => handleAddToCalendar('apple')}>
           <Download className="h-4 w-4 mr-2" />
-          Apple Calendar
+          {t('client.calendar.appleCalendar')}
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => handleAddToCalendar('ics')}>
           <Download className="h-4 w-4 mr-2" />
-          Download ICS File
+          {t('client.calendar.downloadICS')}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
