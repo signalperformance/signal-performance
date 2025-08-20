@@ -23,11 +23,11 @@ const TAIWAN_TIMEZONE = 'Asia/Taipei';
 
 // Convert booking to calendar event
 export const bookingToCalendarEvent = (booking: Booking, t: (key: string) => string): CalendarEvent => {
-  // Create date in Taiwan timezone
+  // Create date in Taiwan timezone - booking date is already in local Taiwan time
   const startDate = new Date(booking.bookingDate);
   startDate.setHours(booking.hour24, 0, 0, 0);
-  const taiwanStartDate = toZonedTime(startDate, TAIWAN_TIMEZONE);
-  const taiwanEndDate = addHours(taiwanStartDate, 1); // Assume 1-hour sessions
+  // Since booking is already in Taiwan time, use it directly
+  const taiwanEndDate = addHours(startDate, 1); // Assume 1-hour sessions
 
   const translatedClassName = getTranslatedClassName(booking.sessionName, t);
   const titlePrefix = t('client.calendar.sessionTitle');
@@ -35,7 +35,7 @@ export const bookingToCalendarEvent = (booking: Booking, t: (key: string) => str
 
   return {
     title: `${titlePrefix}：${translatedClassName}`,
-    startDate: taiwanStartDate,
+    startDate: startDate,
     endDate: taiwanEndDate,
     description: t('client.calendar.description'),
     location: locationText
@@ -102,16 +102,17 @@ export const downloadICS = (event: CalendarEvent): void => {
 
 // Generate Google Calendar URL
 export const generateGoogleCalendarUrl = (event: CalendarEvent): string => {
-  // Convert to UTC for Google Calendar
-  const startDateUTC = formatInTimeZone(event.startDate, 'UTC', "yyyyMMdd'T'HHmmss'Z'");
-  const endDateUTC = formatInTimeZone(event.endDate, 'UTC', "yyyyMMdd'T'HHmmss'Z'");
+  // Format dates in Taiwan timezone for Google Calendar
+  const startDateLocal = formatInTimeZone(event.startDate, TAIWAN_TIMEZONE, "yyyyMMdd'T'HHmmss");
+  const endDateLocal = formatInTimeZone(event.endDate, TAIWAN_TIMEZONE, "yyyyMMdd'T'HHmmss");
   
   const params = new URLSearchParams({
     action: 'TEMPLATE',
     text: event.title,
-    dates: `${startDateUTC}/${endDateUTC}`,
+    dates: `${startDateLocal}/${endDateLocal}`,
     details: event.description || '',
-    location: event.location || ''
+    location: event.location || '',
+    ctz: TAIWAN_TIMEZONE
   });
 
   return `https://calendar.google.com/calendar/render?${params.toString()}`;
