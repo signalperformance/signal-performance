@@ -47,9 +47,7 @@ export default function ClientLogin() {
         <Card>
           <CardHeader className="text-center">
             <CardTitle className="text-2xl font-heading">Client Portal</CardTitle>
-            <CardDescription>
-              Sign in to access your training schedule and bookings
-            </CardDescription>
+            
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">
