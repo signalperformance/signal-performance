@@ -45,8 +45,16 @@ const getSavedLanguage = (): Language => {
 };
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  const [language, setLanguage] = useState<Language>(getSavedLanguage);
-  const [isInitialized, setIsInitialized] = useState(false);
+  const [language, setLanguage] = useState<Language>(() => {
+    // Initialize synchronously to prevent flash
+    const savedLang = getSavedLanguage();
+    // Set data-language immediately if possible
+    if (typeof document !== 'undefined') {
+      document.body.setAttribute('data-language', savedLang);
+    }
+    return savedLang;
+  });
+  const [isInitialized, setIsInitialized] = useState(true); // Start as initialized
 
   // Save language preference to localStorage whenever it changes
   useEffect(() => {
@@ -64,19 +72,14 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     }
   }, [language]);
 
-  // Set initial data-language attribute and mark as initialized
+  // Ensure data-language attribute is set on mount (backup)
   useEffect(() => {
     if (typeof document !== 'undefined') {
       document.body.setAttribute('data-language', language);
     }
-    setIsInitialized(true);
   }, []);
 
   const t = (key: string): string => {
-    if (!isInitialized) {
-      return key; // Return key as fallback if not initialized
-    }
-    
     try {
       const translation = translations[language]?.[key as keyof typeof translations[typeof language]];
       return translation || key;

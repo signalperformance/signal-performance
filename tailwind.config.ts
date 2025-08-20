@@ -19,9 +19,9 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				'lora': ['Lora', 'serif'],
-				'montserrat': ['Montserrat', 'sans-serif'],
-				'ibm-plex-sans-jp': ['IBM Plex Sans JP', 'sans-serif'],
+				'lora': ['Lora', 'Georgia', 'serif'],
+				'montserrat': ['Montserrat', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+				'ibm-plex-sans-jp': ['IBM Plex Sans JP', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Meiryo', 'sans-serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
