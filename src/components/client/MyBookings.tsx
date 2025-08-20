@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { Calendar, Clock, MapPin, X } from 'lucide-react';
 import { AddToCalendarButton } from './AddToCalendarButton';
 import { format, isPast, isToday, isTomorrow, addHours } from 'date-fns';
+import { zhCN } from 'date-fns/locale';
 import { useToast } from '@/hooks/use-toast';
 import { useIsMobile } from '@/hooks/use-mobile';
 import {
@@ -24,7 +25,7 @@ import {
 
 export const MyBookings: React.FC = () => {
   const { user } = useAuth();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { getUpcomingBookings, cancelBooking, loadBookings, loadSchedule } = useBookingStore();
   const { toast } = useToast();
   const isMobile = useIsMobile();
@@ -53,8 +54,10 @@ export const MyBookings: React.FC = () => {
 
   const getDateLabel = (date: Date) => {
     if (isToday(date)) return t('client.schedule.today');
-    if (isTomorrow(date)) return 'Tomorrow'; // Keep English for simplicity or add translation
-    return format(date, 'EEEE, MMM dd');
+    if (isTomorrow(date)) return t('client.schedule.tomorrow');
+    return language === 'zh' ? 
+      format(date, 'EEEE, M月dd日', { locale: zhCN }) :
+      format(date, 'EEEE, MMM dd');
   };
 
   const handleCancelBooking = async (bookingId: string, sessionName: string, date: Date) => {
@@ -79,8 +82,8 @@ export const MyBookings: React.FC = () => {
         });
     } else {
       toast({
-        title: "Cancellation failed",
-        description: "Unable to cancel booking. Please try again.",
+        title: t('client.bookings.cancelFailedTitle'),
+        description: t('client.bookings.cancelFailedMessage'),
         variant: "destructive",
       });
     }
@@ -125,7 +128,10 @@ export const MyBookings: React.FC = () => {
           <CardTitle className="flex items-center gap-2">
             {t('client.bookings.title')}
             <Badge variant="outline">
-              {upcomingBookings.length} upcoming
+              {language === 'zh' ? 
+                `${upcomingBookings.length} ${t('client.bookings.upcoming')}` :
+                `${upcomingBookings.length} upcoming`
+              }
             </Badge>
           </CardTitle>
         </CardHeader>
@@ -142,7 +148,10 @@ export const MyBookings: React.FC = () => {
               <CardTitle className="text-lg">
                 {getDateLabel(date)}
                 <div className="text-sm font-normal text-muted-foreground">
-                  {format(date, 'MMMM dd, yyyy')}
+                  {language === 'zh' ? 
+                    format(date, 'yyyy年M月dd日', { locale: zhCN }) :
+                    format(date, 'MMMM dd, yyyy')
+                  }
                 </div>
               </CardTitle>
             </CardHeader>
@@ -183,7 +192,7 @@ export const MyBookings: React.FC = () => {
                                 if (isWithinCutoff && !isPast(booking.bookingDate)) {
                                   return (
                                     <Badge variant="outline" className="text-xs text-amber-600 border-amber-300">
-                                      Can't cancel
+                                      {t('client.bookings.cantCancel')}
                                     </Badge>
                                   );
                                 }
@@ -210,27 +219,33 @@ export const MyBookings: React.FC = () => {
                                 className={isMobile ? "w-full" : "text-destructive hover:text-destructive"}
                               >
                                 <X className={`${isMobile ? 'h-5 w-5 mr-2' : 'h-4 w-4'}`} />
-                                {isMobile && "Cancel Booking"}
+                                {isMobile && t('client.bookings.cancelBooking')}
                               </Button>
                             </AlertDialogTrigger>
                             <AlertDialogContent>
                               <AlertDialogHeader>
-                                <AlertDialogTitle>Cancel Booking</AlertDialogTitle>
+                                <AlertDialogTitle>{t('client.bookings.cancelConfirmTitle')}</AlertDialogTitle>
                                 <AlertDialogDescription>
-                                  Are you sure you want to cancel your booking for {booking.sessionName} on {getDateLabel(booking.bookingDate)} at {formatTime(booking.hour24)}?
+                                  {language === 'zh' ? 
+                                    t('client.bookings.cancelConfirmMessage')
+                                      .replace('{sessionName}', booking.sessionName)
+                                      .replace('{date}', getDateLabel(booking.bookingDate))
+                                      .replace('{time}', formatTime(booking.hour24)) :
+                                    `Are you sure you want to cancel your booking for ${booking.sessionName} on ${getDateLabel(booking.bookingDate)} at ${formatTime(booking.hour24)}?`
+                                  }
                                   <br /><br />
                                   <span className="text-amber-600 text-sm">
-                                    Note: Sessions cannot be cancelled within 3 hours of the start time.
+                                    {t('client.bookings.cancelNote')}
                                   </span>
                                 </AlertDialogDescription>
                               </AlertDialogHeader>
                               <AlertDialogFooter>
-                                <AlertDialogCancel>Keep Booking</AlertDialogCancel>
+                                <AlertDialogCancel>{t('client.bookings.keepBooking')}</AlertDialogCancel>
                                 <AlertDialogAction
                                   onClick={() => handleCancelBooking(booking.id, booking.sessionName, booking.bookingDate)}
                                   className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
                                 >
-                                  Cancel Booking
+                                  {t('client.bookings.cancelBooking')}
                                 </AlertDialogAction>
                               </AlertDialogFooter>
                             </AlertDialogContent>

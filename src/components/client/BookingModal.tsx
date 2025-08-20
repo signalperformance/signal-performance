@@ -13,6 +13,7 @@ import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Calendar, Clock, Users, MapPin } from 'lucide-react';
 import { format } from 'date-fns';
+import { zhCN } from 'date-fns/locale';
 import { Separator } from '@/components/ui/separator';
 import { useSessionLimits } from '@/hooks/useSessionLimits';
 
@@ -35,7 +36,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
   canBook,
   userMembershipPlan,
 }) => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { canBookSession, getSessionLimitMessage } = useSessionLimits();
   
   if (!session) return null;
@@ -105,7 +106,10 @@ export const BookingModal: React.FC<BookingModalProps> = ({
             <div className="flex items-center gap-2">
               <Calendar className="h-4 w-4 text-muted-foreground" />
               <span className="text-sm">
-                {format(session.date, 'EEEE, MMM dd')}
+                {language === 'zh' ? 
+                  format(session.date, 'EEEE, M月dd日', { locale: zhCN }) :
+                  format(session.date, 'EEEE, MMM dd')
+                }
               </span>
             </div>
             <div className="flex items-center gap-2">

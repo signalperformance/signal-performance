@@ -258,6 +258,17 @@ const zh = {
   'client.schedule.today': '今天',
   'client.schedule.weekOf': '週次',
 
+  // Date Labels
+  'client.schedule.tomorrow': '明天',
+  'client.bookings.upcoming': '個即將到來',
+  'client.bookings.cantCancel': '無法取消',
+  'client.bookings.cancelBooking': '取消預約',
+  'client.bookings.keepBooking': '保留預約',
+  'client.bookings.cancelConfirmTitle': '取消預約',
+  'client.bookings.cancelConfirmMessage': '您確定要取消 {date} {time} 的 {sessionName} 預約嗎？',
+  'client.bookings.cancelNote': '注意：課程開始前3小時內無法取消預約。',
+  'client.bookings.cancelFailedTitle': '取消失敗',
+  'client.bookings.cancelFailedMessage': '無法取消預約，請重試。',
 
   // Session Card
   'client.session.bookSession': '預約課程',
@@ -290,13 +301,12 @@ const zh = {
   'client.bookings.title': '我的即將到來的預約',
   'client.bookings.noBookings': '沒有即將到來的預約',
   'client.bookings.noBookingsMessage': '您沒有任何即將到來的課程。請前往課程表頁面預約您的訓練課程。',
-  'client.bookings.cancelBooking': '取消預約',
   'client.bookings.addToCalendar': '加到行事曆',
   'client.bookings.confirmCancel': '取消課程',
   'client.bookings.cancelWarning': '您確定要取消此預約嗎？',
   'client.bookings.cancelMessage': '此動作無法撤銷。如果仍有名額，您可以重新預約課程。',
   'client.bookings.cancelConfirm': '是的，取消預約',
-  'client.bookings.keepBooking': '保留預約',
+  'client.bookings.keepOldBooking': '保留預約',
   'client.bookings.cancelSuccess': '預約已取消',
   'client.bookings.cancelSuccessMessage': '您的預約已成功取消。',
   'client.bookings.cancelError': '取消預約失敗',

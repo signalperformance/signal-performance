@@ -258,6 +258,17 @@ const en = {
   'client.schedule.today': 'Today',
   'client.schedule.weekOf': 'Week of',
 
+  // Date Labels
+  'client.schedule.tomorrow': 'Tomorrow',
+  'client.bookings.upcoming': 'upcoming',
+  'client.bookings.cantCancel': "Can't cancel",
+  'client.bookings.cancelBooking': 'Cancel Booking',
+  'client.bookings.keepBooking': 'Keep Booking',
+  'client.bookings.cancelConfirmTitle': 'Cancel Booking',
+  'client.bookings.cancelConfirmMessage': 'Are you sure you want to cancel your booking for {sessionName} on {date} at {time}?',
+  'client.bookings.cancelNote': 'Note: Sessions cannot be cancelled within 3 hours of the start time.',
+  'client.bookings.cancelFailedTitle': 'Cancellation failed',
+  'client.bookings.cancelFailedMessage': 'Unable to cancel booking. Please try again.',
 
   // Session Card
   'client.session.bookSession': 'Book Session',
@@ -290,13 +301,12 @@ const en = {
   'client.bookings.title': 'My Upcoming Bookings',
   'client.bookings.noBookings': 'No upcoming bookings',
   'client.bookings.noBookingsMessage': 'You don\'t have any upcoming sessions. Visit the Schedule tab to book your training sessions.',
-  'client.bookings.cancelBooking': 'Cancel Booking',
   'client.bookings.addToCalendar': 'Add to Calendar',
   'client.bookings.confirmCancel': 'Cancel Session',
   'client.bookings.cancelWarning': 'Are you sure you want to cancel this booking?',
   'client.bookings.cancelMessage': 'This action cannot be undone. You can rebook the session if spots are still available.',
   'client.bookings.cancelConfirm': 'Yes, cancel booking',
-  'client.bookings.keepBooking': 'Keep booking',
+  'client.bookings.keepOldBooking': 'Keep booking',
   'client.bookings.cancelSuccess': 'Booking cancelled',
   'client.bookings.cancelSuccessMessage': 'Your booking has been cancelled successfully.',
   'client.bookings.cancelError': 'Failed to cancel booking',
