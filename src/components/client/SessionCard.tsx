@@ -1,13 +1,11 @@
 import React from 'react';
 import { ScheduleWithAvailability } from '@/types/client';
-import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Users, Clock } from 'lucide-react';
 import { format } from 'date-fns';
 import { cn } from '@/lib/utils';
-import { getTranslatedClassName } from '@/lib/classNameTranslation';
 
 interface SessionCardProps {
   session: ScheduleWithAvailability;
@@ -26,7 +24,6 @@ export const SessionCard: React.FC<SessionCardProps> = ({
   className,
   isMobile = false,
 }) => {
-  const { t } = useLanguage();
   const isFull = session.currentBookings >= session.maxParticipants;
   const spotsLeft = session.maxParticipants - session.currentBookings;
   
@@ -64,20 +61,20 @@ export const SessionCard: React.FC<SessionCardProps> = ({
           <div className="flex gap-2">
             {spotsLeft <= 3 && spotsLeft > 0 && (
               <Badge variant="outline" className={isMobile ? "text-sm px-3 py-1" : "text-xs"}>
-                {spotsLeft} {t('client.session.spotsLeft')}
+                {spotsLeft} left
               </Badge>
             )}
             
             {isFull && (
               <Badge variant="destructive" className={isMobile ? "text-sm px-3 py-1" : "text-xs"}>
-                {t('client.session.full')}
+                Full
               </Badge>
             )}
           </div>
         </div>
 
         <h4 className={`font-semibold mb-4 ${isMobile ? 'text-xl' : 'text-lg'}`}>
-          {getTranslatedClassName(session.name, t)}
+          {session.name}
         </h4>
 
         <Button 
@@ -87,7 +84,7 @@ export const SessionCard: React.FC<SessionCardProps> = ({
           className="w-full"
           size={isMobile ? "lg" : "sm"}
         >
-          {isBooked ? t('client.session.booked') : isFull ? t('client.session.full') : t('client.session.bookSession')}
+          {isBooked ? 'Booked' : isFull ? 'Full' : 'Book Session'}
         </Button>
       </CardContent>
     </Card>

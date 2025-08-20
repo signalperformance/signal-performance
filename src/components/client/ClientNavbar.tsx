@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
-import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { LogOut, Calendar, BookOpen, Menu, User, Clock, CreditCard, Globe } from 'lucide-react';
+import { LogOut, Calendar, BookOpen, Menu, User, Clock, CreditCard } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useSessionLimits } from '@/hooks/useSessionLimits';
 import { useClientPaymentStatus } from '@/hooks/useClientPaymentStatus';
@@ -22,18 +21,13 @@ export const ClientNavbar: React.FC<ClientNavbarProps> = ({ activeTab, onTabChan
   const { toast } = useToast();
   const isMobile = useIsMobile();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { t, language, setLanguage } = useLanguage();
 
   const handleLogout = () => {
     logout();
     toast({
-      title: t('client.account.loggedOut'),
-      description: t('client.account.loggedOutMessage'),
+      title: "Logged out successfully",
+      description: "See you next time!",
     });
-  };
-
-  const toggleLanguage = () => {
-    setLanguage(language === 'zh' ? 'en' : 'zh');
   };
 
   const MobileUserInfo = () => (
@@ -44,17 +38,17 @@ export const ClientNavbar: React.FC<ClientNavbarProps> = ({ activeTab, onTabChan
         </div>
         <div>
           <div className="font-medium">{user?.firstName} {user?.lastName}</div>
-          <div className="text-sm text-muted-foreground capitalize">{user?.membershipPlan} {t('client.navbar.member')}</div>
+          <div className="text-sm text-muted-foreground capitalize">{user?.membershipPlan} Member</div>
         </div>
       </div>
 
       <div className="space-y-3">
         {sessionInfo && !loading && (
-            <div className="flex items-center justify-between p-3 bg-muted rounded-lg">
-              <div className="flex items-center space-x-2">
-                <Clock className="h-4 w-4 text-muted-foreground" />
-                <span className="text-sm">{t('client.navbar.sessionsUsed')}</span>
-              </div>
+          <div className="flex items-center justify-between p-3 bg-muted rounded-lg">
+            <div className="flex items-center space-x-2">
+              <Clock className="h-4 w-4 text-muted-foreground" />
+              <span className="text-sm">Sessions Used</span>
+            </div>
             <Badge variant={sessionInfo.remainingSessions <= 2 ? "destructive" : "secondary"}>
               {sessionInfo.usedSessions}/{sessionInfo.totalSessions}
             </Badge>
@@ -62,11 +56,11 @@ export const ClientNavbar: React.FC<ClientNavbarProps> = ({ activeTab, onTabChan
         )}
 
         {paymentInfo && (paymentInfo.isOverdue || paymentInfo.isDueToday || paymentInfo.isDueSoon) && (
-            <div className="flex items-center justify-between p-3 bg-destructive/10 rounded-lg">
-              <div className="flex items-center space-x-2">
-                <CreditCard className="h-4 w-4 text-destructive" />
-                <span className="text-sm text-destructive">{t('client.navbar.paymentStatus')}</span>
-              </div>
+          <div className="flex items-center justify-between p-3 bg-destructive/10 rounded-lg">
+            <div className="flex items-center space-x-2">
+              <CreditCard className="h-4 w-4 text-destructive" />
+              <span className="text-sm text-destructive">Payment Status</span>
+            </div>
             <Badge variant={paymentInfo.isOverdue || paymentInfo.isDueToday ? "destructive" : "secondary"}>
               {paymentInfo.displayText}
             </Badge>
@@ -74,14 +68,9 @@ export const ClientNavbar: React.FC<ClientNavbarProps> = ({ activeTab, onTabChan
         )}
       </div>
 
-      <Button onClick={toggleLanguage} variant="ghost" className="w-full mb-3" size="lg">
-        <Globe className="h-4 w-4 mr-2" />
-        {language === 'zh' ? 'English' : '中文'}
-      </Button>
-
       <Button onClick={handleLogout} variant="outline" className="w-full" size="lg">
         <LogOut className="h-4 w-4 mr-2" />
-        {t('client.navbar.signOut')}
+        Sign Out
       </Button>
     </div>
   );
@@ -100,7 +89,7 @@ export const ClientNavbar: React.FC<ClientNavbarProps> = ({ activeTab, onTabChan
                 />
               </div>
               <h1 className="text-xl font-bold text-foreground brand-font">
-                {t('client.navbar.trainingPortal')}
+                Training Portal
               </h1>
             </div>
             
@@ -111,7 +100,7 @@ export const ClientNavbar: React.FC<ClientNavbarProps> = ({ activeTab, onTabChan
                 className="flex items-center gap-2"
               >
                 <Calendar className="h-4 w-4" />
-                {t('client.navbar.schedule')}
+                Schedule
               </Button>
               <Button
                 variant={activeTab === 'bookings' ? 'default' : 'ghost'}
@@ -119,22 +108,13 @@ export const ClientNavbar: React.FC<ClientNavbarProps> = ({ activeTab, onTabChan
                 className="flex items-center gap-2"
               >
                 <BookOpen className="h-4 w-4" />
-                {t('client.navbar.myBookings')}
+                My Bookings
               </Button>
             </div>
           </div>
 
           {/* Desktop User Info */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={toggleLanguage}
-              className="flex items-center gap-2"
-            >
-              <Globe className="h-4 w-4" />
-              {language === 'zh' ? 'EN' : '中文'}
-            </Button>
             {sessionInfo && !loading && (
               <Badge 
                 variant={sessionInfo.remainingSessions <= 2 ? "destructive" : "secondary"}
@@ -154,13 +134,13 @@ export const ClientNavbar: React.FC<ClientNavbarProps> = ({ activeTab, onTabChan
             <div className="flex items-center space-x-3">
               <div className="text-sm">
                 <div className="font-medium">{user?.firstName} {user?.lastName}</div>
-                <div className="text-muted-foreground capitalize">{user?.membershipPlan} {t('client.navbar.member')}</div>
+                <div className="text-muted-foreground capitalize">{user?.membershipPlan} Member</div>
               </div>
             </div>
             
             <Button variant="ghost" size="sm" onClick={handleLogout}>
               <LogOut className="h-4 w-4" />
-              <span className="ml-2">{t('client.navbar.logout')}</span>
+              <span className="ml-2">Logout</span>
             </Button>
           </div>
 
@@ -174,7 +154,7 @@ export const ClientNavbar: React.FC<ClientNavbarProps> = ({ activeTab, onTabChan
               </SheetTrigger>
               <SheetContent side="right" className="w-80">
                 <SheetHeader>
-                  <SheetTitle>{t('client.navbar.accountInfo')}</SheetTitle>
+                  <SheetTitle>Account Info</SheetTitle>
                 </SheetHeader>
                 <div className="mt-6">
                   <MobileUserInfo />
@@ -193,7 +173,7 @@ export const ClientNavbar: React.FC<ClientNavbarProps> = ({ activeTab, onTabChan
               className="flex-1 rounded-none justify-center gap-2 h-14 text-base"
             >
               <Calendar className="h-5 w-5" />
-              {t('client.navbar.schedule')}
+              Schedule
             </Button>
             <Button
               variant={activeTab === 'bookings' ? 'default' : 'ghost'}
@@ -201,7 +181,7 @@ export const ClientNavbar: React.FC<ClientNavbarProps> = ({ activeTab, onTabChan
               className="flex-1 rounded-none justify-center gap-2 h-14 text-base"
             >
               <BookOpen className="h-5 w-5" />
-              {t('client.navbar.myBookings')}
+              My Bookings
             </Button>
           </div>
         </div>

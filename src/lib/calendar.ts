@@ -1,6 +1,5 @@
 import { format, addHours } from 'date-fns';
 import { formatInTimeZone, toZonedTime } from 'date-fns-tz';
-import { getTranslatedClassName } from './classNameTranslation';
 
 export interface CalendarEvent {
   title: string;
@@ -22,23 +21,19 @@ export interface Booking {
 const TAIWAN_TIMEZONE = 'Asia/Taipei';
 
 // Convert booking to calendar event
-export const bookingToCalendarEvent = (booking: Booking, t: (key: string) => string): CalendarEvent => {
-  // Create date in Taiwan timezone - booking date is already in local Taiwan time
+export const bookingToCalendarEvent = (booking: Booking): CalendarEvent => {
+  // Create date in Taiwan timezone
   const startDate = new Date(booking.bookingDate);
   startDate.setHours(booking.hour24, 0, 0, 0);
-  // Since booking is already in Taiwan time, use it directly
-  const taiwanEndDate = addHours(startDate, 1); // Assume 1-hour sessions
-
-  const translatedClassName = getTranslatedClassName(booking.sessionName, t);
-  const titlePrefix = t('client.calendar.sessionTitle');
-  const locationText = t('client.calendar.location');
+  const taiwanStartDate = toZonedTime(startDate, TAIWAN_TIMEZONE);
+  const taiwanEndDate = addHours(taiwanStartDate, 1); // Assume 1-hour sessions
 
   return {
-    title: `${titlePrefix}：${translatedClassName}`,
-    startDate: startDate,
+    title: `體能課：${booking.sessionName}`,
+    startDate: taiwanStartDate,
     endDate: taiwanEndDate,
-    description: t('client.calendar.description'),
-    location: locationText
+    description: '',
+    location: '2樓, 南勢里9鄰33-6號, Linkou District, New Taipei City, 244'
   };
 };
 
@@ -102,32 +97,19 @@ export const downloadICS = (event: CalendarEvent): void => {
 
 // Generate Google Calendar URL
 export const generateGoogleCalendarUrl = (event: CalendarEvent): string => {
-  // Convert Taiwan time to UTC for Google Calendar (Taiwan is UTC+8)
-  const startDateUTC = new Date(event.startDate.getTime() - 8 * 60 * 60 * 1000);
-  const endDateUTC = new Date(event.endDate.getTime() - 8 * 60 * 60 * 1000);
-  
-  // Format in UTC with Z suffix - this is the most reliable format for Google Calendar
-  const startDateFormatted = format(startDateUTC, "yyyyMMdd'T'HHmmss'Z'");
-  const endDateFormatted = format(endDateUTC, "yyyyMMdd'T'HHmmss'Z'");
+  const startDate = formatInTimeZone(event.startDate, TAIWAN_TIMEZONE, "yyyyMMdd'T'HHmmss");
+  const endDate = formatInTimeZone(event.endDate, TAIWAN_TIMEZONE, "yyyyMMdd'T'HHmmss");
   
   const params = new URLSearchParams({
     action: 'TEMPLATE',
     text: event.title,
-    dates: `${startDateFormatted}/${endDateFormatted}`,
+    dates: `${startDate}/${endDate}`,
     details: event.description || '',
-    location: event.location || ''
+    location: event.location || '',
+    ctz: TAIWAN_TIMEZONE
   });
 
-  const url = `https://calendar.google.com/calendar/render?${params.toString()}`;
-  
-  // Debug logging in development
-  if (process.env.NODE_ENV === 'development') {
-    console.log('Google Calendar URL:', url);
-    console.log('Original Taiwan time:', event.startDate);
-    console.log('UTC time for Google:', startDateUTC);
-  }
-  
-  return url;
+  return `https://calendar.google.com/calendar/render?${params.toString()}`;
 };
 
 // Generate Apple Calendar URL (same as ICS download)
@@ -139,13 +121,11 @@ export const generateAppleCalendarUrl = (event: CalendarEvent): string => {
 
 // Generate Outlook Calendar URL
 export const generateOutlookCalendarUrl = (event: CalendarEvent): string => {
-  // Convert to ISO format for Outlook
-  const startDate = event.startDate.toISOString();
-  const endDate = event.endDate.toISOString();
+  // Convert Taiwan time to ISO for Outlook
+  const startDate = formatInTimeZone(event.startDate, TAIWAN_TIMEZONE, "yyyy-MM-dd'T'HH:mm:ssXXX");
+  const endDate = formatInTimeZone(event.endDate, TAIWAN_TIMEZONE, "yyyy-MM-dd'T'HH:mm:ssXXX");
   
   const params = new URLSearchParams({
-    path: '/calendar/action/compose',
-    rru: 'addevent',
     subject: event.title,
     startdt: startDate,
     enddt: endDate,
@@ -158,30 +138,19 @@ export const generateOutlookCalendarUrl = (event: CalendarEvent): string => {
 
 export type CalendarService = 'google' | 'apple' | 'outlook' | 'ics';
 
-export const addToCalendar = (booking: Booking, service: CalendarService, t: (key: string) => string): void => {
-  const event = bookingToCalendarEvent(booking, t);
+export const addToCalendar = (booking: Booking, service: CalendarService): void => {
+  const event = bookingToCalendarEvent(booking);
   
   switch (service) {
-    case 'google': {
-      const url = generateGoogleCalendarUrl(event);
-      const win = window.open(url, '_blank', 'noopener,noreferrer');
-      if (!win) {
-        // Fallback when pop-up is blocked (e.g., inside sandboxed iframes)
-        window.location.href = url;
-      }
+    case 'google':
+      window.open(generateGoogleCalendarUrl(event), '_blank');
       break;
-    }
     case 'apple':
     case 'ics':
       downloadICS(event);
       break;
-    case 'outlook': {
-      const url = generateOutlookCalendarUrl(event);
-      const win = window.open(url, '_blank', 'noopener,noreferrer');
-      if (!win) {
-        window.location.href = url;
-      }
+    case 'outlook':
+      window.open(generateOutlookCalendarUrl(event), '_blank');
       break;
-    }
   }
 };

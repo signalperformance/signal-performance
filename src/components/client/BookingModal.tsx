@@ -1,6 +1,5 @@
 import React from 'react';
 import { ScheduleWithAvailability } from '@/types/client';
-import { useLanguage } from '@/contexts/LanguageContext';
 import {
   Dialog,
   DialogContent,
@@ -13,10 +12,8 @@ import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Calendar, Clock, Users, MapPin } from 'lucide-react';
 import { format } from 'date-fns';
-import { zhCN } from 'date-fns/locale';
 import { Separator } from '@/components/ui/separator';
 import { useSessionLimits } from '@/hooks/useSessionLimits';
-import { getTranslatedClassName } from '@/lib/classNameTranslation';
 
 interface BookingModalProps {
   session: ScheduleWithAvailability | null;
@@ -37,7 +34,6 @@ export const BookingModal: React.FC<BookingModalProps> = ({
   canBook,
   userMembershipPlan,
 }) => {
-  const { t, language } = useLanguage();
   const { canBookSession, getSessionLimitMessage } = useSessionLimits();
   
   if (!session) return null;
@@ -82,10 +78,10 @@ export const BookingModal: React.FC<BookingModalProps> = ({
 
   const getBookingMessage = () => {
     if (isBooked) return null;
-    if (isFull) return t('client.booking.sessionFull');
-    if (!isDateBookable(session.date)) return t('client.booking.outsideWindow');
+    if (isFull) return "This session is currently full.";
+    if (!isDateBookable(session.date)) return "This session is more than 2 weeks away and cannot be booked yet.";
     if (session.sessionType === 'pro' && userMembershipPlan === 'basic') {
-      return t('client.booking.membershipRestriction');
+      return "Pro sessions are only available to Pro members. Upgrade your membership to access this session.";
     }
     return null;
   };
@@ -95,10 +91,10 @@ export const BookingModal: React.FC<BookingModalProps> = ({
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>
-            {getTranslatedClassName(session.name, t)}
+            {session.name}
           </DialogTitle>
           <DialogDescription>
-            {isBooked ? t('client.booking.sessionDetails') : t('client.booking.title')}
+            {isBooked ? 'Booking details' : 'Book this training session'}
           </DialogDescription>
         </DialogHeader>
 
@@ -107,10 +103,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
             <div className="flex items-center gap-2">
               <Calendar className="h-4 w-4 text-muted-foreground" />
               <span className="text-sm">
-                {language === 'zh' ? 
-                  format(session.date, 'EEEE, M月dd日', { locale: zhCN }) :
-                  format(session.date, 'EEEE, MMM dd')
-                }
+                {format(session.date, 'EEEE, MMM dd')}
               </span>
             </div>
             <div className="flex items-center gap-2">
@@ -133,7 +126,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
           {isBooked && (
             <div className="bg-green-50 dark:bg-green-950 border border-green-200 dark:border-green-800 rounded-lg p-3">
               <p className="text-sm text-green-800 dark:text-green-200">
-                ✅ {t('client.booking.alreadyBooked')}
+                ✅ You are booked for this session
               </p>
             </div>
           )}
@@ -152,7 +145,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
               onClick={onClose}
               className="flex-1"
             >
-              {t('client.booking.close')}
+              Close
             </Button>
             {!isBooked && (
               <Button
@@ -161,7 +154,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                 variant="default"
                 className="flex-1"
               >
-                {t('client.booking.confirm')}
+                Book Session
               </Button>
             )}
           </div>
