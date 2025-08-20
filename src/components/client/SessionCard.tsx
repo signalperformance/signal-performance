@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Users, Clock } from 'lucide-react';
 import { format } from 'date-fns';
 import { cn } from '@/lib/utils';
+import { getTranslatedClassName } from '@/lib/classNameTranslation';
 
 interface SessionCardProps {
   session: ScheduleWithAvailability;
@@ -76,7 +77,7 @@ export const SessionCard: React.FC<SessionCardProps> = ({
         </div>
 
         <h4 className={`font-semibold mb-4 ${isMobile ? 'text-xl' : 'text-lg'}`}>
-          {session.name}
+          {getTranslatedClassName(session.name, t)}
         </h4>
 
         <Button 

@@ -11,6 +11,7 @@ import { format, isPast, isToday, isTomorrow, addHours } from 'date-fns';
 import { zhCN } from 'date-fns/locale';
 import { useToast } from '@/hooks/use-toast';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { getTranslatedClassName } from '@/lib/classNameTranslation';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -168,7 +169,7 @@ export const MyBookings: React.FC = () => {
                         <div className="space-y-3 flex-1">
                           <div className={`flex items-center ${isMobile ? 'flex-col items-start space-y-2' : 'gap-2'}`}>
                             <h4 className={`font-semibold ${isMobile ? 'text-lg' : ''}`}>
-                              {booking.sessionName}
+                              {getTranslatedClassName(booking.sessionName, t)}
                             </h4>
                             <Badge 
                               className={getSessionTypeColor(booking.sessionType)}

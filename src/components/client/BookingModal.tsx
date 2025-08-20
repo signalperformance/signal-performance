@@ -16,6 +16,7 @@ import { format } from 'date-fns';
 import { zhCN } from 'date-fns/locale';
 import { Separator } from '@/components/ui/separator';
 import { useSessionLimits } from '@/hooks/useSessionLimits';
+import { getTranslatedClassName } from '@/lib/classNameTranslation';
 
 interface BookingModalProps {
   session: ScheduleWithAvailability | null;
@@ -94,7 +95,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>
-            {session.name}
+            {getTranslatedClassName(session.name, t)}
           </DialogTitle>
           <DialogDescription>
             {isBooked ? t('client.booking.sessionDetails') : t('client.booking.title')}
