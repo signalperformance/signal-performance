@@ -222,7 +222,110 @@ const zh = {
   'assessment.prep.reminders.restAndHydrate': '保持充足睡眠並補充水分，確保測試結果準確',
   'assessment.prep.contactInfo': '如有任何問題，請聯繫我們的團隊：noah@signalperformance.golf',
   'assessment.prep.lineButton.title': '聯絡我們',
-  'assessment.prep.lineButton.text': '加入 LINE 好友'
+  'assessment.prep.lineButton.text': '加入 LINE 好友',
+
+  // Client Portal
+  'client.navbar.trainingPortal': '訓練平台',
+  'client.navbar.schedule': '課程表',
+  'client.navbar.myBookings': '我的預約',
+  'client.navbar.accountInfo': '帳戶資訊',
+  'client.navbar.sessionsUsed': '已使用課程',
+  'client.navbar.paymentStatus': '付款狀態',
+  'client.navbar.signOut': '登出',
+  'client.navbar.logout': '登出',
+  'client.navbar.member': '會員',
+
+  // Client Login
+  'client.login.title': '會員平台',
+  'client.login.subtitle': '登入以存取您的訓練課程表和預約',
+  'client.login.email': '電子郵件',
+  'client.login.password': '密碼',
+  'client.login.emailPlaceholder': '請輸入您的電子郵件',
+  'client.login.passwordPlaceholder': '請輸入您的密碼',
+  'client.login.signIn': '登入',
+  'client.login.signingIn': '登入中...',
+  'client.login.success': '登入成功',
+  'client.login.successMessage': '歡迎來到您的會員平台！',
+  'client.login.invalidCredentials': '電子郵件或密碼無效。請檢查您的憑證。',
+  'client.login.error': '登入時發生錯誤。請再試一次。',
+
+  // Client Schedule
+  'client.schedule.title': '訓練課程表',
+  'client.schedule.selectDay': '選擇日期',
+  'client.schedule.noSessions': '這一天沒有可用的課程。',
+  'client.schedule.bookingWindow': '課程只能提前兩週預約。',
+  'client.schedule.nextWeek': '下週',
+  'client.schedule.previousWeek': '上週',
+  'client.schedule.today': '今天',
+  'client.schedule.weekOf': '週次',
+
+  // Session Card
+  'client.session.bookSession': '預約課程',
+  'client.session.booked': '已預約',
+  'client.session.full': '額滿',
+  'client.session.spotsLeft': '個名額',
+  'client.session.at': '於',
+
+  // Booking Modal
+  'client.booking.title': '預約課程',
+  'client.booking.sessionDetails': '課程詳情',
+  'client.booking.date': '日期',
+  'client.booking.time': '時間',
+  'client.booking.type': '類型',
+  'client.booking.availability': '可用性',
+  'client.booking.spotsAvailable': '個名額可用',
+  'client.booking.sessionFull': '此課程目前已額滿。',
+  'client.booking.outsideWindow': '此課程超出預約時間範圍。',
+  'client.booking.membershipRestriction': '您的會員方案不允許預約此類型的課程。',
+  'client.booking.sessionLimitReached': '您已達到每週課程限制。',
+  'client.booking.alreadyBooked': '您已經預約了此課程。',
+  'client.booking.confirm': '預約課程',
+  'client.booking.close': '關閉',
+  'client.booking.success': '課程預約成功！',
+  'client.booking.successMessage': '您的課程已成功預約。',
+  'client.booking.error': '課程預約失敗',
+  'client.booking.errorMessage': '請再試一次。',
+
+  // My Bookings
+  'client.bookings.title': '我的即將到來的預約',
+  'client.bookings.noBookings': '沒有即將到來的預約',
+  'client.bookings.noBookingsMessage': '您沒有任何即將到來的課程。請前往課程表頁面預約您的訓練課程。',
+  'client.bookings.cancelBooking': '取消預約',
+  'client.bookings.addToCalendar': '加到行事曆',
+  'client.bookings.confirmCancel': '取消課程',
+  'client.bookings.cancelWarning': '您確定要取消此預約嗎？',
+  'client.bookings.cancelMessage': '此動作無法撤銷。如果仍有名額，您可以重新預約課程。',
+  'client.bookings.cancelConfirm': '是的，取消預約',
+  'client.bookings.keepBooking': '保留預約',
+  'client.bookings.cancelSuccess': '預約已取消',
+  'client.bookings.cancelSuccessMessage': '您的預約已成功取消。',
+  'client.bookings.cancelError': '取消預約失敗',
+  'client.bookings.cancelErrorMessage': '請再試一次。',
+  'client.bookings.cancellationPolicy': '取消預約必須在課程開始前至少3小時進行。',
+
+  // Add to Calendar
+  'client.calendar.addToCalendar': '加到行事曆',
+  'client.calendar.googleCalendar': 'Google 行事曆',
+  'client.calendar.outlookCalendar': 'Outlook 行事曆',
+  'client.calendar.appleCalendar': 'Apple 行事曆',
+  'client.calendar.downloadICS': '下載 ICS 檔案',
+  'client.calendar.success': '已加到行事曆',
+  'client.calendar.successMessage': '課程已加到您的行事曆。',
+  'client.calendar.error': '加到行事曆失敗',
+  'client.calendar.errorMessage': '請再試一次。',
+
+  // Account Status
+  'client.account.deactivated': '帳戶暫時停用',
+  'client.account.deactivatedMessage': '您的帳戶已暫時停用。請聯繫我們的支援團隊重新啟用您的帳戶。',
+  'client.account.contactSupport': '聯絡客服',
+  'client.account.logout': '登出',
+  'client.account.loggedOut': '成功登出',
+  'client.account.loggedOutMessage': '下次見！',
+
+  // Language Toggle
+  'language.english': 'English',
+  'language.chinese': '中文',
+  'language.switch': '切換語言'
 };
 
 export default zh;

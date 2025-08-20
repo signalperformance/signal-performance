@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { useBookingStore } from '@/stores/useBookingStore';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -23,6 +24,7 @@ import {
 
 export const MyBookings: React.FC = () => {
   const { user } = useAuth();
+  const { t } = useLanguage();
   const { getUpcomingBookings, cancelBooking, loadBookings, loadSchedule } = useBookingStore();
   const { toast } = useToast();
   const isMobile = useIsMobile();
@@ -50,8 +52,8 @@ export const MyBookings: React.FC = () => {
   };
 
   const getDateLabel = (date: Date) => {
-    if (isToday(date)) return 'Today';
-    if (isTomorrow(date)) return 'Tomorrow';
+    if (isToday(date)) return t('client.schedule.today');
+    if (isTomorrow(date)) return 'Tomorrow'; // Keep English for simplicity or add translation
     return format(date, 'EEEE, MMM dd');
   };
 
@@ -61,20 +63,20 @@ export const MyBookings: React.FC = () => {
     const threeHoursCutoff = addHours(date, -3);
     
     if (now >= threeHoursCutoff) {
-      toast({
-        title: "Cancellation not allowed",
-        description: "Sessions cannot be cancelled within 3 hours of the start time.",
-        variant: "destructive",
-      });
+        toast({
+          title: t('client.bookings.cancelError'),
+          description: t('client.bookings.cancellationPolicy'),
+          variant: "destructive",
+        });
       return;
     }
 
     const success = await cancelBooking(bookingId);
     if (success) {
-      toast({
-        title: "Booking cancelled",
-        description: `Cancelled ${sessionName} on ${format(date, 'EEEE, MMM dd')}`,
-      });
+        toast({
+          title: t('client.bookings.cancelSuccess'),
+          description: t('client.bookings.cancelSuccessMessage'),
+        });
     } else {
       toast({
         title: "Cancellation failed",
@@ -88,14 +90,14 @@ export const MyBookings: React.FC = () => {
     return (
       <Card>
         <CardHeader>
-          <CardTitle>My Bookings</CardTitle>
+          <CardTitle>{t('client.bookings.title')}</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="text-center py-8">
             <Calendar className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-            <h3 className="text-lg font-medium mb-2">No upcoming bookings</h3>
+            <h3 className="text-lg font-medium mb-2">{t('client.bookings.noBookings')}</h3>
             <p className="text-muted-foreground mb-4">
-              You haven't booked any sessions yet. Check the schedule to book your first session!
+              {t('client.bookings.noBookingsMessage')}
             </p>
           </div>
         </CardContent>
@@ -121,7 +123,7 @@ export const MyBookings: React.FC = () => {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            My Bookings
+            {t('client.bookings.title')}
             <Badge variant="outline">
               {upcomingBookings.length} upcoming
             </Badge>
