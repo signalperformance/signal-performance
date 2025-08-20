@@ -97,7 +97,7 @@
   body[data-language="zh"] h5,
   body[data-language="zh"] h6 {
     @apply font-ibm-plex-sans-jp;
-    font-display: swap !important;
+    font-display: block !important;
     font-family: 'IBM Plex Sans JP', sans-serif !important;
   }
 
