@@ -371,6 +371,10 @@ const en = {
   'portal.badges.cannotCancel': "Can't cancel",
   'portal.badges.booked': 'You are booked for this session',
   
+  // Schedule
+  'portal.schedule.session': 'session',
+  'portal.schedule.sessions': 'sessions',
+  
   // Empty States
   'portal.empty.noBookingsTitle': 'No upcoming bookings',
   'portal.empty.noBookingsDesc': "You haven't booked any sessions yet. Check the schedule to book your first session!"

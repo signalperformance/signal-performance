@@ -11,13 +11,14 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { format, startOfWeek, addWeeks, isSameDay, isToday } from 'date-fns';
+import { zhCN, enUS } from 'date-fns/locale';
 import { useToast } from '@/hooks/use-toast';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
 export const ClientScheduleView: React.FC = () => {
   const { user } = useAuth();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { 
     getScheduleWithAvailability, 
     bookSession, 
@@ -128,7 +129,7 @@ export const ClientScheduleView: React.FC = () => {
     if (success) {
       toast({
         title: t('portal.toast.bookingSuccess'),
-        description: `${t('portal.booking.booked')} ${selectedSession.name} on ${format(selectedSession.date, 'EEEE, MMM dd')}`,
+        description: `${t('portal.booking.booked')} ${selectedSession.name} on ${format(selectedSession.date, 'EEEE, MMM dd', { locale })}`,
       });
     } else {
       toast({
@@ -146,6 +147,9 @@ export const ClientScheduleView: React.FC = () => {
   const weekStart = getCurrentWeekStart();
   const weekEnd = new Date(weekStart);
   weekEnd.setDate(weekStart.getDate() + 6);
+
+  // Get locale for date formatting
+  const locale = language === 'zh' ? zhCN : enUS;
 
   // Set default selected day to today (or first available day)
   const defaultDay = useMemo(() => {
@@ -196,7 +200,7 @@ export const ClientScheduleView: React.FC = () => {
               {t('schedule.title')}
               {!isMobile && (
                 <Badge variant="outline">
-                  {format(weekStart, 'MMM dd')} - {format(weekEnd, 'MMM dd, yyyy')}
+                  {format(weekStart, 'MMM dd', { locale })} - {format(weekEnd, 'MMM dd, yyyy', { locale })}
                 </Badge>
               )}
             </CardTitle>
@@ -235,7 +239,7 @@ export const ClientScheduleView: React.FC = () => {
           {isMobile && (
             <div className="mt-2">
               <Badge variant="outline" className="text-xs">
-                {format(weekStart, 'MMM dd')} - {format(weekEnd, 'MMM dd, yyyy')}
+                {format(weekStart, 'MMM dd', { locale })} - {format(weekEnd, 'MMM dd, yyyy', { locale })}
               </Badge>
             </div>
           )}
@@ -248,8 +252,8 @@ export const ClientScheduleView: React.FC = () => {
           <div className="grid grid-cols-7 gap-1 p-1">
             {weekDays.map((date) => {
               const dayStr = format(date, 'yyyy-MM-dd');
-              const dayName = format(date, 'EEE');
-              const dateNum = format(date, 'dd');
+              const dayName = format(date, language === 'zh' ? 'EEEEE' : 'EEE', { locale });
+              const dateNum = format(date, 'dd', { locale });
               const isSelected = selectedDay === dayStr;
               const isPast = isPastDate(date);
               
@@ -276,8 +280,8 @@ export const ClientScheduleView: React.FC = () => {
           <TabsList className="grid w-full grid-cols-7 h-auto">
             {weekDays.map((date) => {
               const dayStr = format(date, 'yyyy-MM-dd');
-              const dayName = format(date, 'EEE');
-              const dateNum = format(date, 'dd');
+              const dayName = format(date, language === 'zh' ? 'EEEEE' : 'EEE', { locale });
+              const dateNum = format(date, 'dd', { locale });
               const sessions = getSessionsForDay(date);
               const userBookingsCount = sessions.filter(session => isSessionBooked(session)).length;
               const isPast = isPastDate(date);
@@ -305,11 +309,11 @@ export const ClientScheduleView: React.FC = () => {
             <CardHeader>
               <CardTitle className="flex items-center justify-between">
                 <span>
-                  {isMobile ? format(selectedDate, 'MMMM dd') : format(selectedDate, 'EEEE, MMMM dd')}
+                  {isMobile ? format(selectedDate, 'MMMM dd', { locale }) : format(selectedDate, 'EEEE, MMMM dd', { locale })}
                   {isToday(selectedDate) && <Badge variant="outline" className="ml-2">{t('portal.days.today')}</Badge>}
                 </span>
                 <Badge variant="secondary">
-                  {selectedDaySessions.length} session{selectedDaySessions.length !== 1 ? 's' : ''}
+                  {selectedDaySessions.length} {selectedDaySessions.length === 1 ? t('portal.schedule.session') : t('portal.schedule.sessions')}
                 </Badge>
               </CardTitle>
             </CardHeader>

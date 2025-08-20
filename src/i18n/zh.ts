@@ -371,6 +371,10 @@ const zh = {
   'portal.badges.cannotCancel': '無法取消',
   'portal.badges.booked': '您已預約此課程',
   
+  // Schedule
+  'portal.schedule.session': '節課程',
+  'portal.schedule.sessions': '節課程',
+  
   // Empty States
   'portal.empty.noBookingsTitle': '沒有即將到來的預約',
   'portal.empty.noBookingsDesc': '您尚未預約任何課程。請查看課程表以預約您的第一堂課！'
