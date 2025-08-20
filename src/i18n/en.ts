@@ -264,6 +264,7 @@ const en = {
   'portal.schedule.nextWeek': 'Next Week',
   'portal.schedule.prevWeek': 'Previous Week',
   'portal.schedule.weekOf': 'Week of',
+  'portal.schedule.noSessions': 'No sessions scheduled for this day',
   
   // Day Labels
   'portal.days.today': 'Today',
@@ -312,6 +313,7 @@ const en = {
   'portal.toast.cancelError': 'Failed to cancel booking. Please try again.',
   'portal.toast.calendarAdded': 'Added to calendar successfully',
   'portal.toast.calendarError': 'Failed to add to calendar',
+  'portal.toast.logoutSuccess': 'Successfully logged out',
   
   // Account Status
   'portal.account.deactivated': 'Account Temporarily Deactivated',

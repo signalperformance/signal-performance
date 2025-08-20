@@ -264,6 +264,7 @@ const zh = {
   'portal.schedule.nextWeek': '下週',
   'portal.schedule.prevWeek': '上週',
   'portal.schedule.weekOf': '週次',
+  'portal.schedule.noSessions': '今日無排定課程',
   
   // Day Labels
   'portal.days.today': '今天',
@@ -312,6 +313,7 @@ const zh = {
   'portal.toast.cancelError': '取消預約失敗，請重試。',
   'portal.toast.calendarAdded': '成功加入行事曆',
   'portal.toast.calendarError': '無法加入行事曆',
+  'portal.toast.logoutSuccess': '成功登出',
   
   // Account Status
   'portal.account.deactivated': '帳戶暫時停用',
