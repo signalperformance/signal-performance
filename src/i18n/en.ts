@@ -389,7 +389,11 @@ const en = {
   'portal.login.signingIn': 'Signing in...',
   'portal.login.loginSuccess': 'Login successful',
   'portal.login.welcomeMessage': 'Welcome to your client portal!',
-  'portal.login.errorOccurred': 'An error occurred during login. Please try again.'
+  'portal.login.errorOccurred': 'An error occurred during login. Please try again.',
+  
+  // Footer
+  'footer.followUs': 'Follow Us',
+  'footer.instagram': 'Instagram'
 };
 
 export default en;

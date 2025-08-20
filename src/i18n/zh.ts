@@ -389,7 +389,11 @@ const zh = {
   'portal.login.signingIn': '登入中...',
   'portal.login.loginSuccess': '登入成功',
   'portal.login.welcomeMessage': '歡迎使用您的訓練平台！',
-  'portal.login.errorOccurred': '登入時發生錯誤，請重試。'
+  'portal.login.errorOccurred': '登入時發生錯誤，請重試。',
+  
+  // Footer
+  'footer.followUs': '關注我們',
+  'footer.instagram': 'Instagram'
 };
 
 export default zh;
