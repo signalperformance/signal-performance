@@ -225,7 +225,7 @@ const zh = {
   'assessment.prep.lineButton.text': '加入 LINE 好友',
 
   // Training Portal - Navigation & UI
-  'portal.title': '訓練入口',
+  'portal.title': '訓練平台',
   'portal.nav.schedule': '課程表',
   'portal.nav.bookings': '我的預約',
   'portal.nav.signOut': '登出',
@@ -323,7 +323,7 @@ const zh = {
   
   // Login Portal
   'portal.login.title': '會員登入',
-  'portal.login.subtitle': '進入您的訓練入口',
+  'portal.login.subtitle': '進入您的訓練平台',
   'portal.login.email': '電子郵件',
   'portal.login.password': '密碼',
   'portal.login.signIn': '登入',
@@ -388,7 +388,7 @@ const zh = {
   'portal.login.passwordPlaceholder': '請輸入您的密碼',
   'portal.login.signingIn': '登入中...',
   'portal.login.loginSuccess': '登入成功',
-  'portal.login.welcomeMessage': '歡迎使用您的訓練入口！',
+  'portal.login.welcomeMessage': '歡迎使用您的訓練平台！',
   'portal.login.errorOccurred': '登入時發生錯誤，請重試。'
 };
 
