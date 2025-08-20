@@ -149,15 +149,26 @@ export const addToCalendar = (booking: Booking, service: CalendarService, t: (ke
   const event = bookingToCalendarEvent(booking, t);
   
   switch (service) {
-    case 'google':
-      window.open(generateGoogleCalendarUrl(event), '_blank');
+    case 'google': {
+      const url = generateGoogleCalendarUrl(event);
+      const win = window.open(url, '_blank', 'noopener,noreferrer');
+      if (!win) {
+        // Fallback when pop-up is blocked (e.g., inside sandboxed iframes)
+        window.location.href = url;
+      }
       break;
+    }
     case 'apple':
     case 'ics':
       downloadICS(event);
       break;
-    case 'outlook':
-      window.open(generateOutlookCalendarUrl(event), '_blank');
+    case 'outlook': {
+      const url = generateOutlookCalendarUrl(event);
+      const win = window.open(url, '_blank', 'noopener,noreferrer');
+      if (!win) {
+        window.location.href = url;
+      }
       break;
+    }
   }
 };

@@ -321,7 +321,7 @@ const en = {
   'client.calendar.downloadICS': 'Download ICS File',
   'client.calendar.success': 'Added to calendar',
   'client.calendar.downloadSuccess': 'Calendar file downloaded successfully.',
-  'client.calendar.openCalendar': 'Calendar should open in a new tab.',
+  'client.calendar.openCalendar': 'Opening calendar. If a new tab is blocked, it will open in this tab.',
   'client.calendar.sessionTitle': 'Fitness Session',
   'client.calendar.description': 'Professional fitness training session.',
   'client.calendar.location': '2F, No. 33-6, Nanshi Village, Linkou District, New Taipei City, 244',

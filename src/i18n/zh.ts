@@ -321,7 +321,7 @@ const zh = {
   'client.calendar.downloadICS': '下載 ICS 檔案',
   'client.calendar.success': '已加到行事曆',
   'client.calendar.downloadSuccess': '行事曆檔案下載成功。',
-  'client.calendar.openCalendar': '行事曆應該會在新分頁中開啟。',
+  'client.calendar.openCalendar': '正在開啟行事曆。若瀏覽器封鎖新分頁，將在此分頁開啟。',
   'client.calendar.sessionTitle': '體能課',
   'client.calendar.description': '專業體能訓練課程。',
   'client.calendar.location': '2樓, 南勢里9鄰33-6號, Linkou District, New Taipei City, 244',
