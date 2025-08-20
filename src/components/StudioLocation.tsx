@@ -82,18 +82,11 @@ const StudioLocation = () => {
                     
                     <div className="pt-4">
                       <Button 
-                        asChild
+                        onClick={() => window.location.href = googleMapsLink}
                         size="lg"
-                        className="bg-signal-gold text-white w-full text-lg py-6 font-semibold shadow-lg whitespace-normal min-w-0"
+                        className="bg-signal-gold text-white w-full text-lg py-6 font-semibold shadow-lg whitespace-normal min-w-0 inline-flex items-center justify-center gap-2 sm:gap-3"
                       >
-                        <a 
-                          href={googleMapsLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center justify-center gap-2 sm:gap-3 w-full min-w-0 whitespace-normal text-center"
-                        >
-                          <span className="min-w-0 break-words text-balance leading-snug">{t('studio.address.mapButton')}</span>
-                        </a>
+                        <span className="min-w-0 break-words text-balance leading-snug">{t('studio.address.mapButton')}</span>
                       </Button>
                     </div>
                   </div>
