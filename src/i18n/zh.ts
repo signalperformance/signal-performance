@@ -334,7 +334,46 @@ const zh = {
   // Loading States
   'portal.loading.sessions': '載入課程中...',
   'portal.loading.bookings': '載入預約中...',
-  'portal.loading.user': '載入用戶資料中...'
+  'portal.loading.user': '載入用戶資料中...',
+  
+  // Session Names
+  'portal.sessionNames.MOBILITY': '活動度',
+  'portal.sessionNames.STRENGTH': '肌力',  
+  'portal.sessionNames.CONDITIONING': '體能',
+  'portal.sessionNames.RECOVERY': '恢復',
+  'portal.sessionNames.TECHNIQUE': '技術',
+  'portal.sessionNames.ASSESSMENT': '評估',
+  
+  // Calendar Integration
+  'portal.calendar.title': '加入行事曆',
+  'portal.calendar.downloaded': '行事曆檔案已下載',
+  'portal.calendar.downloadedDesc': '行事曆事件檔案已下載。開啟它以加入您的行事曆。',
+  'portal.calendar.opening': '開啟行事曆',
+  'portal.calendar.openingDesc': '在新分頁中開啟 {service} 行事曆。',
+  'portal.calendar.error': '錯誤',
+  'portal.calendar.errorDesc': '無法將事件加入行事曆。請重試。',
+  
+  // Cancel Dialog
+  'portal.cancel.title': '取消預約',
+  'portal.cancel.message': '您確定要取消',
+  'portal.cancel.note': '注意：課程開始前3小時內無法取消。',
+  'portal.cancel.keep': '保留預約',
+  'portal.cancel.confirm': '取消預約',
+  'portal.cancel.notAllowed': '無法取消',
+  'portal.cancel.notAllowedDesc': '課程開始前3小時內無法取消。',
+  'portal.cancel.success': '預約已取消',
+  'portal.cancel.successDesc': '已取消 {date} 的 {sessionName}',
+  'portal.cancel.failed': '取消失敗',
+  'portal.cancel.failedDesc': '無法取消預約。請重試。',
+  
+  // Badge Labels
+  'portal.badges.upcoming': '即將到來',
+  'portal.badges.cannotCancel': '無法取消',
+  'portal.badges.booked': '您已預約此課程',
+  
+  // Empty States
+  'portal.empty.noBookingsTitle': '沒有即將到來的預約',
+  'portal.empty.noBookingsDesc': '您尚未預約任何課程。請查看課程表以預約您的第一堂課！'
 };
 
 export default zh;

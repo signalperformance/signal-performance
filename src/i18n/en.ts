@@ -334,7 +334,46 @@ const en = {
   // Loading States
   'portal.loading.sessions': 'Loading sessions...',
   'portal.loading.bookings': 'Loading bookings...',
-  'portal.loading.user': 'Loading user data...'
+  'portal.loading.user': 'Loading user data...',
+  
+  // Session Names  
+  'portal.sessionNames.MOBILITY': 'MOBILITY',
+  'portal.sessionNames.STRENGTH': 'STRENGTH',
+  'portal.sessionNames.CONDITIONING': 'CONDITIONING',
+  'portal.sessionNames.RECOVERY': 'RECOVERY',
+  'portal.sessionNames.TECHNIQUE': 'TECHNIQUE',
+  'portal.sessionNames.ASSESSMENT': 'ASSESSMENT',
+  
+  // Calendar Integration
+  'portal.calendar.title': 'Add to Calendar',
+  'portal.calendar.downloaded': 'Calendar file downloaded',
+  'portal.calendar.downloadedDesc': 'The calendar event file has been downloaded. Open it to add to your calendar.',
+  'portal.calendar.opening': 'Opening calendar',
+  'portal.calendar.openingDesc': 'Opening {service} Calendar in a new tab.',
+  'portal.calendar.error': 'Error',
+  'portal.calendar.errorDesc': 'Failed to add event to calendar. Please try again.',
+  
+  // Cancel Dialog
+  'portal.cancel.title': 'Cancel Booking',
+  'portal.cancel.message': 'Are you sure you want to cancel your booking for',
+  'portal.cancel.note': 'Note: Sessions cannot be cancelled within 3 hours of the start time.',
+  'portal.cancel.keep': 'Keep Booking',
+  'portal.cancel.confirm': 'Cancel Booking',
+  'portal.cancel.notAllowed': 'Cancellation not allowed',
+  'portal.cancel.notAllowedDesc': 'Sessions cannot be cancelled within 3 hours of the start time.',
+  'portal.cancel.success': 'Booking cancelled',
+  'portal.cancel.successDesc': 'Cancelled {sessionName} on {date}',
+  'portal.cancel.failed': 'Cancellation failed',
+  'portal.cancel.failedDesc': 'Unable to cancel booking. Please try again.',
+  
+  // Badge Labels
+  'portal.badges.upcoming': 'upcoming',
+  'portal.badges.cannotCancel': "Can't cancel",
+  'portal.badges.booked': 'You are booked for this session',
+  
+  // Empty States
+  'portal.empty.noBookingsTitle': 'No upcoming bookings',
+  'portal.empty.noBookingsDesc': "You haven't booked any sessions yet. Check the schedule to book your first session!"
 };
 
 export default en;

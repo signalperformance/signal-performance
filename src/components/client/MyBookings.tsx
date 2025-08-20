@@ -7,8 +7,10 @@ import { Badge } from '@/components/ui/badge';
 import { Calendar, Clock, MapPin, X } from 'lucide-react';
 import { AddToCalendarButton } from './AddToCalendarButton';
 import { format, isPast, isToday, isTomorrow, addHours } from 'date-fns';
+import { zhCN, enUS } from 'date-fns/locale';
 import { useToast } from '@/hooks/use-toast';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { useLanguage } from '@/contexts/LanguageContext';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -26,6 +28,7 @@ export const MyBookings: React.FC = () => {
   const { getUpcomingBookings, cancelBooking, loadBookings, loadSchedule } = useBookingStore();
   const { toast } = useToast();
   const isMobile = useIsMobile();
+  const { t, language } = useLanguage();
 
   useEffect(() => {
     const initializeData = async () => {
@@ -50,9 +53,15 @@ export const MyBookings: React.FC = () => {
   };
 
   const getDateLabel = (date: Date) => {
-    if (isToday(date)) return 'Today';
-    if (isTomorrow(date)) return 'Tomorrow';
-    return format(date, 'EEEE, MMM dd');
+    const locale = language === 'zh' ? zhCN : enUS;
+    if (isToday(date)) return t('portal.days.today');
+    if (isTomorrow(date)) return t('portal.days.tomorrow');
+    return format(date, 'EEEE, MMM dd', { locale });
+  };
+
+  const getSessionName = (sessionName: string) => {
+    const translationKey = `portal.sessionNames.${sessionName}`;
+    return t(translationKey) !== translationKey ? t(translationKey) : sessionName;
   };
 
   const handleCancelBooking = async (bookingId: string, sessionName: string, date: Date) => {
@@ -62,23 +71,24 @@ export const MyBookings: React.FC = () => {
     
     if (now >= threeHoursCutoff) {
       toast({
-        title: "Cancellation not allowed",
-        description: "Sessions cannot be cancelled within 3 hours of the start time.",
+        title: t('portal.cancel.notAllowed'),
+        description: t('portal.cancel.notAllowedDesc'),
         variant: "destructive",
       });
       return;
     }
 
     const success = await cancelBooking(bookingId);
+    const locale = language === 'zh' ? zhCN : enUS;
     if (success) {
       toast({
-        title: "Booking cancelled",
-        description: `Cancelled ${sessionName} on ${format(date, 'EEEE, MMM dd')}`,
+        title: t('portal.cancel.success'),
+        description: `${getSessionName(sessionName)} ${format(date, 'EEEE, MMM dd', { locale })}`,
       });
     } else {
       toast({
-        title: "Cancellation failed",
-        description: "Unable to cancel booking. Please try again.",
+        title: t('portal.cancel.failed'),
+        description: t('portal.cancel.failedDesc'),
         variant: "destructive",
       });
     }
@@ -88,14 +98,14 @@ export const MyBookings: React.FC = () => {
     return (
       <Card>
         <CardHeader>
-          <CardTitle>My Bookings</CardTitle>
+          <CardTitle>{t('portal.bookings.title')}</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="text-center py-8">
             <Calendar className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-            <h3 className="text-lg font-medium mb-2">No upcoming bookings</h3>
+            <h3 className="text-lg font-medium mb-2">{t('portal.empty.noBookingsTitle')}</h3>
             <p className="text-muted-foreground mb-4">
-              You haven't booked any sessions yet. Check the schedule to book your first session!
+              {t('portal.empty.noBookingsDesc')}
             </p>
           </div>
         </CardContent>
@@ -121,9 +131,9 @@ export const MyBookings: React.FC = () => {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            My Bookings
+            {t('portal.bookings.title')}
             <Badge variant="outline">
-              {upcomingBookings.length} upcoming
+              {upcomingBookings.length} {t('portal.badges.upcoming')}
             </Badge>
           </CardTitle>
         </CardHeader>
@@ -140,7 +150,7 @@ export const MyBookings: React.FC = () => {
               <CardTitle className="text-lg">
                 {getDateLabel(date)}
                 <div className="text-sm font-normal text-muted-foreground">
-                  {format(date, 'MMMM dd, yyyy')}
+                  {format(date, 'MMMM dd, yyyy', { locale: language === 'zh' ? zhCN : enUS })}
                 </div>
               </CardTitle>
             </CardHeader>
@@ -157,7 +167,7 @@ export const MyBookings: React.FC = () => {
                         <div className="space-y-3 flex-1">
                           <div className={`flex items-center ${isMobile ? 'flex-col items-start space-y-2' : 'gap-2'}`}>
                             <h4 className={`font-semibold ${isMobile ? 'text-lg' : ''}`}>
-                              {booking.sessionName}
+                              {getSessionName(booking.sessionName)}
                             </h4>
                             <Badge 
                               className={getSessionTypeColor(booking.sessionType)}
@@ -181,7 +191,7 @@ export const MyBookings: React.FC = () => {
                                 if (isWithinCutoff && !isPast(booking.bookingDate)) {
                                   return (
                                     <Badge variant="outline" className="text-xs text-amber-600 border-amber-300">
-                                      Can't cancel
+                                      {t('portal.badges.cannotCancel')}
                                     </Badge>
                                   );
                                 }
@@ -207,31 +217,31 @@ export const MyBookings: React.FC = () => {
                                 size={isMobile ? "lg" : "sm"}
                                 className={isMobile ? "w-full" : "text-destructive hover:text-destructive"}
                               >
-                                <X className={`${isMobile ? 'h-5 w-5 mr-2' : 'h-4 w-4'}`} />
-                                {isMobile && "Cancel Booking"}
+                                 <X className={`${isMobile ? 'h-5 w-5 mr-2' : 'h-4 w-4'}`} />
+                                 {isMobile && t('portal.booking.cancel')}
                               </Button>
                             </AlertDialogTrigger>
-                            <AlertDialogContent>
-                              <AlertDialogHeader>
-                                <AlertDialogTitle>Cancel Booking</AlertDialogTitle>
-                                <AlertDialogDescription>
-                                  Are you sure you want to cancel your booking for {booking.sessionName} on {getDateLabel(booking.bookingDate)} at {formatTime(booking.hour24)}?
-                                  <br /><br />
-                                  <span className="text-amber-600 text-sm">
-                                    Note: Sessions cannot be cancelled within 3 hours of the start time.
-                                  </span>
-                                </AlertDialogDescription>
-                              </AlertDialogHeader>
-                              <AlertDialogFooter>
-                                <AlertDialogCancel>Keep Booking</AlertDialogCancel>
-                                <AlertDialogAction
-                                  onClick={() => handleCancelBooking(booking.id, booking.sessionName, booking.bookingDate)}
-                                  className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
-                                >
-                                  Cancel Booking
-                                </AlertDialogAction>
-                              </AlertDialogFooter>
-                            </AlertDialogContent>
+                             <AlertDialogContent>
+                               <AlertDialogHeader>
+                                 <AlertDialogTitle>{t('portal.cancel.title')}</AlertDialogTitle>
+                                  <AlertDialogDescription>
+                                    {t('portal.cancel.message')} {getSessionName(booking.sessionName)} {getDateLabel(booking.bookingDate)} {formatTime(booking.hour24)}?
+                                    <br /><br />
+                                    <span className="text-amber-600 text-sm">
+                                      {t('portal.cancel.note')}
+                                    </span>
+                                  </AlertDialogDescription>
+                               </AlertDialogHeader>
+                               <AlertDialogFooter>
+                                 <AlertDialogCancel>{t('portal.cancel.keep')}</AlertDialogCancel>
+                                 <AlertDialogAction
+                                   onClick={() => handleCancelBooking(booking.id, booking.sessionName, booking.bookingDate)}
+                                   className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                                 >
+                                   {t('portal.cancel.confirm')}
+                                 </AlertDialogAction>
+                               </AlertDialogFooter>
+                             </AlertDialogContent>
                             </AlertDialog>
                           )}
                         </div>

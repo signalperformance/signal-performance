@@ -9,6 +9,7 @@ import {
 import { Calendar, Download, ExternalLink } from 'lucide-react';
 import { addToCalendar, type CalendarService } from '@/lib/calendar';
 import { useToast } from '@/hooks/use-toast';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface Booking {
   id: string;
@@ -32,6 +33,7 @@ export const AddToCalendarButton: React.FC<AddToCalendarButtonProps> = ({
   className
 }) => {
   const { toast } = useToast();
+  const { t } = useLanguage();
 
   const handleAddToCalendar = (service: CalendarService) => {
     try {
@@ -39,19 +41,20 @@ export const AddToCalendarButton: React.FC<AddToCalendarButtonProps> = ({
       
       if (service === 'ics' || service === 'apple') {
         toast({
-          title: "Calendar file downloaded",
-          description: "The calendar event file has been downloaded. Open it to add to your calendar.",
+          title: t('portal.calendar.downloaded'),
+          description: t('portal.calendar.downloadedDesc'),
         });
       } else {
+        const serviceName = service === 'google' ? 'Google' : 'Outlook';
         toast({
-          title: "Opening calendar",
-          description: `Opening ${service === 'google' ? 'Google' : 'Outlook'} Calendar in a new tab.`,
+          title: t('portal.calendar.opening'),
+          description: `${t('portal.calendar.opening')} ${serviceName} Calendar`,
         });
       }
     } catch (error) {
       toast({
-        title: "Error",
-        description: "Failed to add event to calendar. Please try again.",
+        title: t('portal.calendar.error'),
+        description: t('portal.calendar.errorDesc'),
         variant: "destructive",
       });
     }
@@ -62,25 +65,25 @@ export const AddToCalendarButton: React.FC<AddToCalendarButtonProps> = ({
       <DropdownMenuTrigger asChild>
         <Button variant={variant} size={size} className={className}>
           <Calendar className="h-4 w-4 mr-2" />
-          Add to Calendar
+          {t('portal.calendar.title')}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-48">
         <DropdownMenuItem onClick={() => handleAddToCalendar('google')}>
           <ExternalLink className="h-4 w-4 mr-2" />
-          Google Calendar
+          {t('portal.calendar.google')}
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => handleAddToCalendar('outlook')}>
           <ExternalLink className="h-4 w-4 mr-2" />
-          Outlook Calendar
+          {t('portal.calendar.outlook')}
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => handleAddToCalendar('apple')}>
           <Download className="h-4 w-4 mr-2" />
-          Apple Calendar
+          {t('portal.calendar.apple')}
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => handleAddToCalendar('ics')}>
           <Download className="h-4 w-4 mr-2" />
-          Download ICS File
+          {t('portal.calendar.download')}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

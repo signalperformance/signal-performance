@@ -12,8 +12,10 @@ import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Calendar, Clock, Users, MapPin } from 'lucide-react';
 import { format } from 'date-fns';
+import { zhCN, enUS } from 'date-fns/locale';
 import { Separator } from '@/components/ui/separator';
 import { useSessionLimits } from '@/hooks/useSessionLimits';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface BookingModalProps {
   session: ScheduleWithAvailability | null;
@@ -35,6 +37,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
   userMembershipPlan,
 }) => {
   const { canBookSession, getSessionLimitMessage } = useSessionLimits();
+  const { t, language } = useLanguage();
   
   if (!session) return null;
 
@@ -76,12 +79,17 @@ export const BookingModal: React.FC<BookingModalProps> = ({
     return canBook;
   };
 
+  const getSessionName = (sessionName: string) => {
+    const translationKey = `portal.sessionNames.${sessionName}`;
+    return t(translationKey) !== translationKey ? t(translationKey) : sessionName;
+  };
+
   const getBookingMessage = () => {
     if (isBooked) return null;
-    if (isFull) return "This session is currently full.";
-    if (!isDateBookable(session.date)) return "This session is more than 2 weeks away and cannot be booked yet.";
+    if (isFull) return t('portal.validation.sessionFull');
+    if (!isDateBookable(session.date)) return t('portal.validation.tooFarAdvance');
     if (session.sessionType === 'pro' && userMembershipPlan === 'basic') {
-      return "Pro sessions are only available to Pro members. Upgrade your membership to access this session.";
+      return t('portal.validation.membershipRequired');
     }
     return null;
   };
@@ -91,10 +99,10 @@ export const BookingModal: React.FC<BookingModalProps> = ({
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>
-            {session.name}
+            {getSessionName(session.name)}
           </DialogTitle>
           <DialogDescription>
-            {isBooked ? 'Booking details' : 'Book this training session'}
+            {isBooked ? t('portal.modal.sessionDetails') : t('portal.modal.confirm')}
           </DialogDescription>
         </DialogHeader>
 
@@ -103,7 +111,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
             <div className="flex items-center gap-2">
               <Calendar className="h-4 w-4 text-muted-foreground" />
               <span className="text-sm">
-                {format(session.date, 'EEEE, MMM dd')}
+                {format(session.date, 'EEEE, MMM dd', { locale: language === 'zh' ? zhCN : enUS })}
               </span>
             </div>
             <div className="flex items-center gap-2">
@@ -126,7 +134,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
           {isBooked && (
             <div className="bg-green-50 dark:bg-green-950 border border-green-200 dark:border-green-800 rounded-lg p-3">
               <p className="text-sm text-green-800 dark:text-green-200">
-                ✅ You are booked for this session
+                ✅ {t('portal.badges.booked')}
               </p>
             </div>
           )}
@@ -145,7 +153,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
               onClick={onClose}
               className="flex-1"
             >
-              Close
+              {t('portal.modal.close')}
             </Button>
             {!isBooked && (
               <Button
@@ -154,7 +162,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                 variant="default"
                 className="flex-1"
               >
-                Book Session
+                {t('portal.booking.book')}
               </Button>
             )}
           </div>
