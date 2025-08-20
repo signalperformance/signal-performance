@@ -237,7 +237,6 @@ const zh = {
 
   // Client Login
   'client.login.title': '會員平台',
-  'client.login.subtitle': '登入以存取您的訓練課程表和預約',
   'client.login.email': '電子郵件',
   'client.login.password': '密碼',
   'client.login.emailPlaceholder': '請輸入您的電子郵件',

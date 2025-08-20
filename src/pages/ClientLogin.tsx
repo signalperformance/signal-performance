@@ -63,9 +63,6 @@ const LoginForm = () => {
               {language === 'zh' ? 'EN' : '中文'}
             </Button>
             <CardTitle className="text-2xl font-heading">{t('client.login.title')}</CardTitle>
-            <CardDescription>
-              {t('client.login.subtitle')}
-            </CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">

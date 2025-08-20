@@ -237,7 +237,6 @@ const en = {
 
   // Client Login
   'client.login.title': 'Client Portal',
-  'client.login.subtitle': 'Sign in to access your training schedule and bookings',
   'client.login.email': 'Email',
   'client.login.password': 'Password',
   'client.login.emailPlaceholder': 'Enter your email',
