@@ -102,20 +102,32 @@ export const downloadICS = (event: CalendarEvent): void => {
 
 // Generate Google Calendar URL
 export const generateGoogleCalendarUrl = (event: CalendarEvent): string => {
-  // Format dates in Taiwan timezone for Google Calendar
-  const startDateLocal = formatInTimeZone(event.startDate, TAIWAN_TIMEZONE, "yyyyMMdd'T'HHmmss");
-  const endDateLocal = formatInTimeZone(event.endDate, TAIWAN_TIMEZONE, "yyyyMMdd'T'HHmmss");
+  // Convert Taiwan time to UTC for Google Calendar (Taiwan is UTC+8)
+  const startDateUTC = new Date(event.startDate.getTime() - 8 * 60 * 60 * 1000);
+  const endDateUTC = new Date(event.endDate.getTime() - 8 * 60 * 60 * 1000);
+  
+  // Format in UTC with Z suffix - this is the most reliable format for Google Calendar
+  const startDateFormatted = format(startDateUTC, "yyyyMMdd'T'HHmmss'Z'");
+  const endDateFormatted = format(endDateUTC, "yyyyMMdd'T'HHmmss'Z'");
   
   const params = new URLSearchParams({
     action: 'TEMPLATE',
     text: event.title,
-    dates: `${startDateLocal}/${endDateLocal}`,
+    dates: `${startDateFormatted}/${endDateFormatted}`,
     details: event.description || '',
-    location: event.location || '',
-    ctz: TAIWAN_TIMEZONE
+    location: event.location || ''
   });
 
-  return `https://calendar.google.com/calendar/render?${params.toString()}`;
+  const url = `https://calendar.google.com/calendar/render?${params.toString()}`;
+  
+  // Debug logging in development
+  if (process.env.NODE_ENV === 'development') {
+    console.log('Google Calendar URL:', url);
+    console.log('Original Taiwan time:', event.startDate);
+    console.log('UTC time for Google:', startDateUTC);
+  }
+  
+  return url;
 };
 
 // Generate Apple Calendar URL (same as ICS download)
