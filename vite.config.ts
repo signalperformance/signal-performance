@@ -25,7 +25,6 @@ export default defineConfig(({ mode }) => ({
         manualChunks: {
           vendor: ['react', 'react-dom'],
           ui: ['@radix-ui/react-accordion', '@radix-ui/react-tooltip', 'embla-carousel-react'],
-          animations: ['p5'],
         },
       },
     },
