@@ -9,13 +9,15 @@ const Footer = () => {
   return <footer id="contact" className="bg-signal-black text-white py-6 scroll-mt-24 lg:scroll-mt-32">
       <div className="container mx-auto container-padding">
         <div className="text-center mb-4">
-          <button 
-            onClick={() => window.location.href = 'https://www.instagram.com/signalperformance/'}
+          <a 
+            href="https://www.instagram.com/signalperformance/" 
+            target="_blank" 
+            rel="noopener noreferrer"
             className="inline-flex items-center justify-center text-slate-50 hover:text-signal-gold transition-colors"
             aria-label="Instagram"
           >
             <Instagram size={24} />
-          </button>
+          </a>
         </div>
         <div className="text-center text-muted-foreground text-sm">
           <p className="text-slate-50 text-xs">{copyrightText}</p>

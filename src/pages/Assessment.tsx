@@ -106,13 +106,11 @@ const Assessment = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent className="text-center">
-                <Button 
-                  onClick={() => window.location.href = 'https://lin.ee/2mE17yG'}
-                  className="bg-[#00B900] hover:bg-[#00A000] text-white font-medium px-8 py-3 h-auto flex items-center gap-2" 
-                  size="lg"
-                >
-                  <MessageCircle className="w-5 h-5" />
-                  {t('assessment.prep.lineButton.text')}
+                <Button asChild className="bg-[#00B900] hover:bg-[#00A000] text-white font-medium px-8 py-3 h-auto" size="lg">
+                  <a href="https://lin.ee/2mE17yG" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+                    <MessageCircle className="w-5 h-5" />
+                    {t('assessment.prep.lineButton.text')}
+                  </a>
                 </Button>
               </CardContent>
             </Card>
