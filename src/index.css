@@ -78,18 +78,16 @@
     @apply bg-background text-foreground;
   }
 
-  /* Dynamic font application based on language with font-display optimization */
+  /* Dynamic font application based on language */
   body[data-language="zh"] {
     @apply font-ibm-plex-sans-jp;
-    font-display: swap;
   }
 
   body[data-language="en"] {
     @apply font-montserrat;
-    font-display: swap;
   }
 
-  /* Heading fonts with font-display optimization */
+  /* Heading fonts */
   body[data-language="zh"] h1,
   body[data-language="zh"] h2,
   body[data-language="zh"] h3,
@@ -97,7 +95,6 @@
   body[data-language="zh"] h5,
   body[data-language="zh"] h6 {
     @apply font-ibm-plex-sans-jp;
-    font-display: swap;
   }
 
   body[data-language="en"] h1,
@@ -107,7 +104,6 @@
   body[data-language="en"] h5,
   body[data-language="en"] h6 {
     @apply font-lora;
-    font-display: swap;
   }
 
   /* Brand-specific font that overrides language-based font switching */

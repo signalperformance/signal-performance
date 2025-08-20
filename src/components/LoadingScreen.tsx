@@ -26,19 +26,12 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
       }));
       promises.push(...imagePromises);
 
-      // Wait for fonts to load with specific focus on Chinese fonts
-      const fontPromise = document.fonts.ready.then(() => {
-        // Ensure critical fonts are loaded
-        const criticalFonts = ['IBM Plex Sans JP', 'Montserrat', 'Lora'];
-        return Promise.all(criticalFonts.map(font => document.fonts.load(`400 16px "${font}"`)));
-      }).catch(() => {
-        // Continue even if font loading fails
-        return Promise.resolve();
-      });
+      // Wait for fonts to load
+      const fontPromise = document.fonts.ready;
       promises.push(fontPromise);
 
-      // Increased loading time to ensure fonts and translations are ready
-      const minLoadTime = new Promise(resolve => setTimeout(resolve, 1200));
+      // Reduced loading time for better performance
+      const minLoadTime = new Promise(resolve => setTimeout(resolve, 800));
       promises.push(minLoadTime);
 
       try {
