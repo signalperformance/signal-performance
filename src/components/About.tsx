@@ -13,7 +13,7 @@ const About = () => {
       <div className="container mx-auto container-padding">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-8">
-            <h2 data-scroll-anchor className="text-3xl md:text-4xl font-bold mb-4 font-lora text-signal-charcoal">{t('about.coach.title')}</h2>
+            <h2 data-scroll-anchor className="text-3xl md:text-4xl font-bold mb-4 text-signal-charcoal">{t('about.coach.title')}</h2>
             <Separator className="mx-auto w-24 bg-signal-gold h-0.5" />
           </div>
           
