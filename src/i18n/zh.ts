@@ -381,7 +381,15 @@ const zh = {
   
   // Empty States
   'portal.empty.noBookingsTitle': '沒有即將到來的預約',
-  'portal.empty.noBookingsDesc': '您尚未預約任何課程。請查看課程表以預約您的第一堂課！'
+  'portal.empty.noBookingsDesc': '您尚未預約任何課程。請查看課程表以預約您的第一堂課！',
+
+  // Login placeholders and messages
+  'portal.login.emailPlaceholder': '請輸入您的電子郵件',
+  'portal.login.passwordPlaceholder': '請輸入您的密碼',
+  'portal.login.signingIn': '登入中...',
+  'portal.login.loginSuccess': '登入成功',
+  'portal.login.welcomeMessage': '歡迎使用您的訓練入口！',
+  'portal.login.errorOccurred': '登入時發生錯誤，請重試。'
 };
 
 export default zh;

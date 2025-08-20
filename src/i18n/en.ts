@@ -381,7 +381,15 @@ const en = {
   
   // Empty States
   'portal.empty.noBookingsTitle': 'No upcoming bookings',
-  'portal.empty.noBookingsDesc': "You haven't booked any sessions yet. Check the schedule to book your first session!"
+  'portal.empty.noBookingsDesc': "You haven't booked any sessions yet. Check the schedule to book your first session!",
+
+  // Login placeholders and messages
+  'portal.login.emailPlaceholder': 'Enter your email',
+  'portal.login.passwordPlaceholder': 'Enter your password',
+  'portal.login.signingIn': 'Signing in...',
+  'portal.login.loginSuccess': 'Login successful',
+  'portal.login.welcomeMessage': 'Welcome to your client portal!',
+  'portal.login.errorOccurred': 'An error occurred during login. Please try again.'
 };
 
 export default en;
