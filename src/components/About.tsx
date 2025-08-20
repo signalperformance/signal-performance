@@ -30,7 +30,7 @@ const About = () => {
                 </div>
               </div>
               <div className="text-center">
-                <h3 className="text-2xl font-bold font-lora text-signal-charcoal">{t('about.coach.name')}</h3>
+                <h3 className="text-2xl font-bold text-signal-charcoal">{t('about.coach.name')}</h3>
                 <p className="text-signal-gold mt-1 text-base font-semibold">{t('about.coach.position')}</p>
               </div>
             </div>
