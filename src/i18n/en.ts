@@ -258,6 +258,7 @@ const en = {
   'client.schedule.today': 'Today',
   'client.schedule.weekOf': 'Week of',
 
+
   // Session Card
   'client.session.bookSession': 'Book Session',
   'client.session.booked': 'Booked',

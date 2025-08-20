@@ -258,6 +258,7 @@ const zh = {
   'client.schedule.today': '今天',
   'client.schedule.weekOf': '週次',
 
+
   // Session Card
   'client.session.bookSession': '預約課程',
   'client.session.booked': '已預約',

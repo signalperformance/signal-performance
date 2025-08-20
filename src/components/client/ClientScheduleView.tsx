@@ -11,13 +11,23 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { format, startOfWeek, addWeeks, isSameDay, isToday } from 'date-fns';
+import { zhCN } from 'date-fns/locale';
 import { useToast } from '@/hooks/use-toast';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
 export const ClientScheduleView: React.FC = () => {
   const { user } = useAuth();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+
+  // Helper function to get translated day names
+  const getDayName = (dayIndex: number) => {
+    if (language === 'zh') {
+      const dayNames = ['日', '一', '二', '三', '四', '五', '六'];
+      return dayNames[dayIndex];
+    }
+    return format(new Date(2023, 0, dayIndex + 1), 'EEE'); // Use a reference date for consistent formatting
+  };
   const { 
     getScheduleWithAvailability, 
     bookSession, 
@@ -196,7 +206,10 @@ export const ClientScheduleView: React.FC = () => {
               {t('client.schedule.title')}
               {!isMobile && (
                 <Badge variant="outline">
-                  {format(weekStart, 'MMM dd')} - {format(weekEnd, 'MMM dd, yyyy')}
+                  {language === 'zh' ? 
+                    `${format(weekStart, 'M月dd日', { locale: zhCN })} - ${format(weekEnd, 'M月dd日, yyyy年', { locale: zhCN })}` :
+                    `${format(weekStart, 'MMM dd')} - ${format(weekEnd, 'MMM dd, yyyy')}`
+                  }
                 </Badge>
               )}
             </CardTitle>
@@ -235,7 +248,10 @@ export const ClientScheduleView: React.FC = () => {
           {isMobile && (
             <div className="mt-2">
               <Badge variant="outline" className="text-xs">
-                {format(weekStart, 'MMM dd')} - {format(weekEnd, 'MMM dd, yyyy')}
+                {language === 'zh' ? 
+                  `${format(weekStart, 'M月dd日', { locale: zhCN })} - ${format(weekEnd, 'M月dd日, yyyy年', { locale: zhCN })}` :
+                  `${format(weekStart, 'MMM dd')} - ${format(weekEnd, 'MMM dd, yyyy')}`
+                }
               </Badge>
             </div>
           )}
@@ -248,7 +264,7 @@ export const ClientScheduleView: React.FC = () => {
           <div className="grid grid-cols-7 gap-1 p-1">
             {weekDays.map((date) => {
               const dayStr = format(date, 'yyyy-MM-dd');
-              const dayName = format(date, 'EEE');
+              const dayName = getDayName(date.getDay());
               const dateNum = format(date, 'dd');
               const isSelected = selectedDay === dayStr;
               const isPast = isPastDate(date);
@@ -276,7 +292,7 @@ export const ClientScheduleView: React.FC = () => {
           <TabsList className="grid w-full grid-cols-7 h-auto">
             {weekDays.map((date) => {
               const dayStr = format(date, 'yyyy-MM-dd');
-              const dayName = format(date, 'EEE');
+              const dayName = getDayName(date.getDay());
               const dateNum = format(date, 'dd');
               const sessions = getSessionsForDay(date);
               const userBookingsCount = sessions.filter(session => isSessionBooked(session)).length;
@@ -305,11 +321,20 @@ export const ClientScheduleView: React.FC = () => {
             <CardHeader>
               <CardTitle className="flex items-center justify-between">
                 <span>
-                  {isMobile ? format(selectedDate, 'MMMM dd') : format(selectedDate, 'EEEE, MMMM dd')}
+                  {language === 'zh' ? 
+                    (isMobile ? 
+                      format(selectedDate, 'M月dd日', { locale: zhCN }) : 
+                      `星期${getDayName(selectedDate.getDay())}, ${format(selectedDate, 'M月dd日', { locale: zhCN })}`
+                    ) :
+                    (isMobile ? format(selectedDate, 'MMMM dd') : format(selectedDate, 'EEEE, MMMM dd'))
+                  }
                   {isToday(selectedDate) && <Badge variant="outline" className="ml-2">{t('client.schedule.today')}</Badge>}
                 </span>
                 <Badge variant="secondary">
-                  {selectedDaySessions.length} session{selectedDaySessions.length !== 1 ? 's' : ''}
+                  {language === 'zh' ? 
+                    `${selectedDaySessions.length} 個課程` :
+                    `${selectedDaySessions.length} session${selectedDaySessions.length !== 1 ? 's' : ''}`
+                  }
                 </Badge>
               </CardTitle>
             </CardHeader>
