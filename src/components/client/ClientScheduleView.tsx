@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { useBookingStore } from '@/stores/useBookingStore';
 import { ScheduleWithAvailability } from '@/types/client';
 import { SessionCard } from './SessionCard';
@@ -16,6 +17,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 
 export const ClientScheduleView: React.FC = () => {
   const { user } = useAuth();
+  const { t } = useLanguage();
   const { 
     getScheduleWithAvailability, 
     bookSession, 
@@ -125,13 +127,13 @@ export const ClientScheduleView: React.FC = () => {
     const success = await bookSession(selectedSession, user.id);
     if (success) {
       toast({
-        title: "Session booked!",
-        description: `Booked ${selectedSession.name} on ${format(selectedSession.date, 'EEEE, MMM dd')}`,
+        title: t('portal.toast.bookingSuccess'),
+        description: `${t('portal.booking.booked')} ${selectedSession.name} on ${format(selectedSession.date, 'EEEE, MMM dd')}`,
       });
     } else {
       toast({
-        title: "Booking failed",
-        description: "Unable to book session. It may be full or you may already be booked.",
+        title: t('portal.toast.bookingError'),
+        description: t('portal.validation.sessionFull') || "Unable to book session. It may be full or you may already be booked.",
         variant: "destructive",
       });
     }
@@ -191,7 +193,7 @@ export const ClientScheduleView: React.FC = () => {
         <CardHeader>
           <div className="flex items-center justify-between">
             <CardTitle className={`flex items-center gap-2 ${isMobile ? 'text-lg' : ''}`}>
-              Training Schedule
+              {t('schedule.title')}
               {!isMobile && (
                 <Badge variant="outline">
                   {format(weekStart, 'MMM dd')} - {format(weekEnd, 'MMM dd, yyyy')}
@@ -207,7 +209,7 @@ export const ClientScheduleView: React.FC = () => {
                 className={isMobile ? "px-3" : ""}
               >
                 <ChevronLeft className="h-4 w-4" />
-                {!isMobile && "Previous"}
+                {!isMobile && t('portal.schedule.prevWeek')}
               </Button>
               <Button
                 variant="outline"
@@ -225,7 +227,7 @@ export const ClientScheduleView: React.FC = () => {
                 })()}
                 className={isMobile ? "px-3" : ""}
               >
-                {!isMobile && "Next"}
+                {!isMobile && t('portal.schedule.nextWeek')}
                 <ChevronRight className="h-4 w-4" />
               </Button>
             </div>
@@ -304,7 +306,7 @@ export const ClientScheduleView: React.FC = () => {
               <CardTitle className="flex items-center justify-between">
                 <span>
                   {isMobile ? format(selectedDate, 'MMMM dd') : format(selectedDate, 'EEEE, MMMM dd')}
-                  {isToday(selectedDate) && <Badge variant="outline" className="ml-2">Today</Badge>}
+                  {isToday(selectedDate) && <Badge variant="outline" className="ml-2">{t('portal.days.today')}</Badge>}
                 </span>
                 <Badge variant="secondary">
                   {selectedDaySessions.length} session{selectedDaySessions.length !== 1 ? 's' : ''}
@@ -314,7 +316,7 @@ export const ClientScheduleView: React.FC = () => {
             <CardContent>
               {selectedDaySessions.length === 0 ? (
                 <div className="text-center py-8">
-                  <p className="text-muted-foreground">No sessions scheduled for this day</p>
+                  <p className="text-muted-foreground">{t('portal.schedule.noSessions') || 'No sessions scheduled for this day'}</p>
                 </div>
               ) : (
                 <div className={`grid gap-4 ${isMobile ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'}`}>

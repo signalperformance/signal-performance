@@ -222,7 +222,117 @@ const zh = {
   'assessment.prep.reminders.restAndHydrate': '保持充足睡眠並補充水分，確保測試結果準確',
   'assessment.prep.contactInfo': '如有任何問題，請聯繫我們的團隊：noah@signalperformance.golf',
   'assessment.prep.lineButton.title': '聯絡我們',
-  'assessment.prep.lineButton.text': '加入 LINE 好友'
+  'assessment.prep.lineButton.text': '加入 LINE 好友',
+
+  // Training Portal - Navigation & UI
+  'portal.title': '訓練入口',
+  'portal.nav.schedule': '課程表',
+  'portal.nav.bookings': '我的預約',
+  'portal.nav.signOut': '登出',
+  'portal.nav.logout': '登出',
+  
+  // User Info & Status
+  'portal.user.member': '會員',
+  'portal.user.sessionsUsed': '已使用課程',
+  'portal.user.paymentStatus': '付款狀態',
+  'portal.user.accountInfo': '帳戶資訊',
+  
+  // Payment Status
+  'portal.payment.current': '正常',
+  'portal.payment.due': '待付款',
+  'portal.payment.overdue': '逾期',
+  'portal.payment.suspended': '暫停',
+  
+  // Session Types & Time
+  'portal.session.pro': '職業',
+  'portal.session.amateur': '業餘',
+  'portal.session.available': '可預約',
+  'portal.session.full': '額滿',
+  'portal.session.spots': '名額',
+  'portal.session.remaining': '剩餘',
+  
+  // Booking Actions
+  'portal.booking.book': '預約課程',
+  'portal.booking.booked': '已預約',
+  'portal.booking.cancel': '取消預約',
+  'portal.booking.confirmCancel': '確認取消',
+  'portal.booking.addToCalendar': '加入行事曆',
+  
+  // Schedule Navigation
+  'portal.schedule.today': '今天',
+  'portal.schedule.thisWeek': '本週',
+  'portal.schedule.nextWeek': '下週',
+  'portal.schedule.prevWeek': '上週',
+  'portal.schedule.weekOf': '週次',
+  
+  // Day Labels
+  'portal.days.today': '今天',
+  'portal.days.tomorrow': '明天',
+  'portal.days.yesterday': '昨天',
+  
+  // Booking Modal
+  'portal.modal.sessionDetails': '課程詳情',
+  'portal.modal.date': '日期',
+  'portal.modal.time': '時間',
+  'portal.modal.close': '關閉',
+  'portal.modal.confirm': '確認預約',
+  
+  // My Bookings
+  'portal.bookings.title': '我的預約',
+  'portal.bookings.upcoming': '即將到來的課程',
+  'portal.bookings.noBookings': '沒有即將到來的預約',
+  'portal.bookings.bookYourFirst': '從課程表頁籤預約您的第一堂課',
+  'portal.bookings.cancelWindow': '您可在課程開始前3小時取消',
+  'portal.bookings.cannotCancel': '課程開始前3小時內無法取消',
+  
+  // Calendar Services
+  'portal.calendar.google': 'Google 行事曆',
+  'portal.calendar.outlook': 'Outlook 行事曆',
+  'portal.calendar.apple': 'Apple 行事曆',
+  'portal.calendar.download': '下載 ICS 檔案',
+  
+  // Session Limits & Validation
+  'portal.limits.reached': '課程額度已用完',
+  'portal.limits.available': '本期間可用課程',
+  'portal.limits.noSessions': '無可用課程',
+  'portal.limits.upgradeRequired': '升級會員以獲得更多課程',
+  
+  // Booking Validation Messages
+  'portal.validation.sessionFull': '此課程已額滿',
+  'portal.validation.alreadyBooked': '您已預約此課程',
+  'portal.validation.paymentRequired': '需先付款才能預約課程',
+  'portal.validation.membershipRequired': '需要有效會員資格',
+  'portal.validation.pastSession': '無法預約過去的課程',
+  'portal.validation.tooFarAdvance': '無法預約超過2週後的課程',
+  
+  // Toast Messages
+  'portal.toast.bookingSuccess': '課程預約成功！',
+  'portal.toast.bookingError': '預約失敗，請重試。',
+  'portal.toast.cancelSuccess': '預約取消成功',
+  'portal.toast.cancelError': '取消預約失敗，請重試。',
+  'portal.toast.calendarAdded': '成功加入行事曆',
+  'portal.toast.calendarError': '無法加入行事曆',
+  
+  // Account Status
+  'portal.account.deactivated': '帳戶暫時停用',
+  'portal.account.deactivatedMessage': '您的帳戶已暫時停用。請聯繫客服尋求協助。',
+  'portal.account.contactSupport': '聯繫客服',
+  'portal.account.supportLine': '透過 LINE 聯繫',
+  
+  // Login Portal
+  'portal.login.title': '會員登入',
+  'portal.login.subtitle': '進入您的訓練入口',
+  'portal.login.email': '電子郵件',
+  'portal.login.password': '密碼',
+  'portal.login.signIn': '登入',
+  'portal.login.forgotPassword': '忘記密碼',
+  'portal.login.invalidCredentials': '無效的電子郵件或密碼',
+  'portal.login.loginError': '登入失敗，請重試。',
+  
+  // Loading States
+  'portal.loading.sessions': '載入課程中...',
+  'portal.loading.bookings': '載入預約中...',
+  'portal.loading.user': '載入用戶資料中...'
 };
 
 export default zh;

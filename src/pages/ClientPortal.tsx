@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
+import { LanguageProvider } from '@/contexts/LanguageContext';
 import { useNavigate } from 'react-router-dom';
 import { ClientNavbar } from '@/components/client/ClientNavbar';
 import { ClientScheduleView } from '@/components/client/ClientScheduleView';
@@ -37,23 +38,27 @@ export default function ClientPortal() {
   // Show deactivated modal if user account is inactive
   if (!user.isActive) {
     return (
-      <div className="min-h-screen bg-background">
-        <AccountDeactivatedModal open={true} />
-      </div>
+      <LanguageProvider>
+        <div className="min-h-screen bg-background">
+          <AccountDeactivatedModal open={true} />
+        </div>
+      </LanguageProvider>
     );
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <ClientNavbar activeTab={activeTab} onTabChange={setActiveTab} />
-      
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {activeTab === 'schedule' ? (
-          <ClientScheduleView />
-        ) : (
-          <MyBookings />
-        )}
-      </main>
-    </div>
+    <LanguageProvider>
+      <div className="min-h-screen bg-background">
+        <ClientNavbar activeTab={activeTab} onTabChange={setActiveTab} />
+        
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          {activeTab === 'schedule' ? (
+            <ClientScheduleView />
+          ) : (
+            <MyBookings />
+          )}
+        </main>
+      </div>
+    </LanguageProvider>
   );
 }

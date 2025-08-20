@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Switch } from '@/components/ui/switch';
@@ -17,6 +18,7 @@ interface ClientNavbarProps {
 
 export const ClientNavbar: React.FC<ClientNavbarProps> = ({ activeTab, onTabChange }) => {
   const { user, logout } = useAuth();
+  const { language, setLanguage, t } = useLanguage();
   const { sessionInfo, loading } = useSessionLimits();
   const paymentInfo = useClientPaymentStatus(user?.id, user?.monthlyRenewalDate);
   const { toast } = useToast();
@@ -26,21 +28,26 @@ export const ClientNavbar: React.FC<ClientNavbarProps> = ({ activeTab, onTabChan
   const handleLogout = () => {
     logout();
     toast({
-      title: "Logged out successfully",
-      description: "See you next time!",
+      title: t('portal.nav.logout'),
+      description: t('portal.toast.logoutSuccess') || 'See you next time!',
     });
+  };
+
+  const handleLanguageToggle = () => {
+    setLanguage(language === 'zh' ? 'en' : 'zh');
   };
 
   const MobileUserInfo = () => (
     <div className="space-y-4">
       {/* Language Toggle - Mobile */}
       <div className="flex items-center justify-center space-x-1 p-3 bg-muted rounded-lg">
-        <span className="text-xs font-medium text-signal-gold">EN</span>
+        <span className={`text-xs font-medium ${language === 'en' ? 'text-signal-gold' : 'text-signal-charcoal'}`}>EN</span>
         <Switch 
-          checked={false} 
+          checked={language === 'zh'} 
+          onCheckedChange={handleLanguageToggle}
           className="data-[state=checked]:bg-signal-gold data-[state=unchecked]:bg-signal-charcoal" 
         />
-        <span className="text-xs font-medium text-signal-charcoal">中文</span>
+        <span className={`text-xs font-medium ${language === 'zh' ? 'text-signal-gold' : 'text-signal-charcoal'}`}>中文</span>
       </div>
 
       <div className="flex items-center space-x-3 p-4 bg-muted rounded-lg">
@@ -49,7 +56,7 @@ export const ClientNavbar: React.FC<ClientNavbarProps> = ({ activeTab, onTabChan
         </div>
         <div>
           <div className="font-medium">{user?.firstName} {user?.lastName}</div>
-          <div className="text-sm text-muted-foreground capitalize">{user?.membershipPlan} Member</div>
+          <div className="text-sm text-muted-foreground capitalize">{user?.membershipPlan} {t('portal.user.member')}</div>
         </div>
       </div>
 
@@ -58,7 +65,7 @@ export const ClientNavbar: React.FC<ClientNavbarProps> = ({ activeTab, onTabChan
           <div className="flex items-center justify-between p-3 bg-muted rounded-lg">
             <div className="flex items-center space-x-2">
               <Clock className="h-4 w-4 text-muted-foreground" />
-              <span className="text-sm">Sessions Used</span>
+              <span className="text-sm">{t('portal.user.sessionsUsed')}</span>
             </div>
             <Badge variant={sessionInfo.remainingSessions <= 2 ? "destructive" : "secondary"}>
               {sessionInfo.usedSessions}/{sessionInfo.totalSessions}
@@ -70,7 +77,7 @@ export const ClientNavbar: React.FC<ClientNavbarProps> = ({ activeTab, onTabChan
           <div className="flex items-center justify-between p-3 bg-destructive/10 rounded-lg">
             <div className="flex items-center space-x-2">
               <CreditCard className="h-4 w-4 text-destructive" />
-              <span className="text-sm text-destructive">Payment Status</span>
+              <span className="text-sm text-destructive">{t('portal.user.paymentStatus')}</span>
             </div>
             <Badge variant={paymentInfo.isOverdue || paymentInfo.isDueToday ? "destructive" : "secondary"}>
               {paymentInfo.displayText}
@@ -81,7 +88,7 @@ export const ClientNavbar: React.FC<ClientNavbarProps> = ({ activeTab, onTabChan
 
       <Button onClick={handleLogout} variant="outline" className="w-full" size="lg">
         <LogOut className="h-4 w-4 mr-2" />
-        Sign Out
+        {t('portal.nav.signOut')}
       </Button>
     </div>
   );
@@ -100,7 +107,7 @@ export const ClientNavbar: React.FC<ClientNavbarProps> = ({ activeTab, onTabChan
                 />
               </div>
               <h1 className="text-xl font-bold text-foreground brand-font">
-                Training Portal
+                {t('portal.title')}
               </h1>
             </div>
             
@@ -111,7 +118,7 @@ export const ClientNavbar: React.FC<ClientNavbarProps> = ({ activeTab, onTabChan
                 className="flex items-center gap-2"
               >
                 <Calendar className="h-4 w-4" />
-                Schedule
+                {t('portal.nav.schedule')}
               </Button>
               <Button
                 variant={activeTab === 'bookings' ? 'default' : 'ghost'}
@@ -119,7 +126,7 @@ export const ClientNavbar: React.FC<ClientNavbarProps> = ({ activeTab, onTabChan
                 className="flex items-center gap-2"
               >
                 <BookOpen className="h-4 w-4" />
-                My Bookings
+                {t('portal.nav.bookings')}
               </Button>
             </div>
           </div>
@@ -145,23 +152,24 @@ export const ClientNavbar: React.FC<ClientNavbarProps> = ({ activeTab, onTabChan
             <div className="flex items-center space-x-3">
               <div className="text-sm">
                 <div className="font-medium">{user?.firstName} {user?.lastName}</div>
-                <div className="text-muted-foreground capitalize">{user?.membershipPlan} Member</div>
+                <div className="text-muted-foreground capitalize">{user?.membershipPlan} {t('portal.user.member')}</div>
               </div>
             </div>
 
             {/* Language Toggle - Desktop */}
             <div className="flex items-center space-x-2">
-              <span className="text-xs md:text-sm font-medium text-signal-gold">EN</span>
+              <span className={`text-xs md:text-sm font-medium ${language === 'en' ? 'text-signal-gold' : 'text-signal-charcoal'}`}>EN</span>
               <Switch 
-                checked={false} 
+                checked={language === 'zh'} 
+                onCheckedChange={handleLanguageToggle}
                 className="data-[state=checked]:bg-signal-gold data-[state=unchecked]:bg-signal-charcoal" 
               />
-              <span className="text-xs md:text-sm font-medium text-signal-charcoal">中文</span>
+              <span className={`text-xs md:text-sm font-medium ${language === 'zh' ? 'text-signal-gold' : 'text-signal-charcoal'}`}>中文</span>
             </div>
             
             <Button variant="ghost" size="sm" onClick={handleLogout}>
               <LogOut className="h-4 w-4" />
-              <span className="ml-2">Logout</span>
+              <span className="ml-2">{t('portal.nav.logout')}</span>
             </Button>
           </div>
 
@@ -175,7 +183,7 @@ export const ClientNavbar: React.FC<ClientNavbarProps> = ({ activeTab, onTabChan
               </SheetTrigger>
               <SheetContent side="right" className="w-80">
                 <SheetHeader>
-                  <SheetTitle>Account Info</SheetTitle>
+                  <SheetTitle>{t('portal.user.accountInfo')}</SheetTitle>
                 </SheetHeader>
                 <div className="mt-6">
                   <MobileUserInfo />
@@ -194,7 +202,7 @@ export const ClientNavbar: React.FC<ClientNavbarProps> = ({ activeTab, onTabChan
               className="flex-1 rounded-none justify-center gap-2 h-14 text-base"
             >
               <Calendar className="h-5 w-5" />
-              Schedule
+              {t('portal.nav.schedule')}
             </Button>
             <Button
               variant={activeTab === 'bookings' ? 'default' : 'ghost'}
@@ -202,7 +210,7 @@ export const ClientNavbar: React.FC<ClientNavbarProps> = ({ activeTab, onTabChan
               className="flex-1 rounded-none justify-center gap-2 h-14 text-base"
             >
               <BookOpen className="h-5 w-5" />
-              My Bookings
+              {t('portal.nav.bookings')}
             </Button>
           </div>
         </div>

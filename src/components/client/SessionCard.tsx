@@ -1,5 +1,6 @@
 import React from 'react';
 import { ScheduleWithAvailability } from '@/types/client';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -24,6 +25,7 @@ export const SessionCard: React.FC<SessionCardProps> = ({
   className,
   isMobile = false,
 }) => {
+  const { t } = useLanguage();
   const isFull = session.currentBookings >= session.maxParticipants;
   const spotsLeft = session.maxParticipants - session.currentBookings;
   
@@ -61,13 +63,13 @@ export const SessionCard: React.FC<SessionCardProps> = ({
           <div className="flex gap-2">
             {spotsLeft <= 3 && spotsLeft > 0 && (
               <Badge variant="outline" className={isMobile ? "text-sm px-3 py-1" : "text-xs"}>
-                {spotsLeft} left
+                {spotsLeft} {t('portal.session.remaining')}
               </Badge>
             )}
             
             {isFull && (
               <Badge variant="destructive" className={isMobile ? "text-sm px-3 py-1" : "text-xs"}>
-                Full
+                {t('portal.session.full')}
               </Badge>
             )}
           </div>
@@ -84,7 +86,7 @@ export const SessionCard: React.FC<SessionCardProps> = ({
           className="w-full"
           size={isMobile ? "lg" : "sm"}
         >
-          {isBooked ? 'Booked' : isFull ? 'Full' : 'Book Session'}
+          {isBooked ? t('portal.booking.booked') : isFull ? t('portal.session.full') : t('portal.booking.book')}
         </Button>
       </CardContent>
     </Card>

@@ -222,7 +222,117 @@ const en = {
   'assessment.prep.reminders.restAndHydrate': 'Get sufficient sleep and stay hydrated to ensure accurate results',
   'assessment.prep.contactInfo': 'If you have any questions, please contact our team at noah@signalperformance.golf',
   'assessment.prep.lineButton.title': 'Contact us',
-  'assessment.prep.lineButton.text': 'Add LINE Friend'
+  'assessment.prep.lineButton.text': 'Add LINE Friend',
+
+  // Training Portal - Navigation & UI
+  'portal.title': 'Training Portal',
+  'portal.nav.schedule': 'Schedule',
+  'portal.nav.bookings': 'My Bookings',
+  'portal.nav.signOut': 'Sign Out',
+  'portal.nav.logout': 'Logout',
+  
+  // User Info & Status
+  'portal.user.member': 'Member',
+  'portal.user.sessionsUsed': 'Sessions Used',
+  'portal.user.paymentStatus': 'Payment Status',
+  'portal.user.accountInfo': 'Account Info',
+  
+  // Payment Status
+  'portal.payment.current': 'Current',
+  'portal.payment.due': 'Due',
+  'portal.payment.overdue': 'Overdue',
+  'portal.payment.suspended': 'Suspended',
+  
+  // Session Types & Time
+  'portal.session.pro': 'PRO',
+  'portal.session.amateur': 'Amateur',
+  'portal.session.available': 'Available',
+  'portal.session.full': 'Full',
+  'portal.session.spots': 'spots',
+  'portal.session.remaining': 'remaining',
+  
+  // Booking Actions
+  'portal.booking.book': 'Book Session',
+  'portal.booking.booked': 'Booked',
+  'portal.booking.cancel': 'Cancel Booking',
+  'portal.booking.confirmCancel': 'Confirm Cancellation',
+  'portal.booking.addToCalendar': 'Add to Calendar',
+  
+  // Schedule Navigation
+  'portal.schedule.today': 'Today',
+  'portal.schedule.thisWeek': 'This Week',
+  'portal.schedule.nextWeek': 'Next Week',
+  'portal.schedule.prevWeek': 'Previous Week',
+  'portal.schedule.weekOf': 'Week of',
+  
+  // Day Labels
+  'portal.days.today': 'Today',
+  'portal.days.tomorrow': 'Tomorrow',
+  'portal.days.yesterday': 'Yesterday',
+  
+  // Booking Modal
+  'portal.modal.sessionDetails': 'Session Details',
+  'portal.modal.date': 'Date',
+  'portal.modal.time': 'Time',
+  'portal.modal.close': 'Close',
+  'portal.modal.confirm': 'Confirm Booking',
+  
+  // My Bookings
+  'portal.bookings.title': 'My Bookings',
+  'portal.bookings.upcoming': 'Upcoming Sessions',
+  'portal.bookings.noBookings': 'No upcoming bookings',
+  'portal.bookings.bookYourFirst': 'Book your first session from the Schedule tab',
+  'portal.bookings.cancelWindow': 'You can cancel up to 3 hours before the session',
+  'portal.bookings.cannotCancel': 'Cannot cancel within 3 hours of session',
+  
+  // Calendar Services
+  'portal.calendar.google': 'Google Calendar',
+  'portal.calendar.outlook': 'Outlook Calendar',
+  'portal.calendar.apple': 'Apple Calendar',
+  'portal.calendar.download': 'Download ICS File',
+  
+  // Session Limits & Validation
+  'portal.limits.reached': 'Session limit reached',
+  'portal.limits.available': 'sessions available this period',
+  'portal.limits.noSessions': 'No sessions available',
+  'portal.limits.upgradeRequired': 'Upgrade membership for more sessions',
+  
+  // Booking Validation Messages
+  'portal.validation.sessionFull': 'This session is full',
+  'portal.validation.alreadyBooked': 'You have already booked this session',
+  'portal.validation.paymentRequired': 'Payment required to book sessions',
+  'portal.validation.membershipRequired': 'Valid membership required',
+  'portal.validation.pastSession': 'Cannot book past sessions',
+  'portal.validation.tooFarAdvance': 'Cannot book more than 2 weeks in advance',
+  
+  // Toast Messages
+  'portal.toast.bookingSuccess': 'Session booked successfully!',
+  'portal.toast.bookingError': 'Failed to book session. Please try again.',
+  'portal.toast.cancelSuccess': 'Booking cancelled successfully',
+  'portal.toast.cancelError': 'Failed to cancel booking. Please try again.',
+  'portal.toast.calendarAdded': 'Added to calendar successfully',
+  'portal.toast.calendarError': 'Failed to add to calendar',
+  
+  // Account Status
+  'portal.account.deactivated': 'Account Temporarily Deactivated',
+  'portal.account.deactivatedMessage': 'Your account has been temporarily deactivated. Please contact support for assistance.',
+  'portal.account.contactSupport': 'Contact Support',
+  'portal.account.supportLine': 'Contact via LINE',
+  
+  // Login Portal
+  'portal.login.title': 'Member Login',
+  'portal.login.subtitle': 'Access your training portal',
+  'portal.login.email': 'Email',
+  'portal.login.password': 'Password',
+  'portal.login.signIn': 'Sign In',
+  'portal.login.forgotPassword': 'Forgot Password',
+  'portal.login.invalidCredentials': 'Invalid email or password',
+  'portal.login.loginError': 'Login failed. Please try again.',
+  
+  // Loading States
+  'portal.loading.sessions': 'Loading sessions...',
+  'portal.loading.bookings': 'Loading bookings...',
+  'portal.loading.user': 'Loading user data...'
 };
 
 export default en;
