@@ -112,12 +112,12 @@ const About = () => {
                       </div>
                       <div className="flex justify-center">
                         <div className="w-16 h-16">
-                          <img alt="FMS Certified 2" className="w-full h-full object-contain" src="/lovable-uploads/385d07dd-80d6-44cb-b2ef-9cbc80e9c887.png" />
+                          <img alt="FRA Certification" className="w-full h-full object-contain" src="/lovable-uploads/ea936717-eb96-4705-98af-8513f4b6c976.png" />
                         </div>
                       </div>
                       <div className="flex justify-center">
                         <div className="w-16 h-16">
-                          <img alt="FRA Certification" className="w-full h-full object-contain" src="/lovable-uploads/ea936717-eb96-4705-98af-8513f4b6c976.png" />
+                          <img alt="FMS Certified 2" className="w-full h-full object-contain" src="/lovable-uploads/385d07dd-80d6-44cb-b2ef-9cbc80e9c887.png" />
                         </div>
                       </div>
                     </div>
@@ -173,12 +173,12 @@ const About = () => {
                         </div>
                         <div className="flex flex-col items-center">
                           <div className="w-20 h-20">
-                            <img alt="FMS Certified 2" className="w-full h-full object-contain" src="/lovable-uploads/385d07dd-80d6-44cb-b2ef-9cbc80e9c887.png" />
+                            <img alt="FRA Certification" className="w-full h-full object-contain" src="/lovable-uploads/ea936717-eb96-4705-98af-8513f4b6c976.png" />
                           </div>
                         </div>
                         <div className="flex flex-col items-center">
                           <div className="w-20 h-20">
-                            <img alt="FRA Certification" className="w-full h-full object-contain" src="/lovable-uploads/ea936717-eb96-4705-98af-8513f4b6c976.png" />
+                            <img alt="FMS Certified 2" className="w-full h-full object-contain" src="/lovable-uploads/385d07dd-80d6-44cb-b2ef-9cbc80e9c887.png" />
                           </div>
                         </div>
                       </div>
