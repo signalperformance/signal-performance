@@ -93,7 +93,7 @@ const About = () => {
                       </div>
                       <div className="flex justify-center">
                         <div className="w-16 h-16">
-                          <img alt="TPI Certified Fitness 3" className="w-full h-full object-contain" src="/lovable-uploads/902b1a90-6037-4bd1-8514-73eabbd2da80.png" />
+                          <img alt="TPI Certified Fitness 3" className="w-full h-full object-contain" src="/lovable-uploads/80663943-a684-4747-88d6-29d27b58e790.png" />
                         </div>
                       </div>
                       <div className="flex justify-center">
@@ -135,7 +135,7 @@ const About = () => {
                         </div>
                         <div className="flex flex-col items-center">
                           <div className="w-20 h-20">
-                            <img alt="TPI Certified Fitness 3" className="w-full h-full object-contain" src="/lovable-uploads/902b1a90-6037-4bd1-8514-73eabbd2da80.png" />
+                            <img alt="TPI Certified Fitness 3" className="w-full h-full object-contain" src="/lovable-uploads/80663943-a684-4747-88d6-29d27b58e790.png" />
                           </div>
                         </div>
                         <div className="flex flex-col items-center">
