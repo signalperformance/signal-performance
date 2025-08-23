@@ -102,6 +102,25 @@ const About = () => {
                         </div>
                       </div>
                     </div>
+                    
+                    {/* Third row - 3 additional certifications */}
+                    <div className="grid grid-cols-3 gap-4">
+                      <div className="flex justify-center">
+                        <div className="w-16 h-16">
+                          <img alt="FRC Certification" className="w-full h-full object-contain" src="/lovable-uploads/02648a92-ba42-467d-b308-7d76e55376a2.png" />
+                        </div>
+                      </div>
+                      <div className="flex justify-center">
+                        <div className="w-16 h-16">
+                          <img alt="FMS Certified 2" className="w-full h-full object-contain" src="/lovable-uploads/06356803-be6d-4dce-b006-b5944a61d7f8.png" />
+                        </div>
+                      </div>
+                      <div className="flex justify-center">
+                        <div className="w-16 h-16">
+                          <img alt="FRA Certification" className="w-full h-full object-contain" src="/lovable-uploads/08851ee9-0b49-49f8-a037-3b2566bfd6d3.png" />
+                        </div>
+                      </div>
+                    </div>
                   </div>
 
                   {/* Desktop layout - staggered */}
@@ -127,7 +146,7 @@ const About = () => {
                       </div>
                       
                       {/* Bottom row - 3 certifications */}
-                      <div className="flex justify-between">
+                      <div className="flex justify-between mb-6">
                         <div className="flex flex-col items-center">
                           <div className="w-20 h-20">
                             <img alt="BCIA Biofeedback Certification" className="w-full h-full object-contain" src="/lovable-uploads/b8e8e7d5-5980-475f-9534-3660f734bccf.png" />
@@ -141,6 +160,25 @@ const About = () => {
                         <div className="flex flex-col items-center">
                           <div className="w-20 h-20">
                             <img alt="BCIA Neurofeedback Certification" className="w-full h-full object-contain" src="/lovable-uploads/650394e1-2bf5-4354-b912-86a81648eaaa.png" />
+                          </div>
+                        </div>
+                      </div>
+                      
+                      {/* Third row - 3 additional certifications */}
+                      <div className="flex justify-between">
+                        <div className="flex flex-col items-center">
+                          <div className="w-20 h-20">
+                            <img alt="FRC Certification" className="w-full h-full object-contain" src="/lovable-uploads/02648a92-ba42-467d-b308-7d76e55376a2.png" />
+                          </div>
+                        </div>
+                        <div className="flex flex-col items-center">
+                          <div className="w-20 h-20">
+                            <img alt="FMS Certified 2" className="w-full h-full object-contain" src="/lovable-uploads/06356803-be6d-4dce-b006-b5944a61d7f8.png" />
+                          </div>
+                        </div>
+                        <div className="flex flex-col items-center">
+                          <div className="w-20 h-20">
+                            <img alt="FRA Certification" className="w-full h-full object-contain" src="/lovable-uploads/08851ee9-0b49-49f8-a037-3b2566bfd6d3.png" />
                           </div>
                         </div>
                       </div>
