@@ -93,7 +93,7 @@ const About = () => {
                       </div>
                       <div className="flex justify-center">
                         <div className="w-16 h-16">
-                          <img alt="BCIA Biofeedback Certification" className="w-full h-full object-contain" src="/lovable-uploads/b8e8e7d5-5980-475f-9534-3660f734bccf.png" />
+                          <img alt="TPI Certified Fitness 3" className="w-full h-full object-contain" src="/lovable-uploads/89a6cdc6-81a5-4c68-a9cf-4fc899a0a814.png" />
                         </div>
                       </div>
                       <div className="flex justify-center">
@@ -135,7 +135,7 @@ const About = () => {
                         </div>
                         <div className="flex flex-col items-center">
                           <div className="w-20 h-20">
-                            <img alt="BCIA Biofeedback Certification" className="w-full h-full object-contain" src="/lovable-uploads/b8e8e7d5-5980-475f-9534-3660f734bccf.png" />
+                            <img alt="TPI Certified Fitness 3" className="w-full h-full object-contain" src="/lovable-uploads/89a6cdc6-81a5-4c68-a9cf-4fc899a0a814.png" />
                           </div>
                         </div>
                         <div className="flex flex-col items-center">
