@@ -89,7 +89,7 @@
     font-display: swap;
   }
 
-  /* Heading fonts with font-display optimization */
+  /* Heading fonts with consistent font-display for smooth loading */
   body[data-language="zh"] h1,
   body[data-language="zh"] h2,
   body[data-language="zh"] h3,
@@ -97,8 +97,10 @@
   body[data-language="zh"] h5,
   body[data-language="zh"] h6 {
     @apply font-ibm-plex-sans-jp;
-    font-display: block !important;
+    font-display: swap;
     font-family: 'IBM Plex Sans JP', sans-serif !important;
+    transition: font-family 0.2s ease-in-out;
+    will-change: auto;
   }
 
   body[data-language="en"] h1,
@@ -109,6 +111,8 @@
   body[data-language="en"] h6 {
     @apply font-lora;
     font-display: swap;
+    transition: font-family 0.2s ease-in-out;
+    will-change: auto;
   }
 
   /* Brand-specific font that overrides language-based font switching */

@@ -1,39 +1,15 @@
 
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useState, useEffect } from 'react';
 
 const Hero = () => {
   const { t, language } = useLanguage();
-  const [isMobile, setIsMobile] = useState(false);
 
-  // Get headline and subtitle text
+  // Get headline and subtitle text - synchronous to prevent delays
   const headlineText = t('hero.headline');
   const subtitleText = language === 'zh' 
     ? '體能、心理與技術訓練集中於一個專業空間'
     : 'Physical, mental, and skill training — all in one place';
-
-  // Create mobile-friendly headline for English
-  const getMobileHeadline = () => {
-    if (language === 'zh' || !isMobile) {
-      return headlineText;
-    }
-    // For English on mobile, split after "Space"
-    return headlineText.replace('Space', 'Space\n');
-  };
-
-  const displayHeadline = getMobileHeadline();
-
-  // Check for mobile device
-  useEffect(() => {
-    const checkIfMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
-    checkIfMobile();
-    window.addEventListener('resize', checkIfMobile);
-    return () => window.removeEventListener('resize', checkIfMobile);
-  }, []);
 
   // Custom assessment button text
   const getAssessmentButtonText = () => {
@@ -81,22 +57,11 @@ const Hero = () => {
         <div className="max-w-6xl mx-auto text-center">
           {/* Modern card container with signal-charcoal background */}
           <div className="bg-signal-charcoal/95 backdrop-blur-sm rounded-2xl shadow-xl border border-signal-charcoal/60 p-8 md:p-12 lg:p-16">
-            <h1 data-scroll-anchor className={`font-bold mb-4 text-white leading-tight ${
-              isMobile 
-                ? 'text-3xl sm:text-4xl' 
-                : 'text-3xl md:text-4xl lg:text-5xl xl:text-6xl'
-            }`}
-            style={{ 
-              whiteSpace: isMobile && language === 'en' ? 'pre-line' : 'normal'
-            }}>
-              {displayHeadline}
+            <h1 data-scroll-anchor className="font-bold mb-4 text-white leading-tight text-3xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-6xl transition-all duration-300">
+              {headlineText}
             </h1>
             
-            <p className={`text-white mb-8 sm:mb-12 ${
-              isMobile 
-                ? 'text-lg sm:text-xl' 
-                : 'text-xl md:text-2xl lg:text-3xl'
-            }`}>
+            <p className="text-white mb-8 sm:mb-12 text-lg sm:text-xl md:text-xl lg:text-2xl xl:text-3xl transition-all duration-300">
               {subtitleText}
             </p>
             
