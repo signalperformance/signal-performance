@@ -147,18 +147,13 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
         </h1>
         
         {/* Enhanced loading indicator with progress */}
-        <div className="mt-8 space-y-4">
+        <div className="mt-8">
           {/* Progress dots */}
           <div className="flex space-x-1 justify-center">
             <div className="w-2 h-2 bg-signal-gold rounded-full animate-pulse"></div>
             <div className="w-2 h-2 bg-signal-gold rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
             <div className="w-2 h-2 bg-signal-gold rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
           </div>
-          
-          {/* Loading status text */}
-          <p className="text-signal-charcoal/60 text-sm text-center animate-fade-in">
-            Loading resources...
-          </p>
         </div>
       </div>
     </div>
