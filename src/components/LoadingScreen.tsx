@@ -11,34 +11,100 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
   useEffect(() => {
     const preloadResources = async () => {
       const promises = [];
+      let progressCount = 0;
+      const totalResources = 20; // Approximate count for progress
 
-      // Only preload critical images for faster loading
+      // Comprehensive image preloading - all critical above-the-fold images
       const criticalImages = [
         "/lovable-uploads/a46da5a6-283e-4115-91d7-c1373de8fb80.png", // Loading logo
-        "/lovable-uploads/0959e8f0-e34c-4d16-9e3e-16462b6d8961.png"  // Navbar logo
+        "/lovable-uploads/0959e8f0-e34c-4d16-9e3e-16462b6d8961.png", // Navbar logo
+        // Hero background image (if any)
+        // Philosophy section images - all variants for responsive design
+        "/lovable-uploads/4bdd82f1-a74e-471c-ad2d-72a158c7e24e.png", // Philosophy Chinese mobile
+        "/lovable-uploads/bad88ef0-fed5-4d79-90c4-5fbeed980400.png", // Philosophy English mobile
+        "/lovable-uploads/23ce2472-9cbc-4d05-bd80-cd0ac6eb27a8.png", // Philosophy Chinese desktop
+        "/lovable-uploads/2277bfb2-f510-4e78-bf50-410d94a0f83b.png", // Philosophy English desktop
+        // About section images - profile and certifications
+        "/lovable-uploads/9cd6f4c9-9cfc-435a-8ebb-2bbe20537915.png", // Dr. Noah Sachs profile
+        "/lovable-uploads/1d022755-a8e7-481a-91db-13f7db87b26a.png", // PGA certification
+        "/lovable-uploads/1dc02882-2327-403c-9e82-8b8207c618ff.png", // CSCS certification
+        "/lovable-uploads/09961efd-a840-417f-a93a-2e2990b91489.png", // CMPC certification
+        "/lovable-uploads/b8e8e7d5-5980-475f-9534-3660f734bccf.png", // BCIA Biofeedback
+        "/lovable-uploads/80663943-a684-4747-88d6-29d27b58e790.png", // TPI certification
+        "/lovable-uploads/650394e1-2bf5-4354-b912-86a81648eaaa.png"  // BCIA Neurofeedback
       ];
       
+      // Enhanced image preloading with progress tracking
       const imagePromises = criticalImages.map(src => new Promise((resolve) => {
         const img = new Image();
-        img.onload = () => resolve(true);
-        img.onerror = () => resolve(true); // Don't fail loading if image fails
+        img.onload = () => {
+          progressCount++;
+          resolve(true);
+        };
+        img.onerror = () => {
+          progressCount++;
+          resolve(true); // Don't fail loading if image fails
+        };
         img.src = src;
       }));
       promises.push(...imagePromises);
 
-      // Wait for fonts to load with specific focus on Chinese fonts
-      const fontPromise = document.fonts.ready.then(() => {
-        // Ensure critical fonts are loaded
-        const criticalFonts = ['IBM Plex Sans JP', 'Montserrat', 'Lora'];
-        return Promise.all(criticalFonts.map(font => document.fonts.load(`400 16px "${font}"`)));
+      // Enhanced font loading - wait for ALL font weights and variants
+      const fontPromise = document.fonts.ready.then(async () => {
+        const fontLoadPromises = [
+          // IBM Plex Sans JP - all weights
+          document.fonts.load('300 16px "IBM Plex Sans JP"'),
+          document.fonts.load('400 16px "IBM Plex Sans JP"'),
+          document.fonts.load('500 16px "IBM Plex Sans JP"'),
+          document.fonts.load('600 16px "IBM Plex Sans JP"'),
+          document.fonts.load('700 16px "IBM Plex Sans JP"'),
+          // Montserrat - all weights
+          document.fonts.load('400 16px "Montserrat"'),
+          document.fonts.load('500 16px "Montserrat"'),
+          document.fonts.load('600 16px "Montserrat"'),
+          document.fonts.load('700 16px "Montserrat"'),
+          // Lora
+          document.fonts.load('400 16px "Lora"'),
+          document.fonts.load('700 16px "Lora"'),
+          // Inter
+          document.fonts.load('300 16px "Inter"'),
+          document.fonts.load('400 16px "Inter"'),
+          document.fonts.load('500 16px "Inter"'),
+          document.fonts.load('600 16px "Inter"'),
+          document.fonts.load('700 16px "Inter"')
+        ];
+        
+        try {
+          await Promise.all(fontLoadPromises);
+          progressCount += 3; // Add to progress count
+          return true;
+        } catch (error) {
+          console.log('Some fonts failed to load:', error);
+          progressCount += 3;
+          return true; // Continue even if some fonts fail
+        }
       }).catch(() => {
-        // Continue even if font loading fails
+        progressCount += 3;
         return Promise.resolve();
       });
       promises.push(fontPromise);
 
-      // Increased loading time to ensure fonts and translations are ready
-      const minLoadTime = new Promise(resolve => setTimeout(resolve, 1200));
+      // Preload lazy components during loading screen
+      const componentPreloadPromises = [
+        import('./memo/MemoizedPhilosophy'),
+        import('./memo/MemoizedStudioLocation'), 
+        import('./memo/MemoizedWeeklySchedule')
+      ].map(p => p.then(() => {
+        progressCount++;
+        return true;
+      }).catch(() => {
+        progressCount++;
+        return true;
+      }));
+      promises.push(...componentPreloadPromises);
+
+      // Minimum load time for smooth experience (reduced from 1200ms)
+      const minLoadTime = new Promise(resolve => setTimeout(resolve, 800));
       promises.push(minLoadTime);
 
       try {
@@ -80,11 +146,19 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
           Signal Performance
         </h1>
         
-        {/* Subtle loading indicator */}
-        <div className="mt-8 flex space-x-1">
-          <div className="w-2 h-2 bg-signal-gold rounded-full animate-pulse"></div>
-          <div className="w-2 h-2 bg-signal-gold rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
-          <div className="w-2 h-2 bg-signal-gold rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
+        {/* Enhanced loading indicator with progress */}
+        <div className="mt-8 space-y-4">
+          {/* Progress dots */}
+          <div className="flex space-x-1 justify-center">
+            <div className="w-2 h-2 bg-signal-gold rounded-full animate-pulse"></div>
+            <div className="w-2 h-2 bg-signal-gold rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
+            <div className="w-2 h-2 bg-signal-gold rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
+          </div>
+          
+          {/* Loading status text */}
+          <p className="text-signal-charcoal/60 text-sm text-center animate-fade-in">
+            Loading resources...
+          </p>
         </div>
       </div>
     </div>
