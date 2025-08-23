@@ -27,7 +27,7 @@ const Footer = () => {
               aria-label="LINE"
             >
               <img 
-                src="/lovable-uploads/ff8c683e-0ae0-4a98-87ff-b4274c4be5db.png" 
+                src="/lovable-uploads/bf413d50-ec4b-498a-83f8-bf41a43a8e24.png" 
                 alt="LINE" 
                 className="w-6 h-6 object-contain"
               />
