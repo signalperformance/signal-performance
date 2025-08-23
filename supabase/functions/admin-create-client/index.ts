@@ -105,7 +105,6 @@ serve(async (req) => {
       .insert({
         id: authUserId,
         email,
-        password: "", // Do not store passwords here
         first_name: firstName,
         last_name: lastName,
         phone: phone || null,

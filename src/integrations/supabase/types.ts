@@ -379,7 +379,6 @@ export type Database = {
           membership_plan: Database["public"]["Enums"]["membership_plan"]
           monthly_renewal_date: string | null
           notes: string | null
-          password: string
           phone: string | null
           player_type: Database["public"]["Enums"]["player_type"]
           profile_picture: string | null
@@ -395,7 +394,6 @@ export type Database = {
           membership_plan?: Database["public"]["Enums"]["membership_plan"]
           monthly_renewal_date?: string | null
           notes?: string | null
-          password: string
           phone?: string | null
           player_type?: Database["public"]["Enums"]["player_type"]
           profile_picture?: string | null
@@ -411,7 +409,6 @@ export type Database = {
           membership_plan?: Database["public"]["Enums"]["membership_plan"]
           monthly_renewal_date?: string | null
           notes?: string | null
-          password?: string
           phone?: string | null
           player_type?: Database["public"]["Enums"]["player_type"]
           profile_picture?: string | null
