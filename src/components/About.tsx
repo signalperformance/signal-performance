@@ -4,7 +4,6 @@ import { Separator } from '@/components/ui/separator';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
-import tpiLogo from '@/assets/tpi-logo.png';
 
 const About = () => {
   const { t } = useLanguage();
@@ -89,7 +88,7 @@ const About = () => {
                     <div className="grid grid-cols-3 gap-4">
                       <div className="flex flex-col items-center">
                         <div className="w-16 h-16">
-                          <img src={tpiLogo} alt="TPI Certified Fitness 3" className="w-full h-full object-contain" />
+                          <img src="/lovable-uploads/b2c458ce-5772-436f-9de9-e35fe90698a9.png" alt="TPI Certified Fitness 3" className="w-full h-full object-contain" />
                         </div>
                       </div>
                       <div className="flex flex-col items-center">
@@ -131,7 +130,7 @@ const About = () => {
                       <div className="flex justify-between">
                         <div className="flex flex-col items-center">
                           <div className="w-24 h-24">
-                            <img src={tpiLogo} alt="TPI Certified Fitness 3" className="w-full h-full object-contain" />
+                            <img src="/lovable-uploads/b2c458ce-5772-436f-9de9-e35fe90698a9.png" alt="TPI Certified Fitness 3" className="w-full h-full object-contain" />
                           </div>
                         </div>
                         <div className="flex flex-col items-center">
