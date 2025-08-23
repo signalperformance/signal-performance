@@ -88,7 +88,7 @@ const About = () => {
                     <div className="grid grid-cols-3 gap-4">
                       <div className="flex flex-col items-center">
                         <div className="w-16 h-16">
-                          <img src="/lovable-uploads/69e35715-6357-4bb8-a364-925b7b2c405a.png" alt="TPI Certified Fitness 3" className="w-full h-full object-contain" />
+                          <img src="/lovable-uploads/49968980-ce88-4e9e-afac-0773e95c91c7.png" alt="TPI Certified Fitness 3" className="w-full h-full object-contain" />
                         </div>
                       </div>
                       <div className="flex flex-col items-center">
@@ -130,7 +130,7 @@ const About = () => {
                       <div className="flex justify-between">
                         <div className="flex flex-col items-center">
                           <div className="w-24 h-24">
-                            <img src="/lovable-uploads/69e35715-6357-4bb8-a364-925b7b2c405a.png" alt="TPI Certified Fitness 3" className="w-full h-full object-contain" />
+                            <img src="/lovable-uploads/49968980-ce88-4e9e-afac-0773e95c91c7.png" alt="TPI Certified Fitness 3" className="w-full h-full object-contain" />
                           </div>
                         </div>
                         <div className="flex flex-col items-center">
