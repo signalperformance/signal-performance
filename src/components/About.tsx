@@ -84,16 +84,21 @@ const About = () => {
                       </div>
                     </div>
                     
-                    {/* Second row - 2 BCIA certifications */}
-                    <div className="grid grid-cols-2 gap-4">
+                    {/* Second row - 3 BCIA certifications */}
+                    <div className="grid grid-cols-3 gap-4">
                       <div className="flex justify-center">
-                        <div className="w-20 h-20">
+                        <div className="w-16 h-16">
                           <img alt="BCIA Biofeedback Certification" className="w-full h-full object-contain" src="/lovable-uploads/b8e8e7d5-5980-475f-9534-3660f734bccf.png" />
                         </div>
                       </div>
                       <div className="flex justify-center">
-                        <div className="w-20 h-20">
-                           <img alt="BCIA Neurofeedback Certification" className="w-full h-full object-contain" src="/lovable-uploads/650394e1-2bf5-4354-b912-86a81648eaaa.png" />
+                        <div className="w-16 h-16">
+                          <img alt="BCIA Biofeedback Certification" className="w-full h-full object-contain" src="/lovable-uploads/b8e8e7d5-5980-475f-9534-3660f734bccf.png" />
+                        </div>
+                      </div>
+                      <div className="flex justify-center">
+                        <div className="w-16 h-16">
+                          <img alt="BCIA Neurofeedback Certification" className="w-full h-full object-contain" src="/lovable-uploads/650394e1-2bf5-4354-b912-86a81648eaaa.png" />
                         </div>
                       </div>
                     </div>
@@ -121,15 +126,20 @@ const About = () => {
                         </div>
                       </div>
                       
-                      {/* Bottom row - 2 certifications positioned between top ones */}
+                      {/* Bottom row - 3 certifications */}
                       <div className="flex justify-between">
-                        <div className="flex flex-col items-center ml-[18%]">
-                          <div className="w-24 h-24">
+                        <div className="flex flex-col items-center">
+                          <div className="w-20 h-20">
                             <img alt="BCIA Biofeedback Certification" className="w-full h-full object-contain" src="/lovable-uploads/b8e8e7d5-5980-475f-9534-3660f734bccf.png" />
                           </div>
                         </div>
-                        <div className="flex flex-col items-center mr-[18%]">
-                          <div className="w-24 h-24">
+                        <div className="flex flex-col items-center">
+                          <div className="w-20 h-20">
+                            <img alt="BCIA Biofeedback Certification" className="w-full h-full object-contain" src="/lovable-uploads/b8e8e7d5-5980-475f-9534-3660f734bccf.png" />
+                          </div>
+                        </div>
+                        <div className="flex flex-col items-center">
+                          <div className="w-20 h-20">
                             <img alt="BCIA Neurofeedback Certification" className="w-full h-full object-contain" src="/lovable-uploads/650394e1-2bf5-4354-b912-86a81648eaaa.png" />
                           </div>
                         </div>
