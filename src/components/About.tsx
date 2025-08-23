@@ -112,7 +112,7 @@ const About = () => {
                       </div>
                       <div className="flex justify-center">
                         <div className="w-16 h-16">
-                          <img alt="FMS Certified 2" className="w-full h-full object-contain" src="/lovable-uploads/701695fc-a46b-424e-bbc7-ce0b807972ae.png" />
+                          <img alt="FMS Certified 2" className="w-full h-full object-contain" src="/lovable-uploads/385d07dd-80d6-44cb-b2ef-9cbc80e9c887.png" />
                         </div>
                       </div>
                       <div className="flex justify-center">
@@ -173,7 +173,7 @@ const About = () => {
                         </div>
                         <div className="flex flex-col items-center">
                           <div className="w-20 h-20">
-                            <img alt="FMS Certified 2" className="w-full h-full object-contain" src="/lovable-uploads/701695fc-a46b-424e-bbc7-ce0b807972ae.png" />
+                            <img alt="FMS Certified 2" className="w-full h-full object-contain" src="/lovable-uploads/385d07dd-80d6-44cb-b2ef-9cbc80e9c887.png" />
                           </div>
                         </div>
                         <div className="flex flex-col items-center">
