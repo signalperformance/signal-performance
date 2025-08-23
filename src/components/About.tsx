@@ -107,17 +107,17 @@ const About = () => {
                     <div className="grid grid-cols-3 gap-4">
                       <div className="flex justify-center">
                         <div className="w-16 h-16">
-                          <img alt="FRC Certification" className="w-full h-full object-contain" src="/lovable-uploads/02648a92-ba42-467d-b308-7d76e55376a2.png" />
+                          <img alt="FRC Certification" className="w-full h-full object-contain" src="/lovable-uploads/05754402-e6c2-4ca2-98e3-9ba6aad7a5ea.png" />
                         </div>
                       </div>
                       <div className="flex justify-center">
                         <div className="w-16 h-16">
-                          <img alt="FMS Certified 2" className="w-full h-full object-contain" src="/lovable-uploads/06356803-be6d-4dce-b006-b5944a61d7f8.png" />
+                          <img alt="FMS Certified 2" className="w-full h-full object-contain" src="/lovable-uploads/701695fc-a46b-424e-bbc7-ce0b807972ae.png" />
                         </div>
                       </div>
                       <div className="flex justify-center">
                         <div className="w-16 h-16">
-                          <img alt="FRA Certification" className="w-full h-full object-contain" src="/lovable-uploads/08851ee9-0b49-49f8-a037-3b2566bfd6d3.png" />
+                          <img alt="FRA Certification" className="w-full h-full object-contain" src="/lovable-uploads/ea936717-eb96-4705-98af-8513f4b6c976.png" />
                         </div>
                       </div>
                     </div>
@@ -168,17 +168,17 @@ const About = () => {
                       <div className="flex justify-between">
                         <div className="flex flex-col items-center">
                           <div className="w-20 h-20">
-                            <img alt="FRC Certification" className="w-full h-full object-contain" src="/lovable-uploads/02648a92-ba42-467d-b308-7d76e55376a2.png" />
+                            <img alt="FRC Certification" className="w-full h-full object-contain" src="/lovable-uploads/05754402-e6c2-4ca2-98e3-9ba6aad7a5ea.png" />
                           </div>
                         </div>
                         <div className="flex flex-col items-center">
                           <div className="w-20 h-20">
-                            <img alt="FMS Certified 2" className="w-full h-full object-contain" src="/lovable-uploads/06356803-be6d-4dce-b006-b5944a61d7f8.png" />
+                            <img alt="FMS Certified 2" className="w-full h-full object-contain" src="/lovable-uploads/701695fc-a46b-424e-bbc7-ce0b807972ae.png" />
                           </div>
                         </div>
                         <div className="flex flex-col items-center">
                           <div className="w-20 h-20">
-                            <img alt="FRA Certification" className="w-full h-full object-contain" src="/lovable-uploads/08851ee9-0b49-49f8-a037-3b2566bfd6d3.png" />
+                            <img alt="FRA Certification" className="w-full h-full object-contain" src="/lovable-uploads/ea936717-eb96-4705-98af-8513f4b6c976.png" />
                           </div>
                         </div>
                       </div>
