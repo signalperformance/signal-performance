@@ -57,8 +57,8 @@ const FloatingAssessmentButton = () => {
   // Dynamic positioning based on mobile and footer visibility
   const getButtonPosition = () => {
     if (isMobile && isFooterVisible) {
-      // On mobile when footer is visible, position higher to avoid overlap
-      return "fixed bottom-20 right-6 z-50";
+      // On mobile when footer is visible, position slightly higher to avoid overlap
+      return "fixed bottom-12 right-6 z-50";
     }
     return "fixed bottom-6 right-6 z-50";
   };
