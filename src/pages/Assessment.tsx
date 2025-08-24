@@ -47,7 +47,11 @@ const Assessment = () => {
                   </li>
                   <li className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-                    <span>{t('assessment.prep.whatToBring.shoes')}</span>
+                    <span>{t('assessment.prep.whatToBring.golfShoes')}</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
+                    <span>{t('assessment.prep.whatToBring.runningShoes')}</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
@@ -56,14 +60,6 @@ const Assessment = () => {
                   <li className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
                     <span>{t('assessment.prep.whatToBring.towel')}</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-                    <span>{t('assessment.prep.whatToBring.changeOfClothes')}</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-                    <span>{t('assessment.prep.whatToBring.snacks')}</span>
                   </li>
                 </ul>
               </CardContent>
@@ -93,7 +89,7 @@ const Assessment = () => {
                   </li>
                   <li className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-                    <span>{t('assessment.prep.reminders.restAndHydrate')}</span>
+                    <span>{t('assessment.prep.reminders.stayHydrated')}</span>
                   </li>
                 </ul>
               </CardContent>
