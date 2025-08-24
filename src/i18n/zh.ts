@@ -219,7 +219,7 @@ const zh = {
   'assessment.prep.reminders.wearAppropriateClothing': '穿着短裤及短袖或背心；避免宽松衣物',
   'assessment.prep.reminders.avoidOvereating': '評估前避免進食過量',
   'assessment.prep.reminders.arriveEarly': '提前15分鐘到場',
-  'assessment.prep.reminders.stayHydrated': '補充水分，確保測試結果準確',
+  
   'assessment.prep.contactInfo': '如有任何問題，請聯繫我們的團隊：noah@signalperformance.golf',
   'assessment.prep.lineButton.title': '聯絡我們',
   'assessment.prep.lineButton.text': '加入 LINE 好友',

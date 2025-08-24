@@ -87,10 +87,6 @@ const Assessment = () => {
                     <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
                     <span>{t('assessment.prep.reminders.arriveEarly')}</span>
                   </li>
-                  <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-                    <span>{t('assessment.prep.reminders.stayHydrated')}</span>
-                  </li>
                 </ul>
               </CardContent>
             </Card>
