@@ -217,6 +217,7 @@ const en = {
   'assessment.prep.whatToBring.changeOfClothes': 'Change of clothes and personal toiletries',
   'assessment.prep.whatToBring.snacks': 'Healthy snacks',
   'assessment.prep.reminders.title': 'Important Reminders',
+  'assessment.prep.reminders.wearAppropriateClothing': 'Wear shorts and a short-sleeve or sleeveless shirt; avoid baggy clothing',
   'assessment.prep.reminders.avoidOvereating': 'Avoid eating a large meal before the assessment',
   'assessment.prep.reminders.arriveEarly': 'Arrive 15 minutes early to complete all tests smoothly',
   'assessment.prep.reminders.restAndHydrate': 'Get sufficient sleep and stay hydrated to ensure accurate results',
