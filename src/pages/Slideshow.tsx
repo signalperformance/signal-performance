@@ -177,8 +177,8 @@ const Slideshow = () => {
   useEffect(() => {
     if (imagesLoading) return; // Don't start slideshow until images are loaded
     
-    // Use longer timeout for video slide (34 seconds), normal timeout for others (8 seconds)
-    const slideTimeout = currentSlide === 3 ? 34000 : 8000;
+    // Use longer timeout for video slide (33 seconds), normal timeout for others (8 seconds)
+    const slideTimeout = currentSlide === 3 ? 33000 : 8000;
     
     const timer = setInterval(() => {
       if (!isAutoPaused) {
