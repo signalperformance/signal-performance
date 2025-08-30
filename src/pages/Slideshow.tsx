@@ -258,12 +258,13 @@ const Slideshow = () => {
           <div className="w-full max-w-4xl mx-auto">
             <div className="relative w-full" style={{ aspectRatio: '16/9' }}>
               <iframe 
-                src="https://player.vimeo.com/video/1114465402?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" 
+                src="https://www.youtube.com/embed/9yyIwGOXogM?si=c5pvJY3h9PMiEoJ7&amp;controls=0" 
                 className="absolute inset-0 w-full h-full rounded-lg shadow-2xl"
                 frameBorder="0" 
-                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                 referrerPolicy="strict-origin-when-cross-origin" 
-                title="我們的評估流程"
+                allowFullScreen
+                title="YouTube video player"
               />
             </div>
           </div>
