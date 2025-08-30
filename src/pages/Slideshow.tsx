@@ -872,35 +872,6 @@ const Slideshow = () => {
         </Button>
       </div>
       
-      {/* Slide Dots Navigation */}
-      <div className="fixed bottom-16 left-1/2 transform -translate-x-1/2 z-40">
-        <div className="flex items-center gap-2 bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg">
-          {Array.from({ length: totalSlides }, (_, index) => (
-            <button
-              key={index}
-              onClick={() => goToSlide(index)}
-              onMouseEnter={pauseAutoAdvance}
-              onMouseLeave={() => {
-                if (Date.now() - lastInteractionTime > 3000) {
-                  resumeAutoAdvance();
-                }
-              }}
-              className={`w-3 h-3 rounded-full transition-all duration-200 ${
-                currentSlide === index
-                  ? 'bg-signal-gold shadow-md'
-                  : 'bg-signal-charcoal/30 hover:bg-signal-charcoal/50'
-              }`}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
-          {/* Auto-pause indicator */}
-          {isAutoPaused && (
-            <div className="ml-2 px-2 py-1 text-xs text-signal-charcoal/60 font-medium">
-              Paused
-            </div>
-          )}
-        </div>
-      </div>
       
       
       {/* Persistent QR Code */}
