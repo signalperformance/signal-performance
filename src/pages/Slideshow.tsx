@@ -696,7 +696,7 @@ const Slideshow = () => {
                     <img 
                       src="/lovable-uploads/9cd6f4c9-9cfc-435a-8ebb-2bbe20537915.png" 
                       alt="Dr. Noah Sachs"
-                      className="object-cover w-full h-full object-center" 
+                      className="object-cover w-full h-full object-top" 
                       loading="eager"
                       fetchPriority="high"
                       decoding="async"
