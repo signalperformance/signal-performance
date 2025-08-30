@@ -424,9 +424,6 @@ const Slideshow = () => {
                       省 NT${t['membership.pro.savings']}
                     </div>
                     
-                    <div className="text-lg md:text-xl lg:text-2xl xl:text-3xl text-signal-gold font-semibold mb-6">
-                      {t['membership.pro.sessions']}
-                    </div>
                     
                     {/* Booking Status Tracker */}
                     <div className="bg-gray-50 rounded-lg p-4 mb-6">
