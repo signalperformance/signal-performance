@@ -242,41 +242,30 @@ const Slideshow = () => {
       </div>
     ),
 
-    // Slide 4: Assessment Process Details
+    // Slide 4: Assessment Process Video
     () => (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50/40 flex items-center justify-center p-4 md:p-8">
-        <div className="container mx-auto">
-          <div className="text-center mb-8 md:mb-16">
-            <h2 className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold font-lora text-signal-charcoal mb-6">
-              {t['assessment.process.title']}
+        <div className="container mx-auto max-w-4xl">
+          <div className="text-center mb-8 md:mb-12">
+            <h2 className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold font-lora text-signal-charcoal mb-4 md:mb-6">
+              我們的評估流程
             </h2>
+            <p className="text-lg md:text-xl lg:text-2xl xl:text-3xl text-muted-foreground max-w-3xl mx-auto">
+              每季，會員會完成一項由五部分組成的評估，以確保訓練保持一致且有效。
+            </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 md:gap-8 max-w-7xl mx-auto">
-            {[
-              { icon: Move, title: t['assessment.joint.title'], color: 'text-blue-500', bg: 'bg-blue-500' },
-              { icon: Dumbbell, title: t['assessment.strength.title'], color: 'text-red-500', bg: 'bg-red-500' },
-              { icon: Activity, title: t['assessment.metabolic.title'], color: 'text-green-500', bg: 'bg-green-500' },
-              { icon: User, title: t['assessment.body.title'], color: 'text-purple-500', bg: 'bg-purple-500' },
-              { icon: Club, title: t['assessment.golf.title'], color: 'text-signal-gold', bg: 'bg-signal-gold' }
-            ].map((assessment, index) => {
-              const IconComponent = assessment.icon;
-              return (
-                <Card key={index} className="shadow-xl border-2 border-gray-100 text-center">
-                  <CardContent className="p-6 md:p-8">
-                    <div className={`w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 rounded-full ${assessment.bg} flex items-center justify-center mx-auto mb-4 md:mb-6`}>
-                      <IconComponent className="w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 text-white" />
-                    </div>
-                    <div className={`text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold ${assessment.bg} rounded-full w-8 h-8 md:w-10 md:h-10 flex items-center justify-center text-white mx-auto mb-4`}>
-                      {index + 1}
-                    </div>
-                    <h3 className={`text-lg md:text-xl lg:text-2xl xl:text-3xl font-bold font-lora ${assessment.color}`}>
-                      {assessment.title}
-                    </h3>
-                  </CardContent>
-                </Card>
-              );
-            })}
+          <div className="w-full max-w-4xl mx-auto">
+            <div className="relative w-full" style={{ aspectRatio: '16/9' }}>
+              <iframe 
+                src="https://player.vimeo.com/video/1114465402?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" 
+                className="absolute inset-0 w-full h-full rounded-lg shadow-2xl"
+                frameBorder="0" 
+                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+                referrerPolicy="strict-origin-when-cross-origin" 
+                title="我們的評估流程"
+              />
+            </div>
           </div>
         </div>
       </div>
