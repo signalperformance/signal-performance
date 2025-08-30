@@ -233,8 +233,8 @@ const Slideshow = () => {
   useEffect(() => {
     if (imagesLoading) return; // Don't start slideshow until images are loaded
     
-    // Use custom timeout for philosophy slide (32 seconds), video slide (33 seconds), normal timeout for others (8 seconds)
-    const slideTimeout = currentSlide === 1 ? 32000 : currentSlide === 3 ? 33000 : 8000;
+    // Use custom timeout for philosophy slide (32 seconds), video slide (33 seconds), 5th slide (15 seconds), normal timeout for others (8 seconds)
+    const slideTimeout = currentSlide === 1 ? 32000 : currentSlide === 3 ? 33000 : currentSlide === 4 ? 15000 : 8000;
     
     const timer = setInterval(() => {
       if (!isAutoPaused) {
