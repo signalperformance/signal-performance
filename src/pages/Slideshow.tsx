@@ -479,7 +479,7 @@ const Slideshow = () => {
                     
                     {/* Discounted Price */}
                     <div className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-signal-charcoal mb-2">
-                      NT$15,000<span className="text-lg md:text-xl lg:text-2xl xl:text-3xl">／月</span>
+                      15,000元／月
                     </div>
                     
                     {/* Savings Amount */}
