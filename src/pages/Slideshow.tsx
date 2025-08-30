@@ -233,6 +233,8 @@ const Slideshow = () => {
                 alt="Signal wave with red spike (Chinese)" 
                 className="w-full max-w-5xl h-auto object-contain"
                 loading="eager"
+                fetchPriority="high"
+                decoding="async"
               />
             </div>
           </div>
@@ -518,6 +520,9 @@ const Slideshow = () => {
                       src="/lovable-uploads/9cd6f4c9-9cfc-435a-8ebb-2bbe20537915.png" 
                       alt="Dr. Noah Sachs" 
                       className="object-contain w-full h-full" 
+                      loading="eager"
+                      fetchPriority="high"
+                      decoding="async"
                     />
                   </div>
                 </div>
@@ -572,15 +577,17 @@ const Slideshow = () => {
                         '/lovable-uploads/1d022755-a8e7-481a-91db-13f7db87b26a.png',
                         '/lovable-uploads/1dc02882-2327-403c-9e82-8b8207c618ff.png',
                         '/lovable-uploads/09961efd-a840-417f-a93a-2e2990b91489.png'
-                      ].map((cert, index) => (
-                        <div key={index} className="w-16 h-16 md:w-20 md:h-20">
-                          <img 
-                            src={cert}
-                            alt={`Certification ${index + 1}`}
-                            className="w-full h-full object-contain"
-                          />
-                        </div>
-                      ))}
+                       ].map((cert, index) => (
+                         <div key={index} className="w-16 h-16 md:w-20 md:h-20">
+                           <img 
+                             src={cert}
+                             alt={`Certification ${index + 1}`}
+                             className="w-full h-full object-contain"
+                             loading="eager"
+                             decoding="async"
+                           />
+                         </div>
+                       ))}
                     </div>
                     
                     {/* Row 2 */}
@@ -589,15 +596,17 @@ const Slideshow = () => {
                         '/lovable-uploads/b8e8e7d5-5980-475f-9534-3660f734bccf.png',
                         '/lovable-uploads/80663943-a684-4747-88d6-29d27b58e790.png',
                         '/lovable-uploads/650394e1-2bf5-4354-b912-86a81648eaaa.png'
-                      ].map((cert, index) => (
-                        <div key={index + 3} className="w-16 h-16 md:w-20 md:h-20">
-                          <img 
-                            src={cert}
-                            alt={`Certification ${index + 4}`}
-                            className="w-full h-full object-contain"
-                          />
-                        </div>
-                      ))}
+                       ].map((cert, index) => (
+                         <div key={index + 3} className="w-16 h-16 md:w-20 md:h-20">
+                           <img 
+                             src={cert}
+                             alt={`Certification ${index + 4}`}
+                             className="w-full h-full object-contain"
+                             loading="eager"
+                             decoding="async"
+                           />
+                         </div>
+                       ))}
                     </div>
                     
                     {/* Row 3 */}
@@ -606,15 +615,17 @@ const Slideshow = () => {
                         '/lovable-uploads/05754402-e6c2-4ca2-98e3-9ba6aad7a5ea.png',
                         '/lovable-uploads/ea936717-eb96-4705-98af-8513f4b6c976.png',
                         '/lovable-uploads/385d07dd-80d6-44cb-b2ef-9cbc80e9c887.png'
-                      ].map((cert, index) => (
-                        <div key={index + 6} className="w-16 h-16 md:w-20 md:h-20">
-                          <img 
-                            src={cert}
-                            alt={`Certification ${index + 7}`}
-                            className="w-full h-full object-contain"
-                          />
-                        </div>
-                      ))}
+                       ].map((cert, index) => (
+                         <div key={index + 6} className="w-16 h-16 md:w-20 md:h-20">
+                           <img 
+                             src={cert}
+                             alt={`Certification ${index + 7}`}
+                             className="w-full h-full object-contain"
+                             loading="eager"
+                             decoding="async"
+                           />
+                         </div>
+                       ))}
                     </div>
                   </div>
                 </CardContent>

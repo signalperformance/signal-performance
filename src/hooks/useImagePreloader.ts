@@ -23,12 +23,27 @@ export const useImagePreloader = (imageUrls: string[]): UseImagePreloaderReturn 
     setHasErrors(false);
 
     const imagePromises = imageUrls.map((url) => {
-      return new Promise<void>((resolve, reject) => {
+      return new Promise<void>((resolve) => {
         const img = new Image();
         
-        img.onload = () => {
-          setLoadedCount(prev => prev + 1);
-          resolve();
+        // Force browser-level caching with better attributes
+        img.crossOrigin = 'anonymous';
+        img.decoding = 'async';
+        img.loading = 'eager';
+        
+        img.onload = async () => {
+          try {
+            // Force image decode for better caching
+            if (img.decode) {
+              await img.decode();
+            }
+            setLoadedCount(prev => prev + 1);
+            resolve();
+          } catch (decodeError) {
+            console.warn(`Failed to decode image: ${url}`, decodeError);
+            setLoadedCount(prev => prev + 1);
+            resolve();
+          }
         };
         
         img.onerror = () => {
@@ -38,6 +53,7 @@ export const useImagePreloader = (imageUrls: string[]): UseImagePreloaderReturn 
           resolve(); // Don't reject to prevent blocking other images
         };
         
+        // Set source last to trigger loading
         img.src = url;
       });
     });
