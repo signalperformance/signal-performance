@@ -321,9 +321,6 @@ const Slideshow = () => {
             <h2 className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold font-lora text-signal-charcoal mb-6">
               如何開始
             </h2>
-            <p className="text-lg md:text-xl lg:text-2xl xl:text-3xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
-              先進行完整評估，包含基礎數據收集與私人訓練，之後開始您的每月訓練課程。
-            </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 max-w-6xl mx-auto">
