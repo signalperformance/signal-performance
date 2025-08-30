@@ -1,10 +1,26 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { Clock, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Clock, ChevronLeft, ChevronRight, Loader2 } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
 import { Move, Activity, User, Dumbbell, Club } from 'lucide-react';
 import QRCode from 'qrcode';
+import { useImagePreloader } from '@/hooks/useImagePreloader';
+
+// All slideshow images that need preloading
+const SLIDESHOW_IMAGES = [
+  '/lovable-uploads/23ce2472-9cbc-4d05-bd80-cd0ac6eb27a8.png', // Philosophy wave
+  '/lovable-uploads/9cd6f4c9-9cfc-435a-8ebb-2bbe20537915.png', // Coach photo
+  '/lovable-uploads/1d022755-a8e7-481a-91db-13f7db87b26a.png', // Cert 1
+  '/lovable-uploads/1dc02882-2327-403c-9e82-8b8207c618ff.png', // Cert 2
+  '/lovable-uploads/09961efd-a840-417f-a93a-2e2990b91489.png', // Cert 3
+  '/lovable-uploads/b8e8e7d5-5980-475f-9534-3660f734bccf.png', // Cert 4
+  '/lovable-uploads/80663943-a684-4747-88d6-29d27b58e790.png', // Cert 5
+  '/lovable-uploads/650394e1-2bf5-4354-b912-86a81648eaaa.png', // Cert 6
+  '/lovable-uploads/05754402-e6c2-4ca2-98e3-9ba6aad7a5ea.png', // Cert 7
+  '/lovable-uploads/ea936717-eb96-4705-98af-8513f4b6c976.png', // Cert 8
+  '/lovable-uploads/385d07dd-80d6-44cb-b2ef-9cbc80e9c887.png', // Cert 9
+];
 
 // Force Chinese language context for slideshow
 const useChineseTranslations = () => {
@@ -77,6 +93,9 @@ const Slideshow = () => {
   const [isAutoPaused, setIsAutoPaused] = useState(false);
   const [lastInteractionTime, setLastInteractionTime] = useState(0);
   const t = useChineseTranslations();
+  
+  // Preload all slideshow images
+  const { isLoading: imagesLoading, loadedCount, totalCount } = useImagePreloader(SLIDESHOW_IMAGES);
 
   const totalSlides = 6;
 
@@ -117,8 +136,10 @@ const Slideshow = () => {
     }).then(setQrCodeUrl);
   }, []);
 
-  // Auto-advance slides with pause/resume logic
+  // Auto-advance slides with pause/resume logic (only after images load)
   useEffect(() => {
+    if (imagesLoading) return; // Don't start slideshow until images are loaded
+    
     const timer = setInterval(() => {
       if (!isAutoPaused) {
         setCurrentSlide(prev => (prev + 1) % totalSlides);
@@ -131,7 +152,7 @@ const Slideshow = () => {
     }, 8000);
 
     return () => clearInterval(timer);
-  }, [isAutoPaused, lastInteractionTime, totalSlides, resumeAutoAdvance]);
+  }, [isAutoPaused, lastInteractionTime, totalSlides, resumeAutoAdvance, imagesLoading]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -604,6 +625,22 @@ const Slideshow = () => {
       </div>
     )
   ];
+
+  // Show loading screen while images are preloading
+  if (imagesLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted flex items-center justify-center">
+        <div className="text-center space-y-4">
+          <Loader2 className="w-8 h-8 animate-spin mx-auto text-primary" />
+          <div className="text-lg font-medium">載入中...</div>
+          <div className="text-sm text-muted-foreground">
+            {loadedCount} / {totalCount} 張圖片已載入
+          </div>
+          <Progress value={(loadedCount / totalCount) * 100} className="w-64 mx-auto" />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="relative">
