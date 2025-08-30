@@ -16,6 +16,7 @@ const Admin = lazy(() => import("./pages/Admin"));
 const AdminLogin = lazy(() => import("./pages/AdminLogin"));
 const ClientLogin = lazy(() => import("./pages/ClientLogin"));
 const ClientPortal = lazy(() => import("./pages/ClientPortal"));
+const Slideshow = lazy(() => import("./pages/Slideshow"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const App = () => (
@@ -66,6 +67,14 @@ const App = () => (
             element={
               <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="animate-spin w-8 h-8 border-2 border-signal-gold border-t-transparent rounded-full"></div></div>}>
                 <ClientPortal />
+              </Suspense>
+            } 
+          />
+          <Route 
+            path="/slideshow" 
+            element={
+              <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="animate-spin w-8 h-8 border-2 border-signal-gold border-t-transparent rounded-full"></div></div>}>
+                <Slideshow />
               </Suspense>
             } 
           />
