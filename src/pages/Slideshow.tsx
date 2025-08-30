@@ -408,6 +408,9 @@ const Slideshow = () => {
             <h2 className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold font-lora text-signal-charcoal">
               {t['coach.title']}
             </h2>
+            <div className="text-right mt-4">
+              <span className="text-lg md:text-xl text-signal-charcoal/60 font-medium">6/6</span>
+            </div>
           </div>
           
           <div className="flex flex-col lg:flex-row gap-8 md:gap-16 items-center lg:items-start max-w-7xl mx-auto">
@@ -419,7 +422,7 @@ const Slideshow = () => {
                     <img 
                       src="/lovable-uploads/9cd6f4c9-9cfc-435a-8ebb-2bbe20537915.png" 
                       alt="Dr. Noah Sachs" 
-                      className="object-cover w-full h-full" 
+                      className="object-contain w-full h-full" 
                     />
                   </div>
                 </div>
@@ -467,7 +470,7 @@ const Slideshow = () => {
                   </h4>
                   
                   {/* Certification grid - responsive */}
-                  <div className="grid grid-cols-3 gap-4 md:gap-6 lg:gap-8 max-w-2xl mx-auto">
+                  <div className="grid grid-cols-3 gap-6 md:gap-8 lg:gap-10 max-w-4xl mx-auto">
                     {[
                       '/lovable-uploads/1d022755-a8e7-481a-91db-13f7db87b26a.png',
                       '/lovable-uploads/1dc02882-2327-403c-9e82-8b8207c618ff.png',
@@ -480,7 +483,7 @@ const Slideshow = () => {
                       '/lovable-uploads/385d07dd-80d6-44cb-b2ef-9cbc80e9c887.png'
                     ].map((cert, index) => (
                       <div key={index} className="flex justify-center">
-                        <div className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24">
+                        <div className="w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 bg-white rounded-lg shadow-md p-2 flex items-center justify-center">
                           <img 
                             src={cert}
                             alt={`Certification ${index + 1}`}
