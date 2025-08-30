@@ -161,63 +161,81 @@ const Slideshow = () => {
       </div>
     ),
 
-    // Slide 3: Assessment + Membership Combined
+    // Slide 3: How to Get Started
     () => (
       <div className="min-h-screen bg-white flex items-center justify-center p-4 md:p-8">
         <div className="container mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 max-w-6xl mx-auto">
-            {/* Assessment Package */}
-            <Card className="shadow-2xl border-2 border-signal-gold/30 bg-gradient-to-br from-white to-signal-gold/5">
-              <CardContent className="p-6 md:p-10">
-                <div className="text-center mb-8">
-                  <h3 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold font-lora text-signal-charcoal mb-4">
-                    {t['assessment.title']}
-                  </h3>
-                  <div className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-signal-gold mb-6">
-                    NT${t['assessment.price']}
-                  </div>
-                </div>
-                <ul className="space-y-4 text-base md:text-lg lg:text-xl xl:text-2xl">
-                  <li className="flex items-center">
-                    <span className="w-2 h-2 bg-signal-gold rounded-full mr-4 flex-shrink-0"></span>
-                    評估 – 基礎檢測 3小時
-                  </li>
-                  <li className="flex items-center">
-                    <span className="w-2 h-2 bg-signal-gold rounded-full mr-4 flex-shrink-0"></span>
-                    回顧 – 結果與計劃 1小時
-                  </li>
-                  <li className="flex items-center">
-                    <span className="w-2 h-2 bg-signal-gold rounded-full mr-4 flex-shrink-0"></span>
-                    訓練 – 私人課程3堂 3小時
-                  </li>
-                </ul>
-              </CardContent>
-            </Card>
+          {/* Header Section */}
+          <div className="text-center mb-8 md:mb-16">
+            <h2 className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold font-lora text-signal-charcoal mb-6">
+              如何開始
+            </h2>
+            <p className="text-lg md:text-xl lg:text-2xl xl:text-3xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
+              先進行完整評估，包含基礎數據收集與私人訓練，之後開始您的每月訓練課程。
+            </p>
+          </div>
 
-            {/* Pro Membership */}
-            <Card className="shadow-2xl border-2 border-signal-charcoal/30 bg-gradient-to-br from-signal-charcoal/5 to-white">
-              <CardContent className="p-6 md:p-10">
-                <div className="text-center mb-8">
-                  <h3 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold font-lora text-signal-charcoal mb-4">
-                    {t['membership.pro.title']}
-                  </h3>
-                  <div className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-signal-charcoal mb-2">
-                    NT${t['membership.pro.price']}
-                  </div>
-                  <div className="text-lg md:text-xl lg:text-2xl xl:text-3xl text-signal-gold font-semibold">
-                    {t['membership.pro.sessions']}
-                  </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 max-w-6xl mx-auto">
+            {/* Step 1: Assessment */}
+            <div className="space-y-6">
+              <div className="flex justify-center">
+                <div className="bg-signal-gold text-signal-charcoal px-6 py-3 rounded-full font-bold text-lg md:text-xl">
+                  第1步 · 完成基礎評估
                 </div>
-                <ul className="space-y-4 text-base md:text-lg lg:text-xl xl:text-2xl">
-                  {t['membership.pro.features'].map((feature, index) => (
-                    <li key={index} className="flex items-center">
-                      <span className="w-2 h-2 bg-signal-charcoal rounded-full mr-4 flex-shrink-0"></span>
-                      {feature}
+              </div>
+              <Card className="shadow-2xl border-2 border-signal-gold/30 bg-gradient-to-br from-white to-signal-gold/5">
+                <CardContent className="p-6 md:p-10">
+                  <div className="text-center mb-8">
+                    <div className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-signal-gold mb-6">
+                      NT${t['assessment.price']}
+                    </div>
+                  </div>
+                  <ul className="space-y-4 text-base md:text-lg lg:text-xl xl:text-2xl">
+                    <li className="flex items-center">
+                      <span className="w-2 h-2 bg-signal-gold rounded-full mr-4 flex-shrink-0"></span>
+                      評估 – 基礎檢測 3小時
                     </li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
+                    <li className="flex items-center">
+                      <span className="w-2 h-2 bg-signal-gold rounded-full mr-4 flex-shrink-0"></span>
+                      回顧 – 結果與計劃 1小時
+                    </li>
+                    <li className="flex items-center">
+                      <span className="w-2 h-2 bg-signal-gold rounded-full mr-4 flex-shrink-0"></span>
+                      訓練 – 私人課程3堂 3小時
+                    </li>
+                  </ul>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Step 2: Membership */}
+            <div className="space-y-6">
+              <div className="flex justify-center">
+                <div className="bg-signal-charcoal text-white px-6 py-3 rounded-full font-bold text-lg md:text-xl">
+                  第2步 · 選擇月方案
+                </div>
+              </div>
+              <Card className="shadow-2xl border-2 border-signal-charcoal/30 bg-gradient-to-br from-signal-charcoal/5 to-white">
+                <CardContent className="p-6 md:p-10">
+                  <div className="text-center mb-8">
+                    <div className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-signal-charcoal mb-2">
+                      NT${t['membership.pro.price']}
+                    </div>
+                    <div className="text-lg md:text-xl lg:text-2xl xl:text-3xl text-signal-gold font-semibold">
+                      {t['membership.pro.sessions']}
+                    </div>
+                  </div>
+                  <ul className="space-y-4 text-base md:text-lg lg:text-xl xl:text-2xl">
+                    {t['membership.pro.features'].map((feature, index) => (
+                      <li key={index} className="flex items-center">
+                        <span className="w-2 h-2 bg-signal-charcoal rounded-full mr-4 flex-shrink-0"></span>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </div>
       </div>
