@@ -10,7 +10,7 @@ import { useImagePreloader } from '@/hooks/useImagePreloader';
 // All slideshow images that need preloading
 const SLIDESHOW_IMAGES = [
   '/lovable-uploads/23ce2472-9cbc-4d05-bd80-cd0ac6eb27a8.png', // Philosophy wave
-  '/lovable-uploads/9cd6f4c9-9cfc-435a-8ebb-2bbe20537915.png', // Coach photo
+  '/lovable-uploads/coach-headshot.png', // Coach photo
   '/lovable-uploads/1d022755-a8e7-481a-91db-13f7db87b26a.png', // Cert 1
   '/lovable-uploads/1dc02882-2327-403c-9e82-8b8207c618ff.png', // Cert 2
   '/lovable-uploads/09961efd-a840-417f-a93a-2e2990b91489.png', // Cert 3
@@ -692,11 +692,11 @@ const Slideshow = () => {
             <div className="w-full lg:w-1/3">
               <div className="text-center">
                 <div className="mb-6 md:mb-8">
-                  <div className="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 mx-auto rounded-lg overflow-hidden bg-signal-gold/20">
+                  <div className="w-64 h-80 md:w-72 md:h-96 lg:w-80 lg:h-[26rem] mx-auto rounded-lg overflow-hidden bg-signal-gold/20">
                     <img 
-                      src="/lovable-uploads/9cd6f4c9-9cfc-435a-8ebb-2bbe20537915.png" 
+                      src="/lovable-uploads/coach-headshot.png" 
                       alt="Dr. Noah Sachs" 
-                      className="object-contain w-full h-full" 
+                      className="object-cover w-full h-full object-center" 
                       loading="eager"
                       fetchPriority="high"
                       decoding="async"
