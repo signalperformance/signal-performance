@@ -13,20 +13,20 @@ const HeroSlide = () => {
   return (
     <div className="relative min-h-screen overflow-hidden flex items-center justify-center bg-gradient-to-br from-slate-50 via-white to-gray-100">
       {/* Animated geometric shapes */}
-      <div className="absolute top-10 left-10 w-32 h-32 bg-signal-gold/10 rounded-full blur-xl animate-pulse"></div>
-      <div className="absolute top-1/3 right-20 w-48 h-48 bg-signal-charcoal/5 rounded-full blur-2xl animate-pulse delay-1000"></div>
-      <div className="absolute bottom-20 left-1/4 w-24 h-24 bg-signal-gold/15 rounded-full blur-lg animate-pulse delay-500"></div>
+      <div className="absolute top-10 left-10 w-64 h-64 bg-signal-gold/10 rounded-full blur-xl animate-pulse"></div>
+      <div className="absolute top-1/3 right-20 w-96 h-96 bg-signal-charcoal/5 rounded-full blur-2xl animate-pulse delay-1000"></div>
+      <div className="absolute bottom-20 left-1/4 w-48 h-48 bg-signal-gold/15 rounded-full blur-lg animate-pulse delay-500"></div>
       
-      <div className="relative z-10 container mx-auto px-8 text-center">
-        <div className="max-w-6xl mx-auto">
-          <div className="bg-signal-charcoal/95 backdrop-blur-sm rounded-3xl shadow-2xl border border-signal-charcoal/60 p-16">
-            <h1 className="font-bold mb-8 text-white leading-tight text-6xl xl:text-8xl transition-all duration-300">
+      <div className="relative z-10 container mx-auto px-16 text-center">
+        <div className="max-w-8xl mx-auto">
+          <div className="bg-signal-charcoal/95 backdrop-blur-sm rounded-3xl shadow-2xl border border-signal-charcoal/60 p-24">
+            <h1 className="font-bold mb-16 text-white leading-tight text-8xl xl:text-9xl transition-all duration-300">
               {t('hero.headline')}
             </h1>
-            <p className="text-white mb-12 text-3xl xl:text-4xl transition-all duration-300">
+            <p className="text-white mb-16 text-5xl xl:text-6xl transition-all duration-300 leading-relaxed">
               體能、心理與技術訓練集中於一個專業空間
             </p>
-            <div className="text-signal-gold text-4xl font-bold">
+            <div className="text-signal-gold text-6xl xl:text-7xl font-bold">
               歡迎來到信號表現訓練中心
             </div>
           </div>
@@ -36,45 +36,154 @@ const HeroSlide = () => {
   );
 };
 
-const PhilosophySlide = () => {
+const PhilosophyIntroSlide = () => {
   const { t } = useLanguage();
   
-  const cards = [
-    { key: "card1", title: t('philosophy.card1.title'), content: t('philosophy.card1.content') },
-    { key: "card2", title: t('philosophy.card2.title'), content: t('philosophy.card2.content') },
-    { key: "card3", title: t('philosophy.card3.title'), content: t('philosophy.card3.content') },
-  ];
-
   return (
-    <div className="min-h-screen bg-signal-light-gray flex items-center justify-center py-16">
-      <div className="container mx-auto px-8">
-        <h2 className="text-6xl font-bold mb-16 text-center font-lora text-signal-charcoal">
+    <div className="min-h-screen bg-signal-light-gray flex items-center justify-center py-24">
+      <div className="container mx-auto px-16 text-center">
+        <h2 className="text-8xl xl:text-9xl font-bold mb-24 font-lora text-signal-charcoal">
           {t('philosophy.title')}
         </h2>
         
-        {/* Signal wave graphic */}
+        {/* Signal wave graphic - larger */}
         <div className="w-full mb-16 flex items-center justify-center">
           <img 
             alt="Signal wave with red spike (Chinese)" 
-            className="w-full max-w-6xl h-auto object-contain" 
+            className="w-full max-w-8xl h-auto object-contain" 
             src="/lovable-uploads/23ce2472-9cbc-4d05-bd80-cd0ac6eb27a8.png"
             loading="eager"
           />
         </div>
         
-        {/* Philosophy cards grid */}
-        <div className="grid grid-cols-3 gap-12">
-          {cards.map((c) => (
-            <Card key={c.key} className="text-left shadow-2xl bg-white border-4 border-gray-100 animate-scale-in">
-              <CardContent className="p-12">
-                <h3 className="text-3xl font-lora mb-6 text-signal-charcoal font-bold">
-                  {c.title}
-                </h3>
-                <p className="text-muted-foreground text-xl leading-relaxed">
-                  {c.content}
-                </p>
-              </CardContent>
-            </Card>
+        <div className="text-6xl text-signal-charcoal font-medium leading-relaxed max-w-6xl mx-auto">
+          我們的訓練哲學建立在三個核心支柱上
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const PhilosophyCard1Slide = () => {
+  const { t } = useLanguage();
+  
+  return (
+    <div className="min-h-screen bg-white flex items-center justify-center py-24">
+      <div className="container mx-auto px-16">
+        <div className="max-w-6xl mx-auto text-center">
+          <Card className="shadow-2xl bg-white border-8 border-gray-100 animate-scale-in">
+            <CardContent className="p-24">
+              <div className="text-8xl font-bold mb-16 text-signal-gold">1</div>
+              <h3 className="text-7xl font-lora mb-16 text-signal-charcoal font-bold">
+                {t('philosophy.card1.title')}
+              </h3>
+              <p className="text-4xl text-muted-foreground leading-relaxed">
+                {t('philosophy.card1.content')}
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const PhilosophyCard2Slide = () => {
+  const { t } = useLanguage();
+  
+  return (
+    <div className="min-h-screen bg-signal-light-gray flex items-center justify-center py-24">
+      <div className="container mx-auto px-16">
+        <div className="max-w-6xl mx-auto text-center">
+          <Card className="shadow-2xl bg-white border-8 border-gray-100 animate-scale-in">
+            <CardContent className="p-24">
+              <div className="text-8xl font-bold mb-16 text-signal-gold">2</div>
+              <h3 className="text-7xl font-lora mb-16 text-signal-charcoal font-bold">
+                {t('philosophy.card2.title')}
+              </h3>
+              <p className="text-4xl text-muted-foreground leading-relaxed">
+                {t('philosophy.card2.content')}
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const PhilosophyCard3Slide = () => {
+  const { t } = useLanguage();
+  
+  return (
+    <div className="min-h-screen bg-white flex items-center justify-center py-24">
+      <div className="container mx-auto px-16">
+        <div className="max-w-6xl mx-auto text-center">
+          <Card className="shadow-2xl bg-white border-8 border-gray-100 animate-scale-in">
+            <CardContent className="p-24">
+              <div className="text-8xl font-bold mb-16 text-signal-gold">3</div>
+              <h3 className="text-7xl font-lora mb-16 text-signal-charcoal font-bold">
+                {t('philosophy.card3.title')}
+              </h3>
+              <p className="text-4xl text-muted-foreground leading-relaxed">
+                {t('philosophy.card3.content')}
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const AssessmentIntroSlide = () => {
+  const { t } = useLanguage();
+  
+  return (
+    <div className="min-h-screen bg-signal-light-gray flex items-center justify-center py-24">
+      <div className="container mx-auto px-16 text-center">
+        <h2 className="text-8xl xl:text-9xl font-bold mb-24 font-lora text-signal-charcoal">
+          {t('assessment.title')}
+        </h2>
+        <p className="text-5xl text-muted-foreground leading-relaxed max-w-6xl mx-auto mb-16">
+          {t('assessment.processDescription')}
+        </p>
+        <div className="text-6xl font-bold text-signal-gold">
+          完整的五步驟評估流程
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const AssessmentOverviewSlide = () => {
+  const { t } = useLanguage();
+  
+  const assessments = [
+    { title: t('assessment.joint.title'), number: 1, color: "bg-blue-500" },
+    { title: t('assessment.strength.title'), number: 2, color: "bg-red-500" },
+    { title: t('assessment.metabolic.title'), number: 3, color: "bg-green-500" },
+    { title: t('assessment.body.title'), number: 4, color: "bg-purple-500" },
+    { title: t('assessment.golf.title'), number: 5, color: "bg-signal-gold" }
+  ];
+
+  return (
+    <div className="min-h-screen bg-white flex items-center justify-center py-24">
+      <div className="container mx-auto px-16">
+        <div className="text-center mb-24">
+          <h2 className="text-7xl font-bold mb-16 font-lora text-signal-charcoal">評估項目</h2>
+        </div>
+
+        <div className="grid grid-cols-5 gap-8 max-w-7xl mx-auto">
+          {assessments.map((assessment, idx) => (
+            <div key={idx} className="text-center">
+              <div className={`w-32 h-32 rounded-full ${assessment.color} flex items-center justify-center text-white font-bold text-4xl mx-auto mb-8`}>
+                {assessment.number}
+              </div>
+              <h3 className="text-3xl font-lora font-bold text-signal-charcoal">
+                {assessment.title}
+              </h3>
+            </div>
           ))}
         </div>
       </div>
@@ -82,7 +191,24 @@ const PhilosophySlide = () => {
   );
 };
 
-const MembershipFlowSlide = () => {
+const MembershipIntroSlide = () => {
+  const { t } = useLanguage();
+  
+  return (
+    <div className="min-h-screen bg-signal-light-gray flex items-center justify-center py-24">
+      <div className="container mx-auto px-16 text-center">
+        <h2 className="text-8xl xl:text-9xl font-bold mb-24 font-lora text-signal-charcoal">
+          {t("pricing.title")}
+        </h2>
+        <div className="text-6xl text-signal-charcoal font-medium leading-relaxed max-w-6xl mx-auto">
+          開始您的健身之旅
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const AssessmentPackageSlide = () => {
   const { t } = useLanguage();
   
   const assessmentFeatures = [
@@ -92,110 +218,75 @@ const MembershipFlowSlide = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center py-16">
-      <div className="container mx-auto px-8">
-        <h2 className="text-6xl font-bold mb-16 text-center font-lora text-signal-charcoal">
-          {t("pricing.title")}
-        </h2>
-        
-        <div className="grid grid-cols-2 gap-16 max-w-7xl mx-auto">
-          {/* Step 1: Assessment Card */}
-          <Card className="rounded-3xl shadow-2xl border-4 border-primary/20">
-            <CardContent className="p-12">
-              <Badge variant="outline" className="rounded-full border-2 border-primary bg-primary/10 text-foreground px-6 py-3 text-lg font-bold mb-8">
+    <div className="min-h-screen bg-white flex items-center justify-center py-24">
+      <div className="container mx-auto px-16">
+        <div className="max-w-5xl mx-auto">
+          <Card className="rounded-3xl shadow-2xl border-8 border-primary/20">
+            <CardContent className="p-24 text-center">
+              <Badge variant="outline" className="rounded-full border-4 border-primary bg-primary/10 text-foreground px-8 py-4 text-2xl font-bold mb-16">
                 {t("flow.step1")}
               </Badge>
 
-              {/* Assessment Promo Banner */}
-              <div className="mb-8 bg-gradient-to-r from-red-500/90 to-orange-500/90 text-white rounded-2xl p-6">
-                <div className="text-center">
-                  <h4 className="font-bold text-xl mb-4">{t("promo.limitedOffer")}</h4>
-                  <div className="flex justify-center">
-                    <div className="flex flex-col items-center gap-3 min-w-[200px]">
-                      <div className="w-full bg-white/20 rounded-full h-3">
-                        <div className="bg-white rounded-full h-3 w-1/5 transition-all duration-500" />
-                      </div>
-                      <div className="text-base font-medium">
-                        <span className="font-bold">2</span> {t("promo.spotsTaken")} • <span className="font-bold">8</span> {t("promo.remaining")}
-                      </div>
-                    </div>
-                  </div>
+              <div className="mb-16">
+                <div className="flex items-baseline justify-center gap-8 mb-8">
+                  <span className="text-4xl line-through text-muted-foreground">NT$12,000</span>
+                  <span className="text-8xl font-bold text-green-600">{t("gettingstarted.assessmentPackage.price")}</span>
                 </div>
-              </div>
-
-              <div className="mb-10">
-                <div className="flex items-baseline gap-4 mb-4">
-                  <span className="text-2xl line-through text-muted-foreground">NT$12,000</span>
-                  <span className="text-6xl font-bold text-green-600">{t("gettingstarted.assessmentPackage.price")}</span>
-                </div>
-                <Badge className="bg-green-100 text-green-800 hover:bg-green-100 text-lg px-4 py-2">
+                <Badge className="bg-green-100 text-green-800 hover:bg-green-100 text-3xl px-8 py-4">
                   {t("promo.save")} NT$2,000
                 </Badge>
-                <p className="mt-4 text-lg text-muted-foreground">
-                  {t("assessment.description")}
-                </p>
               </div>
 
-              <ul className="space-y-6">
+              <ul className="space-y-8 text-left max-w-3xl mx-auto">
                 {assessmentFeatures.map(name => (
-                  <li key={name} className="flex gap-4 items-center">
-                    <div className="inline-flex h-8 w-8 items-center justify-center rounded-full border-2 border-primary text-foreground">
-                      <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="3">
+                  <li key={name} className="flex gap-6 items-center">
+                    <div className="inline-flex h-12 w-12 items-center justify-center rounded-full border-4 border-primary text-foreground">
+                      <svg viewBox="0 0 24 24" className="h-8 w-8" fill="none" stroke="currentColor" strokeWidth="3">
                         <path d="M20 6L9 17l-5-5" />
                       </svg>
                     </div>
-                    <div className="text-xl font-medium">{name}</div>
+                    <div className="text-3xl font-medium">{name}</div>
                   </li>
                 ))}
               </ul>
             </CardContent>
           </Card>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-          {/* Step 2: Membership Card */}
-          <Card className="rounded-3xl shadow-2xl border-4 border-secondary/50 bg-secondary">
-            <CardContent className="p-12">
-              <Badge variant="outline" className="rounded-full border-2 border-primary bg-primary/10 text-foreground px-6 py-3 text-lg font-bold mb-8">
+const MembershipPlansSlide = () => {
+  const { t } = useLanguage();
+
+  return (
+    <div className="min-h-screen bg-signal-light-gray flex items-center justify-center py-24">
+      <div className="container mx-auto px-16">
+        <div className="max-w-5xl mx-auto">
+          <Card className="rounded-3xl shadow-2xl border-8 border-secondary/50 bg-secondary">
+            <CardContent className="p-24 text-center">
+              <Badge variant="outline" className="rounded-full border-4 border-primary bg-primary/10 text-foreground px-8 py-4 text-2xl font-bold mb-16">
                 {t("flow.step2")}
               </Badge>
 
-              <div className="mb-8 bg-gradient-to-r from-red-500/90 to-orange-500/90 text-white rounded-2xl p-6">
-                <div className="text-center">
-                  <h4 className="font-bold text-xl mb-4">{t("promo.limitedOffer")}</h4>
-                  <div className="flex justify-center">
-                    <div className="flex flex-col items-center gap-3 min-w-[200px]">
-                      <div className="w-full bg-white/20 rounded-full h-3">
-                        <div className="bg-white rounded-full h-3 w-1/5 transition-all duration-500" />
-                      </div>
-                      <div className="text-base font-medium">
-                        <span className="font-bold">2</span> {t("promo.spotsTaken")} • <span className="font-bold">8</span> {t("promo.remaining")}
-                      </div>
-                    </div>
-                  </div>
+              <div className="mb-16">
+                <div className="flex items-baseline justify-center gap-8 mb-8">
+                  <span className="text-4xl line-through text-muted-foreground">NT$8,000</span>
+                  <span className="text-8xl font-bold text-green-600">NT$6,400</span>
+                  <span className="text-3xl text-muted-foreground">{t("pricing.perMonth")}</span>
                 </div>
-              </div>
-
-              <div className="mb-10">
-                <div className="flex items-baseline gap-4 mb-4">
-                  <span className="text-2xl line-through text-muted-foreground">NT$8,000</span>
-                  <span className="text-6xl font-bold text-green-600">NT$6,400</span>
-                  <span className="text-xl text-muted-foreground">{t("pricing.perMonth")}</span>
-                </div>
-                <Badge className="bg-green-100 text-green-800 hover:bg-green-100 text-lg px-4 py-2">
+                <Badge className="bg-green-100 text-green-800 hover:bg-green-100 text-3xl px-8 py-4">
                   {t("promo.save")} NT$1,600
                 </Badge>
-                <p className="mt-4 text-lg text-muted-foreground">
-                  專業會員計畫包含完整的訓練服務
-                </p>
               </div>
 
-              <div className="text-center">
-                <div className="text-4xl font-bold text-signal-gold mb-4">
-                  選擇適合您的會員計畫
-                </div>
-                <p className="text-xl text-muted-foreground">
-                  專業級或基礎級訓練方案
-                </p>
+              <div className="text-6xl font-bold text-signal-gold mb-8">
+                選擇適合您的會員計畫
               </div>
+              <p className="text-4xl text-muted-foreground">
+                專業級或基礎級訓練方案
+              </p>
             </CardContent>
           </Card>
         </div>
@@ -204,170 +295,69 @@ const MembershipFlowSlide = () => {
   );
 };
 
-const AssessmentProcessSlide = () => {
+const ScheduleIntroSlide = () => {
   const { t } = useLanguage();
   
-  const assessments = {
-    mobility: { title: t('assessment.joint.title'), icon: Move, description: t('assessment.joint.description'), number: 1, color: "bg-blue-500" },
-    strength: { title: t('assessment.strength.title'), icon: Dumbbell, description: t('assessment.strength.description'), number: 2, color: "bg-red-500" },
-    metabolic: { title: t('assessment.metabolic.title'), icon: Activity, description: t('assessment.metabolic.description'), number: 3, color: "bg-green-500" },
-    body: { title: t('assessment.body.title'), icon: User, description: t('assessment.body.description'), number: 4, color: "bg-purple-500" },
-    golf: { title: t('assessment.golf.title'), icon: Club, description: t('assessment.golf.description'), number: 5, color: "bg-signal-gold" }
-  };
-
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center py-16">
-      <div className="container mx-auto px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-6xl font-bold mb-8 font-lora text-signal-charcoal">{t('assessment.title')}</h2>
-          <p className="max-w-5xl mx-auto text-2xl text-muted-foreground leading-relaxed">
-            {t('assessment.processDescription')}
-          </p>
-        </div>
-
-        <div className="grid grid-cols-5 gap-8 max-w-7xl mx-auto">
-          {Object.entries(assessments).map(([key, assessment]) => (
-            <Card key={key} className="shadow-2xl border-4 border-gray-100 text-center">
-              <CardContent className="p-8">
-                <div className={`w-20 h-20 rounded-full ${assessment.color} flex items-center justify-center text-white font-bold text-2xl mx-auto mb-6`}>
-                  {assessment.number}
-                </div>
-                <h3 className="text-2xl font-lora font-bold mb-4 text-signal-charcoal">
-                  {assessment.title}
-                </h3>
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                  {assessment.description}
-                </p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-        
-        <div className="text-center mt-16">
-          <div className="text-4xl font-bold text-signal-gold">
-            完整的五步驟評估流程
-          </div>
+    <div className="min-h-screen bg-signal-light-gray flex items-center justify-center py-24">
+      <div className="container mx-auto px-16 text-center">
+        <h2 className="text-8xl xl:text-9xl font-bold mb-24 font-lora text-signal-charcoal">
+          {t('schedule.title')}
+        </h2>
+        <div className="text-5xl text-signal-charcoal font-medium leading-relaxed max-w-6xl mx-auto">
+          每週選擇四堂課程，我們為專業選手和業餘愛好者提供不同的課程安排
         </div>
       </div>
     </div>
   );
 };
 
-const WeeklyScheduleSlide = () => {
+const ClassTypesSlide = () => {
   const { t } = useLanguage();
   
-  type Item = {
-    hour24: number;
-    minute?: number;
-    labelKey: 'mobility' | 'strength' | 'cardio' | 'power';
-    pro?: boolean;
-  };
-
-  const mwf: Item[] = [
-    { hour24: 12, minute: 0, labelKey: 'mobility', pro: true },
-    { hour24: 13, minute: 30, labelKey: 'strength', pro: true },
-    { hour24: 15, minute: 0, labelKey: 'mobility', pro: true },
-    { hour24: 17, minute: 0, labelKey: 'mobility' },
-    { hour24: 18, minute: 30, labelKey: 'strength' },
-    { hour24: 20, minute: 0, labelKey: 'strength' },
+  const classTypes = [
+    { name: t('schedule.classes.mobility'), color: "bg-blue-500", description: "關節活動度與柔軟度訓練" },
+    { name: t('schedule.classes.strength'), color: "bg-red-500", description: "肌力與肌耐力強化" },
+    { name: t('schedule.classes.cardio'), color: "bg-green-500", description: "心肺功能提升訓練" },
+    { name: t('schedule.classes.power'), color: "bg-purple-500", description: "爆發力與運動表現" },
   ];
-
-  const tth: Item[] = [
-    { hour24: 12, minute: 0, labelKey: 'power', pro: true },
-    { hour24: 13, minute: 30, labelKey: 'cardio', pro: true },
-    { hour24: 15, minute: 0, labelKey: 'power', pro: true },
-    { hour24: 17, minute: 0, labelKey: 'power' },
-    { hour24: 18, minute: 30, labelKey: 'cardio' },
-    { hour24: 20, minute: 0, labelKey: 'power' },
-  ];
-
-  const weekend: Item[] = [
-    { hour24: 9, minute: 0, labelKey: 'mobility' },
-    { hour24: 10, minute: 30, labelKey: 'strength' },
-    { hour24: 12, minute: 0, labelKey: 'cardio' },
-    { hour24: 13, minute: 30, labelKey: 'power' },
-    { hour24: 15, minute: 0, labelKey: 'mobility', pro: true },
-    { hour24: 16, minute: 30, labelKey: 'power', pro: true },
-  ];
-
-  const columns = [
-    { title: t('schedule.columns.mwf'), items: mwf },
-    { title: t('schedule.columns.tth'), items: tth },
-    { title: t('schedule.columns.weekend'), items: weekend },
-  ];
-
-  const formatTime = (hour24: number, minute: number = 0) => {
-    return `${String(hour24).padStart(2, '0')}:${String(minute).padStart(2, '0')}`;
-  };
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center py-16">
-      <div className="container mx-auto px-8">
-        <header className="mb-16 text-center">
-          <h2 className="text-6xl font-bold font-lora text-signal-charcoal mb-8">
-            {t('schedule.title')}
-          </h2>
-          <p className="text-2xl text-muted-foreground font-montserrat max-w-4xl mx-auto">
-            每週選擇四堂課程，我們為專業選手和業餘愛好者提供不同的課程安排
-          </p>
-        </header>
+    <div className="min-h-screen bg-white flex items-center justify-center py-24">
+      <div className="container mx-auto px-16">
+        <div className="text-center mb-24">
+          <h2 className="text-7xl font-bold mb-16 font-lora text-signal-charcoal">課程類型</h2>
+        </div>
 
-        <div className="grid grid-cols-3 gap-12 max-w-7xl mx-auto">
-          {columns.map((col, idx) => (
-            <Card key={idx} className="overflow-hidden border-4 border-border/70 shadow-2xl">
-              <div className="h-2 w-full bg-signal-gold" />
-              <div className="p-8">
-                <h3 className="text-center text-2xl font-bold text-foreground mb-8">
-                  {col.title}
+        <div className="grid grid-cols-2 gap-16 max-w-6xl mx-auto">
+          {classTypes.map((classType, idx) => (
+            <Card key={idx} className="shadow-2xl border-8 border-gray-100 text-center">
+              <CardContent className="p-16">
+                <div className={`w-24 h-24 rounded-full ${classType.color} flex items-center justify-center mx-auto mb-12`}>
+                  <div className="text-white font-bold text-3xl">{idx + 1}</div>
+                </div>
+                <h3 className="text-5xl font-lora font-bold mb-8 text-signal-charcoal">
+                  {classType.name}
                 </h3>
-                <ul className="space-y-4">
-                  {col.items.map((it, i) => (
-                    <li
-                      key={i}
-                      className={`relative grid grid-cols-[auto_1fr_auto] items-center gap-4 rounded-lg border-2 border-border/60 px-4 py-3 ${
-                        it.pro ? 'bg-signal-gold/10' : 'bg-card/50'
-                      }`}
-                    >
-                      {it.pro && (
-                        <span className="absolute left-0 top-0 h-full w-2 bg-signal-gold rounded-l-lg" />
-                      )}
-                      <span className="inline-flex items-center gap-2 text-base text-muted-foreground">
-                        <Clock className="h-5 w-5" />
-                        {formatTime(it.hour24, it.minute)}
-                      </span>
-                      <span className="text-xl font-extrabold font-lora text-foreground text-center">
-                        {t(`schedule.classes.${it.labelKey}`)}
-                      </span>
-                      <span>
-                        {it.pro ? (
-                          <span className="inline-flex items-center gap-1 rounded-full bg-signal-gold/20 text-signal-charcoal px-3 py-1 text-sm font-bold uppercase tracking-wide ring-2 ring-signal-gold/40">
-                            {t('schedule.badge.pro')}
-                          </span>
-                        ) : (
-                          <span className="inline-flex items-center gap-1 rounded-full bg-signal-charcoal/15 text-signal-charcoal px-3 py-1 text-sm font-bold uppercase tracking-wide ring-2 ring-signal-charcoal/40">
-                            {t('schedule.badge.am')}
-                          </span>
-                        )}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                <p className="text-3xl text-muted-foreground leading-relaxed">
+                  {classType.description}
+                </p>
+              </CardContent>
             </Card>
           ))}
         </div>
 
-        <div className="mt-16 text-center">
-          <div className="flex justify-center gap-12 text-xl">
+        <div className="mt-24 text-center">
+          <div className="flex justify-center gap-16 text-2xl">
             <span className="flex items-center gap-4">
-              <span className="inline-flex items-center gap-1 rounded-full bg-signal-gold/20 text-signal-charcoal px-4 py-2 text-base font-bold uppercase tracking-wide ring-2 ring-signal-gold/40">
+              <span className="inline-flex items-center gap-1 rounded-full bg-signal-gold/20 text-signal-charcoal px-6 py-3 text-xl font-bold uppercase tracking-wide ring-4 ring-signal-gold/40">
                 {t('schedule.badge.pro')}
               </span>
               <span>=</span>
               <span>{t('schedule.legend.pros')}</span>
             </span>
             <span className="flex items-center gap-4">
-              <span className="inline-flex items-center gap-1 rounded-full bg-signal-charcoal/15 text-signal-charcoal px-4 py-2 text-base font-bold uppercase tracking-wide ring-2 ring-signal-charcoal/40">
+              <span className="inline-flex items-center gap-1 rounded-full bg-signal-charcoal/15 text-signal-charcoal px-6 py-3 text-xl font-bold uppercase tracking-wide ring-4 ring-signal-charcoal/40">
                 {t('schedule.badge.am')}
               </span>
               <span>=</span>
@@ -380,93 +370,101 @@ const WeeklyScheduleSlide = () => {
   );
 };
 
-const AboutSlide = () => {
+const AboutIntroSlide = () => {
   const { t } = useLanguage();
   
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center py-16">
-      <div className="container mx-auto px-8">
+    <div className="min-h-screen bg-signal-light-gray flex items-center justify-center py-24">
+      <div className="container mx-auto px-16 text-center">
+        <h2 className="text-8xl xl:text-9xl font-bold mb-24 text-signal-charcoal">
+          {t('about.coach.title')}
+        </h2>
+        <div className="text-6xl text-signal-charcoal font-medium leading-relaxed max-w-6xl mx-auto">
+          認識我們的專業教練
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const CoachProfileSlide = () => {
+  const { t } = useLanguage();
+  
+  return (
+    <div className="min-h-screen bg-white flex items-center justify-center py-24">
+      <div className="container mx-auto px-16">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-6xl font-bold mb-8 text-signal-charcoal">{t('about.coach.title')}</h2>
-          </div>
-          
-          <div className="flex gap-16 items-center">
+          <div className="flex gap-20 items-center">
             {/* Profile Section */}
-            <div className="w-1/3">
-              <div className="mb-8">
-                <div className="rounded-2xl overflow-hidden bg-signal-gold/20 relative">
-                  <img src="/lovable-uploads/9cd6f4c9-9cfc-435a-8ebb-2bbe20537915.png" alt="Dr. Noah Sachs" className="object-cover w-full h-full" />
-                </div>
-              </div>
-              <div className="text-center">
-                <h3 className="text-4xl font-bold text-signal-charcoal mb-2">{t('about.coach.name')}</h3>
-                <p className="text-signal-gold text-2xl font-semibold">{t('about.coach.position')}</p>
+            <div className="w-1/2">
+              <div className="relative">
+                <div className="absolute inset-0 border-4 border-signal-gold rounded-2xl transform translate-x-6 translate-y-6"></div>
+                <img 
+                  src="/lovable-uploads/9cd6f4c9-9cfc-435a-8ebb-2bbe20537915.png" 
+                  alt="Dr. Noah Sachs" 
+                  className="rounded-2xl shadow-2xl w-full h-auto object-cover relative z-10 aspect-[3/4]"
+                />
               </div>
             </div>
             
-            {/* Bio & Certification Section */}
-            <div className="w-2/3">
-              {/* Academic & Experience Card */}
-              <Card className="mb-8 shadow-2xl border-4 border-gray-100">
-                <CardContent className="p-12">
-                  <div className="mb-8">
-                    <h4 className="text-3xl font-bold mb-6 text-signal-charcoal">{t('about.coach.academic')}</h4>
-                    <p className="text-xl leading-relaxed text-signal-charcoal/90">
-                      {t('about.coach.academic.degree')}
-                    </p>
-                  </div>
-                  
-                  <div>
-                    <h4 className="text-3xl font-bold mb-6 text-signal-charcoal">{t('about.coach.experience')}</h4>
-                    <ul className="text-xl leading-relaxed text-signal-charcoal/90 space-y-3">
-                      <li>{t('about.coach.experience.img')}</li>
-                      <li>{t('about.coach.experience.usaf')}</li>
-                      <li>{t('about.coach.experience.pga')}</li>
-                    </ul>
-                  </div>
-                </CardContent>
-              </Card>
+            <div className="w-1/2">
+              <h3 className="text-6xl font-bold mb-6 text-signal-charcoal">{t('about.coach.name')}</h3>
+              <p className="text-4xl text-signal-gold font-semibold mb-16">{t('about.coach.position')}</p>
               
-              {/* Certifications Card */}
-              <Card className="shadow-2xl border-4 border-gray-100">
-                <CardContent className="p-12">
-                  <h4 className="text-3xl font-bold mb-8 text-signal-charcoal">{t('about.coach.certifications')}</h4>
-                  
-                  <div className="grid grid-cols-6 gap-8">
-                    <div className="flex flex-col items-center">
-                      <div className="w-24 h-24">
-                        <img src="/lovable-uploads/1d022755-a8e7-481a-91db-13f7db87b26a.png" alt="PGA of America Member" className="w-full h-full object-contain" />
-                      </div>
-                    </div>
-                    <div className="flex flex-col items-center">
-                      <div className="w-24 h-24">
-                        <img src="/lovable-uploads/1dc02882-2327-403c-9e82-8b8207c618ff.png" alt="CSCS Certification" className="w-full h-full object-contain" />
-                      </div>
-                    </div>
-                    <div className="flex flex-col items-center">
-                      <div className="w-24 h-24">
-                        <img src="/lovable-uploads/09961efd-a840-417f-a93a-2e2990b91489.png" alt="CMPC Certification" className="w-full h-full object-contain" />
-                      </div>
-                    </div>
-                    <div className="flex justify-center">
-                      <div className="w-24 h-24">
-                        <img alt="BCIA Biofeedback Certification" className="w-full h-full object-contain" src="/lovable-uploads/b8e8e7d5-5980-475f-9534-3660f734bccf.png" />
-                      </div>
-                    </div>
-                    <div className="flex justify-center">
-                      <div className="w-24 h-24">
-                        <img alt="TPI Certified Fitness 3" className="w-full h-full object-contain" src="/lovable-uploads/80663943-a684-4747-88d6-29d27b58e790.png" />
-                      </div>
-                    </div>
-                    <div className="flex justify-center">
-                      <div className="w-24 h-24">
-                        <img alt="BCIA Neurofeedback Certification" className="w-full h-full object-contain" src="/lovable-uploads/650394e1-2bf5-4354-b912-86a81648eaaa.png" />
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+              <div className="space-y-8">
+                <div>
+                  <h4 className="text-4xl font-bold mb-6 text-signal-charcoal">{t('about.coach.academic')}</h4>
+                  <p className="text-3xl leading-relaxed text-signal-charcoal/90">
+                    {t('about.coach.academic.degree')}
+                  </p>
+                </div>
+                
+                <div>
+                  <h4 className="text-4xl font-bold mb-6 text-signal-charcoal">{t('about.coach.experience')}</h4>
+                  <ul className="text-3xl leading-relaxed text-signal-charcoal/90 space-y-4">
+                    <li>{t('about.coach.experience.img')}</li>
+                    <li>{t('about.coach.experience.usaf')}</li>
+                    <li>{t('about.coach.experience.pga')}</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div className="mt-24">
+            <h4 className="text-5xl font-bold mb-16 text-center text-signal-charcoal">{t('about.coach.certifications')}</h4>
+            
+            <div className="grid grid-cols-6 gap-12 max-w-6xl mx-auto">
+              <div className="flex flex-col items-center">
+                <div className="w-32 h-32">
+                  <img src="/lovable-uploads/1d022755-a8e7-481a-91db-13f7db87b26a.png" alt="PGA of America Member" className="w-full h-full object-contain" />
+                </div>
+              </div>
+              <div className="flex flex-col items-center">
+                <div className="w-32 h-32">
+                  <img src="/lovable-uploads/1dc02882-2327-403c-9e82-8b8207c618ff.png" alt="CSCS Certification" className="w-full h-full object-contain" />
+                </div>
+              </div>
+              <div className="flex flex-col items-center">
+                <div className="w-32 h-32">
+                  <img src="/lovable-uploads/09961efd-a840-417f-a93a-2e2990b91489.png" alt="CMPC Certification" className="w-full h-full object-contain" />
+                </div>
+              </div>
+              <div className="flex justify-center">
+                <div className="w-32 h-32">
+                  <img alt="BCIA Biofeedback Certification" className="w-full h-full object-contain" src="/lovable-uploads/b8e8e7d5-5980-475f-9534-3660f734bccf.png" />
+                </div>
+              </div>
+              <div className="flex justify-center">
+                <div className="w-32 h-32">
+                  <img alt="TPI Certified Fitness 3" className="w-full h-full object-contain" src="/lovable-uploads/80663943-a684-4747-88d6-29d27b58e790.png" />
+                </div>
+              </div>
+              <div className="flex justify-center">
+                <div className="w-32 h-32">
+                  <img alt="BCIA Neurofeedback Certification" className="w-full h-full object-contain" src="/lovable-uploads/650394e1-2bf5-4354-b912-86a81648eaaa.png" />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -518,11 +516,19 @@ const Slideshow = () => {
 
   const slides = useMemo(() => [
     { id: 'hero', component: HeroSlide, title: '歡迎' },
-    { id: 'philosophy', component: PhilosophySlide, title: '理念' },
-    { id: 'membership-flow', component: MembershipFlowSlide, title: '會員方案' },
-    { id: 'assessment-process', component: AssessmentProcessSlide, title: '評估流程' },
-    { id: 'schedule', component: WeeklyScheduleSlide, title: '課程時間表' },
-    { id: 'about', component: AboutSlide, title: '關於教練' },
+    { id: 'philosophy-intro', component: PhilosophyIntroSlide, title: '訓練理念' },
+    { id: 'philosophy-1', component: PhilosophyCard1Slide, title: '體能訓練' },
+    { id: 'philosophy-2', component: PhilosophyCard2Slide, title: '心理訓練' },
+    { id: 'philosophy-3', component: PhilosophyCard3Slide, title: '技術訓練' },
+    { id: 'assessment-intro', component: AssessmentIntroSlide, title: '評估介紹' },
+    { id: 'assessment-overview', component: AssessmentOverviewSlide, title: '評估項目' },
+    { id: 'membership-intro', component: MembershipIntroSlide, title: '會員方案' },
+    { id: 'assessment-package', component: AssessmentPackageSlide, title: '評估套餐' },
+    { id: 'membership-plans', component: MembershipPlansSlide, title: '會員計畫' },
+    { id: 'schedule-intro', component: ScheduleIntroSlide, title: '課程時間表' },
+    { id: 'class-types', component: ClassTypesSlide, title: '課程類型' },
+    { id: 'about-intro', component: AboutIntroSlide, title: '關於教練' },
+    { id: 'coach-profile', component: CoachProfileSlide, title: '教練簡介' },
   ], []);
 
   // Auto-advance slides
@@ -531,7 +537,7 @@ const Slideshow = () => {
 
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 8000); // 8 seconds per slide
+    }, 10000); // 10 seconds per slide
 
     return () => clearInterval(interval);
   }, [slides.length, isAutoPlay]);
