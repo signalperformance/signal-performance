@@ -837,40 +837,7 @@ const Slideshow = () => {
         {slides[currentSlide]()}
       </div>
       
-      {/* Arrow Navigation */}
-      <div className="fixed inset-y-0 left-0 flex items-center z-40">
-        <Button
-          variant="outline"
-          size="icon"
-          onClick={prevSlide}
-          onMouseEnter={pauseAutoAdvance}
-          onMouseLeave={() => {
-            if (Date.now() - lastInteractionTime > 3000) {
-              resumeAutoAdvance();
-            }
-          }}
-          className="ml-4 bg-white/90 backdrop-blur-sm border-signal-gold/20 hover:bg-signal-gold hover:text-signal-charcoal shadow-lg"
-        >
-          <ChevronLeft className="h-4 w-4" />
-        </Button>
-      </div>
       
-      <div className="fixed inset-y-0 right-0 flex items-center z-40">
-        <Button
-          variant="outline"
-          size="icon"
-          onClick={nextSlide}
-          onMouseEnter={pauseAutoAdvance}
-          onMouseLeave={() => {
-            if (Date.now() - lastInteractionTime > 3000) {
-              resumeAutoAdvance();
-            }
-          }}
-          className="mr-4 bg-white/90 backdrop-blur-sm border-signal-gold/20 hover:bg-signal-gold hover:text-signal-charcoal shadow-lg"
-        >
-          <ChevronRight className="h-4 w-4" />
-        </Button>
-      </div>
       
       
       
