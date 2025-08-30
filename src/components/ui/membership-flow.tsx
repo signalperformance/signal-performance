@@ -195,8 +195,7 @@ export function MembershipFlow({
                             </span>
                             <div className="flex items-baseline gap-2">
                               <span className="text-4xl font-bold text-green-600">
-                                {tier.currency ?? "NT$"}
-                                {formatNumber(tier.price.monthly)}
+                                15,000元
                               </span>
                               <span className="text-sm text-muted-foreground">{t("pricing.perMonth")}</span>
                             </div>
