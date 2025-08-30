@@ -109,7 +109,10 @@ const Slideshow = () => {
   const [isAutoPaused, setIsAutoPaused] = useState(false);
   const [lastInteractionTime, setLastInteractionTime] = useState(0);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const [focusedPrinciple, setFocusedPrinciple] = useState<number | null>(null);
+  const [principlePhase, setPrinciplePhase] = useState<'initial' | 'focusing'>('initial');
   const playerRef = useRef<any>(null);
+  const principleTimerRef = useRef<NodeJS.Timeout | null>(null);
   const t = useChineseTranslations();
   
   // Preload all slideshow images
@@ -181,12 +184,57 @@ const Slideshow = () => {
     }
   }, []);
 
+  // Philosophy slide principle focusing animation
+  useEffect(() => {
+    if (currentSlide === 1 && !isAutoPaused) { // Philosophy slide
+      // Clear any existing timer
+      if (principleTimerRef.current) {
+        clearTimeout(principleTimerRef.current);
+      }
+
+      // Initial 2-second delay, all principles visible but blurred except first
+      setPrinciplePhase('initial');
+      setFocusedPrinciple(0);
+      
+      // Set up the sequence
+      const sequence = [
+        { delay: 2000, principle: 0 }, // 0-2s: initial + focus on principle 1
+        { delay: 12000, principle: 1 }, // 2-12s: focus on principle 1, then switch to 2
+        { delay: 22000, principle: 2 }, // 12-22s: focus on principle 2, then switch to 3
+      ];
+
+      sequence.forEach(({ delay, principle }) => {
+        principleTimerRef.current = setTimeout(() => {
+          if (currentSlide === 1 && !isAutoPaused) {
+            setPrinciplePhase('focusing');
+            setFocusedPrinciple(principle);
+          }
+        }, delay);
+      });
+    } else {
+      // Reset philosophy state when leaving slide
+      if (principleTimerRef.current) {
+        clearTimeout(principleTimerRef.current);
+        principleTimerRef.current = null;
+      }
+      setFocusedPrinciple(null);
+      setPrinciplePhase('initial');
+    }
+
+    return () => {
+      if (principleTimerRef.current) {
+        clearTimeout(principleTimerRef.current);
+        principleTimerRef.current = null;
+      }
+    };
+  }, [currentSlide, isAutoPaused]);
+
   // Auto-advance slides with pause/resume logic (only after images load)
   useEffect(() => {
     if (imagesLoading) return; // Don't start slideshow until images are loaded
     
-    // Use longer timeout for video slide (33 seconds), normal timeout for others (8 seconds)
-    const slideTimeout = currentSlide === 3 ? 33000 : 8000;
+    // Use custom timeout for philosophy slide (32 seconds), video slide (33 seconds), normal timeout for others (8 seconds)
+    const slideTimeout = currentSlide === 1 ? 32000 : currentSlide === 3 ? 33000 : 8000;
     
     const timer = setInterval(() => {
       if (!isAutoPaused) {
@@ -295,18 +343,36 @@ const Slideshow = () => {
               { title: t['philosophy.card1.title'], content: t['philosophy.card1.content'] },
               { title: t['philosophy.card2.title'], content: t['philosophy.card2.content'] },
               { title: t['philosophy.card3.title'], content: t['philosophy.card3.content'] }
-            ].map((card, index) => (
-              <Card key={index} className="bg-white shadow-xl border-2 border-gray-100 h-full">
-                <CardContent className="p-6 md:p-8 h-full flex flex-col">
-                  <h3 className="text-lg md:text-xl lg:text-2xl xl:text-3xl font-lora font-bold mb-4 md:mb-6 text-signal-charcoal">
-                    {card.title}
-                  </h3>
-                  <p className="text-sm md:text-base lg:text-lg xl:text-xl text-muted-foreground leading-relaxed flex-1">
-                    {card.content}
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
+            ].map((card, index) => {
+              const isFocused = focusedPrinciple === index;
+              const isBlurred = focusedPrinciple !== null && !isFocused;
+              
+              return (
+                <Card 
+                  key={index} 
+                  className={`bg-white shadow-xl border-2 h-full transition-all duration-500 ease-in-out ${
+                    isFocused 
+                      ? 'border-signal-gold/60 shadow-2xl transform scale-105 bg-gradient-to-br from-white to-signal-gold/5' 
+                      : isBlurred 
+                        ? 'border-gray-100 opacity-40 blur-sm transform scale-95' 
+                        : 'border-gray-100'
+                  }`}
+                >
+                  <CardContent className="p-6 md:p-8 h-full flex flex-col">
+                    <h3 className={`text-lg md:text-xl lg:text-2xl xl:text-3xl font-lora font-bold mb-4 md:mb-6 transition-colors duration-500 ${
+                      isFocused ? 'text-signal-charcoal' : 'text-signal-charcoal'
+                    }`}>
+                      {card.title}
+                    </h3>
+                    <p className={`text-sm md:text-base lg:text-lg xl:text-xl leading-relaxed flex-1 transition-colors duration-500 ${
+                      isFocused ? 'text-signal-charcoal/90' : 'text-muted-foreground'
+                    }`}>
+                      {card.content}
+                    </p>
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
         </div>
       </div>
