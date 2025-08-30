@@ -1,10 +1,34 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { Clock, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Clock, ChevronLeft, ChevronRight, Loader2 } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
 import { Move, Activity, User, Dumbbell, Club } from 'lucide-react';
 import QRCode from 'qrcode';
+import { useImagePreloader } from '@/hooks/useImagePreloader';
+
+// All slideshow images that need preloading
+const SLIDESHOW_IMAGES = [
+  '/lovable-uploads/23ce2472-9cbc-4d05-bd80-cd0ac6eb27a8.png', // Philosophy wave
+  '/lovable-uploads/9cd6f4c9-9cfc-435a-8ebb-2bbe20537915.png', // Coach photo
+  '/lovable-uploads/1d022755-a8e7-481a-91db-13f7db87b26a.png', // Cert 1
+  '/lovable-uploads/1dc02882-2327-403c-9e82-8b8207c618ff.png', // Cert 2
+  '/lovable-uploads/09961efd-a840-417f-a93a-2e2990b91489.png', // Cert 3
+  '/lovable-uploads/b8e8e7d5-5980-475f-9534-3660f734bccf.png', // Cert 4
+  '/lovable-uploads/80663943-a684-4747-88d6-29d27b58e790.png', // Cert 5
+  '/lovable-uploads/650394e1-2bf5-4354-b912-86a81648eaaa.png', // Cert 6
+  '/lovable-uploads/05754402-e6c2-4ca2-98e3-9ba6aad7a5ea.png', // Cert 7
+  '/lovable-uploads/ea936717-eb96-4705-98af-8513f4b6c976.png', // Cert 8
+  '/lovable-uploads/385d07dd-80d6-44cb-b2ef-9cbc80e9c887.png', // Cert 9
+];
+
+// YouTube API type declarations
+declare global {
+  interface Window {
+    YT: any;
+    onYouTubeIframeAPIReady: () => void;
+  }
+}
 
 // Force Chinese language context for slideshow
 const useChineseTranslations = () => {
@@ -12,6 +36,7 @@ const useChineseTranslations = () => {
     // Hero
     'hero.headline': '高爾夫好手的整合式訓練空間',
     'hero.subheadline': '體能、心理與技術訓練集中於一個專業空間',
+    
     // Philosophy
     'philosophy.title': '我們的理念',
     'philosophy.card1.title': '去除雜訊，聚焦訊號',
@@ -20,14 +45,29 @@ const useChineseTranslations = () => {
     'philosophy.card2.content': '我們採取以數據為基礎、科學實證支持的訓練方式，不靠猜測，也不盲從數據。數據能提供方向，但不是唯一的決策依據。我們重視專業教練的經驗與判斷，並結合有意義的指標，打造出既有效又具個人化的訓練計畫，協助選手精準提升表現。',
     'philosophy.card3.title': '整合式訓練系統',
     'philosophy.card3.content': '表現從不是單一因素決定的，它是一個由多個面向互動構成的複雜系統。我們的身心彼此連動，技術則建立在兩者之上。因此，我們不將體能、心理與技術分割訓練，而是納入一套整合式的訓練架構中，讓每一部分協同作用，推動整體表現持續進步。',
+    
     // Assessment & Membership
     'assessment.title': '我們的評估流程',
     'assessment.price': '10,000元',
+    'assessment.originalPrice': '12,000',
+    'assessment.savings': '2,000',
+    'assessment.promotional': '限時優惠！立即預約',
+    'assessment.bookingStatus': '2人已預約，8名額剩餘',
     'membership.title': '會員方案',
     'membership.pro.price': '15,000',
+    'membership.pro.originalPrice': '18,000',
+    'membership.pro.savings': '3,000',
     'membership.pro.title': '專業會員',
     'membership.pro.sessions': '每月18堂課',
-    'membership.pro.features': ['體能訓練 — 每週4次（1對3）', '心理訓練 — 每月2次（1對1）', '表現報告 — 每月1次', '季度評估'],
+    'membership.pro.features': [
+      '體能訓練 — 每週4次（1對3）',
+      '心理訓練 — 每月2次（1對1）',
+      '表現報告 — 每月1次',
+      '季度評估'
+    ],
+    'membership.pro.promotional': '限時優惠！立即預約',
+    'membership.pro.bookingStatus': '2人已預約，8名額剩餘',
+    
     // Assessment Process
     'assessment.process.title': '5步評估流程',
     'assessment.joint.title': '關節活動度',
@@ -35,6 +75,7 @@ const useChineseTranslations = () => {
     'assessment.metabolic.title': '心肺耐力',
     'assessment.body.title': '身體組成',
     'assessment.golf.title': '高爾夫技術',
+    
     // Schedule
     'schedule.title': '每週訓練課表',
     'schedule.subtitle': '每週最多選4堂課，依時間與目標安排',
@@ -42,6 +83,7 @@ const useChineseTranslations = () => {
     'schedule.classes.strength': '肌力',
     'schedule.classes.cardio': '心肺',
     'schedule.classes.power': '爆發力',
+    
     // Coach
     'coach.title': '您的教練',
     'coach.name': '諾亞薩克斯博士',
@@ -49,18 +91,30 @@ const useChineseTranslations = () => {
     'coach.academic': '學術背景',
     'coach.degree': '運動與表現心理學博士',
     'coach.experience': '專業經歷',
-    'coach.experience.items': ['IMG Academy', '美國空軍特種作戰司令部', '美國PGA高爾夫學院-觀瀾湖'],
+    'coach.experience.items': [
+      'IMG Academy',
+      '美國空軍特種作戰司令部',
+      '美國PGA高爾夫學院-觀瀾湖'
+    ],
     'coach.certifications': '專業認證',
+    
     // QR Code
     'qr.text': '掃描預約評估'
   };
 };
+
 const Slideshow = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [qrCodeUrl, setQrCodeUrl] = useState('');
   const [isAutoPaused, setIsAutoPaused] = useState(false);
   const [lastInteractionTime, setLastInteractionTime] = useState(0);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const playerRef = useRef<any>(null);
   const t = useChineseTranslations();
+  
+  // Preload all slideshow images
+  const { isLoading: imagesLoading, loadedCount, totalCount } = useImagePreloader(SLIDESHOW_IMAGES);
+
   const totalSlides = 6;
 
   // Navigation functions
@@ -68,18 +122,22 @@ const Slideshow = () => {
     setCurrentSlide(index);
     pauseAutoAdvance();
   }, []);
+
   const nextSlide = useCallback(() => {
     setCurrentSlide(prev => (prev + 1) % totalSlides);
     pauseAutoAdvance();
   }, [totalSlides]);
+
   const prevSlide = useCallback(() => {
     setCurrentSlide(prev => (prev - 1 + totalSlides) % totalSlides);
     pauseAutoAdvance();
   }, [totalSlides]);
+
   const pauseAutoAdvance = useCallback(() => {
     setIsAutoPaused(true);
     setLastInteractionTime(Date.now());
   }, []);
+
   const resumeAutoAdvance = useCallback(() => {
     setIsAutoPaused(false);
   }, []);
@@ -96,8 +154,40 @@ const Slideshow = () => {
     }).then(setQrCodeUrl);
   }, []);
 
-  // Auto-advance slides with pause/resume logic
+  // YouTube Player API initialization
   useEffect(() => {
+    // Load YouTube IFrame API
+    if (!window.YT) {
+      const tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      const firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
+      
+      window.onYouTubeIframeAPIReady = () => {
+        if (playerRef.current) {
+          playerRef.current = new window.YT.Player('youtube-player', {
+            events: {
+              onStateChange: (event: any) => {
+                if (event.data === window.YT.PlayerState.PLAYING) {
+                  setIsVideoPlaying(true);
+                } else if (event.data === window.YT.PlayerState.ENDED) {
+                  setIsVideoPlaying(false);
+                }
+              }
+            }
+          });
+        }
+      };
+    }
+  }, []);
+
+  // Auto-advance slides with pause/resume logic (only after images load)
+  useEffect(() => {
+    if (imagesLoading) return; // Don't start slideshow until images are loaded
+    
+    // Use longer timeout for video slide (33 seconds), normal timeout for others (8 seconds)
+    const slideTimeout = currentSlide === 3 ? 33000 : 8000;
+    
     const timer = setInterval(() => {
       if (!isAutoPaused) {
         setCurrentSlide(prev => (prev + 1) % totalSlides);
@@ -107,9 +197,10 @@ const Slideshow = () => {
           resumeAutoAdvance();
         }
       }
-    }, 8000);
+    }, slideTimeout);
+
     return () => clearInterval(timer);
-  }, [isAutoPaused, lastInteractionTime, totalSlides, resumeAutoAdvance]);
+  }, [isAutoPaused, lastInteractionTime, totalSlides, resumeAutoAdvance, imagesLoading, currentSlide]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -146,12 +237,15 @@ const Slideshow = () => {
           break;
       }
     };
+
     window.addEventListener('keydown', handleKeydown);
     return () => window.removeEventListener('keydown', handleKeydown);
   }, [goToSlide, nextSlide, prevSlide, isAutoPaused, pauseAutoAdvance, resumeAutoAdvance, totalSlides]);
+
   const slides = [
-  // Slide 1: Hero
-  () => <div className="min-h-screen bg-gradient-to-br from-signal-charcoal to-signal-charcoal/80 flex items-center justify-center relative overflow-hidden">
+    // Slide 1: Hero
+    () => (
+      <div className="min-h-screen bg-gradient-to-br from-signal-charcoal to-signal-charcoal/80 flex items-center justify-center relative overflow-hidden">
         {/* Background geometric shapes */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-20 left-20 w-64 h-64 border-2 border-signal-gold rounded-full animate-pulse"></div>
@@ -168,9 +262,12 @@ const Slideshow = () => {
             </p>
           </div>
         </div>
-      </div>,
-  // Slide 2: Philosophy (All 3 cards)
-  () => <div className="min-h-screen bg-signal-light-gray flex items-center justify-center p-4 md:p-8">
+      </div>
+    ),
+
+    // Slide 2: Philosophy (All 3 cards)
+    () => (
+      <div className="min-h-screen bg-signal-light-gray flex items-center justify-center p-4 md:p-8">
         <div className="container mx-auto">
           <div className="text-center mb-8 md:mb-16">
             <h2 className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 md:mb-12 font-lora text-signal-charcoal">
@@ -179,22 +276,27 @@ const Slideshow = () => {
             
             {/* Chinese signal wave graphic */}
             <div className="w-full mb-8 md:mb-16 flex justify-center">
-              <img src="/lovable-uploads/23ce2472-9cbc-4d05-bd80-cd0ac6eb27a8.png" alt="Signal wave with red spike (Chinese)" className="w-full max-w-5xl h-auto object-contain" loading="eager" />
+              <div 
+                className="w-full max-w-5xl h-32 md:h-48 lg:h-64 bg-center bg-no-repeat bg-contain opacity-0 animate-fade-in"
+                style={{
+                  backgroundImage: 'url(/lovable-uploads/23ce2472-9cbc-4d05-bd80-cd0ac6eb27a8.png)',
+                  animationDelay: '0.1s',
+                  animationFillMode: 'forwards'
+                }}
+                role="img"
+                aria-label="Signal wave with red spike (Chinese)"
+              />
             </div>
           </div>
           
           {/* 3-column grid for all screen sizes */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 max-w-7xl mx-auto">
-            {[{
-          title: t['philosophy.card1.title'],
-          content: t['philosophy.card1.content']
-        }, {
-          title: t['philosophy.card2.title'],
-          content: t['philosophy.card2.content']
-        }, {
-          title: t['philosophy.card3.title'],
-          content: t['philosophy.card3.content']
-        }].map((card, index) => <Card key={index} className="bg-white shadow-xl border-2 border-gray-100 h-full">
+            {[
+              { title: t['philosophy.card1.title'], content: t['philosophy.card1.content'] },
+              { title: t['philosophy.card2.title'], content: t['philosophy.card2.content'] },
+              { title: t['philosophy.card3.title'], content: t['philosophy.card3.content'] }
+            ].map((card, index) => (
+              <Card key={index} className="bg-white shadow-xl border-2 border-gray-100 h-full">
                 <CardContent className="p-6 md:p-8 h-full flex flex-col">
                   <h3 className="text-lg md:text-xl lg:text-2xl xl:text-3xl font-lora font-bold mb-4 md:mb-6 text-signal-charcoal">
                     {card.title}
@@ -203,12 +305,16 @@ const Slideshow = () => {
                     {card.content}
                   </p>
                 </CardContent>
-              </Card>)}
+              </Card>
+            ))}
           </div>
         </div>
-      </div>,
-  // Slide 3: How to Get Started
-  () => <div className="min-h-screen bg-white flex items-center justify-center p-4 md:p-8">
+      </div>
+    ),
+
+    // Slide 3: How to Get Started
+    () => (
+      <div className="min-h-screen bg-white flex items-center justify-center p-4 md:p-8">
         <div className="container mx-auto">
           {/* Header Section */}
           <div className="text-center mb-8 md:mb-16">
@@ -228,11 +334,44 @@ const Slideshow = () => {
                   第1步 · 完成基礎評估
                 </div>
               </div>
-              <Card className="shadow-2xl border-2 border-signal-gold/30 bg-gradient-to-br from-white to-signal-gold/5">
+              <Card className="shadow-2xl border-2 border-signal-gold/30 bg-gradient-to-br from-white to-signal-gold/5 overflow-hidden">
+                {/* Promotional Banner */}
+                <div className="bg-gradient-to-r from-orange-500 to-red-500 text-white text-center py-3 px-6">
+                  <div className="font-bold text-sm md:text-base lg:text-lg">
+                    {t['assessment.promotional']}
+                  </div>
+                </div>
+                
                 <CardContent className="p-6 md:p-10">
                   <div className="text-center mb-8">
-                    <div className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-signal-gold mb-6">
+                    {/* Original Price (Crossed Out) */}
+                    <div className="text-lg md:text-xl lg:text-2xl text-gray-500 line-through mb-2">
+                      NT${t['assessment.originalPrice']}
+                    </div>
+                    
+                    {/* Discounted Price */}
+                    <div className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-signal-gold mb-2">
                       NT${t['assessment.price']}
+                    </div>
+                    
+                    {/* Savings Amount */}
+                    <div className="text-sm md:text-base lg:text-lg text-green-600 font-semibold mb-4">
+                      省 NT${t['assessment.savings']}
+                    </div>
+                    
+                    {/* Booking Status Tracker */}
+                    <div className="bg-gray-50 rounded-lg p-4 mb-6">
+                      <div className="text-sm md:text-base text-gray-600 mb-2">
+                        {t['assessment.bookingStatus']}
+                      </div>
+                      <div className="flex justify-center space-x-1">
+                        {[...Array(10)].map((_, i) => (
+                          <div 
+                            key={i} 
+                            className={`w-3 h-3 rounded-full ${i < 2 ? 'bg-orange-500' : 'bg-gray-300'}`}
+                          />
+                        ))}
+                      </div>
                     </div>
                   </div>
                   <ul className="space-y-4 text-base md:text-lg lg:text-xl xl:text-2xl">
@@ -260,137 +399,148 @@ const Slideshow = () => {
                   第2步 · 選擇月方案
                 </div>
               </div>
-              <Card className="shadow-2xl border-2 border-signal-charcoal/30 bg-gradient-to-br from-signal-charcoal/5 to-white">
+              <Card className="shadow-2xl border-2 border-signal-charcoal/30 bg-gradient-to-br from-signal-charcoal/5 to-white overflow-hidden">
+                {/* Promotional Banner */}
+                <div className="bg-gradient-to-r from-orange-500 to-red-500 text-white text-center py-3 px-6">
+                  <div className="font-bold text-sm md:text-base lg:text-lg">
+                    {t['membership.pro.promotional']}
+                  </div>
+                </div>
+                
                 <CardContent className="p-6 md:p-10">
                   <div className="text-center mb-8">
+                    {/* Original Price (Crossed Out) */}
+                    <div className="text-lg md:text-xl lg:text-2xl text-gray-500 line-through mb-2">
+                      NT${t['membership.pro.originalPrice']}
+                    </div>
+                    
+                    {/* Discounted Price */}
                     <div className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-signal-charcoal mb-2">
                       NT${t['membership.pro.price']}
                     </div>
-                    <div className="text-lg md:text-xl lg:text-2xl xl:text-3xl text-signal-gold font-semibold">
+                    
+                    {/* Savings Amount */}
+                    <div className="text-sm md:text-base lg:text-lg text-green-600 font-semibold mb-4">
+                      省 NT${t['membership.pro.savings']}
+                    </div>
+                    
+                    <div className="text-lg md:text-xl lg:text-2xl xl:text-3xl text-signal-gold font-semibold mb-6">
                       {t['membership.pro.sessions']}
                     </div>
+                    
+                    {/* Booking Status Tracker */}
+                    <div className="bg-gray-50 rounded-lg p-4 mb-6">
+                      <div className="text-sm md:text-base text-gray-600 mb-2">
+                        {t['membership.pro.bookingStatus']}
+                      </div>
+                      <div className="flex justify-center space-x-1">
+                        {[...Array(10)].map((_, i) => (
+                          <div 
+                            key={i} 
+                            className={`w-3 h-3 rounded-full ${i < 2 ? 'bg-orange-500' : 'bg-gray-300'}`}
+                          />
+                        ))}
+                      </div>
+                    </div>
                   </div>
+                  
                   <ul className="space-y-4 text-base md:text-lg lg:text-xl xl:text-2xl">
-                    {t['membership.pro.features'].map((feature, index) => <li key={index} className="flex items-center">
+                    {t['membership.pro.features'].map((feature, index) => (
+                      <li key={index} className="flex items-center">
                         <span className="w-2 h-2 bg-signal-charcoal rounded-full mr-4 flex-shrink-0"></span>
                         {feature}
-                      </li>)}
+                      </li>
+                    ))}
                   </ul>
                 </CardContent>
               </Card>
             </div>
           </div>
         </div>
-      </div>,
-  // Slide 4: Assessment Process Video
-  () => {},
-  // Slide 5: Weekly Schedule
-  () => {
-    type Item = {
-      hour24: number;
-      minute?: number;
-      labelKey: 'mobility' | 'strength' | 'cardio' | 'power';
-      pro?: boolean;
-    };
+      </div>
+    ),
 
-    // Schedule data matching WeeklySchedule component
-    const mwf: Item[] = [{
-      hour24: 12,
-      minute: 0,
-      labelKey: 'mobility',
-      pro: true
-    }, {
-      hour24: 13,
-      minute: 30,
-      labelKey: 'strength',
-      pro: true
-    }, {
-      hour24: 15,
-      minute: 0,
-      labelKey: 'mobility',
-      pro: true
-    }, {
-      hour24: 17,
-      minute: 0,
-      labelKey: 'mobility'
-    }, {
-      hour24: 18,
-      minute: 30,
-      labelKey: 'strength'
-    }, {
-      hour24: 20,
-      minute: 0,
-      labelKey: 'strength'
-    }];
-    const tth: Item[] = [{
-      hour24: 12,
-      minute: 0,
-      labelKey: 'power',
-      pro: true
-    }, {
-      hour24: 13,
-      minute: 30,
-      labelKey: 'cardio',
-      pro: true
-    }, {
-      hour24: 15,
-      minute: 0,
-      labelKey: 'power',
-      pro: true
-    }, {
-      hour24: 17,
-      minute: 0,
-      labelKey: 'power'
-    }, {
-      hour24: 18,
-      minute: 30,
-      labelKey: 'cardio'
-    }, {
-      hour24: 20,
-      minute: 0,
-      labelKey: 'power'
-    }];
-    const weekend: Item[] = [{
-      hour24: 9,
-      minute: 0,
-      labelKey: 'mobility'
-    }, {
-      hour24: 10,
-      minute: 30,
-      labelKey: 'strength'
-    }, {
-      hour24: 12,
-      minute: 0,
-      labelKey: 'cardio'
-    }, {
-      hour24: 13,
-      minute: 30,
-      labelKey: 'power'
-    }, {
-      hour24: 15,
-      minute: 0,
-      labelKey: 'mobility',
-      pro: true
-    }, {
-      hour24: 16,
-      minute: 30,
-      labelKey: 'power',
-      pro: true
-    }];
-    const columns = [{
-      title: '週一／週三／週五',
-      items: mwf
-    }, {
-      title: '週二／週四',
-      items: tth
-    }, {
-      title: '週末',
-      items: weekend
-    }];
-    const formatTime = (hour24: number, minute: number = 0) => {
-      return `${String(hour24).padStart(2, '0')}:${String(minute).padStart(2, '0')}`;
-    };
-    return <div className="min-h-screen bg-white flex items-center justify-center p-4 md:p-8">
+    // Slide 4: Assessment Process Video
+    () => (
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50/40 flex items-center justify-center p-4 md:p-8">
+        <div className="container mx-auto max-w-4xl">
+          <div className="text-center mb-8 md:mb-12">
+            <h2 className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold font-lora text-signal-charcoal mb-4 md:mb-6">
+              我們的評估流程
+            </h2>
+            <p className="text-lg md:text-xl lg:text-2xl xl:text-3xl text-muted-foreground max-w-3xl mx-auto">
+              每季，會員會完成一項由五部分組成的評估，以確保訓練保持一致且有效。
+            </p>
+          </div>
+          
+          <div className="w-full max-w-4xl mx-auto">
+            <div className="relative w-full" style={{ aspectRatio: '16/9' }}>
+              <iframe 
+                id="youtube-player"
+                width="560" 
+                height="315" 
+                src="https://www.youtube.com/embed/9yyIwGOXogM?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&enablejsapi=1" 
+                title="YouTube video player" 
+                frameBorder="0" 
+                allow="autoplay; encrypted-media" 
+                allowFullScreen
+                className="absolute inset-0 w-full h-full rounded-lg shadow-2xl"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    ),
+
+    // Slide 5: Weekly Schedule
+    () => {
+      type Item = {
+        hour24: number;
+        minute?: number;
+        labelKey: 'mobility' | 'strength' | 'cardio' | 'power';
+        pro?: boolean;
+      };
+
+      // Schedule data matching WeeklySchedule component
+      const mwf: Item[] = [
+        { hour24: 12, minute: 0, labelKey: 'mobility', pro: true },
+        { hour24: 13, minute: 30, labelKey: 'strength', pro: true },
+        { hour24: 15, minute: 0, labelKey: 'mobility', pro: true },
+        { hour24: 17, minute: 0, labelKey: 'mobility' },
+        { hour24: 18, minute: 30, labelKey: 'strength' },
+        { hour24: 20, minute: 0, labelKey: 'strength' },
+      ];
+
+      const tth: Item[] = [
+        { hour24: 12, minute: 0, labelKey: 'power', pro: true },
+        { hour24: 13, minute: 30, labelKey: 'cardio', pro: true },
+        { hour24: 15, minute: 0, labelKey: 'power', pro: true },
+        { hour24: 17, minute: 0, labelKey: 'power' },
+        { hour24: 18, minute: 30, labelKey: 'cardio' },
+        { hour24: 20, minute: 0, labelKey: 'power' },
+      ];
+
+      const weekend: Item[] = [
+        { hour24: 9, minute: 0, labelKey: 'mobility' },
+        { hour24: 10, minute: 30, labelKey: 'strength' },
+        { hour24: 12, minute: 0, labelKey: 'cardio' },
+        { hour24: 13, minute: 30, labelKey: 'power' },
+        { hour24: 15, minute: 0, labelKey: 'mobility', pro: true },
+        { hour24: 16, minute: 30, labelKey: 'power', pro: true },
+      ];
+
+      const columns = [
+        { title: '週一／週三／週五', items: mwf },
+        { title: '週二／週四', items: tth },
+        { title: '週末', items: weekend },
+      ];
+
+      const formatTime = (hour24: number, minute: number = 0) => {
+        return `${String(hour24).padStart(2, '0')}:${String(minute).padStart(2, '0')}`;
+      };
+
+      return (
+        <div className="min-h-screen bg-white flex items-center justify-center p-4 md:p-8">
           <div className="container mx-auto">
             <div className="text-center mb-8 md:mb-12">
               <h2 className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold font-lora text-signal-charcoal mb-4">
@@ -403,15 +553,27 @@ const Slideshow = () => {
             
             {/* Desktop 3-column grid */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto">
-              {columns.map((col, idx) => <Card key={idx} className="shadow-xl border-2 border-gray-100 overflow-hidden">
+              {columns.map((col, idx) => (
+                <Card key={idx} className="shadow-xl border-2 border-gray-100 overflow-hidden">
                   <div className="h-2 w-full bg-signal-gold"></div>
                   <CardContent className="p-4 md:p-6">
                     <h3 className="text-xl md:text-2xl lg:text-3xl font-bold font-lora text-center mb-4 md:mb-6 text-signal-charcoal">
                       {col.title}
                     </h3>
                     <div className="space-y-2 md:space-y-3">
-                      {col.items.map((item, i) => <div key={i} className={`relative grid grid-cols-[auto_1fr_auto] items-center gap-2 rounded-md border border-gray-200 px-3 py-2 md:py-3 ${item.pro ? 'bg-signal-gold/10' : 'bg-gray-50'}`}>
-                          {item.pro && <span className="absolute left-0 top-0 h-full w-1 bg-signal-gold" aria-hidden />}
+                      {col.items.map((item, i) => (
+                        <div
+                          key={i}
+                          className={`relative grid grid-cols-[auto_1fr_auto] items-center gap-2 rounded-md border border-gray-200 px-3 py-2 md:py-3 ${
+                            item.pro ? 'bg-signal-gold/10' : 'bg-gray-50'
+                          }`}
+                        >
+                          {item.pro && (
+                            <span
+                              className="absolute left-0 top-0 h-full w-1 bg-signal-gold"
+                              aria-hidden
+                            />
+                          )}
                           <span className="inline-flex items-center gap-1 text-xs md:text-sm text-gray-600">
                             <Clock className="h-3.5 w-3.5" />
                             {formatTime(item.hour24, item.minute)}
@@ -420,16 +582,22 @@ const Slideshow = () => {
                             {t[`schedule.classes.${item.labelKey}`]}
                           </span>
                           <span className="justify-self-end">
-                            {item.pro ? <span className="inline-flex items-center gap-1 rounded-full bg-signal-gold/20 text-signal-charcoal px-2 py-1 text-[10px] md:text-xs font-semibold uppercase tracking-wide ring-1 ring-signal-gold/40">
+                            {item.pro ? (
+                              <span className="inline-flex items-center gap-1 rounded-full bg-signal-gold/20 text-signal-charcoal px-2 py-1 text-[10px] md:text-xs font-semibold uppercase tracking-wide ring-1 ring-signal-gold/40">
                                 PRO
-                              </span> : <span className="inline-flex items-center gap-1 rounded-full bg-signal-charcoal/15 text-signal-charcoal px-2 py-1 text-[10px] md:text-xs font-semibold uppercase tracking-wide ring-1 ring-signal-charcoal/40">
+                              </span>
+                            ) : (
+                              <span className="inline-flex items-center gap-1 rounded-full bg-signal-charcoal/15 text-signal-charcoal px-2 py-1 text-[10px] md:text-xs font-semibold uppercase tracking-wide ring-1 ring-signal-charcoal/40">
                                 AM
-                              </span>}
+                              </span>
+                            )}
                           </span>
-                        </div>)}
+                        </div>
+                      ))}
                     </div>
                   </CardContent>
-                </Card>)}
+                </Card>
+              ))}
             </div>
             
             {/* Legend */}
@@ -448,10 +616,13 @@ const Slideshow = () => {
               </div>
             </div>
           </div>
-        </div>;
-  },
-  // Slide 6: Coach Profile & Credentials Combined
-  () => <div className="min-h-screen bg-gradient-to-br from-signal-light-gray to-white flex items-center justify-center p-4 md:p-8">
+        </div>
+      );
+    },
+
+    // Slide 6: Coach Profile & Credentials Combined
+    () => (
+      <div className="min-h-screen bg-gradient-to-br from-signal-light-gray to-white flex items-center justify-center p-4 md:p-8">
         <div className="container mx-auto">
           <div className="text-center mb-8 md:mb-16">
             <h2 className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold font-lora text-signal-charcoal">
@@ -465,7 +636,14 @@ const Slideshow = () => {
               <div className="text-center">
                 <div className="mb-6 md:mb-8">
                   <div className="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 mx-auto rounded-lg overflow-hidden bg-signal-gold/20">
-                    <img src="/lovable-uploads/9cd6f4c9-9cfc-435a-8ebb-2bbe20537915.png" alt="Dr. Noah Sachs" className="object-contain w-full h-full" />
+                    <img 
+                      src="/lovable-uploads/9cd6f4c9-9cfc-435a-8ebb-2bbe20537915.png" 
+                      alt="Dr. Noah Sachs" 
+                      className="object-contain w-full h-full" 
+                      loading="eager"
+                      fetchPriority="high"
+                      decoding="async"
+                    />
                   </div>
                 </div>
                 <h3 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-signal-charcoal mb-2">
@@ -496,7 +674,9 @@ const Slideshow = () => {
                       {t['coach.experience']}
                     </h4>
                     <ul className="text-base md:text-lg lg:text-xl xl:text-2xl leading-relaxed text-signal-charcoal/90 space-y-2">
-                      {t['coach.experience.items'].map((item, index) => <li key={index}>{item}</li>)}
+                      {t['coach.experience.items'].map((item, index) => (
+                        <li key={index}>{item}</li>
+                      ))}
                     </ul>
                   </div>
                 </CardContent>
@@ -513,23 +693,59 @@ const Slideshow = () => {
                   <div className="space-y-4 md:space-y-6 max-w-3xl mx-auto">
                     {/* Row 1 */}
                     <div className="flex justify-between items-center">
-                      {['/lovable-uploads/1d022755-a8e7-481a-91db-13f7db87b26a.png', '/lovable-uploads/1dc02882-2327-403c-9e82-8b8207c618ff.png', '/lovable-uploads/09961efd-a840-417f-a93a-2e2990b91489.png'].map((cert, index) => <div key={index} className="w-16 h-16 md:w-20 md:h-20">
-                          <img src={cert} alt={`Certification ${index + 1}`} className="w-full h-full object-contain" />
-                        </div>)}
+                      {[
+                        '/lovable-uploads/1d022755-a8e7-481a-91db-13f7db87b26a.png',
+                        '/lovable-uploads/1dc02882-2327-403c-9e82-8b8207c618ff.png',
+                        '/lovable-uploads/09961efd-a840-417f-a93a-2e2990b91489.png'
+                       ].map((cert, index) => (
+                         <div key={index} className="w-16 h-16 md:w-20 md:h-20">
+                           <img 
+                             src={cert}
+                             alt={`Certification ${index + 1}`}
+                             className="w-full h-full object-contain"
+                             loading="eager"
+                             decoding="async"
+                           />
+                         </div>
+                       ))}
                     </div>
                     
                     {/* Row 2 */}
                     <div className="flex justify-between items-center">
-                      {['/lovable-uploads/b8e8e7d5-5980-475f-9534-3660f734bccf.png', '/lovable-uploads/80663943-a684-4747-88d6-29d27b58e790.png', '/lovable-uploads/650394e1-2bf5-4354-b912-86a81648eaaa.png'].map((cert, index) => <div key={index + 3} className="w-16 h-16 md:w-20 md:h-20">
-                          <img src={cert} alt={`Certification ${index + 4}`} className="w-full h-full object-contain" />
-                        </div>)}
+                      {[
+                        '/lovable-uploads/b8e8e7d5-5980-475f-9534-3660f734bccf.png',
+                        '/lovable-uploads/80663943-a684-4747-88d6-29d27b58e790.png',
+                        '/lovable-uploads/650394e1-2bf5-4354-b912-86a81648eaaa.png'
+                       ].map((cert, index) => (
+                         <div key={index + 3} className="w-16 h-16 md:w-20 md:h-20">
+                           <img 
+                             src={cert}
+                             alt={`Certification ${index + 4}`}
+                             className="w-full h-full object-contain"
+                             loading="eager"
+                             decoding="async"
+                           />
+                         </div>
+                       ))}
                     </div>
                     
                     {/* Row 3 */}
                     <div className="flex justify-between items-center">
-                      {['/lovable-uploads/05754402-e6c2-4ca2-98e3-9ba6aad7a5ea.png', '/lovable-uploads/ea936717-eb96-4705-98af-8513f4b6c976.png', '/lovable-uploads/385d07dd-80d6-44cb-b2ef-9cbc80e9c887.png'].map((cert, index) => <div key={index + 6} className="w-16 h-16 md:w-20 md:h-20">
-                          <img src={cert} alt={`Certification ${index + 7}`} className="w-full h-full object-contain" />
-                        </div>)}
+                      {[
+                        '/lovable-uploads/05754402-e6c2-4ca2-98e3-9ba6aad7a5ea.png',
+                        '/lovable-uploads/ea936717-eb96-4705-98af-8513f4b6c976.png',
+                        '/lovable-uploads/385d07dd-80d6-44cb-b2ef-9cbc80e9c887.png'
+                       ].map((cert, index) => (
+                         <div key={index + 6} className="w-16 h-16 md:w-20 md:h-20">
+                           <img 
+                             src={cert}
+                             alt={`Certification ${index + 7}`}
+                             className="w-full h-full object-contain"
+                             loading="eager"
+                             decoding="async"
+                           />
+                         </div>
+                       ))}
                     </div>
                   </div>
                 </CardContent>
@@ -537,8 +753,28 @@ const Slideshow = () => {
             </div>
           </div>
         </div>
-      </div>];
-  return <div className="relative">
+      </div>
+    )
+  ];
+
+  // Show loading screen while images are preloading
+  if (imagesLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted flex items-center justify-center">
+        <div className="text-center space-y-4">
+          <Loader2 className="w-8 h-8 animate-spin mx-auto text-primary" />
+          <div className="text-lg font-medium">載入中...</div>
+          <div className="text-sm text-muted-foreground">
+            {loadedCount} / {totalCount} 張圖片已載入
+          </div>
+          <Progress value={(loadedCount / totalCount) * 100} className="w-64 mx-auto" />
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="relative">
       {/* Current slide */}
       <div className="transition-opacity duration-500">
         {slides[currentSlide]()}
@@ -546,21 +782,35 @@ const Slideshow = () => {
       
       {/* Arrow Navigation */}
       <div className="fixed inset-y-0 left-0 flex items-center z-40">
-        <Button variant="outline" size="icon" onClick={prevSlide} onMouseEnter={pauseAutoAdvance} onMouseLeave={() => {
-        if (Date.now() - lastInteractionTime > 3000) {
-          resumeAutoAdvance();
-        }
-      }} className="ml-4 bg-white/90 backdrop-blur-sm border-signal-gold/20 hover:bg-signal-gold hover:text-signal-charcoal shadow-lg">
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={prevSlide}
+          onMouseEnter={pauseAutoAdvance}
+          onMouseLeave={() => {
+            if (Date.now() - lastInteractionTime > 3000) {
+              resumeAutoAdvance();
+            }
+          }}
+          className="ml-4 bg-white/90 backdrop-blur-sm border-signal-gold/20 hover:bg-signal-gold hover:text-signal-charcoal shadow-lg"
+        >
           <ChevronLeft className="h-4 w-4" />
         </Button>
       </div>
       
       <div className="fixed inset-y-0 right-0 flex items-center z-40">
-        <Button variant="outline" size="icon" onClick={nextSlide} onMouseEnter={pauseAutoAdvance} onMouseLeave={() => {
-        if (Date.now() - lastInteractionTime > 3000) {
-          resumeAutoAdvance();
-        }
-      }} className="mr-4 bg-white/90 backdrop-blur-sm border-signal-gold/20 hover:bg-signal-gold hover:text-signal-charcoal shadow-lg">
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={nextSlide}
+          onMouseEnter={pauseAutoAdvance}
+          onMouseLeave={() => {
+            if (Date.now() - lastInteractionTime > 3000) {
+              resumeAutoAdvance();
+            }
+          }}
+          className="mr-4 bg-white/90 backdrop-blur-sm border-signal-gold/20 hover:bg-signal-gold hover:text-signal-charcoal shadow-lg"
+        >
           <ChevronRight className="h-4 w-4" />
         </Button>
       </div>
@@ -568,37 +818,61 @@ const Slideshow = () => {
       {/* Slide Dots Navigation */}
       <div className="fixed bottom-16 left-1/2 transform -translate-x-1/2 z-40">
         <div className="flex items-center gap-2 bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg">
-          {Array.from({
-          length: totalSlides
-        }, (_, index) => <button key={index} onClick={() => goToSlide(index)} onMouseEnter={pauseAutoAdvance} onMouseLeave={() => {
-          if (Date.now() - lastInteractionTime > 3000) {
-            resumeAutoAdvance();
-          }
-        }} className={`w-3 h-3 rounded-full transition-all duration-200 ${currentSlide === index ? 'bg-signal-gold shadow-md' : 'bg-signal-charcoal/30 hover:bg-signal-charcoal/50'}`} aria-label={`Go to slide ${index + 1}`} />)}
+          {Array.from({ length: totalSlides }, (_, index) => (
+            <button
+              key={index}
+              onClick={() => goToSlide(index)}
+              onMouseEnter={pauseAutoAdvance}
+              onMouseLeave={() => {
+                if (Date.now() - lastInteractionTime > 3000) {
+                  resumeAutoAdvance();
+                }
+              }}
+              className={`w-3 h-3 rounded-full transition-all duration-200 ${
+                currentSlide === index
+                  ? 'bg-signal-gold shadow-md'
+                  : 'bg-signal-charcoal/30 hover:bg-signal-charcoal/50'
+              }`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
           {/* Auto-pause indicator */}
-          {isAutoPaused && <div className="ml-2 px-2 py-1 text-xs text-signal-charcoal/60 font-medium">
+          {isAutoPaused && (
+            <div className="ml-2 px-2 py-1 text-xs text-signal-charcoal/60 font-medium">
               Paused
-            </div>}
+            </div>
+          )}
         </div>
       </div>
       
       {/* Progress indicator */}
       <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-40 bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg">
-        <Progress value={(currentSlide + 1) / slides.length * 100} className="w-32 md:w-48 h-2" />
+        <Progress 
+          value={((currentSlide + 1) / slides.length) * 100} 
+          className="w-32 md:w-48 h-2" 
+        />
         <div className="text-xs md:text-sm text-center mt-1 font-semibold text-signal-charcoal">
           {currentSlide + 1} / {slides.length}
         </div>
       </div>
       
       {/* Persistent QR Code */}
-      {qrCodeUrl && <div className="fixed bottom-4 right-4 z-50 bg-white rounded-lg shadow-2xl p-3 md:p-4 border-2 border-signal-gold/20">
+      {qrCodeUrl && (
+        <div className="fixed bottom-4 right-4 z-50 bg-white rounded-lg shadow-2xl p-3 md:p-4 border-2 border-signal-gold/20">
           <div className="text-center">
-            <img src={qrCodeUrl} alt="QR Code for booking assessment" className="w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 mx-auto mb-2" />
+            <img 
+              src={qrCodeUrl} 
+              alt="QR Code for booking assessment"
+              className="w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 mx-auto mb-2"
+            />
             <p className="text-xs md:text-sm lg:text-base font-semibold text-signal-charcoal">
               {t['qr.text']}
             </p>
           </div>
-        </div>}
-    </div>;
+        </div>
+      )}
+    </div>
+  );
 };
+
 export default Slideshow;
