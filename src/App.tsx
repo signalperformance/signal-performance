@@ -17,7 +17,6 @@ const AdminLogin = lazy(() => import("./pages/AdminLogin"));
 const ClientLogin = lazy(() => import("./pages/ClientLogin"));
 const ClientPortal = lazy(() => import("./pages/ClientPortal"));
 const NotFound = lazy(() => import("./pages/NotFound"));
-const Slideshow = lazy(() => import("./pages/Slideshow"));
 
 const App = () => (
   <TooltipProvider>
@@ -33,14 +32,6 @@ const App = () => (
             element={
               <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="animate-spin w-8 h-8 border-2 border-signal-gold border-t-transparent rounded-full"></div></div>}>
                 <Assessment />
-              </Suspense>
-            } 
-          />
-          <Route 
-            path="/slideshow" 
-            element={
-              <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-signal-charcoal"><div className="animate-spin w-8 h-8 border-2 border-signal-gold border-t-transparent rounded-full"></div></div>}>
-                <Slideshow />
               </Suspense>
             } 
           />
