@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
+import { Clock } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
 import { Move, Activity, User, Dumbbell, Club } from 'lucide-react';
 import QRCode from 'qrcode';
@@ -282,63 +283,132 @@ const Slideshow = () => {
     ),
 
     // Slide 5: Weekly Schedule
-    () => (
-      <div className="min-h-screen bg-white flex items-center justify-center p-4 md:p-8">
-        <div className="container mx-auto">
-          <div className="text-center mb-8 md:mb-16">
-            <h2 className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold font-lora text-signal-charcoal mb-4">
-              {t['schedule.title']}
-            </h2>
-            <p className="text-lg md:text-xl lg:text-2xl xl:text-3xl text-muted-foreground">
-              {t['schedule.subtitle']}
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8 max-w-7xl mx-auto">
-            {[
-              { name: t['schedule.classes.mobility'], color: 'bg-blue-500', times: ['12:00', '15:00', '17:00'] },
-              { name: t['schedule.classes.strength'], color: 'bg-red-500', times: ['13:30', '18:30', '20:00'] },
-              { name: t['schedule.classes.cardio'], color: 'bg-green-500', times: ['13:30', '18:30', '12:00'] },
-              { name: t['schedule.classes.power'], color: 'bg-purple-500', times: ['12:00', '15:00', '17:00'] }
-            ].map((classType, index) => (
-              <Card key={index} className="shadow-xl border-2 border-gray-100">
-                <div className={`h-2 ${classType.color}`}></div>
-                <CardContent className="p-6 md:p-8">
-                  <h3 className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold font-lora text-center mb-6 md:mb-8 text-signal-charcoal">
-                    {classType.name}
-                  </h3>
-                  <div className="space-y-3 md:space-y-4">
-                    {classType.times.map((time, timeIndex) => (
-                      <div key={timeIndex} className="bg-signal-light-gray rounded-lg p-3 md:p-4 text-center">
-                        <div className="text-lg md:text-xl lg:text-2xl xl:text-3xl font-bold text-signal-charcoal">
-                          {time}
+    () => {
+      type Item = {
+        hour24: number;
+        minute?: number;
+        labelKey: 'mobility' | 'strength' | 'cardio' | 'power';
+        pro?: boolean;
+      };
+
+      // Schedule data matching WeeklySchedule component
+      const mwf: Item[] = [
+        { hour24: 12, minute: 0, labelKey: 'mobility', pro: true },
+        { hour24: 13, minute: 30, labelKey: 'strength', pro: true },
+        { hour24: 15, minute: 0, labelKey: 'mobility', pro: true },
+        { hour24: 17, minute: 0, labelKey: 'mobility' },
+        { hour24: 18, minute: 30, labelKey: 'strength' },
+        { hour24: 20, minute: 0, labelKey: 'strength' },
+      ];
+
+      const tth: Item[] = [
+        { hour24: 12, minute: 0, labelKey: 'power', pro: true },
+        { hour24: 13, minute: 30, labelKey: 'cardio', pro: true },
+        { hour24: 15, minute: 0, labelKey: 'power', pro: true },
+        { hour24: 17, minute: 0, labelKey: 'power' },
+        { hour24: 18, minute: 30, labelKey: 'cardio' },
+        { hour24: 20, minute: 0, labelKey: 'power' },
+      ];
+
+      const weekend: Item[] = [
+        { hour24: 9, minute: 0, labelKey: 'mobility' },
+        { hour24: 10, minute: 30, labelKey: 'strength' },
+        { hour24: 12, minute: 0, labelKey: 'cardio' },
+        { hour24: 13, minute: 30, labelKey: 'power' },
+        { hour24: 15, minute: 0, labelKey: 'mobility', pro: true },
+        { hour24: 16, minute: 30, labelKey: 'power', pro: true },
+      ];
+
+      const columns = [
+        { title: '週一／週三／週五', items: mwf },
+        { title: '週二／週四', items: tth },
+        { title: '週末', items: weekend },
+      ];
+
+      const formatTime = (hour24: number, minute: number = 0) => {
+        return `${String(hour24).padStart(2, '0')}:${String(minute).padStart(2, '0')}`;
+      };
+
+      return (
+        <div className="min-h-screen bg-white flex items-center justify-center p-4 md:p-8">
+          <div className="container mx-auto">
+            <div className="text-center mb-8 md:mb-12">
+              <h2 className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold font-lora text-signal-charcoal mb-4">
+                {t['schedule.title']}
+              </h2>
+              <p className="text-lg md:text-xl lg:text-2xl xl:text-3xl text-muted-foreground">
+                {t['schedule.subtitle']}
+              </p>
+            </div>
+            
+            {/* Desktop 3-column grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto">
+              {columns.map((col, idx) => (
+                <Card key={idx} className="shadow-xl border-2 border-gray-100 overflow-hidden">
+                  <div className="h-2 w-full bg-signal-gold"></div>
+                  <CardContent className="p-4 md:p-6">
+                    <h3 className="text-xl md:text-2xl lg:text-3xl font-bold font-lora text-center mb-4 md:mb-6 text-signal-charcoal">
+                      {col.title}
+                    </h3>
+                    <div className="space-y-2 md:space-y-3">
+                      {col.items.map((item, i) => (
+                        <div
+                          key={i}
+                          className={`relative grid grid-cols-[auto_1fr_auto] items-center gap-2 rounded-md border border-gray-200 px-3 py-2 md:py-3 ${
+                            item.pro ? 'bg-signal-gold/10' : 'bg-gray-50'
+                          }`}
+                        >
+                          {item.pro && (
+                            <span
+                              className="absolute left-0 top-0 h-full w-1 bg-signal-gold"
+                              aria-hidden
+                            />
+                          )}
+                          <span className="inline-flex items-center gap-1 text-xs md:text-sm text-gray-600">
+                            <Clock className="h-3.5 w-3.5" />
+                            {formatTime(item.hour24, item.minute)}
+                          </span>
+                          <span className="text-sm md:text-base lg:text-lg font-bold font-lora text-signal-charcoal text-center">
+                            {t[`schedule.classes.${item.labelKey}`]}
+                          </span>
+                          <span className="justify-self-end">
+                            {item.pro ? (
+                              <span className="inline-flex items-center gap-1 rounded-full bg-signal-gold/20 text-signal-charcoal px-2 py-1 text-[10px] md:text-xs font-semibold uppercase tracking-wide ring-1 ring-signal-gold/40">
+                                PRO
+                              </span>
+                            ) : (
+                              <span className="inline-flex items-center gap-1 rounded-full bg-signal-charcoal/15 text-signal-charcoal px-2 py-1 text-[10px] md:text-xs font-semibold uppercase tracking-wide ring-1 ring-signal-charcoal/40">
+                                AM
+                              </span>
+                            )}
+                          </span>
                         </div>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-          
-          {/* Legend */}
-          <div className="text-center mt-8 md:mt-16 space-y-2">
-            <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8">
-              <span className="flex items-center gap-2">
-                <span className="inline-flex items-center gap-1 rounded-full bg-signal-gold/20 text-signal-charcoal px-3 py-1 text-sm font-semibold uppercase">PRO</span>
-                <span className="text-base md:text-lg">=</span>
-                <span className="text-base md:text-lg">僅限職業</span>
-              </span>
-              <span className="flex items-center gap-2">
-                <span className="inline-flex items-center gap-1 rounded-full bg-signal-charcoal/15 text-signal-charcoal px-3 py-1 text-sm font-semibold uppercase">AM</span>
-                <span className="text-base md:text-lg">=</span>
-                <span className="text-base md:text-lg">僅限業餘</span>
-              </span>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+            
+            {/* Legend */}
+            <div className="text-center mt-8 md:mt-12">
+              <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8">
+                <span className="flex items-center gap-2">
+                  <span className="inline-flex items-center gap-1 rounded-full bg-signal-gold/20 text-signal-charcoal px-3 py-1 text-sm font-semibold uppercase">PRO</span>
+                  <span className="text-base md:text-lg">=</span>
+                  <span className="text-base md:text-lg">僅限職業</span>
+                </span>
+                <span className="flex items-center gap-2">
+                  <span className="inline-flex items-center gap-1 rounded-full bg-signal-charcoal/15 text-signal-charcoal px-3 py-1 text-sm font-semibold uppercase">AM</span>
+                  <span className="text-base md:text-lg">=</span>
+                  <span className="text-base md:text-lg">僅限業餘</span>
+                </span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    ),
+      );
+    },
 
     // Slide 6: Coach Profile & Credentials Combined
     () => (
