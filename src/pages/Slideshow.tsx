@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { Clock } from 'lucide-react';
+import { Clock, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
+import { Button } from '@/components/ui/button';
 import { Move, Activity, User, Dumbbell, Club } from 'lucide-react';
 import QRCode from 'qrcode';
 
@@ -73,7 +74,36 @@ const useChineseTranslations = () => {
 const Slideshow = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [qrCodeUrl, setQrCodeUrl] = useState('');
+  const [isAutoPaused, setIsAutoPaused] = useState(false);
+  const [lastInteractionTime, setLastInteractionTime] = useState(0);
   const t = useChineseTranslations();
+
+  const totalSlides = 6;
+
+  // Navigation functions
+  const goToSlide = useCallback((index: number) => {
+    setCurrentSlide(index);
+    pauseAutoAdvance();
+  }, []);
+
+  const nextSlide = useCallback(() => {
+    setCurrentSlide(prev => (prev + 1) % totalSlides);
+    pauseAutoAdvance();
+  }, [totalSlides]);
+
+  const prevSlide = useCallback(() => {
+    setCurrentSlide(prev => (prev - 1 + totalSlides) % totalSlides);
+    pauseAutoAdvance();
+  }, [totalSlides]);
+
+  const pauseAutoAdvance = useCallback(() => {
+    setIsAutoPaused(true);
+    setLastInteractionTime(Date.now());
+  }, []);
+
+  const resumeAutoAdvance = useCallback(() => {
+    setIsAutoPaused(false);
+  }, []);
 
   // Generate QR code for Calendly booking
   useEffect(() => {
@@ -87,14 +117,61 @@ const Slideshow = () => {
     }).then(setQrCodeUrl);
   }, []);
 
-  // Auto-advance slides every 8 seconds
+  // Auto-advance slides with pause/resume logic
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentSlide(prev => (prev + 1) % 6); // 6 total slides
+      if (!isAutoPaused) {
+        setCurrentSlide(prev => (prev + 1) % totalSlides);
+      } else {
+        // Resume auto-advance after 10 seconds of no interaction
+        if (Date.now() - lastInteractionTime > 10000) {
+          resumeAutoAdvance();
+        }
+      }
     }, 8000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [isAutoPaused, lastInteractionTime, totalSlides, resumeAutoAdvance]);
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeydown = (e: KeyboardEvent) => {
+      switch (e.key) {
+        case 'ArrowLeft':
+          e.preventDefault();
+          prevSlide();
+          break;
+        case 'ArrowRight':
+          e.preventDefault();
+          nextSlide();
+          break;
+        case ' ':
+        case 'Enter':
+          e.preventDefault();
+          if (isAutoPaused) {
+            resumeAutoAdvance();
+          } else {
+            pauseAutoAdvance();
+          }
+          break;
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+          e.preventDefault();
+          const slideIndex = parseInt(e.key) - 1;
+          if (slideIndex >= 0 && slideIndex < totalSlides) {
+            goToSlide(slideIndex);
+          }
+          break;
+      }
+    };
+
+    window.addEventListener('keydown', handleKeydown);
+    return () => window.removeEventListener('keydown', handleKeydown);
+  }, [goToSlide, nextSlide, prevSlide, isAutoPaused, pauseAutoAdvance, resumeAutoAdvance, totalSlides]);
 
   const slides = [
     // Slide 1: Hero
@@ -533,6 +610,71 @@ const Slideshow = () => {
       {/* Current slide */}
       <div className="transition-opacity duration-500">
         {slides[currentSlide]()}
+      </div>
+      
+      {/* Arrow Navigation */}
+      <div className="fixed inset-y-0 left-0 flex items-center z-40">
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={prevSlide}
+          onMouseEnter={pauseAutoAdvance}
+          onMouseLeave={() => {
+            if (Date.now() - lastInteractionTime > 3000) {
+              resumeAutoAdvance();
+            }
+          }}
+          className="ml-4 bg-white/90 backdrop-blur-sm border-signal-gold/20 hover:bg-signal-gold hover:text-signal-charcoal shadow-lg"
+        >
+          <ChevronLeft className="h-4 w-4" />
+        </Button>
+      </div>
+      
+      <div className="fixed inset-y-0 right-0 flex items-center z-40">
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={nextSlide}
+          onMouseEnter={pauseAutoAdvance}
+          onMouseLeave={() => {
+            if (Date.now() - lastInteractionTime > 3000) {
+              resumeAutoAdvance();
+            }
+          }}
+          className="mr-4 bg-white/90 backdrop-blur-sm border-signal-gold/20 hover:bg-signal-gold hover:text-signal-charcoal shadow-lg"
+        >
+          <ChevronRight className="h-4 w-4" />
+        </Button>
+      </div>
+      
+      {/* Slide Dots Navigation */}
+      <div className="fixed bottom-16 left-1/2 transform -translate-x-1/2 z-40">
+        <div className="flex items-center gap-2 bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg">
+          {Array.from({ length: totalSlides }, (_, index) => (
+            <button
+              key={index}
+              onClick={() => goToSlide(index)}
+              onMouseEnter={pauseAutoAdvance}
+              onMouseLeave={() => {
+                if (Date.now() - lastInteractionTime > 3000) {
+                  resumeAutoAdvance();
+                }
+              }}
+              className={`w-3 h-3 rounded-full transition-all duration-200 ${
+                currentSlide === index
+                  ? 'bg-signal-gold shadow-md'
+                  : 'bg-signal-charcoal/30 hover:bg-signal-charcoal/50'
+              }`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
+          {/* Auto-pause indicator */}
+          {isAutoPaused && (
+            <div className="ml-2 px-2 py-1 text-xs text-signal-charcoal/60 font-medium">
+              Paused
+            </div>
+          )}
+        </div>
       </div>
       
       {/* Progress indicator */}
