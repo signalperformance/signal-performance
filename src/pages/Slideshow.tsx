@@ -177,12 +177,10 @@ const Slideshow = () => {
   useEffect(() => {
     if (imagesLoading) return; // Don't start slideshow until images are loaded
     
+    // Use longer timeout for video slide (34 seconds), normal timeout for others (8 seconds)
+    const slideTimeout = currentSlide === 3 ? 34000 : 8000;
+    
     const timer = setInterval(() => {
-      // Don't advance if video is playing on current slide
-      if (currentSlide === 3 && isVideoPlaying) {
-        return;
-      }
-      
       if (!isAutoPaused) {
         setCurrentSlide(prev => (prev + 1) % totalSlides);
       } else {
@@ -191,10 +189,10 @@ const Slideshow = () => {
           resumeAutoAdvance();
         }
       }
-    }, 8000);
+    }, slideTimeout);
 
     return () => clearInterval(timer);
-  }, [isAutoPaused, lastInteractionTime, totalSlides, resumeAutoAdvance, imagesLoading, currentSlide, isVideoPlaying]);
+  }, [isAutoPaused, lastInteractionTime, totalSlides, resumeAutoAdvance, imagesLoading, currentSlide]);
 
   // Keyboard navigation
   useEffect(() => {
