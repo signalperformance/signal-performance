@@ -462,9 +462,6 @@ const Slideshow = () => {
             <h2 className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold font-lora text-signal-charcoal mb-4 md:mb-6">
               我們的評估流程
             </h2>
-            <p className="text-lg md:text-xl lg:text-2xl xl:text-3xl text-muted-foreground max-w-3xl mx-auto">
-              每季，會員會完成一項由五部分組成的評估，以確保訓練保持一致且有效。
-            </p>
           </div>
           
           <div className="w-full max-w-4xl mx-auto">
