@@ -51,6 +51,8 @@ const useChineseTranslations = () => {
     'assessment.price': '10,000元',
     'membership.title': '會員方案',
     'membership.pro.price': '15,000',
+    'membership.pro.originalPrice': '18,000',
+    'membership.pro.savings': '3,000',
     'membership.pro.title': '專業會員',
     'membership.pro.sessions': '每月18堂課',
     'membership.pro.features': [
@@ -59,6 +61,8 @@ const useChineseTranslations = () => {
       '表現報告 — 每月1次',
       '季度評估'
     ],
+    'membership.pro.promotional': '限時優惠！立即預約',
+    'membership.pro.bookingStatus': '2人已預約，8名額剩餘',
     
     // Assessment Process
     'assessment.process.title': '5步評估流程',
@@ -358,16 +362,51 @@ const Slideshow = () => {
                   第2步 · 選擇月方案
                 </div>
               </div>
-              <Card className="shadow-2xl border-2 border-signal-charcoal/30 bg-gradient-to-br from-signal-charcoal/5 to-white">
+              <Card className="shadow-2xl border-2 border-signal-charcoal/30 bg-gradient-to-br from-signal-charcoal/5 to-white overflow-hidden">
+                {/* Promotional Banner */}
+                <div className="bg-gradient-to-r from-orange-500 to-red-500 text-white text-center py-3 px-6">
+                  <div className="font-bold text-sm md:text-base lg:text-lg">
+                    {t['membership.pro.promotional']}
+                  </div>
+                </div>
+                
                 <CardContent className="p-6 md:p-10">
                   <div className="text-center mb-8">
+                    {/* Original Price (Crossed Out) */}
+                    <div className="text-lg md:text-xl lg:text-2xl text-gray-500 line-through mb-2">
+                      NT${t['membership.pro.originalPrice']}
+                    </div>
+                    
+                    {/* Discounted Price */}
                     <div className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-signal-charcoal mb-2">
                       NT${t['membership.pro.price']}
                     </div>
-                    <div className="text-lg md:text-xl lg:text-2xl xl:text-3xl text-signal-gold font-semibold">
+                    
+                    {/* Savings Amount */}
+                    <div className="text-sm md:text-base lg:text-lg text-green-600 font-semibold mb-4">
+                      省 NT${t['membership.pro.savings']}
+                    </div>
+                    
+                    <div className="text-lg md:text-xl lg:text-2xl xl:text-3xl text-signal-gold font-semibold mb-6">
                       {t['membership.pro.sessions']}
                     </div>
+                    
+                    {/* Booking Status Tracker */}
+                    <div className="bg-gray-50 rounded-lg p-4 mb-6">
+                      <div className="text-sm md:text-base text-gray-600 mb-2">
+                        {t['membership.pro.bookingStatus']}
+                      </div>
+                      <div className="flex justify-center space-x-1">
+                        {[...Array(10)].map((_, i) => (
+                          <div 
+                            key={i} 
+                            className={`w-3 h-3 rounded-full ${i < 2 ? 'bg-orange-500' : 'bg-gray-300'}`}
+                          />
+                        ))}
+                      </div>
+                    </div>
                   </div>
+                  
                   <ul className="space-y-4 text-base md:text-lg lg:text-xl xl:text-2xl">
                     {t['membership.pro.features'].map((feature, index) => (
                       <li key={index} className="flex items-center">
