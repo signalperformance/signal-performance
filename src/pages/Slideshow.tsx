@@ -228,13 +228,15 @@ const Slideshow = () => {
             
             {/* Chinese signal wave graphic */}
             <div className="w-full mb-8 md:mb-16 flex justify-center">
-              <img 
-                src="/lovable-uploads/23ce2472-9cbc-4d05-bd80-cd0ac6eb27a8.png"
-                alt="Signal wave with red spike (Chinese)" 
-                className="w-full max-w-5xl h-auto object-contain"
-                loading="eager"
-                fetchPriority="high"
-                decoding="async"
+              <div 
+                className="w-full max-w-5xl h-32 md:h-48 lg:h-64 bg-center bg-no-repeat bg-contain opacity-0 animate-fade-in"
+                style={{
+                  backgroundImage: 'url(/lovable-uploads/23ce2472-9cbc-4d05-bd80-cd0ac6eb27a8.png)',
+                  animationDelay: '0.1s',
+                  animationFillMode: 'forwards'
+                }}
+                role="img"
+                aria-label="Signal wave with red spike (Chinese)"
               />
             </div>
           </div>
