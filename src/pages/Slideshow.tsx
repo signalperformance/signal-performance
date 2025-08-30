@@ -345,7 +345,7 @@ const Slideshow = () => {
               { title: t['philosophy.card3.title'], content: t['philosophy.card3.content'] }
             ].map((card, index) => {
               const isFocused = focusedPrinciple === index;
-              const isBlurred = focusedPrinciple !== null && !isFocused;
+              const isBlurred = focusedPrinciple !== index;
               
               return (
                 <Card 
