@@ -192,15 +192,15 @@ const Slideshow = () => {
         clearTimeout(principleTimerRef.current);
       }
 
-      // Initial 2-second delay, all principles visible but blurred except first
+      // Initial 2-second delay, all principles blurred
       setPrinciplePhase('initial');
-      setFocusedPrinciple(0);
+      setFocusedPrinciple(null);
       
       // Set up the sequence
       const sequence = [
-        { delay: 2000, principle: 0 }, // 0-2s: initial + focus on principle 1
-        { delay: 12000, principle: 1 }, // 2-12s: focus on principle 1, then switch to 2
-        { delay: 22000, principle: 2 }, // 12-22s: focus on principle 2, then switch to 3
+        { delay: 2000, principle: 0 }, // 2s: focus on principle 1
+        { delay: 12000, principle: 1 }, // 12s: focus on principle 2
+        { delay: 22000, principle: 2 }, // 22s: focus on principle 3
       ];
 
       sequence.forEach(({ delay, principle }) => {
