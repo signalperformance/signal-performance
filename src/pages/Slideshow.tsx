@@ -902,16 +902,6 @@ const Slideshow = () => {
         </div>
       </div>
       
-      {/* Progress indicator */}
-      <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-40 bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg">
-        <Progress 
-          value={((currentSlide + 1) / slides.length) * 100} 
-          className="w-32 md:w-48 h-2" 
-        />
-        <div className="text-xs md:text-sm text-center mt-1 font-semibold text-signal-charcoal">
-          {currentSlide + 1} / {slides.length}
-        </div>
-      </div>
       
       {/* Persistent QR Code */}
       {qrCodeUrl && (
