@@ -13,20 +13,20 @@ const HeroSlide = () => {
   return (
     <div className="relative min-h-screen overflow-hidden flex items-center justify-center bg-gradient-to-br from-slate-50 via-white to-gray-100">
       {/* Animated geometric shapes */}
-      <div className="absolute top-10 left-10 w-64 h-64 bg-signal-gold/10 rounded-full blur-xl animate-pulse"></div>
-      <div className="absolute top-1/3 right-20 w-96 h-96 bg-signal-charcoal/5 rounded-full blur-2xl animate-pulse delay-1000"></div>
-      <div className="absolute bottom-20 left-1/4 w-48 h-48 bg-signal-gold/15 rounded-full blur-lg animate-pulse delay-500"></div>
+      <div className="absolute top-4 md:top-10 left-4 md:left-10 w-32 md:w-48 lg:w-64 h-32 md:h-48 lg:h-64 bg-signal-gold/10 rounded-full blur-xl animate-pulse"></div>
+      <div className="absolute top-1/3 right-8 md:right-20 w-48 md:w-64 lg:w-96 h-48 md:h-64 lg:h-96 bg-signal-charcoal/5 rounded-full blur-2xl animate-pulse delay-1000"></div>
+      <div className="absolute bottom-8 md:bottom-20 left-1/4 w-24 md:w-36 lg:w-48 h-24 md:h-36 lg:h-48 bg-signal-gold/15 rounded-full blur-lg animate-pulse delay-500"></div>
       
-      <div className="relative z-10 container mx-auto px-16 text-center">
-        <div className="max-w-8xl mx-auto">
-          <div className="bg-signal-charcoal/95 backdrop-blur-sm rounded-3xl shadow-2xl border border-signal-charcoal/60 p-24">
-            <h1 className="font-bold mb-16 text-white leading-tight text-8xl xl:text-9xl transition-all duration-300">
+      <div className="relative z-10 container mx-auto px-4 md:px-8 lg:px-12 xl:px-16 text-center">
+        <div className="max-w-4xl md:max-w-6xl lg:max-w-7xl xl:max-w-8xl mx-auto">
+          <div className="bg-signal-charcoal/95 backdrop-blur-sm rounded-2xl md:rounded-3xl shadow-2xl border border-signal-charcoal/60 p-6 md:p-12 lg:p-16 xl:p-24">
+            <h1 className="font-bold mb-6 md:mb-12 lg:mb-16 text-white leading-tight text-3xl md:text-5xl lg:text-6xl xl:text-8xl 2xl:text-9xl transition-all duration-300">
               {t('hero.headline')}
             </h1>
-            <p className="text-white mb-16 text-5xl xl:text-6xl transition-all duration-300 leading-relaxed">
+            <p className="text-white mb-6 md:mb-12 lg:mb-16 text-lg md:text-2xl lg:text-3xl xl:text-5xl 2xl:text-6xl transition-all duration-300 leading-relaxed">
               體能、心理與技術訓練集中於一個專業空間
             </p>
-            <div className="text-signal-gold text-6xl xl:text-7xl font-bold">
+            <div className="text-signal-gold text-xl md:text-3xl lg:text-4xl xl:text-6xl 2xl:text-7xl font-bold">
               歡迎來到信號表現訓練中心
             </div>
           </div>
@@ -40,23 +40,23 @@ const PhilosophyIntroSlide = () => {
   const { t } = useLanguage();
   
   return (
-    <div className="min-h-screen bg-signal-light-gray flex items-center justify-center py-24">
-      <div className="container mx-auto px-16 text-center">
-        <h2 className="text-8xl xl:text-9xl font-bold mb-24 font-lora text-signal-charcoal">
+    <div className="min-h-screen bg-signal-light-gray flex items-center justify-center py-8 md:py-16 lg:py-24">
+      <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16 text-center">
+        <h2 className="text-3xl md:text-5xl lg:text-6xl xl:text-8xl 2xl:text-9xl font-bold mb-8 md:mb-16 lg:mb-24 font-lora text-signal-charcoal">
           {t('philosophy.title')}
         </h2>
         
         {/* Signal wave graphic - larger */}
-        <div className="w-full mb-16 flex items-center justify-center">
+        <div className="w-full mb-8 md:mb-12 lg:mb-16 flex items-center justify-center">
           <img 
             alt="Signal wave with red spike (Chinese)" 
-            className="w-full max-w-8xl h-auto object-contain" 
+            className="w-full max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-8xl h-auto object-contain" 
             src="/lovable-uploads/23ce2472-9cbc-4d05-bd80-cd0ac6eb27a8.png"
             loading="eager"
           />
         </div>
         
-        <div className="text-6xl text-signal-charcoal font-medium leading-relaxed max-w-6xl mx-auto">
+        <div className="text-xl md:text-3xl lg:text-4xl xl:text-6xl text-signal-charcoal font-medium leading-relaxed max-w-2xl md:max-w-4xl lg:max-w-6xl mx-auto">
           我們的訓練哲學建立在三個核心支柱上
         </div>
       </div>
@@ -68,16 +68,16 @@ const PhilosophyCard1Slide = () => {
   const { t } = useLanguage();
   
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center py-24">
-      <div className="container mx-auto px-16">
-        <div className="max-w-6xl mx-auto text-center">
-          <Card className="shadow-2xl bg-white border-8 border-gray-100 animate-scale-in">
-            <CardContent className="p-24">
-              <div className="text-8xl font-bold mb-16 text-signal-gold">1</div>
-              <h3 className="text-7xl font-lora mb-16 text-signal-charcoal font-bold">
+    <div className="min-h-screen bg-white flex items-center justify-center py-8 md:py-16 lg:py-24">
+      <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16">
+        <div className="max-w-2xl md:max-w-4xl lg:max-w-6xl mx-auto text-center">
+          <Card className="shadow-2xl bg-white border-4 md:border-6 lg:border-8 border-gray-100 animate-scale-in">
+            <CardContent className="p-8 md:p-12 lg:p-16 xl:p-24">
+              <div className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-6 md:mb-12 lg:mb-16 text-signal-gold">1</div>
+              <h3 className="text-2xl md:text-4xl lg:text-5xl xl:text-7xl font-lora mb-6 md:mb-12 lg:mb-16 text-signal-charcoal font-bold">
                 {t('philosophy.card1.title')}
               </h3>
-              <p className="text-4xl text-muted-foreground leading-relaxed">
+              <p className="text-lg md:text-2xl lg:text-3xl xl:text-4xl text-muted-foreground leading-relaxed">
                 {t('philosophy.card1.content')}
               </p>
             </CardContent>
@@ -92,16 +92,16 @@ const PhilosophyCard2Slide = () => {
   const { t } = useLanguage();
   
   return (
-    <div className="min-h-screen bg-signal-light-gray flex items-center justify-center py-24">
-      <div className="container mx-auto px-16">
-        <div className="max-w-6xl mx-auto text-center">
-          <Card className="shadow-2xl bg-white border-8 border-gray-100 animate-scale-in">
-            <CardContent className="p-24">
-              <div className="text-8xl font-bold mb-16 text-signal-gold">2</div>
-              <h3 className="text-7xl font-lora mb-16 text-signal-charcoal font-bold">
+    <div className="min-h-screen bg-signal-light-gray flex items-center justify-center py-8 md:py-16 lg:py-24">
+      <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16">
+        <div className="max-w-2xl md:max-w-4xl lg:max-w-6xl mx-auto text-center">
+          <Card className="shadow-2xl bg-white border-4 md:border-6 lg:border-8 border-gray-100 animate-scale-in">
+            <CardContent className="p-8 md:p-12 lg:p-16 xl:p-24">
+              <div className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-6 md:mb-12 lg:mb-16 text-signal-gold">2</div>
+              <h3 className="text-2xl md:text-4xl lg:text-5xl xl:text-7xl font-lora mb-6 md:mb-12 lg:mb-16 text-signal-charcoal font-bold">
                 {t('philosophy.card2.title')}
               </h3>
-              <p className="text-4xl text-muted-foreground leading-relaxed">
+              <p className="text-lg md:text-2xl lg:text-3xl xl:text-4xl text-muted-foreground leading-relaxed">
                 {t('philosophy.card2.content')}
               </p>
             </CardContent>
@@ -116,16 +116,16 @@ const PhilosophyCard3Slide = () => {
   const { t } = useLanguage();
   
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center py-24">
-      <div className="container mx-auto px-16">
-        <div className="max-w-6xl mx-auto text-center">
-          <Card className="shadow-2xl bg-white border-8 border-gray-100 animate-scale-in">
-            <CardContent className="p-24">
-              <div className="text-8xl font-bold mb-16 text-signal-gold">3</div>
-              <h3 className="text-7xl font-lora mb-16 text-signal-charcoal font-bold">
+    <div className="min-h-screen bg-white flex items-center justify-center py-8 md:py-16 lg:py-24">
+      <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16">
+        <div className="max-w-2xl md:max-w-4xl lg:max-w-6xl mx-auto text-center">
+          <Card className="shadow-2xl bg-white border-4 md:border-6 lg:border-8 border-gray-100 animate-scale-in">
+            <CardContent className="p-8 md:p-12 lg:p-16 xl:p-24">
+              <div className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-6 md:mb-12 lg:mb-16 text-signal-gold">3</div>
+              <h3 className="text-2xl md:text-4xl lg:text-5xl xl:text-7xl font-lora mb-6 md:mb-12 lg:mb-16 text-signal-charcoal font-bold">
                 {t('philosophy.card3.title')}
               </h3>
-              <p className="text-4xl text-muted-foreground leading-relaxed">
+              <p className="text-lg md:text-2xl lg:text-3xl xl:text-4xl text-muted-foreground leading-relaxed">
                 {t('philosophy.card3.content')}
               </p>
             </CardContent>
@@ -140,15 +140,15 @@ const AssessmentIntroSlide = () => {
   const { t } = useLanguage();
   
   return (
-    <div className="min-h-screen bg-signal-light-gray flex items-center justify-center py-24">
-      <div className="container mx-auto px-16 text-center">
-        <h2 className="text-8xl xl:text-9xl font-bold mb-24 font-lora text-signal-charcoal">
+    <div className="min-h-screen bg-signal-light-gray flex items-center justify-center py-8 md:py-16 lg:py-24">
+      <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16 text-center">
+        <h2 className="text-3xl md:text-5xl lg:text-6xl xl:text-8xl 2xl:text-9xl font-bold mb-8 md:mb-16 lg:mb-24 font-lora text-signal-charcoal">
           {t('assessment.title')}
         </h2>
-        <p className="text-5xl text-muted-foreground leading-relaxed max-w-6xl mx-auto mb-16">
+        <p className="text-xl md:text-3xl lg:text-4xl xl:text-5xl text-muted-foreground leading-relaxed max-w-2xl md:max-w-4xl lg:max-w-6xl mx-auto mb-6 md:mb-12 lg:mb-16">
           {t('assessment.processDescription')}
         </p>
-        <div className="text-6xl font-bold text-signal-gold">
+        <div className="text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-signal-gold">
           完整的五步驟評估流程
         </div>
       </div>
@@ -168,19 +168,19 @@ const AssessmentOverviewSlide = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center py-24">
-      <div className="container mx-auto px-16">
-        <div className="text-center mb-24">
-          <h2 className="text-7xl font-bold mb-16 font-lora text-signal-charcoal">評估項目</h2>
+    <div className="min-h-screen bg-white flex items-center justify-center py-8 md:py-16 lg:py-24">
+      <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16">
+        <div className="text-center mb-8 md:mb-16 lg:mb-24">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl xl:text-7xl font-bold mb-6 md:mb-12 lg:mb-16 font-lora text-signal-charcoal">評估項目</h2>
         </div>
 
-        <div className="grid grid-cols-5 gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 lg:gap-8 max-w-sm md:max-w-4xl lg:max-w-7xl mx-auto">
           {assessments.map((assessment, idx) => (
             <div key={idx} className="text-center">
-              <div className={`w-32 h-32 rounded-full ${assessment.color} flex items-center justify-center text-white font-bold text-4xl mx-auto mb-8`}>
+              <div className={`w-16 h-16 md:w-24 h-24 lg:w-32 h-32 rounded-full ${assessment.color} flex items-center justify-center text-white font-bold text-xl md:text-3xl lg:text-4xl mx-auto mb-4 md:mb-6 lg:mb-8`}>
                 {assessment.number}
               </div>
-              <h3 className="text-3xl font-lora font-bold text-signal-charcoal">
+              <h3 className="text-sm md:text-xl lg:text-2xl xl:text-3xl font-lora font-bold text-signal-charcoal">
                 {assessment.title}
               </h3>
             </div>
@@ -195,12 +195,12 @@ const MembershipIntroSlide = () => {
   const { t } = useLanguage();
   
   return (
-    <div className="min-h-screen bg-signal-light-gray flex items-center justify-center py-24">
-      <div className="container mx-auto px-16 text-center">
-        <h2 className="text-8xl xl:text-9xl font-bold mb-24 font-lora text-signal-charcoal">
+    <div className="min-h-screen bg-signal-light-gray flex items-center justify-center py-8 md:py-16 lg:py-24">
+      <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16 text-center">
+        <h2 className="text-3xl md:text-5xl lg:text-6xl xl:text-8xl 2xl:text-9xl font-bold mb-8 md:mb-16 lg:mb-24 font-lora text-signal-charcoal">
           {t("pricing.title")}
         </h2>
-        <div className="text-6xl text-signal-charcoal font-medium leading-relaxed max-w-6xl mx-auto">
+        <div className="text-2xl md:text-4xl lg:text-5xl xl:text-6xl text-signal-charcoal font-medium leading-relaxed max-w-2xl md:max-w-4xl lg:max-w-6xl mx-auto">
           開始您的健身之旅
         </div>
       </div>
@@ -218,34 +218,34 @@ const AssessmentPackageSlide = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center py-24">
-      <div className="container mx-auto px-16">
-        <div className="max-w-5xl mx-auto">
-          <Card className="rounded-3xl shadow-2xl border-8 border-primary/20">
-            <CardContent className="p-24 text-center">
-              <Badge variant="outline" className="rounded-full border-4 border-primary bg-primary/10 text-foreground px-8 py-4 text-2xl font-bold mb-16">
+    <div className="min-h-screen bg-white flex items-center justify-center py-8 md:py-16 lg:py-24">
+      <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16">
+        <div className="max-w-2xl md:max-w-4xl lg:max-w-5xl mx-auto">
+          <Card className="rounded-2xl md:rounded-3xl shadow-2xl border-4 md:border-6 lg:border-8 border-primary/20">
+            <CardContent className="p-8 md:p-16 lg:p-20 xl:p-24 text-center">
+              <Badge variant="outline" className="rounded-full border-2 md:border-3 lg:border-4 border-primary bg-primary/10 text-foreground px-4 md:px-6 lg:px-8 py-2 md:py-3 lg:py-4 text-lg md:text-xl lg:text-2xl font-bold mb-8 md:mb-12 lg:mb-16">
                 {t("flow.step1")}
               </Badge>
 
-              <div className="mb-16">
-                <div className="flex items-baseline justify-center gap-8 mb-8">
-                  <span className="text-4xl line-through text-muted-foreground">NT$12,000</span>
-                  <span className="text-8xl font-bold text-green-600">{t("gettingstarted.assessmentPackage.price")}</span>
+              <div className="mb-8 md:mb-12 lg:mb-16">
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6 lg:gap-8 mb-4 md:mb-6 lg:mb-8">
+                  <span className="text-2xl md:text-3xl lg:text-4xl line-through text-muted-foreground">NT$12,000</span>
+                  <span className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-green-600">{t("gettingstarted.assessmentPackage.price")}</span>
                 </div>
-                <Badge className="bg-green-100 text-green-800 hover:bg-green-100 text-3xl px-8 py-4">
+                <Badge className="bg-green-100 text-green-800 hover:bg-green-100 text-lg md:text-2xl lg:text-3xl px-4 md:px-6 lg:px-8 py-2 md:py-3 lg:py-4">
                   {t("promo.save")} NT$2,000
                 </Badge>
               </div>
 
-              <ul className="space-y-8 text-left max-w-3xl mx-auto">
+              <ul className="space-y-4 md:space-y-6 lg:space-y-8 text-left max-w-lg md:max-w-2xl lg:max-w-3xl mx-auto">
                 {assessmentFeatures.map(name => (
-                  <li key={name} className="flex gap-6 items-center">
-                    <div className="inline-flex h-12 w-12 items-center justify-center rounded-full border-4 border-primary text-foreground">
-                      <svg viewBox="0 0 24 24" className="h-8 w-8" fill="none" stroke="currentColor" strokeWidth="3">
+                  <li key={name} className="flex gap-3 md:gap-4 lg:gap-6 items-center">
+                    <div className="inline-flex h-8 w-8 md:h-10 w-10 lg:h-12 w-12 items-center justify-center rounded-full border-2 md:border-3 lg:border-4 border-primary text-foreground flex-shrink-0">
+                      <svg viewBox="0 0 24 24" className="h-4 w-4 md:h-6 w-6 lg:h-8 w-8" fill="none" stroke="currentColor" strokeWidth="3">
                         <path d="M20 6L9 17l-5-5" />
                       </svg>
                     </div>
-                    <div className="text-3xl font-medium">{name}</div>
+                    <div className="text-lg md:text-2xl lg:text-3xl font-medium">{name}</div>
                   </li>
                 ))}
               </ul>
@@ -261,30 +261,30 @@ const MembershipPlansSlide = () => {
   const { t } = useLanguage();
 
   return (
-    <div className="min-h-screen bg-signal-light-gray flex items-center justify-center py-24">
-      <div className="container mx-auto px-16">
-        <div className="max-w-5xl mx-auto">
-          <Card className="rounded-3xl shadow-2xl border-8 border-secondary/50 bg-secondary">
-            <CardContent className="p-24 text-center">
-              <Badge variant="outline" className="rounded-full border-4 border-primary bg-primary/10 text-foreground px-8 py-4 text-2xl font-bold mb-16">
+    <div className="min-h-screen bg-signal-light-gray flex items-center justify-center py-8 md:py-16 lg:py-24">
+      <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16">
+        <div className="max-w-2xl md:max-w-4xl lg:max-w-5xl mx-auto">
+          <Card className="rounded-2xl md:rounded-3xl shadow-2xl border-4 md:border-6 lg:border-8 border-secondary/50 bg-secondary">
+            <CardContent className="p-8 md:p-16 lg:p-20 xl:p-24 text-center">
+              <Badge variant="outline" className="rounded-full border-2 md:border-3 lg:border-4 border-primary bg-primary/10 text-foreground px-4 md:px-6 lg:px-8 py-2 md:py-3 lg:py-4 text-lg md:text-xl lg:text-2xl font-bold mb-8 md:mb-12 lg:mb-16">
                 {t("flow.step2")}
               </Badge>
 
-              <div className="mb-16">
-                <div className="flex items-baseline justify-center gap-8 mb-8">
-                  <span className="text-4xl line-through text-muted-foreground">NT$8,000</span>
-                  <span className="text-8xl font-bold text-green-600">NT$6,400</span>
-                  <span className="text-3xl text-muted-foreground">{t("pricing.perMonth")}</span>
+              <div className="mb-8 md:mb-12 lg:mb-16">
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6 lg:gap-8 mb-4 md:mb-6 lg:mb-8">
+                  <span className="text-2xl md:text-3xl lg:text-4xl line-through text-muted-foreground">NT$8,000</span>
+                  <span className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-green-600">NT$6,400</span>
+                  <span className="text-lg md:text-2xl lg:text-3xl text-muted-foreground">{t("pricing.perMonth")}</span>
                 </div>
-                <Badge className="bg-green-100 text-green-800 hover:bg-green-100 text-3xl px-8 py-4">
+                <Badge className="bg-green-100 text-green-800 hover:bg-green-100 text-lg md:text-2xl lg:text-3xl px-4 md:px-6 lg:px-8 py-2 md:py-3 lg:py-4">
                   {t("promo.save")} NT$1,600
                 </Badge>
               </div>
 
-              <div className="text-6xl font-bold text-signal-gold mb-8">
+              <div className="text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-signal-gold mb-4 md:mb-6 lg:mb-8">
                 選擇適合您的會員計畫
               </div>
-              <p className="text-4xl text-muted-foreground">
+              <p className="text-lg md:text-2xl lg:text-3xl xl:text-4xl text-muted-foreground">
                 專業級或基礎級訓練方案
               </p>
             </CardContent>
@@ -299,12 +299,12 @@ const ScheduleIntroSlide = () => {
   const { t } = useLanguage();
   
   return (
-    <div className="min-h-screen bg-signal-light-gray flex items-center justify-center py-24">
-      <div className="container mx-auto px-16 text-center">
-        <h2 className="text-8xl xl:text-9xl font-bold mb-24 font-lora text-signal-charcoal">
+    <div className="min-h-screen bg-signal-light-gray flex items-center justify-center py-8 md:py-16 lg:py-24">
+      <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16 text-center">
+        <h2 className="text-3xl md:text-5xl lg:text-6xl xl:text-8xl 2xl:text-9xl font-bold mb-8 md:mb-16 lg:mb-24 font-lora text-signal-charcoal">
           {t('schedule.title')}
         </h2>
-        <div className="text-5xl text-signal-charcoal font-medium leading-relaxed max-w-6xl mx-auto">
+        <div className="text-xl md:text-3xl lg:text-4xl xl:text-5xl text-signal-charcoal font-medium leading-relaxed max-w-2xl md:max-w-4xl lg:max-w-6xl mx-auto">
           每週選擇四堂課程，我們為專業選手和業餘愛好者提供不同的課程安排
         </div>
       </div>
@@ -323,23 +323,23 @@ const ClassTypesSlide = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center py-24">
-      <div className="container mx-auto px-16">
-        <div className="text-center mb-24">
-          <h2 className="text-7xl font-bold mb-16 font-lora text-signal-charcoal">課程類型</h2>
+    <div className="min-h-screen bg-white flex items-center justify-center py-8 md:py-16 lg:py-24">
+      <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16">
+        <div className="text-center mb-8 md:mb-16 lg:mb-24">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl xl:text-7xl font-bold mb-6 md:mb-12 lg:mb-16 font-lora text-signal-charcoal">課程類型</h2>
         </div>
 
-        <div className="grid grid-cols-2 gap-16 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 max-w-sm md:max-w-4xl lg:max-w-6xl mx-auto">
           {classTypes.map((classType, idx) => (
-            <Card key={idx} className="shadow-2xl border-8 border-gray-100 text-center">
-              <CardContent className="p-16">
-                <div className={`w-24 h-24 rounded-full ${classType.color} flex items-center justify-center mx-auto mb-12`}>
-                  <div className="text-white font-bold text-3xl">{idx + 1}</div>
+            <Card key={idx} className="shadow-2xl border-4 md:border-6 lg:border-8 border-gray-100 text-center">
+              <CardContent className="p-6 md:p-12 lg:p-16">
+                <div className={`w-16 h-16 md:w-20 h-20 lg:w-24 h-24 rounded-full ${classType.color} flex items-center justify-center mx-auto mb-6 md:mb-10 lg:mb-12`}>
+                  <div className="text-white font-bold text-lg md:text-2xl lg:text-3xl">{idx + 1}</div>
                 </div>
-                <h3 className="text-5xl font-lora font-bold mb-8 text-signal-charcoal">
+                <h3 className="text-xl md:text-3xl lg:text-4xl xl:text-5xl font-lora font-bold mb-4 md:mb-6 lg:mb-8 text-signal-charcoal">
                   {classType.name}
                 </h3>
-                <p className="text-3xl text-muted-foreground leading-relaxed">
+                <p className="text-sm md:text-xl lg:text-2xl xl:text-3xl text-muted-foreground leading-relaxed">
                   {classType.description}
                 </p>
               </CardContent>
@@ -347,17 +347,17 @@ const ClassTypesSlide = () => {
           ))}
         </div>
 
-        <div className="mt-24 text-center">
-          <div className="flex justify-center gap-16 text-2xl">
-            <span className="flex items-center gap-4">
-              <span className="inline-flex items-center gap-1 rounded-full bg-signal-gold/20 text-signal-charcoal px-6 py-3 text-xl font-bold uppercase tracking-wide ring-4 ring-signal-gold/40">
+        <div className="mt-8 md:mt-16 lg:mt-24 text-center">
+          <div className="flex flex-col md:flex-row justify-center gap-4 md:gap-8 lg:gap-16 text-sm md:text-lg lg:text-2xl">
+            <span className="flex items-center justify-center gap-2 md:gap-4">
+              <span className="inline-flex items-center gap-1 rounded-full bg-signal-gold/20 text-signal-charcoal px-3 md:px-4 lg:px-6 py-2 md:py-2 lg:py-3 text-xs md:text-sm lg:text-xl font-bold uppercase tracking-wide ring-2 md:ring-3 lg:ring-4 ring-signal-gold/40">
                 {t('schedule.badge.pro')}
               </span>
               <span>=</span>
               <span>{t('schedule.legend.pros')}</span>
             </span>
-            <span className="flex items-center gap-4">
-              <span className="inline-flex items-center gap-1 rounded-full bg-signal-charcoal/15 text-signal-charcoal px-6 py-3 text-xl font-bold uppercase tracking-wide ring-4 ring-signal-charcoal/40">
+            <span className="flex items-center justify-center gap-2 md:gap-4">
+              <span className="inline-flex items-center gap-1 rounded-full bg-signal-charcoal/15 text-signal-charcoal px-3 md:px-4 lg:px-6 py-2 md:py-2 lg:py-3 text-xs md:text-sm lg:text-xl font-bold uppercase tracking-wide ring-2 md:ring-3 lg:ring-4 ring-signal-charcoal/40">
                 {t('schedule.badge.am')}
               </span>
               <span>=</span>
@@ -374,12 +374,12 @@ const AboutIntroSlide = () => {
   const { t } = useLanguage();
   
   return (
-    <div className="min-h-screen bg-signal-light-gray flex items-center justify-center py-24">
-      <div className="container mx-auto px-16 text-center">
-        <h2 className="text-8xl xl:text-9xl font-bold mb-24 text-signal-charcoal">
+    <div className="min-h-screen bg-signal-light-gray flex items-center justify-center py-8 md:py-16 lg:py-24">
+      <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16 text-center">
+        <h2 className="text-3xl md:text-5xl lg:text-6xl xl:text-8xl 2xl:text-9xl font-bold mb-8 md:mb-16 lg:mb-24 text-signal-charcoal">
           {t('about.coach.title')}
         </h2>
-        <div className="text-6xl text-signal-charcoal font-medium leading-relaxed max-w-6xl mx-auto">
+        <div className="text-2xl md:text-4xl lg:text-5xl xl:text-6xl text-signal-charcoal font-medium leading-relaxed max-w-2xl md:max-w-4xl lg:max-w-6xl mx-auto">
           認識我們的專業教練
         </div>
       </div>
@@ -391,37 +391,37 @@ const CoachProfileSlide = () => {
   const { t } = useLanguage();
   
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center py-24">
-      <div className="container mx-auto px-16">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex gap-20 items-center">
+    <div className="min-h-screen bg-white flex items-center justify-center py-8 md:py-16 lg:py-24">
+      <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16">
+        <div className="max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto">
+          <div className="flex flex-col md:flex-row gap-8 md:gap-12 lg:gap-20 items-center">
             {/* Profile Section */}
-            <div className="w-1/2">
-              <div className="relative">
-                <div className="absolute inset-0 border-4 border-signal-gold rounded-2xl transform translate-x-6 translate-y-6"></div>
+            <div className="w-full md:w-1/2">
+              <div className="relative max-w-sm md:max-w-md lg:max-w-lg mx-auto">
+                <div className="absolute inset-0 border-2 md:border-3 lg:border-4 border-signal-gold rounded-xl md:rounded-2xl transform translate-x-3 md:translate-x-4 lg:translate-x-6 translate-y-3 md:translate-y-4 lg:translate-y-6"></div>
                 <img 
                   src="/lovable-uploads/9cd6f4c9-9cfc-435a-8ebb-2bbe20537915.png" 
                   alt="Dr. Noah Sachs" 
-                  className="rounded-2xl shadow-2xl w-full h-auto object-cover relative z-10 aspect-[3/4]"
+                  className="rounded-xl md:rounded-2xl shadow-2xl w-full h-auto object-cover relative z-10 aspect-[3/4]"
                 />
               </div>
             </div>
             
-            <div className="w-1/2">
-              <h3 className="text-6xl font-bold mb-6 text-signal-charcoal">{t('about.coach.name')}</h3>
-              <p className="text-4xl text-signal-gold font-semibold mb-16">{t('about.coach.position')}</p>
+            <div className="w-full md:w-1/2 text-center md:text-left">
+              <h3 className="text-2xl md:text-3xl lg:text-4xl xl:text-6xl font-bold mb-3 md:mb-4 lg:mb-6 text-signal-charcoal">{t('about.coach.name')}</h3>
+              <p className="text-lg md:text-2xl lg:text-3xl xl:text-4xl text-signal-gold font-semibold mb-6 md:mb-10 lg:mb-16">{t('about.coach.position')}</p>
               
-              <div className="space-y-8">
+              <div className="space-y-4 md:space-y-6 lg:space-y-8">
                 <div>
-                  <h4 className="text-4xl font-bold mb-6 text-signal-charcoal">{t('about.coach.academic')}</h4>
-                  <p className="text-3xl leading-relaxed text-signal-charcoal/90">
+                  <h4 className="text-lg md:text-2xl lg:text-3xl xl:text-4xl font-bold mb-3 md:mb-4 lg:mb-6 text-signal-charcoal">{t('about.coach.academic')}</h4>
+                  <p className="text-sm md:text-lg lg:text-2xl xl:text-3xl leading-relaxed text-signal-charcoal/90">
                     {t('about.coach.academic.degree')}
                   </p>
                 </div>
                 
                 <div>
-                  <h4 className="text-4xl font-bold mb-6 text-signal-charcoal">{t('about.coach.experience')}</h4>
-                  <ul className="text-3xl leading-relaxed text-signal-charcoal/90 space-y-4">
+                  <h4 className="text-lg md:text-2xl lg:text-3xl xl:text-4xl font-bold mb-3 md:mb-4 lg:mb-6 text-signal-charcoal">{t('about.coach.experience')}</h4>
+                  <ul className="text-sm md:text-lg lg:text-2xl xl:text-3xl leading-relaxed text-signal-charcoal/90 space-y-2 md:space-y-3 lg:space-y-4">
                     <li>{t('about.coach.experience.img')}</li>
                     <li>{t('about.coach.experience.usaf')}</li>
                     <li>{t('about.coach.experience.pga')}</li>
@@ -498,13 +498,13 @@ const QRCodeComponent = () => {
   }, []);
 
   return (
-    <div className="fixed bottom-8 right-8 z-50 bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl border-4 border-signal-gold p-6">
+    <div className="fixed bottom-4 md:bottom-6 lg:bottom-8 right-4 md:right-6 lg:right-8 z-50 bg-white/95 backdrop-blur-sm rounded-xl md:rounded-2xl shadow-2xl border-2 md:border-3 lg:border-4 border-signal-gold p-3 md:p-4 lg:p-6">
       <div className="text-center">
         {qrCodeDataURL && (
-          <img src={qrCodeDataURL} alt="QR Code for Assessment Booking" className="w-48 h-48 mx-auto mb-4" />
+          <img src={qrCodeDataURL} alt="QR Code for Assessment Booking" className="w-24 h-24 md:w-36 h-36 lg:w-48 h-48 mx-auto mb-2 md:mb-3 lg:mb-4" />
         )}
-        <p className="text-signal-charcoal font-bold text-xl mb-2">掃描預約評估</p>
-        <p className="text-signal-charcoal/70 text-lg">Scan to Book Assessment</p>
+        <p className="text-signal-charcoal font-bold text-sm md:text-lg lg:text-xl mb-1 md:mb-2">掃描預約評估</p>
+        <p className="text-signal-charcoal/70 text-xs md:text-sm lg:text-lg">Scan to Book Assessment</p>
       </div>
     </div>
   );
