@@ -49,6 +49,10 @@ const useChineseTranslations = () => {
     // Assessment & Membership
     'assessment.title': '我們的評估流程',
     'assessment.price': '10,000元',
+    'assessment.originalPrice': '12,000',
+    'assessment.savings': '2,000',
+    'assessment.promotional': '限時優惠！立即預約',
+    'assessment.bookingStatus': '2人已預約，8名額剩餘',
     'membership.title': '會員方案',
     'membership.pro.price': '15,000',
     'membership.pro.originalPrice': '18,000',
@@ -330,11 +334,44 @@ const Slideshow = () => {
                   第1步 · 完成基礎評估
                 </div>
               </div>
-              <Card className="shadow-2xl border-2 border-signal-gold/30 bg-gradient-to-br from-white to-signal-gold/5">
+              <Card className="shadow-2xl border-2 border-signal-gold/30 bg-gradient-to-br from-white to-signal-gold/5 overflow-hidden">
+                {/* Promotional Banner */}
+                <div className="bg-gradient-to-r from-orange-500 to-red-500 text-white text-center py-3 px-6">
+                  <div className="font-bold text-sm md:text-base lg:text-lg">
+                    {t['assessment.promotional']}
+                  </div>
+                </div>
+                
                 <CardContent className="p-6 md:p-10">
                   <div className="text-center mb-8">
-                    <div className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-signal-gold mb-6">
+                    {/* Original Price (Crossed Out) */}
+                    <div className="text-lg md:text-xl lg:text-2xl text-gray-500 line-through mb-2">
+                      NT${t['assessment.originalPrice']}
+                    </div>
+                    
+                    {/* Discounted Price */}
+                    <div className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-signal-gold mb-2">
                       NT${t['assessment.price']}
+                    </div>
+                    
+                    {/* Savings Amount */}
+                    <div className="text-sm md:text-base lg:text-lg text-green-600 font-semibold mb-4">
+                      省 NT${t['assessment.savings']}
+                    </div>
+                    
+                    {/* Booking Status Tracker */}
+                    <div className="bg-gray-50 rounded-lg p-4 mb-6">
+                      <div className="text-sm md:text-base text-gray-600 mb-2">
+                        {t['assessment.bookingStatus']}
+                      </div>
+                      <div className="flex justify-center space-x-1">
+                        {[...Array(10)].map((_, i) => (
+                          <div 
+                            key={i} 
+                            className={`w-3 h-3 rounded-full ${i < 2 ? 'bg-orange-500' : 'bg-gray-300'}`}
+                          />
+                        ))}
+                      </div>
                     </div>
                   </div>
                   <ul className="space-y-4 text-base md:text-lg lg:text-xl xl:text-2xl">
