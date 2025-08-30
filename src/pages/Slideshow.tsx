@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Clock, ChevronLeft, ChevronRight, Loader2 } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
@@ -21,6 +21,14 @@ const SLIDESHOW_IMAGES = [
   '/lovable-uploads/ea936717-eb96-4705-98af-8513f4b6c976.png', // Cert 8
   '/lovable-uploads/385d07dd-80d6-44cb-b2ef-9cbc80e9c887.png', // Cert 9
 ];
+
+// YouTube API type declarations
+declare global {
+  interface Window {
+    YT: any;
+    onYouTubeIframeAPIReady: () => void;
+  }
+}
 
 // Force Chinese language context for slideshow
 const useChineseTranslations = () => {
@@ -92,6 +100,8 @@ const Slideshow = () => {
   const [qrCodeUrl, setQrCodeUrl] = useState('');
   const [isAutoPaused, setIsAutoPaused] = useState(false);
   const [lastInteractionTime, setLastInteractionTime] = useState(0);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const playerRef = useRef<any>(null);
   const t = useChineseTranslations();
   
   // Preload all slideshow images
@@ -136,11 +146,43 @@ const Slideshow = () => {
     }).then(setQrCodeUrl);
   }, []);
 
+  // YouTube Player API initialization
+  useEffect(() => {
+    // Load YouTube IFrame API
+    if (!window.YT) {
+      const tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      const firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
+      
+      window.onYouTubeIframeAPIReady = () => {
+        if (playerRef.current) {
+          playerRef.current = new window.YT.Player('youtube-player', {
+            events: {
+              onStateChange: (event: any) => {
+                if (event.data === window.YT.PlayerState.PLAYING) {
+                  setIsVideoPlaying(true);
+                } else if (event.data === window.YT.PlayerState.ENDED) {
+                  setIsVideoPlaying(false);
+                }
+              }
+            }
+          });
+        }
+      };
+    }
+  }, []);
+
   // Auto-advance slides with pause/resume logic (only after images load)
   useEffect(() => {
     if (imagesLoading) return; // Don't start slideshow until images are loaded
     
     const timer = setInterval(() => {
+      // Don't advance if video is playing on current slide
+      if (currentSlide === 3 && isVideoPlaying) {
+        return;
+      }
+      
       if (!isAutoPaused) {
         setCurrentSlide(prev => (prev + 1) % totalSlides);
       } else {
@@ -152,7 +194,7 @@ const Slideshow = () => {
     }, 8000);
 
     return () => clearInterval(timer);
-  }, [isAutoPaused, lastInteractionTime, totalSlides, resumeAutoAdvance, imagesLoading]);
+  }, [isAutoPaused, lastInteractionTime, totalSlides, resumeAutoAdvance, imagesLoading, currentSlide, isVideoPlaying]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -360,13 +402,15 @@ const Slideshow = () => {
           <div className="w-full max-w-4xl mx-auto">
             <div className="relative w-full" style={{ aspectRatio: '16/9' }}>
               <iframe 
-                src="https://www.youtube.com/embed/9yyIwGOXogM?si=c5pvJY3h9PMiEoJ7&amp;controls=0" 
-                className="absolute inset-0 w-full h-full rounded-lg shadow-2xl"
+                id="youtube-player"
+                width="560" 
+                height="315" 
+                src="https://www.youtube.com/embed/9yyIwGOXogM?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&loop=1&playlist=9yyIwGOXogM&enablejsapi=1" 
+                title="YouTube video player" 
                 frameBorder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                referrerPolicy="strict-origin-when-cross-origin" 
+                allow="autoplay; encrypted-media" 
                 allowFullScreen
-                title="YouTube video player"
+                className="absolute inset-0 w-full h-full rounded-lg shadow-2xl"
               />
             </div>
           </div>
