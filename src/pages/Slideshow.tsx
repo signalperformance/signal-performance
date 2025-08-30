@@ -589,7 +589,7 @@ const Slideshow = () => {
       const columns = [
         { title: '週一／週三／週五', items: mwf },
         { title: '週二／週四', items: tth },
-        { title: '週末', items: weekend },
+        { title: '六/日', items: weekend },
       ];
 
       const formatTime = (hour24: number, minute: number = 0) => {
