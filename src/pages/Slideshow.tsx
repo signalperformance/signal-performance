@@ -819,7 +819,7 @@ const Slideshow = () => {
             <div className="w-full lg:w-1/3">
               <div className="text-center">
                 <div className="mb-3 md:mb-4">
-                  <div className="w-48 h-56 md:w-52 md:h-64 lg:w-56 lg:h-72 mx-auto rounded-lg overflow-hidden bg-signal-gold/20">
+                  <div className="w-52 h-60 md:w-56 md:h-68 lg:w-60 lg:h-76 mx-auto rounded-lg overflow-hidden bg-signal-gold/20">
                     <img 
                       src="/lovable-uploads/9cd6f4c9-9cfc-435a-8ebb-2bbe20537915.png" 
                       alt="Dr. Noah Sachs"
