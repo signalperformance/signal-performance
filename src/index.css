@@ -190,29 +190,43 @@ html {
 
 /* TV Safe Area Utilities */
 .tv-safe-area {
-  @apply tv:px-20 tv:py-16;
+  @media (min-width: 1920px) {
+    @apply px-20 py-16;
+  }
 }
 
 .tv-safe-content {
-  @apply tv:max-w-5xl tv:mx-auto;
+  @media (min-width: 1920px) {
+    @apply max-w-5xl mx-auto;
+  }
 }
 
 .tv-text-display {
-  @apply tv:text-6xl;
+  @media (min-width: 1920px) {
+    @apply text-6xl;
+  }
 }
 
 .tv-text-title {
-  @apply tv:text-4xl;
+  @media (min-width: 1920px) {
+    @apply text-4xl;
+  }
 }
 
 .tv-text-subtitle {
-  @apply tv:text-2xl;
+  @media (min-width: 1920px) {
+    @apply text-2xl;
+  }
 }
 
 .tv-text-body {
-  @apply tv:text-lg;
+  @media (min-width: 1920px) {
+    @apply text-lg;
+  }
 }
 
 .tv-safe-position {
-  @apply tv:bottom-16 tv:right-16;
+  @media (min-width: 1920px) {
+    @apply bottom-16 right-16;
+  }
 }

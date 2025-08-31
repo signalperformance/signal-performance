@@ -918,7 +918,7 @@ const Slideshow = () => {
             <img 
               src={qrCodeUrl} 
               alt="QR Code for booking assessment"
-              className="w-24 h-24 md:w-32 md:h-32 lg:w-36 lg:h-36 tv:w-32 tv:h-32 mx-auto mb-2"
+              className="w-24 h-24 md:w-32 md:h-32 lg:w-36 lg:h-36 mx-auto mb-2"
             />
             <p className="text-xs md:text-sm lg:text-base tv-text-body font-semibold text-signal-charcoal">
               {t['qr.text']}
