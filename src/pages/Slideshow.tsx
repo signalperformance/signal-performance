@@ -127,6 +127,12 @@ const Slideshow = () => {
   useEffect(() => {
     const preloadFonts = async () => {
       try {
+        // Set a timeout to prevent infinite loading
+        const timeout = setTimeout(() => {
+          console.warn('Font loading timeout - proceeding with slideshow');
+          setFontsLoading(false);
+        }, 3000);
+
         // Wait for font document to be ready first
         await document.fonts.ready;
         
@@ -160,6 +166,7 @@ const Slideshow = () => {
         );
         
         await Promise.all(progressPromises);
+        clearTimeout(timeout);
         setFontsLoading(false);
       } catch (error) {
         console.warn('Font preloading failed:', error);
