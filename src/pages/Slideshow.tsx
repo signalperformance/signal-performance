@@ -113,6 +113,8 @@ const Slideshow = () => {
   const [principlePhase, setPrinciplePhase] = useState<'initial' | 'focusing' | 'all-visible'>('initial');
   const [focusedStep, setFocusedStep] = useState<number | null>(null);
   const [pricingPhase, setPricingPhase] = useState<'initial' | 'step1' | 'step2' | 'all-visible'>('initial');
+  const [fontsLoading, setFontsLoading] = useState(true);
+  const [fontsProgress, setFontsProgress] = useState(0);
   const playerRef = useRef<any>(null);
   const principleTimerRef = useRef<NodeJS.Timeout | null>(null);
   const pricingTimerRef = useRef<NodeJS.Timeout | null>(null);
@@ -120,6 +122,53 @@ const Slideshow = () => {
   
   // Preload all slideshow images
   const { isLoading: imagesLoading, loadedCount, totalCount } = useImagePreloader(SLIDESHOW_IMAGES);
+
+  // Preload fonts to prevent flickering
+  useEffect(() => {
+    const preloadFonts = async () => {
+      try {
+        // Wait for font document to be ready first
+        await document.fonts.ready;
+        
+        const fontLoadPromises = [
+          // Montserrat - used in slideshow headings
+          document.fonts.load('400 16px "Montserrat"'),
+          document.fonts.load('500 16px "Montserrat"'),
+          document.fonts.load('600 16px "Montserrat"'),
+          document.fonts.load('700 16px "Montserrat"'),
+          // Lora - used in slideshow content
+          document.fonts.load('400 16px "Lora"'),
+          document.fonts.load('700 16px "Lora"'),
+          // Inter - used in UI elements
+          document.fonts.load('400 16px "Inter"'),
+          document.fonts.load('500 16px "Inter"'),
+          document.fonts.load('600 16px "Inter"')
+        ];
+        
+        // Track progress
+        let completed = 0;
+        const totalFonts = fontLoadPromises.length;
+        
+        const progressPromises = fontLoadPromises.map(promise => 
+          promise.then(() => {
+            completed++;
+            setFontsProgress((completed / totalFonts) * 100);
+          }).catch(() => {
+            completed++;
+            setFontsProgress((completed / totalFonts) * 100);
+          })
+        );
+        
+        await Promise.all(progressPromises);
+        setFontsLoading(false);
+      } catch (error) {
+        console.warn('Font preloading failed:', error);
+        setFontsLoading(false);
+      }
+    };
+
+    preloadFonts();
+  }, []);
 
   const totalSlides = 6;
 
@@ -884,24 +933,41 @@ const Slideshow = () => {
     )
   ];
 
-  // Show loading screen while images are preloading
-  if (imagesLoading) {
+  // Show loading screen while fonts or images are preloading
+  if (fontsLoading || imagesLoading) {
+    const isLoadingFonts = fontsLoading;
+    const isLoadingImages = imagesLoading;
+    
     return (
       <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted flex items-center justify-center">
-        <div className="text-center space-y-4">
+        <div className="text-center space-y-6">
           <Loader2 className="w-8 h-8 animate-spin mx-auto text-primary" />
           <div className="text-lg font-medium">載入中...</div>
-          <div className="text-sm text-muted-foreground">
-            {loadedCount} / {totalCount} 張圖片已載入
-          </div>
-          <Progress value={(loadedCount / totalCount) * 100} className="w-64 mx-auto" />
+          
+          {isLoadingFonts && (
+            <div className="space-y-2">
+              <div className="text-sm text-muted-foreground">
+                正在載入字體...
+              </div>
+              <Progress value={fontsProgress} className="w-64 mx-auto" />
+            </div>
+          )}
+          
+          {isLoadingImages && (
+            <div className="space-y-2">
+              <div className="text-sm text-muted-foreground">
+                {loadedCount} / {totalCount} 張圖片已載入
+              </div>
+              <Progress value={(loadedCount / totalCount) * 100} className="w-64 mx-auto" />
+            </div>
+          )}
         </div>
       </div>
     );
   }
 
   return (
-    <div className="relative">
+    <div className="relative opacity-0 animate-fade-in">
       {/* Current slide */}
       <div className="transition-opacity duration-500">
         {slides[currentSlide]()}
