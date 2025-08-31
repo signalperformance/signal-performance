@@ -808,8 +808,8 @@ const Slideshow = () => {
     () => (
       <div className="min-h-screen bg-gradient-to-br from-signal-light-gray to-white flex items-center justify-center p-2 md:p-4">
         <div className="container mx-auto">
-          <div className="text-center mb-3 md:mb-6">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold font-lora text-signal-charcoal">
+          <div className="text-center mb-2 md:mb-4">
+            <h2 className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold font-lora text-signal-charcoal">
               {t['coach.title']}
             </h2>
           </div>
