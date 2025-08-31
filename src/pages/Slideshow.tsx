@@ -117,9 +117,11 @@ const Slideshow = () => {
   const [pricingPhase, setPricingPhase] = useState<'initial' | 'step1' | 'step2' | 'all-visible'>('initial');
   const [fontsLoading, setFontsLoading] = useState(true);
   const [fontsProgress, setFontsProgress] = useState(0);
+  const [certCarouselApi, setCertCarouselApi] = useState<any>(null);
   const playerRef = useRef<any>(null);
   const principleTimerRef = useRef<NodeJS.Timeout | null>(null);
   const pricingTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const certCarouselTimerRef = useRef<NodeJS.Timeout | null>(null);
   const t = useChineseTranslations();
   
   // Preload all slideshow images
@@ -342,6 +344,41 @@ const Slideshow = () => {
       }
     };
   }, [currentSlide, isAutoPaused]);
+
+  // Auto-advance certification carousel when on slide 6
+  useEffect(() => {
+    if (currentSlide === 5 && !isAutoPaused && certCarouselApi) { // Coach slide is index 5
+      // Clear any existing timer
+      if (certCarouselTimerRef.current) {
+        clearInterval(certCarouselTimerRef.current);
+      }
+
+      // Set up auto-advance every 3 seconds
+      certCarouselTimerRef.current = setInterval(() => {
+        if (currentSlide === 5 && !isAutoPaused && certCarouselApi) {
+          if (certCarouselApi.canScrollNext()) {
+            certCarouselApi.scrollNext();
+          } else {
+            // Loop back to first certification
+            certCarouselApi.scrollTo(0);
+          }
+        }
+      }, 3000);
+    } else {
+      // Clear timer when leaving slide or paused
+      if (certCarouselTimerRef.current) {
+        clearInterval(certCarouselTimerRef.current);
+        certCarouselTimerRef.current = null;
+      }
+    }
+
+    return () => {
+      if (certCarouselTimerRef.current) {
+        clearInterval(certCarouselTimerRef.current);
+        certCarouselTimerRef.current = null;
+      }
+    };
+  }, [currentSlide, isAutoPaused, certCarouselApi]);
 
   // Auto-advance slides with pause/resume logic (only after images load)
   useEffect(() => {
@@ -895,7 +932,7 @@ const Slideshow = () => {
                     
                     {/* Elegant Certification Carousel */}
                     <div className="max-w-md mx-auto">
-                      <Carousel className="w-full">
+                      <Carousel className="w-full" setApi={setCertCarouselApi}>
                         <CarouselContent>
                           {certifications.map((cert, index) => (
                             <CarouselItem key={index}>
@@ -911,16 +948,7 @@ const Slideshow = () => {
                             </CarouselItem>
                           ))}
                         </CarouselContent>
-                        <CarouselPrevious className="left-2 bg-white/80 hover:bg-white border-signal-gold text-signal-gold hover:text-signal-charcoal transition-colors" />
-                        <CarouselNext className="right-2 bg-white/80 hover:bg-white border-signal-gold text-signal-gold hover:text-signal-charcoal transition-colors" />
                       </Carousel>
-                      
-                      {/* Certification counter */}
-                      <div className="text-center mt-4">
-                        <p className="text-sm md:text-base text-signal-charcoal/70">
-                          {certifications.length} Professional Certifications
-                        </p>
-                      </div>
                     </div>
                   </CardContent>
                 </Card>
