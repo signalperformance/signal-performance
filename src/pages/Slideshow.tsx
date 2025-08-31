@@ -4,6 +4,7 @@ import { Clock, ChevronLeft, ChevronRight, Loader2 } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
 import { Move, Activity, User, Dumbbell, Club } from 'lucide-react';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import QRCode from 'qrcode';
 import { useImagePreloader } from '@/hooks/useImagePreloader';
 import SlideshowImage from '@/components/SlideshowImage';
@@ -804,132 +805,131 @@ const Slideshow = () => {
       );
     },
 
-    // Slide 6: Coach Profile & Credentials Combined
-    () => (
-      <div className="min-h-screen bg-gradient-to-br from-signal-light-gray to-white flex items-center justify-center p-2 md:p-4">
-        <div className="container mx-auto">
-          <div className="text-center mb-2 md:mb-4">
-            <h2 className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold font-lora text-signal-charcoal">
-              {t['coach.title']}
-            </h2>
-          </div>
-          
-          <div className="flex flex-col lg:flex-row gap-4 md:gap-6 items-center lg:items-start max-w-6xl mx-auto">
-            {/* Coach Profile */}
-            <div className="w-full lg:w-1/3">
-              <div className="text-center">
-                <div className="mb-3 md:mb-4">
-                  <div className="w-48 h-56 md:w-52 md:h-64 lg:w-56 lg:h-72 mx-auto rounded-lg overflow-hidden bg-signal-gold/20">
-                    <img 
-                      src="/lovable-uploads/9cd6f4c9-9cfc-435a-8ebb-2bbe20537915.png" 
-                      alt="Dr. Noah Sachs"
-                      className="object-cover w-full h-full object-top" 
-                      loading="eager"
-                      fetchPriority="high"
-                      decoding="async"
-                    />
-                  </div>
-                </div>
-                <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-signal-charcoal mb-1">
-                  {t['coach.name']}
-                </h3>
-                <p className="text-sm md:text-base lg:text-lg text-signal-gold font-semibold">
-                  {t['coach.position']}
-                </p>
-              </div>
+    // Slide 6: Coach Profile & Credentials Combined - Redesigned
+    () => {
+      const certifications = [
+        '/lovable-uploads/1d022755-a8e7-481a-91db-13f7db87b26a.png',
+        '/lovable-uploads/1dc02882-2327-403c-9e82-8b8207c618ff.png',
+        '/lovable-uploads/09961efd-a840-417f-a93a-2e2990b91489.png',
+        '/lovable-uploads/b8e8e7d5-5980-475f-9534-3660f734bccf.png',
+        '/lovable-uploads/80663943-a684-4747-88d6-29d27b58e790.png',
+        '/lovable-uploads/650394e1-2bf5-4354-b912-86a81648eaaa.png',
+        '/lovable-uploads/05754402-e6c2-4ca2-98e3-9ba6aad7a5ea.png',
+        '/lovable-uploads/ea936717-eb96-4705-98af-8513f4b6c976.png',
+        '/lovable-uploads/385d07dd-80d6-44cb-b2ef-9cbc80e9c887.png'
+      ];
+
+      return (
+        <div className="min-h-screen bg-gradient-to-br from-signal-light-gray to-white flex items-center justify-center p-4 md:p-6">
+          <div className="container mx-auto max-w-7xl">
+            {/* Title - Larger and more prominent */}
+            <div className="text-center mb-8 md:mb-12">
+              <h2 className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold font-lora text-signal-charcoal">
+                {t['coach.title']}
+              </h2>
             </div>
             
-            {/* Academic & Experience & Certifications */}
-            <div className="w-full lg:w-2/3">
-              {/* Academic & Experience */}
-              <Card className="mb-2 md:mb-3 shadow-lg border border-gray-100">
-                <CardContent className="p-3 md:p-4">
-                  <div className="mb-3 md:mb-4">
-                    <h4 className="text-sm md:text-base lg:text-lg font-bold mb-2 text-signal-charcoal">
-                      {t['coach.academic']}
-                    </h4>
-                    <p className="text-xs md:text-sm lg:text-base leading-relaxed text-signal-charcoal/90">
-                      {t['coach.degree']}
-                    </p>
+            <div className="flex flex-col lg:flex-row gap-8 md:gap-12 items-center lg:items-center max-w-6xl mx-auto">
+              {/* Coach Profile - Left Column (Larger) */}
+              <div className="w-full lg:w-2/5">
+                <div className="text-center">
+                  <div className="mb-6 md:mb-8">
+                    {/* Much larger headshot with elegant shadow */}
+                    <div className="w-64 h-80 md:w-72 md:h-96 lg:w-80 lg:h-[400px] mx-auto rounded-2xl overflow-hidden bg-signal-gold/20 shadow-2xl">
+                      <img 
+                        src="/lovable-uploads/9cd6f4c9-9cfc-435a-8ebb-2bbe20537915.png" 
+                        alt="Dr. Noah Sachs"
+                        className="object-cover w-full h-full object-top" 
+                        loading="eager"
+                        fetchPriority="high"
+                        decoding="async"
+                      />
+                    </div>
                   </div>
-                  
-                  <div>
-                    <h4 className="text-sm md:text-base lg:text-lg font-bold mb-2 text-signal-charcoal">
-                      {t['coach.experience']}
-                    </h4>
-                    <ul className="text-xs md:text-sm lg:text-base leading-relaxed text-signal-charcoal/90 space-y-1">
-                      {t['coach.experience.items'].map((item, index) => (
-                        <li key={index}>{item}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </CardContent>
-              </Card>
+                  {/* Larger typography */}
+                  <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-signal-charcoal mb-3">
+                    {t['coach.name']}
+                  </h3>
+                  <p className="text-lg md:text-xl lg:text-2xl text-signal-gold font-semibold">
+                    {t['coach.position']}
+                  </p>
+                </div>
+              </div>
               
-              {/* Certifications */}
-              <Card className="shadow-lg border border-gray-100">
-                <CardContent className="p-3 md:p-4">
-                  <h4 className="text-sm md:text-base lg:text-lg font-bold mb-3 md:mb-4 text-signal-charcoal text-center">
-                    {t['coach.certifications']}
-                  </h4>
-                  
-                  {/* Certification layout - 3 rows of 3 certifications each */}
-                  <div className="space-y-2 md:space-y-3 max-w-2xl mx-auto">
-                     {/* Row 1 */}
-                     <div className="flex justify-between items-center">
-                       {[
-                         '/lovable-uploads/1d022755-a8e7-481a-91db-13f7db87b26a.png',
-                         '/lovable-uploads/1dc02882-2327-403c-9e82-8b8207c618ff.png',
-                         '/lovable-uploads/09961efd-a840-417f-a93a-2e2990b91489.png'
-                        ].map((cert, index) => (
-                          <SlideshowImage
-                            key={index}
-                            src={cert}
-                            alt={`Certification ${index + 1}`}
-                            className="w-12 h-12 md:w-14 md:h-14 relative"
-                          />
+              {/* Content - Right Column */}
+              <div className="w-full lg:w-3/5">
+                {/* Single Consolidated Academic & Experience Card */}
+                <Card className="mb-8 shadow-2xl border border-gray-200 bg-white/80 backdrop-blur-sm">
+                  <CardContent className="p-6 md:p-8">
+                    <div className="mb-8">
+                      <h4 className="text-xl md:text-2xl lg:text-3xl font-bold mb-4 text-signal-charcoal">
+                        {t['coach.academic']}
+                      </h4>
+                      <p className="text-base md:text-lg lg:text-xl leading-relaxed text-signal-charcoal/90">
+                        {t['coach.degree']}
+                      </p>
+                    </div>
+                    
+                    <div>
+                      <h4 className="text-xl md:text-2xl lg:text-3xl font-bold mb-4 text-signal-charcoal">
+                        {t['coach.experience']}
+                      </h4>
+                      <ul className="text-base md:text-lg lg:text-xl leading-relaxed text-signal-charcoal/90 space-y-2">
+                        {t['coach.experience.items'].map((item, index) => (
+                          <li key={index} className="flex items-start">
+                            <span className="text-signal-gold mr-3 mt-1">•</span>
+                            <span>{item}</span>
+                          </li>
                         ))}
-                     </div>
-                     
-                     {/* Row 2 */}
-                     <div className="flex justify-between items-center">
-                       {[
-                         '/lovable-uploads/b8e8e7d5-5980-475f-9534-3660f734bccf.png',
-                         '/lovable-uploads/80663943-a684-4747-88d6-29d27b58e790.png',
-                         '/lovable-uploads/650394e1-2bf5-4354-b912-86a81648eaaa.png'
-                        ].map((cert, index) => (
-                          <SlideshowImage
-                            key={index + 3}
-                            src={cert}
-                            alt={`Certification ${index + 4}`}
-                            className="w-12 h-12 md:w-14 md:h-14 relative"
-                          />
-                        ))}
-                     </div>
-                     
-                     {/* Row 3 */}
-                     <div className="flex justify-between items-center">
-                       {[
-                         '/lovable-uploads/05754402-e6c2-4ca2-98e3-9ba6aad7a5ea.png',
-                         '/lovable-uploads/ea936717-eb96-4705-98af-8513f4b6c976.png',
-                         '/lovable-uploads/385d07dd-80d6-44cb-b2ef-9cbc80e9c887.png'
-                        ].map((cert, index) => (
-                          <SlideshowImage
-                            key={index + 6}
-                            src={cert}
-                            alt={`Certification ${index + 7}`}
-                            className="w-12 h-12 md:w-14 md:h-14 relative"
-                          />
-                        ))}
-                     </div>
-                  </div>
-                </CardContent>
-              </Card>
+                      </ul>
+                    </div>
+                  </CardContent>
+                </Card>
+                
+                {/* Certifications Carousel */}
+                <Card className="shadow-2xl border border-gray-200 bg-white/80 backdrop-blur-sm">
+                  <CardContent className="p-6 md:p-8">
+                    <h4 className="text-xl md:text-2xl lg:text-3xl font-bold mb-6 text-signal-charcoal text-center">
+                      {t['coach.certifications']}
+                    </h4>
+                    
+                    {/* Elegant Certification Carousel */}
+                    <div className="max-w-md mx-auto">
+                      <Carousel className="w-full">
+                        <CarouselContent>
+                          {certifications.map((cert, index) => (
+                            <CarouselItem key={index}>
+                              <div className="flex justify-center p-4">
+                                <div className="w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48">
+                                  <SlideshowImage
+                                    src={cert}
+                                    alt={`Professional Certification ${index + 1}`}
+                                    className="w-full h-full rounded-lg shadow-lg border border-gray-100"
+                                  />
+                                </div>
+                              </div>
+                            </CarouselItem>
+                          ))}
+                        </CarouselContent>
+                        <CarouselPrevious className="left-2 bg-white/80 hover:bg-white border-signal-gold text-signal-gold hover:text-signal-charcoal transition-colors" />
+                        <CarouselNext className="right-2 bg-white/80 hover:bg-white border-signal-gold text-signal-gold hover:text-signal-charcoal transition-colors" />
+                      </Carousel>
+                      
+                      {/* Certification counter */}
+                      <div className="text-center mt-4">
+                        <p className="text-sm md:text-base text-signal-charcoal/70">
+                          {certifications.length} Professional Certifications
+                        </p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    )
+      );
+    }
   ];
 
   // Show loading screen while fonts or images are preloading
