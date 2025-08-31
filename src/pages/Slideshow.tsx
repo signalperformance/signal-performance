@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Move, Activity, User, Dumbbell, Club } from 'lucide-react';
 import QRCode from 'qrcode';
 import { useImagePreloader } from '@/hooks/useImagePreloader';
+import SlideshowImage from '@/components/SlideshowImage';
 
 // All slideshow images that need preloading
 const SLIDESHOW_IMAGES = [
@@ -874,62 +875,53 @@ const Slideshow = () => {
                   
                   {/* Certification layout - 3 rows of 3 certifications each */}
                   <div className="space-y-4 md:space-y-6 max-w-3xl mx-auto">
-                    {/* Row 1 */}
-                    <div className="flex justify-between items-center">
-                      {[
-                        '/lovable-uploads/1d022755-a8e7-481a-91db-13f7db87b26a.png',
-                        '/lovable-uploads/1dc02882-2327-403c-9e82-8b8207c618ff.png',
-                        '/lovable-uploads/09961efd-a840-417f-a93a-2e2990b91489.png'
-                       ].map((cert, index) => (
-                         <div key={index} className="w-16 h-16 md:w-20 md:h-20">
-                           <img 
-                             src={cert}
-                             alt={`Certification ${index + 1}`}
-                             className="w-full h-full object-contain"
-                             loading="eager"
-                             decoding="async"
-                           />
-                         </div>
-                       ))}
-                    </div>
-                    
-                    {/* Row 2 */}
-                    <div className="flex justify-between items-center">
-                      {[
-                        '/lovable-uploads/b8e8e7d5-5980-475f-9534-3660f734bccf.png',
-                        '/lovable-uploads/80663943-a684-4747-88d6-29d27b58e790.png',
-                        '/lovable-uploads/650394e1-2bf5-4354-b912-86a81648eaaa.png'
-                       ].map((cert, index) => (
-                         <div key={index + 3} className="w-16 h-16 md:w-20 md:h-20">
-                           <img 
-                             src={cert}
-                             alt={`Certification ${index + 4}`}
-                             className="w-full h-full object-contain"
-                             loading="eager"
-                             decoding="async"
-                           />
-                         </div>
-                       ))}
-                    </div>
-                    
-                    {/* Row 3 */}
-                    <div className="flex justify-between items-center">
-                      {[
-                        '/lovable-uploads/05754402-e6c2-4ca2-98e3-9ba6aad7a5ea.png',
-                        '/lovable-uploads/ea936717-eb96-4705-98af-8513f4b6c976.png',
-                        '/lovable-uploads/385d07dd-80d6-44cb-b2ef-9cbc80e9c887.png'
-                       ].map((cert, index) => (
-                         <div key={index + 6} className="w-16 h-16 md:w-20 md:h-20">
-                           <img 
-                             src={cert}
-                             alt={`Certification ${index + 7}`}
-                             className="w-full h-full object-contain"
-                             loading="eager"
-                             decoding="async"
-                           />
-                         </div>
-                       ))}
-                    </div>
+                     {/* Row 1 */}
+                     <div className="flex justify-between items-center">
+                       {[
+                         '/lovable-uploads/1d022755-a8e7-481a-91db-13f7db87b26a.png',
+                         '/lovable-uploads/1dc02882-2327-403c-9e82-8b8207c618ff.png',
+                         '/lovable-uploads/09961efd-a840-417f-a93a-2e2990b91489.png'
+                        ].map((cert, index) => (
+                          <SlideshowImage
+                            key={index}
+                            src={cert}
+                            alt={`Certification ${index + 1}`}
+                            className="w-16 h-16 md:w-20 md:h-20 relative"
+                          />
+                        ))}
+                     </div>
+                     
+                     {/* Row 2 */}
+                     <div className="flex justify-between items-center">
+                       {[
+                         '/lovable-uploads/b8e8e7d5-5980-475f-9534-3660f734bccf.png',
+                         '/lovable-uploads/80663943-a684-4747-88d6-29d27b58e790.png',
+                         '/lovable-uploads/650394e1-2bf5-4354-b912-86a81648eaaa.png'
+                        ].map((cert, index) => (
+                          <SlideshowImage
+                            key={index + 3}
+                            src={cert}
+                            alt={`Certification ${index + 4}`}
+                            className="w-16 h-16 md:w-20 md:h-20 relative"
+                          />
+                        ))}
+                     </div>
+                     
+                     {/* Row 3 */}
+                     <div className="flex justify-between items-center">
+                       {[
+                         '/lovable-uploads/05754402-e6c2-4ca2-98e3-9ba6aad7a5ea.png',
+                         '/lovable-uploads/ea936717-eb96-4705-98af-8513f4b6c976.png',
+                         '/lovable-uploads/385d07dd-80d6-44cb-b2ef-9cbc80e9c887.png'
+                        ].map((cert, index) => (
+                          <SlideshowImage
+                            key={index + 6}
+                            src={cert}
+                            alt={`Certification ${index + 7}`}
+                            className="w-16 h-16 md:w-20 md:h-20 relative"
+                          />
+                        ))}
+                     </div>
                   </div>
                 </CardContent>
               </Card>

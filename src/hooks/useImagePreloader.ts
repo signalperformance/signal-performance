@@ -33,9 +33,18 @@ export const useImagePreloader = (imageUrls: string[]): UseImagePreloaderReturn 
         
         img.onload = async () => {
           try {
-            // Force image decode for better caching
+            // Force image decode and warm cache for immediate availability
             if (img.decode) {
               await img.decode();
+            }
+            // Force browser to cache by painting once
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            if (ctx) {
+              canvas.width = img.naturalWidth;
+              canvas.height = img.naturalHeight;
+              ctx.drawImage(img, 0, 0);
+              // This ensures the image is fully processed and cached
             }
             setLoadedCount(prev => prev + 1);
             resolve();
