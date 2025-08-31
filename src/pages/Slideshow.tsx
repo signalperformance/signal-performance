@@ -150,7 +150,7 @@ const Slideshow = () => {
 
   // Generate QR code for Calendly booking
   useEffect(() => {
-    QRCode.toDataURL('https://calendly.com/signal-performance/assessment', {
+    QRCode.toDataURL('https://calendly.com/noah-signalperformance/assessment', {
       width: 150,
       margin: 2,
       color: {
