@@ -201,9 +201,9 @@ const Slideshow = () => {
       
       // Set up the sequence
       const sequence = [
-        { delay: 2000, principle: 0 }, // 2s: focus on principle 1
-        { delay: 12000, principle: 1 }, // 12s: focus on principle 2
-        { delay: 22000, principle: 2 }, // 22s: focus on principle 3
+        { delay: 2000, principle: 0 },    // 2s: focus on principle 1
+        { delay: 27000, principle: 1 },   // 27s: focus on principle 2  
+        { delay: 52000, principle: 2 },   // 52s: focus on principle 3
       ];
 
       sequence.forEach(({ delay, principle }) => {
@@ -221,7 +221,7 @@ const Slideshow = () => {
           setPrinciplePhase('all-visible');
           setFocusedPrinciple(null);
         }
-      }, 27000);
+      }, 77000); // Show all principles at 77s
     } else {
       // Reset philosophy state when leaving slide
       if (principleTimerRef.current) {
@@ -290,7 +290,7 @@ const Slideshow = () => {
     if (imagesLoading) return; // Don't start slideshow until images are loaded
     
     // Use custom timeout for pricing slide (20 seconds), philosophy slide (32 seconds), video slide (33 seconds), 5th slide (15 seconds), normal timeout for others (8 seconds)
-    const slideTimeout = currentSlide === 1 ? 32000 : currentSlide === 2 ? 20000 : currentSlide === 3 ? 33000 : currentSlide === 4 ? 15000 : 8000;
+    const slideTimeout = currentSlide === 1 ? 85000 : currentSlide === 2 ? 20000 : currentSlide === 3 ? 33000 : currentSlide === 4 ? 15000 : 8000;
     
     const timer = setInterval(() => {
       if (!isAutoPaused) {
