@@ -110,7 +110,7 @@ const Slideshow = () => {
   const [lastInteractionTime, setLastInteractionTime] = useState(0);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [focusedPrinciple, setFocusedPrinciple] = useState<number | null>(null);
-  const [principlePhase, setPrinciplePhase] = useState<'initial' | 'focusing'>('initial');
+  const [principlePhase, setPrinciplePhase] = useState<'initial' | 'focusing' | 'all-visible'>('initial');
   const playerRef = useRef<any>(null);
   const principleTimerRef = useRef<NodeJS.Timeout | null>(null);
   const t = useChineseTranslations();
@@ -211,6 +211,14 @@ const Slideshow = () => {
           }
         }, delay);
       });
+      
+      // Add final phase: all principles unblurred at 27s
+      principleTimerRef.current = setTimeout(() => {
+        if (currentSlide === 1 && !isAutoPaused) {
+          setPrinciplePhase('all-visible');
+          setFocusedPrinciple(null);
+        }
+      }, 27000);
     } else {
       // Reset philosophy state when leaving slide
       if (principleTimerRef.current) {
@@ -344,8 +352,9 @@ const Slideshow = () => {
               { title: t['philosophy.card2.title'], content: t['philosophy.card2.content'] },
               { title: t['philosophy.card3.title'], content: t['philosophy.card3.content'] }
             ].map((card, index) => {
-              const isFocused = focusedPrinciple === index;
-              const isBlurred = focusedPrinciple !== index;
+              const isFocused = focusedPrinciple === index && principlePhase === 'focusing';
+              const isBlurred = principlePhase === 'focusing' && focusedPrinciple !== index;
+              const isAllVisible = principlePhase === 'all-visible';
               
               return (
                 <Card 
@@ -355,7 +364,9 @@ const Slideshow = () => {
                       ? 'border-signal-gold/60 shadow-2xl transform scale-105 bg-gradient-to-br from-white to-signal-gold/5' 
                       : isBlurred 
                         ? 'border-gray-100 opacity-40 blur-sm transform scale-95' 
-                        : 'border-gray-100'
+                        : isAllVisible
+                          ? 'border-gray-100 opacity-100 blur-none transform scale-100'
+                          : 'border-gray-100'
                   }`}
                 >
                   <CardContent className="p-6 md:p-8 h-full flex flex-col">
