@@ -13,15 +13,15 @@ import SlideshowImage from '@/components/SlideshowImage';
 const SLIDESHOW_IMAGES = [
   '/lovable-uploads/23ce2472-9cbc-4d05-bd80-cd0ac6eb27a8.png', // Philosophy wave
   '/lovable-uploads/9cd6f4c9-9cfc-435a-8ebb-2bbe20537915.png', // Coach photo
-  '/lovable-uploads/02648a92-ba42-467d-b308-7d76e55376a2.png', // Cert 1
-  '/lovable-uploads/037cce22-eaf6-447b-aa60-5b3235e04171.png', // Cert 2
-  '/lovable-uploads/05754402-e6c2-4ca2-98e3-9ba6aad7a5ea.png', // Cert 3
-  '/lovable-uploads/06356803-be6d-4dce-b006-b5944a61d7f8.png', // Cert 4
-  '/lovable-uploads/08851ee9-0b49-49f8-a037-3b2566bfd6d3.png', // Cert 5
-  '/lovable-uploads/088eed72-c9ab-4411-b31e-1630cf66d2b1.png', // Cert 6
-  '/lovable-uploads/0959e8f0-e34c-4d16-9e3e-16462b6d8961.png', // Cert 7
-  '/lovable-uploads/09961efd-a840-417f-a93a-2e2990b91489.png', // Cert 8
-  '/lovable-uploads/113d918f-6887-4479-9a2c-10ef1a20137f.png', // Cert 9
+  '/lovable-uploads/1d022755-a8e7-481a-91db-13f7db87b26a.png', // Cert 1
+  '/lovable-uploads/1dc02882-2327-403c-9e82-8b8207c618ff.png', // Cert 2
+  '/lovable-uploads/09961efd-a840-417f-a93a-2e2990b91489.png', // Cert 3
+  '/lovable-uploads/b8e8e7d5-5980-475f-9534-3660f734bccf.png', // Cert 4
+  '/lovable-uploads/80663943-a684-4747-88d6-29d27b58e790.png', // Cert 5
+  '/lovable-uploads/650394e1-2bf5-4354-b912-86a81648eaaa.png', // Cert 6
+  '/lovable-uploads/05754402-e6c2-4ca2-98e3-9ba6aad7a5ea.png', // Cert 7
+  '/lovable-uploads/ea936717-eb96-4705-98af-8513f4b6c976.png', // Cert 8
+  '/lovable-uploads/385d07dd-80d6-44cb-b2ef-9cbc80e9c887.png', // Cert 9
 ];
 
 // YouTube API type declarations
@@ -845,15 +845,15 @@ const Slideshow = () => {
     // Slide 6: Coach Profile & Credentials Combined - Redesigned
     () => {
       const certifications = [
-        '/lovable-uploads/02648a92-ba42-467d-b308-7d76e55376a2.png',
-        '/lovable-uploads/037cce22-eaf6-447b-aa60-5b3235e04171.png',
-        '/lovable-uploads/05754402-e6c2-4ca2-98e3-9ba6aad7a5ea.png',
-        '/lovable-uploads/06356803-be6d-4dce-b006-b5944a61d7f8.png',
-        '/lovable-uploads/08851ee9-0b49-49f8-a037-3b2566bfd6d3.png',
-        '/lovable-uploads/088eed72-c9ab-4411-b31e-1630cf66d2b1.png',
-        '/lovable-uploads/0959e8f0-e34c-4d16-9e3e-16462b6d8961.png',
+        '/lovable-uploads/1d022755-a8e7-481a-91db-13f7db87b26a.png',
+        '/lovable-uploads/1dc02882-2327-403c-9e82-8b8207c618ff.png',
         '/lovable-uploads/09961efd-a840-417f-a93a-2e2990b91489.png',
-        '/lovable-uploads/113d918f-6887-4479-9a2c-10ef1a20137f.png'
+        '/lovable-uploads/b8e8e7d5-5980-475f-9534-3660f734bccf.png',
+        '/lovable-uploads/80663943-a684-4747-88d6-29d27b58e790.png',
+        '/lovable-uploads/650394e1-2bf5-4354-b912-86a81648eaaa.png',
+        '/lovable-uploads/05754402-e6c2-4ca2-98e3-9ba6aad7a5ea.png',
+        '/lovable-uploads/ea936717-eb96-4705-98af-8513f4b6c976.png',
+        '/lovable-uploads/385d07dd-80d6-44cb-b2ef-9cbc80e9c887.png'
       ];
 
       return (
