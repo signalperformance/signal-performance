@@ -901,15 +901,19 @@ const Slideshow = () => {
   }
 
   return (
-    <div className="relative tv-safe-area">
+    <div className="relative">
       {/* Current slide */}
-      <div className="transition-opacity duration-500 tv-safe-content">
+      <div className="transition-opacity duration-500">
         {slides[currentSlide]()}
       </div>
       
+      
+      
+      
+      
       {/* Persistent QR Code */}
       {qrCodeUrl && (
-        <div className="fixed bottom-6 right-6 lg:bottom-8 lg:right-8 tv:bottom-12 tv:right-12 z-50 bg-white rounded-lg shadow-2xl p-3 md:p-4 border-2 border-signal-gold/20">
+        <div className="fixed bottom-4 right-4 z-50 bg-white rounded-lg shadow-2xl p-3 md:p-4 border-2 border-signal-gold/20">
           <div className="text-center">
             <img 
               src={qrCodeUrl} 

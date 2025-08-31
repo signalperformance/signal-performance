@@ -17,9 +17,6 @@ export default {
 				'2xl': '1400px'
 			}
 		},
-		screens: {
-			'tv': '1400px'
-		},
 		extend: {
 			fontFamily: {
 				'lora': ['Lora', 'Georgia', 'serif'],

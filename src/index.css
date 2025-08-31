@@ -153,7 +153,7 @@ html {
 }
 
 .section-padding {
-  @apply py-8;
+  @apply py-16 md:py-24;
 }
 
 .container-padding {
@@ -186,24 +186,4 @@ html {
     transparent 8px
   );
   background-size: 12px 12px;
-}
-
-/* TV-safe area styles for preventing content cutoff on TVs due to overscan */
-.tv-safe-area {
-  @apply p-4 md:p-6 lg:p-8;
-}
-
-.tv-safe-content {
-  @apply px-2 md:px-4 lg:px-6;
-}
-
-/* TV-specific media query for screens larger than typical desktop */
-@media (min-width: 1400px) and (min-height: 900px), (min-width: 1920px) {
-  .tv-safe-area {
-    @apply p-8 lg:p-12;
-  }
-  
-  .tv-safe-content {
-    @apply px-6 lg:px-12;
-  }
 }
