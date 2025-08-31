@@ -255,8 +255,8 @@ const Slideshow = () => {
       // Set up the sequence
       const sequence = [
         { delay: 0, step: 0, phase: 'step1' }, // 0s: show step 1
-        { delay: 5000, step: 1, phase: 'step2' }, // 5s: show step 2
-        { delay: 10000, step: null, phase: 'all-visible' }, // 10s: show both
+        { delay: 10000, step: 1, phase: 'step2' }, // 10s: show step 2
+        { delay: 20000, step: null, phase: 'all-visible' }, // 20s: show both
       ];
 
       sequence.forEach(({ delay, step, phase }) => {
@@ -289,8 +289,8 @@ const Slideshow = () => {
   useEffect(() => {
     if (imagesLoading) return; // Don't start slideshow until images are loaded
     
-    // Use custom timeout for pricing slide (20 seconds), philosophy slide (32 seconds), video slide (33 seconds), 5th slide (15 seconds), normal timeout for others (8 seconds)
-    const slideTimeout = currentSlide === 1 ? 85000 : currentSlide === 2 ? 20000 : currentSlide === 3 ? 33000 : currentSlide === 4 ? 15000 : 8000;
+    // Use custom timeout for pricing slide (30 seconds), philosophy slide (85 seconds), video slide (33 seconds), 5th slide (15 seconds), normal timeout for others (8 seconds)
+    const slideTimeout = currentSlide === 1 ? 85000 : currentSlide === 2 ? 30000 : currentSlide === 3 ? 33000 : currentSlide === 4 ? 15000 : 8000;
     
     const timer = setInterval(() => {
       if (!isAutoPaused) {
