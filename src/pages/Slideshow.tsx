@@ -385,7 +385,7 @@ const Slideshow = () => {
     if (imagesLoading) return; // Don't start slideshow until images are loaded
     
     // Use custom timeout for pricing slide (30 seconds), philosophy slide (85 seconds), video slide (33 seconds), 5th slide (15 seconds), normal timeout for others (8 seconds)
-    const slideTimeout = currentSlide === 1 ? 85000 : currentSlide === 2 ? 30000 : currentSlide === 3 ? 33000 : currentSlide === 4 ? 15000 : 8000;
+    const slideTimeout = currentSlide === 1 ? 85000 : currentSlide === 2 ? 30000 : currentSlide === 3 ? 33000 : currentSlide === 4 ? 15000 : currentSlide === 5 ? 40000 : 8000;
     
     const timer = setInterval(() => {
       if (!isAutoPaused) {
