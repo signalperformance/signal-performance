@@ -111,8 +111,11 @@ const Slideshow = () => {
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [focusedPrinciple, setFocusedPrinciple] = useState<number | null>(null);
   const [principlePhase, setPrinciplePhase] = useState<'initial' | 'focusing' | 'all-visible'>('initial');
+  const [focusedStep, setFocusedStep] = useState<number | null>(null);
+  const [pricingPhase, setPricingPhase] = useState<'initial' | 'step1' | 'step2' | 'all-visible'>('initial');
   const playerRef = useRef<any>(null);
   const principleTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const pricingTimerRef = useRef<NodeJS.Timeout | null>(null);
   const t = useChineseTranslations();
   
   // Preload all slideshow images
@@ -237,12 +240,57 @@ const Slideshow = () => {
     };
   }, [currentSlide, isAutoPaused]);
 
+  // Pricing slide step focusing animation
+  useEffect(() => {
+    if (currentSlide === 2 && !isAutoPaused) { // Pricing slide
+      // Clear any existing timer
+      if (pricingTimerRef.current) {
+        clearTimeout(pricingTimerRef.current);
+      }
+
+      // Initial state - both steps blurred
+      setPricingPhase('initial');
+      setFocusedStep(null);
+      
+      // Set up the sequence
+      const sequence = [
+        { delay: 0, step: 0, phase: 'step1' }, // 0s: show step 1
+        { delay: 5000, step: 1, phase: 'step2' }, // 5s: show step 2
+        { delay: 10000, step: null, phase: 'all-visible' }, // 10s: show both
+      ];
+
+      sequence.forEach(({ delay, step, phase }) => {
+        pricingTimerRef.current = setTimeout(() => {
+          if (currentSlide === 2 && !isAutoPaused) {
+            setPricingPhase(phase as 'step1' | 'step2' | 'all-visible');
+            setFocusedStep(step);
+          }
+        }, delay);
+      });
+    } else {
+      // Reset pricing state when leaving slide
+      if (pricingTimerRef.current) {
+        clearTimeout(pricingTimerRef.current);
+        pricingTimerRef.current = null;
+      }
+      setFocusedStep(null);
+      setPricingPhase('initial');
+    }
+
+    return () => {
+      if (pricingTimerRef.current) {
+        clearTimeout(pricingTimerRef.current);
+        pricingTimerRef.current = null;
+      }
+    };
+  }, [currentSlide, isAutoPaused]);
+
   // Auto-advance slides with pause/resume logic (only after images load)
   useEffect(() => {
     if (imagesLoading) return; // Don't start slideshow until images are loaded
     
-    // Use custom timeout for philosophy slide (32 seconds), video slide (33 seconds), 5th slide (15 seconds), normal timeout for others (8 seconds)
-    const slideTimeout = currentSlide === 1 ? 32000 : currentSlide === 3 ? 33000 : currentSlide === 4 ? 15000 : 8000;
+    // Use custom timeout for pricing slide (20 seconds), philosophy slide (32 seconds), video slide (33 seconds), 5th slide (15 seconds), normal timeout for others (8 seconds)
+    const slideTimeout = currentSlide === 1 ? 32000 : currentSlide === 2 ? 20000 : currentSlide === 3 ? 33000 : currentSlide === 4 ? 15000 : 8000;
     
     const timer = setInterval(() => {
       if (!isAutoPaused) {
@@ -408,7 +456,15 @@ const Slideshow = () => {
                   第1步 · 完成基礎評估
                 </div>
               </div>
-              <Card className="shadow-2xl border-2 border-signal-gold/30 bg-gradient-to-br from-white to-signal-gold/5 overflow-hidden">
+               <Card className={`shadow-2xl border-2 border-signal-gold/30 bg-gradient-to-br from-white to-signal-gold/5 overflow-hidden transition-all duration-500 ease-in-out ${
+                 pricingPhase === 'step1' && focusedStep === 0
+                   ? 'border-signal-gold/80 shadow-2xl transform scale-105 bg-gradient-to-br from-white to-signal-gold/10'
+                   : (pricingPhase === 'step1' || pricingPhase === 'step2') && focusedStep !== 0
+                     ? 'opacity-40 blur-sm transform scale-95'
+                     : pricingPhase === 'all-visible'
+                       ? 'opacity-100 blur-none transform scale-100'
+                       : ''
+               }`}>
                 {/* Promotional Banner */}
                 <div className="bg-gradient-to-r from-orange-500 to-red-500 text-white text-center py-3 px-6">
                   <div className="font-bold text-sm md:text-base lg:text-lg">
@@ -473,7 +529,15 @@ const Slideshow = () => {
                   第2步 · 選擇月方案
                 </div>
               </div>
-              <Card className="shadow-2xl border-2 border-signal-charcoal/30 bg-gradient-to-br from-signal-charcoal/5 to-white overflow-hidden">
+               <Card className={`shadow-2xl border-2 border-signal-charcoal/30 bg-gradient-to-br from-signal-charcoal/5 to-white overflow-hidden transition-all duration-500 ease-in-out ${
+                 pricingPhase === 'step2' && focusedStep === 1
+                   ? 'border-signal-charcoal/80 shadow-2xl transform scale-105 bg-gradient-to-br from-signal-charcoal/10 to-white'
+                   : (pricingPhase === 'step1' || pricingPhase === 'step2') && focusedStep !== 1
+                     ? 'opacity-40 blur-sm transform scale-95'
+                     : pricingPhase === 'all-visible'
+                       ? 'opacity-100 blur-none transform scale-100'
+                       : ''
+               }`}>
                 {/* Promotional Banner */}
                 <div className="bg-gradient-to-r from-orange-500 to-red-500 text-white text-center py-3 px-6">
                   <div className="font-bold text-sm md:text-base lg:text-lg">
