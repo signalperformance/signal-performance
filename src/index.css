@@ -187,3 +187,32 @@ html {
   );
   background-size: 12px 12px;
 }
+
+/* TV Safe Area Utilities */
+.tv-safe-area {
+  @apply tv:px-20 tv:py-16;
+}
+
+.tv-safe-content {
+  @apply tv:max-w-5xl tv:mx-auto;
+}
+
+.tv-text-display {
+  @apply tv:text-6xl;
+}
+
+.tv-text-title {
+  @apply tv:text-4xl;
+}
+
+.tv-text-subtitle {
+  @apply tv:text-2xl;
+}
+
+.tv-text-body {
+  @apply tv:text-lg;
+}
+
+.tv-safe-position {
+  @apply tv:bottom-16 tv:right-16;
+}

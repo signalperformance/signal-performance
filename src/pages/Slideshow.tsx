@@ -349,14 +349,14 @@ const Slideshow = () => {
   const slides = [
     // Slide 1: Hero
     () => (
-      <div className="min-h-screen bg-gradient-to-br from-signal-charcoal via-signal-charcoal/90 to-signal-charcoal/70 flex items-center justify-center relative overflow-hidden">
+      <div className="min-h-screen bg-gradient-to-br from-signal-charcoal via-signal-charcoal/90 to-signal-charcoal/70 flex items-center justify-center relative overflow-hidden tv-safe-area">
         
-        <div className="container mx-auto px-4 text-center relative z-10">
+        <div className="container mx-auto px-4 text-center relative z-10 tv-safe-content">
           <div className="max-w-4xl mx-auto bg-signal-charcoal/95 backdrop-blur-md rounded-3xl border border-signal-gold/40 p-8 md:p-16 animate-scale-in shadow-2xl shadow-signal-gold/10 hover:shadow-signal-gold/20 transition-all duration-700">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white mb-6 font-lora leading-tight opacity-0 animate-fade-in" style={{ animationDelay: '0.3s', animationFillMode: 'forwards' }}>
+            <h1 className="text-4xl md:text-6xl lg:text-7xl xl:text-7xl tv-text-display font-bold text-white mb-6 font-lora leading-tight opacity-0 animate-fade-in" style={{ animationDelay: '0.3s', animationFillMode: 'forwards' }}>
               {t['hero.headline']}
             </h1>
-            <p className="text-xl md:text-2xl lg:text-3xl xl:text-4xl text-signal-gold font-light leading-relaxed opacity-0 animate-fade-in" style={{ animationDelay: '0.6s', animationFillMode: 'forwards' }}>
+            <p className="text-xl md:text-2xl lg:text-3xl xl:text-3xl tv-text-title text-signal-gold font-light leading-relaxed opacity-0 animate-fade-in" style={{ animationDelay: '0.6s', animationFillMode: 'forwards' }}>
               {t['hero.subheadline']}
             </p>
           </div>
@@ -366,10 +366,10 @@ const Slideshow = () => {
 
     // Slide 2: Philosophy (All 3 cards)
     () => (
-      <div className="min-h-screen bg-signal-light-gray flex items-center justify-center p-4 md:p-8">
-        <div className="container mx-auto">
+      <div className="min-h-screen bg-signal-light-gray flex items-center justify-center p-4 md:p-8 tv-safe-area">
+        <div className="container mx-auto tv-safe-content">
           <div className="text-center mb-8 md:mb-16">
-            <h2 className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 md:mb-12 font-lora text-signal-charcoal">
+            <h2 className="text-3xl md:text-5xl lg:text-6xl xl:text-6xl tv-text-display font-bold mb-6 md:mb-12 font-lora text-signal-charcoal">
               {t['philosophy.title']}
             </h2>
             
@@ -413,12 +413,12 @@ const Slideshow = () => {
                   }`}
                 >
                   <CardContent className="p-6 md:p-8 h-full flex flex-col">
-                    <h3 className={`text-lg md:text-xl lg:text-2xl xl:text-3xl font-lora font-bold mb-4 md:mb-6 transition-colors duration-500 ${
+                    <h3 className={`text-lg md:text-xl lg:text-2xl xl:text-2xl tv-text-title font-lora font-bold mb-4 md:mb-6 transition-colors duration-500 ${
                       isFocused ? 'text-signal-charcoal' : 'text-signal-charcoal'
                     }`}>
                       {card.title}
                     </h3>
-                    <p className={`text-sm md:text-base lg:text-lg xl:text-xl leading-relaxed flex-1 transition-colors duration-500 ${
+                    <p className={`text-sm md:text-base lg:text-lg xl:text-lg tv-text-body leading-relaxed flex-1 transition-colors duration-500 ${
                       isFocused ? 'text-signal-charcoal/90' : 'text-muted-foreground'
                     }`}>
                       {card.content}
@@ -434,11 +434,11 @@ const Slideshow = () => {
 
     // Slide 3: How to Get Started
     () => (
-      <div className="min-h-screen bg-white flex items-center justify-center p-4 md:p-8">
-        <div className="container mx-auto">
+      <div className="min-h-screen bg-white flex items-center justify-center p-4 md:p-8 tv-safe-area">
+        <div className="container mx-auto tv-safe-content">
           {/* Header Section */}
           <div className="text-center mb-8 md:mb-16">
-            <h2 className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold font-lora text-signal-charcoal mb-6">
+            <h2 className="text-3xl md:text-5xl lg:text-6xl xl:text-5xl tv-text-display font-bold font-lora text-signal-charcoal mb-6">
               如何開始
             </h2>
           </div>
@@ -475,7 +475,7 @@ const Slideshow = () => {
                     </div>
                     
                     {/* Discounted Price */}
-                    <div className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-signal-gold mb-2">
+                    <div className="text-3xl md:text-4xl lg:text-5xl xl:text-4xl tv-text-title font-bold text-signal-gold mb-2">
                       10,000元
                     </div>
                     
@@ -913,14 +913,14 @@ const Slideshow = () => {
       
       {/* Persistent QR Code */}
       {qrCodeUrl && (
-        <div className="fixed bottom-4 right-4 z-50 bg-white rounded-lg shadow-2xl p-3 md:p-4 border-2 border-signal-gold/20">
+        <div className="fixed bottom-4 right-4 tv-safe-position z-50 bg-white rounded-lg shadow-2xl p-3 md:p-4 border-2 border-signal-gold/20">
           <div className="text-center">
             <img 
               src={qrCodeUrl} 
               alt="QR Code for booking assessment"
-              className="w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 mx-auto mb-2"
+              className="w-24 h-24 md:w-32 md:h-32 lg:w-36 lg:h-36 tv:w-32 tv:h-32 mx-auto mb-2"
             />
-            <p className="text-xs md:text-sm lg:text-base font-semibold text-signal-charcoal">
+            <p className="text-xs md:text-sm lg:text-base tv-text-body font-semibold text-signal-charcoal">
               {t['qr.text']}
             </p>
           </div>
