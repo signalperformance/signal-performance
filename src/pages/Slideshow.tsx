@@ -349,19 +349,28 @@ const Slideshow = () => {
   const slides = [
     // Slide 1: Hero
     () => (
-      <div className="min-h-screen bg-gradient-to-br from-signal-charcoal to-signal-charcoal/80 flex items-center justify-center relative overflow-hidden">
-        {/* Background geometric shapes */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-20 left-20 w-64 h-64 border-2 border-signal-gold rounded-full animate-pulse"></div>
-          <div className="absolute bottom-20 right-20 w-48 h-48 bg-signal-gold/20 rounded-lg transform rotate-45"></div>
+      <div className="min-h-screen bg-gradient-to-br from-signal-charcoal via-signal-charcoal/90 to-signal-charcoal/70 flex items-center justify-center relative overflow-hidden">
+        {/* Background geometric elements */}
+        <div className="absolute inset-0 opacity-8">
+          {/* Top left subtle rectangles */}
+          <div className="absolute top-16 left-16 w-2 h-24 bg-signal-gold/30 animate-fade-in" style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}></div>
+          <div className="absolute top-20 left-24 w-16 h-2 bg-signal-gold/20 animate-fade-in" style={{ animationDelay: '0.8s', animationFillMode: 'forwards' }}></div>
+          
+          {/* Top right floating elements */}
+          <div className="absolute top-32 right-32 w-3 h-3 bg-signal-gold/40 rounded-full animate-gentle-pulse" style={{ animationDelay: '1s' }}></div>
+          <div className="absolute top-40 right-24 w-1 h-12 bg-signal-gold/25 animate-fade-in" style={{ animationDelay: '1.2s', animationFillMode: 'forwards' }}></div>
+          
+          {/* Bottom elements */}
+          <div className="absolute bottom-32 left-32 w-8 h-1 bg-signal-gold/30 animate-fade-in" style={{ animationDelay: '1.5s', animationFillMode: 'forwards' }}></div>
+          <div className="absolute bottom-20 right-20 w-48 h-48 bg-signal-gold/20 rounded-lg transform rotate-45 animate-gentle-pulse"></div>
         </div>
         
         <div className="container mx-auto px-4 text-center relative z-10">
-          <div className="max-w-4xl mx-auto bg-signal-charcoal/90 backdrop-blur-sm rounded-3xl border border-signal-gold/30 p-8 md:p-16">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white mb-6 font-lora leading-tight">
+          <div className="max-w-4xl mx-auto bg-signal-charcoal/95 backdrop-blur-md rounded-3xl border border-signal-gold/40 p-8 md:p-16 animate-scale-in shadow-2xl shadow-signal-gold/10 hover:shadow-signal-gold/20 transition-all duration-700">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white mb-6 font-lora leading-tight opacity-0 animate-fade-in" style={{ animationDelay: '0.3s', animationFillMode: 'forwards' }}>
               {t['hero.headline']}
             </h1>
-            <p className="text-xl md:text-2xl lg:text-3xl xl:text-4xl text-signal-gold font-light leading-relaxed">
+            <p className="text-xl md:text-2xl lg:text-3xl xl:text-4xl text-signal-gold font-light leading-relaxed opacity-0 animate-fade-in" style={{ animationDelay: '0.6s', animationFillMode: 'forwards' }}>
               {t['hero.subheadline']}
             </p>
           </div>
