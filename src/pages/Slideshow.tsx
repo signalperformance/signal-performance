@@ -806,20 +806,20 @@ const Slideshow = () => {
 
     // Slide 6: Coach Profile & Credentials Combined
     () => (
-      <div className="min-h-screen bg-gradient-to-br from-signal-light-gray to-white flex items-center justify-center p-4 md:p-8">
+      <div className="min-h-screen bg-gradient-to-br from-signal-light-gray to-white flex items-center justify-center p-2 md:p-4">
         <div className="container mx-auto">
-          <div className="text-center mb-8 md:mb-16">
-            <h2 className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold font-lora text-signal-charcoal">
+          <div className="text-center mb-3 md:mb-6">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold font-lora text-signal-charcoal">
               {t['coach.title']}
             </h2>
           </div>
           
-          <div className="flex flex-col lg:flex-row gap-8 md:gap-16 items-center lg:items-start max-w-7xl mx-auto">
+          <div className="flex flex-col lg:flex-row gap-4 md:gap-6 items-center lg:items-start max-w-6xl mx-auto">
             {/* Coach Profile */}
             <div className="w-full lg:w-1/3">
               <div className="text-center">
-                <div className="mb-6 md:mb-8">
-                  <div className="w-64 h-80 md:w-72 md:h-96 lg:w-80 lg:h-[26rem] mx-auto rounded-lg overflow-hidden bg-signal-gold/20">
+                <div className="mb-3 md:mb-4">
+                  <div className="w-48 h-56 md:w-52 md:h-64 lg:w-56 lg:h-72 mx-auto rounded-lg overflow-hidden bg-signal-gold/20">
                     <img 
                       src="/lovable-uploads/9cd6f4c9-9cfc-435a-8ebb-2bbe20537915.png" 
                       alt="Dr. Noah Sachs"
@@ -830,10 +830,10 @@ const Slideshow = () => {
                     />
                   </div>
                 </div>
-                <h3 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-signal-charcoal mb-2">
+                <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-signal-charcoal mb-1">
                   {t['coach.name']}
                 </h3>
-                <p className="text-lg md:text-xl lg:text-2xl xl:text-3xl text-signal-gold font-semibold">
+                <p className="text-sm md:text-base lg:text-lg text-signal-gold font-semibold">
                   {t['coach.position']}
                 </p>
               </div>
@@ -842,22 +842,22 @@ const Slideshow = () => {
             {/* Academic & Experience & Certifications */}
             <div className="w-full lg:w-2/3">
               {/* Academic & Experience */}
-              <Card className="mb-4 md:mb-6 shadow-xl border-2 border-gray-100">
-                <CardContent className="p-6 md:p-10">
-                  <div className="mb-6 md:mb-8">
-                    <h4 className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold mb-4 text-signal-charcoal">
+              <Card className="mb-2 md:mb-3 shadow-lg border border-gray-100">
+                <CardContent className="p-3 md:p-4">
+                  <div className="mb-3 md:mb-4">
+                    <h4 className="text-sm md:text-base lg:text-lg font-bold mb-2 text-signal-charcoal">
                       {t['coach.academic']}
                     </h4>
-                    <p className="text-base md:text-lg lg:text-xl xl:text-2xl leading-relaxed text-signal-charcoal/90">
+                    <p className="text-xs md:text-sm lg:text-base leading-relaxed text-signal-charcoal/90">
                       {t['coach.degree']}
                     </p>
                   </div>
                   
                   <div>
-                    <h4 className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold mb-4 text-signal-charcoal">
+                    <h4 className="text-sm md:text-base lg:text-lg font-bold mb-2 text-signal-charcoal">
                       {t['coach.experience']}
                     </h4>
-                    <ul className="text-base md:text-lg lg:text-xl xl:text-2xl leading-relaxed text-signal-charcoal/90 space-y-2">
+                    <ul className="text-xs md:text-sm lg:text-base leading-relaxed text-signal-charcoal/90 space-y-1">
                       {t['coach.experience.items'].map((item, index) => (
                         <li key={index}>{item}</li>
                       ))}
@@ -867,14 +867,14 @@ const Slideshow = () => {
               </Card>
               
               {/* Certifications */}
-              <Card className="shadow-xl border-2 border-gray-100">
-                <CardContent className="p-6 md:p-10">
-                  <h4 className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold mb-6 md:mb-8 text-signal-charcoal text-center">
+              <Card className="shadow-lg border border-gray-100">
+                <CardContent className="p-3 md:p-4">
+                  <h4 className="text-sm md:text-base lg:text-lg font-bold mb-3 md:mb-4 text-signal-charcoal text-center">
                     {t['coach.certifications']}
                   </h4>
                   
                   {/* Certification layout - 3 rows of 3 certifications each */}
-                  <div className="space-y-4 md:space-y-6 max-w-3xl mx-auto">
+                  <div className="space-y-2 md:space-y-3 max-w-2xl mx-auto">
                      {/* Row 1 */}
                      <div className="flex justify-between items-center">
                        {[
@@ -886,7 +886,7 @@ const Slideshow = () => {
                             key={index}
                             src={cert}
                             alt={`Certification ${index + 1}`}
-                            className="w-16 h-16 md:w-20 md:h-20 relative"
+                            className="w-12 h-12 md:w-14 md:h-14 relative"
                           />
                         ))}
                      </div>
@@ -902,7 +902,7 @@ const Slideshow = () => {
                             key={index + 3}
                             src={cert}
                             alt={`Certification ${index + 4}`}
-                            className="w-16 h-16 md:w-20 md:h-20 relative"
+                            className="w-12 h-12 md:w-14 md:h-14 relative"
                           />
                         ))}
                      </div>
@@ -918,7 +918,7 @@ const Slideshow = () => {
                             key={index + 6}
                             src={cert}
                             alt={`Certification ${index + 7}`}
-                            className="w-16 h-16 md:w-20 md:h-20 relative"
+                            className="w-12 h-12 md:w-14 md:h-14 relative"
                           />
                         ))}
                      </div>
