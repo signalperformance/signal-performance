@@ -785,7 +785,7 @@ const Slideshow = () => {
             {/* Academic & Experience & Certifications */}
             <div className="w-full lg:w-2/3">
               {/* Academic & Experience */}
-              <Card className="mb-6 md:mb-8 shadow-xl border-2 border-gray-100">
+              <Card className="mb-4 md:mb-6 shadow-xl border-2 border-gray-100">
                 <CardContent className="p-6 md:p-10">
                   <div className="mb-6 md:mb-8">
                     <h4 className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold mb-4 text-signal-charcoal">
