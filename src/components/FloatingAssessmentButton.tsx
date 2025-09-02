@@ -8,51 +8,28 @@ const FloatingAssessmentButton = () => {
   const { language } = useLanguage();
   const isMobile = useIsMobile();
   const [isVisible, setIsVisible] = useState(false);
-  const scrollTimeoutRef = useRef<NodeJS.Timeout>();
+  const hasBeenTriggered = useRef(false);
 
   useEffect(() => {
-    // Use intersection observer for philosophy section as more reliable trigger
     const philosophySection = document.getElementById('philosophy');
     
     if (philosophySection) {
       const observer = new IntersectionObserver(
         ([entry]) => {
-          setIsVisible(entry.isIntersecting);
+          if (entry.isIntersecting && !hasBeenTriggered.current) {
+            setIsVisible(true);
+            hasBeenTriggered.current = true;
+          }
         },
         {
           threshold: 0.1,
-          rootMargin: '-100px 0px 0px 0px' // Trigger slightly before section is visible
+          rootMargin: '-100px 0px 0px 0px'
         }
       );
       
       observer.observe(philosophySection);
       return () => observer.disconnect();
     }
-
-    // Fallback to scroll-based detection with debouncing
-    const handleScroll = () => {
-      if (scrollTimeoutRef.current) {
-        clearTimeout(scrollTimeoutRef.current);
-      }
-      
-      scrollTimeoutRef.current = setTimeout(() => {
-        const heroSection = document.querySelector('section') || document.querySelector('[data-hero]');
-        const heroHeight = heroSection ? heroSection.offsetHeight : window.innerHeight;
-        const scrollPosition = window.scrollY;
-        
-        // Show button when scrolled past 60% of hero section
-        const triggerPoint = heroHeight * 0.6;
-        setIsVisible(scrollPosition > triggerPoint);
-      }, 100); // Debounce for 100ms
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      if (scrollTimeoutRef.current) {
-        clearTimeout(scrollTimeoutRef.current);
-      }
-    };
   }, []);
 
   const getAssessmentButtonText = () => {

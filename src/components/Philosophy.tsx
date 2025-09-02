@@ -28,7 +28,7 @@ const Philosophy = () => {
   ];
 
   return (
-    <section className="section-padding bg-signal-light-gray">
+    <section id="philosophy" className="section-padding bg-signal-light-gray">
       <div className="container mx-auto container-padding">
         <h2 data-scroll-anchor className="text-3xl lg:text-4xl font-bold mb-0 lg:mb-12 text-center font-lora">{t('philosophy.title')}</h2>
         
