@@ -50,7 +50,7 @@ const FloatingAssessmentButton = () => {
     >
       <Button
         onClick={handleBookAssessment}
-        className="bg-signal-gold hover:bg-signal-gold/90 text-black font-semibold px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105"
+        className="bg-signal-gold hover:bg-signal-gold/90 text-white font-semibold px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105"
         size="lg"
       >
         {getAssessmentButtonText()}
