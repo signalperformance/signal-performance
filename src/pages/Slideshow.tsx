@@ -913,8 +913,7 @@ const Slideshow = () => {
                       </h4>
                       <ul className="text-base md:text-lg lg:text-xl leading-relaxed text-signal-charcoal/90 space-y-2">
                         {t['coach.experience.items'].map((item, index) => (
-                          <li key={index} className="flex items-start">
-                            <span className="text-signal-gold mr-3 mt-1">•</span>
+                          <li key={index}>
                             <span>{item}</span>
                           </li>
                         ))}
