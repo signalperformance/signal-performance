@@ -15,32 +15,32 @@ const WeeklySchedule = () => {
     pro?: boolean;
   };
 
-  // Pro and Amateur classes with 30-minute buffers
+  // Pro and Amateur classes with updated times
   const mwf: Item[] = [
     { hour24: 12, minute: 0, labelKey: 'mobility', pro: true },
-    { hour24: 13, minute: 30, labelKey: 'strength', pro: true },
-    { hour24: 15, minute: 0, labelKey: 'mobility', pro: true }, // updated per request
-    { hour24: 17, minute: 0, labelKey: 'mobility' },
-    { hour24: 18, minute: 30, labelKey: 'strength' },
-    { hour24: 20, minute: 0, labelKey: 'strength' },
+    { hour24: 13, minute: 15, labelKey: 'strength', pro: true },
+    { hour24: 14, minute: 30, labelKey: 'mobility', pro: true },
+    { hour24: 18, minute: 0, labelKey: 'mobility' },
+    { hour24: 19, minute: 15, labelKey: 'strength' },
+    { hour24: 20, minute: 30, labelKey: 'strength' },
   ];
 
   const tth: Item[] = [
     { hour24: 12, minute: 0, labelKey: 'power', pro: true },
-    { hour24: 13, minute: 30, labelKey: 'cardio', pro: true },
-    { hour24: 15, minute: 0, labelKey: 'power', pro: true },
-    { hour24: 17, minute: 0, labelKey: 'power' },
-    { hour24: 18, minute: 30, labelKey: 'cardio' },
-    { hour24: 20, minute: 0, labelKey: 'power' },
+    { hour24: 13, minute: 15, labelKey: 'cardio', pro: true },
+    { hour24: 14, minute: 30, labelKey: 'power', pro: true },
+    { hour24: 18, minute: 0, labelKey: 'power' },
+    { hour24: 19, minute: 15, labelKey: 'cardio' },
+    { hour24: 20, minute: 30, labelKey: 'power' },
   ];
 
   const weekend: Item[] = [
     { hour24: 9, minute: 0, labelKey: 'mobility' },
-    { hour24: 10, minute: 30, labelKey: 'strength' },
-    { hour24: 12, minute: 0, labelKey: 'cardio' },
-    { hour24: 13, minute: 30, labelKey: 'power' },
-    { hour24: 15, minute: 0, labelKey: 'mobility', pro: true },
-    { hour24: 16, minute: 30, labelKey: 'power', pro: true },
+    { hour24: 10, minute: 15, labelKey: 'strength' },
+    { hour24: 11, minute: 30, labelKey: 'cardio' },
+    { hour24: 12, minute: 45, labelKey: 'power' },
+    { hour24: 14, minute: 0, labelKey: 'mobility', pro: true },
+    { hour24: 15, minute: 15, labelKey: 'power', pro: true },
   ];
 
   const columns = [
