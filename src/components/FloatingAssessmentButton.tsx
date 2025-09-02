@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -8,20 +8,51 @@ const FloatingAssessmentButton = () => {
   const { language } = useLanguage();
   const isMobile = useIsMobile();
   const [isVisible, setIsVisible] = useState(false);
+  const scrollTimeoutRef = useRef<NodeJS.Timeout>();
 
   useEffect(() => {
-    const handleScroll = () => {
-      // Get the hero section height (100svh) and calculate when buttons become invisible
-      const heroHeight = window.innerHeight;
-      const scrollPosition = window.scrollY;
+    // Use intersection observer for philosophy section as more reliable trigger
+    const philosophySection = document.getElementById('philosophy');
+    
+    if (philosophySection) {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          setIsVisible(entry.isIntersecting);
+        },
+        {
+          threshold: 0.1,
+          rootMargin: '-100px 0px 0px 0px' // Trigger slightly before section is visible
+        }
+      );
       
-      // Show button when scrolled past about 70% of hero section (when buttons start to disappear)
-      const triggerPoint = heroHeight * 0.7;
-      setIsVisible(scrollPosition > triggerPoint);
+      observer.observe(philosophySection);
+      return () => observer.disconnect();
+    }
+
+    // Fallback to scroll-based detection with debouncing
+    const handleScroll = () => {
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+      
+      scrollTimeoutRef.current = setTimeout(() => {
+        const heroSection = document.querySelector('section') || document.querySelector('[data-hero]');
+        const heroHeight = heroSection ? heroSection.offsetHeight : window.innerHeight;
+        const scrollPosition = window.scrollY;
+        
+        // Show button when scrolled past 60% of hero section
+        const triggerPoint = heroHeight * 0.6;
+        setIsVisible(scrollPosition > triggerPoint);
+      }, 100); // Debounce for 100ms
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+    };
   }, []);
 
   const getAssessmentButtonText = () => {
@@ -35,7 +66,7 @@ const FloatingAssessmentButton = () => {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <div className="fixed bottom-6 right-6 z-[60]">
       <Button 
         size="lg" 
         onClick={handleBookAssessment}
