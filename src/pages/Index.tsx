@@ -95,39 +95,41 @@ const Index = () => {
   }
   
   return (
-    <div className="min-h-screen flex flex-col animate-fade-in">
-      <Navbar />
-      <section id="home" className="bg-background scroll-mt-24 lg:scroll-mt-32">
-        <Hero />
-      </section>
-      <section className="bg-muted scroll-mt-24 lg:scroll-mt-32">
-        <Philosophy />
-      </section>
-      <section id="getting-started" className="bg-card scroll-mt-24 lg:scroll-mt-32">
-        <MembershipFlow tiers={membershipTiers} subtitle={t('gettingstarted.subtitle')} />
-      </section>
-      <section id="membership" className="bg-muted scroll-mt-24 lg:scroll-mt-32">
-        <Membership />
-      </section>
-      <section id="weekly-schedule" className="bg-muted scroll-mt-24 lg:scroll-mt-32">
-        <Suspense fallback={<div className="min-h-[400px] flex items-center justify-center"><div className="animate-spin w-8 h-8 border-2 border-signal-gold border-t-transparent rounded-full"></div></div>}>
-          <LazyWeeklySchedule />
-        </Suspense>
-      </section>
-      <section id="assessment-process" className="bg-muted scroll-mt-24 lg:scroll-mt-32">
-        <AssessmentProcess />
-      </section>
-      <section id="studio-location" className="bg-muted scroll-mt-24 lg:scroll-mt-32">
-        <Suspense fallback={<div className="min-h-[400px] flex items-center justify-center"><div className="animate-spin w-8 h-8 border-2 border-signal-gold border-t-transparent rounded-full"></div></div>}>
-          <LazyStudioLocation />
-        </Suspense>
-      </section>
-      <section id="about" className="bg-card scroll-mt-24 lg:scroll-mt-32">
-        <About />
-      </section>
-      <Footer />
+    <>
+      <div className="min-h-screen flex flex-col animate-fade-in">
+        <Navbar />
+        <section id="home" className="bg-background scroll-mt-24 lg:scroll-mt-32">
+          <Hero />
+        </section>
+        <section className="bg-muted scroll-mt-24 lg:scroll-mt-32">
+          <Philosophy />
+        </section>
+        <section id="getting-started" className="bg-card scroll-mt-24 lg:scroll-mt-32">
+          <MembershipFlow tiers={membershipTiers} subtitle={t('gettingstarted.subtitle')} />
+        </section>
+        <section id="membership" className="bg-muted scroll-mt-24 lg:scroll-mt-32">
+          <Membership />
+        </section>
+        <section id="weekly-schedule" className="bg-muted scroll-mt-24 lg:scroll-mt-32">
+          <Suspense fallback={<div className="min-h-[400px] flex items-center justify-center"><div className="animate-spin w-8 h-8 border-2 border-signal-gold border-t-transparent rounded-full"></div></div>}>
+            <LazyWeeklySchedule />
+          </Suspense>
+        </section>
+        <section id="assessment-process" className="bg-muted scroll-mt-24 lg:scroll-mt-32">
+          <AssessmentProcess />
+        </section>
+        <section id="studio-location" className="bg-muted scroll-mt-24 lg:scroll-mt-32">
+          <Suspense fallback={<div className="min-h-[400px] flex items-center justify-center"><div className="animate-spin w-8 h-8 border-2 border-signal-gold border-t-transparent rounded-full"></div></div>}>
+            <LazyStudioLocation />
+          </Suspense>
+        </section>
+        <section id="about" className="bg-card scroll-mt-24 lg:scroll-mt-32">
+          <About />
+        </section>
+        <Footer />
+      </div>
       <FloatingAssessmentButton />
-    </div>
+    </>
   );
 };
 
