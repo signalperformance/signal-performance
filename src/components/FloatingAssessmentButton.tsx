@@ -8,7 +8,6 @@ const FloatingAssessmentButton = () => {
   const { language } = useLanguage();
   const isMobile = useIsMobile();
   const [isVisible, setIsVisible] = useState(false);
-  const [isFooterVisible, setIsFooterVisible] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,25 +24,6 @@ const FloatingAssessmentButton = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Intersection Observer to detect footer visibility
-  useEffect(() => {
-    const footer = document.getElementById('contact');
-    if (!footer) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsFooterVisible(entry.isIntersecting);
-      },
-      {
-        threshold: 0.1, // Trigger when 10% of footer is visible
-        rootMargin: '0px 0px -50px 0px' // Account for button height
-      }
-    );
-
-    observer.observe(footer);
-    return () => observer.disconnect();
-  }, []);
-
   const getAssessmentButtonText = () => {
     return language === 'zh' ? '預約評估' : 'Book Assessment';
   };
@@ -54,17 +34,8 @@ const FloatingAssessmentButton = () => {
 
   if (!isVisible) return null;
 
-  // Dynamic positioning based on mobile and footer visibility
-  const getButtonPosition = () => {
-    if (isMobile && isFooterVisible) {
-      // On mobile when footer is visible, position much higher to completely clear social icons
-      return "fixed bottom-24 right-6 z-50";
-    }
-    return "fixed bottom-6 right-6 z-50";
-  };
-
   return (
-    <div className={getButtonPosition()}>
+    <div className="fixed bottom-6 right-6 z-50">
       <Button 
         size="lg" 
         onClick={handleBookAssessment}
