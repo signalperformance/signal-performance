@@ -98,7 +98,7 @@ const Index = () => {
       <section id="home" className="bg-background scroll-mt-24 lg:scroll-mt-32">
         <Hero />
       </section>
-      <section id="philosophy" className="bg-muted scroll-mt-24 lg:scroll-mt-32">
+      <section className="bg-muted scroll-mt-24 lg:scroll-mt-32">
         <Philosophy />
       </section>
       <section id="getting-started" className="bg-card scroll-mt-24 lg:scroll-mt-32">

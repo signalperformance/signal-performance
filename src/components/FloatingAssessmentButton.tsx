@@ -9,27 +9,55 @@ const FloatingAssessmentButton = () => {
   const isMobile = useIsMobile();
   const [isVisible, setIsVisible] = useState(false);
   const hasBeenTriggered = useRef(false);
+  const scrollTimeoutRef = useRef<NodeJS.Timeout>();
 
   useEffect(() => {
-    const philosophySection = document.getElementById('philosophy');
-    
-    if (philosophySection) {
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting && !hasBeenTriggered.current) {
+    const handleScroll = () => {
+      // Throttle scroll events
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+      
+      scrollTimeoutRef.current = setTimeout(() => {
+        if (hasBeenTriggered.current) return;
+        
+        const philosophySection = document.getElementById('philosophy');
+        if (philosophySection) {
+          const rect = philosophySection.getBoundingClientRect();
+          const windowHeight = window.innerHeight;
+          
+          // Show button when 20% of philosophy section is visible
+          const isPhilosophyVisible = rect.top < windowHeight * 0.8 && rect.bottom > 0;
+          
+          if (isPhilosophyVisible) {
             setIsVisible(true);
             hasBeenTriggered.current = true;
           }
-        },
-        {
-          threshold: 0.1,
-          rootMargin: '-100px 0px 0px 0px'
+        } else {
+          // Fallback: show after scrolling past hero section
+          const heroSection = document.querySelector('section');
+          if (heroSection) {
+            const heroHeight = heroSection.offsetHeight;
+            const scrollPosition = window.scrollY;
+            
+            if (scrollPosition > heroHeight * 0.6) {
+              setIsVisible(true);
+              hasBeenTriggered.current = true;
+            }
+          }
         }
-      );
-      
-      observer.observe(philosophySection);
-      return () => observer.disconnect();
-    }
+      }, 50);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // Check initial position
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+    };
   }, []);
 
   const getAssessmentButtonText = () => {
