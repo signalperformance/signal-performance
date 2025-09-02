@@ -1,52 +1,17 @@
-
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useIsMobile } from '@/hooks/use-mobile';
 
 const FloatingAssessmentButton = () => {
   const { language } = useLanguage();
-  const isMobile = useIsMobile();
   const [isVisible, setIsVisible] = useState(false);
-  const hasBeenTriggered = useRef(false);
-  const scrollTimeoutRef = useRef<NodeJS.Timeout>();
 
   useEffect(() => {
     const handleScroll = () => {
-      // Throttle scroll events
-      if (scrollTimeoutRef.current) {
-        clearTimeout(scrollTimeoutRef.current);
+      // Show button after scrolling 400px (past hero section)
+      if (window.scrollY > 400) {
+        setIsVisible(true);
       }
-      
-      scrollTimeoutRef.current = setTimeout(() => {
-        if (hasBeenTriggered.current) return;
-        
-        const philosophySection = document.getElementById('philosophy');
-        if (philosophySection) {
-          const rect = philosophySection.getBoundingClientRect();
-          const windowHeight = window.innerHeight;
-          
-          // Show button when 20% of philosophy section is visible
-          const isPhilosophyVisible = rect.top < windowHeight * 0.8 && rect.bottom > 0;
-          
-          if (isPhilosophyVisible) {
-            setIsVisible(true);
-            hasBeenTriggered.current = true;
-          }
-        } else {
-          // Fallback: show after scrolling past hero section
-          const heroSection = document.querySelector('section');
-          if (heroSection) {
-            const heroHeight = heroSection.offsetHeight;
-            const scrollPosition = window.scrollY;
-            
-            if (scrollPosition > heroHeight * 0.6) {
-              setIsVisible(true);
-              hasBeenTriggered.current = true;
-            }
-          }
-        }
-      }, 50);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -54,9 +19,6 @@ const FloatingAssessmentButton = () => {
     
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      if (scrollTimeoutRef.current) {
-        clearTimeout(scrollTimeoutRef.current);
-      }
     };
   }, []);
 
@@ -71,7 +33,7 @@ const FloatingAssessmentButton = () => {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-6 right-6 z-[60]">
+    <div className="fixed bottom-6 right-6 z-[100]">
       <Button 
         size="lg" 
         onClick={handleBookAssessment}
