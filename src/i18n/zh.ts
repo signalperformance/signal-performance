@@ -190,8 +190,8 @@ const zh = {
   'studio.address.mapButton': '在Google地圖上查看',
 
   // CTA
-  'cta.learnMore': '了解更多',
-  'cta.watchOverview': '觀看概覽',
+  'cta.learnMore': '觀看影片',
+  'cta.watchOverview': '觀看影片',
 
   // Promotional
   'promo.limitedTime': '限時優惠',
