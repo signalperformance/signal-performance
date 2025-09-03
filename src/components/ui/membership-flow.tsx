@@ -142,7 +142,7 @@ export function MembershipFlow({
             <div className="p-6 md:p-8 flex-1">
               <div className="mb-4">
                 <Badge variant="outline" className="rounded-full border border-primary bg-primary/10 text-foreground px-4 py-1.5 text-xs md:text-sm font-medium whitespace-nowrap">
-                  開始月訓方案
+                  第1步 · 開始月訓方案
                 </Badge>
               </div>
 
