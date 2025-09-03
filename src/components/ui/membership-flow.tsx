@@ -108,18 +108,16 @@ export function MembershipFlow({
                   </DialogTrigger>
                   <DialogContent className="w-[90vw] sm:w-[80vw] lg:w-[70vw] h-auto max-h-[80vh] sm:max-h-[90vh] p-4 bg-background">
                     <div className="relative w-full aspect-video">
-                      {isVideoOpen && (
-                        <iframe 
-                          src="https://player.vimeo.com/video/1115391563?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1" 
-                          width="100%" 
-                          height="100%" 
-                          frameBorder="0" 
-                          allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
-                          referrerPolicy="strict-origin-when-cross-origin" 
-                          title="Assessment Proces"
-                          className="rounded-lg absolute inset-0"
-                        />
-                      )}
+                      <iframe 
+                        src="https://player.vimeo.com/video/1115391563?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&preload=1" 
+                        width="100%" 
+                        height="100%" 
+                        frameBorder="0" 
+                        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+                        referrerPolicy="strict-origin-when-cross-origin" 
+                        title="Assessment Process"
+                        className="rounded-lg absolute inset-0"
+                      />
                     </div>
                   </DialogContent>
                 </Dialog>
@@ -245,18 +243,16 @@ export function MembershipFlow({
                   </DialogTrigger>
                   <DialogContent className="w-[90vw] sm:w-[80vw] lg:w-[70vw] h-auto max-h-[80vh] sm:max-h-[90vh] p-4 bg-background">
                     <div className="relative w-full aspect-video">
-                      {isStep2VideoOpen && (
-                        <iframe 
-                          src="https://player.vimeo.com/video/1115394967?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1" 
-                          width="100%" 
-                          height="100%" 
-                          frameBorder="0" 
-                          allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
-                          referrerPolicy="strict-origin-when-cross-origin" 
-                          title="訓練方案 / Program Overview"
-                          className="rounded-lg absolute inset-0"
-                        />
-                      )}
+                      <iframe 
+                        src="https://player.vimeo.com/video/1115394967?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&preload=1" 
+                        width="100%" 
+                        height="100%" 
+                        frameBorder="0" 
+                        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+                        referrerPolicy="strict-origin-when-cross-origin" 
+                        title="訓練方案 / Program Overview"
+                        className="rounded-lg absolute inset-0"
+                      />
                     </div>
                   </DialogContent>
                 </Dialog>
