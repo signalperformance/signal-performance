@@ -2,6 +2,7 @@ import React, { useMemo, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/contexts/LanguageContext";
 import type { PricingTier } from "@/components/ui/pricing-section";
@@ -29,6 +30,7 @@ export function MembershipFlow({
     return [pro, basic].filter(Boolean) as PricingTier[];
   }, [tiers]);
   const [activeTier, setActiveTier] = useState<string>(orderedTiers[0]?.id ?? tiers[0]?.id);
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
   const currentTier = useMemo(() => orderedTiers.find(x => x.id === activeTier) ?? orderedTiers[0] ?? tiers[0], [activeTier, orderedTiers, tiers]);
   const sectionTitle = title ?? t("pricing.title");
   
@@ -102,30 +104,30 @@ export function MembershipFlow({
               </ul>
 
               <div className="mt-6">
-                <Button
-                  variant="default"
-                  onClick={() => {
-                    const section = document.getElementById("assessment-process");
-                    if (!section) return;
-
-                    const nav = document.getElementById("site-nav");
-                    const offset = (nav?.offsetHeight ?? 0) + 12;
-
-                    const anchor = section.querySelector(
-                      "[data-scroll-anchor], h1, h2, h3"
-                    ) as HTMLElement | null;
-                    const target = anchor ?? section;
-
-                    const top = target.getBoundingClientRect().top + window.scrollY - offset;
-                    window.scrollTo({ top, behavior: "smooth" });
-
-                    // Keep URL in sync without triggering default jump
-                    history.replaceState(null, "", "#assessment-process");
-                  }}
-                  className="w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90"
-                >
-                  {t("cta.learnMore")}
-                </Button>
+                <Dialog open={isVideoOpen} onOpenChange={setIsVideoOpen}>
+                  <DialogTrigger asChild>
+                    <Button
+                      variant="default"
+                      className="w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90"
+                    >
+                      {t("cta.learnMore")}
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-6xl w-[95vw] h-[95vh] p-0 bg-black">
+                    <div className="relative w-full h-full">
+                      <iframe 
+                        src="https://player.vimeo.com/video/1114465402?badge=0&autopause=0&player_id=0&app_id=58479" 
+                        width="100%" 
+                        height="100%" 
+                        frameBorder="0" 
+                        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+                        referrerPolicy="strict-origin-when-cross-origin" 
+                        title="我們的評估流程"
+                        className="rounded-lg"
+                      />
+                    </div>
+                  </DialogContent>
+                </Dialog>
               </div>
 
             </div>
