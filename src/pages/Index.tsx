@@ -69,7 +69,6 @@ const Index = () => {
         { name: t('pricing.features.physical.4x'), included: true },
         { name: t('pricing.features.mental.2x'), included: true },
         { name: t('pricing.features.report.monthly'), included: true },
-        { name: t('pricing.features.assessment.quarterly'), included: true },
       ],
     },
     {
@@ -84,7 +83,6 @@ const Index = () => {
         { name: t('pricing.features.physical.3x'), included: true },
         { name: t('pricing.features.mental.2x'), included: false },
         { name: t('pricing.features.report.monthly'), included: false },
-        { name: t('pricing.features.assessment.quarterly'), included: true },
       ],
     },
   ]), [t]);
