@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger, DialogTitle, DialogDescription, DialogHeader } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/contexts/LanguageContext";
 import type { PricingTier } from "@/components/ui/pricing-section";
@@ -107,6 +107,12 @@ export function MembershipFlow({
                     </Button>
                   </DialogTrigger>
                   <DialogContent className="w-[90vw] sm:w-[80vw] lg:w-[70vw] h-auto max-h-[80vh] sm:max-h-[90vh] p-4 bg-background">
+                    <DialogHeader>
+                      <DialogTitle>{t("assessment.videoTitle") || "Assessment Process"}</DialogTitle>
+                      <DialogDescription>
+                        {t("assessment.videoDescription") || "Learn more about our comprehensive assessment process"}
+                      </DialogDescription>
+                    </DialogHeader>
                     <div className="relative w-full aspect-video">
                       <iframe 
                         src="https://player.vimeo.com/video/1115391563?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&preload=1" 
@@ -242,6 +248,12 @@ export function MembershipFlow({
                     </Button>
                   </DialogTrigger>
                   <DialogContent className="w-[90vw] sm:w-[80vw] lg:w-[70vw] h-auto max-h-[80vh] sm:max-h-[90vh] p-4 bg-background">
+                    <DialogHeader>
+                      <DialogTitle>{t("membership.videoTitle") || "Program Overview"}</DialogTitle>
+                      <DialogDescription>
+                        {t("membership.videoDescription") || "Watch our comprehensive program overview to learn more"}
+                      </DialogDescription>
+                    </DialogHeader>
                     <div className="relative w-full aspect-video">
                       <iframe 
                         src="https://player.vimeo.com/video/1115394967?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&preload=1" 
@@ -259,6 +271,26 @@ export function MembershipFlow({
               </div>
             </div>
           </article>
+        </div>
+        
+        {/* Hidden preload iframes for instant video loading */}
+        <div style={{ display: 'none' }} aria-hidden="true">
+          <iframe 
+            src="https://player.vimeo.com/video/1115391563?badge=0&autopause=0&background=1&muted=1&preload=1&quality=auto" 
+            width="1" 
+            height="1" 
+            frameBorder="0" 
+            allow="autoplay; fullscreen; picture-in-picture" 
+            title="Assessment Process Preload"
+          />
+          <iframe 
+            src="https://player.vimeo.com/video/1115394967?badge=0&autopause=0&background=1&muted=1&preload=1&quality=auto" 
+            width="1" 
+            height="1" 
+            frameBorder="0" 
+            allow="autoplay; fullscreen; picture-in-picture" 
+            title="Program Overview Preload"
+          />
         </div>
       </div>
     </section>;
