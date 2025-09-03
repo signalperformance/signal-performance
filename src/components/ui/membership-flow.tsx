@@ -31,6 +31,7 @@ export function MembershipFlow({
   }, [tiers]);
   const [activeTier, setActiveTier] = useState<string>(orderedTiers[0]?.id ?? tiers[0]?.id);
   const [isVideoOpen, setIsVideoOpen] = useState(false);
+  const [isStep2VideoOpen, setIsStep2VideoOpen] = useState(false);
   const currentTier = useMemo(() => orderedTiers.find(x => x.id === activeTier) ?? orderedTiers[0] ?? tiers[0], [activeTier, orderedTiers, tiers]);
   const sectionTitle = title ?? t("pricing.title");
   
@@ -257,6 +258,35 @@ export function MembershipFlow({
                         </li>
                       ))}
                     </ul>
+
+                    <div className="mt-6">
+                      <Dialog open={isStep2VideoOpen} onOpenChange={setIsStep2VideoOpen}>
+                        <DialogTrigger asChild>
+                          <Button
+                            variant="outline"
+                            className="w-full sm:w-auto border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                          >
+                            {t("cta.watchOverview")}
+                          </Button>
+                        </DialogTrigger>
+                        <DialogContent className="w-[90vw] sm:w-[80vw] lg:w-[70vw] h-auto max-h-[80vh] sm:max-h-[90vh] p-4 bg-background">
+                          <div className="relative w-full aspect-video">
+                            {isStep2VideoOpen && (
+                              <iframe 
+                                src="https://player.vimeo.com/video/1115394967?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1" 
+                                width="100%" 
+                                height="100%" 
+                                frameBorder="0" 
+                                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+                                referrerPolicy="strict-origin-when-cross-origin" 
+                                title="訓練方案 / Program Overview"
+                                className="rounded-lg absolute inset-0"
+                              />
+                            )}
+                          </div>
+                        </DialogContent>
+                      </Dialog>
+                    </div>
                   </TabsContent>
                 ))}
               </Tabs>
