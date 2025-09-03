@@ -205,7 +205,7 @@ export function MembershipFlow({
                     )}
                     
                     <div className="mb-6">
-                      <div className="flex items-baseline gap-2 min-h-[2.75rem] my-[12px]">
+                      <div className="flex items-baseline gap-2 min-h-[2.75rem] my-[3px]">
                         {tier.originalPrice && tier.isPromo && (
                           <div className="flex flex-col">
                             <span className="text-lg line-through text-muted-foreground">
