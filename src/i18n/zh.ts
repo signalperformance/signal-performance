@@ -191,6 +191,7 @@ const zh = {
 
   // CTA
   'cta.learnMore': '了解更多',
+  'cta.watchOverview': '觀看概覽',
 
   // Promotional
   'promo.limitedTime': '限時優惠',
