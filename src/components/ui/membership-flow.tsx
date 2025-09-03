@@ -189,6 +189,20 @@ export function MembershipFlow({
                         </div>
                       </div>
                     )}
+                    {/* Placeholder for consistent height when no promo banner */}
+                    {!tier.isPromo && (
+                      <div className="mb-4 p-4 opacity-0 pointer-events-none">
+                        <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
+                          <div className="flex-1 text-center sm:text-left">
+                            <h4 className="font-bold text-sm invisible">Placeholder</h4>
+                          </div>
+                          <div className="flex flex-col items-center gap-1.5 min-w-[160px]">
+                            <div className="w-full h-2"></div>
+                            <div className="text-xs font-medium invisible">Placeholder text</div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
                     
                     <div className="mb-6">
                       <div className="flex items-baseline gap-2 min-h-[2.75rem] my-[12px]">
