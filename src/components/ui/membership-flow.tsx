@@ -237,8 +237,8 @@ export function MembershipFlow({
                 <Dialog open={isStep2VideoOpen} onOpenChange={setIsStep2VideoOpen}>
                   <DialogTrigger asChild>
                     <Button
-                      variant="outline"
-                      className="w-full sm:w-auto border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                      variant="default"
+                      className="w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90"
                     >
                       {t("cta.watchOverview")}
                     </Button>
