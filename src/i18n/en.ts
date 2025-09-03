@@ -191,7 +191,7 @@ const en = {
 
   // CTA
   'cta.learnMore': 'Learn More',
-  'cta.watchOverview': 'Watch Overview',
+  'cta.watchOverview': 'Learn More',
 
   // Promotional
   'promo.limitedTime': 'Limited Time Offer',
