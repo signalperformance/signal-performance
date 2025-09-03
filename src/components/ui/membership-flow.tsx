@@ -115,16 +115,18 @@ export function MembershipFlow({
                   </DialogTrigger>
                   <DialogContent className="max-w-6xl w-[95vw] h-[95vh] p-0 bg-black">
                     <div className="relative w-full h-full">
-                      <iframe 
-                        src="https://player.vimeo.com/video/1114465402?badge=0&autopause=0&player_id=0&app_id=58479" 
-                        width="100%" 
-                        height="100%" 
-                        frameBorder="0" 
-                        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
-                        referrerPolicy="strict-origin-when-cross-origin" 
-                        title="我們的評估流程"
-                        className="rounded-lg"
-                      />
+                      {isVideoOpen && (
+                        <iframe 
+                          src="https://player.vimeo.com/video/1114465402?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1" 
+                          width="100%" 
+                          height="100%" 
+                          frameBorder="0" 
+                          allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+                          referrerPolicy="strict-origin-when-cross-origin" 
+                          title="我們的評估流程"
+                          className="rounded-lg"
+                        />
+                      )}
                     </div>
                   </DialogContent>
                 </Dialog>
