@@ -42,9 +42,9 @@ export function MembershipFlow({
           {subtitle && <p className="text-muted-foreground max-w-2xl">{subtitle}</p>}
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
           {/* Step 1: Assessment Card */}
-          <article className={cn("relative group", "rounded-3xl transition-all duration-300", "flex flex-col bg-card border border-border shadow-lg hover:shadow-xl h-full")}>
+          <article className={cn("relative group", "rounded-3xl transition-all duration-300", "flex flex-col bg-card border border-border shadow-lg hover:shadow-xl")}>
             <div className="p-6 md:p-8 flex-1">
               <div className="mb-4">
                 <Badge variant="outline" className="rounded-full border border-primary bg-primary/10 text-foreground px-4 py-1.5 text-xs md:text-sm font-medium whitespace-nowrap">
@@ -104,7 +104,7 @@ export function MembershipFlow({
                   </li>)}
               </ul>
 
-              <div className="mt-auto">
+              <div className="mt-6">
                 <Dialog open={isVideoOpen} onOpenChange={setIsVideoOpen}>
                   <DialogTrigger asChild>
                     <Button
@@ -140,7 +140,7 @@ export function MembershipFlow({
           <article className={cn(
             "relative group",
             "rounded-3xl transition-all duration-300",
-            "flex flex-col border border-border shadow-lg hover:shadow-xl h-full",
+            "flex flex-col border border-border shadow-lg hover:shadow-xl",
             "bg-secondary",
             activeTier === "plus" && "ring-1 ring-primary/20"
           )}>
@@ -273,7 +273,7 @@ export function MembershipFlow({
                       ))}
                     </ul>
 
-                    <div className="mt-auto">
+                    <div className="mt-6">
                       <Dialog open={isStep2VideoOpen} onOpenChange={setIsStep2VideoOpen}>
                         <DialogTrigger asChild>
                           <Button
