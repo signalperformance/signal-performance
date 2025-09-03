@@ -146,10 +146,35 @@ export function MembershipFlow({
           )}>
             <div className="p-6 md:p-8 flex-1">
               <Tabs value={activeTier} onValueChange={setActiveTier} className="w-full">
-                <div className="mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                  <Badge variant="outline" className="rounded-full border border-primary bg-primary/10 text-foreground px-4 py-1.5 text-xs md:text-sm font-medium whitespace-nowrap text-center sm:text-left justify-center sm:justify-start">
+                <div className="mb-4">
+                  <Badge variant="outline" className="rounded-full border border-primary bg-primary/10 text-foreground px-4 py-1.5 text-xs md:text-sm font-medium whitespace-nowrap">
                     {t("flow.step2")}
                   </Badge>
+                </div>
+
+                {/* Monthly Program Promo Banner - Aligned with Step 1 */}
+                {currentTier.isPromo && (
+                  <div className="mb-4 bg-gradient-to-r from-red-500/90 to-orange-500/90 text-white rounded-xl p-4">
+                    <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
+                      <div className="flex-1 text-center sm:text-left">
+                        <h4 className="font-bold text-sm">{t("promo.limitedOffer")}</h4>
+                      </div>
+                      <div className="flex flex-col items-center gap-1.5 min-w-[160px]">
+                        <div className="w-full bg-white/20 rounded-full h-2">
+                          <div 
+                            className="bg-white rounded-full h-2 transition-all duration-500"
+                            style={{ width: "20%" }}
+                          />
+                        </div>
+                        <div className="text-xs font-medium">
+                          <span className="font-bold">2</span> {t("promo.spotsTaken")} • <span className="font-bold">8</span> {t("promo.remaining")}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                <div className="mb-4">
                   <TabsList className="bg-transparent border border-primary/30 rounded-full p-1 flex w-full h-auto sm:h-10 overflow-visible sm:overflow-visible justify-between sm:justify-center gap-1 sm:gap-2 flex-nowrap sm:w-auto">
                     {orderedTiers.map(tier => (
                       <TabsTrigger
@@ -168,41 +193,6 @@ export function MembershipFlow({
 
                 {orderedTiers.map(tier => (
                   <TabsContent key={tier.id} value={tier.id} className="mt-0">
-                    {/* Monthly Program Promo Banner - Only show for promotional tiers */}
-                    {tier.isPromo && (
-                      <div className="mb-4 bg-gradient-to-r from-red-500/90 to-orange-500/90 text-white rounded-xl p-4">
-                        <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
-                          <div className="flex-1 text-center sm:text-left">
-                            <h4 className="font-bold text-sm">{t("promo.limitedOffer")}</h4>
-                          </div>
-                          <div className="flex flex-col items-center gap-1.5 min-w-[160px]">
-                            <div className="w-full bg-white/20 rounded-full h-2">
-                              <div 
-                                className="bg-white rounded-full h-2 transition-all duration-500"
-                                style={{ width: "20%" }}
-                              />
-                            </div>
-                            <div className="text-xs font-medium">
-                              <span className="font-bold">2</span> {t("promo.spotsTaken")} • <span className="font-bold">8</span> {t("promo.remaining")}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                    {/* Placeholder for consistent height when no promo banner */}
-                    {!tier.isPromo && (
-                      <div className="mb-4 p-4 opacity-0 pointer-events-none">
-                        <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
-                          <div className="flex-1 text-center sm:text-left">
-                            <h4 className="font-bold text-sm invisible">Placeholder</h4>
-                          </div>
-                          <div className="flex flex-col items-center gap-1.5 min-w-[160px]">
-                            <div className="w-full h-2"></div>
-                            <div className="text-xs font-medium invisible">Placeholder text</div>
-                          </div>
-                        </div>
-                      </div>
-                    )}
                     
                     <div className="mb-6">
                       <div className="flex items-baseline gap-2 min-h-[2.75rem] my-[3px]">
