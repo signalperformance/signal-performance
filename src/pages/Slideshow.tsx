@@ -64,8 +64,7 @@ const useChineseTranslations = () => {
     'membership.pro.features': [
       '體能訓練 — 每週4次（1對3）',
       '心理訓練 — 每月2次（1對1）',
-      '表現報告 — 每月1次',
-      '季度評估'
+      '表現報告 — 每月1次'
     ],
     'membership.pro.promotional': '限時優惠！立即預約',
     'membership.pro.bookingStatus': '2人已預約，8名額剩餘',
@@ -579,20 +578,6 @@ const Slideshow = () => {
                       省 NT${t['assessment.savings']}
                     </div>
                     
-                    {/* Booking Status Tracker */}
-                    <div className="bg-gray-50 rounded-lg p-4 mb-6">
-                      <div className="text-sm md:text-base text-gray-600 mb-2">
-                        {t['assessment.bookingStatus']}
-                      </div>
-                      <div className="flex justify-center space-x-1">
-                        {[...Array(10)].map((_, i) => (
-                          <div 
-                            key={i} 
-                            className={`w-3 h-3 rounded-full ${i < 2 ? 'bg-orange-500' : 'bg-gray-300'}`}
-                          />
-                        ))}
-                      </div>
-                    </div>
                   </div>
                   <ul className="space-y-4 text-base md:text-lg lg:text-xl xl:text-2xl">
                     <li className="flex items-center">
@@ -653,20 +638,6 @@ const Slideshow = () => {
                     </div>
                     
                     
-                    {/* Booking Status Tracker */}
-                    <div className="bg-gray-50 rounded-lg p-4 mb-6">
-                      <div className="text-sm md:text-base text-gray-600 mb-2">
-                        {t['membership.pro.bookingStatus']}
-                      </div>
-                      <div className="flex justify-center space-x-1">
-                        {[...Array(10)].map((_, i) => (
-                          <div 
-                            key={i} 
-                            className={`w-3 h-3 rounded-full ${i < 2 ? 'bg-orange-500' : 'bg-gray-300'}`}
-                          />
-                        ))}
-                      </div>
-                    </div>
                   </div>
                   
                   <ul className="space-y-4 text-base md:text-lg lg:text-xl xl:text-2xl">
