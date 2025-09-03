@@ -113,8 +113,8 @@ export function MembershipFlow({
                       {t("cta.learnMore")}
                     </Button>
                   </DialogTrigger>
-                  <DialogContent className="max-w-6xl w-[95vw] h-[95vh] p-0 bg-black">
-                    <div className="relative w-full h-full">
+                  <DialogContent className="w-[90vw] sm:w-[80vw] lg:w-[70vw] h-auto max-h-[80vh] sm:max-h-[90vh] p-4 bg-background">
+                    <div className="relative w-full aspect-video">
                       {isVideoOpen && (
                         <iframe 
                           src="https://player.vimeo.com/video/1114465402?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1" 
@@ -124,7 +124,7 @@ export function MembershipFlow({
                           allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
                           referrerPolicy="strict-origin-when-cross-origin" 
                           title="我們的評估流程"
-                          className="rounded-lg"
+                          className="rounded-lg absolute inset-0"
                         />
                       )}
                     </div>
