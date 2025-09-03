@@ -117,13 +117,13 @@ export function MembershipFlow({
                     <div className="relative w-full aspect-video">
                       {isVideoOpen && (
                         <iframe 
-                          src="https://player.vimeo.com/video/1114465402?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1" 
+                          src="https://player.vimeo.com/video/1115391563?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1" 
                           width="100%" 
                           height="100%" 
                           frameBorder="0" 
                           allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
                           referrerPolicy="strict-origin-when-cross-origin" 
-                          title="我們的評估流程"
+                          title="Assessment Proces"
                           className="rounded-lg absolute inset-0"
                         />
                       )}
