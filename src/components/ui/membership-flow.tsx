@@ -107,12 +107,6 @@ export function MembershipFlow({
                     </Button>
                   </DialogTrigger>
                   <DialogContent className="w-[90vw] sm:w-[80vw] lg:w-[70vw] h-auto max-h-[80vh] sm:max-h-[90vh] p-4 bg-background">
-                    <DialogHeader>
-                      <DialogTitle>{t("assessment.videoTitle") || "Assessment Process"}</DialogTitle>
-                      <DialogDescription>
-                        {t("assessment.videoDescription") || "Learn more about our comprehensive assessment process"}
-                      </DialogDescription>
-                    </DialogHeader>
                     <div className="relative w-full aspect-video">
                       <iframe 
                         src="https://player.vimeo.com/video/1115391563?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&preload=1" 
@@ -248,12 +242,6 @@ export function MembershipFlow({
                     </Button>
                   </DialogTrigger>
                   <DialogContent className="w-[90vw] sm:w-[80vw] lg:w-[70vw] h-auto max-h-[80vh] sm:max-h-[90vh] p-4 bg-background">
-                    <DialogHeader>
-                      <DialogTitle>{t("membership.videoTitle") || "Program Overview"}</DialogTitle>
-                      <DialogDescription>
-                        {t("membership.videoDescription") || "Watch our comprehensive program overview to learn more"}
-                      </DialogDescription>
-                    </DialogHeader>
                     <div className="relative w-full aspect-video">
                       <iframe 
                         src="https://player.vimeo.com/video/1115394967?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&preload=1" 
