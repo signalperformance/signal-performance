@@ -81,6 +81,10 @@ const Assessment = () => {
                   </li>
                   <li className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
+                    <span>{t('assessment.prep.reminders.wearBrightColors')}</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
                     <span>{t('assessment.prep.reminders.avoidOvereating')}</span>
                   </li>
                   <li className="flex items-start gap-3">

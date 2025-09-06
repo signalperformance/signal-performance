@@ -220,6 +220,7 @@ const zh = {
   'assessment.prep.whatToBring.snacks': '健康小點心',
   'assessment.prep.reminders.title': '重要提醒',
   'assessment.prep.reminders.wearAppropriateClothing': '穿著短褲或緊身褲，搭配短袖或背心；避免寬鬆衣物',
+  'assessment.prep.reminders.wearBrightColors': '穿著亮色衣物；避免黑色或深色衣物',
   'assessment.prep.reminders.avoidOvereating': '評估前避免進食過量',
   'assessment.prep.reminders.arriveEarly': '提前15分鐘到場，以順利完成測試',
   'assessment.prep.reminders.restAndHydrate': '保持充足睡眠並補充水分，確保測試結果準確',
