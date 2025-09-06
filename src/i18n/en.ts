@@ -217,7 +217,7 @@ const en = {
   'assessment.prep.whatToBring.waterBottle': 'Water bottle',
   'assessment.prep.whatToBring.towel': 'Towel',
   'assessment.prep.reminders.title': 'Important Reminders',
-  'assessment.prep.reminders.wearAppropriateClothing': 'Wear shorts and a short-sleeve or sleeveless shirt; avoid baggy clothing',
+  'assessment.prep.reminders.wearAppropriateClothing': 'Wear shorts or leggings, and a short-sleeve or sleeveless shirt; avoid baggy clothing',
   'assessment.prep.reminders.avoidOvereating': 'Do not eat a large meal beforehand',
   'assessment.prep.reminders.arriveEarly': 'Arrive 15 minutes early',
   
