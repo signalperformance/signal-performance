@@ -39,7 +39,7 @@ const en = {
 
   // Assessment Process
   'assessment.title': 'Our Assessment Process',
-  'assessment.description': '7 Hours of Assessment + Training',
+  'assessment.description': '6 Hours of Assessment + Training',
   'assessment.processDescription': 'Every quarter, members complete a five-part assessment to ensure training stays aligned and effective.',
 
   'assessment.joint.title': 'Joint Health',
