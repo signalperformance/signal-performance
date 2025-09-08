@@ -131,8 +131,8 @@ const en = {
   'gettingstarted.assessmentPackage.covers': 'Covers steps 1–3',
   'gettingstarted.monthlyProgram.price': 'NT$15,000/month',
   'gettingstarted.monthlyProgram.covers': 'Covers step 4',
-  'gettingstarted.assessmentPackage.bullets.assess': 'Assess – Baseline testing (3h)',
-  'gettingstarted.assessmentPackage.bullets.review': 'Review – Results & plan (1h)',
+  'gettingstarted.assessmentPackage.bullets.assess': 'Assess – Baseline testing (2.5h)',
+  'gettingstarted.assessmentPackage.bullets.review': 'Review – Results & plan (0.5h)',
   'gettingstarted.assessmentPackage.bullets.train': 'Train – 3 private sessions (3h)',
 
   // Schedule

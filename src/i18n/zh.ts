@@ -131,8 +131,8 @@ const zh = {
   'gettingstarted.assessmentPackage.covers': '包含第 1–3 步',
   'gettingstarted.monthlyProgram.price': '每月15,000元',
   'gettingstarted.monthlyProgram.covers': '包含第 4 步',
-  'gettingstarted.assessmentPackage.bullets.assess': '評估 – 基礎檢測 3小時',
-  'gettingstarted.assessmentPackage.bullets.review': '回顧 – 結果與計劃 1小時',
+  'gettingstarted.assessmentPackage.bullets.assess': '評估 – 基礎檢測 2.5小時',
+  'gettingstarted.assessmentPackage.bullets.review': '回顧 – 結果與計劃 0.5小時',
   'gettingstarted.assessmentPackage.bullets.train': '訓練 – 私人課程3堂 3小時',
 
   // Schedule

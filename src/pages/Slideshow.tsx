@@ -582,11 +582,11 @@ const Slideshow = () => {
                   <ul className="space-y-4 text-base md:text-lg lg:text-xl xl:text-2xl">
                     <li className="flex items-center">
                       <span className="w-2 h-2 bg-signal-gold rounded-full mr-4 flex-shrink-0"></span>
-                      評估 – 基礎檢測 3小時
+                      評估 – 基礎檢測 2.5小時
                     </li>
                     <li className="flex items-center">
                       <span className="w-2 h-2 bg-signal-gold rounded-full mr-4 flex-shrink-0"></span>
-                      回顧 – 結果與計劃 1小時
+                      回顧 – 結果與計劃 0.5小時
                     </li>
                     <li className="flex items-center">
                       <span className="w-2 h-2 bg-signal-gold rounded-full mr-4 flex-shrink-0"></span>
