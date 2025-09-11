@@ -16,7 +16,7 @@ const StudioLocation = () => {
   ];
 
   const address = "2樓, 南勢里9鄰33-6號, Linkou District, New Taipei City, 244";
-  const googleMapsLink = "https://www.google.com/maps?gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIGCAEQLhhA0gEIMjc0NmowajCoAgCwAgA&um=1&ie=UTF-8&fb=1&gl=tw&sa=X&geocode=Kfsu2-aBoUI0MbmQWiewxQ2h&daddr=2%E6%A8%93,+%E5%8D%97%E5%8B%A2%E9%87%8C9%E9%84%B033-6%E8%99%9F,+Linkou+District,+New+Taipei+City,+244";
+  const googleMapsLink = "https://maps.app.goo.gl/zDXP1b9t1HxEFuv86?g_st=com.google.maps.preview.copy";
 
   return (
     <section className="section-padding bg-transparent overflow-x-clip">
