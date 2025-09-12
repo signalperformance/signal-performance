@@ -218,7 +218,7 @@ const en = {
   'assessment.prep.whatToBring.towel': 'Towel',
   'assessment.prep.reminders.title': 'Important Reminders',
   'assessment.prep.reminders.wearAppropriateClothing': 'Wear shorts or leggings, and a short-sleeve or sleeveless shirt; avoid baggy clothing',
-  'assessment.prep.reminders.wearBrightColors': 'Wear bright colors; avoid black or dark clothing',
+  
   'assessment.prep.reminders.avoidOvereating': 'Do not eat a large meal beforehand',
   'assessment.prep.reminders.arriveEarly': 'Arrive 15 minutes early',
   
