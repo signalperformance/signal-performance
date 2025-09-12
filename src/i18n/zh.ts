@@ -69,7 +69,7 @@ const zh = {
   'pricing.features.physical.4x': '體能訓練 — 每週4次（1對3）',
   'pricing.features.physical.3x': '體能訓練 — 每週3次（1對3）',
   'pricing.features.mental.2x': '心理訓練 — 每月2次（1對1）',
-  'pricing.features.report.monthly': '表現報告 — 每月1次',
+  'pricing.features.report.monthly': '表現報告 — 每年4次',
   'pricing.features.assessment.quarterly': '季度評估',
 
   // Flow
