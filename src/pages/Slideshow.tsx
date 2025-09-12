@@ -64,7 +64,7 @@ const useChineseTranslations = () => {
     'membership.pro.features': [
       '體能訓練 — 每週4次（1對3）',
       '心理訓練 — 每月2次（1對1）',
-      '表現報告 — 每月1次'
+      '表現報告 — 每年4次'
     ],
     'membership.pro.promotional': '限時優惠！立即預約',
     'membership.pro.bookingStatus': '2人已預約，8名額剩餘',

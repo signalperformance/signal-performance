@@ -32,10 +32,10 @@ const en = {
   'membership.golf.skillassessment': 'Skill Assessment',
   'membership.golf.skillassessment.description': 'Comprehensive evaluation that tests all parts of your game and tracks progress over time.',
 
-  'membership.report.title': 'Progress Tracking',
-  'membership.report.frequency': '1x/month',
+'membership.report.title': 'Progress Tracking',
+  'membership.report.frequency': '4x/year',
   'membership.report.performancereport': 'Performance Report',
-  'membership.report.description': 'Monthly report summarizing progress across all areas with personalized feedback.',
+  'membership.report.description': 'Quarterly report summarizing progress across all areas with personalized feedback.',
 
   // Assessment Process
   'assessment.title': 'Our Assessment Process',
@@ -69,7 +69,7 @@ const en = {
   'pricing.features.physical.4x': 'Physical Training — 4×/week (1-on-3)',
   'pricing.features.physical.3x': 'Physical Training — 3×/week (1-on-3)',
   'pricing.features.mental.2x': 'Mental Training — 2×/month (1-on-1)',
-  'pricing.features.report.monthly': 'Performance Report — 1x/month',
+  'pricing.features.report.monthly': 'Performance Report — 4x/year',
   'pricing.features.assessment.quarterly': 'Quarterly Assessment',
 
   // Flow

@@ -32,10 +32,10 @@ const zh = {
   'membership.golf.skillassessment': '技術評估',
   'membership.golf.skillassessment.description': '全面性的高爾夫能力評估，檢測整體球技並持續追蹤進步。',
 
-  'membership.report.title': '進度追蹤',
-  'membership.report.frequency': '每月1次',
+'membership.report.title': '進度追蹤',
+  'membership.report.frequency': '每年4次',
   'membership.report.performancereport': '表現報告',
-  'membership.report.description': '每月報告總結各方面進展，提供個人化回饋。',
+  'membership.report.description': '季度報告總結各方面進展，提供個人化回饋。',
 
   // Assessment Process
   'assessment.title': '我們的評估流程',
