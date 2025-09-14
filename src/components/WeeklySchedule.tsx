@@ -19,7 +19,7 @@ const WeeklySchedule = () => {
   const mwf: Item[] = [
     { hour24: 14, minute: 0, labelKey: 'mobility', pro: true },
     { hour24: 15, minute: 15, labelKey: 'strength', pro: true },
-    { hour24: 16, minute: 30, labelKey: 'mobility', pro: true },
+    { hour24: 16, minute: 30, labelKey: 'strength', pro: true },
     { hour24: 18, minute: 0, labelKey: 'mobility' },
     { hour24: 19, minute: 15, labelKey: 'strength' },
     { hour24: 20, minute: 30, labelKey: 'strength' },
