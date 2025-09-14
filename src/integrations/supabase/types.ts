@@ -376,7 +376,6 @@ export type Database = {
           id: string
           is_active: boolean
           last_name: string
-          membership_plan: Database["public"]["Enums"]["membership_plan"]
           monthly_renewal_date: string | null
           notes: string | null
           phone: string | null
@@ -391,7 +390,6 @@ export type Database = {
           id?: string
           is_active?: boolean
           last_name: string
-          membership_plan?: Database["public"]["Enums"]["membership_plan"]
           monthly_renewal_date?: string | null
           notes?: string | null
           phone?: string | null
@@ -406,7 +404,6 @@ export type Database = {
           id?: string
           is_active?: boolean
           last_name?: string
-          membership_plan?: Database["public"]["Enums"]["membership_plan"]
           monthly_renewal_date?: string | null
           notes?: string | null
           phone?: string | null
@@ -444,7 +441,6 @@ export type Database = {
         | "friday"
         | "saturday"
         | "sunday"
-      membership_plan: "basic" | "pro"
       membership_plan_type: "basic" | "pro"
       payment_method: "cash" | "card" | "bank_transfer" | "stripe" | "other"
       player_type: "amateur" | "pro"
@@ -596,7 +592,6 @@ export const Constants = {
         "saturday",
         "sunday",
       ],
-      membership_plan: ["basic", "pro"],
       membership_plan_type: ["basic", "pro"],
       payment_method: ["cash", "card", "bank_transfer", "stripe", "other"],
       player_type: ["amateur", "pro"],

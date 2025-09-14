@@ -167,29 +167,21 @@ export const useBookingStore = create<BookingStore>((set, get) => ({
         return false; // Already booked
       }
 
-      // Check session limits - get user's membership plan from Supabase
-      const { data: userProfile } = await supabase
-        .from('user_profiles')
-        .select('membership_plan')
-        .eq('id', userId)
-        .single();
-
-      if (userProfile) {
-        const totalSessions = userProfile.membership_plan === 'pro' ? 16 : 12;
+      // All users get 16 sessions per month
+      const totalSessions = 16;
         
-        // Count user's bookings in current 4-week period
-        const now = new Date();
-        const fourWeeksAgo = new Date(now.getTime() - (4 * 7 * 24 * 60 * 60 * 1000));
-        
-        const userBookings = bookings.filter(booking =>
-          booking.userId === userId &&
-          new Date(booking.bookingDate) >= fourWeeksAgo
-        );
+      // Count user's bookings in current 4-week period
+      const now = new Date();
+      const fourWeeksAgo = new Date(now.getTime() - (4 * 7 * 24 * 60 * 60 * 1000));
+      
+      const userBookings = bookings.filter(booking =>
+        booking.userId === userId &&
+        new Date(booking.bookingDate) >= fourWeeksAgo
+      );
 
-        if (userBookings.length >= totalSessions) {
-          console.log(`User has reached their ${totalSessions} session limit for this 4-week period`);
-          return false;
-        }
+      if (userBookings.length >= totalSessions) {
+        console.log(`User has reached their ${totalSessions} session limit for this 4-week period`);
+        return false; // Session limit reached
       }
 
       // Check if session is full

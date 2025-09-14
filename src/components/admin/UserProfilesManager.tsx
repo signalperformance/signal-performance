@@ -65,7 +65,7 @@ export function UserProfilesManager() {
         .order('created_at', { ascending: false });
 
       if (error) throw error;
-      setUsers(data || []);
+      setUsers((data || []) as any);
     } catch (error) {
       console.error('Failed to load users:', error);
     }

@@ -4,7 +4,6 @@ export interface ClientUser {
   password: string;
   firstName: string;
   lastName: string;
-  membershipPlan: 'basic' | 'pro';
   playerType: 'amateur' | 'pro';
   isActive: boolean;
   monthlyRenewalDate?: Date;

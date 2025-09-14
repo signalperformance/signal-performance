@@ -87,15 +87,11 @@ export const ClientScheduleView: React.FC = () => {
       isSameDay(session.date, date)
     );
     
-    // Filter sessions based on user membership level
+    // Filter sessions based on user player type
     const filteredSessions = allSessions.filter(session => {
       if (!user) return false;
-      if (user.membershipPlan === 'basic') {
-        return session.sessionType === 'amateur';
-      } else if (user.membershipPlan === 'pro') {
-        return session.sessionType === 'pro';
-      }
-      return false;
+      // PRO players can only book PRO sessions, AMATEUR players can only book AMATEUR sessions
+      return session.sessionType === user.playerType;
     });
     
     return filteredSessions.sort((a, b) => a.hour24 - b.hour24);
@@ -111,7 +107,8 @@ export const ClientScheduleView: React.FC = () => {
 
   const canUserBookSession = (session: ScheduleWithAvailability) => {
     if (!user) return false;
-    if (session.sessionType === 'pro' && user.membershipPlan === 'basic') return false;
+    // Check if user's player type matches session type
+    if (session.sessionType !== user.playerType) return false;
     if (!isDateBookable(session.date)) return false;
     return true;
   };
@@ -352,7 +349,7 @@ export const ClientScheduleView: React.FC = () => {
         onConfirm={handleBookingConfirm}
         isBooked={selectedSession ? isSessionBooked(selectedSession) : false}
         canBook={selectedSession ? canUserBookSession(selectedSession) : false}
-        userMembershipPlan={user?.membershipPlan || 'basic'}
+        userPlayerType={user?.playerType || 'amateur'}
       />
     </div>
   );

@@ -51,7 +51,6 @@ serve(async (req) => {
       firstName,
       lastName,
       phone,
-      membershipPlan,
       playerType,
       monthlyRenewalDate, // YYYY-MM-DD
       notes,
@@ -62,7 +61,6 @@ serve(async (req) => {
       firstName: string;
       lastName: string;
       phone?: string;
-      membershipPlan: "basic" | "pro";
       playerType: "amateur" | "pro";
       monthlyRenewalDate?: string;
       notes?: string;
@@ -86,7 +84,6 @@ serve(async (req) => {
       user_metadata: {
         first_name: firstName,
         last_name: lastName,
-        membership_plan: membershipPlan,
       },
     });
 
@@ -108,7 +105,6 @@ serve(async (req) => {
         first_name: firstName,
         last_name: lastName,
         phone: phone || null,
-        membership_plan: membershipPlan,
         player_type: playerType,
         profile_picture: null,
         notes: notes || null,

@@ -56,7 +56,7 @@ export const ClientNavbar: React.FC<ClientNavbarProps> = ({ activeTab, onTabChan
         </div>
         <div>
           <div className="font-medium">{user?.firstName} {user?.lastName}</div>
-          <div className="text-sm text-muted-foreground capitalize">{user?.membershipPlan} {t('portal.user.member')}</div>
+          <div className="text-sm text-muted-foreground">{user?.playerType.toUpperCase()} {t('portal.user.member')}</div>
         </div>
       </div>
 
@@ -152,7 +152,7 @@ export const ClientNavbar: React.FC<ClientNavbarProps> = ({ activeTab, onTabChan
             <div className="flex items-center space-x-3">
               <div className="text-sm">
                 <div className="font-medium">{user?.firstName} {user?.lastName}</div>
-                <div className="text-muted-foreground capitalize">{user?.membershipPlan} {t('portal.user.member')}</div>
+                <div className="text-muted-foreground">{user?.playerType.toUpperCase()} {t('portal.user.member')}</div>
               </div>
             </div>
 

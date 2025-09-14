@@ -14,7 +14,6 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
 import { Eye, EyeOff } from 'lucide-react';
-import { UserProfile, MembershipPlan } from '@/types/admin';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 
@@ -35,7 +34,6 @@ export function EditUserModal({ isOpen, onClose, onUpdateUser, user }: EditUserM
     email: '',
     phone: '',
     password: '',
-    membershipPlan: 'basic' as MembershipPlan,
     playerType: 'amateur' as 'amateur' | 'pro',
     monthlyRenewalDate: '',
     notes: '',
@@ -50,7 +48,6 @@ export function EditUserModal({ isOpen, onClose, onUpdateUser, user }: EditUserM
         email: user.email || '',
         phone: user.phone || '',
         password: '', // Don't populate password for security
-        membershipPlan: user.membership_plan || 'basic',
         playerType: user.player_type || 'amateur',
         monthlyRenewalDate: user.monthly_renewal_date || '',
         notes: user.notes || '',
@@ -75,7 +72,6 @@ export function EditUserModal({ isOpen, onClose, onUpdateUser, user }: EditUserM
           firstName: formData.firstName,
           lastName: formData.lastName,
           phone: formData.phone,
-          membershipPlan: formData.membershipPlan,
           playerType: formData.playerType,
           monthlyRenewalDate: formData.monthlyRenewalDate,
           notes: formData.notes,
@@ -190,37 +186,20 @@ export function EditUserModal({ isOpen, onClose, onUpdateUser, user }: EditUserM
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="membershipPlan">Membership Plan</Label>
-              <Select
-                value={formData.membershipPlan}
-                onValueChange={(value) => handleInputChange('membershipPlan', value)}
-              >
-                <SelectTrigger>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="basic">Basic (12)</SelectItem>
-                  <SelectItem value="pro">Pro (16)</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="playerType">Player Type</Label>
-              <Select
-                value={formData.playerType}
-                onValueChange={(value) => handleInputChange('playerType', value)}
-              >
-                <SelectTrigger>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="amateur">Amateur</SelectItem>
-                  <SelectItem value="pro">Pro</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
+          <div className="space-y-2">
+            <Label htmlFor="playerType">Player Type</Label>
+            <Select
+              value={formData.playerType}
+              onValueChange={(value) => handleInputChange('playerType', value)}
+            >
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="amateur">Amateur</SelectItem>
+                <SelectItem value="pro">Pro</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
 
           <div className="space-y-2">

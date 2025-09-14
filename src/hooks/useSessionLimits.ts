@@ -23,8 +23,8 @@ export const useSessionLimits = () => {
   const calculateSessionLimits = (): SessionLimitInfo | null => {
     if (!user) return null;
 
-    // Get total sessions based on membership plan
-    const totalSessions = user.membershipPlan === 'pro' ? 16 : 12;
+    // All users get 16 sessions per month
+    const totalSessions = 16;
 
     // Calculate current 4-week period - use account creation or current date as fallback
     const renewalDate = new Date(); // For now, use current date as base period

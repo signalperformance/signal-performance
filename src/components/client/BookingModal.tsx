@@ -24,7 +24,7 @@ interface BookingModalProps {
   onConfirm: () => void;
   isBooked: boolean;
   canBook: boolean;
-  userMembershipPlan: 'basic' | 'pro';
+  userPlayerType: 'amateur' | 'pro';
 }
 
 export const BookingModal: React.FC<BookingModalProps> = ({
@@ -34,7 +34,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
   onConfirm,
   isBooked,
   canBook,
-  userMembershipPlan,
+  userPlayerType,
 }) => {
   const { canBookSession, getSessionLimitMessage } = useSessionLimits();
   const { t, language } = useLanguage();
@@ -73,7 +73,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
   const canUserBook = () => {
     if (isBooked) return true; // Can cancel
     if (isFull) return false;
-    if (session.sessionType === 'pro' && userMembershipPlan === 'basic') return false;
+    if (session.sessionType !== userPlayerType) return false;
     if (!isDateBookable(session.date)) return false;
     if (!canBookSession()) return false; // Check session limits
     return canBook;
@@ -88,8 +88,8 @@ export const BookingModal: React.FC<BookingModalProps> = ({
     if (isBooked) return null;
     if (isFull) return t('portal.validation.sessionFull');
     if (!isDateBookable(session.date)) return t('portal.validation.tooFarAdvance');
-    if (session.sessionType === 'pro' && userMembershipPlan === 'basic') {
-      return t('portal.validation.membershipRequired');
+    if (session.sessionType !== userPlayerType) {
+      return `Only ${session.sessionType.toUpperCase()} players can book this session`;
     }
     return null;
   };

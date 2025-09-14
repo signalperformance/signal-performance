@@ -1,5 +1,3 @@
-export type MembershipPlan = 'basic' | 'pro';
-
 export type ClassType = 'mobility' | 'strength' | 'cardio' | 'power';
 
 export type SessionType = 'pro' | 'amateur';
@@ -14,7 +12,6 @@ export interface UserProfile {
   lastName: string;
   email: string;
   phone: string;
-  membershipPlan: MembershipPlan;
   playerType: PlayerType;
   profilePicture?: string;
   notes: string;

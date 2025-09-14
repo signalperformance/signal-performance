@@ -8,7 +8,6 @@ export const mockClientUsers: ClientUser[] = mockUsers.map(user => ({
   password: (user as any).password || 'password123', // fallback for existing users
   firstName: user.firstName,
   lastName: user.lastName,
-  membershipPlan: user.membershipPlan,
   playerType: user.playerType,
   isActive: user.isActive,
 }));
