@@ -17,7 +17,7 @@ Deno.serve(async (req) => {
   }
 
   try {
-    const { period_id } = await req.json();
+    const { period_id, force_cleanup = false } = await req.json();
     
     if (!period_id) {
       throw new Error('period_id is required');
@@ -94,14 +94,28 @@ Deno.serve(async (req) => {
 
     console.log(`Generated ${instances.length} instances`);
 
-    // Clear existing instances for this period first
-    const { error: deleteError } = await supabase
-      .from('live_schedule_instances')
-      .delete()
-      .eq('period_id', period_id);
+    if (force_cleanup) {
+      // When force cleanup is enabled, delete ALL instances in the date range regardless of period
+      console.log('Force cleanup enabled - removing all conflicting instances in date range');
+      const { error: forceDeleteError } = await supabase
+        .from('live_schedule_instances')
+        .delete()
+        .gte('class_date', period.start_date)
+        .lte('class_date', period.end_date);
 
-    if (deleteError) {
-      console.warn('Warning: Could not clear existing instances:', deleteError.message);
+      if (forceDeleteError) {
+        console.warn('Warning: Could not perform force cleanup:', forceDeleteError.message);
+      }
+    } else {
+      // Standard cleanup - only delete instances for this specific period
+      const { error: deleteError } = await supabase
+        .from('live_schedule_instances')
+        .delete()
+        .eq('period_id', period_id);
+
+      if (deleteError) {
+        console.warn('Warning: Could not clear existing instances:', deleteError.message);
+      }
     }
 
     // Insert the new instances

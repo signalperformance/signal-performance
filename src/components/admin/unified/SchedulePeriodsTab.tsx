@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Plus, Calendar, Trash2, RefreshCw } from 'lucide-react';
+import { Plus, Calendar, Trash2, RefreshCw, AlertTriangle, Wrench } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -8,6 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Calendar as CalendarComponent } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Separator } from '@/components/ui/separator';
 import { useUnifiedScheduleStore } from '@/hooks/useUnifiedScheduleStore';
 import { format, addDays, startOfWeek, endOfWeek } from 'date-fns';
 
@@ -18,6 +19,7 @@ export function SchedulePeriodsTab() {
     createPeriod,
     deletePeriod,
     generateInstances,
+    cleanupOrphanedInstances,
   } = useUnifiedScheduleStore();
 
   const [showCreateDialog, setShowCreateDialog] = useState(false);
@@ -75,10 +77,20 @@ export function SchedulePeriodsTab() {
           <h2 className="text-2xl font-bold">Schedule Periods</h2>
           <p className="text-muted-foreground">Assign schedule templates to specific date ranges</p>
         </div>
-        <Button onClick={() => setShowCreateDialog(true)}>
-          <Plus className="h-4 w-4 mr-2" />
-          Create Period
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button 
+            variant="outline" 
+            onClick={cleanupOrphanedInstances}
+            className="text-orange-600 hover:text-orange-700"
+          >
+            <Wrench className="h-4 w-4 mr-2" />
+            Clean Database
+          </Button>
+          <Button onClick={() => setShowCreateDialog(true)}>
+            <Plus className="h-4 w-4 mr-2" />
+            Create Period
+          </Button>
+        </div>
       </div>
 
       <div className="grid gap-4">
@@ -114,6 +126,15 @@ export function SchedulePeriodsTab() {
                   <Button 
                     variant="ghost" 
                     size="sm" 
+                    onClick={() => generateInstances(period.id, true)}
+                    title="Force regenerate (clears ALL conflicting instances in date range)"
+                    className="text-orange-600 hover:text-orange-700"
+                  >
+                    <AlertTriangle className="h-4 w-4" />
+                  </Button>
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
                     onClick={() => deletePeriod(period.id)}
                     className="text-destructive hover:text-destructive"
                   >
@@ -132,6 +153,53 @@ export function SchedulePeriodsTab() {
             </CardContent>
           </Card>
         )}
+        
+        {/* Admin Tools */}
+        <Card className="border-orange-200 bg-orange-50">
+          <CardHeader>
+            <CardTitle className="text-orange-800 flex items-center gap-2">
+              <Wrench className="h-5 w-5" />
+              Database Maintenance
+            </CardTitle>
+            <CardDescription className="text-orange-700">
+              Advanced tools for resolving schedule conflicts and cleaning up orphaned data
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="grid gap-2">
+              <div className="flex items-center justify-between p-3 bg-orange-100 rounded-lg">
+                <div>
+                  <h4 className="font-medium text-orange-900">Clean Orphaned Instances</h4>
+                  <p className="text-sm text-orange-700">Remove live schedule instances from inactive periods</p>
+                </div>
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={cleanupOrphanedInstances}
+                  className="border-orange-300 text-orange-700 hover:bg-orange-200"
+                >
+                  <Wrench className="h-4 w-4 mr-2" />
+                  Clean Up
+                </Button>
+              </div>
+              
+              <Separator className="bg-orange-200" />
+              
+              <div className="p-3 bg-yellow-100 rounded-lg border border-yellow-300">
+                <div className="flex items-start gap-2">
+                  <AlertTriangle className="h-4 w-4 text-yellow-600 mt-0.5" />
+                  <div className="text-sm">
+                    <p className="font-medium text-yellow-800">Force Regenerate Button</p>
+                    <p className="text-yellow-700">
+                      The orange warning button next to each period performs a "force regenerate" that clears ALL instances 
+                      in the period's date range (from any period) before creating new ones. Use this to resolve duplicate conflicts.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
       </div>
 
       {/* Create Period Dialog */}

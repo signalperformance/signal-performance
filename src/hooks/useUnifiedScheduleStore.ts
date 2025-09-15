@@ -214,21 +214,38 @@ export function useUnifiedScheduleStore() {
     await loadTemplates();
   };
 
-  // Delete period
+  // Delete period with instance cleanup
   const deletePeriod = async (periodId: string) => {
-    const { error } = await supabase
-      .from('schedule_periods')
-      .update({ is_active: false })
-      .eq('id', periodId);
+    try {
+      // First delete all associated live schedule instances
+      const { error: instancesError } = await supabase
+        .from('live_schedule_instances')
+        .delete()
+        .eq('period_id', periodId);
 
-    if (error) throw error;
+      if (instancesError) {
+        console.warn('Failed to delete instances for period:', instancesError);
+        // Continue with period deletion even if instance cleanup fails
+      }
 
-    toast({
-      title: "Success",
-      description: "Period deleted successfully",
-    });
+      // Then deactivate the period
+      const { error: periodError } = await supabase
+        .from('schedule_periods')
+        .update({ is_active: false })
+        .eq('id', periodId);
 
-    await Promise.all([loadPeriods(), loadLiveInstances()]);
+      if (periodError) throw periodError;
+
+      toast({
+        title: "Success",
+        description: "Period and associated instances deleted successfully",
+      });
+
+      await Promise.all([loadPeriods(), loadLiveInstances()]);
+    } catch (error) {
+      console.error('Error deleting period:', error);
+      throw error;
+    }
   };
 
   // Duplicate template
@@ -272,10 +289,10 @@ export function useUnifiedScheduleStore() {
     await loadTemplates();
   };
 
-  // Manual instance generation
-  const generateInstances = async (periodId: string) => {
+  // Manual instance generation with force cleanup
+  const generateInstances = async (periodId: string, forceCleanup = false) => {
     const { data, error } = await supabase.functions.invoke('generate-schedule-instances', {
-      body: { period_id: periodId }
+      body: { period_id: periodId, force_cleanup: forceCleanup }
     });
 
     if (error) throw error;
@@ -286,6 +303,29 @@ export function useUnifiedScheduleStore() {
     });
 
     await loadLiveInstances();
+  };
+
+  // Database cleanup function
+  const cleanupOrphanedInstances = async () => {
+    try {
+      const { data, error } = await supabase.functions.invoke('cleanup-orphaned-instances');
+
+      if (error) throw error;
+
+      toast({
+        title: "Success",
+        description: `Cleaned up ${data?.cleaned_count || 0} orphaned instances`,
+      });
+
+      await loadLiveInstances();
+    } catch (error) {
+      console.error('Error cleaning up instances:', error);
+      toast({
+        title: "Error",
+        description: "Failed to cleanup orphaned instances",
+        variant: "destructive",
+      });
+    }
   };
 
   // Initialize data on mount
@@ -341,6 +381,7 @@ export function useUnifiedScheduleStore() {
     deletePeriod,
     duplicateTemplate,
     generateInstances,
+    cleanupOrphanedInstances,
     refreshData: loadAllData,
   };
 }
