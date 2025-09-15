@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Users, Clock, Calendar as CalendarIcon, Plus, Edit } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Users, Clock, Calendar as CalendarIcon, Plus, Edit, Trash2, Square, CheckSquare } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
+import { Checkbox } from '@/components/ui/checkbox';
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { EditLiveClassModal } from '../EditLiveClassModal';
@@ -59,11 +61,30 @@ export function LiveCalendarTab() {
   const [addModalOpen, setAddModalOpen] = useState(false);
   const [selectedClass, setSelectedClass] = useState<ClassWithBookings | null>(null);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [selectionMode, setSelectionMode] = useState(false);
+  const [selectedClassIds, setSelectedClassIds] = useState<Set<string>>(new Set());
+  const [bulkDeleting, setBulkDeleting] = useState(false);
   const { toast } = useToast();
 
   useEffect(() => {
     loadLiveCalendar();
-  }, [currentWeekStart]);
+  }, [currentWeekStart, selectionMode]); // Reload when selection mode changes
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if ((event.ctrlKey || event.metaKey) && event.key === 'a' && selectionMode) {
+        event.preventDefault();
+        selectAllClasses();
+      }
+      if (event.key === 'Escape' && selectionMode) {
+        setSelectionMode(false);
+        setSelectedClassIds(new Set());
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [selectionMode, classes]);
 
   const loadLiveCalendar = async () => {
     try {
@@ -74,14 +95,20 @@ export function LiveCalendarTab() {
       const weekEnd = addDays(weekStart, 13); // 2 weeks
 
       // Load live schedule instances for the two-week period
-      const { data: instances, error: instancesError } = await supabase
+      // Include cancelled classes when in selection mode
+      const instancesQuery = supabase
         .from('live_schedule_instances')
         .select('*')
         .gte('class_date', format(weekStart, 'yyyy-MM-dd'))
         .lte('class_date', format(weekEnd, 'yyyy-MM-dd'))
-        .eq('is_cancelled', false)
         .order('class_date')
         .order('start_time');
+
+      if (!selectionMode) {
+        instancesQuery.eq('is_cancelled', false);
+      }
+
+      const { data: instances, error: instancesError } = await instancesQuery;
 
       if (instancesError) throw instancesError;
 
@@ -176,6 +203,67 @@ export function LiveCalendarTab() {
     loadLiveCalendar();
   };
 
+  const toggleSelectionMode = () => {
+    setSelectionMode(!selectionMode);
+    setSelectedClassIds(new Set());
+  };
+
+  const toggleClassSelection = (classId: string) => {
+    const newSelected = new Set(selectedClassIds);
+    if (newSelected.has(classId)) {
+      newSelected.delete(classId);
+    } else {
+      newSelected.add(classId);
+    }
+    setSelectedClassIds(newSelected);
+  };
+
+  const selectAllClasses = () => {
+    const allClassIds = new Set(classes.map(cls => cls.id));
+    setSelectedClassIds(allClassIds);
+  };
+
+  const clearSelection = () => {
+    setSelectedClassIds(new Set());
+  };
+
+  const bulkDeleteClasses = async () => {
+    if (selectedClassIds.size === 0) return;
+
+    try {
+      setBulkDeleting(true);
+      
+      const { error } = await supabase
+        .from('live_schedule_instances')
+        .update({ is_cancelled: true })
+        .in('id', Array.from(selectedClassIds));
+
+      if (error) throw error;
+
+      toast({
+        title: "Success",
+        description: `Successfully cancelled ${selectedClassIds.size} class${selectedClassIds.size > 1 ? 'es' : ''}`,
+      });
+
+      setSelectedClassIds(new Set());
+      setSelectionMode(false);
+      await loadLiveCalendar();
+    } catch (error) {
+      console.error('Error bulk deleting classes:', error);
+      toast({
+        title: "Error",
+        description: "Failed to cancel selected classes",
+        variant: "destructive",
+      });
+    } finally {
+      setBulkDeleting(false);
+    }
+  };
+
+  const getSelectedClassesWithBookings = () => {
+    return classes.filter(cls => selectedClassIds.has(cls.id));
+  };
+
   if (loading) {
     return <div className="flex items-center justify-center p-8">Loading live calendar...</div>;
   }
@@ -187,18 +275,76 @@ export function LiveCalendarTab() {
           <h2 className="text-xl md:text-2xl font-bold">Live Calendar</h2>
           <p className="text-sm text-muted-foreground">View and manage scheduled classes and bookings</p>
         </div>
-        <div className="flex items-center gap-1 md:gap-2">
-          <Button variant="outline" size="sm" onClick={() => navigateWeek('prev')}>
-            <ChevronLeft className="h-3 w-3 md:h-4 md:w-4" />
-            <span className="sr-only">Previous week</span>
-          </Button>
-          <div className="text-xs md:text-sm font-medium min-w-[160px] md:min-w-[200px] text-center px-2">
-            {format(currentWeekStart, 'MMM d')} - {format(addDays(currentWeekStart, 13), 'MMM d, yyyy')}
+        
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+          {/* Selection Mode Toolbar */}
+          {selectionMode && (
+            <div className="flex items-center gap-2 px-3 py-1 bg-muted rounded-md">
+              <span className="text-sm font-medium">{selectedClassIds.size} selected</span>
+              <Button variant="ghost" size="sm" onClick={selectAllClasses}>
+                <CheckSquare className="h-3 w-3 mr-1" />
+                All
+              </Button>
+              <Button variant="ghost" size="sm" onClick={clearSelection}>
+                <Square className="h-3 w-3 mr-1" />
+                Clear
+              </Button>
+              <AlertDialog>
+                <AlertDialogTrigger asChild>
+                  <Button 
+                    variant="destructive" 
+                    size="sm" 
+                    disabled={selectedClassIds.size === 0 || bulkDeleting}
+                  >
+                    <Trash2 className="h-3 w-3 mr-1" />
+                    Cancel ({selectedClassIds.size})
+                  </Button>
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>Cancel Selected Classes</AlertDialogTitle>
+                    <AlertDialogDescription>
+                      Are you sure you want to cancel {selectedClassIds.size} class{selectedClassIds.size > 1 ? 'es' : ''}?
+                      {getSelectedClassesWithBookings().some(cls => cls.booking_count > 0) && (
+                        <div className="mt-2 p-2 bg-destructive/10 rounded text-sm">
+                          <strong>Warning:</strong> Some selected classes have existing bookings.
+                        </div>
+                      )}
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>Keep Classes</AlertDialogCancel>
+                    <AlertDialogAction onClick={bulkDeleteClasses} className="bg-destructive hover:bg-destructive/90">
+                      Cancel Classes
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
+            </div>
+          )}
+          
+          {/* Main Controls */}
+          <div className="flex items-center gap-1 md:gap-2">
+            <Button 
+              variant={selectionMode ? "default" : "outline"} 
+              size="sm" 
+              onClick={toggleSelectionMode}
+            >
+              {selectionMode ? <CheckSquare className="h-3 w-3 md:h-4 md:w-4 mr-1" /> : <Square className="h-3 w-3 md:h-4 md:w-4 mr-1" />}
+              <span className="hidden sm:inline">Select</span>
+            </Button>
+            <Button variant="outline" size="sm" onClick={() => navigateWeek('prev')}>
+              <ChevronLeft className="h-3 w-3 md:h-4 md:w-4" />
+              <span className="sr-only">Previous week</span>
+            </Button>
+            <div className="text-xs md:text-sm font-medium min-w-[160px] md:min-w-[200px] text-center px-2">
+              {format(currentWeekStart, 'MMM d')} - {format(addDays(currentWeekStart, 13), 'MMM d, yyyy')}
+            </div>
+            <Button variant="outline" size="sm" onClick={() => navigateWeek('next')}>
+              <ChevronRight className="h-3 w-3 md:h-4 md:w-4" />
+              <span className="sr-only">Next week</span>
+            </Button>
           </div>
-          <Button variant="outline" size="sm" onClick={() => navigateWeek('next')}>
-            <ChevronRight className="h-3 w-3 md:h-4 md:w-4" />
-            <span className="sr-only">Next week</span>
-          </Button>
         </div>
       </div>
 
@@ -277,18 +423,29 @@ export function LiveCalendarTab() {
                   <Card 
                     key={cls.id} 
                     className={cn(
-                      "p-4 cursor-pointer transition-colors",
+                      "p-4 transition-colors",
+                      selectionMode ? "cursor-default" : "cursor-pointer",
                       cls.session_type === 'pro' 
                         ? "bg-primary/20 border-primary/30 hover:bg-primary/30" 
                         : "bg-muted/50 border-muted hover:bg-muted/70",
-                      cls.is_cancelled && "opacity-60"
+                      cls.is_cancelled && "opacity-60",
+                      selectionMode && selectedClassIds.has(cls.id) && "ring-2 ring-primary"
                     )}
-                    onClick={() => handleEditClass(cls)}
+                    onClick={selectionMode ? () => toggleClassSelection(cls.id) : () => handleEditClass(cls)}
                   >
                     <div className="flex items-center justify-between">
-                      <div className="space-y-1">
-                        <div className="font-medium">{cls.class_name}</div>
-                        <div className="text-sm text-muted-foreground">{formatTime(cls.start_time)}</div>
+                      <div className="flex items-center gap-3">
+                        {selectionMode && (
+                          <Checkbox 
+                            checked={selectedClassIds.has(cls.id)}
+                            onCheckedChange={() => toggleClassSelection(cls.id)}
+                            onClick={(e) => e.stopPropagation()}
+                          />
+                        )}
+                        <div className="space-y-1">
+                          <div className="font-medium">{cls.class_name}</div>
+                          <div className="text-sm text-muted-foreground">{formatTime(cls.start_time)}</div>
+                        </div>
                       </div>
                       <div className="flex items-center gap-2 text-muted-foreground">
                         <Users className="h-4 w-4" />
@@ -343,14 +500,26 @@ export function LiveCalendarTab() {
                   <Card 
                     key={cls.id} 
                     className={cn(
-                      "p-3 cursor-pointer transition-colors",
+                      "p-3 transition-colors relative",
+                      selectionMode ? "cursor-default" : "cursor-pointer",
                       cls.session_type === 'pro' 
                         ? "bg-primary/20 border-primary/30 hover:bg-primary/30 text-foreground" 
                         : "bg-muted/50 border-muted hover:bg-muted/70 text-foreground",
-                      cls.is_cancelled && "opacity-60"
+                      cls.is_cancelled && "opacity-60",
+                      selectionMode && selectedClassIds.has(cls.id) && "ring-2 ring-primary"
                     )}
-                    onClick={() => handleEditClass(cls)}
+                    onClick={selectionMode ? () => toggleClassSelection(cls.id) : () => handleEditClass(cls)}
                   >
+                    {selectionMode && (
+                      <div className="absolute top-1 left-1">
+                        <Checkbox 
+                          checked={selectedClassIds.has(cls.id)}
+                          onCheckedChange={() => toggleClassSelection(cls.id)}
+                          onClick={(e) => e.stopPropagation()}
+                          className="h-3 w-3"
+                        />
+                      </div>
+                    )}
                     <div className="space-y-1 text-center">
                       <div className="flex items-center justify-between">
                         <div className="text-sm font-medium">{formatTime(cls.start_time)}</div>
