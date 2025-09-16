@@ -342,6 +342,7 @@ const en = {
   'portal.sessionNames.MOBILITY': 'MOBILITY',
   'portal.sessionNames.STRENGTH': 'STRENGTH',
   'portal.sessionNames.CONDITIONING': 'CONDITIONING',
+  'portal.sessionNames.POWER': 'POWER',
   'portal.sessionNames.RECOVERY': 'RECOVERY',
   'portal.sessionNames.TECHNIQUE': 'TECHNIQUE',
   'portal.sessionNames.ASSESSMENT': 'ASSESSMENT',

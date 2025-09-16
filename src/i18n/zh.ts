@@ -342,8 +342,9 @@ const zh = {
   
   // Session Names
   'portal.sessionNames.MOBILITY': '活動度',
-  'portal.sessionNames.STRENGTH': '肌力',  
+  'portal.sessionNames.STRENGTH': '肌力',
   'portal.sessionNames.CONDITIONING': '體能',
+  'portal.sessionNames.POWER': '爆發力',
   'portal.sessionNames.RECOVERY': '恢復',
   'portal.sessionNames.TECHNIQUE': '技術',
   'portal.sessionNames.ASSESSMENT': '評估',
