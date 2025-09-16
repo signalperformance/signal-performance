@@ -169,12 +169,6 @@ export const MyBookings: React.FC = () => {
                             <h4 className={`font-semibold ${isMobile ? 'text-lg' : ''}`}>
                               {getSessionName(booking.sessionName)}
                             </h4>
-                            <Badge 
-                              className={getSessionTypeColor(booking.sessionType)}
-                              variant="secondary"
-                            >
-                              {booking.sessionType.toUpperCase()}
-                            </Badge>
                           </div>
                           
                           <div className={`grid ${isMobile ? 'grid-cols-1 gap-3' : 'grid-cols-1 gap-4'} text-sm text-muted-foreground`}>
