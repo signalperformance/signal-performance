@@ -113,6 +113,12 @@ export const ClientScheduleView: React.FC = () => {
     return true;
   };
 
+  const getSessionName = (sessionName: string) => {
+    const translationKey = `portal.sessionNames.${sessionName}`;
+    const translated = t(translationKey);
+    return translated !== translationKey ? translated : sessionName;
+  };
+
   const handleSessionClick = (session: ScheduleWithAvailability) => {
     setSelectedSession(session);
     setIsModalOpen(true);
@@ -126,7 +132,7 @@ export const ClientScheduleView: React.FC = () => {
     if (success) {
       toast({
         title: t('portal.toast.bookingSuccess'),
-        description: `${t('portal.booking.booked')} ${selectedSession.name} on ${format(selectedSession.date, 'EEEE, MMM dd', { locale })}`,
+        description: `${t('portal.booking.booked')} ${getSessionName(selectedSession.name)} on ${format(selectedSession.date, 'EEEE, MMM dd', { locale })}`,
       });
     } else {
       toast({
