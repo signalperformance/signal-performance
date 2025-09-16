@@ -395,6 +395,9 @@ const zh = {
   'portal.login.welcomeMessage': '歡迎使用您的訓練平台！',
   'portal.login.errorOccurred': '登入時發生錯誤，請重試。',
   
+  // Toast Messages
+  'portal.toast.bookingDescription': '已預約{session}於{date}',
+  
   // Footer
   'footer.followUs': '關注我們',
   'footer.instagram': 'Instagram'

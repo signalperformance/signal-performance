@@ -130,9 +130,14 @@ export const ClientScheduleView: React.FC = () => {
     // Only handle booking, not cancellation
     const success = await bookSession(selectedSession, user.id);
     if (success) {
+      const formattedDate = format(selectedSession.date, 'EEEE, MMM dd', { locale });
+      const description = t('portal.toast.bookingDescription')
+        .replace('{session}', getSessionName(selectedSession.name))
+        .replace('{date}', formattedDate);
+      
       toast({
         title: t('portal.toast.bookingSuccess'),
-        description: `${t('portal.booking.booked')} ${getSessionName(selectedSession.name)} on ${format(selectedSession.date, 'EEEE, MMM dd', { locale })}`,
+        description,
       });
     } else {
       toast({

@@ -393,6 +393,9 @@ const en = {
   'portal.login.welcomeMessage': 'Welcome to your client portal!',
   'portal.login.errorOccurred': 'An error occurred during login. Please try again.',
   
+  // Toast Messages
+  'portal.toast.bookingDescription': 'Booked {session} on {date}',
+  
   // Footer
   'footer.followUs': 'Follow Us',
   'footer.instagram': 'Instagram'
