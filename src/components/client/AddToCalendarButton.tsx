@@ -35,23 +35,18 @@ export const AddToCalendarButton: React.FC<AddToCalendarButtonProps> = ({
   const { toast } = useToast();
   const { t } = useLanguage();
 
-  // Translate session name to Chinese
+  // Get translated session name using the standard translation pattern
   const getSessionName = (sessionName: string): string => {
-    const sessionMap: { [key: string]: string } = {
-      'STRENGTH': '肌力',
-      'SPEED_AGILITY': '速度敏捷',
-      'CONDITIONING': '體能調節',
-      'PERFORMANCE': '運動表現',
-      'RECOVERY': '恢復訓練',
-      'ASSESSMENT': '評估測試'
-    };
-    return sessionMap[sessionName] || sessionName;
+    const translationKey = `portal.sessionNames.${sessionName}`;
+    const translated = t(translationKey);
+    return translated !== translationKey ? translated : sessionName;
   };
 
   const handleAddToCalendar = (service: CalendarService) => {
     try {
       const translatedSessionName = getSessionName(booking.sessionName);
-      addToCalendar(booking, service, translatedSessionName);
+      const calendarTitle = t('portal.calendar.eventTitle');
+      addToCalendar(booking, service, translatedSessionName, calendarTitle);
       
       if (service === 'ics' || service === 'apple') {
         toast({

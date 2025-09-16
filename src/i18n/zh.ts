@@ -351,6 +351,7 @@ const zh = {
   
   // Calendar Integration
   'portal.calendar.title': '加入行事曆',
+  'portal.calendar.eventTitle': '體能課',
   'portal.calendar.downloaded': '行事曆檔案已下載',
   'portal.calendar.downloadedDesc': '行事曆事件檔案已下載。開啟它以加入您的行事曆。',
   'portal.calendar.opening': '開啟行事曆',

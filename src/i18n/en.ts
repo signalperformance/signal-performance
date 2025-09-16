@@ -349,6 +349,7 @@ const en = {
   
   // Calendar Integration
   'portal.calendar.title': 'Add to Calendar',
+  'portal.calendar.eventTitle': 'Fitness Class',
   'portal.calendar.downloaded': 'Calendar file downloaded',
   'portal.calendar.downloadedDesc': 'The calendar event file has been downloaded. Open it to add to your calendar.',
   'portal.calendar.opening': 'Opening calendar',
