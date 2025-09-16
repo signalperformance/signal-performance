@@ -21,7 +21,7 @@ export interface Booking {
 const TAIWAN_TIMEZONE = 'Asia/Taipei';
 
 // Convert booking to calendar event
-export const bookingToCalendarEvent = (booking: Booking): CalendarEvent => {
+export const bookingToCalendarEvent = (booking: Booking, translatedSessionName?: string): CalendarEvent => {
   // Create date in Taiwan timezone
   const startDate = new Date(booking.bookingDate);
   startDate.setHours(booking.hour24, 0, 0, 0);
@@ -29,7 +29,7 @@ export const bookingToCalendarEvent = (booking: Booking): CalendarEvent => {
   const taiwanEndDate = addHours(taiwanStartDate, 1); // Assume 1-hour sessions
 
   return {
-    title: `體能課：${booking.sessionName}`,
+    title: `體能課：${translatedSessionName || booking.sessionName}`,
     startDate: taiwanStartDate,
     endDate: taiwanEndDate,
     description: '',
@@ -138,8 +138,8 @@ export const generateOutlookCalendarUrl = (event: CalendarEvent): string => {
 
 export type CalendarService = 'google' | 'apple' | 'outlook' | 'ics';
 
-export const addToCalendar = (booking: Booking, service: CalendarService): void => {
-  const event = bookingToCalendarEvent(booking);
+export const addToCalendar = (booking: Booking, service: CalendarService, translatedSessionName?: string): void => {
+  const event = bookingToCalendarEvent(booking, translatedSessionName);
   
   switch (service) {
     case 'google':
