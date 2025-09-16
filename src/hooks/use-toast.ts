@@ -6,7 +6,8 @@ import type {
 } from "@/components/ui/toast"
 
 const TOAST_LIMIT = 1
-const TOAST_REMOVE_DELAY = 3000
+const TOAST_REMOVE_DELAY = 2000
+const TOAST_AUTO_DISMISS_DELAY = 2000
 
 type ToasterToast = ToastProps & {
   id: string
@@ -54,6 +55,7 @@ interface State {
 }
 
 const toastTimeouts = new Map<string, ReturnType<typeof setTimeout>>()
+const autoDismissTimeouts = new Map<string, ReturnType<typeof setTimeout>>()
 
 const addToRemoveQueue = (toastId: string) => {
   if (toastTimeouts.has(toastId)) {
@@ -90,12 +92,21 @@ export const reducer = (state: State, action: Action): State => {
     case "DISMISS_TOAST": {
       const { toastId } = action
 
-      // ! Side effects ! - This could be extracted into a dismissToast() action,
-      // but I'll keep it here for simplicity
+      // Clear auto-dismiss timeouts for dismissed toasts
       if (toastId) {
+        const autoDismissTimeout = autoDismissTimeouts.get(toastId)
+        if (autoDismissTimeout) {
+          clearTimeout(autoDismissTimeout)
+          autoDismissTimeouts.delete(toastId)
+        }
         addToRemoveQueue(toastId)
       } else {
         state.toasts.forEach((toast) => {
+          const autoDismissTimeout = autoDismissTimeouts.get(toast.id)
+          if (autoDismissTimeout) {
+            clearTimeout(autoDismissTimeout)
+            autoDismissTimeouts.delete(toast.id)
+          }
           addToRemoveQueue(toast.id)
         })
       }
@@ -160,6 +171,14 @@ function toast({ ...props }: Toast) {
       },
     },
   })
+
+  // Set up automatic dismissal after TOAST_AUTO_DISMISS_DELAY
+  const autoDismissTimeout = setTimeout(() => {
+    autoDismissTimeouts.delete(id)
+    dismiss()
+  }, TOAST_AUTO_DISMISS_DELAY)
+  
+  autoDismissTimeouts.set(id, autoDismissTimeout)
 
   return {
     id: id,
