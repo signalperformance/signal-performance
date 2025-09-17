@@ -173,7 +173,16 @@ export const ClientNavbar: React.FC<ClientNavbarProps> = ({ activeTab, onTabChan
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center space-x-2">
+            {/* Mobile Session Limit Badge */}
+            {sessionInfo && !loading && (
+              <Badge 
+                variant={sessionInfo.remainingSessions <= 2 ? "destructive" : "secondary"}
+                className="text-xs font-semibold"
+              >
+                {sessionInfo.usedSessions}/{sessionInfo.totalSessions}
+              </Badge>
+            )}
             <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="sm">
