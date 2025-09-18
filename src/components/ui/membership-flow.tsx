@@ -54,11 +54,11 @@ export function MembershipFlow({
                     <div className="w-full bg-white/20 rounded-full h-2">
                       <div 
                         className="bg-white rounded-full h-2 transition-all duration-500"
-                        style={{ width: "50%" }}
+                        style={{ width: "90%" }}
                       />
                     </div>
                     <div className="text-xs font-medium">
-                        <span className="font-bold">5</span> {t("promo.spotsTaken")} • <span className="font-bold">5</span> {t("promo.remaining")}
+                        <span className="font-bold">9</span> {t("promo.spotsTaken")} • <span className="font-bold">1</span> {t("promo.remaining")}
                     </div>
                   </div>
                 </div>
@@ -151,11 +151,11 @@ export function MembershipFlow({
                       <div className="w-full bg-white/20 rounded-full h-2">
                         <div 
                           className="bg-white rounded-full h-2 transition-all duration-500"
-                          style={{ width: "50%" }}
+                          style={{ width: "60%" }}
                         />
                       </div>
                       <div className="text-xs font-medium">
-                        <span className="font-bold">5</span> {t("promo.spotsTaken")} • <span className="font-bold">5</span> {t("promo.remaining")}
+                        <span className="font-bold">6</span> {t("promo.spotsTaken")} • <span className="font-bold">4</span> {t("promo.remaining")}
                       </div>
                     </div>
                   </div>
