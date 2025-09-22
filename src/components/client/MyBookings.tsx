@@ -116,7 +116,7 @@ export const MyBookings: React.FC = () => {
 
   // Group bookings by date
   const bookingsByDate = upcomingBookings.reduce((acc, booking) => {
-    const dateKey = formatInTimeZone(booking.bookingDate, 'Asia/Taipei', 'yyyy-MM-dd');
+    const dateKey = booking.classDate; // Use raw classDate directly - already in "yyyy-MM-dd" format
     if (!acc[dateKey]) {
       acc[dateKey] = [];
     }
