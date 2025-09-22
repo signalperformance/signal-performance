@@ -42,6 +42,9 @@ export interface AuthState {
   user: ClientUser | null;
   isAuthenticated: boolean;
   isLoadingProfile?: boolean;
+  profileError?: string | null;
+  isOnline?: boolean;
+  retryProfileLoad?: () => void;
   login: (email: string, password: string) => Promise<boolean>;
   logout: () => void;
 }
