@@ -61,6 +61,14 @@ function toDateString(d: Date) {
 function dueDateForMonth(renewalDateStr: string | null, monthDate: Date): Date | null {
   if (!renewalDateStr) return null;
   const renewal = parseISO(renewalDateStr);
+  
+  // Check if the selected month is before the renewal month
+  const renewalMonth = new Date(renewal.getFullYear(), renewal.getMonth(), 1);
+  const selectedMonth = new Date(monthDate.getFullYear(), monthDate.getMonth(), 1);
+  
+  // No payment due for months before the renewal month
+  if (selectedMonth < renewalMonth) return null;
+  
   const day = renewal.getDate();
   const last = getDaysInMonth(monthDate);
   const dueDay = Math.min(day, last);
