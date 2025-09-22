@@ -10,7 +10,7 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { format, startOfWeek, addWeeks, isSameDay, isToday } from 'date-fns';
+import { format, startOfWeek, addWeeks, isSameDay, isToday, parseISO } from 'date-fns';
 import { zhCN, enUS } from 'date-fns/locale';
 import { useToast } from '@/hooks/use-toast';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -195,7 +195,7 @@ export const ClientScheduleView: React.FC = () => {
     }
   }, [defaultDay, selectedDay, weekDays]);
 
-  const selectedDate = selectedDay ? new Date(selectedDay) : weekDays[0];
+  const selectedDate = selectedDay ? parseISO(selectedDay) : weekDays[0];
   const selectedDaySessions = getSessionsForDay(selectedDate);
 
   return (
