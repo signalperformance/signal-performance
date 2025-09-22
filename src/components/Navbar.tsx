@@ -1,7 +1,9 @@
 
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Switch } from '@/components/ui/switch';
+import { Button } from '@/components/ui/button';
 
 const Navbar = () => {
   const {
@@ -32,10 +34,22 @@ const Navbar = () => {
           <span className="text-signal-charcoal md:text-2xl font-bold text-sm whitespace-nowrap brand-font">Signal Performance</span>
         </a>
 
-        <div className="flex items-center space-x-1 md:space-x-2">
-          <span className={`text-xs md:text-sm font-medium ${language === 'en' ? 'text-signal-gold' : 'text-signal-charcoal'}`}>EN</span>
-          <Switch checked={language === 'zh'} onCheckedChange={toggleLanguage} className="data-[state=checked]:bg-signal-gold data-[state=unchecked]:bg-signal-charcoal" />
-          <span className={`text-xs md:text-sm font-medium ${language === 'zh' ? 'text-signal-gold' : 'text-signal-charcoal'}`}>中文</span>
+        <div className="flex items-center space-x-2 md:space-x-4">
+          <Link to="/client/login">
+            <Button 
+              variant="outline" 
+              size="sm"
+              className="text-xs md:text-sm font-medium border-signal-gold text-signal-gold hover:bg-signal-gold hover:text-white transition-colors"
+            >
+              {t('nav.login')}
+            </Button>
+          </Link>
+          
+          <div className="flex items-center space-x-1 md:space-x-2">
+            <span className={`text-xs md:text-sm font-medium ${language === 'en' ? 'text-signal-gold' : 'text-signal-charcoal'}`}>EN</span>
+            <Switch checked={language === 'zh'} onCheckedChange={toggleLanguage} className="data-[state=checked]:bg-signal-gold data-[state=unchecked]:bg-signal-charcoal" />
+            <span className={`text-xs md:text-sm font-medium ${language === 'zh' ? 'text-signal-gold' : 'text-signal-charcoal'}`}>中文</span>
+          </div>
         </div>
       </div>
     </nav>;
