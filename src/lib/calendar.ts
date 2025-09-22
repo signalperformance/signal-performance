@@ -23,19 +23,19 @@ const TAIWAN_TIMEZONE = 'Asia/Taipei';
 
 // Convert booking to calendar event
 export const bookingToCalendarEvent = (booking: Booking, translatedSessionName?: string, calendarTitle?: string): CalendarEvent => {
-  // Create date in Taiwan timezone
+  // Create date directly without double timezone conversion
+  // booking.bookingDate is already from Taiwan timezone data
   const startDate = new Date(booking.bookingDate);
   startDate.setHours(booking.hour24, booking.minute, 0, 0);
-  const taiwanStartDate = toZonedTime(startDate, TAIWAN_TIMEZONE);
-  const taiwanEndDate = addHours(taiwanStartDate, 1); // Assume 1-hour sessions
+  const endDate = addHours(startDate, 1); // Assume 1-hour sessions
 
   const sessionName = translatedSessionName || booking.sessionName;
   const title = calendarTitle ? `${calendarTitle}：${sessionName}` : `Fitness Class: ${sessionName}`;
 
   return {
     title,
-    startDate: taiwanStartDate,
-    endDate: taiwanEndDate,
+    startDate,
+    endDate,
     description: '',
     location: '2樓, 南勢里9鄰33-6號, Linkou District, New Taipei City, 244'
   };
