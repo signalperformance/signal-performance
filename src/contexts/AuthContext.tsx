@@ -192,7 +192,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       window.removeEventListener('online', handleOnline);
       window.removeEventListener('offline', handleOffline);
     };
-  }, [session?.user, user, profileError]);
+  }, []);
 
   const login = async (email: string, password: string): Promise<boolean> => {
     try {
