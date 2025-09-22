@@ -60,6 +60,45 @@ export const MyBookings: React.FC = () => {
     return format(date, 'EEEE, MMM dd', { locale });
   };
 
+  const getDateLabelFromString = (dateString: string) => {
+    // Parse the date string (yyyy-MM-dd format) to components
+    const [year, month, day] = dateString.split('-').map(Number);
+    
+    // Get today's date components in local timezone
+    const today = new Date();
+    const todayYear = today.getFullYear();
+    const todayMonth = today.getMonth() + 1; // getMonth() returns 0-11
+    const todayDay = today.getDate();
+    
+    // Check if it's today
+    if (year === todayYear && month === todayMonth && day === todayDay) {
+      return t('portal.days.today');
+    }
+    
+    // Check if it's tomorrow
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const tomorrowYear = tomorrow.getFullYear();
+    const tomorrowMonth = tomorrow.getMonth() + 1;
+    const tomorrowDay = tomorrow.getDate();
+    
+    if (year === tomorrowYear && month === tomorrowMonth && day === tomorrowDay) {
+      return t('portal.days.tomorrow');
+    }
+    
+    // Create a date object for formatting only (this won't be affected by timezone since we're using specific components)
+    const displayDate = new Date(year, month - 1, day); // month is 0-indexed in Date constructor
+    const locale = language === 'zh' ? zhCN : enUS;
+    return format(displayDate, 'EEEE, MMM dd', { locale });
+  };
+
+  const formatDateFromString = (dateString: string) => {
+    const [year, month, day] = dateString.split('-').map(Number);
+    const displayDate = new Date(year, month - 1, day); // month is 0-indexed in Date constructor
+    const locale = language === 'zh' ? zhCN : enUS;
+    return format(displayDate, 'MMMM dd, yyyy', { locale });
+  };
+
   const getSessionName = (sessionName: string) => {
     const translationKey = `portal.sessionNames.${sessionName}`;
     return t(translationKey) !== translationKey ? t(translationKey) : sessionName;
@@ -142,16 +181,15 @@ export const MyBookings: React.FC = () => {
 
       {sortedDates.map(dateKey => {
         const bookings = bookingsByDate[dateKey];
-        const date = new Date(dateKey + 'T00:00:00+08:00');
         const sortedBookings = bookings.sort((a, b) => a.hour24 - b.hour24);
 
         return (
           <Card key={dateKey}>
             <CardHeader className="pb-4">
               <CardTitle className="text-lg">
-                {getDateLabel(date)}
+                {getDateLabelFromString(dateKey)}
                 <div className="text-sm font-normal text-muted-foreground">
-                  {format(date, 'MMMM dd, yyyy', { locale: language === 'zh' ? zhCN : enUS })}
+                  {formatDateFromString(dateKey)}
                 </div>
               </CardTitle>
             </CardHeader>
