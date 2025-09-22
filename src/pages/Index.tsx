@@ -16,7 +16,6 @@ import Footer from "@/components/Footer";
 import FloatingAssessmentButton from "@/components/FloatingAssessmentButton";
 
 
-
 import { MembershipFlow } from "@/components/ui/membership-flow";
 
 import { Trophy, Dumbbell } from "lucide-react";
