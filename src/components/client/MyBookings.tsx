@@ -40,9 +40,9 @@ export const MyBookings: React.FC = () => {
 
   const upcomingBookings = user ? getUpcomingBookings(user.id) : [];
 
-  const formatTime = (hour24: number) => {
+  const formatTime = (hour24: number, minute: number) => {
     const date = new Date();
-    date.setHours(hour24, 0, 0, 0);
+    date.setHours(hour24, minute, 0, 0);
     return format(date, 'h:mm a');
   };
 
@@ -174,9 +174,9 @@ export const MyBookings: React.FC = () => {
                           <div className={`grid ${isMobile ? 'grid-cols-1 gap-3' : 'grid-cols-1 gap-4'} text-sm text-muted-foreground`}>
                             <div className="flex items-center gap-2">
                               <Clock className={`${isMobile ? 'h-5 w-5' : 'h-4 w-4'}`} />
-                              <span className={isMobile ? 'text-base' : ''}>
-                                {formatTime(booking.hour24)}
-                              </span>
+                               <span className={isMobile ? 'text-base' : ''}>
+                                 {formatTime(booking.hour24, booking.minute)}
+                               </span>
                               {(() => {
                                 const now = new Date();
                                 const threeHoursCutoff = addHours(booking.bookingDate, -3);
@@ -219,7 +219,7 @@ export const MyBookings: React.FC = () => {
                                <AlertDialogHeader>
                                  <AlertDialogTitle>{t('portal.cancel.title')}</AlertDialogTitle>
                                   <AlertDialogDescription>
-                                    {t('portal.cancel.message')} {getSessionName(booking.sessionName)} {getDateLabel(booking.bookingDate)} {formatTime(booking.hour24)}?
+                                    {t('portal.cancel.message')} {getSessionName(booking.sessionName)} {getDateLabel(booking.bookingDate)} {formatTime(booking.hour24, booking.minute)}?
                                     <br /><br />
                                     <span className="text-amber-600 text-sm">
                                       {t('portal.cancel.note')}

@@ -45,9 +45,9 @@ export const BookingModal: React.FC<BookingModalProps> = ({
   const spotsLeft = session.maxParticipants - session.currentBookings;
   const sessionLimitMessage = getSessionLimitMessage();
   
-  const formatTime = (hour24: number) => {
+  const formatTime = (hour24: number, minute: number) => {
     const date = new Date();
-    date.setHours(hour24, 0, 0, 0);
+    date.setHours(hour24, minute, 0, 0);
     return format(date, 'h:mm a');
   };
 
@@ -116,7 +116,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
             </div>
             <div className="flex items-center gap-2">
               <Clock className="h-4 w-4 text-muted-foreground" />
-              <span className="text-sm">{formatTime(session.hour24)}</span>
+              <span className="text-sm">{formatTime(session.hour24, session.minute)}</span>
             </div>
           </div>
 

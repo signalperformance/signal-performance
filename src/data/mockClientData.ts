@@ -20,6 +20,7 @@ export const mockBookings: Booking[] = [
     scheduleEntryId: 'schedule-1',
     dayKey: 'monday',
     hour24: 13,
+    minute: 0,
     sessionName: 'MOBILITY',
     sessionType: 'pro',
     bookingDate: new Date(2024, 11, 23), // December 23, 2024
@@ -31,6 +32,7 @@ export const mockBookings: Booking[] = [
     scheduleEntryId: 'schedule-2',
     dayKey: 'wednesday',
     hour24: 18,
+    minute: 15,
     sessionName: 'STRENGTH',
     sessionType: 'amateur',
     bookingDate: new Date(2024, 11, 25), // December 25, 2024

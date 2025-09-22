@@ -64,6 +64,7 @@ export const useBookings = (userId?: string) => {
             id: sessionId,
             dayKey: session.dayKey,
             hour24: session.hour24,
+            minute: 0, // Default to 0 for mock data
             name: session.name,
             sessionType: session.sessionType,
             maxParticipants: SESSION_CONFIG.maxParticipants[session.sessionType],
@@ -101,6 +102,7 @@ export const useBookings = (userId?: string) => {
       scheduleEntryId: scheduleEntry.id,
       dayKey: scheduleEntry.dayKey,
       hour24: scheduleEntry.hour24,
+      minute: scheduleEntry.minute,
       sessionName: scheduleEntry.name,
       sessionType: scheduleEntry.sessionType,
       bookingDate: scheduleEntry.date,

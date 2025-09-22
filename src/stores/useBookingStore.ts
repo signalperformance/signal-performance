@@ -39,17 +39,21 @@ export const useBookingStore = create<BookingStore>((set, get) => ({
 
       if (error) throw error;
 
-      const bookings: Booking[] = data?.map((b: any) => ({
-        id: b.id,
-        userId: b.user_id,
-        scheduleEntryId: b.schedule_entry_id,
-        dayKey: parseISO(b.live_schedule_instances.class_date).toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase(),
-        hour24: parseInt(b.live_schedule_instances.start_time.split(':')[0]),
-        sessionName: b.live_schedule_instances.class_name,
-        sessionType: b.live_schedule_instances.session_type,
-        bookingDate: new Date(`${b.live_schedule_instances.class_date}T${b.live_schedule_instances.start_time}`),
-        createdAt: new Date(b.created_at),
-      })) || [];
+      const bookings: Booking[] = data?.map((b: any) => {
+        const timeParts = b.live_schedule_instances.start_time.split(':');
+        return {
+          id: b.id,
+          userId: b.user_id,
+          scheduleEntryId: b.schedule_entry_id,
+          dayKey: parseISO(b.live_schedule_instances.class_date).toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase(),
+          hour24: parseInt(timeParts[0]),
+          minute: parseInt(timeParts[1]),
+          sessionName: b.live_schedule_instances.class_name,
+          sessionType: b.live_schedule_instances.session_type,
+          bookingDate: new Date(`${b.live_schedule_instances.class_date}T${b.live_schedule_instances.start_time}`),
+          createdAt: new Date(b.created_at),
+        };
+      }) || [];
 
       set({ bookings });
     } catch (error) {
@@ -120,7 +124,9 @@ export const useBookingStore = create<BookingStore>((set, get) => ({
       // Only include sessions that haven't started yet
       if (sessionDateTime >= now) {
         const dayKey = instanceDate.toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase();
-        const hour24 = parseInt(instance.start_time.split(':')[0]);
+        const timeParts = instance.start_time.split(':');
+        const hour24 = parseInt(timeParts[0]);
+        const minute = parseInt(timeParts[1]);
         
         // Count current bookings for this instance
         const currentBookings = bookings.filter(booking => 
@@ -132,6 +138,7 @@ export const useBookingStore = create<BookingStore>((set, get) => ({
           id: instance.id,
           dayKey,
           hour24,
+          minute,
           name: instance.class_name,
           sessionType: instance.session_type,
           maxParticipants: instance.max_participants,

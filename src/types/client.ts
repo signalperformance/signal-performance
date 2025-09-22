@@ -15,6 +15,7 @@ export interface Booking {
   scheduleEntryId: string;
   dayKey: string;
   hour24: number;
+  minute: number;
   sessionName: string;
   sessionType: 'pro' | 'amateur';
   bookingDate: Date;
@@ -25,6 +26,7 @@ export interface ScheduleWithAvailability {
   id: string;
   dayKey: string;
   hour24: number;
+  minute: number;
   name: string;
   sessionType: 'pro' | 'amateur';
   maxParticipants: number;

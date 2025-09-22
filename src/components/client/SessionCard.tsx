@@ -35,9 +35,9 @@ export const SessionCard: React.FC<SessionCardProps> = ({
       : 'bg-charcoal text-charcoal-foreground';
   };
 
-  const formatTime = (hour24: number) => {
+  const formatTime = (hour24: number, minute: number) => {
     const date = new Date();
-    date.setHours(hour24, 0, 0, 0);
+    date.setHours(hour24, minute, 0, 0);
     return format(date, 'h:mm a');
   };
 
@@ -61,7 +61,7 @@ export const SessionCard: React.FC<SessionCardProps> = ({
           <div className="flex items-center gap-3">
             <Clock className={`${isMobile ? 'h-5 w-5' : 'h-4 w-4'} text-muted-foreground`} />
             <span className={`font-medium ${isMobile ? 'text-lg' : ''}`}>
-              {formatTime(session.hour24)}
+              {formatTime(session.hour24, session.minute)}
             </span>
           </div>
           
