@@ -348,6 +348,7 @@ const zh = {
   'portal.sessionNames.RECOVERY': '恢復',
   'portal.sessionNames.TECHNIQUE': '技術',
   'portal.sessionNames.ASSESSMENT': '評估',
+  'portal.sessionNames.CARDIO': '心肺',
   
   // Calendar Integration
   'portal.calendar.title': '加入行事曆',

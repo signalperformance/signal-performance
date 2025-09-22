@@ -346,6 +346,7 @@ const en = {
   'portal.sessionNames.RECOVERY': 'RECOVERY',
   'portal.sessionNames.TECHNIQUE': 'TECHNIQUE',
   'portal.sessionNames.ASSESSMENT': 'ASSESSMENT',
+  'portal.sessionNames.CARDIO': 'CARDIO',
   
   // Calendar Integration
   'portal.calendar.title': 'Add to Calendar',
