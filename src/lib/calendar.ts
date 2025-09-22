@@ -15,6 +15,7 @@ export interface Booking {
   sessionType: 'pro' | 'amateur';
   bookingDate: Date;
   hour24: number;
+  minute: number;
 }
 
 // Taiwan timezone constant
@@ -24,7 +25,7 @@ const TAIWAN_TIMEZONE = 'Asia/Taipei';
 export const bookingToCalendarEvent = (booking: Booking, translatedSessionName?: string, calendarTitle?: string): CalendarEvent => {
   // Create date in Taiwan timezone
   const startDate = new Date(booking.bookingDate);
-  startDate.setHours(booking.hour24, 0, 0, 0);
+  startDate.setHours(booking.hour24, booking.minute, 0, 0);
   const taiwanStartDate = toZonedTime(startDate, TAIWAN_TIMEZONE);
   const taiwanEndDate = addHours(taiwanStartDate, 1); // Assume 1-hour sessions
 

@@ -10,14 +10,7 @@ import { Calendar, Download, ExternalLink } from 'lucide-react';
 import { addToCalendar, type CalendarService } from '@/lib/calendar';
 import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/contexts/LanguageContext';
-
-interface Booking {
-  id: string;
-  sessionName: string;
-  sessionType: 'pro' | 'amateur';
-  bookingDate: Date;
-  hour24: number;
-}
+import { type Booking } from '@/types/client';
 
 interface AddToCalendarButtonProps {
   booking: Booking;
