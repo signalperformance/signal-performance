@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { format } from 'date-fns';
 
 // Types
 export interface ScheduleTemplate {
@@ -136,7 +137,7 @@ export function useUnifiedScheduleStore() {
       .from('live_schedule_instances')
       .select('*')
       .eq('is_cancelled', false)
-      .gte('class_date', new Date().toISOString().split('T')[0])
+      .gte('class_date', format(new Date(), 'yyyy-MM-dd'))
       .order('class_date')
       .order('start_time');
 

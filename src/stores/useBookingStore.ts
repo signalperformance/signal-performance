@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { Booking, ScheduleWithAvailability } from '@/types/client';
 import { supabase } from '@/integrations/supabase/client';
-import { addDays, startOfWeek, format, isSameDay, addHours } from 'date-fns';
+import { addDays, startOfWeek, format, isSameDay, addHours, parseISO } from 'date-fns';
 
 interface BookingStore {
   bookings: Booking[];
@@ -43,7 +43,7 @@ export const useBookingStore = create<BookingStore>((set, get) => ({
         id: b.id,
         userId: b.user_id,
         scheduleEntryId: b.schedule_entry_id,
-        dayKey: new Date(b.live_schedule_instances.class_date).toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase(),
+        dayKey: parseISO(b.live_schedule_instances.class_date).toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase(),
         hour24: parseInt(b.live_schedule_instances.start_time.split(':')[0]),
         sessionName: b.live_schedule_instances.class_name,
         sessionType: b.live_schedule_instances.session_type,
@@ -68,8 +68,8 @@ export const useBookingStore = create<BookingStore>((set, get) => ({
         .from('live_schedule_instances')
         .select('*')
         .eq('is_cancelled', false)
-        .gte('class_date', today.toISOString().split('T')[0])
-        .lte('class_date', fiveWeeksFromNow.toISOString().split('T')[0])
+        .gte('class_date', format(today, 'yyyy-MM-dd'))
+        .lte('class_date', format(fiveWeeksFromNow, 'yyyy-MM-dd'))
         .order('class_date')
         .order('start_time');
 
@@ -114,7 +114,7 @@ export const useBookingStore = create<BookingStore>((set, get) => ({
 
     // Use live schedule instances directly and filter by current time
     scheduleEntries.forEach((instance: any) => {
-      const instanceDate = new Date(instance.class_date);
+      const instanceDate = parseISO(instance.class_date);
       const sessionDateTime = new Date(`${instance.class_date}T${instance.start_time}`);
       
       // Only include sessions that haven't started yet

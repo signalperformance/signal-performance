@@ -8,6 +8,7 @@ import { useUnifiedScheduleStore } from '@/hooks/useUnifiedScheduleStore';
 import { ScheduleTemplatesTab } from './unified/ScheduleTemplatesTab';
 import { SchedulePeriodsTab } from './unified/SchedulePeriodsTab';
 import { LiveCalendarTab } from './unified/LiveCalendarTab';
+import { parseISO, isAfter } from 'date-fns';
 
 export function UnifiedScheduleManager() {
   const [activeTab, setActiveTab] = useState('live');
@@ -25,7 +26,7 @@ export function UnifiedScheduleManager() {
   const activeTemplates = templates.filter(t => t.is_active).length;
   const activePeriods = periods.filter(p => p.is_active).length;
   const upcomingClasses = liveInstances.filter(instance => 
-    new Date(instance.class_date) >= new Date()
+    isAfter(parseISO(instance.class_date), new Date())
   ).length;
 
   if (loading) {

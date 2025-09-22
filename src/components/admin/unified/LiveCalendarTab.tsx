@@ -18,7 +18,8 @@ import {
   addWeeks, 
   isSameDay, 
   startOfDay,
-  endOfDay
+  endOfDay,
+  parseISO
 } from 'date-fns';
 
 interface LiveScheduleInstance {
@@ -171,7 +172,7 @@ export function LiveCalendarTab() {
 
   const getClassesForDay = (dayOffset: number) => {
     const targetDate = addDays(currentWeekStart, dayOffset);
-    return classes.filter(cls => isSameDay(new Date(cls.class_date), targetDate));
+    return classes.filter(cls => isSameDay(parseISO(cls.class_date), targetDate));
   };
 
   const formatTime = (time: string) => {

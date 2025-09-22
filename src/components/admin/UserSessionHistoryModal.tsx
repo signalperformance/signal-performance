@@ -8,7 +8,7 @@ import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
-import { format } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 import { Calendar, Clock, Users, CheckCircle, XCircle, AlertCircle } from 'lucide-react';
 
 interface UserSessionHistoryModalProps {
@@ -328,7 +328,7 @@ export const UserSessionHistoryModal = ({ isOpen, onClose, user }: UserSessionHi
                         <TableCell>
                           <div>
                             <div className="font-medium">
-                              {format(new Date(session.class_date), 'MMM dd, yyyy')}
+                              {format(parseISO(session.class_date), 'MMM dd, yyyy')}
                             </div>
                             <div className="text-sm text-muted-foreground">
                               {format(new Date(`2000-01-01T${session.start_time}`), 'h:mm a')} 
@@ -379,10 +379,10 @@ export const UserSessionHistoryModal = ({ isOpen, onClose, user }: UserSessionHi
                   {pastSessions.map((session) => (
                     <TableRow key={session.booking_id}>
                       <TableCell>
-                        <div>
-                          <div className="font-medium">
-                            {format(new Date(session.class_date), 'MMM dd, yyyy')}
-                          </div>
+                          <div>
+                            <div className="font-medium">
+                              {format(parseISO(session.class_date), 'MMM dd, yyyy')}
+                            </div>
                           <div className="text-sm text-muted-foreground">
                             {format(new Date(`2000-01-01T${session.start_time}`), 'h:mm a')}
                           </div>
