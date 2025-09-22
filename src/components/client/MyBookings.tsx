@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Calendar, Clock, MapPin, X } from 'lucide-react';
 import { AddToCalendarButton } from './AddToCalendarButton';
 import { format, isPast, isToday, isTomorrow, addHours } from 'date-fns';
+import { formatInTimeZone } from 'date-fns-tz';
 import { zhCN, enUS } from 'date-fns/locale';
 import { useToast } from '@/hooks/use-toast';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -115,7 +116,7 @@ export const MyBookings: React.FC = () => {
 
   // Group bookings by date
   const bookingsByDate = upcomingBookings.reduce((acc, booking) => {
-    const dateKey = format(booking.bookingDate, 'yyyy-MM-dd');
+    const dateKey = formatInTimeZone(booking.bookingDate, 'Asia/Taipei', 'yyyy-MM-dd');
     if (!acc[dateKey]) {
       acc[dateKey] = [];
     }
@@ -141,7 +142,7 @@ export const MyBookings: React.FC = () => {
 
       {sortedDates.map(dateKey => {
         const bookings = bookingsByDate[dateKey];
-        const date = new Date(dateKey + 'T00:00:00');
+        const date = new Date(dateKey + 'T00:00:00+08:00');
         const sortedBookings = bookings.sort((a, b) => a.hour24 - b.hour24);
 
         return (
