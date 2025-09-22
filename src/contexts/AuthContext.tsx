@@ -8,6 +8,7 @@ const AuthContext = createContext<AuthState | undefined>(undefined);
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<ClientUser | null>(null);
   const [session, setSession] = useState<Session | null>(null);
+  const [isLoadingProfile, setIsLoadingProfile] = useState(false);
 
   // Map DB profile to ClientUser type
   const mapProfileToClientUser = (profile: any): ClientUser => ({
@@ -80,39 +81,61 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
-  useEffect(() => {
-    // Listen to auth state changes FIRST
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, newSession) => {
-      console.log('Auth state change:', _event, newSession?.user?.email);
-      setSession(newSession);
-      
-      if (newSession?.user) {
-        const clientUser = await fetchUserProfile(newSession.user);
-        if (clientUser) {
-          setUser(clientUser);
-          localStorage.setItem('client-user', JSON.stringify(clientUser));
-        } else {
-          console.error('Failed to fetch or create user profile');
-          setUser(null);
-          localStorage.removeItem('client-user');
-        }
+  // Fetch profile with retry logic
+  const fetchProfileWithRetry = async (authUser: any, retries = 2) => {
+    setIsLoadingProfile(true);
+    try {
+      const clientUser = await fetchUserProfile(authUser);
+      if (clientUser) {
+        setUser(clientUser);
+        localStorage.setItem('client-user', JSON.stringify(clientUser));
+        console.log('Profile loaded successfully');
+      } else {
+        console.error('Failed to fetch or create user profile');
+        setUser(null);
+        localStorage.removeItem('client-user');
+      }
+    } catch (err) {
+      console.error('Profile fetch error:', err);
+      if (retries > 0) {
+        console.log(`Retrying profile fetch, ${retries} attempts remaining`);
+        setTimeout(() => fetchProfileWithRetry(authUser, retries - 1), 1000);
       } else {
         setUser(null);
         localStorage.removeItem('client-user');
       }
+    } finally {
+      setIsLoadingProfile(false);
+    }
+  };
+
+  useEffect(() => {
+    // Listen to auth state changes FIRST - SYNCHRONOUS callback to avoid deadlocks
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, newSession) => {
+      console.log('Auth state change:', _event, newSession?.user?.email);
+      setSession(newSession);
+      
+      if (newSession?.user) {
+        // Defer profile fetching to avoid deadlock
+        setTimeout(() => {
+          fetchProfileWithRetry(newSession.user);
+        }, 0);
+      } else {
+        setUser(null);
+        localStorage.removeItem('client-user');
+        setIsLoadingProfile(false);
+      }
     });
 
-    // Then check for existing session
-    supabase.auth.getSession().then(async ({ data: { session: existingSession } }) => {
+    // Then check for existing session - also defer profile fetching
+    supabase.auth.getSession().then(({ data: { session: existingSession } }) => {
       console.log('Initial session check:', existingSession?.user?.email);
       setSession(existingSession);
       
       if (existingSession?.user) {
-        const clientUser = await fetchUserProfile(existingSession.user);
-        if (clientUser) {
-          setUser(clientUser);
-          localStorage.setItem('client-user', JSON.stringify(clientUser));
-        }
+        setTimeout(() => {
+          fetchProfileWithRetry(existingSession.user);
+        }, 0);
       }
     });
 
@@ -137,20 +160,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         return false;
       }
 
-      console.log('Login successful, fetching profile...');
-      
-      // Directly handle the profile fetching after successful login
-      const clientUser = await fetchUserProfile(data.user);
-      if (clientUser) {
-        setSession(data.session);
-        setUser(clientUser);
-        localStorage.setItem('client-user', JSON.stringify(clientUser));
-        console.log('Login completed successfully');
-        return true;
-      } else {
-        console.error('Failed to fetch or create user profile after login');
-        return false;
-      }
+      console.log('Login successful - auth state handler will fetch profile');
+      return true;
     } catch (err) {
       console.error('Login exception:', err);
       return false;
@@ -167,6 +178,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const value: AuthState = {
     user,
     isAuthenticated: !!session,
+    isLoadingProfile,
     login,
     logout,
   };

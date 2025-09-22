@@ -36,6 +36,7 @@ export interface ScheduleWithAvailability {
 export interface AuthState {
   user: ClientUser | null;
   isAuthenticated: boolean;
+  isLoadingProfile?: boolean;
   login: (email: string, password: string) => Promise<boolean>;
   logout: () => void;
 }

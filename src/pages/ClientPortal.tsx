@@ -8,7 +8,7 @@ import { MyBookings } from '@/components/client/MyBookings';
 import { AccountDeactivatedModal } from '@/components/client/AccountDeactivatedModal';
 
 export default function ClientPortal() {
-  const { user, isAuthenticated } = useAuth();
+  const { user, isAuthenticated, isLoadingProfile } = useAuth();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<'schedule' | 'bookings'>('schedule');
 
@@ -27,7 +27,7 @@ export default function ClientPortal() {
   }
 
   // Show loading if authenticated but user profile is still loading
-  if (!user) {
+  if (isAuthenticated && (!user || isLoadingProfile)) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="animate-spin w-8 h-8 border-2 border-signal-gold border-t-transparent rounded-full"></div>
