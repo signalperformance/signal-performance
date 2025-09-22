@@ -16,6 +16,9 @@ export const useBookings = (userId?: string) => {
         ...b,
         bookingDate: new Date(b.bookingDate),
         createdAt: new Date(b.createdAt),
+        // Ensure classDate and startTime exist (for backward compatibility)
+        classDate: b.classDate || format(new Date(b.bookingDate), 'yyyy-MM-dd'),
+        startTime: b.startTime || `${b.hour24?.toString().padStart(2, '0') || '00'}:${b.minute?.toString().padStart(2, '0') || '00'}:00`,
       })));
     } else {
       setBookings(mockBookings);
@@ -107,6 +110,9 @@ export const useBookings = (userId?: string) => {
       sessionType: scheduleEntry.sessionType,
       bookingDate: scheduleEntry.date,
       createdAt: new Date(),
+      // Generate raw date/time strings for calendar export
+      classDate: format(scheduleEntry.date, 'yyyy-MM-dd'),
+      startTime: `${scheduleEntry.hour24.toString().padStart(2, '0')}:${scheduleEntry.minute.toString().padStart(2, '0')}:00`,
     };
 
     saveBookings([...bookings, newBooking]);

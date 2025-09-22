@@ -25,6 +25,8 @@ export const mockBookings: Booking[] = [
     sessionType: 'pro',
     bookingDate: new Date(2024, 11, 23), // December 23, 2024
     createdAt: new Date(),
+    classDate: '2024-12-23',
+    startTime: '13:00:00',
   },
   {
     id: 'booking-2',
@@ -37,6 +39,8 @@ export const mockBookings: Booking[] = [
     sessionType: 'amateur',
     bookingDate: new Date(2024, 11, 25), // December 25, 2024
     createdAt: new Date(),
+    classDate: '2024-12-25',
+    startTime: '18:15:00',
   },
 ];
 

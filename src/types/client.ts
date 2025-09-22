@@ -20,6 +20,9 @@ export interface Booking {
   sessionType: 'pro' | 'amateur';
   bookingDate: Date;
   createdAt: Date;
+  // Raw date/time strings from database to avoid timezone issues in calendar export
+  classDate: string; // YYYY-MM-DD format
+  startTime: string; // HH:MM:SS format
 }
 
 export interface ScheduleWithAvailability {

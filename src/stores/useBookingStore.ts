@@ -52,6 +52,9 @@ export const useBookingStore = create<BookingStore>((set, get) => ({
           sessionType: b.live_schedule_instances.session_type,
           bookingDate: new Date(`${b.live_schedule_instances.class_date}T${b.live_schedule_instances.start_time}+08:00`),
           createdAt: new Date(b.created_at),
+          // Store raw date/time strings for calendar export
+          classDate: b.live_schedule_instances.class_date,
+          startTime: b.live_schedule_instances.start_time,
         };
       }) || [];
 

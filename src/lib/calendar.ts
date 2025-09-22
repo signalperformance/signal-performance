@@ -16,15 +16,17 @@ export interface Booking {
   bookingDate: Date;
   hour24: number;
   minute: number;
+  classDate: string; // Raw YYYY-MM-DD string
+  startTime: string; // Raw HH:MM:SS string
 }
 
 // Taiwan timezone constant
 const TAIWAN_TIMEZONE = 'Asia/Taipei';
 
-// Convert booking to calendar event
+// Convert booking to calendar event using raw date/time strings to avoid timezone issues
 export const bookingToCalendarEvent = (booking: Booking, translatedSessionName?: string, calendarTitle?: string): CalendarEvent => {
-  // Now that bookingDate is properly created with Taiwan timezone, we can use it directly
-  const startDate = new Date(booking.bookingDate);
+  // Use raw date/time strings to construct Taiwan timezone date directly
+  const startDate = new Date(`${booking.classDate}T${booking.startTime}+08:00`);
   const endDate = addHours(startDate, 1); // Assume 1-hour sessions
 
   const sessionName = translatedSessionName || booking.sessionName;
