@@ -23,13 +23,8 @@ const TAIWAN_TIMEZONE = 'Asia/Taipei';
 
 // Convert booking to calendar event
 export const bookingToCalendarEvent = (booking: Booking, translatedSessionName?: string, calendarTitle?: string): CalendarEvent => {
-  // Construct Taiwan time directly from components to avoid timezone conversion issues
-  // Extract date from bookingDate but build time in Taiwan timezone explicitly
-  const dateStr = booking.bookingDate.toISOString().split('T')[0]; // Get YYYY-MM-DD
-  
-  // Create Taiwan timezone date string with explicit +08:00 offset
-  const taiwanDateTimeStr = `${dateStr}T${booking.hour24.toString().padStart(2, '0')}:${booking.minute.toString().padStart(2, '0')}:00+08:00`;
-  const startDate = new Date(taiwanDateTimeStr);
+  // Now that bookingDate is properly created with Taiwan timezone, we can use it directly
+  const startDate = new Date(booking.bookingDate);
   const endDate = addHours(startDate, 1); // Assume 1-hour sessions
 
   const sessionName = translatedSessionName || booking.sessionName;

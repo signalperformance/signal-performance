@@ -50,7 +50,7 @@ export const useBookingStore = create<BookingStore>((set, get) => ({
           minute: parseInt(timeParts[1]),
           sessionName: b.live_schedule_instances.class_name,
           sessionType: b.live_schedule_instances.session_type,
-          bookingDate: new Date(`${b.live_schedule_instances.class_date}T${b.live_schedule_instances.start_time}`),
+          bookingDate: new Date(`${b.live_schedule_instances.class_date}T${b.live_schedule_instances.start_time}+08:00`),
           createdAt: new Date(b.created_at),
         };
       }) || [];
@@ -82,7 +82,7 @@ export const useBookingStore = create<BookingStore>((set, get) => ({
       // Filter out sessions that have already passed
       const now = new Date();
       const futureEntries = (data || []).filter(instance => {
-        const sessionDateTime = new Date(`${instance.class_date}T${instance.start_time}`);
+        const sessionDateTime = new Date(`${instance.class_date}T${instance.start_time}+08:00`);
         return sessionDateTime >= now;
       });
       
@@ -119,7 +119,7 @@ export const useBookingStore = create<BookingStore>((set, get) => ({
     // Use live schedule instances directly and filter by current time
     scheduleEntries.forEach((instance: any) => {
       const instanceDate = parseISO(instance.class_date);
-      const sessionDateTime = new Date(`${instance.class_date}T${instance.start_time}`);
+      const sessionDateTime = new Date(`${instance.class_date}T${instance.start_time}+08:00`);
       
       // Only include sessions that haven't started yet
       if (sessionDateTime >= now) {
@@ -241,7 +241,7 @@ export const useBookingStore = create<BookingStore>((set, get) => ({
       if (fetchError) throw fetchError;
 
       // Check 3-hour cancellation policy
-      const sessionDateTime = new Date(`${bookingData.live_schedule_instances.class_date}T${bookingData.live_schedule_instances.start_time}`);
+      const sessionDateTime = new Date(`${bookingData.live_schedule_instances.class_date}T${bookingData.live_schedule_instances.start_time}+08:00`);
       const now = new Date();
       const threeHoursCutoff = addHours(sessionDateTime, -3);
 
