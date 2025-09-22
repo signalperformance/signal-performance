@@ -9,8 +9,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [user, setUser] = useState<ClientUser | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [isLoadingProfile, setIsLoadingProfile] = useState(false);
-  const [profileError, setProfileError] = useState<string | null>(null);
-  const [isOnline, setIsOnline] = useState(navigator.onLine);
 
   // Map DB profile to ClientUser type
   const mapProfileToClientUser = (profile: any): ClientUser => ({
@@ -83,80 +81,35 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
-  // Fetch profile with retry and timeout logic
+  // Fetch profile with retry logic
   const fetchProfileWithRetry = async (authUser: any, retries = 2) => {
     setIsLoadingProfile(true);
-    setProfileError(null);
-    
-    // Set a 10-second timeout
-    const timeoutId = setTimeout(() => {
-      console.error('Profile fetch timed out after 10 seconds');
-      setIsLoadingProfile(false);
-      setProfileError(isOnline ? 'Profile loading timed out. Please try again.' : 'No internet connection. Please check your network and try again.');
-    }, 10000);
-
     try {
       const clientUser = await fetchUserProfile(authUser);
-      clearTimeout(timeoutId); // Clear timeout if successful
-      
       if (clientUser) {
         setUser(clientUser);
         localStorage.setItem('client-user', JSON.stringify(clientUser));
-        setProfileError(null);
         console.log('Profile loaded successfully');
       } else {
         console.error('Failed to fetch or create user profile');
         setUser(null);
         localStorage.removeItem('client-user');
-        setProfileError('Failed to load user profile. Please try again.');
       }
     } catch (err) {
-      clearTimeout(timeoutId);
       console.error('Profile fetch error:', err);
-      
-      if (retries > 0 && isOnline) {
+      if (retries > 0) {
         console.log(`Retrying profile fetch, ${retries} attempts remaining`);
         setTimeout(() => fetchProfileWithRetry(authUser, retries - 1), 1000);
-        return; // Don't set error state during retries
       } else {
         setUser(null);
         localStorage.removeItem('client-user');
-        setProfileError(isOnline ? 'Failed to load user profile after multiple attempts.' : 'No internet connection. Please check your network and try again.');
       }
     } finally {
-      if (!timeoutId) { // Only clear loading if timeout didn't trigger
-        setIsLoadingProfile(false);
-      }
-    }
-  };
-
-  // Manual retry function for user-triggered retries
-  const retryProfileLoad = () => {
-    if (session?.user) {
-      fetchProfileWithRetry(session.user, 2);
+      setIsLoadingProfile(false);
     }
   };
 
   useEffect(() => {
-    // Network status listeners
-    const handleOnline = () => {
-      console.log('Network status: online');
-      setIsOnline(true);
-      // Retry profile load if we were offline and have a session but no user
-      if (session?.user && !user && profileError) {
-        retryProfileLoad();
-      }
-    };
-    
-    const handleOffline = () => {
-      console.log('Network status: offline');
-      setIsOnline(false);
-      setProfileError('No internet connection. Please check your network and try again.');
-    };
-
-    window.addEventListener('online', handleOnline);
-    window.addEventListener('offline', handleOffline);
-
     // Listen to auth state changes FIRST - SYNCHRONOUS callback to avoid deadlocks
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, newSession) => {
       console.log('Auth state change:', _event, newSession?.user?.email);
@@ -171,7 +124,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setUser(null);
         localStorage.removeItem('client-user');
         setIsLoadingProfile(false);
-        setProfileError(null);
       }
     });
 
@@ -189,8 +141,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     return () => {
       subscription.unsubscribe();
-      window.removeEventListener('online', handleOnline);
-      window.removeEventListener('offline', handleOffline);
     };
   }, []);
 
@@ -229,9 +179,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     user,
     isAuthenticated: !!session,
     isLoadingProfile,
-    profileError,
-    isOnline,
-    retryProfileLoad,
     login,
     logout,
   };
