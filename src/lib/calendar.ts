@@ -99,7 +99,37 @@ export const downloadICS = (event: CalendarEvent): void => {
   URL.revokeObjectURL(link.href);
 };
 
-// Generate Google Calendar URL
+// Generate Google Calendar URL directly from raw date/time strings (no transformations)
+export const generateGoogleCalendarUrlDirect = (booking: Booking, translatedSessionName?: string, calendarTitle?: string): string => {
+  // Take raw classDate (e.g., "2024-10-02") and startTime (e.g., "18:00:00")
+  const classDate = booking.classDate.replace(/-/g, ''); // "20241002"
+  const startTimeParts = booking.startTime.split(':'); // ["18", "00", "00"]
+  const startHour = parseInt(startTimeParts[0]);
+  const startMinute = startTimeParts[1];
+  
+  // Format start time directly as YYYYMMDDTHHMMSS
+  const startDateTime = `${classDate}T${startHour.toString().padStart(2, '0')}${startMinute}00`;
+  
+  // Calculate end time by adding 1 hour
+  const endHour = (startHour + 1) % 24;
+  const endDateTime = `${classDate}T${endHour.toString().padStart(2, '0')}${startMinute}00`;
+  
+  const sessionName = translatedSessionName || booking.sessionName;
+  const title = calendarTitle ? `${calendarTitle}：${sessionName}` : `Fitness Class: ${sessionName}`;
+  
+  const params = new URLSearchParams({
+    action: 'TEMPLATE',
+    text: title,
+    dates: `${startDateTime}/${endDateTime}`,
+    details: '',
+    location: '2樓, 南勢里9鄰33-6號, Linkou District, New Taipei City, 244',
+    ctz: TAIWAN_TIMEZONE
+  });
+
+  return `https://calendar.google.com/calendar/render?${params.toString()}`;
+};
+
+// Generate Google Calendar URL (legacy function for other calendar event usage)
 export const generateGoogleCalendarUrl = (event: CalendarEvent): string => {
   const startDate = formatInTimeZone(event.startDate, TAIWAN_TIMEZONE, "yyyyMMdd'T'HHmmss");
   const endDate = formatInTimeZone(event.endDate, TAIWAN_TIMEZONE, "yyyyMMdd'T'HHmmss");
@@ -143,18 +173,21 @@ export const generateOutlookCalendarUrl = (event: CalendarEvent): string => {
 export type CalendarService = 'google' | 'apple' | 'outlook' | 'ics';
 
 export const addToCalendar = (booking: Booking, service: CalendarService, translatedSessionName?: string, calendarTitle?: string): void => {
-  const event = bookingToCalendarEvent(booking, translatedSessionName, calendarTitle);
-  
   switch (service) {
     case 'google':
-      window.open(generateGoogleCalendarUrl(event), '_blank');
+      // Use direct export for Google Calendar (no transformations)
+      window.open(generateGoogleCalendarUrlDirect(booking, translatedSessionName, calendarTitle), '_blank');
       break;
     case 'apple':
     case 'ics':
+      // Use calendar event for other services
+      const event = bookingToCalendarEvent(booking, translatedSessionName, calendarTitle);
       downloadICS(event);
       break;
     case 'outlook':
-      window.open(generateOutlookCalendarUrl(event), '_blank');
+      // Use calendar event for Outlook
+      const outlookEvent = bookingToCalendarEvent(booking, translatedSessionName, calendarTitle);
+      window.open(generateOutlookCalendarUrl(outlookEvent), '_blank');
       break;
   }
 };
