@@ -14,6 +14,7 @@ import LazyWeeklySchedule from "@/components/lazy/LazyWeeklySchedule";
 import LazyStudioLocation from "@/components/lazy/LazyStudioLocation";
 import Footer from "@/components/Footer";
 import FloatingAssessmentButton from "@/components/FloatingAssessmentButton";
+import FloatingControls from "@/components/FloatingControls";
 
 
 import { MembershipFlow } from "@/components/ui/membership-flow";
@@ -127,6 +128,7 @@ const Index = () => {
         <Footer />
       </div>
       <FloatingAssessmentButton />
+      <FloatingControls />
     </>
   );
 };
