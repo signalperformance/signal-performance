@@ -44,44 +44,14 @@ export function MembershipFlow({
                 </Badge>
               </div>
 
-              {/* Assessment Promo Banner */}
-              <div className="mb-4 bg-gradient-to-r from-red-500/90 to-orange-500/90 text-white rounded-xl p-4">
-                <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
-                  <div className="flex-1 text-center sm:text-left">
-                    <h4 className="font-bold text-sm">{t("promo.limitedOffer")}</h4>
-                  </div>
-                  <div className="flex flex-col items-center gap-1.5 min-w-[160px]">
-                    <div className="w-full bg-white/20 rounded-full h-2">
-                      <div 
-                        className="bg-white rounded-full h-2 transition-all duration-500"
-                        style={{ width: "90%" }}
-                      />
-                    </div>
-                    <div className="text-xs font-medium">
-                        <span className="font-bold">9</span> {t("promo.spotsTaken")} • <span className="font-bold">1</span> {t("promo.remaining")}
-                    </div>
-                  </div>
+              <div className="mb-6">
+                <div className="flex items-baseline gap-2">
+                  <span className="text-4xl font-bold text-foreground">NT$12,000</span>
                 </div>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  {t("assessment.description")}
+                </p>
               </div>
-
-                <div className="mb-6">
-                  <div className="flex items-baseline gap-2 min-h-[2.75rem] my-[3px]">
-                    <div className="flex flex-col">
-                      <span className="text-lg line-through text-muted-foreground">NT$12,000</span>
-                      <div className="flex items-baseline gap-2">
-                        <span className="text-4xl font-bold text-green-600">{t("gettingstarted.assessmentPackage.price")}</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="mt-2">
-                    <Badge className="bg-green-100 text-green-800 hover:bg-green-100">
-                      {t("promo.save")} NT$2,000
-                    </Badge>
-                  </div>
-                  <p className="mt-2 text-sm text-muted-foreground">
-                    {t("assessment.description")}
-                  </p>
-                </div>
 
               <ul className="space-y-4">
                 {assessmentFeatures.map(name => <li key={name} className="flex gap-3">
