@@ -50,7 +50,7 @@ const useChineseTranslations = () => {
     
     // Assessment & Membership
     'assessment.title': '我們的評估流程',
-    'assessment.price': '10,000元',
+    'assessment.price': '12,000元',
     'assessment.originalPrice': '12,000',
     'assessment.savings': '2,000',
     'assessment.promotional': '限時優惠！立即預約',
@@ -554,31 +554,13 @@ const Slideshow = () => {
                        ? 'opacity-100 blur-none transform scale-100'
                        : ''
                }`}>
-                {/* Promotional Banner */}
-                <div className="bg-gradient-to-r from-orange-500 to-red-500 text-white text-center py-3 px-6">
-                  <div className="font-bold text-sm md:text-base lg:text-lg">
-                    {t['assessment.promotional']}
-                  </div>
-                </div>
-                
-                <CardContent className="p-6 md:p-10">
-                  <div className="text-center mb-8">
-                    {/* Original Price (Crossed Out) */}
-                    <div className="text-lg md:text-xl lg:text-2xl text-gray-500 line-through mb-2">
-                      NT${t['assessment.originalPrice']}
-                    </div>
-                    
-                    {/* Discounted Price */}
-                    <div className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-signal-gold mb-2">
-                      10,000元
-                    </div>
-                    
-                    {/* Savings Amount */}
-                    <div className="text-sm md:text-base lg:text-lg text-green-600 font-semibold mb-4">
-                      省 NT${t['assessment.savings']}
-                    </div>
-                    
-                  </div>
+                 <CardContent className="p-6 md:p-10">
+                   <div className="text-center mb-8">
+                     {/* Price */}
+                     <div className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground mb-2">
+                       12,000元
+                     </div>
+                   </div>
                   <ul className="space-y-4 text-base md:text-lg lg:text-xl xl:text-2xl">
                     <li className="flex items-center">
                       <span className="w-2 h-2 bg-signal-gold rounded-full mr-4 flex-shrink-0"></span>
