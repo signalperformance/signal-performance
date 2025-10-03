@@ -254,15 +254,15 @@ const Slideshow = () => {
         clearTimeout(principleTimerRef.current);
       }
 
-      // Initial 2-second delay, all principles blurred
+      // Initial 0.5-second delay, all principles blurred
       setPrinciplePhase('initial');
       setFocusedPrinciple(null);
       
-      // Set up the sequence
+      // Set up the sequence (compressed to 10s total)
       const sequence = [
-        { delay: 2000, principle: 0 },    // 2s: focus on principle 1
-        { delay: 27000, principle: 1 },   // 27s: focus on principle 2  
-        { delay: 52000, principle: 2 },   // 52s: focus on principle 3
+        { delay: 500, principle: 0 },     // 0.5s: focus on principle 1
+        { delay: 3500, principle: 1 },    // 3.5s: focus on principle 2  
+        { delay: 6500, principle: 2 },    // 6.5s: focus on principle 3
       ];
 
       sequence.forEach(({ delay, principle }) => {
@@ -274,13 +274,13 @@ const Slideshow = () => {
         }, delay);
       });
       
-      // Add final phase: all principles unblurred at 27s
+      // Add final phase: all principles unblurred at 9.5s
       principleTimerRef.current = setTimeout(() => {
         if (currentSlide === 1 && !isAutoPaused) {
           setPrinciplePhase('all-visible');
           setFocusedPrinciple(null);
         }
-      }, 77000); // Show all principles at 77s
+      }, 9500); // Show all principles at 9.5s
     } else {
       // Reset philosophy state when leaving slide
       if (principleTimerRef.current) {
@@ -383,8 +383,8 @@ const Slideshow = () => {
   useEffect(() => {
     if (imagesLoading) return; // Don't start slideshow until images are loaded
     
-    // Use custom timeout for pricing slide (30 seconds), philosophy slide (85 seconds), video slide (33 seconds), 5th slide (15 seconds), normal timeout for others (8 seconds)
-    const slideTimeout = currentSlide === 1 ? 85000 : currentSlide === 2 ? 30000 : currentSlide === 3 ? 33000 : currentSlide === 4 ? 15000 : currentSlide === 5 ? 40000 : 8000;
+    // Use custom timeout for pricing slide (30 seconds), philosophy slide (10 seconds), video slide (33 seconds), 5th slide (15 seconds), normal timeout for others (8 seconds)
+    const slideTimeout = currentSlide === 1 ? 10000 : currentSlide === 2 ? 30000 : currentSlide === 3 ? 33000 : currentSlide === 4 ? 15000 : currentSlide === 5 ? 40000 : 8000;
     
     const timer = setInterval(() => {
       if (!isAutoPaused) {
