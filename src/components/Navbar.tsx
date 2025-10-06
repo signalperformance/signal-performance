@@ -35,7 +35,7 @@ const Navbar = () => {
         </a>
 
         <div className="flex items-center space-x-2 md:space-x-4">
-          <Link to="/client/login">
+          <a href="https://signalperformance.lovable.app/auth">
             <Button 
               variant="outline" 
               size="sm"
@@ -43,7 +43,7 @@ const Navbar = () => {
             >
               {t('nav.login')}
             </Button>
-          </Link>
+          </a>
           
           <div className="flex items-center space-x-1 md:space-x-2">
             <span className={`text-xs md:text-sm font-medium ${language === 'en' ? 'text-signal-gold' : 'text-signal-charcoal'}`}>EN</span>
