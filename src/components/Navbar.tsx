@@ -1,9 +1,10 @@
-
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Switch } from '@/components/ui/switch';
 import { Button } from '@/components/ui/button';
+import { Menu } from 'lucide-react';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 
 const Navbar = () => {
   const {
@@ -12,6 +13,7 @@ const Navbar = () => {
     t
   } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,21 +37,51 @@ const Navbar = () => {
         </a>
 
         <div className="flex items-center space-x-2 md:space-x-4">
-          <a href="https://signalperformance.lovable.app/auth">
-            <Button 
-              variant="outline" 
-              size="sm"
-              className="text-xs md:text-sm font-medium border-signal-gold text-signal-gold hover:bg-signal-gold hover:text-white transition-colors"
-            >
-              {t('nav.login')}
-            </Button>
-          </a>
-          
-          <div className="flex items-center space-x-1 md:space-x-2">
-            <span className={`text-xs md:text-sm font-medium ${language === 'en' ? 'text-signal-gold' : 'text-signal-charcoal'}`}>EN</span>
-            <Switch checked={language === 'zh'} onCheckedChange={toggleLanguage} className="data-[state=checked]:bg-signal-gold data-[state=unchecked]:bg-signal-charcoal" />
-            <span className={`text-xs md:text-sm font-medium ${language === 'zh' ? 'text-signal-gold' : 'text-signal-charcoal'}`}>中文</span>
+          {/* Desktop menu */}
+          <div className="hidden md:flex items-center space-x-4">
+            <a href="https://signalperformance.lovable.app/auth">
+              <Button 
+                variant="outline" 
+                size="sm"
+                className="text-xs md:text-sm font-medium border-signal-gold text-signal-gold hover:bg-signal-gold hover:text-white transition-colors"
+              >
+                {t('nav.login')}
+              </Button>
+            </a>
+            
+            <div className="flex items-center space-x-2">
+              <span className={`text-sm font-medium ${language === 'en' ? 'text-signal-gold' : 'text-signal-charcoal'}`}>EN</span>
+              <Switch checked={language === 'zh'} onCheckedChange={toggleLanguage} className="data-[state=checked]:bg-signal-gold data-[state=unchecked]:bg-signal-charcoal" />
+              <span className={`text-sm font-medium ${language === 'zh' ? 'text-signal-gold' : 'text-signal-charcoal'}`}>中文</span>
+            </div>
           </div>
+
+          {/* Mobile hamburger menu */}
+          <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+            <SheetTrigger asChild className="md:hidden">
+              <Button variant="ghost" size="icon" className="h-8 w-8">
+                <Menu className="h-5 w-5 text-signal-charcoal" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-64">
+              <div className="flex flex-col space-y-6 mt-8">
+                <a href="https://signalperformance.lovable.app/auth" onClick={() => setMobileMenuOpen(false)}>
+                  <Button 
+                    variant="outline" 
+                    className="w-full border-signal-gold text-signal-gold hover:bg-signal-gold hover:text-white transition-colors"
+                  >
+                    {t('nav.login')}
+                  </Button>
+                </a>
+                
+                <div className="flex items-center justify-center space-x-2 pt-4 border-t">
+                  <span className={`text-sm font-medium ${language === 'en' ? 'text-signal-gold' : 'text-signal-charcoal'}`}>EN</span>
+                  <Switch checked={language === 'zh'} onCheckedChange={toggleLanguage} className="data-[state=checked]:bg-signal-gold data-[state=unchecked]:bg-signal-charcoal" />
+                  <span className={`text-sm font-medium ${language === 'zh' ? 'text-signal-gold' : 'text-signal-charcoal'}`}>中文</span>
+                </div>
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
     </nav>;
