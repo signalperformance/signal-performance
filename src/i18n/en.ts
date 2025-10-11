@@ -213,7 +213,7 @@ const en = {
   'assessment.prep.whatToBring.golfClubs': 'Golf clubs',
   'assessment.prep.whatToBring.athleticWear': 'Workout clothes',
   'assessment.prep.whatToBring.golfShoes': 'Golf shoes',
-  'assessment.prep.whatToBring.runningShoes': 'Running shoes',
+  'assessment.prep.whatToBring.runningShoes': 'Gym shoes',
   'assessment.prep.whatToBring.waterBottle': 'Water bottle',
   'assessment.prep.whatToBring.towel': 'Towel',
   'assessment.prep.reminders.title': 'Important Reminders',

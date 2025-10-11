@@ -213,7 +213,7 @@ const zh = {
   'assessment.prep.whatToBring.golfClubs': '高爾夫球桿',
   'assessment.prep.whatToBring.athleticWear': '運動服裝',
   'assessment.prep.whatToBring.golfShoes': '高爾夫球鞋',
-  'assessment.prep.whatToBring.runningShoes': '跑鞋',
+  'assessment.prep.whatToBring.runningShoes': '健身鞋',
   'assessment.prep.whatToBring.waterBottle': '水瓶',
   'assessment.prep.whatToBring.towel': '毛巾',
   'assessment.prep.whatToBring.changeOfClothes': '更換衣物與個人盥洗用品',
