@@ -39,15 +39,7 @@ const Assessment = () => {
                 <ul className="space-y-3">
                   <li className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-                    <span>{t('assessment.prep.whatToBring.golfClubs')}</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
                     <span>{t('assessment.prep.whatToBring.athleticWear')}</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-                    <span>{t('assessment.prep.whatToBring.golfShoes')}</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
@@ -82,10 +74,6 @@ const Assessment = () => {
                   <li className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
                     <span>{t('assessment.prep.reminders.avoidOvereating')}</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-                    <span>{t('assessment.prep.reminders.arriveEarly')}</span>
                   </li>
                 </ul>
               </CardContent>
