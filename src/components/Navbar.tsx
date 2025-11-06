@@ -39,7 +39,7 @@ const Navbar = () => {
         <div className="flex items-center space-x-2 md:space-x-4">
           {/* Desktop menu */}
           <div className="hidden md:flex items-center space-x-4">
-            <a href="https://www.canva.com/design/DAG31mVRgFc/MGeO4AtsfInb-A6wCIHW0w/view?utm_content=DAG31mVRgFc&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h1b6fedb387" target="_blank" rel="noopener noreferrer">
+            <a href="https://signalperformance.lovable.app/auth">
               <Button 
                 variant="outline" 
                 size="sm"
@@ -65,7 +65,7 @@ const Navbar = () => {
             </SheetTrigger>
             <SheetContent side="right" className="w-64">
               <div className="flex flex-col space-y-6 mt-8">
-                <a href="https://www.canva.com/design/DAG31mVRgFc/MGeO4AtsfInb-A6wCIHW0w/view?utm_content=DAG31mVRgFc&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h1b6fedb387" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)}>
+                <a href="https://signalperformance.lovable.app/auth" onClick={() => setMobileMenuOpen(false)}>
                   <Button 
                     variant="outline" 
                     className="w-full border-signal-gold text-signal-gold hover:bg-signal-gold hover:text-white transition-colors"
